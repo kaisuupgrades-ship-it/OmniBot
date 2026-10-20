@@ -72,6 +72,10 @@ bun run dist:win
 
 The installer is in `dist/`. It is not code signed, so Windows SmartScreen warns on the first run.
 
+The app asks you to sign in before you can use it, and sign-in needs your account service. Until
+you deploy it (next section), a built app stays on "Connecting to OmniBot". To try the app before
+that, run `bun run dev`: it starts a local account service and the app together.
+
 ## Run your own servers
 
 Do the steps in [docs/self-hosting.md](docs/self-hosting.md), with your own domain:
