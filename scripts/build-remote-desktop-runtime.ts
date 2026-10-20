@@ -143,7 +143,7 @@ async function packageCorrespondingSource(
     tarExecutable,
     [
       "-czf",
-      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-omnibot-source.tar.gz`),
+      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`),
       ...exclusions,
       "-C",
       moonlightSource,
@@ -279,10 +279,10 @@ function buildSunshine(source: string, version: string, commit: string): void {
     },
   );
   if (platform === "darwin") {
-    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "omnibot-setup-test"], {
+    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "openbot-setup-test"], {
       stdio: "inherit",
     });
-    execFileSync(join(build, "omnibot-setup-test"), [], { stdio: "inherit" });
+    execFileSync(join(build, "openbot-setup-test"), [], { stdio: "inherit" });
   }
 }
 
