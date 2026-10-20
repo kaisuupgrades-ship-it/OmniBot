@@ -42,7 +42,7 @@ export interface BillingPlan {
 
 /** The storage, members and speed of each plan. The amounts are Stripe Prices, not code. */
 export const BILLING_PLANS: readonly BillingPlan[] = [
-  { id: "starter", storageGb: 12, memberLimit: DEFAULT_TEAM_MEMBER_LIMIT, siteLimit: 3, relativeSpeed: 1 },
+  { id: "starter", storageGb: 12, memberLimit: 3, siteLimit: 3, relativeSpeed: 1 },
   { id: "standard", storageGb: 50, memberLimit: 10, siteLimit: 10, relativeSpeed: 2 },
   { id: "pro", storageGb: 100, memberLimit: 25, siteLimit: 50, relativeSpeed: 4 },
 ];
@@ -52,9 +52,12 @@ export function memberLimitForPlan(plan: BillingPlanId | null): number {
   return BILLING_PLANS.find((candidate) => candidate.id === plan)?.memberLimit ?? DEFAULT_TEAM_MEMBER_LIMIT;
 }
 
-/** The active hosted-site limit of a server with this plan. A self-hosted server has no plan and gets 1. */
+/** The active hosted-site limit of a server with no plan, such as a self-hosted server. */
+const NO_PLAN_SITE_LIMIT = 100;
+
+/** The active hosted-site limit of a server with this plan, or with no plan. */
 export function siteLimitForPlan(plan: BillingPlanId | null): number {
-  return BILLING_PLANS.find((candidate) => candidate.id === plan)?.siteLimit ?? 1;
+  return BILLING_PLANS.find((candidate) => candidate.id === plan)?.siteLimit ?? NO_PLAN_SITE_LIMIT;
 }
 
 /**

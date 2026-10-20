@@ -13,7 +13,12 @@ import {
 import { isBoolean, isDynamicRecord, isFunction, isNumber, isString } from "@openbot/contracts/runtime-values";
 import { normalizeEmailAddress } from "@openbot/contracts/validation";
 import { OpenPanelBase, type OpenPanelOptions } from "@openpanel/web";
-import { ANALYTICS_SCHEMA_VERSION, configureDesktopReports, configureErrorReports } from "./error-reports";
+import {
+  ANALYTICS_SCHEMA_VERSION,
+  configureDesktopReports,
+  configureErrorReports,
+  PRODUCTION_ANALYTICS_ENABLED,
+} from "./error-reports";
 import { MARKETPLACE_PLUGINS } from "./features/settings/marketplace-plugin-catalog";
 
 const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
@@ -468,7 +473,10 @@ const UPDATE_PHASES = new Set([
 ]);
 
 function shouldEnableDesktopAnalytics(appInfo: AppInfo, productionBuild: boolean): boolean {
-  return appInfo.analyticsCaptureUrl !== undefined || (productionBuild && appInfo.variant === "production");
+  return (
+    appInfo.analyticsCaptureUrl !== undefined ||
+    (PRODUCTION_ANALYTICS_ENABLED && productionBuild && appInfo.variant === "production")
+  );
 }
 
 function sanitizeDesktopAnalyticsEvent(

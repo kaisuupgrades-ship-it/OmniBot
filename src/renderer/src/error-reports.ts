@@ -13,6 +13,12 @@ import { version } from "../../../package.json";
 /** The desktop schema generation. Product events and failure reports send the same value. */
 export const ANALYTICS_SCHEMA_VERSION = 9;
 
+/**
+ * Production analytics and failure reports are off in this fork. Only a development capture URL
+ * turns them on. Set this to true only after you point the OpenPanel endpoints at your own server.
+ */
+export const PRODUCTION_ANALYTICS_ENABLED: boolean = false;
+
 let queue: ReportQueue | undefined;
 let enabled = false;
 let configured = false;
@@ -26,7 +32,11 @@ export function configureDesktopReports(
   user: Pick<CentralAuthUser, "id" | "email"> | null,
 ): void {
   const capture = info.analyticsCaptureUrl;
-  if (capture === undefined && (!import.meta.env.PROD || info.variant !== "production")) return;
+  if (
+    capture === undefined &&
+    (!PRODUCTION_ANALYTICS_ENABLED || !import.meta.env.PROD || info.variant !== "production")
+  )
+    return;
   queue ??= new ReportQueue(
     indexedReportStorage("openbot-desktop-error-reports-v1"),
     openPanelTransport({
@@ -74,7 +84,8 @@ export function webReportsEnabled(): boolean {
 }
 
 export function configureWebReports(user: Pick<CentralAuthUser, "id" | "email"> | null): void {
-  if (!import.meta.env.PROD || window.location.origin !== "https://openbot.run") return;
+  if (!PRODUCTION_ANALYTICS_ENABLED || !import.meta.env.PROD || window.location.origin !== "https://openbot.run")
+    return;
   queue ??= new ReportQueue(
     indexedReportStorage("openbot-web-error-reports-v1"),
     openPanelTransport({ clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2" }),

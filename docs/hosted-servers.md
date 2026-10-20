@@ -269,17 +269,18 @@ a Claude subscription on a server, read [provider terms](provider-terms.md#claud
 ## Members
 
 The plan sets the number of active members, owner included: Starter 3, Standard 10 and Pro 25
-(`BILLING_PLANS`). A host with no plan has 3 (`DEFAULT_TEAM_MEMBER_LIMIT`). The Worker reads the plan
+(`BILLING_PLANS`). A host with no plan, such as a self-hosted server, has 100
+(`DEFAULT_TEAM_MEMBER_LIMIT`, the same as the stored member cap `INPUT_LIMITS.teamMembers`). The Worker reads the plan
 with `getServerEntitlement` when a member joins or is reactivated, and refuses a member over the limit
 (`409 member_limit_reached`). This also applies to a self-hosted host that has a plan.
 
 - A lower limit after a plan change or a plan end removes no one. Active members keep their seats.
   A new join or a reactivation waits for a free seat.
 - The host list (`GET /v2/remote/hosts/`) gives `memberLimit` for each host. The desktop, web and
-  mobile member screens show it. They use 3 when an older Worker sends no limit.
+  mobile member screens show it. They use 100 when an older Worker sends no limit.
 - After each subscription sync, the Worker sends `account-servers-changed` to each active member,
   so their devices read the host list, and the new limit, again.
-- A host that is not on an account keeps 3 in its own store (`src/main/team-store.ts`). It has no plan.
+- A host that is not on an account keeps 100 in its own store (`src/main/team-store.ts`). It has no plan.
 
 ## Configure the test Worker
 

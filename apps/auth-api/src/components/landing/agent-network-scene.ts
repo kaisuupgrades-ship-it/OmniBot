@@ -9,7 +9,12 @@
 // frame at second `t`. Playback, pause and reduced motion are only a choice of
 // `t`, so they cannot drift apart.
 
-import { APP_LOGO_CORNER, APP_LOGO_EYE_POINTS, APP_LOGO_SIZE } from "@openbot/brand/app-logo-shape";
+import {
+  APP_LOGO_CORNER,
+  APP_LOGO_EYE_POINTS,
+  APP_LOGO_EYE_STROKE,
+  APP_LOGO_SIZE,
+} from "@openbot/brand/app-logo-shape";
 
 /** A node with no avatar is the OpenBot mark at the centre. */
 const HUB = -1;
@@ -890,7 +895,7 @@ function drawNetwork(
       context.roundRect(x - radius, y - radius, side, side, APP_LOGO_CORNER * unit);
       context.fill();
       context.strokeStyle = assets.colors.hubEye;
-      context.lineWidth = 9.5 * unit;
+      context.lineWidth = APP_LOGO_EYE_STROKE * unit;
       context.lineCap = "round";
       context.lineJoin = "round";
       for (const points of [APP_LOGO_EYE_POINTS.left, APP_LOGO_EYE_POINTS.right]) {

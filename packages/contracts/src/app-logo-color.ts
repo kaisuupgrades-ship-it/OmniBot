@@ -23,7 +23,7 @@ export const APP_LOGO_COLORS = [
 export type AppLogoColor = (typeof APP_LOGO_COLORS)[number];
 
 /** The released brand color, `--openbot-logo-production`. */
-export const DEFAULT_APP_LOGO_COLOR: AppLogoColor = "lavender";
+export const DEFAULT_APP_LOGO_COLOR: AppLogoColor = "blue";
 
 /**
  * The logo body color of each choice. The main process recolors the app icon with it, and the

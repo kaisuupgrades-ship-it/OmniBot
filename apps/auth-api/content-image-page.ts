@@ -5,7 +5,12 @@
 // Workers have no WebGL, so the card artwork cannot be produced at request time.
 // This is the one place that turns the shared gradient description into pixels.
 
-import { APP_LOGO_CORNER, APP_LOGO_EYE_POINTS, APP_LOGO_SIZE } from "@openbot/brand/app-logo-shape";
+import {
+  APP_LOGO_CORNER,
+  APP_LOGO_EYE_POINTS,
+  APP_LOGO_EYE_STROKE,
+  APP_LOGO_SIZE,
+} from "@openbot/brand/app-logo-shape";
 import { getShaderColorFromString, meshGradientFragmentShader, ShaderMount } from "@paper-design/shaders";
 import type { ContentImageJob, ContentImageLockup, ContentImageMark } from "./content-images";
 import { RIVAL_MARK_SHAPES, type RivalMarkName } from "./src/components/compare/rival-mark-shapes";
@@ -23,7 +28,7 @@ const TITLE_MAX_LINES = 3;
 /** Under a lockup or a row of marks there is room for two lines. */
 const TITLE_MAX_LINES_WITH_LOCKUP = 2;
 /** `--openbot-logo-production` and `--openbot-logo-eye`. */
-const LOGO_BACKGROUND = "#d6adf2";
+const LOGO_BACKGROUND = "#84adde";
 const LOGO_EYE = "#040007";
 const FONT_FAMILY = '"Inter Variable", Inter, system-ui, sans-serif';
 
@@ -263,7 +268,7 @@ function drawOpenBotMark(context: CanvasRenderingContext2D, x: number, y: number
   context.fill();
   context.clip();
   context.strokeStyle = LOGO_EYE;
-  context.lineWidth = 9.5;
+  context.lineWidth = APP_LOGO_EYE_STROKE;
   context.lineCap = "round";
   context.lineJoin = "round";
   for (const points of [APP_LOGO_EYE_POINTS.left, APP_LOGO_EYE_POINTS.right]) {

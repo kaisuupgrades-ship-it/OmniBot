@@ -230,8 +230,14 @@ const EVENT_PROPERTY_ALLOWLIST = {
  */
 const PENDING_EVENT_LIMIT = 4;
 
+/**
+ * Landing analytics is off in this fork. To turn it on, set the host of your production site here
+ * and point `OPENPANEL_API_URL` at your own OpenPanel server.
+ */
+const LANDING_ANALYTICS_HOSTNAMES: readonly string[] = [];
+
 function shouldEnableLandingAnalytics(hostname: string, productionBuild: boolean): boolean {
-  return productionBuild && hostname === "openbot.run";
+  return productionBuild && LANDING_ANALYTICS_HOSTNAMES.includes(hostname);
 }
 
 class LandingAnalytics {

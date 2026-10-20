@@ -35,7 +35,8 @@
   stroke: var(--app-logo-eye);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 9.5px;
+  /* `APP_LOGO_EYE_STROKE` in app-logo-shape.ts. */
+  stroke-width: 13px;
   pointer-events: none;
   transform-box: view-box;
 }
@@ -48,12 +49,13 @@
   transition: transform var(--openbot-duration-normal) cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* The eye centers, `APP_LOGO_EYE_CENTERS` in app-logo-shape.ts, as parts of the 240-unit mark. */
 .app-logo-eye-left {
-  transform-origin: 28.7% 48.7%;
+  transform-origin: 28.75% 48.75%;
 }
 
 .app-logo-eye-right {
-  transform-origin: 71.2% 48.8%;
+  transform-origin: 71.25% 48.75%;
 }
 
 .app-logo[data-animation="blink"] .app-logo-eye {

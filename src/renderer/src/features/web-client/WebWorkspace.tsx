@@ -58,8 +58,6 @@ import { computeAgentAvatarMoods } from "@openbot/ui/features/agents/agent-avata
 import { createFirstAgentDraft, type FirstAgentDraft } from "@openbot/ui/features/agents/FirstAgentSetup";
 import { BillingDialog } from "@openbot/ui/features/billing/BillingDialog";
 import { createBillingStore } from "@openbot/ui/features/billing/billing-store";
-import { LicenseSection } from "@openbot/ui/features/billing/LicenseSection";
-import { createLicenseStore } from "@openbot/ui/features/billing/license-store";
 import { unloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
 import type { DiagramModelChoice } from "@openbot/ui/features/diagrams/DiagramNewAgentCard";
 import { LeaveServerDialog } from "@openbot/ui/features/servers/LeaveServerDialog";
@@ -163,7 +161,7 @@ import { createWebAccountCalls } from "./web-account";
 import { createWebAccountUsage } from "./web-account-usage";
 import { createWebAgentImportCalls } from "./web-agent-import";
 import { openWebLink } from "./web-attachments";
-import { createWebBillingCalls, createWebLicenseCalls } from "./web-billing";
+import { createWebBillingCalls } from "./web-billing";
 import { createWebChannelsPort } from "./web-channels-runtime";
 import { createWebWorkspace, type WebRuntimeFactory } from "./web-client-context";
 import { createWebConversationRuntime } from "./web-conversation-runtime";
@@ -728,8 +726,6 @@ function WebWorkspaceFrame(props: WebWorkspaceProps) {
   const [billingOpen, setBillingOpen] = createSignal(false);
   const billingCalls = createWebBillingCalls(props.accountFetch);
   const billing = createBillingStore(() => billingCalls, billingOpen);
-  const licenseCalls = createWebLicenseCalls(props.accountFetch);
-  const license = createLicenseStore(() => licenseCalls, billingOpen);
   // The web client has no Hosted servers settings, so a server whose plan ended is renewed or deleted in Billing.
   const billingHostedServers = createSettingsHostedServersStore(
     {
@@ -1721,8 +1717,6 @@ function WebWorkspaceFrame(props: WebWorkspaceProps) {
                       // Publication and screen recording belong to the computer that runs the server.
                       onSetPublished={unavailable}
                       onCreateInvite={serverSettings.createInvite}
-                      license={licenseCalls}
-                      onContactUs={() => window.location.assign(HOSTED_SERVER_CONTACT_URL)}
                       onUpdateMember={serverSettings.updateMember}
                       onRemoveMember={serverSettings.removeMember}
                       onRevokeInvite={serverSettings.revokeInvite}
@@ -1834,13 +1828,6 @@ function WebWorkspaceFrame(props: WebWorkspaceProps) {
                   onOpenChange={setBillingOpen}
                   store={billing}
                   hostedServers={billingHostedServers}
-                  license={
-                    <LicenseSection
-                      store={license}
-                      onManagePayment={() => void billing.openPortal({ flow: "manage" })}
-                      onContactUs={() => window.location.assign(HOSTED_SERVER_CONTACT_URL)}
-                    />
-                  }
                 />
                 <ChannelCreateOverlay />
                 <GlobalSearchOverlay

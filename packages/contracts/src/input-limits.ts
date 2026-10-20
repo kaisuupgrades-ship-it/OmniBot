@@ -110,9 +110,10 @@ export const INPUT_LIMITS = {
   sessionsPerMember: 10,
 } as const;
 
-// Active members of one host with no plan, owner included: the owner and two others. A plan sets
-// its own limit (`memberLimitForPlan`). `INPUT_LIMITS.teamMembers` stays the wire cap for stored members.
-export const DEFAULT_TEAM_MEMBER_LIMIT = 3;
+// Active members of one host with no plan, owner included. A self-hosted server has no plan, so it can
+// use every stored member record: `INPUT_LIMITS.teamMembers` is the wire cap for stored members, and
+// released decoders refuse a larger member list. A plan sets its own limit (`memberLimitForPlan`).
+export const DEFAULT_TEAM_MEMBER_LIMIT = INPUT_LIMITS.teamMembers;
 
 export const ATTACHMENT_LIMITS = {
   fileBytes: 100 * 1024 * 1024,

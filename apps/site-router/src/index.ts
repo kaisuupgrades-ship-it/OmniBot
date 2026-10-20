@@ -372,7 +372,7 @@ const errorPageStyle = `
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#1a1a1a;color:#fff;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 main{width:100%;max-width:440px;padding:32px;border:1px solid rgba(255,255,255,.07);border-radius:18px;background:#212121}
-.brand{margin:0 0 24px;color:#d6adf2;font-weight:600;letter-spacing:-.01em}
+.brand{margin:0 0 24px;color:#84adde;font-weight:600;letter-spacing:-.01em}
 .meta{margin:0 0 8px;color:#979797;font-size:13px;overflow-wrap:anywhere}
 h1{margin:0 0 8px;font-size:24px;line-height:1.25;letter-spacing:-.02em}
 p{margin:0;color:#dcdcdc}

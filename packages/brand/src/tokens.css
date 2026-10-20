@@ -158,7 +158,7 @@
   --openbot-chart-storage-downloads: #9085e9;
   --openbot-chart-storage-runtimes: #c98500;
   --openbot-chart-storage-app: var(--openbot-text-dim);
-  --openbot-logo-production: #d6adf2;
+  --openbot-logo-production: #84adde;
   --openbot-logo-eye: #040007;
   /* The eyes of the release logo. The logo color setting changes it with `--openbot-logo-production`;
      a dev or preview logo keeps `--openbot-logo-eye`. */

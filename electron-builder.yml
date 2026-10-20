@@ -18,10 +18,13 @@ electronFuses:
   onlyLoadAppFromAsar: true
   loadBrowserProcessSpecificV8Snapshot: false
   grantFileProtocolExtraPrivileges: false
+# The auto-update feed: `updatesUrl` in scripts/omnibot/brand.json. The default is under the
+# reserved `example.com` domain. Replace it with a server you control and upload each release's
+# `latest.yml` and installers there. Never point it at a GitHub owner or domain that you do not
+# control, because the app installs what the feed offers.
 publish:
-  provider: github
-  owner: nightly-labs
-  repo: openbot
+  provider: generic
+  url: https://updates.omnibot.example.com
 files:
   - out/**/*
   - package.json
@@ -108,7 +111,6 @@ mac:
   entitlementsInherit: build/entitlements.mac.inherit.plist
   darkModeSupport: true
   extendInfo:
-    ElectronTeamID: ZTRDTUL87R
     NSMicrophoneUsageDescription: OpenBot uses the microphone to transcribe voice prompts locally on this Mac.
     # Computer Use runs the driver as a child process, so macOS asks for both grants in OpenBot's
     # name and shows these sentences.

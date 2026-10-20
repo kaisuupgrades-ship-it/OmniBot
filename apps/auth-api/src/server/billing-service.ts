@@ -18,7 +18,6 @@ import {
   parseBillingLookupKey,
 } from "@openbot/contracts/billing";
 import type { HostedServerCatalog, HostedServerCatalogPlan } from "@openbot/contracts/hosted-servers";
-import { LICENSE_METADATA, LICENSE_METADATA_KIND } from "@openbot/contracts/license";
 import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
 import { sourceText } from "@openbot/i18n/source";
 import { Context, Effect, Layer } from "effect";
@@ -38,7 +37,6 @@ import {
 } from "./billing-errors";
 import { type BillingSales, type PaymentReversal, paymentReversal } from "./billing-sales";
 import type { HostedFailure } from "./hosted-server-service";
-import { isLicensePrice, LicenseService, type LicenseSync } from "./license-service";
 import type { RemoteFailure } from "./remote-control-plane";
 import type { StripeTransportError } from "./stripe-client";
 import {
@@ -139,7 +137,6 @@ interface StoredSubscription {
 
 /** A subscription that a webhook stored, with its account. */
 interface SyncedSubscription {
-  kind: "plan";
   userId: string;
   plan: BillingPlanId;
   interval: BillingInterval;
@@ -176,8 +173,6 @@ export class BillingService {
   readonly #analytics: AccountAnalytics;
   readonly #sales: BillingSales | null;
   readonly #onFirstPlanStarted: ((start: FirstPlanStart) => void) | null;
-  /** The commercial license. It shares the Stripe customer and the webhook with the server plans. */
-  readonly license: LicenseService;
 
   constructor(options: BillingServiceOptions) {
     const database = options.database;
@@ -195,13 +190,6 @@ export class BillingService {
       now,
       onSubscriptionSynced,
       analytics: this.#analytics,
-    });
-    this.license = new LicenseService({
-      database,
-      stripe,
-      secretKey: options.secretKey,
-      now,
-      ensureCustomer: (user) => this.ensureCustomer(user),
     });
   }
 
@@ -393,12 +381,7 @@ export class BillingService {
           .bind(now - LAPSED_PLAN_GRACE_MS, now - LAPSED_PLAN_READ_INTERVAL_MS, LAPSED_PLAN_BATCH_SIZE)
           .all<{ stripe_subscription_id: string }>(),
       );
-      const licenses = yield* this.license.lapsed(
-        now - LAPSED_PLAN_GRACE_MS,
-        now - LAPSED_PLAN_READ_INTERVAL_MS,
-        LAPSED_PLAN_BATCH_SIZE,
-      );
-      for (const subscriptionId of [...rows.results.map((row) => row.stripe_subscription_id), ...licenses]) {
+      for (const { stripe_subscription_id: subscriptionId } of rows.results) {
         yield* this.#syncSubscription(subscriptionId).pipe(
           Effect.catch(() =>
             Effect.sync(() => {
@@ -704,11 +687,8 @@ export class BillingService {
         yield* this.cancelSubscription(payment.subscriptionId);
         yield* this.#syncSubscription(payment.subscriptionId);
       }
-      // A license is not a server sale, so the sales facts and the plan analytics leave it out.
-      const license = synced?.kind === "license" || isLicenseCheckout(event);
-      const plan = synced?.kind === "plan" ? synced : null;
-      if (this.#sales && !license) {
-        yield* this.#sales.webhook(event, plan, payment).pipe(Effect.mapError(() => new BillingOperationError({})));
+      if (this.#sales) {
+        yield* this.#sales.webhook(event, synced, payment).pipe(Effect.mapError(() => new BillingOperationError({})));
       }
       // The event is recorded only after it is applied, so a failed event is applied again on retry.
       yield* billingCall(() =>
@@ -721,7 +701,7 @@ export class BillingService {
             .bind(now - WEBHOOK_EVENT_RETENTION_MS),
         ]),
       );
-      if (!this.#sales && !license) yield* this.#trackEvent(event, plan);
+      if (!this.#sales) yield* this.#trackEvent(event, synced);
     },
     (operation) => operation.pipe(Effect.provide(this.#layer)),
   ).bind(this);
@@ -735,7 +715,7 @@ export class BillingService {
     this: BillingService,
     reversal: PaymentReversal,
     payment: { invoiceId: string; billingReason: string | null },
-    synced: SyncedSubscription | LicenseSync,
+    synced: SyncedSubscription,
   ): Effect.fn.Return<boolean, BillingError | BillingOperationError, BillingDependencies> {
     if (reversal.type === "payment_disputed") return true;
     if (reversal.type !== "payment_refunded") return false;
@@ -780,21 +760,13 @@ export class BillingService {
   readonly #syncSubscription = Effect.fn("BillingService.syncSubscription")(function* (
     this: BillingService,
     subscriptionId: string,
-  ): Effect.fn.Return<
-    SyncedSubscription | LicenseSync | null,
-    BillingError | BillingOperationError,
-    BillingDependencies
-  > {
+  ): Effect.fn.Return<SyncedSubscription | null, BillingError | BillingOperationError, BillingDependencies> {
     const dependencies = yield* BillingDependencies;
     // The time of the read, not of the write: a read that started later holds the newer state.
     const readAt = dependencies.now();
     const subscription = yield* this.#stripeCall(() => dependencies.stripe.getSubscription(subscriptionId));
     const customerId = subscriptionCustomerId(subscription);
     const price = subscription.items.data[0]?.price;
-    if (price && isLicensePrice(price)) {
-      const ownerId = yield* this.#subscriptionOwner(subscription, customerId);
-      return ownerId ? yield* this.license.sync(subscription, ownerId, readAt) : null;
-    }
     // A changed amount moves the lookup key to a new Price, and current subscriptions keep the old one.
     const key =
       parseBillingLookupKey(price?.lookup_key) ??
@@ -855,7 +827,6 @@ export class BillingService {
         .run(),
     );
     const synced: SyncedSubscription = {
-      kind: "plan",
       userId: ownerId,
       plan: key.plan,
       interval: key.interval,
@@ -997,8 +968,6 @@ export class BillingService {
         .first<{ user_id: string }>(),
     );
     if (stored) return stored.user_id;
-    const license = yield* this.license.storedOwner(subscription.id);
-    if (license) return license;
     const known = yield* billingCall(() =>
       dependencies.database
         .prepare("SELECT user_id FROM billing_customers WHERE stripe_customer_id = ?")
@@ -1122,13 +1091,6 @@ function checkoutReturnUrl(origin: string, target: BillingReturnTarget, serverId
 function portalReturnUrl(origin: string, target: BillingReturnTarget): string {
   if (target === "web") return `${origin}/app?billing=portal`;
   return `${origin}/billing/return`;
-}
-
-/** True for a Checkout event of a license page. A paid page also names its subscription, which the sync reads. */
-function isLicenseCheckout(event: StripeEvent): boolean {
-  if (!event.type.startsWith("checkout.session.")) return false;
-  const metadata = event.data.object.metadata;
-  return isDynamicRecord(metadata) && metadata[LICENSE_METADATA.kind] === LICENSE_METADATA_KIND;
 }
 
 /** The subscription that an event is about, or null for an event that does not change one. */

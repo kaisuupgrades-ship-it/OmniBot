@@ -1,0 +1,9 @@
+{
+  "name": "OmniBot",
+  "scheme": "omnibot",
+  "domain": "omnibot.example.com",
+  "sitesDomain": "omnibot-sites.example.com",
+  "updatesUrl": "https://updates.omnibot.example.com",
+  "repositoryUrl": "https://omnibot.example.com/source",
+  "containerImage": "registry.omnibot.example.com/omnibot"
+}

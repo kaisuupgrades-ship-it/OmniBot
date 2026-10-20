@@ -7,7 +7,7 @@ const THINKING_SECONDS = 1.7;
 const WIDE_SECONDS = 1;
 export const CYCLE_SECONDS = IDLE_SECONDS + THINKING_SECONDS + WIDE_SECONDS;
 function loaderAppearance() {
-  const color = "#D6ADF2"; // Matches the app icon color
+  const color = "#84adde"; // Matches the app icon color
   const radii = SHAPE_BY_ID.get("squircle")?.radii;
   const idleMorph = STATE_BY_ID.get("idle")?.morph;
   if (!color || !radii || idleMorph === undefined) throw new Error("Bloub loader appearance is unavailable.");

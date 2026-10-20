@@ -33,8 +33,8 @@ commands continue to use that file.
 
 ### Stripe sandbox
 
-`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `openbot_{plan}_{month|year}`),
-the license Price (`openbot_license_month`) and the Customer Portal settings in the Stripe account of `STRIPE_SECRET_KEY`. It is safe to run
+`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `openbot_{plan}_{month|year}`)
+and the Customer Portal settings in the Stripe account of `STRIPE_SECRET_KEY`. It is safe to run
 again: a changed amount makes a new Price and moves the lookup key to it. In the Portal, an upgrade
 is charged at once, and a downgrade or a shorter interval starts at the next period.
 

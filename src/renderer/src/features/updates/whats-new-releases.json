@@ -7,7 +7,6 @@
       {
         "type": "added",
         "items": [
-          "Settings → Billing has a License for work at a company: 5 to 25 users, in EUR, USD or PLN. See who uses it and change the number of users.",
           "The chat shows the subagents that a Claude or Codex agent starts. Click a subagent to see its task and its steps.",
           "An agent can show its plan before a long task. Turn on \"Show the plan before long tasks\" in the agent's settings.",
           "The context meter in the composer has a New chat button.",
