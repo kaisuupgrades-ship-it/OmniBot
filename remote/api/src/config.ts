@@ -1,4 +1,5 @@
 import { TELEGRAM_BOT_ID_PATTERN } from "@omnibot/contracts/signal-protocol/telegram-route";
+import type { CloudflareTurnConfig } from "./cloudflare-turn";
 
 export interface RemoteApiConfig {
   host: string;
@@ -11,10 +12,13 @@ export interface RemoteApiConfig {
   controlPlaneUrl: string;
   sessionSecret: string;
   authWebhookSecret: string;
+  // The coturn server. Empty when Cloudflare TURN is used instead.
   turnSecret: string;
   turnHost: string;
   turnPort: number;
   turnTlsPort: number;
+  // Cloudflare Realtime TURN, in place of coturn, when both of its values are set.
+  cloudflareTurn: CloudflareTurnConfig | null;
   metricsToken: string | null;
   maximumConnectionsPerUser: number;
   maximumConnectionsPerIp: number;
@@ -145,6 +149,7 @@ export function readRemoteApiConfig(environment: Record<string, string | undefin
   const ticketJwksUrl = optional(environment.REMOTE_TICKET_JWKS_URL);
   if (!ticketJwks && !ticketJwksUrl)
     throw new Error("REMOTE_TICKET_PUBLIC_KEYS or REMOTE_TICKET_JWKS_URL is required.");
+  const cloudflareTurn = readCloudflareTurn(environment);
   return {
     host: environment.REMOTE_SIGNAL_HOST ?? "0.0.0.0",
     port: positiveInteger(environment.REMOTE_SIGNAL_PORT, tlsDisabled ? 8081 : 8443),
@@ -156,10 +161,11 @@ export function readRemoteApiConfig(environment: Record<string, string | undefin
     controlPlaneUrl: required(environment.REMOTE_CONTROL_PLANE_URL, "REMOTE_CONTROL_PLANE_URL"),
     sessionSecret: strongSecret(environment.REMOTE_SESSION_SECRET, "REMOTE_SESSION_SECRET"),
     authWebhookSecret: strongSecret(environment.REMOTE_AUTH_WEBHOOK_SECRET, "REMOTE_AUTH_WEBHOOK_SECRET"),
-    turnSecret: strongSecret(environment.TURN_SHARED_SECRET, "TURN_SHARED_SECRET"),
-    turnHost: required(environment.TURN_HOST, "TURN_HOST"),
+    turnSecret: cloudflareTurn ? "" : strongSecret(environment.TURN_SHARED_SECRET, "TURN_SHARED_SECRET"),
+    turnHost: cloudflareTurn ? "" : required(environment.TURN_HOST, "TURN_HOST"),
     turnPort: positiveInteger(environment.TURN_PORT, 3478),
     turnTlsPort: positiveInteger(environment.TURN_TLS_PORT, 5349),
+    cloudflareTurn,
     metricsToken: optional(environment.REMOTE_METRICS_TOKEN),
     maximumConnectionsPerUser: positiveInteger(environment.REMOTE_MAX_CONNECTIONS_PER_USER, 32),
     maximumConnectionsPerIp: positiveInteger(environment.REMOTE_MAX_CONNECTIONS_PER_IP, 32),
@@ -174,6 +180,16 @@ export function readRemoteApiConfig(environment: Record<string, string | undefin
       environment.DISCORD_MESSAGE_CONTENT,
     ),
   };
+}
+
+/** Both values, or neither: one without the other is a mistake that would quietly fall back to coturn. */
+function readCloudflareTurn(environment: Record<string, string | undefined>): CloudflareTurnConfig | null {
+  const keyId = optional(environment.CLOUDFLARE_TURN_KEY_ID);
+  const apiToken = optional(environment.CLOUDFLARE_TURN_API_TOKEN);
+  if (!keyId && !apiToken) return null;
+  if (!keyId || !apiToken)
+    throw new Error("Set both CLOUDFLARE_TURN_KEY_ID and CLOUDFLARE_TURN_API_TOKEN, or neither.");
+  return { keyId, apiToken };
 }
 
 function required(value: string | undefined, name: string): string {

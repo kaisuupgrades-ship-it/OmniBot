@@ -1,0 +1,33 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  // Signal (remote/api) in a Cloudflare Container. See README.md.
+  "name": "omnibot-signal",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-18",
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "routes": [{ "pattern": "signal.omnibot.example.com", "custom_domain": true }],
+  "containers": [
+    {
+      "class_name": "SignalContainer",
+      "image": "../api/Dockerfile",
+      // The Dockerfile copies the workspace manifests, so it builds from the repository root.
+      "image_build_context": "../..",
+      // 256 MiB. Use "basic" (1 GiB) if Signal runs out of memory.
+      "instance_type": "lite",
+      // Signal keeps its sockets in memory: one instance only.
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "SIGNAL", "class_name": "SignalContainer" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SignalContainer"] }],
+  // Not secret. The secrets come from remote/.env.cloudflare through scripts/deploy-signal-container.ts.
+  "vars": {
+    "REMOTE_TICKET_JWKS_URL": "https://api.omnibot.example.com/.well-known/jwks.json",
+    "REMOTE_CONTROL_PLANE_URL": "https://api.omnibot.example.com",
+    "TELEGRAM_WEBHOOK_ORIGIN": "https://signal.omnibot.example.com"
+  }
+}

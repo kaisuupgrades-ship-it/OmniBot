@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { type IngressRoute, ROUTE_HOST_STATES } from "@omnibot/contracts/signal-protocol/ingress-queue";
 import { Context, Effect, Layer, ManagedRuntime, Schema } from "effect";
 import { createRemoteApiApp, prometheusMetrics } from "./app";
+import { CloudflareTurnCredentials } from "./cloudflare-turn";
 import { readRemoteApiConfig } from "./config";
 import { DiscordGateway } from "./discord-gateway";
 import type { RouteWake } from "./ingress-queue";
@@ -264,6 +265,11 @@ class ControlPlane extends Context.Service<
 
 const controlPlane = ManagedRuntime.make(ControlPlane.layer);
 const controlPlaneService = await controlPlane.runPromise(ControlPlane);
+const cloudflareTurn = config.cloudflareTurn ? new CloudflareTurnCredentials(config.cloudflareTurn) : null;
+if (cloudflareTurn) {
+  await cloudflareTurn.start();
+  console.log("OmniBot Remote API uses Cloudflare TURN.");
+}
 const tokens = new RemoteTokenService(
   config,
   (claims) =>
@@ -271,6 +277,7 @@ const tokens = new RemoteTokenService(
       .validateResume(claims)
       .pipe(Effect.mapError((error) => new RemoteTokenError({ message: error.message }))),
   {
+    ...(cloudflareTurn ? { turnProvider: cloudflareTurn } : {}),
     validateSlackRoute: (hostId, teams) =>
       controlPlaneService
         .validateSlackRoute(hostId, teams)

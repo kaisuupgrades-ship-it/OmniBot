@@ -174,6 +174,7 @@
     "typecheck:team-client": "bun run --cwd packages/team-client typecheck",
     "typecheck:mobile": "bun run --cwd apps/mobile typecheck",
     "typecheck:remote": "bun run --cwd remote/api typecheck",
+    "typecheck:signal-container": "bun scripts/type-checker.ts --noEmit -p remote/cloudflare/tsconfig.json",
     "typecheck:status": "bun run --cwd apps/status typecheck",
     "typecheck": "bun run --parallel 'typecheck:*'",
     "lint": "biome check --max-diagnostics=none .",

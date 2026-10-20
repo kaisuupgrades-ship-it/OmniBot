@@ -83,8 +83,10 @@ Do the steps in [docs/self-hosting.md](docs/self-hosting.md), with your own doma
 1. **Domain on Cloudflare.** Add your domain to a free Cloudflare account.
 2. **Account service (Cloudflare Worker).** In `apps/auth-api/wrangler.jsonc`, set `database_id` to
    the ID that `wrangler d1 create` prints, and set the SMTP values. Then deploy.
-3. **Signal and TURN (your Linux VPS).** Copy `remote/.env.example` to `remote/.env.self-hosted`,
-   fill it in, and start it with Docker Compose.
+3. **Signal and TURN (Cloudflare).** Signal runs in a Cloudflare Container and TURN comes from
+   Cloudflare Realtime, so no server of your own is needed. Fill in `remote/.env.cloudflare` and
+   follow [remote/cloudflare/README.md](remote/cloudflare/README.md). The Docker Compose setup in
+   `remote/` still works if you prefer a Linux server.
 
 After `brand.json` has your domain, the app uses your servers by default. You do not have to set
 `OMNIBOT_AUTH_API_URL` or `OMNIBOT_REMOTE_SIGNAL_URL`.
