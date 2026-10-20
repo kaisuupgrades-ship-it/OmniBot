@@ -1,6 +1,6 @@
 # OmniBot Telegram bot
 
-The one OmniBot Telegram bot, `@meetOmniBot` (bot ID `8630107594`). The OmniBot app links a chat
+The one OmniBot Telegram bot, `@<your_bot>` (bot ID: the part of the token before `:`). The OmniBot app links a chat
 with a one-use `t.me` link, and the chat is linked to the OmniBot server that made the link. People
 mention the bot in a group, reply to it, or send it a direct message, and the Telegram Orchestrator
 agent on that OmniBot server asks the right agent and answers. No code runs here: this file lists the
@@ -31,7 +31,7 @@ Make the bot with `/newbot` in [@BotFather](https://t.me/BotFather), and copy th
 - **About** (`/setabouttext`, at most 120 characters):
 
   ```
-  Your OmniBot AI teammates in Telegram. Mention @meetOmniBot in a group or send a direct message to delegate work.
+  Your OmniBot AI teammates in Telegram. Mention @<your_bot> in a group or send a direct message to delegate work.
   ```
 
 - **Description** (`/setdescription`, at most 512 characters). Telegram shows it in an empty chat:
@@ -39,7 +39,7 @@ Make the bot with `/newbot` in [@BotFather](https://t.me/BotFather), and copy th
   ```
   OmniBot brings your AI teammates into Telegram.
 
-  Mention @meetOmniBot in a group, reply to it, or send it a direct message to delegate work, follow progress, and get results without leaving the chat.
+  Mention @<your_bot> in a group, reply to it, or send it a direct message to delegate work, follow progress, and get results without leaving the chat.
 
   Your AI teammates run in your own OmniBot workspace, with distinct roles, instructions, and context. Use them for research, writing, planning, summaries, and daily work. When an action needs approval, OmniBot asks first.
 
