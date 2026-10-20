@@ -17,7 +17,7 @@ const REPOSITORY = "https://github.com/trycua/cua";
 /**
  * Recomputes the `cuaDriver` block of `native-runtime.lock.json` from a published release.
  *
- * Every target is downloaded, because the pin records a digest for each file OpenBot ships and
+ * Every target is downloaded, because the pin records a digest for each file OmniBot ships and
  * those can only be read out of the archive. Expect around 90 MB of traffic per run.
  */
 export async function pinCuaDriver(
@@ -73,7 +73,7 @@ async function pinArtifact(fetchImpl: typeof fetch, target: CuaDriverTarget, ver
 }
 
 async function download(fetchImpl: typeof fetch, url: string): Promise<Buffer> {
-  const response = await fetchImpl(url, { headers: { "User-Agent": "OpenBot-runtime-pin" }, redirect: "follow" });
+  const response = await fetchImpl(url, { headers: { "User-Agent": "OmniBot-runtime-pin" }, redirect: "follow" });
   if (!response.ok) throw new Error(`${url} answered HTTP ${response.status}.`);
   return Buffer.from(await response.arrayBuffer());
 }

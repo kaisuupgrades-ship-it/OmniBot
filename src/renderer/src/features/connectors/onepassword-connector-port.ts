@@ -1,9 +1,9 @@
-import type { OnePasswordConnectorStatus, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi, OnePasswordConnectorStatus } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
 
 /** What the 1Password page reaches: one 1Password connection, of this computer or of a joined server. */
 export type OnePasswordConnectorPort = Omit<
-  OpenBotDesktopApi["onePasswordConnector"],
+  OmniBotDesktopApi["onePasswordConnector"],
   "hostStatus" | "hostConnectWithToken" | "hostDisconnect"
 >;
 

@@ -41,7 +41,7 @@ import {
   isRoutineFlowCanvas,
   isRoutineFlowLink,
   isRoutineRun,
-  type OpenBotDesktopApi,
+  type OmniBotDesktopApi,
   type QueuedMessageReceipt,
   type RemoteAgentImportResult,
   type ReorderQueueInput,
@@ -295,7 +295,7 @@ export const respondToBrowserSecret = Effect.fn("TeamClient.respondToBrowserSecr
 
 /** The channel calls of the desktop IPC surface, which a remote desktop sends to the host the same way. */
 export type TeamChannelsApi = Pick<
-  OpenBotDesktopApi["agent"],
+  OmniBotDesktopApi["agent"],
   | "listChannels"
   | "readChannel"
   | "channelCommand"
@@ -363,7 +363,7 @@ export const testAgentRoutine = Effect.fn("TeamClient.testAgentRoutine")(functio
 });
 
 /** The routine canvas calls of the desktop IPC surface. Send them only to a host that serves `routine-flows-v1`. */
-export type TeamRoutineFlowsApi = OpenBotDesktopApi["routineFlows"];
+export type TeamRoutineFlowsApi = OmniBotDesktopApi["routineFlows"];
 
 const decodeRoutineFlowCanvas = guardedDecoder(isRoutineFlowCanvas, "routine flow canvas");
 const decodeRoutineFlowLink = guardedDecoder(isRoutineFlowLink, "routine flow link");

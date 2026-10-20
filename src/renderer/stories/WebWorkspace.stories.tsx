@@ -11,7 +11,7 @@ import type { WebRuntimeFactory } from "../src/features/web-client/web-client-co
 import { WebHostIncompatibleError } from "../src/features/web-client/web-runtime";
 import { createBenchWebRuntime } from "../src/preview/bench-web-runtime";
 import { MOCK_HOSTED_SERVER_CATALOG } from "../src/preview/mock-hosted-servers";
-import { createMockOpenBot } from "../src/preview/mock-openbot";
+import { createMockOmniBot } from "../src/preview/mock-openbot";
 import { createMockWebRuntime } from "../src/preview/mock-web-runtime";
 import "../src/features/web-client/web-client.css";
 
@@ -101,7 +101,7 @@ const NEW_SERVER_ID = "cloud-server";
  */
 const newServerRuntime: WebRuntimeFactory = (accountId, events, accountFetch) => {
   const base = createMockWebRuntime(accountId, events, accountFetch);
-  const team = createMockOpenBot();
+  const team = createMockOmniBot();
   let status: AgentStatus = {
     phase: "blocked",
     cliVersion: null,

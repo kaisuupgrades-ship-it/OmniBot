@@ -2,12 +2,12 @@
  * Builds the boat named snapshot that hosted servers are created from:
  *
  *   BOAT_TEMPLATE_API_KEY=... bun scripts/hosting/build-boat-template.ts --version=0.9.0 \
- *     --appimage-url=https://.../OpenBot-0.9.0-x86_64.AppImage --appimage-sha256=<hex> \
+ *     --appimage-url=https://.../OmniBot-0.9.0-x86_64.AppImage --appimage-sha256=<hex> \
  *     --auth-api-url=https://<test worker origin>
  *
  * It creates a builder sandbox with no account env, runs provision.sh there, checks the install,
  * saves the builder as `openbot-server-<version>`, and deletes the builder. The builder never starts
- * OpenBot, so the template holds no host identity and no session. The key needs sandbox, files,
+ * OmniBot, so the template holds no host identity and no session. The key needs sandbox, files,
  * commands, and named snapshot access; the Worker's key must not have that access.
  *
  * The release job adds `--keep-releases=<n> --in-use=<names>`: before the build, it removes the
@@ -19,9 +19,9 @@ import { dirname, join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
 
-const logger = createOpenBotLogger("build-boat-template");
+const logger = createOmniBotLogger("build-boat-template");
 const BOAT_API_URL = "https://boat.dev/api/v1";
 const TEMPLATE_FILES = [
   "provision.sh",
@@ -119,8 +119,8 @@ async function main(): Promise<void> {
       boat,
       builderId,
       [
-        "test -x /opt/OpenBot/app/openbot",
-        `test "$(sed -n 's/^X-AppImage-Version=//p' /opt/OpenBot/app/*.desktop)" = ${shellQuote(options.version)}`,
+        "test -x /opt/OmniBot/app/openbot",
+        `test "$(sed -n 's/^X-AppImage-Version=//p' /opt/OmniBot/app/*.desktop)" = ${shellQuote(options.version)}`,
         "systemctl is-enabled --quiet openbot.service",
         "! systemctl is-active --quiet openbot.service",
         // With more than one unit, `is-enabled` passes when one of them is enabled.
@@ -128,7 +128,7 @@ async function main(): Promise<void> {
         "systemctl is-enabled --quiet openbot-update-apply.service",
         "systemctl is-enabled --quiet openbot-update-request.path",
         "! systemctl is-active --quiet openbot-update.timer",
-        'test ! -e "$HOME/.config/OpenBot"',
+        'test ! -e "$HOME/.config/OmniBot"',
         'test ! -e "$HOME/.config/openbot-hosted"',
         'test -z "$(ls -A /srv/openbot-hosted)"',
         `rm -rf ${REMOTE_DIRECTORY}`,

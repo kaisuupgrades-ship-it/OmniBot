@@ -321,7 +321,7 @@ export const messages = defineMessages("chat", {
   "chat.suggestion.dismissNamed": "Dismiss {name}",
   "chat.suggestion.dismissed": "{name} suggestion dismissed.",
   "chat.suggestion.undo": "Undo",
-  "chat.suggestion.localOnly": "Connect {name} in OpenBot on your own computer.",
+  "chat.suggestion.localOnly": "Connect {name} in OmniBot on your own computer.",
   "chat.suggestion.unavailable": "This server cannot connect {name}.",
   "chat.compaction.running": "Compacting context",
   "chat.compaction.completed": "Context compacted",

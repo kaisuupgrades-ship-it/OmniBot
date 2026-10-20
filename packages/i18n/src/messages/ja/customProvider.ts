@@ -12,7 +12,7 @@ export const messages = {
   "customProvider.registry.update": "アップデート",
   "customProvider.registry.remove": "ランタイムを削除",
   "customProvider.registry.searchFailed": "レジストリを検索できませんでした。もう一度お試しください。",
-  "customProvider.registry.statusFailed": "インストールの進行状況を確認できませんでした。OpenBot が再試行します。",
+  "customProvider.registry.statusFailed": "インストールの進行状況を確認できませんでした。OmniBot が再試行します。",
   "customProvider.registry.installFailed": "エージェントをインストールできませんでした。もう一度お試しください。",
   "customProvider.registry.updateFailed": "エージェントをアップデートできませんでした。もう一度お試しください。",
   "customProvider.registry.removeFailed": "ランタイムを削除できませんでした。もう一度お試しください。",
@@ -22,7 +22,7 @@ export const messages = {
     "小文字の英字、数字、ハイフン、アンダースコアを使い、英字か数字で始めてください。",
   "customProvider.error.providerIdLength": "プロバイダー ID は {max} 文字未満にしてください。",
   "customProvider.error.providerIdBuiltIn":
-    "OpenBot には {id} という名前のプロバイダーがすでにあります。別の ID を選んでください。",
+    "OmniBot には {id} という名前のプロバイダーがすでにあります。別の ID を選んでください。",
   "customProvider.error.providerIdSaved":
     "{id} という名前のエンドポイントはすでに保存されています。先に削除するか、別の ID を選んでください。",
   "customProvider.error.displayNameRequired": "表示名を入力してください。",
@@ -45,16 +45,16 @@ export const messages = {
   "customProvider.error.baseUrlProtocol": "http:// または https:// の URL を使ってください。",
   "customProvider.error.baseUrlCredential": "認証情報は URL ではなくヘッダーに入れてください。",
 
-  "customProvider.saved.restarted": "保存しました。OpenBot がモデルを読み込んでいます。",
+  "customProvider.saved.restarted": "保存しました。OmniBot がモデルを読み込んでいます。",
   "customProvider.saved.skippedBusy":
     "保存しました。OpenCode は現在のタスクが止まったあとで一覧を読み込みます。そのあとで「接続」を押してください。",
   "customProvider.saved.notRunning": "保存しました。OpenCode は次回の起動時に一覧を読み込みます。",
-  "customProvider.removed.restarted": "削除しました。OpenBot がモデルを読み込んでいます。",
+  "customProvider.removed.restarted": "削除しました。OmniBot がモデルを読み込んでいます。",
   "customProvider.removed.skippedBusy":
     "削除しました。OpenCode は現在のタスクが止まったあとで一覧を読み込みます。そのあとで「接続」を押してください。",
   "customProvider.removed.notRunning": "削除しました。OpenCode は次回の起動時に一覧を読み込みます。",
-  "customProvider.saveFailed": "OpenBot はこのエンドポイントを保存できませんでした。",
-  "customProvider.removeFailed": "OpenBot は {name} を削除できませんでした。",
+  "customProvider.saveFailed": "OmniBot はこのエンドポイントを保存できませんでした。",
+  "customProvider.removeFailed": "OmniBot は {name} を削除できませんでした。",
   "customProvider.saveUnavailable": "このビルドではエンドポイントを保存できません。",
   "customProvider.removeUnavailable": "このビルドではエンドポイントを削除できません。",
 
@@ -114,7 +114,7 @@ export const messages = {
   "customProvider.detected.title": "このコンピューターで見つかったもの",
   "customProvider.detected.scanning": "ローカルのモデルとエージェントを探しています。",
   "customProvider.detected.scanAgain": "再スキャン",
-  "customProvider.detected.empty": "OpenBot はローカルのモデルサーバーも ACP エージェントも見つけられませんでした。",
+  "customProvider.detected.empty": "OmniBot はローカルのモデルサーバーも ACP エージェントも見つけられませんでした。",
   "customProvider.detected.add": "追加",
   "customProvider.detected.addLabel": "{name} を追加",
   "customProvider.detected.added": "追加済み",
@@ -128,10 +128,10 @@ export const messages = {
 
   "customProvider.detection.title": "ローカル検出",
   "customProvider.detection.saveFailed": "検出の設定を保存できませんでした。",
-  "customProvider.detection.description": "OpenBot がローカルのモデルサーバーと ACP エージェントを探す場所です。",
+  "customProvider.detection.description": "OmniBot がローカルのモデルサーバーと ACP エージェントを探す場所です。",
   "customProvider.detection.enabled": "ローカルのモデルとエージェントを探す",
   "customProvider.detection.enabledDescription":
-    "OpenBot は Ollama と LM Studio のデフォルトのアドレスを確認し、PATH にある既知の ACP エージェントを探します。",
+    "OmniBot は Ollama と LM Studio のデフォルトのアドレスを確認し、PATH にある既知の ACP エージェントを探します。",
   "customProvider.detection.addresses": "その他のモデルサーバーのアドレス",
   "customProvider.detection.address.label": "アドレス {number}",
   "customProvider.detection.address.remove": "アドレス {number} を削除",
@@ -151,7 +151,7 @@ export const messages = {
   "customProvider.acp.agentId": "エージェント ID",
   "customProvider.acp.agentIdHint": "小文字の英字、数字、ハイフン。あとから変更できません。",
   "customProvider.acp.command": "コマンド",
-  "customProvider.acp.commandHint": "起動するプログラムです。OpenBot は PATH からこれを探します。",
+  "customProvider.acp.commandHint": "起動するプログラムです。OmniBot は PATH からこれを探します。",
   "customProvider.acp.args": "引数",
   "customProvider.acp.argsHint": "引数はスペースで区切ってください。スペースを含む引数は引用符で囲んでください。",
   "customProvider.acp.env": "環境変数",
@@ -161,7 +161,7 @@ export const messages = {
   "customProvider.acp.env.add": "変数を追加",
   "customProvider.acp.check": "接続",
   "customProvider.acp.checkRun": "エージェントを確認",
-  "customProvider.acp.checkIdle": "OpenBot はコマンドを一度起動して、応答することを確認します。",
+  "customProvider.acp.checkIdle": "OmniBot はコマンドを一度起動して、応答することを確認します。",
   "customProvider.acp.checking": "{command} を起動しています。",
   "customProvider.acp.checkOk": "{name} が応答しました",
   "customProvider.acp.checkOkVersion": "{name} {version} が応答しました",
@@ -169,7 +169,7 @@ export const messages = {
   "customProvider.acp.checkFailed": "エージェントが応答しませんでした",
   "customProvider.acp.trustTitle": "このコマンドはこのコンピューターで実行されます",
   "customProvider.acp.trustDescription":
-    "OpenBot はあなたのユーザーアカウントでこれを起動します。エージェントはファイルの読み取りと変更、コマンドの実行ができます。信頼できるエージェントだけを追加してください。",
+    "OmniBot はあなたのユーザーアカウントでこれを起動します。エージェントはファイルの読み取りと変更、コマンドの実行ができます。信頼できるエージェントだけを追加してください。",
   "customProvider.acp.submit": "エージェントを追加",
   "customProvider.acp.editTitle": "カスタム ACP エージェントを編集",
   "customProvider.acp.submitEdit": "エージェントを保存",
@@ -185,7 +185,7 @@ export const messages = {
     "小文字の英字、数字、ハイフンを使い、英字か数字で始めてください。40 文字以内にしてください。",
 
   "customProvider.agents.title": "カスタムエージェント",
-  "customProvider.agents.description": "OpenBot がこのコンピューターで起動する ACP エージェントです。",
+  "customProvider.agents.description": "OmniBot がこのコンピューターで起動する ACP エージェントです。",
   "customProvider.agents.empty": "カスタムエージェントはまだありません。",
   "customProvider.agents.add": "エージェントを追加",
   "customProvider.agents.restart": "エージェントを再起動",
@@ -197,12 +197,12 @@ export const messages = {
   "customProvider.agents.deleteLabel": "{name} を削除",
   "customProvider.agents.confirmDescription":
     "保存した変数は破棄されます。これを使っているエージェントはデフォルトのモデルに移ります。",
-  "customProvider.agents.saveFailed": "OpenBot はこのエージェントを保存できませんでした。",
-  "customProvider.agents.saved.restarted": "保存しました。OpenBot はカスタムエージェントを再起動しました。",
+  "customProvider.agents.saveFailed": "OmniBot はこのエージェントを保存できませんでした。",
+  "customProvider.agents.saved.restarted": "保存しました。OmniBot はカスタムエージェントを再起動しました。",
   "customProvider.agents.saved.skippedBusy":
     "保存しました。カスタムエージェントは現在のタスクが止まったあとで再起動します。",
   "customProvider.agents.saved.notRunning": "保存しました。カスタムエージェントは次回の起動時に読み込みます。",
-  "customProvider.agents.removed.restarted": "削除しました。OpenBot はカスタムエージェントを再起動しました。",
+  "customProvider.agents.removed.restarted": "削除しました。OmniBot はカスタムエージェントを再起動しました。",
   "customProvider.agents.removed.skippedBusy":
     "削除しました。カスタムエージェントは現在のタスクが止まったあとで再起動します。",
   "customProvider.agents.removed.notRunning": "削除しました。カスタムエージェントは次回の起動時に読み込みます。",

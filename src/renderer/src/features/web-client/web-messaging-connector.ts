@@ -38,7 +38,7 @@ import { Effect } from "effect";
 import { actionToast } from "../../action-toast";
 import type { HostMessagingApi } from "../connectors/host-messaging-port";
 
-/** Local storage that is not available holds no mark, and the return page opens `openbot://`. */
+/** Local storage that is not available holds no mark, and the return page opens `omnibot://`. */
 function withStorage(action: (storage: Storage) => void): boolean {
   try {
     action(localStorage);

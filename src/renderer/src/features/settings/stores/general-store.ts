@@ -26,7 +26,7 @@ interface GeneralStoreProps {
   openCodeKeyStatus?: () => ProviderApiKeyStatus | undefined;
   /** The joined server whose host runs these providers. Absent when this computer runs them. */
   providerHostName?: string | undefined;
-  /** The providers that the user turned off in OpenBot. */
+  /** The providers that the user turned off in OmniBot. */
   offProviders?: readonly AgentProviderId[] | undefined;
   /** The names of the agents that use each provider. */
   providerUsers?: Partial<Record<AgentProviderId, readonly string[]>> | undefined;

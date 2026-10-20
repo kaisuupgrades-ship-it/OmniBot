@@ -139,7 +139,7 @@ export function telegramIntegrationState(
 }
 
 /**
- * Server settings > Connectors > Telegram. Each chat adds the one OpenBot bot, and one Telegram
+ * Server settings > Connectors > Telegram. Each chat adds the one OmniBot bot, and one Telegram
  * Orchestrator agent receives the messages of all chats, asks the team and answers. A chat links in
  * Telegram, so the chat list follows the connections that the caller reads again.
  */

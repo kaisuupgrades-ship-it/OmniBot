@@ -59,7 +59,7 @@ import { inspectArchive } from "./skill-package";
 
 /** Skill folders are copied here, published to the local library, and removed again. */
 const SKILL_STAGING = ".openbot/import-skills";
-/** Workspace files of an imported agent go under this folder, so they never replace OpenBot's own. */
+/** Workspace files of an imported agent go under this folder, so they never replace OmniBot's own. */
 const IMPORTED_FILES = "imported";
 /** Archive limits and the errors that name them. */
 const IMPORT_ARCHIVE: ArchiveLimits = {

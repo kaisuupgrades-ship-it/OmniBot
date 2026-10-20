@@ -194,7 +194,7 @@ interface TicketSignerConfig {
 
 type RemoteFetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
-/** The OpenBot Telegram bot that this Worker links chats for. */
+/** The OmniBot Telegram bot that this Worker links chats for. */
 interface TelegramBot {
   botId: string;
   botUsername: string;
@@ -2610,7 +2610,7 @@ export class RemoteControlPlane {
       return yield* new RemoteControlPlaneError(
         409,
         "telegram_chat_taken",
-        "Another OpenBot server answers this Telegram chat. Disconnect it there first.",
+        "Another OmniBot server answers this Telegram chat. Disconnect it there first.",
       );
     }
     if (route?.host_id === code.host_id) {
@@ -2839,8 +2839,8 @@ const deliverRemoteAuthEvents = Effect.fn("RemoteControlPlane.deliverAuthEvents"
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
-                    "OpenBot-Timestamp": timestamp,
-                    "OpenBot-Signature": signature,
+                    "OmniBot-Timestamp": timestamp,
+                    "OmniBot-Signature": signature,
                   },
                   body: event.payload,
                   signal: AbortSignal.any([signal, AbortSignal.timeout(5_000)]),

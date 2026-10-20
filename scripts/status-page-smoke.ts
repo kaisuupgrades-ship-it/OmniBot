@@ -18,10 +18,10 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } fr
 import { createServer, type Server } from "node:http";
 import { extname, resolve } from "node:path";
 import { promisify } from "node:util";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { chromium } from "playwright-core";
 
-const logger = createOpenBotLogger("status-page-smoke");
+const logger = createOmniBotLogger("status-page-smoke");
 const run = promisify(execFile);
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -97,7 +97,7 @@ interface FixtureIssue {
 }
 
 const issue = (fields: FixtureIssue) => ({
-  html_url: `https://github.com/nightly-labs/openbot/issues/${fields.number}`,
+  html_url: `https://omnibot.example.com/source/issues/${fields.number}`,
   state: "open",
   state_reason: null,
   user: MEMBER,
@@ -437,7 +437,7 @@ interface IncidentFixture {
   resolvedAt?: string | null;
 }
 const incident = (fields: IncidentFixture) => ({
-  url: `https://github.com/nightly-labs/openbot/issues/${fields.id}`,
+  url: `https://omnibot.example.com/source/issues/${fields.id}`,
   kind: "incident",
   impact: "partial",
   resolvedAt: null,
@@ -624,7 +624,7 @@ for (const item of got.filter((entry) => entry.subscription === "team" || entry.
   const body = JSON.parse(item.body);
   assert.equal(body.version, 1);
   assert.equal(body.type, item.headers["x-openbot-event"]);
-  assert.equal(body.page, "https://status.openbot.run");
+  assert.equal(body.page, "https://status.omnibot.example.com");
   assert.match(item.headers["x-openbot-delivery-id"] ?? "", /^[0-9a-f]{32}$/);
 }
 const created = JSON.parse(

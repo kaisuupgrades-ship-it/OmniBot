@@ -24,12 +24,12 @@ import {
   ORDER_KEY_DESC,
   ORDERED_THREAD_MESSAGES,
 } from "./database/conversation-queries";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./openbot-database";
 
 export type { ConversationMarkerExclusions } from "./database/conversation-queries";
 
 export class ConversationReadStore {
-  constructor(readonly database: OpenBotDatabase) {}
+  constructor(readonly database: OmniBotDatabase) {}
 
   listStates(
     memberId: string,

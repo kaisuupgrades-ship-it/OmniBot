@@ -19,8 +19,8 @@ interface NativeProps extends ViewProps {
 }
 
 /** `modules/composer-paste`. A build without it, such as Expo Go, pastes text only. */
-const NativePasteTarget = requireOptionalNativeModule("OpenBotComposerPaste")
-  ? requireNativeView<NativeProps>("OpenBotComposerPaste")
+const NativePasteTarget = requireOptionalNativeModule("OmniBotComposerPaste")
+  ? requireNativeView<NativeProps>("OmniBotComposerPaste")
   : null;
 
 /**

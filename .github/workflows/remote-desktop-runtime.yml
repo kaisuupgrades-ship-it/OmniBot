@@ -432,7 +432,7 @@ jobs:
               --repo "$GITHUB_REPOSITORY" \
               --target "$GITHUB_SHA" \
               --title "Remote desktop runtime ${{ needs.prepare.outputs.input_digest }}" \
-              --notes "Pinned Sunshine and Moonlight Web runtime for OpenBot. This prerelease is not an OpenBot application update." \
+              --notes "Pinned Sunshine and Moonlight Web runtime for OmniBot. This prerelease is not an OmniBot application update." \
               --prerelease \
               --latest=false
           fi
@@ -442,7 +442,7 @@ jobs:
             exit 1
           fi
 
-      - name: Confirm stable OpenBot release did not change
+      - name: Confirm stable OmniBot release did not change
         shell: bash
         env:
           BEFORE: ${{ needs.prepare.outputs.stable_release }}
@@ -535,7 +535,7 @@ jobs:
             libx11-6 libxcb-shm0 libxcb-xfixes0 libxcb1 libxfixes3 libxrandr2 libxtst6
           xvfb-run -a bun run test:remote-desktop-runtime
 
-      - name: Package OpenBot from the downloaded runtime
+      - name: Package OmniBot from the downloaded runtime
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: ${{ matrix.platform == 'win32' && 'bun run package:win:verify' || matrix.platform == 'linux' && 'bun run package:linux' || 'bun run package:verify' }}

@@ -166,7 +166,7 @@ export class BitwardenConnectorService implements PasswordVault {
         try: () => Schema.decodeUnknownSync(foldersSchema)(JSON.parse(output)),
         catch: failure,
       });
-      const shared = folders.filter((folder) => folder.name === "Shared with OpenBot");
+      const shared = folders.filter((folder) => folder.name === "Shared with OmniBot");
       if (shared.length !== 1 || !shared[0]?.id) return yield* failure();
       session.folderId = shared[0].id;
       this.#touch();

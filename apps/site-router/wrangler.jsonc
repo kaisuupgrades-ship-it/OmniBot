@@ -8,13 +8,13 @@
   "preview_urls": false,
   "routes": [
     {
-      "pattern": "*.openbot.site/*",
-      "zone_name": "openbot.site"
+      "pattern": "*.omnibot-sites.example.com/*",
+      "zone_name": "omnibot-sites.example.com"
     }
   ],
   "vars": {
     // The account service origin. The report route `/_openbot/report` and the links on error pages use it.
-    "ACCOUNT_ORIGIN": "https://openbot.run"
+    "ACCOUNT_ORIGIN": "https://omnibot.example.com"
   },
   "r2_buckets": [
     {

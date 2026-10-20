@@ -1,7 +1,7 @@
 // The /download pages: one per operating system and phone app, and a hub that lists them. Each
 // statement here comes from the release configuration, README.md or docs/TROUBLESHOOTING.md, and for
 // the phone apps from the native module minimums, the Mobile Connect settings and the mobile changelog. Keep it to what the
-// released app does, because these pages are what a search engine shows for "OpenBot for Linux".
+// released app does, because these pages are what a search engine shows for "OmniBot for Linux".
 
 import { DOWNLOAD_PLATFORM_ORDER, type DownloadPlatform } from "./download-platforms";
 import { LANDING_FAQ, type LandingQuestion } from "./landing-faq";
@@ -73,32 +73,32 @@ export interface DownloadPageContent {
   operatingSystem: string;
 }
 
-const PROVIDERS_ANSWER = LANDING_FAQ.find((entry) => entry.question === "Which AI models can OpenBot use?")?.answer;
+const PROVIDERS_ANSWER = LANDING_FAQ.find((entry) => entry.question === "Which AI models can OmniBot use?")?.answer;
 const FREE_ANSWER =
   "Yes. The app costs $0, with no locked features. You pay only your AI provider, through the plan or API key you already have.";
 const CONNECT_STEP: DownloadStep = {
   text: "Connect a provider, such as Codex with your ChatGPT plan or Claude Code with your Claude plan. Then describe the agent you want in one prompt and save it.",
 };
-const UPDATES_NOTE = "OpenBot checks for new versions and updates itself.";
+const UPDATES_NOTE = "OmniBot checks for new versions and updates itself.";
 const NETWORK_NOTE = "The AI provider you choose needs an internet connection. A local model needs none.";
 const UPDATES_SPEC: DownloadSpec = { label: "Updates", value: "Automatic" };
 
 const COMPUTER_STEP: DownloadStep = {
-  text: "Install OpenBot on the Mac, Windows or Linux computer that runs your agents, and sign in to your OpenBot account.",
+  text: "Install OmniBot on the Mac, Windows or Linux computer that runs your agents, and sign in to your OmniBot account.",
 };
 const GENERATE_CODE_STEP: DownloadStep = {
   text: "On the computer, open Settings, then Mobile Connect, and select Generate QR code. The code expires after two minutes and works for one sign-in.",
 };
 const PHONE_NOTES = [
   "Your chats and files stay on the computer that runs your agents. The phone connects to it over an encrypted connection, directly between your devices when it can, and no cloud stores your chats or files.",
-  "You set up no VPN or tunnel. Remote access needs an OpenBot account.",
-  "The computer must be on and running OpenBot for the phone to reach your agents.",
+  "You set up no VPN or tunnel. Remote access needs an OmniBot account.",
+  "The computer must be on and running OmniBot for the phone to reach your agents.",
   "To remove a phone, open Settings, then Mobile Connect, on the computer and disconnect it. Its access stops at once.",
 ];
 const PHONE_COMPUTER_QUESTION: LandingQuestion = {
   question: "Do I need a computer to use the mobile app?",
   answer:
-    "Yes. The app controls the agents that run in OpenBot on your Mac, Windows or Linux computer, or on a server that runs OpenBot. Your chats and files stay there.",
+    "Yes. The app controls the agents that run in OmniBot on your Mac, Windows or Linux computer, or on a server that runs OmniBot. Your chats and files stay there.",
 };
 const PHONE_FREE_ANSWER =
   "Yes. The app costs $0. You pay only your AI provider, through the plan or API key you already have.";
@@ -116,10 +116,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
   macos: {
     platform: "macos",
     name: "macOS",
-    title: "Download OpenBot for Mac: AI agent app for macOS",
+    title: "Download OmniBot for Mac: AI agent app for macOS",
     description:
-      "Download OpenBot for macOS 13 or later on Apple silicon or Intel. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your Mac.",
-    heading: "OpenBot for Mac",
+      "Download OmniBot for macOS 13 or later on Apple silicon or Intel. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your Mac.",
+    heading: "OmniBot for Mac",
     intro:
       "Run a team of AI agents on your Mac with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or with your own model. Your chats and files stay on your Mac.",
     installers: [
@@ -146,9 +146,9 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
       {
         text: "Download the DMG for your Mac. To find which one you need, open the Apple menu and choose About This Mac: a “Chip” line means Apple silicon, a “Processor” line means Intel.",
       },
-      { text: "Open the DMG and drag OpenBot to the Applications folder." },
+      { text: "Open the DMG and drag OmniBot to the Applications folder." },
       {
-        text: "Open OpenBot from Applications. The app is signed by its developer and notarized by Apple, so macOS only asks you once to confirm that you want to open an app from the internet.",
+        text: "Open OmniBot from Applications. The app is signed by its developer and notarized by Apple, so macOS only asks you once to confirm that you want to open an app from the internet.",
       },
       CONNECT_STEP,
     ],
@@ -156,12 +156,12 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
     notes: [
       UPDATES_NOTE,
       NETWORK_NOTE,
-      "Computer Use needs the Screen Recording and Accessibility permissions. macOS asks for them, and OpenBot does not go around the prompts.",
+      "Computer Use needs the Screen Recording and Accessibility permissions. macOS asks for them, and OmniBot does not go around the prompts.",
     ],
     faq: [
-      { question: "Is OpenBot free on Mac?", answer: FREE_ANSWER },
+      { question: "Is OmniBot free on Mac?", answer: FREE_ANSWER },
       {
-        question: "Does OpenBot run on an Intel Mac?",
+        question: "Does OmniBot run on an Intel Mac?",
         answer: "Yes. Download the Intel installer. It needs macOS 13 or later, like the Apple silicon one.",
       },
       providersQuestion("a Mac"),
@@ -171,10 +171,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
   windows: {
     platform: "windows",
     name: "Windows",
-    title: "Download OpenBot for Windows: AI agent app for Windows 10 and 11",
+    title: "Download OmniBot for Windows: AI agent app for Windows 10 and 11",
     description:
-      "Download OpenBot for Windows 10 or 11 on x64. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your PC.",
-    heading: "OpenBot for Windows",
+      "Download OmniBot for Windows 10 or 11 on x64. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your PC.",
+    heading: "OmniBot for Windows",
     intro:
       "Run a team of AI agents on your PC with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or with your own model. Your chats and files stay on your PC.",
     installers: [
@@ -196,7 +196,7 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
       {
         text: "Run the installer. For a new release, Windows can show “Windows protected your PC”. Select More info, make sure that the publisher is SYNTHETIFY LABS, then select Run anyway.",
       },
-      { text: "The installer installs OpenBot for your user and opens it. Later, open it from the Start menu." },
+      { text: "The installer installs OmniBot for your user and opens it. Later, open it from the Start menu." },
       CONNECT_STEP,
     ],
     extraSections: [],
@@ -207,7 +207,7 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
       "To check the installer before you run it, compare its checksum with the one on the GitHub release, or check the GitHub build attestation.",
     ],
     faq: [
-      { question: "Is OpenBot free on Windows?", answer: FREE_ANSWER },
+      { question: "Is OmniBot free on Windows?", answer: FREE_ANSWER },
       {
         question: "Why does Windows warn about the installer?",
         answer:
@@ -220,10 +220,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
   linux: {
     platform: "linux",
     name: "Linux",
-    title: "Download OpenBot for Linux: AI agent app as an AppImage",
+    title: "Download OmniBot for Linux: AI agent app as an AppImage",
     description:
-      "Download OpenBot for Linux as an AppImage for x64 or arm64. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your computer.",
-    heading: "OpenBot for Linux",
+      "Download OmniBot for Linux as an AppImage for x64 or arm64. A free app that runs Codex, Claude Code, Gemini and Grok agents as a team on your computer.",
+    heading: "OmniBot for Linux",
     intro:
       "Run a team of AI agents on your Linux computer with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or with your own model. Your chats and files stay on your computer.",
     installers: [
@@ -251,10 +251,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         text: "Download the AppImage for your processor. To find which one you need, run this command: x86_64 means x64, and aarch64 means arm64.",
         code: "uname -m",
       },
-      { text: "Make the AppImage executable.", code: "chmod +x OpenBot-*.AppImage" },
+      { text: "Make the AppImage executable.", code: "chmod +x OmniBot-*.AppImage" },
       {
-        text: "Run it. On the first start, OpenBot adds itself to your app launcher, so that openbot:// links open it.",
-        code: "./OpenBot-*.AppImage",
+        text: "Run it. On the first start, OmniBot adds itself to your app launcher, so that omnibot:// links open it.",
+        code: "./OmniBot-*.AppImage",
       },
       CONNECT_STEP,
     ],
@@ -263,15 +263,15 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         title: "Ubuntu 23.10 or newer, and Debian 13",
         steps: [
           {
-            text: "These distributions restrict the user namespaces that the Electron sandbox needs, so OpenBot exits during launch until you install its AppArmor profile. Take the profile out of the AppImage:",
-            code: "./OpenBot-*.AppImage --appimage-extract resources/linux/openbot.apparmor",
+            text: "These distributions restrict the user namespaces that the Electron sandbox needs, so OmniBot exits during launch until you install its AppArmor profile. Take the profile out of the AppImage:",
+            code: "./OmniBot-*.AppImage --appimage-extract resources/linux/openbot.apparmor",
           },
           {
             text: "Install the profile, then reload AppArmor:",
             code: "sudo install -m 0644 squashfs-root/resources/linux/openbot.apparmor /etc/apparmor.d/openbot\nsudo systemctl reload apparmor",
           },
           {
-            text: "The profile applies to an AppImage in ~/Applications, ~/Desktop, ~/Downloads, ~/.local/bin or /opt/OpenBot. Keep it in one of these, or edit the path in the profile before you install it. Do not start OpenBot with --no-sandbox: the sandbox is the boundary between a web page and the rest of your computer.",
+            text: "The profile applies to an AppImage in ~/Applications, ~/Desktop, ~/Downloads, ~/.local/bin or /opt/OmniBot. Keep it in one of these, or edit the path in the profile before you install it. Do not start OmniBot with --no-sandbox: the sandbox is the boundary between a web page and the rest of your computer.",
           },
         ],
       },
@@ -279,10 +279,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         title: "A server with no screen",
         steps: [
           {
-            text: "On Ubuntu 24.04 with systemd, install OpenBot as an always-on server of your account, then sign in with an email code:",
-            code: "curl -fsSL https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/install-server.sh | sudo bash\nsudo openbot login",
+            text: "On Ubuntu 24.04 with systemd, install OmniBot as an always-on server of your account, then sign in with an email code:",
+            code: "curl -fsSL https://updates.omnibot.example.com/scripts/install-server.sh | sudo bash\nsudo openbot login",
           },
-          { text: "Then use it from the desktop app, the mobile app or openbot.run/app." },
+          { text: "Then use it from the desktop app, the mobile app or omnibot.example.com/app." },
         ],
       },
     ],
@@ -297,15 +297,15 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
       {
         question: "Is there an AI agent app for Linux?",
         answer:
-          "Yes. OpenBot runs on Linux as an AppImage for x64 and arm64. It runs Codex, Claude Code, Gemini, Grok and OpenCode agents as a team, with the plans you already pay for or a local model.",
+          "Yes. OmniBot runs on Linux as an AppImage for x64 and arm64. It runs Codex, Claude Code, Gemini, Grok and OpenCode agents as a team, with the plans you already pay for or a local model.",
       },
       {
-        question: "Why does OpenBot exit at once on Ubuntu?",
+        question: "Why does OmniBot exit at once on Ubuntu?",
         answer:
           "Ubuntu 23.10 and newer, and Debian 13, restrict the user namespaces that the Electron sandbox needs. Install the AppArmor profile that ships in the AppImage, as the steps on this page show.",
       },
       {
-        question: "Does OpenBot run on arm64 Linux?",
+        question: "Does OmniBot run on arm64 Linux?",
         answer: "Yes. Download the arm64 AppImage. It has the features of the x64 AppImage except remote desktop.",
       },
     ],
@@ -314,10 +314,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
   ios: {
     platform: "ios",
     name: "iPhone",
-    title: "Download OpenBot for iPhone: your AI agents on your phone",
+    title: "Download OmniBot for iPhone: your AI agents on your phone",
     description:
-      "Join the OpenBot for iPhone beta on TestFlight. Chat with the AI agents on your computer, follow their work and send files from anywhere.",
-    heading: "OpenBot for iPhone",
+      "Join the OmniBot for iPhone beta on TestFlight. Chat with the AI agents on your computer, follow their work and send files from anywhere.",
+    heading: "OmniBot for iPhone",
     intro:
       "Chat with the agents on your computer from anywhere, follow their progress and send them files. The app is in public beta on TestFlight.",
     installers: [
@@ -332,7 +332,7 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
     specs: [
       { label: "System", value: "iOS 16.4 or later" },
       { label: "Store", value: "TestFlight public beta" },
-      { label: "Needs", value: "OpenBot on a computer" },
+      { label: "Needs", value: "OmniBot on a computer" },
       { label: "Updates", value: "Through TestFlight" },
     ],
     installSteps: [
@@ -340,16 +340,16 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
       { text: "On your iPhone, install TestFlight from the App Store." },
       { text: "Open the TestFlight invite on your iPhone. In TestFlight, tap Accept, then Install." },
       GENERATE_CODE_STEP,
-      { text: "Open OpenBot on your iPhone, choose Scan QR code and point the camera at the code." },
+      { text: "Open OmniBot on your iPhone, choose Scan QR code and point the camera at the code." },
     ],
     extraSections: [],
     notes: PHONE_NOTES,
     faq: [
-      { question: "Is OpenBot for iPhone free?", answer: PHONE_FREE_ANSWER },
+      { question: "Is OmniBot for iPhone free?", answer: PHONE_FREE_ANSWER },
       {
         question: "Why is the iPhone app on TestFlight?",
         answer:
-          "OpenBot for iPhone is in public beta. Anyone with the invite link can join, and TestFlight installs each new beta build.",
+          "OmniBot for iPhone is in public beta. Anyone with the invite link can join, and TestFlight installs each new beta build.",
       },
       PHONE_COMPUTER_QUESTION,
     ],
@@ -358,10 +358,10 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
   android: {
     platform: "android",
     name: "Android",
-    title: "Download OpenBot for Android: your AI agents on your phone",
+    title: "Download OmniBot for Android: your AI agents on your phone",
     description:
-      "Get OpenBot for Android on Google Play. Chat with the AI agents on your computer, follow their work and send files from anywhere.",
-    heading: "OpenBot for Android",
+      "Get OmniBot for Android on Google Play. Chat with the AI agents on your computer, follow their work and send files from anywhere.",
+    heading: "OmniBot for Android",
     intro:
       "Chat with the agents on your computer from anywhere, follow their progress and send them files. Get the app on Google Play.",
     installers: [
@@ -376,30 +376,30 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
     specs: [
       { label: "System", value: "Android 7.0 or later" },
       { label: "Store", value: "Google Play" },
-      { label: "Needs", value: "OpenBot on a computer" },
+      { label: "Needs", value: "OmniBot on a computer" },
       { label: "Updates", value: "Through Google Play" },
     ],
     installSteps: [
       COMPUTER_STEP,
-      { text: "On your phone, install OpenBot from Google Play." },
+      { text: "On your phone, install OmniBot from Google Play." },
       GENERATE_CODE_STEP,
-      { text: "Open OpenBot on your phone, choose Scan QR code and point the camera at the code." },
+      { text: "Open OmniBot on your phone, choose Scan QR code and point the camera at the code." },
     ],
     extraSections: [],
     notes: [
       ...PHONE_NOTES,
       "The app does not ask for access to all your photos and videos. You choose photos and files with the system picker.",
     ],
-    faq: [{ question: "Is OpenBot for Android free?", answer: PHONE_FREE_ANSWER }, PHONE_COMPUTER_QUESTION],
+    faq: [{ question: "Is OmniBot for Android free?", answer: PHONE_FREE_ANSWER }, PHONE_COMPUTER_QUESTION],
     operatingSystem: "Android 7.0 or later",
   },
 };
 
 export const DOWNLOAD_HUB = {
-  title: "Download OpenBot for Mac, Windows and Linux",
+  title: "Download OmniBot for Mac, Windows and Linux",
   description:
-    "Download OpenBot, the free app that runs AI agents as a team on your computer. For macOS 13 or later, Windows 10 or later, and Linux on x64 or arm64.",
-  heading: "Download OpenBot",
+    "Download OmniBot, the free app that runs AI agents as a team on your computer. For macOS 13 or later, Windows 10 or later, and Linux on x64 or arm64.",
+  heading: "Download OmniBot",
   intro:
     "Free for Mac, Windows and Linux, with apps for iPhone and Android. Get the installer for this computer, or choose a system below for its requirements and install steps.",
 } as const;
@@ -414,7 +414,7 @@ export function downloadPageUrl(platform: DownloadPagePlatform | "hub", siteUrl:
 
 function breadcrumbData(platform: DownloadPagePlatform | "hub", siteUrl: string) {
   const trail = [
-    { name: "OpenBot", url: siteUrl },
+    { name: "OmniBot", url: siteUrl },
     { name: "Download", url: downloadPageUrl("hub", siteUrl) },
     ...(platform === "hub" ? [] : [{ name: DOWNLOAD_PAGES[platform].name, url: downloadPageUrl(platform, siteUrl) }]),
   ];
@@ -460,7 +460,7 @@ export function downloadPageHead(platform: DownloadPagePlatform | "hub", siteUrl
       { title },
       { name: "description", content: description },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "OpenBot" },
+      { property: "og:site_name", content: "OmniBot" },
       { property: "og:locale", content: "en_US" },
       { property: "og:url", content: url },
       { property: "og:title", content: title },

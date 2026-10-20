@@ -73,7 +73,7 @@ import type {
 import { IPC_ENDPOINTS, isManagedToolRuntime, isUpdateBusyPhase, latestTurnAnswer } from "@openbot/contracts/ipc";
 import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { REMOTE_ACCOUNT_CHECK_INTERVAL_MS } from "@openbot/team-client";
 import {
   app,
@@ -258,7 +258,7 @@ import {
   type UpdateAdapter,
   UpdateService,
 } from "./update-service";
-import { listSiblingOpenBotInstances } from "./update-sibling-instances";
+import { listSiblingOmniBotInstances } from "./update-sibling-instances";
 import { VoiceApiKeyStore } from "./voice-api-key-store";
 import { openScribeSocket } from "./voice-cloud-stream";
 import {
@@ -274,7 +274,7 @@ import { spawnVoiceTranscriptionHost } from "./voice-transcription-host-process"
 import { VoiceTranscriptionService } from "./voice-transcription-service";
 import { WebhookRelay } from "./webhook-relay";
 
-const logger = createOpenBotLogger("application-services");
+const logger = createOmniBotLogger("application-services");
 const SETUP_FILE = "openbot-setup-v2.json";
 const ANALYTICS_PREFERENCE_FILE = "openbot-analytics-preference-v1.json";
 const ANALYTICS_INVENTORY_FILE = "openbot-analytics-inventory-v1.json";
@@ -327,7 +327,7 @@ const ONEPASSWORD_CONNECTOR_FILE = "openbot-onepassword-connector-v1.json";
  * the Electron binary - which is also the name macOS shows in the Privacy & Security panes, and the
  * reason a dev grant does not carry over to a packaged build.
  */
-const PACKAGED_BUNDLE_IDENTIFIER = "app.openbot.desktop";
+const PACKAGED_BUNDLE_IDENTIFIER = "app.omnibot.desktop";
 const DEVELOPMENT_BUNDLE_IDENTIFIER = "com.github.Electron";
 
 const TEARDOWN_ORDER = {
@@ -575,7 +575,7 @@ async function createMessagingServices({
   const messagingCredentialLoadError = await Effect.runPromise(messagingCredentials.load());
   if (messagingCredentialLoadError)
     logger.warn(
-      `OpenBot could not read the messaging token file (${messagingCredentialLoadError.name}). It was left unchanged.`,
+      `OmniBot could not read the messaging token file (${messagingCredentialLoadError.name}). It was left unchanged.`,
     );
   // The Signal socket that brings the events of the Slack workspaces, Discord guilds and Telegram chats
   // linked to this host, and makes its Discord and Telegram calls.
@@ -600,7 +600,7 @@ async function createMessagingServices({
     Effect.runPromise(signalIngress.dispose()),
   );
   // Development only: `bun run dev:slack` names this loopback port, so a Slack install returns to this
-  // dev app and not to an installed OpenBot that owns `openbot://`.
+  // dev app and not to an installed OmniBot that owns `omnibot://`.
   const developmentSlackCallbackPort = app.isPackaged ? 0 : Number(process.env.OPENBOT_DEV_SLACK_CALLBACK_PORT ?? 0);
   const messaging = new MessagingService({
     threads: service.messaging,
@@ -729,7 +729,7 @@ async function createMessagingServices({
   );
   teardown.push(TEARDOWN_ORDER.messaging, "the messaging connections", () => Effect.runPromise(messaging.stop()));
   if (developmentSlackCallbackPort > 0) {
-    // As `openbot://` does for a packaged build, a finished install brings OpenBot to the front.
+    // As `omnibot://` does for a packaged build, a finished install brings OmniBot to the front.
     const callback = await startSlackDevCallbackServer(developmentSlackCallbackPort, async (nonce, grant) => {
       const received = await runCauseEffect(messaging.completeSlackWorkspace(nonce, grant));
       if (received) app.focus({ steal: true });
@@ -803,7 +803,7 @@ export async function createApplicationServices({
   teardown.push(TEARDOWN_ORDER.dynamicIsland, "the Dynamic Island", () => dynamicIsland.destroy());
   const centralAuthApiUrl = readCentralAuthApiUrl(
     process.env.OPENBOT_AUTH_API_URL,
-    app.isPackaged ? "https://api.openbot.run" : "http://127.0.0.1:3100",
+    app.isPackaged ? "https://api.omnibot.example.com" : "http://127.0.0.1:3100",
   );
   const centralAuth = new CentralAuthManager({
     apiUrl: centralAuthApiUrl,
@@ -923,7 +923,7 @@ export async function createApplicationServices({
   teardown.push(TEARDOWN_ORDER.teamWebRtcBridge, "the team WebRTC bridge", () =>
     runCauseEffect(teamWebRtcBridge.stop()),
   );
-  // Only a hosted, self-hosted or container server: one unit or container holds OpenBot and every
+  // Only a hosted, self-hosted or container server: one unit or container holds OmniBot and every
   // agent process. The desktop app does not hold turns for memory.
   const hostMemory =
     hostedServer || serverModeEnvironment
@@ -1046,9 +1046,9 @@ export async function createApplicationServices({
    * The installed CLIs are the computer's, the partial downloads are this profile's.
    *
    * Development gives every renderer port and every `--isolated` worktree a `userData` of its own,
-   * so a store kept there started empty each time: OpenBot fell back to the user's own CLI, offered
+   * so a store kept there started empty each time: OmniBot fell back to the user's own CLI, offered
    * the pinned version against it, and downloaded 144 MB again for a profile that would be replaced
-   * by the next port. The packaged app's `userData` is `appData/OpenBot` already, so the shared
+   * by the next port. The packaged app's `userData` is `appData/OmniBot` already, so the shared
    * store is the path it always used. The switch is read here rather than imported from the entry
    * point, which this file may not reach into; both readers read the same immutable value.
    */
@@ -1133,11 +1133,11 @@ export async function createApplicationServices({
   performance.mark("openbot:services.provider-detection");
   const credentialLoadError = await Effect.runPromise(providerCredentials.load());
   if (credentialLoadError) {
-    logger.warn(`OpenBot could not read the provider key file (${credentialLoadError.name}). It was left unchanged.`);
+    logger.warn(`OmniBot could not read the provider key file (${credentialLoadError.name}). It was left unchanged.`);
   }
   /*
    * The MCP sign-ins, in their own file with the same cipher. `mcp-remote` used to keep these where
-   * OpenBot could not redact them; here they are covered by the same rule as every other secret.
+   * OmniBot could not redact them; here they are covered by the same rule as every other secret.
    *
    * Unreadable is not fatal, for the same reason as the keys above: every signed-in server asks for
    * a sign-in again, and nothing else on this machine stops working.
@@ -1145,7 +1145,7 @@ export async function createApplicationServices({
   const mcpOAuthStore = new McpOAuthStore(join(app.getPath("userData"), MCP_OAUTH_FILE), secretCipher);
   const mcpOAuthLoadError = await Effect.runPromise(mcpOAuthStore.load());
   if (mcpOAuthLoadError) {
-    logger.warn(`OpenBot could not read the MCP sign-in file (${mcpOAuthLoadError.name}). It was left unchanged.`);
+    logger.warn(`OmniBot could not read the MCP sign-in file (${mcpOAuthLoadError.name}). It was left unchanged.`);
   }
   // The OAuth proxy port, so a Codex session resumed after a restart reaches the same address.
   const mcpOAuthProxySettings = new McpOAuthProxySettingsFile(
@@ -1155,13 +1155,13 @@ export async function createApplicationServices({
   const mcpOAuthProxyLoadError = await Effect.runPromise(mcpOAuthProxySettings.load());
   if (mcpOAuthProxyLoadError) {
     logger.warn(
-      `OpenBot could not read the MCP sign-in proxy file (${mcpOAuthProxyLoadError.name}). A new port is used.`,
+      `OmniBot could not read the MCP sign-in proxy file (${mcpOAuthProxyLoadError.name}). A new port is used.`,
     );
   }
   /*
    * Where a returning grant lands. The loopback listener is the address RFC 8252 gives a native
-   * app and the only one some authorization servers accept - Canva refuses `openbot://mcp-auth`
-   * on its own authorization page, where OpenBot cannot see the failure or explain it.
+   * app and the only one some authorization servers accept - Canva refuses `omnibot://mcp-auth`
+   * on its own authorization page, where OmniBot cannot see the failure or explain it.
    *
    * A port that cannot be bound is not fatal: the deep link is still registered with the
    * operating system, and the servers that accept it keep working. It is logged because it
@@ -1200,7 +1200,7 @@ export async function createApplicationServices({
     },
   }).catch((error: unknown) => {
     logger.warn(
-      "OpenBot could not listen for MCP sign-ins on this machine, so the openbot:// link is used instead. Servers that refuse it cannot be signed in to:",
+      "OmniBot could not listen for MCP sign-ins on this machine, so the omnibot:// link is used instead. Servers that refuse it cannot be signed in to:",
       toLogValue(error),
     );
     return null;
@@ -1212,7 +1212,7 @@ export async function createApplicationServices({
     storage: mcpOAuthStore,
     openExternal: (url) => shell.openExternal(url),
     redirectUrl: mcpOAuthRedirect?.redirectUrl ?? MCP_OAUTH_REDIRECT_URL,
-    logger: createOpenBotLogger("mcp-oauth"),
+    logger: createOmniBotLogger("mcp-oauth"),
   });
   mcpOAuthAuthority = mcpOAuth;
   teardown.push(TEARDOWN_ORDER.mcpOAuth, "MCP token refresh", () => Effect.runPromise(mcpOAuth.close()));
@@ -1266,7 +1266,7 @@ export async function createApplicationServices({
       onStatementSettled: (durationMs) => statementTimings.record(durationMs),
     }),
   });
-  // Looked up again on demand, because a user may install the driver while OpenBot runs, and the
+  // Looked up again on demand, because a user may install the driver while OmniBot runs, and the
   // panel's "Check again" has to see it.
   const resolveCuaDriverExecutable = () => {
     const installDirectory = process.env.CUA_DRIVER_RS_INSTALL_DIR ?? process.env.CUA_DRIVER_BIN_DIR;
@@ -1315,11 +1315,11 @@ export async function createApplicationServices({
   // daemon: stopping it first would leave them reading a socket nothing answers.
   teardown.push(TEARDOWN_ORDER.cuaDriver, "the Computer Use driver", () => runCauseEffect(cuaDriver.stop()));
   /*
-   * The rim OpenBot draws over the window an agent works in.
+   * The rim OmniBot draws over the window an agent works in.
    *
    * It asks the daemon two read-only questions over a connection of its own: whether any agent
    * holds a live session, and where every window is. Both answers come from the daemon's own view,
-   * which an MCP client of OpenBot's could not see: the tools report only the sessions of the lease
+   * which an MCP client of OmniBot's could not see: the tools report only the sessions of the lease
    * that asks, and the agent's lease is its own.
    */
   const computerUseReads = new CuaDriverDaemonClient(() =>
@@ -1330,7 +1330,7 @@ export async function createApplicationServices({
     loadWindow: loadComputerUseHighlightRenderer,
     place: sendComputerUseHighlightPlacement,
     displays: computerUseDisplays,
-    // The driver's own cursor on one screen, OpenBot's inside this overlay on more than one. The
+    // The driver's own cursor on one screen, OmniBot's inside this overlay on more than one. The
     // runtime answers `null` for the screen it draws itself, so only one cursor is ever drawn.
     readPointer: () => {
       const pointer = cuaDriver.lastPointer(COMPUTER_USE_CURSOR_MAX_AGE_MS);
@@ -1368,7 +1368,7 @@ export async function createApplicationServices({
     computerUseHighlight.destroy();
     await Effect.runPromise(computerUseReads.close());
   });
-  // The overlays are OpenBot windows, so they can mark only the display OpenBot is on. With an agent
+  // The overlays are OmniBot windows, so they can mark only the display OmniBot is on. With an agent
   // display of its own, the driver works where they cannot be drawn.
   const drawsComputerUseHighlight = !hasSeparateAgentDisplay(process.platform);
   const computerUsePermissionHelp = new ComputerUsePermissionHelpWindowController({
@@ -1407,8 +1407,8 @@ export async function createApplicationServices({
     mailbox,
     browser,
     visualPreview: new ChatVisualPreviewer(),
-    // `desktopCapturer` captures the display OpenBot is on. With an agent display of its own, that
-    // is only the OpenBot window, so agents take their screenshots with the Computer Use driver.
+    // `desktopCapturer` captures the display OmniBot is on. With an agent display of its own, that
+    // is only the OmniBot window, so agents take their screenshots with the Computer Use driver.
     screenCapture: hasSeparateAgentDisplay(process.platform)
       ? null
       : new ScreenCapturer({
@@ -1642,7 +1642,7 @@ export async function createApplicationServices({
   );
   /*
    * Where the decision put the download: onboarding, which is the screen this start is about to
-   * show. A user who finished onboarding before OpenBot downloaded a runtime at all is asked for
+   * show. A user who finished onboarding before OmniBot downloaded a runtime at all is asked for
    * one here too, but only when this machine already has an MCP server to start.
    *
    * Nothing waits for it and nothing reports it. MCP is optional, so a failed download must not
@@ -2365,7 +2365,7 @@ export async function createApplicationServices({
     (hostedInstaller || (supportsInstalledUpdates(process.platform) && updateMetadataAvailable)) &&
     isValidSemver(currentVersion);
   if (app.isPackaged && updateMetadataAvailable && !isValidSemver(currentVersion)) {
-    logger.warn(`OpenBot updates are disabled because the application version is not valid SemVer: ${currentVersion}`);
+    logger.warn(`OmniBot updates are disabled because the application version is not valid SemVer: ${currentVersion}`);
   }
   let updateAdapter: UpdateAdapter = createDisabledUpdateAdapter();
   let updaterEnabled = updatesEnabled;
@@ -2383,11 +2383,11 @@ export async function createApplicationServices({
         updateAdapter = realAdapter;
       } else {
         updaterEnabled = false;
-        logger.warn("OpenBot updates are disabled: electron-updater did not export autoUpdater");
+        logger.warn("OmniBot updates are disabled: electron-updater did not export autoUpdater");
       }
     } catch {
       updaterEnabled = false;
-      logger.warn("OpenBot updates are disabled: electron-updater failed to load");
+      logger.warn("OmniBot updates are disabled: electron-updater failed to load");
     }
   }
   const updater = new UpdateService(updateAdapter, {
@@ -2396,13 +2396,13 @@ export async function createApplicationServices({
     autoDownload: updatePreference.autoDownload,
     beforeInstall: prepareForUpdateInstall,
     // Packaged runs share one application bundle across macOS users. Installing while another
-    // login session runs OpenBot from that bundle would replace it underneath that session, so
+    // login session runs OmniBot from that bundle would replace it underneath that session, so
     // the service refuses the install until every sibling session stopped. Unpackaged runs never
     // enable updates, so there is nothing to guard there.
     ...(app.isPackaged
       ? {
           checkSiblingInstances: () =>
-            listSiblingOpenBotInstances({
+            listSiblingOmniBotInstances({
               executablePath: app.getPath("exe"),
               currentPid: process.pid,
               platform: process.platform,
@@ -2412,7 +2412,7 @@ export async function createApplicationServices({
                   if (siblings.length === 0) return;
                   const list = siblings.map(({ pid, uid }) => `pid ${pid} (uid ${uid})`).join(", ");
                   logger.warn(
-                    `OpenBot update install refused: other OpenBot processes run from this application: ${list}`,
+                    `OmniBot update install refused: other OmniBot processes run from this application: ${list}`,
                   );
                 }),
               ),
@@ -2424,7 +2424,7 @@ export async function createApplicationServices({
     logDirectory: join(app.getPath("userData"), "logs", "update"),
     // Squirrel.Mac only. The path is meaningless under a Linux or Windows home directory.
     ...(process.platform === "darwin"
-      ? { shipItDirectory: join(homedir(), "Library", "Caches", "app.openbot.desktop.ShipIt") }
+      ? { shipItDirectory: join(homedir(), "Library", "Caches", "app.omnibot.desktop.ShipIt") }
       : {}),
   });
   teardown.push(TEARDOWN_ORDER.updater, "the update service", () => Effect.runPromise(updater.stop()));
@@ -2436,7 +2436,7 @@ export async function createApplicationServices({
       yield* automation.sync();
       // Picks up the flows a restart stopped between one agent's answer and the next agent's message.
       yield* routineFlowRuntime.sweep();
-      // Marks the posts a restart cut off, and sends the answers that ended while OpenBot was closed.
+      // Marks the posts a restart cut off, and sends the answers that ended while OmniBot was closed.
       yield* routineResultRuntime.recover();
     }),
   );

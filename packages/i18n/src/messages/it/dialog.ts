@@ -15,5 +15,5 @@ export const messages = {
   "dialog.saveExportSkill": "Salva la skill di esportazione",
   "dialog.saveTransfer": "Salva il file di trasferimento",
   "dialog.chooseTransfer": "Scegli un file di trasferimento",
-  "dialog.filter.transfer": "File di trasferimento OpenBot",
+  "dialog.filter.transfer": "File di trasferimento OmniBot",
 } as const satisfies PartialTranslation<typeof source>;

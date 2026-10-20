@@ -4,7 +4,7 @@ import { ROUTINE_RECOVERY_RUN_ERROR_LIMIT } from "@openbot/contracts/team-protoc
 import { Effect, Schema } from "effect";
 import type { RoutineScheduler } from "./agent/routine-scheduler";
 import type { ChannelRoutineScheduler } from "./channel-routine-scheduler";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./openbot-database";
 import type {
   OwnedRoutineRecord,
   ReceivedWebhookEvent,
@@ -19,7 +19,7 @@ export class RoutineRecordFailed extends Schema.TaggedError<RoutineRecordFailed>
 }) {}
 
 export interface RoutineRecordsOptions {
-  database: OpenBotDatabase;
+  database: OmniBotDatabase;
   agentRoutines: RoutineScheduler;
   channelRoutines: ChannelRoutineScheduler;
   agentExists(agentId: string): boolean;

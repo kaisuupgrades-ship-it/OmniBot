@@ -23,7 +23,7 @@ import { Show } from "solid-js";
 import { useI18n } from "../../i18n-context";
 import { useLogoColorChoice } from "../../logo-color";
 
-const linkTargetOptions: GeneralSettingsValue["externalLinkTarget"][] = ["Default browser", "OpenBot"];
+const linkTargetOptions: GeneralSettingsValue["externalLinkTarget"][] = ["Default browser", "OmniBot"];
 
 /**
  * The saved value is the English name, because it is what `app-settings.ts` persists and what the
@@ -31,7 +31,7 @@ const linkTargetOptions: GeneralSettingsValue["externalLinkTarget"][] = ["Defaul
  */
 const LINK_TARGET_KEYS = {
   "Default browser": "settings.externalLinks.defaultBrowser",
-  OpenBot: "settings.externalLinks.openbot",
+  OmniBot: "settings.externalLinks.openbot",
 } as const satisfies Record<GeneralSettingsValue["externalLinkTarget"], AppTextKey>;
 
 interface SettingsGeneralTabProps {

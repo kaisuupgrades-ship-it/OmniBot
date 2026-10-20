@@ -1,4 +1,4 @@
-// Routine results: where an agent routine's answers go outside OpenBot, and what became of each one.
+// Routine results: where an agent routine's answers go outside OmniBot, and what became of each one.
 // Only this computer's host keeps a destination, so no handler has a remote route.
 
 import { Effect } from "effect";

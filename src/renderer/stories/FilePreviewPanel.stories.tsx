@@ -150,7 +150,7 @@ export const Folder: Story = {
     directory: {
       name: "eyeliner",
       path: "research/eyeliner",
-      root: "/Users/demo/OpenBot/Agents/research",
+      root: "/Users/demo/OmniBot/Agents/research",
       parentPath: "research",
       entries: [
         {

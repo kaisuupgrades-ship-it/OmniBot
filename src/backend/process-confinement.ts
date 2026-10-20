@@ -9,7 +9,7 @@ import { workspaceTemporaryPaths } from "./agent/workspace-sandbox";
  * folders and the provider's state are added to them.
  *
  * Grok, OpenCode, Antigravity, Cursor and Cline take no sandbox per session, so a Workspace only
- * agent on them gets a provider process of its own, and OpenBot starts that process inside an
+ * agent on them gets a provider process of its own, and OmniBot starts that process inside an
  * operating system sandbox. The whole process is confined: the file edit tools, the shell, and every
  * command and MCP server it starts. Nothing inside the process can take the sandbox away. Only macOS
  * has the sandbox now: on Linux and Windows the process does not start, and the user must choose
@@ -193,7 +193,7 @@ export function clineStatePaths(env: NodeJS.ProcessEnv = process.env, home = hom
 }
 
 /**
- * A custom agent keeps its state where it wants, and OpenBot cannot know where. A Workspace only
+ * A custom agent keeps its state where it wants, and OmniBot cannot know where. A Workspace only
  * custom agent gets no state folder: an agent that must write in its home folder to run needs Full
  * access.
  */

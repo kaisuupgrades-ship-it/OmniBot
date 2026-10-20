@@ -1,4 +1,4 @@
-export type ExternalLinkTarget = "Default browser" | "OpenBot";
+export type ExternalLinkTarget = "Default browser" | "OmniBot";
 
 import { type AgentMemoryLimit, type BusyMessageMode, DEFAULT_AGENT_MEMORY_LIMIT } from "@openbot/contracts/ipc";
 /** Which chord sends a message. Re-exported here so settings state can name the same type. */

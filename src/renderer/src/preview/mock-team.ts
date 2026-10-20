@@ -11,7 +11,7 @@ import type {
   HostStatus,
   InviteSummary,
   JoinServerInput,
-  OpenBotDesktopApi,
+  OmniBotDesktopApi,
   RemoteDesktopSession,
   SendDirectMessageInput,
   ServerSummary,
@@ -128,7 +128,7 @@ export function createMockTeam(
     emit(remoteDesktopListeners, sessionsValue);
   }
 
-  const serversApi: OpenBotDesktopApi["servers"] = {
+  const serversApi: OmniBotDesktopApi["servers"] = {
     setMuted: async ({ serverId, muted, durationMs }) => {
       if (!servers.some((server) => server.id === serverId)) throw new Error("Remote server not found.");
       const notificationsMutedUntil = muted && durationMs !== undefined ? Date.now() + durationMs : null;
@@ -180,7 +180,7 @@ export function createMockTeam(
     previewInvite: async () => ({
       serverId: "00000000-0000-4000-8000-000000000000",
       serverName: "Joined workspace",
-      apiHostname: "story-host.openbot.run",
+      apiHostname: "story-host.omnibot.example.com",
       role: "member",
       expiresAt: "2026-09-19T10:00:00.000Z",
       emailBound: false,
@@ -341,7 +341,7 @@ export function createMockTeam(
     },
   };
 
-  const host: OpenBotDesktopApi["host"] = {
+  const host: OmniBotDesktopApi["host"] = {
     getStatus: async () => clone(hostStatus),
     configure: async (input: ConfigureHostInput) => {
       hostStatus = {
@@ -402,7 +402,7 @@ export function createMockTeam(
       role: input.role,
       expiresAt: "2026-09-19T10:00:00.000Z",
       usedAt: null,
-      inviteUrl: "https://openbot.run/join?invite=mock-invite",
+      inviteUrl: "https://omnibot.example.com/join?invite=mock-invite",
       email: input.email ?? null,
       permanent: input.permanent ?? false,
       useCount: 0,
@@ -413,7 +413,7 @@ export function createMockTeam(
     },
   };
 
-  const remoteDesktop: OpenBotDesktopApi["remoteDesktop"] = {
+  const remoteDesktop: OmniBotDesktopApi["remoteDesktop"] = {
     checkSetup: async () => ({
       platform: "darwin",
       hostName: "Mac mini",

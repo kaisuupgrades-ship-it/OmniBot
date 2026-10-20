@@ -1,6 +1,6 @@
 import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Deferred, Effect, Result, Schema } from "effect";
 import { type AgentProvider, ProviderTurnActiveError } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -39,7 +39,7 @@ import { codexSandboxPolicy, workspaceWritableRoots } from "./workspace-sandbox"
 /** Shown to the user when a message names a model of an endpoint that was taken out. */
 export const REMOVED_ENDPOINT_MESSAGE = sourceText("error.agent.endpointRemoved");
 
-const logger = createOpenBotLogger("drain-scheduler");
+const logger = createOmniBotLogger("drain-scheduler");
 const CHANNEL_START_FAILED = "The provider could not start this assignment. Resume to try again.";
 /** How long messages wait for their turn after the provider did not confirm `turn/start` in time. */
 const TURN_START_GRACE_MS = 5 * 60_000;
@@ -489,7 +489,7 @@ export class DrainScheduler {
         if (taskId === null) yield* this.#hooks.startRequestedNewChat(agentId);
         return;
       }
-      // A task compacts its context in its provider only: the OpenBot compaction holds every lane of
+      // A task compacts its context in its provider only: the OmniBot compaction holds every lane of
       // the agent and runs on the agent's own chat or the thread of the work it serves.
       if (taskId === null) {
         const agent = this.#store.list().find((candidate) => candidate.id === agentId);
@@ -812,7 +812,7 @@ export class DrainScheduler {
             this.#channels?.deliveryUncertain(delivery.id);
             this.#hooks.emitError(
               "delivery_start_unconfirmed",
-              `${error.providerName} did not confirm the turn start in time. OpenBot will wait for lifecycle events instead of retrying potentially duplicated work.`,
+              `${error.providerName} did not confirm the turn start in time. OmniBot will wait for lifecycle events instead of retrying potentially duplicated work.`,
               delivery.recipientAgentId,
             );
             // The wait has a limit: a turn that never starts would keep these messages starting, and

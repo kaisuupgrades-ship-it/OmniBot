@@ -71,14 +71,14 @@ export interface SlackOrchestratorModels {
   customAgents?: readonly CustomAgentSummary[];
 }
 
-/** Who can use OpenBot in each Discord server: the members with one of the saved roles. */
+/** Who can use OmniBot in each Discord server: the members with one of the saved roles. */
 export interface DiscordAccessControl {
   /** The saved roles of a Discord server. Empty lets everyone; null while they are not known. */
   allowed: (workspaceId: string) => readonly MessagingRole[] | null;
   /** The roles of a Discord server to choose from. Rejects with the reason. */
   loadRoles: (workspaceId: string) => Promise<readonly MessagingRole[]>;
   onSave: (workspaceId: string, roles: MessagingRole[]) => void;
-  /** True when the joined server's OpenBot is too old to choose roles. */
+  /** True when the joined server's OmniBot is too old to choose roles. */
   unsupported?: boolean | undefined;
 }
 
@@ -106,7 +106,7 @@ export interface SlackIntegrationPanelProps {
   loadError?: string | null | undefined;
   /** Reads the connections again. */
   onRetry?: (() => void) | undefined;
-  /** Who can use OpenBot in each Discord server. Discord only. */
+  /** Who can use OmniBot in each Discord server. Discord only. */
   access?: DiscordAccessControl | undefined;
 }
 
@@ -324,7 +324,7 @@ export function slackIntegrationState(
 type DialogTarget = { kind: "new"; before: ReadonlySet<string> } | { kind: "existing"; workspaceId: string };
 
 /**
- * Server settings > Connectors > Slack. A workspace installs the one OpenBot app, and its Slack
+ * Server settings > Connectors > Slack. A workspace installs the one OmniBot app, and its Slack
  * Orchestrator agent receives every request, asks the team and answers. The connect dialog does both
  * steps. No token reaches this component. Server settings > Connectors > Discord is the same page
  * for a Discord server, with `platform` "discord".
@@ -628,7 +628,7 @@ function WorkspaceRow(props: {
   );
 }
 
-/** Who can mention OpenBot in one Discord server, and the button that changes it. */
+/** Who can mention OmniBot in one Discord server, and the button that changes it. */
 function AccessRow(props: {
   connection: MessagingConnection;
   access: DiscordAccessControl;
@@ -638,7 +638,7 @@ function AccessRow(props: {
 }) {
   const { t, format } = useText();
   const allowed = () => props.access.allowed(props.connection.workspaceId);
-  // A host that cannot choose roles lets everyone mention OpenBot.
+  // A host that cannot choose roles lets everyone mention OmniBot.
   const everyone = () => props.access.unsupported === true || allowed()?.length === 0;
   const summary = () => {
     const roles = allowed();
@@ -688,7 +688,7 @@ function AccessRow(props: {
 }
 
 /**
- * Chooses the roles whose members can use OpenBot in one Discord server. It reads the server's roles
+ * Chooses the roles whose members can use OmniBot in one Discord server. It reads the server's roles
  * when it opens. A saved role that the server no longer has stays in the list until the user removes it.
  */
 function RolesDialog(props: {

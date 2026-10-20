@@ -542,7 +542,7 @@ export class BillingSales {
         .bind(payment.subscriptionId)
         .first<{ user_id: string; server_id: string | null; plan: BillingPlanId; interval: BillingInterval }>(),
     );
-    // A payment of a subscription that is not an OpenBot plan is not an OpenBot sale.
+    // A payment of a subscription that is not an OmniBot plan is not an OmniBot sale.
     if (!stored) return;
     const plan = synced?.plan ?? stored.plan;
     const interval = synced?.interval ?? stored.interval;

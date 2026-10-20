@@ -18,10 +18,10 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./openbot-database";
 
 export class TeamChatStore {
-  constructor(readonly database: OpenBotDatabase) {}
+  constructor(readonly database: OmniBotDatabase) {}
 
   listThreads(memberId: string): DirectThreadSummary[] {
     const rows = databaseRows(

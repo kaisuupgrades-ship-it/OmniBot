@@ -3,7 +3,7 @@
 // service on a temporary profile with a fake Codex app-server that, like Codex 0.160.1, refuses
 // `turn/start` with `ActiveTurnNotSteerable { turn_kind: Compact }` while a compaction turn runs.
 // Three cases: a compaction that ends by itself, one that the deadline stops, and one that does
-// not stop, so that OpenBot sends a turn that Codex refuses.
+// not stop, so that OmniBot sends a turn that Codex refuses.
 // `bun scripts/codex-compaction-queue-e2e.ts`. Writes .openbot-build/codex-compaction-queue-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -36,7 +36,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { OmniBotDatabase } = await import("../src/backend/openbot-database");
 
 /**
  * A Codex app-server with the methods that the service calls. Each normal turn reports 90% of the
@@ -144,7 +144,7 @@ process.stdin.on("data", (chunk) => {
 });
 `;
 
-/** One line of the fake Codex log: a message that OpenBot sent, or a fact that the fake reports. */
+/** One line of the fake Codex log: a message that OmniBot sent, or a fact that the fake reports. */
 interface ProtocolEntry {
   method: string | null;
   threadId: string | null;
@@ -227,7 +227,7 @@ async function waitFor<T>(label: string, read: () => T | null | undefined | fals
 }
 
 await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
-const database = new OpenBotDatabase(userData);
+const database = new OmniBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

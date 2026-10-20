@@ -75,7 +75,7 @@ async function main(): Promise<void> {
       turnId: "fixture-turn",
       callId: `user-control-${++sequence}`,
     });
-    // The same composition as the browser branch of `OpenBotToolRouter`: a held tab waits before the
+    // The same composition as the browser branch of `OmniBotToolRouter`: a held tab waits before the
     // call, a call that the hold reaches in the tab queue waits through the hook, and the turn's
     // cancellation interrupts either wait.
     const routed = (

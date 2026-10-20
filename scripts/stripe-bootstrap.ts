@@ -5,7 +5,7 @@ import {
   type BillingPlanId,
   billingLookupKey,
 } from "@openbot/contracts/billing";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { z } from "zod";
 
 /**
@@ -21,7 +21,7 @@ import { z } from "zod";
  * `bootstrapStripe` and stores the secret itself.
  */
 
-const logger = createOpenBotLogger("stripe-bootstrap");
+const logger = createOmniBotLogger("stripe-bootstrap");
 const STRIPE_API_VERSION = "2025-03-31.basil";
 
 /**
@@ -131,7 +131,7 @@ function productId(plan: BillingPlanId): string {
 async function ensureProduct(stripe: StripeAdmin, plan: BillingPlanId): Promise<void> {
   const id = productId(plan);
   const body = new URLSearchParams({
-    name: `OpenBot ${PLAN_NAME[plan]}`,
+    name: `OmniBot ${PLAN_NAME[plan]}`,
     active: "true",
     "metadata[openbot_plan]": plan,
   });
@@ -210,14 +210,14 @@ async function defaultPortalConfiguration(stripe: StripeAdmin): Promise<string> 
   const customer = await stripe.request(
     "POST",
     "/v1/customers",
-    new URLSearchParams({ description: "OpenBot bootstrap: creates the default Customer Portal configuration" }),
+    new URLSearchParams({ description: "OmniBot bootstrap: creates the default Customer Portal configuration" }),
     z.object({ id: z.string() }),
   );
   try {
     await stripe.request(
       "POST",
       "/v1/billing_portal/sessions",
-      new URLSearchParams({ customer: customer.id, return_url: "https://openbot.run" }),
+      new URLSearchParams({ customer: customer.id, return_url: "https://omnibot.example.com" }),
       z.object({ id: z.string() }),
     );
   } finally {
@@ -268,7 +268,7 @@ async function ensureWebhookEndpoint(stripe: StripeAdmin, url: string, replace: 
   if (parsed.protocol !== "https:" || !parsed.pathname.endsWith("/v1/stripe/webhook")) {
     throw new Error("--webhook-url must be an https URL that ends with /v1/stripe/webhook.");
   }
-  const body = new URLSearchParams({ url: parsed.href, description: "OpenBot account server" });
+  const body = new URLSearchParams({ url: parsed.href, description: "OmniBot account server" });
   for (const event of BILLING_WEBHOOK_EVENTS) body.append("enabled_events[]", event);
   let current: { id: string } | null = null;
   let startingAfter: string | null = null;

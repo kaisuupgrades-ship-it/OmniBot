@@ -3,7 +3,7 @@
 The preload is the only code that runs with both `ipcRenderer` and renderer access. It is part of the
 renderer-to-main trust boundary. [Main-process rules](../main/AGENTS.md#trust-boundary) apply here.
 
-- `index.ts` maps each `OpenBotDesktopApi` method to one IPC channel and exposes the result with
+- `index.ts` maps each `OmniBotDesktopApi` method to one IPC channel and exposes the result with
   `contextBridge.exposeInMainWorld`. Add no business rules here.
 - Decode each value that main sends before the renderer can read it. Put decoders in the
   `*-decoding.ts` file for their domain, not in `index.ts`. Keep the preload `FromMain` decoders

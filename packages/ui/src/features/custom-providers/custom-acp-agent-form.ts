@@ -1,4 +1,4 @@
-// Form side of a user-named ACP agent: a command that OpenBot starts on this computer and talks to
+// Form side of a user-named ACP agent: a command that OmniBot starts on this computer and talks to
 // over the Agent Client Protocol on stdio. The dialog hands the trimmed draft to its host, which
 // turns it into the IPC input with `customAgentInput`.
 
@@ -42,7 +42,7 @@ export interface CustomAcpAgentErrors {
   envRows: (string | undefined)[];
 }
 
-/** The state of one trial start: OpenBot runs the command and sends `initialize`, then stops it. */
+/** The state of one trial start: OmniBot runs the command and sends `initialize`, then stops it. */
 export type AcpAgentCheck =
   | { status: "idle" }
   | { status: "checking" }

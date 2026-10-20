@@ -17,7 +17,7 @@ const STEP_MS = 5_000;
 interface FlowProps {
   /** Open the add-server dialog when the story loads. */
   startOpen?: boolean;
-  /** The fake setup stops with an error at the "Start OpenBot" step on the first try. */
+  /** The fake setup stops with an error at the "Start OmniBot" step on the first try. */
   failFirstTry?: boolean;
   /** The account has this many servers, the maximum, so the plans are disabled. */
   serverLimit?: number;
@@ -91,7 +91,7 @@ function AddServerFlow(props: FlowProps) {
         </Heading>
         <Text tone="muted">Click the plus button in the server rail to add a server.</Text>
         <Show when={contactNote()}>
-          <Text tone="muted">"Contact us" was clicked. The app opens an email to hello@openbot.run here.</Text>
+          <Text tone="muted">"Contact us" was clicked. The app opens an email to hello@omnibot.example.com here.</Text>
         </Show>
         <Show when={manageNote()}>
           <Text tone="muted">"Manage servers" was clicked. The app opens the list of hosted servers here.</Text>
@@ -130,7 +130,7 @@ function AddServerFlow(props: FlowProps) {
               ...serverDefaults(),
               id: pending().id,
               name: pending().name,
-              apiUrl: `https://${pending().id}.hosted.openbot.run`,
+              apiUrl: `https://${pending().id}.hosted.omnibot.example.com`,
               role: "owner",
             })
           }
@@ -179,7 +179,7 @@ export const DialogOpen: Story = {
   render: () => <AddServerFlow startOpen />,
 };
 
-/** The first setup stops at "Start OpenBot". "Try again" then succeeds. */
+/** The first setup stops at "Start OmniBot". "Try again" then succeeds. */
 export const SetupFails: Story = {
   render: () => <AddServerFlow startOpen failFirstTry />,
 };

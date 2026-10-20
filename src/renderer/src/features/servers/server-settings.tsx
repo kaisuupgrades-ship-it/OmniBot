@@ -427,7 +427,7 @@ const ServerSettings = createSimpleContext({
      * The MCP list.
      *
      * It is read when the MCP section opens, not when the dialog opens, because most visits to this
-     * dialog never reach that section. Nothing connects here: OpenBot connects only when the user
+     * dialog never reach that section. Nothing connects here: OmniBot connects only when the user
      * asks for a test, and the providers make their own connections when an agent starts.
      */
     async function refreshMcpServers(): Promise<void> {

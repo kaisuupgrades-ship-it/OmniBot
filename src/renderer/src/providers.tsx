@@ -166,7 +166,7 @@ const Providers = createSimpleContext({
       });
     }
 
-    /** `automatic`: the app asks, not the user, so a provider OpenBot stopped starting stays stopped. */
+    /** `automatic`: the app asks, not the user, so a provider OmniBot stopped starting stays stopped. */
     async function refreshAgentProviders(options = { automatic: false }): Promise<void> {
       if (refreshingProviders() || agentStatus().phase === "starting" || agentStatus().phase === "restarting") {
         return;

@@ -166,7 +166,7 @@ private enum ComposerPaste {
 
 public class ComposerPasteModule: Module {
   public func definition() -> ModuleDefinition {
-    Name("OpenBotComposerPaste")
+    Name("OmniBotComposerPaste")
 
     OnCreate {
       _ = ComposerPaste.installed

@@ -110,7 +110,7 @@ class ComposerPasteView(context: Context, appContext: AppContext) : ExpoView(con
 
 class ComposerPasteModule : Module() {
   override fun definition() = ModuleDefinition {
-    Name("OpenBotComposerPaste")
+    Name("OmniBotComposerPaste")
 
     View(ComposerPasteView::class) {
       Events("onPasteFiles")

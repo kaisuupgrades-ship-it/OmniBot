@@ -59,7 +59,7 @@ const slackRequestSchema = z.object({
   team_id: z.string().optional(),
   team: z.object({ id: z.string() }).nullish(),
   authorizations: z.array(z.object({ team_id: z.string() })).optional(),
-  // Only to know whether the event addresses OpenBot, when a hosted server sleeps. Not the text.
+  // Only to know whether the event addresses OmniBot, when a hosted server sleeps. Not the text.
   event: z
     .object({
       type: z.string().optional(),
@@ -134,8 +134,8 @@ export function createRemoteApiApp(
     .get("/health/live", () => ({ service: "openbot-remote-api", status: "live", commit: config.sourceCommit }))
     .get("/health/ready", () => ({ service: "openbot-remote-api", status: "ready" }))
     .post("/internal/auth-events", async ({ request, set }) => {
-      const timestamp = request.headers.get("OpenBot-Timestamp") ?? "";
-      const signature = request.headers.get("OpenBot-Signature") ?? "";
+      const timestamp = request.headers.get("OmniBot-Timestamp") ?? "";
+      const signature = request.headers.get("OmniBot-Signature") ?? "";
       const bytes = await readBody(request, AUTH_EVENT_BODY_BYTES_LIMIT);
       if (!bytes) {
         set.status = 413;
@@ -162,7 +162,7 @@ export function createRemoteApiApp(
       else signal.revokeSession(event.sessionId);
       return new Response(null, { status: 204 });
     })
-    // The OpenBot Slack app's one request URL, for the events and button presses of every
+    // The OmniBot Slack app's one request URL, for the events and button presses of every
     // workspace. Signal checks Slack's signature, reads only the app and workspace IDs, and passes the
     // exact body to the ingress socket of the host that the app's workspace is linked to. Nothing here stores or
     // logs the body.
@@ -284,7 +284,7 @@ export function createRemoteApiApp(
       },
       { parse: "none" },
     )
-    // The webhook of each OpenBot Telegram bot. Signal checks the bot's secret header, reads only the
+    // The webhook of each OmniBot Telegram bot. Signal checks the bot's secret header, reads only the
     // chat, the callback query and a link code, and passes the exact body to the ingress socket of
     // the chat's host. Nothing here stores or logs the body. A signed update is always answered 200:
     // Telegram holds back the bot's other updates while one fails.

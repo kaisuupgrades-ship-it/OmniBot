@@ -32,7 +32,7 @@ Messages use `AgentService.sendMessage` and its persisted retry keys. The attent
 each pending object an opaque local handle. Responses match that handle and agent together; an
 expired handle cannot answer a later provider request. Pending details are not trimmed to the UI
 snapshot budget. The HTTP boundary redacts outgoing values. Browser takeovers and secret questions
-are notices only and direct the person to OpenBot. Messages and routine runs share the rate limit.
+are notices only and direct the person to OmniBot. Messages and routine runs share the rate limit.
 
 ## Scheduled routine changes
 
@@ -170,7 +170,7 @@ turn at a time. Other task messages wait with a `hold` reason: `task-limit`, `ag
 hosted server is separate.
 
 The user starts a task from the Tasks tab of the side panel ("New task") or moves a queued message to one ("Run as
-task"). The agent starts one with the `start_task` OpenBot tool, up to 8 open tasks. An agent has at most 50
+task"). The agent starts one with the `start_task` OmniBot tool, up to 8 open tasks. An agent has at most 50
 open tasks (`INPUT_LIMITS.agentTasks`, the size of the task list), so each open task stays visible. A message to a
 running task waits in the task, or steers the turn when the agent's busy-message mode is "steer"
 and the provider steers natively, as in the main chat. Stop interrupts the task turn; close moves
@@ -204,9 +204,9 @@ instead, as on desktop: a finished task stays with its result until the person c
 opens the task.
 
 Shared writes: each task thread owns its own browser tabs and tab queue. Computer Use is an MCP
-server that the provider starts, so OpenBot cannot queue its calls; `ThreadLifecycle` starts a task
+server that the provider starts, so OmniBot cannot queue its calls; `ThreadLifecycle` starts a task
 session without it, and the instructions send desktop work to the agent's own chat. Tasks share the
-workspace, and OpenBot does not lock files; the `start_task` guidance warns the agent about this.
+workspace, and OmniBot does not lock files; the `start_task` guidance warns the agent about this.
 
 A provider change is refused with `error.agent.waitForTasksBeforeProviderChange` while a task turn
 runs. After the change, `AgentService` retires the provider sessions of the chat and of each task
@@ -256,7 +256,7 @@ An agent that delegates work can follow and stop it. `openbot.list_agents` repor
 `status` (a starting delivery and a context compaction count as `working`), `queuedMessages`
 (channel work excluded), `turnStartedAt`, and `lastActivityAt`. The last two come from the provider
 notifications that `TurnLifecycle` sees; they are in memory only, so after a restart
-`lastActivityAt` falls back to the newest message for the agent. OpenBot does not record which
+`lastActivityAt` falls back to the newest message for the agent. OmniBot does not record which
 files a turn changed. `openbot.interrupt_agent` (`src/backend/agent/agent-interrupt-tool.ts`)
 refuses the caller itself, a channel turn, and a turn that any delivery other than the caller's
 started, so an agent cannot stop work from the user, a routine, or another agent. It cancels the
@@ -306,13 +306,13 @@ conversation. `openbot.create_agent` creates a persistent teammate with instruct
 task; `openbot.update_profile` changes an existing agent's name, title, instructions, generated
 or custom avatar, provider, model, reasoning effort, access, Computer Use, or notifications. `avatarPath` accepts a local PNG, JPEG, or WebP file up to 512 KB, with relative
 paths resolved from the calling agent’s workspace. The agent uses its available tools to resize or
-compress a copy when needed. OpenBot validates the prepared file before profile changes and copies
+compress a copy when needed. OmniBot validates the prepared file before profile changes and copies
 it into managed avatar storage. Generated avatar settings remove the custom image. Both run through
 the existing agent service and validate arguments before changing state.
 `openbot.create_agent` also accepts an optional `provider`, `model` and `reasoningEffort`. The
 read-only `openbot.list_models` returns the models of each provider that the model picker shows, with
 their reasoning efforts and the default model for a request that names only a provider. An unknown
-model or an unsupported effort is an error that names the valid values; OpenBot checks them before
+model or an unsupported effort is an error that names the valid values; OmniBot checks them before
 it creates the agent. Without a provider and a model, the new agent starts on the calling agent's
 provider, model and reasoning effort, so a team that one agent creates runs where that agent runs.
 When the caller's provider no longer lists its model, the new agent starts on the user's default.
@@ -379,7 +379,7 @@ Unchanged fingerprints resume the existing session. Pending history handoffs are
 the replacement is bound, reloaded after restart, and removed after a turn accepts the handoff.
 
 The same handoff carries a chat to another provider after a provider switch. It holds the user and
-assistant messages after the last context-reset marker, with attachment names only. OpenBot stores
+assistant messages after the last context-reset marker, with attachment names only. OmniBot stores
 no tool steps, so the work log comes from the providers. At the switch, before the old sessions are
 retired, `ThreadLifecycle.readWorkSteps` reads each active session with the provider history read
 through the client that holds it, with a 10-second limit. The switch then checks again that no turn started.
@@ -436,7 +436,7 @@ memory step fails is deleted. Step 1 offers two ways to add the export agent: it
 
 ## Instance transfer
 
-Server settings > Transfer moves a server's agents and server settings to another OpenBot server with
+Server settings > Transfer moves a server's agents and server settings to another OmniBot server with
 one `.zip` file. It is a separate format from the Grok Bot agent import. The first screen offers "Export
 from this server" and "Import into this server". The section shows for this computer's server, and for a
 joined server with `instance-transfer-v1` when the user is an owner or admin (see
@@ -445,7 +445,7 @@ client and mobile do not show it. App preferences, the default model and the pro
 belong to the app, not to a server, so they are not in the file.
 
 The file has `openbot-transfer.json` at its root, `agents/<key>/` folders (`avatar.<ext>`,
-`skills/<slug>/` and `workspace/`), and `shared/` for `~/OpenBot/Shared`. The manifest is
+`skills/<slug>/` and `workspace/`), and `shared/` for `~/OmniBot/Shared`. The manifest is
 `{ format: "openbot-instance-transfer", version: 1, source, agents, settings, shared, signedIn }`.
 `src/main/instance-transfer-manifest.ts` writes and reads it with Effect `Schema`; it is a contract
 between app versions, so add only optional fields and raise `version` for a change of meaning. A file
@@ -456,7 +456,7 @@ Each agent carries its profile (name, title, instructions, avatar seed and image
 and reasoning effort, notifications and busy-message mode, its routines (schedule, limit and missed
 policies; one-time routines are in the optional `oneTimeRoutines` field, so an older app skips them and
 keeps the agent), its memories (with the essential or searchable choice the user made) and the skill folders
-in `.agents/skills` and `.claude/skills` that OpenBot does not manage. Workspace files are optional
+in `.agents/skills` and `.claude/skills` that OmniBot does not manage. Workspace files are optional
 and leave out `.openbot/`, the skill folders, links, and every path `isUnsafeArchivePath` refuses
 (`.git`, `node_modules`, `.env*`, private keys, nested archives). Server settings are optional: MCP servers,
 custom model providers, custom ACP agents (as a warning, see below), sidebar sections and routine flows
@@ -504,10 +504,10 @@ There is no review and no marketplace listing. Before a publish, the renderer dr
 card (`agent-template-card.tsx`) with the agent's avatar and text. It draws it there because the
 avatar and its fonts are there, and it uses a `data:` URL because the Content Security Policy
 refuses `blob:` images. The Worker accepts only a PNG of that size, stores it in R2, and serves it
-as the page's `og:image`, so a post on X shows the agent. `openbot.run/agents/<id>` is a public
+as the page's `og:image`, so a post on X shows the agent. `omnibot.example.com/agents/<id>` is a public
 card page, tinted with the avatar colour. The Bloub library uses browser-only APIs when its module
 loads, so the page loads the avatar and its colour in the browser after hydration. Its button opens
-`openbot://agents/<id>`, the third renderer link kind in
+`omnibot://agents/<id>`, the third renderer link kind in
 `src/main/deep-link-router.ts`. The app then shows the template in `AgentTemplateInstallDialog`;
 like a plugin link, the link itself installs nothing. The page's fallback line also links
 `/app?agent=<id>`, where the browser client shows the same preview. In the same way, the invitation

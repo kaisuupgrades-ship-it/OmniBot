@@ -21,22 +21,22 @@ const filePreview = (
 
 const MARKDOWN = `# Release notes
 
-OpenBot keeps workspaces, conversations, and attachments on **your** computer.
+OmniBot keeps workspaces, conversations, and attachments on **your** computer.
 
 ## What is new
 
 - A file preview panel for markdown, text, images, and PDFs
 - Resizable panels that remember their width
-- Links that open in the embedded browser: [openbot.run](https://openbot.run)
+- Links that open in the embedded browser: [omnibot.example.com](https://omnibot.example.com)
 
 ## Configuration
 
-Set the provider in \`~/OpenBot/config.json\`:
+Set the provider in \`~/OmniBot/config.json\`:
 
 \`\`\`json
 {
   "provider": "claude-code",
-  "workspace": "~/OpenBot/Agents"
+  "workspace": "~/OmniBot/Agents"
 }
 \`\`\`
 
@@ -94,7 +94,7 @@ const SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width
 // the cross-reference table must give the byte position of its object, so the table
 // is built after the objects. All bytes are ASCII: a string index is a byte offset.
 const buildPdf = () => {
-  const stream = "BT /F1 18 Tf 24 150 Td (OpenBot file preview) Tj ET";
+  const stream = "BT /F1 18 Tf 24 150 Td (OmniBot file preview) Tj ET";
   const objects = [
     "<< /Type /Catalog /Pages 2 0 R >>",
     "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",

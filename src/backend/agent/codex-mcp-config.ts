@@ -54,7 +54,7 @@ export const readCodexMcpConfig = Effect.fn("Agent.readCodexMcpConfig")(function
   if (edits.length === 0) return response;
 
   // Save only a disabled placeholder. URLs, arguments, and credentials stay in the thread.
-  // Other Codex clients must not start servers that OpenBot owns.
+  // Other Codex clients must not start servers that OmniBot owns.
   yield* client.request(
     "config/batchWrite",
     {

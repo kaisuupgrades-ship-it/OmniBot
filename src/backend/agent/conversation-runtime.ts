@@ -4,7 +4,7 @@ import type { AgentEvent, AgentSummary, ConversationMessage, ConversationSnapsho
 import { sourceText } from "@openbot/i18n/source";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../openbot-database";
 import { conversationContentSignature } from "./delivery-content";
 
 interface TransactionScope {
@@ -28,7 +28,7 @@ export const CONVERSATION_CACHE_BYTES_LIMIT = 8 * 1024 * 1024;
 export const CONVERSATION_CACHE_TOTAL_BYTES_LIMIT = 64 * 1024 * 1024;
 
 /** Only the caller that opened the transaction holds a scope, so a nested call finds the owner's. */
-const openTransactions = new WeakMap<OpenBotDatabase, TransactionScope>();
+const openTransactions = new WeakMap<OmniBotDatabase, TransactionScope>();
 
 /**
  * Runs `work` inside a SQLite transaction, opening one only when the caller is not already inside
@@ -42,7 +42,7 @@ const openTransactions = new WeakMap<OpenBotDatabase, TransactionScope>();
  * an owner that fails *after* a nested call succeeded still undoes that call's in-memory slice.
  */
 export function withDatabaseTransaction<T>(
-  database: OpenBotDatabase,
+  database: OmniBotDatabase,
   work: () => T,
   onRollback?: () => void,
   onCommit?: () => void,

@@ -1,13 +1,13 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /**
  * What the browser dock overlay reaches in main: the presentation, the actions, the frame, and the code
  * that the agent asks for. The overlay has no provider tree, so this is a module.
  */
 export interface BrowserDockPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "respondToBrowserSecret">;
+  agent: Pick<OmniBotDesktopApi["agent"], "respondToBrowserSecret">;
   browserDock: Pick<
-    OpenBotDesktopApi["browserDock"],
+    OmniBotDesktopApi["browserDock"],
     "getPresentation" | "onPresentation" | "performAction" | "setFrame"
   >;
 }

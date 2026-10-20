@@ -73,7 +73,7 @@ const AAVE: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/aave",
+  shareUrl: "https://omnibot.example.com/plugins/aave",
 };
 
 const CANVA: MarketplacePluginDetail = {
@@ -114,7 +114,7 @@ const CANVA: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/canva",
+  shareUrl: "https://omnibot.example.com/plugins/canva",
 };
 
 const LINEAR: MarketplacePluginDetail = {
@@ -155,7 +155,7 @@ const LINEAR: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/linear",
+  shareUrl: "https://omnibot.example.com/plugins/linear",
 };
 
 const NOTION: MarketplacePluginDetail = {
@@ -196,7 +196,7 @@ const NOTION: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/notion",
+  shareUrl: "https://omnibot.example.com/plugins/notion",
 };
 
 const COBRAIN: MarketplacePluginDetail = {
@@ -236,7 +236,7 @@ const COBRAIN: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/cobrain",
+  shareUrl: "https://omnibot.example.com/plugins/cobrain",
 };
 
 const FIGMA: MarketplacePluginDetail = {
@@ -291,7 +291,7 @@ const FIGMA: MarketplacePluginDetail = {
   installs: 0,
   featured: true,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/figma",
+  shareUrl: "https://omnibot.example.com/plugins/figma",
 };
 
 const PAPER: MarketplacePluginDetail = {
@@ -300,7 +300,7 @@ const PAPER: MarketplacePluginDetail = {
   name: "Paper",
   tagline: "Design canvas built on HTML and CSS",
   description:
-    "Paper lets agents read and write the design file that is open in Paper Desktop: inspect artboards, selections, computed styles, JSX and tokens, and create or change frames, text and styles. Install Paper Desktop, open it once, and open a file before you start. OpenBot starts the Paper CLI that Paper Desktop installs. Paper needs no key. Write tools change the open file, so review each write before you approve it.",
+    "Paper lets agents read and write the design file that is open in Paper Desktop: inspect artboards, selections, computed styles, JSX and tokens, and create or change frames, text and styles. Install Paper Desktop, open it once, and open a file before you start. OmniBot starts the Paper CLI that Paper Desktop installs. Paper needs no key. Write tools change the open file, so review each write before you approve it.",
   category: "design",
   creatorName: "paper.design",
   iconUrl: "https://paper.design/favicon.ico",
@@ -327,7 +327,7 @@ const PAPER: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/paper",
+  shareUrl: "https://omnibot.example.com/plugins/paper",
 };
 
 const SENTRY: MarketplacePluginDetail = {
@@ -367,7 +367,7 @@ const SENTRY: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/sentry",
+  shareUrl: "https://omnibot.example.com/plugins/sentry",
 };
 
 const VERCEL: MarketplacePluginDetail = {
@@ -408,7 +408,7 @@ const VERCEL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/vercel",
+  shareUrl: "https://omnibot.example.com/plugins/vercel",
 };
 
 const CONTEXT7: MarketplacePluginDetail = {
@@ -443,7 +443,7 @@ const CONTEXT7: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/context7",
+  shareUrl: "https://omnibot.example.com/plugins/context7",
 };
 
 const STRIPE: MarketplacePluginDetail = {
@@ -483,7 +483,7 @@ const STRIPE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/stripe",
+  shareUrl: "https://omnibot.example.com/plugins/stripe",
 };
 
 const POSTHOG: MarketplacePluginDetail = {
@@ -541,7 +541,7 @@ const POSTHOG: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/posthog",
+  shareUrl: "https://omnibot.example.com/plugins/posthog",
 };
 
 const AIRTABLE: MarketplacePluginDetail = {
@@ -591,7 +591,7 @@ const AIRTABLE: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/airtable",
+  shareUrl: "https://omnibot.example.com/plugins/airtable",
 };
 
 const FIRECRAWL: MarketplacePluginDetail = {
@@ -649,7 +649,7 @@ const FIRECRAWL: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/firecrawl",
+  shareUrl: "https://omnibot.example.com/plugins/firecrawl",
 };
 
 const BRAVE_SEARCH: MarketplacePluginDetail = {
@@ -701,7 +701,7 @@ const BRAVE_SEARCH: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/brave-search",
+  shareUrl: "https://omnibot.example.com/plugins/brave-search",
 };
 
 const RESEND: MarketplacePluginDetail = {
@@ -753,7 +753,7 @@ const RESEND: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/resend",
+  shareUrl: "https://omnibot.example.com/plugins/resend",
 };
 
 const COMPOSIO: MarketplacePluginDetail = {
@@ -817,7 +817,7 @@ const COMPOSIO: MarketplacePluginDetail = {
   installs: 0,
   featured: false,
   updatedAt: "2026-09-30T00:00:00.000Z",
-  shareUrl: "https://openbot.run/plugins/composio",
+  shareUrl: "https://omnibot.example.com/plugins/composio",
 };
 
 export const MARKETPLACE_PLUGINS: MarketplacePluginDetail[] = [

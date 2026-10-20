@@ -56,10 +56,9 @@ const EXCLUDED: readonly RegExp[] = [
   /(^|\/)\.env\.(production|dev)$/u,
   /^scripts\/omnibot\//u,
   /^OMNIBOT\.md$/u,
+  // The remote desktop patches are checked by their SHA-256 before a build uses them.
   /^vendor\//u,
   /^native-runtime\.lock\.json$/u,
-  /^scripts\/[^/]*remote-desktop-runtime[^/]*$/u,
-  /^scripts\/host-manager-macos\.ts$/u,
 ];
 
 /** Rules that skip some paths. `"scheme:"` is also a performance mark prefix in this script. */

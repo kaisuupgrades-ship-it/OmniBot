@@ -157,7 +157,7 @@ export class FcmRelaySender {
 
 /**
  * A data message, so that Android gives it to the app also when the app does not run. The app opens
- * `sealed` (`OpenBotMessagingService.kt` in the mobile app) and plays `sound`. High priority lets
+ * `sealed` (`OmniBotMessagingService.kt` in the mobile app) and plays `sound`. High priority lets
  * the app run at once also when the phone saves power.
  */
 function notificationMessage(push: AndroidNotificationRelayPush) {

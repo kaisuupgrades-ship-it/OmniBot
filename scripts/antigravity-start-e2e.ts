@@ -1,6 +1,6 @@
 // Starts the Antigravity provider end to end on the real driver and `ProviderRuntime`, with a fake
 // server that, like the Windows PyInstaller build, unpacks itself into the temporary folder at each
-// start. Checks that each process gets its own temporary folder and that OpenBot removes it, that
+// start. Checks that each process gets its own temporary folder and that OmniBot removes it, that
 // failed starts stop after the limit, that an automatic refresh does not start the provider again
 // and a user refresh does, that low disk space stops a start before the process spawns, that a
 // launch removes what an earlier run left, and that a server that unpacks for longer than the
@@ -20,7 +20,7 @@ import type { AgentClient, AgentProvider } from "../src/backend/agent-client";
 import { AgentStore } from "../src/backend/agent-store";
 import { type AgentCliInfo, ANTIGRAVITY_MANIFEST } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import {
   BUILT_IN_PROVIDER_DRIVERS,
   NO_PROVIDER_CREDENTIALS,
@@ -170,7 +170,7 @@ function runtime(
   freeBytes: () => number,
   isStopping: () => boolean = () => false,
 ): { providers: ProviderRuntime; store: AgentStore } {
-  const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+  const store = new AgentStore(join(root, "profile"), join(root, "home"), new OmniBotDatabase(join(root, "profile")));
   const providers = new ProviderRuntime({
     offProviders: BUILT_IN_PROVIDER_DRIVERS.map((driver) => driver.id).filter((id) => id !== "antigravity"),
     conversation: new ConversationRuntime(
@@ -222,7 +222,7 @@ try {
   await chmod(executable, 0o755);
   const cli: AgentCliInfo = { executable, version: "1.2.1", source: "managed" };
 
-  // 1. A process that is stopped while it unpacks: its folder is in OpenBot's root and is removed.
+  // 1. A process that is stopped while it unpacks: its folder is in OmniBot's root and is removed.
   process.env.FAKE_AGY_MODE = "hang";
   const stoppedRoot = join(root, "temp-stopped");
   const client: AgentClient = requireProviderDriver("antigravity").createClient(cli, 5_000, {
@@ -244,7 +244,7 @@ try {
     unpackedWhileRunning,
     leftAfterStop: await entries(tempRoot),
   };
-  assert.ok(envInRoot, "TMP, TEMP and TMPDIR point into OpenBot's temporary root");
+  assert.ok(envInRoot, "TMP, TEMP and TMPDIR point into OmniBot's temporary root");
   assert.ok(unpackedWhileRunning, "the fake server unpacked while it ran");
 
   // 2. Failed starts stop after the limit, whatever asks for the provider.

@@ -1,6 +1,6 @@
-# OpenBot Auth API
+# OmniBot Auth API
 
-This TanStack Start and Solid 2 package is the central OpenBot account API. It
+This TanStack Start and Solid 2 package is the central OmniBot account API. It
 runs on Cloudflare Workers, stores account and authentication records in D1,
 and stores account avatars in R2. Users sign in with an eight-character
 one-time email code. D1 stores hashes instead of plaintext codes, session tokens,
@@ -71,7 +71,7 @@ bun scripts/stripe-flows-e2e.ts --api http://127.0.0.1:<port> [scenario ...]
 The `portal` scenario prints a Customer Portal cancel page and then an update page, and waits until
 you use them. The report goes to `.openbot-build/stripe-flows-e2e.json`.
 
-The `boat` scenario runs only when you name it. It pays for a server, waits until OpenBot in the VM
+The `boat` scenario runs only when you name it. It pays for a server, waits until OmniBot in the VM
 signs in and publishes the host, restarts the service to check the stored session, and deletes the
 server. It needs the real `BOAT_API_KEY`, a template from `bun run hosting:template` whose
 `--auth-api-url` reaches your Worker (for example a `cloudflared tunnel --url` to its port), and
@@ -137,9 +137,9 @@ exercise real delivery locally, put a full set in the ignored `.dev.vars` file:
 ```dotenv
 EMAIL_SMTP_HOST=mail.privateemail.com
 EMAIL_SMTP_PORT=465
-EMAIL_SMTP_USERNAME=hello@openbot.run
+EMAIL_SMTP_USERNAME=hello@omnibot.example.com
 EMAIL_SMTP_PASSWORD=<PRIVATE_EMAIL_APP_PASSWORD>
-EMAIL_FROM=hello@openbot.run
+EMAIL_FROM=hello@omnibot.example.com
 ```
 
 `bun run env:set:smtp` encrypts the app password into `.env.production` only.
@@ -156,7 +156,7 @@ write-only server client. Keep both in the encrypted `.env.production` for local
 the `cloudflare-production` GitHub Environment for CI. Both deployment paths check these values
 before remote changes. Test deployments do not send account analytics.
 
-`GITHUB_APP_PRIVATE_KEY` is the OpenBot GitHub App's private key as a PKCS #8 PEM. GitHub gives a
+`GITHUB_APP_PRIVATE_KEY` is the OmniBot GitHub App's private key as a PKCS #8 PEM. GitHub gives a
 PKCS #1 key; convert it with `openssl pkcs8 -topk8 -nocrypt -in <key>.pem`. With the key, the
 Worker gives the desktop installation tokens, so GitHub shows `openbotgit[bot]` as the author of an
 agent's work. With no key, the desktop acts as the signed-in user. In GitHub Actions the secret is
@@ -174,7 +174,7 @@ them in Wrangler's temporary runtime secrets file.
 Use `bun run api:deploy:test` for the isolated `openbot-auth-api-test` Worker
 and the `openbot-auth-test` D1 database.
 
-As a fallback, set `EMAIL_DELIVERY_WEBHOOK_URL` to an HTTPS endpoint. OpenBot
+As a fallback, set `EMAIL_DELIVERY_WEBHOOK_URL` to an HTTPS endpoint. OmniBot
 sends this JSON:
 
 ```json
@@ -199,7 +199,7 @@ The contact form on `/contact` posts to `/v1/contact`. The Worker sends each mes
 The D1 counter of sign-in allows 3 messages for each IP address and 15 in total in each 15-minute
 window, so the form cannot spend the quota that sign-in codes need. A Cloudflare rate-limit binding
 counts in each location separately, so it cannot hold a total. Without SMTP the route answers 503
-`email_delivery_not_configured`, and the form tells the visitor to write to `hello@openbot.run`.
+`email_delivery_not_configured`, and the form tells the visitor to write to `hello@omnibot.example.com`.
 
 ## Cloudflare deployment
 
@@ -216,7 +216,7 @@ The service applies limits per email, per IP, per challenge, and per resend.
 
 ## Hosted sites
 
-`/v1/sites` takes two optional headers: `OpenBot-Host-Id` and `OpenBot-Host-Token`, the machine token
+`/v1/sites` takes two optional headers: `OmniBot-Host-Id` and `OmniBot-Host-Token`, the machine token
 of a registered server. With them, a request sees only that server's sites, and a new site counts
 against the server plan's limit. A wrong token gets 401 `host_unauthorized`. Without them, a new site
 goes into the account's unlinked bucket of one site; `GET /v1/sites?scope=unlinked` lists only that
@@ -261,13 +261,13 @@ To deploy your own copy of this Worker with your own Signal, see
 host to Apple Push Notification service. The host seals the content for the phone, so the Worker
 cannot read it. The Worker checks the host credential and `LIVE_ACTIVITY_RATE_LIMITER`, makes the
 APNs payload itself, and stores and logs nothing. An update that shows an event that notifies the
-member has an `alert` with the sound of the phone and "OpenBot" as its only text (iOS shows the text
+member has an `alert` with the sound of the phone and "OmniBot" as its only text (iOS shows the text
 on Apple Watch only); a host cannot give the text.
 
 `POST /v2/remote/hosts/:hostId/notification` forwards a sealed iPhone notification in the same way.
 It has its own key in `LIVE_ACTIVITY_RATE_LIMITER`, and it sends nothing for a device session that
 has ended (`RemoteControlPlane.sessionOpen`), because the host does not learn about the end. The
-alert has "OpenBot" as its only text and `mutable-content`; the app opens the sealed bytes.
+alert has "OmniBot" as its only text and `mutable-content`; the app opens the sealed bytes.
 
 The relay is off until `APNS_PRIVATE_KEY` (the `.p8` key text) and `APNS_KEY_ID` are set. Create
 the key in Apple Developer > Keys with the Apple Push Notifications service, then add both to the

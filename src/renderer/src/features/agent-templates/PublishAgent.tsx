@@ -65,7 +65,7 @@ export function createPublishAgent(
     void load(agentId);
   }
 
-  /** The preload rebuilt `shareUrl` from the id, on `openbot.run` or, in development, the local Worker. */
+  /** The preload rebuilt `shareUrl` from the id, on `omnibot.example.com` or, in development, the local Worker. */
   async function copyShareLink(): Promise<boolean> {
     const publication = state.preview?.publication;
     if (!publication) return false;

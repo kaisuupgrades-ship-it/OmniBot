@@ -111,7 +111,7 @@ export const messages = {
   "sidebar.delete.pending": "Wird gelöscht…",
   "sidebar.delete.title": "{name} löschen?",
   "sidebar.delete.agentDescription":
-    "Dies entfernt den Agenten und seine OpenBot-Unterhaltung aus der App. Seine Warteschlange, Erinnerungen, Routinen und sein Arbeitsbereich werden gelöscht. Der separat vom verbundenen CLI-Anbieter gespeicherte Verlauf wird nicht gelöscht.",
+    "Dies entfernt den Agenten und seine OmniBot-Unterhaltung aus der App. Seine Warteschlange, Erinnerungen, Routinen und sein Arbeitsbereich werden gelöscht. Der separat vom verbundenen CLI-Anbieter gespeicherte Verlauf wird nicht gelöscht.",
   "sidebar.delete.channelDescription":
     "Dies stoppt den Kanal. Sein Verlauf bleibt unter „Gelöschte Kanäle“ nur zur Ansicht erhalten. Du kannst ihn nicht wiederherstellen. Die zugehörigen Agenten bleiben erhalten.",
   "sidebar.delete.sectionDescription":
@@ -125,7 +125,7 @@ export const messages = {
   "sidebar.announce.movedPinned": "Der angeheftete Chat wurde an Position {position} von {total} verschoben.",
   "sidebar.announce.personFallback": "Person",
   "sidebar.announce.chatFallback": "Chat",
-  "sidebar.mobileApp.title": "OpenBot für Mobilgeräte",
+  "sidebar.mobileApp.title": "OmniBot für Mobilgeräte",
   "sidebar.mobileApp.body": "Die App gibt es jetzt für iPhone und Android.",
   "sidebar.mobileApp.howToInstall": "Anleitung",
   "sidebar.mobileApp.dismiss": "Ankündigung der Mobile-App ausblenden",

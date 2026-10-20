@@ -1,6 +1,6 @@
 # @openbot/ui
 
-Internal SolidJS component library for OpenBot desktop, public web, and Storybook.
+Internal SolidJS component library for OmniBot desktop, public web, and Storybook.
 The source files are moved from the desktop renderer; there is one implementation.
 
 ```tsx

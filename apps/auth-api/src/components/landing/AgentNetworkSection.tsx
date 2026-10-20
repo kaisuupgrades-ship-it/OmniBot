@@ -121,7 +121,7 @@ function standaloneMark(mark: SVGSVGElement): SVGSVGElement {
 
 /**
  * "Your agents talk to each other": Ada, Linus and Grace pass the Safari task
- * through OpenBot, then the network grows until it fills the frame. When it is
+ * through OmniBot, then the network grows until it fills the frame. When it is
  * complete, a click on an agent grows a new network from that agent. At any time,
  * a click on the hub sends a signal, in one of the styles at random, through the
  * network. The picture is decorative; the heading and the sentence carry the message.

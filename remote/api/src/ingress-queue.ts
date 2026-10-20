@@ -8,10 +8,10 @@ import { Deferred, Effect } from "effect";
 
 /**
  * The one path of every messaging platform for an event whose route has no `ingress` socket. Each
- * platform gives only its route, whether the event addresses OpenBot (`wakes`), and its delivery frame.
+ * platform gives only its route, whether the event addresses OmniBot (`wakes`), and its delivery frame.
  *
  * Signal asks the account service for the route's host. A hosted server that sleeps starts for an event
- * that addresses OpenBot, and Signal keeps that event, sealed to the host's queue key, until the host's
+ * that addresses OmniBot, and Signal keeps that event, sealed to the host's queue key, until the host's
  * socket holds the route again, and keeps it until the host acknowledges it, so a socket that closes
  * after the flush loses nothing. Everything here is in memory: a restart of Signal loses it. Signal
  * never keeps an event that it cannot seal.

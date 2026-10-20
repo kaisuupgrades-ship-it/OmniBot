@@ -4,7 +4,7 @@ import { chmod, copyFile, mkdir, readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { Effect, Result } from "effect";
-import { migrateOpenBotDatabase } from "../openbot-database-schema";
+import { migrateOmniBotDatabase } from "../openbot-database-schema";
 import { storedIO, storedSync } from "../stored-state-effects";
 import { databaseRow, errorCode, requiredNumberColumn, requiredStringColumn } from "./database-rows";
 
@@ -101,7 +101,7 @@ export class DatabaseCore {
   }
 
   get connection(): DatabaseSync {
-    if (!this.#db) throw new Error("OpenBot database is not initialized.");
+    if (!this.#db) throw new Error("OmniBot database is not initialized.");
     return this.#db;
   }
 
@@ -211,7 +211,7 @@ export class DatabaseCore {
   }
 
   #migrate(closedCleanly: boolean): void {
-    migrateOpenBotDatabase(this.connection, { closedCleanly });
+    migrateOmniBotDatabase(this.connection, { closedCleanly });
   }
 }
 

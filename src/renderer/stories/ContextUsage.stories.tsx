@@ -18,7 +18,7 @@ import { STORY_AGENT, STORY_AGENTS } from "./fixtures";
 /*
  * Context usage for an agent's provider thread. The data differs by provider:
  *
- * - Codex reports `tokenUsage.last.totalTokens` and `modelContextWindow`. OpenBot already asks Codex
+ * - Codex reports `tokenUsage.last.totalTokens` and `modelContextWindow`. OmniBot already asks Codex
  *   to compact at 80% (`context-compaction.ts`) and holds the queue until it ends.
  * - Claude supplies local context estimates and native compaction events. Its compacted-message
  *   count excludes system/tools, so it cannot supply a full-context before/after comparison.
@@ -166,7 +166,7 @@ export const ClaudeEstimate: Story = {
   render: (args) => <Composer usage={args.usage} />,
 };
 
-/** Codex reports one total. OpenBot compacts at 80% and remembers the last result. */
+/** Codex reports one total. OmniBot compacts at 80% and remembers the last result. */
 export const CodexTotal: Story = {
   args: { usage: { ...CODEX, usedTokens: 206_700 } },
   render: (args) => <Composer usage={args.usage} />,

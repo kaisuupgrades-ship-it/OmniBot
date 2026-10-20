@@ -201,7 +201,7 @@ export type TeamApiProviderAccounts = Pick<
 
 /** Its presence is what `#protocolSupport` advertises `storage-v1` on. */
 export type TeamApiStorage = Pick<StorageUsageService, "usage" | "deleteFile" | "clear">;
-/** `hosted-sites-v1`: the openbot.site sites of this server. Members list; only admins delete. */
+/** `hosted-sites-v1`: the omnibot-sites.example.com sites of this server. Members list; only admins delete. */
 export type TeamApiHostedSites = Pick<HostedSiteDesktopService, "listServerSites" | "deleteServerSite">;
 
 /** Its presence is what `#protocolSupport` advertises `agent-hidden-v1` on. Any member can use it. */
@@ -401,7 +401,7 @@ export interface TeamApiOptions {
   onDirectTyping?: ((event: DirectTypingRealtimeEvent) => void) | undefined;
   createInvite?: OmitThisParameter<HostService["createInvite"]> | undefined;
   /**
-   * Changes and removes members as the desktop app does. With an OpenBot account, the account
+   * Changes and removes members as the desktop app does. With an OmniBot account, the account
    * directory holds the membership; a change only in the team file has no effect there.
    */
   updateMember?: OmitThisParameter<HostService["updateMember"]> | undefined;

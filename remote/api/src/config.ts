@@ -23,13 +23,13 @@ export interface RemoteApiConfig {
   // The repository commit of this build, from the image. `/health/live` shows it, so a deploy can be
   // compared with a release tag. `unknown` for a build without it.
   sourceCommit: string;
-  // The signing secret of each OpenBot Slack app, production and development, which share this
+  // The signing secret of each OmniBot Slack app, production and development, which share this
   // Signal. A request must name the app whose secret signed it. Without one, the Slack route answers 503.
   slackSigningSecrets: SlackSigningSecret[];
-  // The OpenBot Telegram bots, production and development, which share this Signal. Without them,
+  // The OmniBot Telegram bots, production and development, which share this Signal. Without them,
   // the Telegram routes answer 404 and `ready` names no `telegram` capability.
   telegram: TelegramConfig | null;
-  // The OpenBot Discord bot. Without it, Signal keeps no Gateway connection and the Discord API route
+  // The OmniBot Discord bot. Without it, Signal keeps no Gateway connection and the Discord API route
   // answers 503.
   discord: DiscordBotConfig | null;
 }

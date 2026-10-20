@@ -221,7 +221,7 @@ export function assertSupportedBunVersion(version: string): void {
   if (version === supportedBunVersion) return;
 
   throw new Error(
-    `Unsupported Bun ${version}. OpenBot development requires stable Bun ${supportedBunVersion}. Install the exact version with the command in https://github.com/nightly-labs/openbot#development, then retry.`,
+    `Unsupported Bun ${version}. OmniBot development requires stable Bun ${supportedBunVersion}. Install the exact version with the command in https://omnibot.example.com/source#development, then retry.`,
   );
 }
 

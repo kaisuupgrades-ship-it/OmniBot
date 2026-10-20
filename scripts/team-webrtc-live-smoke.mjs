@@ -1,10 +1,10 @@
 import { app, BrowserWindow } from "electron";
 
-app.setName("OpenBot");
+app.setName("OmniBot");
 app.exit(await main());
 
 async function main() {
-  const signalUrl = process.env.OPENBOT_REMOTE_SIGNAL_URL ?? "wss://signal.openbot.run/v1/signal";
+  const signalUrl = process.env.OPENBOT_REMOTE_SIGNAL_URL ?? "wss://signal.omnibot.example.com/v1/signal";
   const hostTicket = process.env.OPENBOT_REMOTE_SMOKE_HOST_TICKET;
   const clientTicket = process.env.OPENBOT_REMOTE_SMOKE_CLIENT_TICKET;
   const iceTransportPolicy = process.env.OPENBOT_REMOTE_SMOKE_ICE_POLICY ?? "all";
@@ -36,7 +36,7 @@ async function main() {
   });
 
   try {
-    await window.loadURL("data:text/html,<meta charset=utf-8><title>OpenBot WebRTC smoke</title>");
+    await window.loadURL("data:text/html,<meta charset=utf-8><title>OmniBot WebRTC smoke</title>");
     const result = await window.webContents.executeJavaScript(
       `(${runWebRtcSmoke.toString()})(${JSON.stringify({
         signalUrl,

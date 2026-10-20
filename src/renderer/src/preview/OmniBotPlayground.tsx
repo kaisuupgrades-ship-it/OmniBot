@@ -8,26 +8,26 @@ import { onCleanup, onSettled } from "solid-js";
 import { App } from "../App";
 import { syncLogoColor } from "../logo-color";
 import { LANDING_PREVIEW_OPTIONS } from "./landing-fixtures";
-import { createMockOpenBot, type MockOpenBotControls, type MockOpenBotOptions } from "./mock-openbot";
+import { createMockOmniBot, type MockOmniBotControls, type MockOmniBotOptions } from "./mock-openbot";
 
 const LANDING_PREVIEW_READY_RETRY_MS = 250;
 
-export interface OpenBotPlaygroundDependencies {
-  createMock: (options?: MockOpenBotOptions) => MockOpenBotControls;
+export interface OmniBotPlaygroundDependencies {
+  createMock: (options?: MockOmniBotOptions) => MockOmniBotControls;
   loadLandingController?: () => Promise<typeof import("./landing-demo")>;
   renderApp: () => JSX.Element;
 }
 
-export interface OpenBotPlaygroundProps {
-  dependencies?: OpenBotPlaygroundDependencies;
-  options?: MockOpenBotOptions | undefined;
+export interface OmniBotPlaygroundProps {
+  dependencies?: OmniBotPlaygroundDependencies;
+  options?: MockOmniBotOptions | undefined;
   variant?: "default" | "landing";
 }
 
-export function OpenBotPlayground(props: OpenBotPlaygroundProps) {
+export function OmniBotPlayground(props: OmniBotPlaygroundProps) {
   const landingPreview = props.variant === "landing";
   const dependencies = props.dependencies ?? {
-    createMock: createMockOpenBot,
+    createMock: createMockOmniBot,
     renderApp: () => <App landingPreview={landingPreview} />,
   };
   const previousApi = window.openbot;

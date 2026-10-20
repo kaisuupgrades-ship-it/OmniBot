@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import {
   formatStoreDates,
   MOBILE_CHANGELOG,
@@ -18,7 +18,7 @@ import {
 // version and the stores that have it. Each store reviews a build on its own: run it one time for
 // each store, in the order that they approve the build.
 
-const logger = createOpenBotLogger("publish-mobile-release");
+const logger = createOmniBotLogger("publish-mobile-release");
 const USAGE = "Usage: bun run mobile:release:published <ios|android|both> [--version x.y.z]";
 
 const args = process.argv.slice(2);

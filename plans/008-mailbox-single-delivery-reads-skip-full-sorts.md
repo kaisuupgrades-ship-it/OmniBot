@@ -95,7 +95,7 @@ There is no persistent index, so the 18 places that assign
   .map((delivery) => this.#publicDelivery(delivery, positions, this.#requireMessage(delivery.messageId, messages)))
   ```
 - `scripts/mailbox-queue-scale-e2e.ts` (153 lines): seeds 10,000 messages
-  through the real `MailboxStore` and `OpenBotDatabase` on a temporary profile;
+  through the real `MailboxStore` and `OmniBotDatabase` on a temporary profile;
   2,000 deliveries go to `agent-a`, the first 1,000 are completed. It checks
   `listQueue` positions and times `listQueue` + `senderAgentIdsForRecipient`
   (`timeQueueChanges`). It writes `.openbot-build/mailbox-queue-scale-e2e/report.json`.

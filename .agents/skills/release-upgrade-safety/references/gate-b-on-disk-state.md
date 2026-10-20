@@ -126,7 +126,7 @@ open the inventory for the file-by-file detail.
   `src/backend/workspace-paths.ts`, `bots.json` (`LEGACY_AGENTS_STATE_FILE` in
   `src/backend/agent-store.ts`), `mailbox.json`, and the `legacy-import:bots:v1` command id are
   spellings a shipped release already wrote to the user's disk. A database restored from the user's
-  own file copy never ran migration v13, so `bot-<uuid>` ids and `~/OpenBot/Bots` paths are still
+  own file copy never ran migration v13, so `bot-<uuid>` ids and `~/OmniBot/Bots` paths are still
   live values.
 - **`legacy-backup-v1/` is not a general backup.** `DatabaseCore.backupLegacyFile` copies a single
   named file, once, with `COPYFILE_EXCL`, and it is used for the two legacy JSON imports only.

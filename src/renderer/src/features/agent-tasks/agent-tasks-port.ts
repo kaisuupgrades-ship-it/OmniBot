@@ -1,9 +1,9 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /** What the task state reaches in main: the task list, a task's conversation, and the task actions. */
 export interface AgentTasksPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    OmniBotDesktopApi["agent"],
     | "closeTask"
     | "listTasks"
     | "readTask"

@@ -162,7 +162,7 @@ export const startAcpAuthentication = Effect.fnUntraced(function* (options: {
         params: {
           protocolVersion: 1,
           clientCapabilities: { fs: { readTextFile: false, writeTextFile: false }, terminal: false },
-          clientInfo: { name: "openbot", title: "OpenBot", version: "0.1.0" },
+          clientInfo: { name: "openbot", title: "OmniBot", version: "0.1.0" },
         },
       });
       return Effect.sync(() => {

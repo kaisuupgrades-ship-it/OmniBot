@@ -36,9 +36,9 @@ export function createProviderAwareCodec(profile: ProviderAwareProfile) {
   };
 }
 
-export const TEAM_PROTOCOL_VERSION_HEADER = "OpenBot-Protocol-Version";
-export const TEAM_APP_VERSION_HEADER = "OpenBot-App-Version";
-export const TEAM_CAPABILITIES_HEADER = "OpenBot-Capabilities";
+export const TEAM_PROTOCOL_VERSION_HEADER = "OmniBot-Protocol-Version";
+export const TEAM_APP_VERSION_HEADER = "OmniBot-App-Version";
+export const TEAM_CAPABILITIES_HEADER = "OmniBot-Capabilities";
 
 export const TEAM_PROTOCOL_ProviderAware_CAPABILITIES = [
   "agent-runtime-snapshots",

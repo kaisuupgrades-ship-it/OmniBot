@@ -13,16 +13,16 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import type { AgentSummary, AgentTask, AgentTasksSnapshot, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { AgentSummary, AgentTask, AgentTasksSnapshot, OmniBotDesktopApi } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { readDevInstanceRecords } from "./dev-automation/instance-registry";
 
 // The page functions below run in the app window, where the preload bridge sets this.
 declare global {
   interface Window {
-    openbot: OpenBotDesktopApi;
+    openbot: OmniBotDesktopApi;
   }
 }
 
@@ -64,7 +64,7 @@ assertMutationAllowed({
   instanceNamed: true,
   target: instance.instanceId,
 });
-const session = await connectToDevApp(instance.remoteDebuggingPort, createOpenBotLogger("agent-tasks-e2e"), {
+const session = await connectToDevApp(instance.remoteDebuggingPort, createOmniBotLogger("agent-tasks-e2e"), {
   expectedRendererPort: instance.rendererPort,
   ownerPid: instance.pid,
 });

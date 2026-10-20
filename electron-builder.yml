@@ -1,10 +1,10 @@
-appId: app.openbot.desktop
-productName: OpenBot
+appId: app.omnibot.desktop
+productName: OmniBot
 copyright: Copyright © 2026 Synthetify Labs spółka z ograniczoną odpowiedzialnością
 protocols:
-  - name: OpenBot invitations
+  - name: OmniBot invitations
     schemes:
-      - openbot
+      - omnibot
 asar: true
 artifactName: ${productName}-${version}-${arch}.${ext}
 electronUpdaterCompatibility: ">=2.16"
@@ -102,7 +102,7 @@ mac:
     - from: build/cua-driver/darwin/${arch}
       to: cua-driver/darwin/${arch}
   # The Computer Use driver arrives signed by Cua AI with the hardened runtime, a secure timestamp
-  # and `com.apple.security.automation.apple-events`. Re-signing it with OpenBot's inherited
+  # and `com.apple.security.automation.apple-events`. Re-signing it with OmniBot's inherited
   # entitlements would drop that entitlement and break the driver's Automation route, so its own
   # Developer ID signature is kept. Notarization accepts a nested binary signed by another team.
   signIgnore:
@@ -111,11 +111,11 @@ mac:
   entitlementsInherit: build/entitlements.mac.inherit.plist
   darkModeSupport: true
   extendInfo:
-    NSMicrophoneUsageDescription: OpenBot uses the microphone to transcribe voice prompts locally on this Mac.
-    # Computer Use runs the driver as a child process, so macOS asks for both grants in OpenBot's
+    NSMicrophoneUsageDescription: OmniBot uses the microphone to transcribe voice prompts locally on this Mac.
+    # Computer Use runs the driver as a child process, so macOS asks for both grants in OmniBot's
     # name and shows these sentences.
-    NSScreenCaptureUsageDescription: OpenBot captures the screen so an agent can see the app windows you ask it to control.
-    NSAppleEventsUsageDescription: OpenBot sends Automation events so an agent can control the apps you ask it to control.
+    NSScreenCaptureUsageDescription: OmniBot captures the screen so an agent can see the app windows you ask it to control.
+    NSAppleEventsUsageDescription: OmniBot sends Automation events so an agent can control the apps you ask it to control.
     NSUserActivityTypes:
       - NSUserActivityTypeBrowsingWeb
   # No `arch` here: a target's own `arch` list replaces the one given on the command line, so

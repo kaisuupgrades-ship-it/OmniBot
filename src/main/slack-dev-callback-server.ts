@@ -1,8 +1,8 @@
 /**
  * Development only: where a Slack install returns when `bun run dev:slack` runs.
  *
- * A packaged build gets the install back as an `openbot://slack-workspace` link. On a computer that
- * also has OpenBot installed, the operating system sends that link to the installed app, not to the
+ * A packaged build gets the install back as an `omnibot://slack-workspace` link. On a computer that
+ * also has OmniBot installed, the operating system sends that link to the installed app, not to the
  * dev app. So the dev app names this loopback listener as the return address, and a development
  * account API sends the browser here. The waiting connect checks `nonce` the same way, so a request
  * this run did not start does nothing.
@@ -54,7 +54,7 @@ async function answer(
   receive: (nonce: string, grant: string) => Promise<boolean>,
 ): Promise<boolean> {
   if (method !== "GET" || !url?.startsWith(SLACK_DEV_CALLBACK_PATH)) return false;
-  const link = parseDeepLink(`openbot://${url.replace(/^\/+/u, "")}`);
+  const link = parseDeepLink(`omnibot://${url.replace(/^\/+/u, "")}`);
   if (link?.kind !== "slack-workspace") return false;
   return receive(link.nonce, link.grant).catch(() => false);
 }

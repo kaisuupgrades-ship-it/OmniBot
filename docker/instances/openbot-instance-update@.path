@@ -1,7 +1,7 @@
 # The app of instance %i asks for an update with an empty file in update-requests.
 # `openbot-instance start` enables this unit for each instance.
 [Unit]
-Description=Update requests of OpenBot instance %i
+Description=Update requests of OmniBot instance %i
 
 [Path]
 PathExists=/srv/openbot/%i/update-requests/update-stage

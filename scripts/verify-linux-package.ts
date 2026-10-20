@@ -6,10 +6,10 @@ import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
 import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 
-const logger = createOpenBotLogger("verify-linux-package");
+const logger = createOmniBotLogger("verify-linux-package");
 
 // Each launch step ends on a state or an event. This limit only turns a real hang into a clear failure:
 // a slow release runner can need much more time than usual to start the first instance.
@@ -129,7 +129,7 @@ if (!isString(packageJson.version)) throw new Error("package.json version is mis
 const packagedManifest = JSON.parse(await readAsarFile(asarPath, "package.json"));
 if (!isDynamicRecord(packagedManifest)) throw new Error("The packaged package.json is not a JSON object.");
 expectEqual(packagedManifest.name, "openbot", "packaged name");
-expectEqual(packagedManifest.productName, "OpenBot", "packaged product name");
+expectEqual(packagedManifest.productName, "OmniBot", "packaged product name");
 expectEqual(packagedManifest.version, packageJson.version, "packaged version");
 
 const executable = await readFile(executablePath);
@@ -144,8 +144,8 @@ if (machine !== target.elfMachine) {
 
 const appImages = existsSync("dist") ? await findAppImages() : [];
 for (const appImage of appImages) {
-  if (!appImage.startsWith(`OpenBot-${packageJson.version}-`)) {
-    throw new Error(`Unexpected AppImage name: ${appImage} (expected OpenBot-${packageJson.version}-<arch>.AppImage)`);
+  if (!appImage.startsWith(`OmniBot-${packageJson.version}-`)) {
+    throw new Error(`Unexpected AppImage name: ${appImage} (expected OmniBot-${packageJson.version}-<arch>.AppImage)`);
   }
 }
 
@@ -181,7 +181,7 @@ await verifyLaunch(executablePath);
 
 logger.info(`Verified ${appPath}`);
 logger.info(
-  `OpenBot ${packageJson.version} · Linux ${architecture} · manifest · no voice or remote desktop · ASAR integrity · hardened fuses · launch`,
+  `OmniBot ${packageJson.version} · Linux ${architecture} · manifest · no voice or remote desktop · ASAR integrity · hardened fuses · launch`,
 );
 
 function expectEqual(actual: unknown, expected: unknown, label: string): void {
@@ -258,7 +258,7 @@ async function verifyLaunch(executable: string): Promise<void> {
   const launchExit = new Promise<never>((_, reject) => {
     child.once("exit", (code, signal) => {
       reject(
-        new Error(`Packaged OpenBot exited during launch (${signal ?? `code ${String(code)}`}): ${stderr.trim()}`),
+        new Error(`Packaged OmniBot exited during launch (${signal ?? `code ${String(code)}`}): ${stderr.trim()}`),
       );
     });
   });
@@ -285,7 +285,7 @@ async function verifyLaunch(executable: string): Promise<void> {
     await verifySecondInstanceExits(executable, userDataPath, launchExit);
     if (child.exitCode !== null || child.signalCode !== null) {
       throw new Error(
-        `Packaged OpenBot exited when a second instance started (${child.signalCode ?? `code ${String(child.exitCode)}`}): ${stderr.trim()}`,
+        `Packaged OmniBot exited when a second instance started (${child.signalCode ?? `code ${String(child.exitCode)}`}): ${stderr.trim()}`,
       );
     }
   } finally {
@@ -326,7 +326,7 @@ async function waitForFirstInstance(
     const limit = Date.now() + launchStepLimitMs;
     while (!(await reached())) {
       if (Date.now() > limit) {
-        throw new Error(`Packaged OpenBot did not ${step} in 5 minutes: ${stderr().trim()}`);
+        throw new Error(`Packaged OmniBot did not ${step} in 5 minutes: ${stderr().trim()}`);
       }
       await delay(200, undefined, { signal: stop.signal });
     }
@@ -389,11 +389,11 @@ async function verifySecondInstanceExits(
       delay(launchStepLimitMs, null, { signal: stop.signal }),
     ]);
     if (!result) {
-      throw new Error(`A second OpenBot instance did not exit in 5 minutes: ${stderr.trim()}`);
+      throw new Error(`A second OmniBot instance did not exit in 5 minutes: ${stderr.trim()}`);
     }
     if (result.code !== 0 || result.signal) {
       throw new Error(
-        `A second OpenBot instance exited unexpectedly (${result.signal ?? `code ${String(result.code)}`}): ${stderr.trim()}`,
+        `A second OmniBot instance exited unexpectedly (${result.signal ?? `code ${String(result.code)}`}): ${stderr.trim()}`,
       );
     }
   } finally {

@@ -522,7 +522,7 @@ async function aCheckoutReturnStaysOnTheAccountSite() {
 }
 
 async function aSiteServesOnlyItsOwnFiles() {
-  const hostname = "demo.openbot.site";
+  const hostname = "demo.omnibot-sites.example.com";
   const prefix = "sites/site-1/deployments/deployment-1/";
   const manifest = {
     version: 1,
@@ -589,7 +589,9 @@ async function aRateLimitIgnoresForwardedFor() {
     },
   };
   const send = (headers: Record<string, string>) =>
-    Effect.runPromise(enforceMarketplaceIngress(new Request("https://openbot.run/v1/skills", { headers }), bindings));
+    Effect.runPromise(
+      enforceMarketplaceIngress(new Request("https://omnibot.example.com/v1/skills", { headers }), bindings),
+    );
   await send({ "CF-Connecting-IP": "203.0.113.7", "X-Forwarded-For": "198.51.100.1" });
   await send({ "CF-Connecting-IP": "203.0.113.7", "X-Forwarded-For": "198.51.100.2" });
   await send({ "X-Forwarded-For": "198.51.100.3" });

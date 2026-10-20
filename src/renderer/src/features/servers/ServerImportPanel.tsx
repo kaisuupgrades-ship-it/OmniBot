@@ -1,4 +1,4 @@
-import type { AgentImportPreview, AgentImportResult, OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { AgentImportPreview, AgentImportResult, OmniBotDesktopApi } from "@openbot/contracts/ipc";
 import { classifyFailure } from "@openbot/telemetry";
 import {
   type AgentImportPhase,
@@ -20,7 +20,7 @@ function readSetup(): AgentImportSetup {
   }
 }
 
-export type AgentImportCalls = OpenBotDesktopApi["agentImport"] & {
+export type AgentImportCalls = OmniBotDesktopApi["agentImport"] & {
   /** Opens the ready export agent's Grok Bot page. */
   openExportAgent(): void;
 };

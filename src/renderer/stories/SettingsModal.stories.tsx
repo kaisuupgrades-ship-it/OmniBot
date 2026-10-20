@@ -9,7 +9,7 @@ import type { SettingsTab } from "../src/features/settings/settings-tabs";
 import { STORY_SERVERS } from "../src/preview/fixtures";
 import { createMockBilling } from "../src/preview/mock-billing";
 import type { MockVoiceOptions } from "../src/preview/mock-voice";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 import { SettingsPageStory } from "./settings-page-story";
 import { previewStorySoundSettings } from "./sound-feedback-fixture";
 
@@ -20,7 +20,7 @@ const storyGeneralSettings: GeneralSettingsValue = {
   keepRunningInBackground: false,
 };
 
-const storyAppInfo = { name: "OpenBot", version: "0.2.1", platform: "darwin", variant: "dev" } as const;
+const storyAppInfo = { name: "OmniBot", version: "0.2.1", platform: "darwin", variant: "dev" } as const;
 const storyAccount: CentralAuthUser = {
   id: "user-1",
   email: "person@example.com",
@@ -52,7 +52,7 @@ function SettingsModalStory(props: {
 }) {
   const previousApi = window.openbot;
   const billingApi = createMockBilling();
-  const mock = createMockOpenBot(props.voice);
+  const mock = createMockOmniBot(props.voice);
   window.openbot = mock.api;
   onCleanup(() => {
     mock.dispose();
@@ -111,7 +111,7 @@ function SettingsModalStory(props: {
   async function createMobileConnect(): Promise<{ qrData: string; expiresAt: number }> {
     return {
       qrData:
-        "openbot://mobile-connect?api=https%3A%2F%2Fapi.openbot.run&ticket=storybook-mobile-ticket_1234567890abcdef",
+        "omnibot://mobile-connect?api=https%3A%2F%2Fapi.omnibot.example.com&ticket=storybook-mobile-ticket_1234567890abcdef",
       expiresAt: Date.now() + 120_000,
     };
   }
@@ -186,7 +186,7 @@ const meta = {
     onUpdateAccountAvatar: fn(async () => undefined),
     onCreateMobileConnect: fn(async () => ({
       qrData:
-        "openbot://mobile-connect?api=https%3A%2F%2Fapi.openbot.run&ticket=storybook-mobile-ticket_1234567890abcdef",
+        "omnibot://mobile-connect?api=https%3A%2F%2Fapi.omnibot.example.com&ticket=storybook-mobile-ticket_1234567890abcdef",
       expiresAt: Date.now() + 120_000,
     })),
   },

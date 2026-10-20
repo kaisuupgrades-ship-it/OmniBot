@@ -23,7 +23,7 @@ import { normalizeMemoryText } from "../memory-store";
 import { type DynamicToolCallParams, isRecord } from "../protocol";
 import type { ConversationRuntime } from "./conversation-runtime";
 import { listMemoriesInput, searchMemoriesInput, setMemoryInclusionInput } from "./memory-tool-inputs";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "./routine-tools";
+import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "./routine-tools";
 
 type PendingMemoryMutation =
   | {
@@ -170,7 +170,7 @@ export class AgentMemories {
     params: DynamicToolCallParams,
     senderAgentId: string,
     redact: (value: string) => string = redactText,
-  ): OpenBotToolResponse | null {
+  ): OmniBotToolResponse | null {
     try {
       return this.#handleTool(params, senderAgentId, redact);
     } catch (error) {
@@ -184,7 +184,7 @@ export class AgentMemories {
     params: DynamicToolCallParams,
     senderAgentId: string,
     redact: (value: string) => string,
-  ): OpenBotToolResponse | null {
+  ): OmniBotToolResponse | null {
     if (params.tool === "search_memories") {
       const parsed = searchMemoriesInput.safeParse(params.arguments);
       if (!parsed.success) return openBotToolFailure(sourceText("error.backend.memorySearchQuery"));
@@ -625,7 +625,7 @@ export class AgentMemories {
 function memoryRecallResult(
   result: AgentMemorySearchResult | AgentMemoryListPage,
   redact: (value: string) => string,
-): OpenBotToolResponse {
+): OmniBotToolResponse {
   while (
     Buffer.byteLength(redact(JSON.stringify(result)), "utf8") > AGENT_MEMORY_CONTEXT_BUDGET_BYTES &&
     result.memories.length > 0

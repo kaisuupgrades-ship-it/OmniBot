@@ -63,8 +63,8 @@ remote/bin/dotenvx run --overload -f remote/.env.production -fk remote/.env.keys
 remote/bin/dotenvx run --overload -f remote/.env.production -fk remote/.env.keys -- \
   docker compose -p openbot-remote -f remote/compose.yaml up -d --no-build --no-deps remote-api
 docker inspect openbot-remote-remote-api-1 --format '{{.Image}} {{.State.Health.Status}}'
-curl --fail --silent --show-error https://signal.openbot.run/health/ready
-curl --fail --silent --show-error https://signal.openbot.run/health/live
+curl --fail --silent --show-error https://signal.omnibot.example.com/health/ready
+curl --fail --silent --show-error https://signal.omnibot.example.com/health/live
 ```
 
 `/health/live` must show the release commit. Builds made before this field existed show no `commit`;

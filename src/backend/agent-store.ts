@@ -60,13 +60,13 @@ import {
 import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
 import { isGeneratedAgentId, isUuidV4, legacyAgentId } from "@openbot/contracts/validation";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { Effect, Result, Semaphore, Stream } from "effect";
 import { ProfileCreationRecovery } from "./agent/profile-creation-recovery";
 import { isEmptyStoredFile, parseStoredJson, writeFileAtomically } from "./atomic-json-file";
 import { automationRoot } from "./automation-command";
 import type { AgentModelChange } from "./database/agent-roster";
-import { OpenBotDatabase, type ProviderSession, stableThreadId } from "./openbot-database";
+import { OmniBotDatabase, type ProviderSession, stableThreadId } from "./openbot-database";
 import { isPathInside } from "./path-containment";
 import { isRecord } from "./protocol";
 import { StoredStateFailure, storedIO, storedSync } from "./stored-state-effects";
@@ -152,7 +152,7 @@ const LEGACY_AGENTS_STATE_FILE = "bots.json";
 const LEGACY_AGENTS_STATE_KEY = "bots";
 const LEGACY_AGENTS_IMPORT_COMMAND_ID = "legacy-import:bots:v1";
 
-const logger = createOpenBotLogger("agent-store");
+const logger = createOmniBotLogger("agent-store");
 
 // Windows answers `EBUSY` or `EPERM` while a file in the tree is still open: a provider process that
 // is exiting after its session closed, an antivirus scan or the search indexer. Node retries these
@@ -169,13 +169,13 @@ export class AgentStore {
   readonly #duplicationsRoot: string;
   readonly #automationRoot: string;
   readonly #profileCreationRecovery: ProfileCreationRecovery;
-  readonly #database: OpenBotDatabase;
+  readonly #database: OmniBotDatabase;
   #state: StoredState = { version: 2, examplesInitialized: false, agents: [] };
   readonly #avatarUpdateQueue = Semaphore.makeUnsafe(1);
   readonly #creationQueue = Semaphore.makeUnsafe(1);
 
-  constructor(userDataPath: string, homePath: string, database = new OpenBotDatabase(userDataPath)) {
-    const openbotRoot = join(homePath, "OpenBot");
+  constructor(userDataPath: string, homePath: string, database = new OmniBotDatabase(userDataPath)) {
+    const openbotRoot = join(homePath, "OmniBot");
     this.#statePath = join(userDataPath, LEGACY_AGENTS_STATE_FILE);
     this.#agentsRoot = join(openbotRoot, "Agents");
     this.#legacyAgentsRoot = join(openbotRoot, "Bots");
@@ -191,7 +191,7 @@ export class AgentStore {
     );
   }
 
-  get database(): OpenBotDatabase {
+  get database(): OmniBotDatabase {
     return this.#database;
   }
 
@@ -903,7 +903,7 @@ export class AgentStore {
       //
       // The agent's own id is always safe to clear under the old root: nobody else can be stored under it.
       // Migration v13 leaves a `bot-` id alone unless the application minted it, and a legacy `bots.json`
-      // import runs afterwards and keeps both the id and the `~/OpenBot/Bots/<id>` workspace it read, so an
+      // import runs afterwards and keeps both the id and the `~/OmniBot/Bots/<id>` workspace it read, so an
       // agent whose workspace is only ever there is a state the user can reach.
       const legacyPaths = [join(this.#legacyAgentsRoot, id)];
       const legacyId = this.#unclaimedLegacyId(id);
@@ -979,7 +979,7 @@ export class AgentStore {
   }, Effect.uninterruptible);
 
   /**
-   * The file half of migration v13: `~/OpenBot/Bots/bot-<uuid>` becomes `~/OpenBot/Agents/agent-<uuid>`,
+   * The file half of migration v13: `~/OmniBot/Bots/bot-<uuid>` becomes `~/OmniBot/Agents/agent-<uuid>`,
    * and the uploaded avatar directory follows the id the same way. It cannot run inside that migration,
    * because `runMigration` rolls its transaction back on a throw and a directory that has already moved
    * cannot be rolled back.
@@ -1017,7 +1017,7 @@ export class AgentStore {
    *
    * An id the application never minted -- `chief`, or one the user chose -- keeps its spelling, and that is
    * not the same as having nothing to do: the *root* moved as well, so its workspace is still sitting in
-   * `OpenBot/Bots` under exactly this name. Nobody else can hold it, because ids are unique.
+   * `OmniBot/Bots` under exactly this name. Nobody else can hold it, because ids are unique.
    */
   #unclaimedLegacyId(id: string): string | null {
     const legacyId = legacyAgentId(id);
@@ -1029,7 +1029,7 @@ export class AgentStore {
    * Answers whether the agent's stored workspace path had to change, which is what has to be persisted.
    *
    * The destination is derived from the root and the id, never read from the stored path. An agent the
-   * user named themselves came out of the upgrade still recorded under `OpenBot/Bots/<id>`, because
+   * user named themselves came out of the upgrade still recorded under `OmniBot/Bots/<id>`, because
    * migration v13 rewrites id values and that id did not change -- so trusting the stored path would find
    * the workspace already "at" its destination and leave it in the old root forever.
    */
@@ -1077,7 +1077,7 @@ export class AgentStore {
         if (Result.isFailure(attempt2)) {
           const error = attempt2.failure.cause;
           // Only the move failed; the workspace itself is still there and still readable. `EXDEV` means
-          // `~/OpenBot/Bots` is a link onto another volume, so the move would be a copy, and a copy of a
+          // `~/OmniBot/Bots` is a link onto another volume, so the move would be a copy, and a copy of a
           // workspace interrupted halfway is lost data. A permission error, a Windows lock or an open handle
           // leave exactly the same situation, so they get the same answer: the files stay where they are and
           // the stored path is pointed back at them. An out-of-date directory name is cosmetic.
@@ -1412,7 +1412,7 @@ export class AgentStore {
 
   bindProviderSession(id: string, provider: AgentProviderId, externalSessionId: string): ProviderSession {
     const agent = this.#requireAgent(id);
-    if (!agent.threadId) throw new Error(`Agent ${id} does not have an OpenBot thread.`);
+    if (!agent.threadId) throw new Error(`Agent ${id} does not have an OmniBot thread.`);
     return this.#database.bindProviderSession({
       threadId: agent.threadId,
       provider,
@@ -1801,7 +1801,7 @@ interface UnreadableStoredAgent {
  * A stored profile, with every field this build cannot read put back to a value it can.
  *
  * The three fields it refuses on instead are the ones no default can stand in for. `id` names the
- * avatar directory, the workspace under `~/OpenBot/Agents` and the agent every thread and receipt
+ * avatar directory, the workspace under `~/OmniBot/Agents` and the agent every thread and receipt
  * points at; `workspacePath` is the directory the agent reads and writes, and a guessed one is either
  * another agent's files or an empty new directory beside the real one; `threadId` is the whole
  * conversation, and reading a broken one as `null` reports an empty history and mints a second thread

@@ -518,7 +518,7 @@ function writeTees(prefix: string, line: string): void {
   }
 }
 
-export function createOpenBotLogger(prefix: string, sink?: (line: string) => void, level?: LogLevel): Logger {
+export function createOmniBotLogger(prefix: string, sink?: (line: string) => void, level?: LogLevel): Logger {
   const threshold = LEVEL_RANK[level ?? resolveLogLevel(process.env.OPENBOT_LOG_LEVEL)];
   const out = sink ?? ((line: string) => process.stdout.write(`${line}\n`));
   const err = sink ?? ((line: string) => process.stderr.write(`${line}\n`));

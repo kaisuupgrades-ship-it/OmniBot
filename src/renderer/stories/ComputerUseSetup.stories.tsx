@@ -2,7 +2,7 @@ import type { ComputerUseState, MacPermissionId } from "@openbot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { ComputerUseSetup } from "../src/features/computer-use/ComputerUseSetup";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 function permissions(granted: readonly MacPermissionId[]): ComputerUseState["permissions"] {
   return (["screen-recording", "accessibility"] as const).map((id) => ({ id, granted: granted.includes(id) }));
@@ -16,7 +16,7 @@ const permissionsRequired: ComputerUseState = {
 
 function MockedSetup(props: { state?: ComputerUseState; error?: Error; loading?: boolean }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot();
+  const mock = createMockOmniBot();
   mock.api.computerUse.getState = props.loading
     ? () => new Promise(() => undefined)
     : props.error
@@ -72,7 +72,7 @@ export const DriverMissing: Story = {
       state={{
         status: "driver-missing",
         permissions: permissions([]),
-        message: "This build of OpenBot carries no Computer Use driver.",
+        message: "This build of OmniBot carries no Computer Use driver.",
       }}
     />
   ),
@@ -84,5 +84,5 @@ export const ReadyWithoutPermissions: Story = {
 };
 
 export const Failure: Story = {
-  render: () => <MockedSetup error={new Error("OpenBot could not check Computer Use.")} />,
+  render: () => <MockedSetup error={new Error("OmniBot could not check Computer Use.")} />,
 };

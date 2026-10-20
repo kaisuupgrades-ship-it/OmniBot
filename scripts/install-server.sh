@@ -1,10 +1,10 @@
 #!/bin/bash
-# Installs OpenBot as a self-hosted server on a Linux computer with no screen:
+# Installs OmniBot as a self-hosted server on a Linux computer with no screen:
 #
-#   curl -fsSL https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/install-server.sh | sudo bash
+#   curl -fsSL https://updates.omnibot.example.com/scripts/install-server.sh | sudo bash
 #
 # Options (after `sudo bash -s --`):
-#   --user <name>             The user that runs OpenBot and its agents. Default: the user of the
+#   --user <name>             The user that runs OmniBot and its agents. Default: the user of the
 #                             installed server, else openbot, which the install makes when it does
 #                             not exist.
 #   --auth-api-url <origin>   Another account server, for development. Default: the one of the
@@ -19,7 +19,7 @@
 set -euo pipefail
 export LC_ALL=C DEBIAN_FRONTEND=noninteractive
 
-RELEASES=https://github.com/nightly-labs/openbot/releases
+RELEASES=https://updates.omnibot.example.com
 service_user=""
 auth_api_url=""
 display_size=""
@@ -58,19 +58,19 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-[ "$(uname -s)" = Linux ] || fail "This install is for Linux. Download the desktop app at https://openbot.run."
+[ "$(uname -s)" = Linux ] || fail "This install is for Linux. Download the desktop app at https://omnibot.example.com."
 [ "$(id -u)" -eq 0 ] || fail "Run this with sudo."
-[ -d /run/systemd/system ] || fail "OpenBot needs systemd."
-command -v apt-get >/dev/null || fail "OpenBot needs Ubuntu 24.04 or a newer Ubuntu or Debian."
+[ -d /run/systemd/system ] || fail "OmniBot needs systemd."
+command -v apt-get >/dev/null || fail "OmniBot needs Ubuntu 24.04 or a newer Ubuntu or Debian."
 # shellcheck disable=SC1091
 . /etc/os-release
 if [ "${ID:-}" != ubuntu ] || [ "${VERSION_ID:-}" != 24.04 ]; then
-  echo "OpenBot is tested on Ubuntu 24.04. This is ${PRETTY_NAME:-an unknown system}; the install continues." >&2
+  echo "OmniBot is tested on Ubuntu 24.04. This is ${PRETTY_NAME:-an unknown system}; the install continues." >&2
 fi
 case $(uname -m) in
   x86_64) architecture=x86_64 manifest=latest-linux.yml ;;
   aarch64) architecture=arm64 manifest=latest-linux-arm64.yml ;;
-  *) fail "OpenBot has no release for this machine." ;;
+  *) fail "OmniBot has no release for this machine." ;;
 esac
 
 missing=()
@@ -87,27 +87,27 @@ version=$(sed -n 's/^version: *//p' <<<"$manifest" | head -n 1)
 path=$(sed -n 's/^path: *//p' <<<"$manifest" | head -n 1)
 sha512=$(sed -n 's/^sha512: *//p' <<<"$manifest" | head -n 1)
 [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || fail "The release manifest has no valid version."
-[ "$path" = "OpenBot-$version-$architecture.AppImage" ] || fail "The release manifest names another file."
+[ "$path" = "OmniBot-$version-$architecture.AppImage" ] || fail "The release manifest names another file."
 [[ $sha512 =~ ^[A-Za-z0-9+/]{86}==$ ]] || fail "The release manifest has no valid SHA-512."
 
-echo "Downloading OpenBot $version..."
-fetch --output "$work/OpenBot.AppImage" "$RELEASES/download/v$version/$path"
-[ "$(openssl dgst -sha512 -binary "$work/OpenBot.AppImage" | openssl base64 -A)" = "$sha512" ] ||
+echo "Downloading OmniBot $version..."
+fetch --output "$work/OmniBot.AppImage" "$RELEASES/download/v$version/$path"
+[ "$(openssl dgst -sha512 -binary "$work/OmniBot.AppImage" | openssl base64 -A)" = "$sha512" ] ||
   fail "The download does not match the release manifest."
-chmod 0700 "$work/OpenBot.AppImage"
-(cd "$work" && ./OpenBot.AppImage --appimage-extract >/dev/null)
+chmod 0700 "$work/OmniBot.AppImage"
+(cd "$work" && ./OmniBot.AppImage --appimage-extract >/dev/null)
 
 setup="$work/squashfs-root/resources/hosting/openbot-server-setup"
-[ -f "$setup" ] || fail "OpenBot $version cannot install as a server. Try again after the next release."
+[ -f "$setup" ] || fail "OmniBot $version cannot install as a server. Try again after the next release."
 # A release before --display-size refuses a fourth argument.
 if [ -n "$display_size" ] && ! grep -q OPENBOT_DISPLAY_SIZE "$setup"; then
-  fail "OpenBot $version has no --display-size. Install without it, or try again after the next release."
+  fail "OmniBot $version has no --display-size. Install without it, or try again after the next release."
 fi
 bash "$setup" "$service_user" "$work/squashfs-root" "$auth_api_url" ${display_size:+"$display_size"}
 
 cat <<'EOF'
 
-Next, sign in with your OpenBot account:
+Next, sign in with your OmniBot account:
 
   sudo openbot login
 

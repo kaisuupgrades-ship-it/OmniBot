@@ -19,7 +19,7 @@ import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
 import { type MessagingCredentials, MessagingService } from "../src/backend/messaging/messaging-service";
 import type { MessagingIngress } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 
 const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-disconnect-orchestrator-e2e");
@@ -90,7 +90,7 @@ async function boot<T>(
     busy: Set<string>;
   }) => Promise<T>,
 ): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new OmniBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
@@ -237,7 +237,7 @@ try {
           channelId: "group-1",
           draft: { name: "Group", title: "", instructions: "", members: [{ agentId: user.id }], leadAgentId: null },
         },
-        { id: "openbot", name: "OpenBot" },
+        { id: "openbot", name: "OmniBot" },
       ),
     );
     await runCauseEffect(

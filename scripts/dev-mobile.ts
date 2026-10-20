@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { parseMobileConnectUrl } from "@openbot/contracts/mobile-connect";
 import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { connectToDevApp } from "./dev-automation/cdp-client";
 import { type DevInstanceRecord, readDevInstanceRecords, selectDevInstance } from "./dev-automation/instance-registry";
 
@@ -26,9 +26,9 @@ const PAIRING_CONFIRM_MS = 20_000;
 const POLL_INTERVAL_MS = 1_000;
 
 const writeLine = (line: string) => process.stderr.write(`${line}\n`);
-const logger = createOpenBotLogger("dev-mobile", writeLine, "info");
+const logger = createOmniBotLogger("dev-mobile", writeLine, "info");
 // The CDP client reports every connection, and pairing polls the desktop each second.
-const cdpLogger = createOpenBotLogger("dev-mobile", writeLine, "warn");
+const cdpLogger = createOmniBotLogger("dev-mobile", writeLine, "warn");
 const runCommand = promisify(execFile);
 
 export interface DevMobileOptions {
@@ -198,13 +198,13 @@ async function selectSimulator(requested: string | null): Promise<string> {
       await runCommand("xcrun", ["simctl", "get_app_container", udid, MOBILE_BUNDLE_ID]);
       withApp.push(udid);
     } catch {
-      // OpenBot is not installed on this simulator.
+      // OmniBot is not installed on this simulator.
     }
   }
   const [udid, ...extra] = withApp;
-  if (!udid) throw new Error("No booted simulator has OpenBot installed. Run without --pair-only to build it.");
+  if (!udid) throw new Error("No booted simulator has OmniBot installed. Run without --pair-only to build it.");
   if (extra.length > 0) {
-    throw new Error(`Several booted simulators have OpenBot. Pass --simulator=<udid>: ${withApp.join(", ")}`);
+    throw new Error(`Several booted simulators have OmniBot. Pass --simulator=<udid>: ${withApp.join(", ")}`);
   }
   return udid;
 }

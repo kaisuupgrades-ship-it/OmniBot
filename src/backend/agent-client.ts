@@ -58,7 +58,7 @@ export interface AgentClient {
   on(event: "request", listener: (request: AppServerRequest) => void): this;
   /**
    * `origin.duringStop` marks a stderr line of a process that `stop()` ended while it still ran: the
-   * shutdown that OpenBot started, not an error for the user. A line with no `origin` is reported.
+   * shutdown that OmniBot started, not an error for the user. A line with no `origin` is reported.
    */
   on(event: "diagnostic", listener: (message: string, origin?: DiagnosticOrigin) => void): this;
   once(event: "exit", listener: (error: Error) => void): this;
@@ -106,7 +106,7 @@ export class MissingClaudeSessionError extends Error {
 const EXIT_DETAIL_LIMIT = 300;
 
 /**
- * The provider CLI ended while OpenBot waited for an answer. The message names how it ended.
+ * The provider CLI ended while OmniBot waited for an answer. The message names how it ended.
  *
  * The last line the CLI wrote to stderr is usually the only cause a user can act on: a config the
  * CLI refuses, a CPU it cannot run on, a file it cannot open. It stays private, out of the message

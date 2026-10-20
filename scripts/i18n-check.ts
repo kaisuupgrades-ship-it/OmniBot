@@ -4,7 +4,7 @@ import { isDynamicRecord } from "@openbot/contracts/runtime-values";
 import type { Message, PluralMessage } from "@openbot/i18n";
 import { TRANSLATED_LOCALES } from "@openbot/i18n";
 import { matchingSourceKeys } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 
 // Checks the catalogs in packages/i18n/src/messages. See docs/i18n.md.
 //
@@ -31,7 +31,7 @@ const SKIPPED_DIRECTORIES = new Set(["node_modules", "dist", "build", "out", ".e
 /** Keys that no current code sends, but older hosts still do. Keep them so their text is translated. */
 const RELEASED_SOURCE_KEYS = new Set(["error.agent.noStartingModel", "error.provider.cliBusyUpdate"]);
 
-const logger = createOpenBotLogger("i18n-check");
+const logger = createOmniBotLogger("i18n-check");
 const failures: string[] = [];
 const OBJECT_START = "export const messages = {";
 /** The quoted key of a catalog entry, after the comments and blank lines above it. */

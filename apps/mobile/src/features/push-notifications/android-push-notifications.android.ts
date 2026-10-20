@@ -5,7 +5,7 @@ import type { NotificationPermission } from "@/features/settings/model/push-noti
 import { androidChannelId, createAndroidChannels } from "./android-notification-channels";
 import { type PushNotificationsNative, SOUND_PREVIEW_KEY } from "./push-notifications-native.types";
 
-/** `OpenBotMessagingService.kt` reads this file in the files folder of the app (`Paths.document`). */
+/** `OmniBotMessagingService.kt` reads this file in the files folder of the app (`Paths.document`). */
 const KEYS_FILE = "push-notifications.json";
 
 /**

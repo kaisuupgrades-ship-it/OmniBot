@@ -109,7 +109,7 @@ interface ClientEvents {
   diagnostic: [string, DiagnosticOrigin?];
 }
 
-/** Owns Pi's native sessions. The database owns OpenBot history and agent identity. */
+/** Owns Pi's native sessions. The database owns OmniBot history and agent identity. */
 export class PiAgentClient extends EventEmitter<ClientEvents> implements AgentClient {
   readonly contextCompaction = "request";
   readonly provider = "pi";

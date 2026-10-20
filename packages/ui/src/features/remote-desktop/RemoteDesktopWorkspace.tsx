@@ -218,7 +218,7 @@ export function RemoteDesktopWorkspace(props: RemoteDesktopWorkspaceProps) {
                 onClick={props.onHide}
               >
                 <ArrowLeft size={14} aria-hidden="true" />
-                {t("remoteDesktop.backToOpenBot")}
+                {t("remoteDesktop.backToOmniBot")}
               </Button>
               <Button
                 type="button"

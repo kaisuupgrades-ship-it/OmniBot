@@ -1,7 +1,7 @@
 import { sortConversationMessages } from "@openbot/contracts/conversation-order";
 import type { ConversationMessage } from "@openbot/contracts/ipc";
 import { redactText } from "@openbot/logging";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../openbot-database";
 import { HANDOFF_END, HANDOFF_START, renderHandoffMessage } from "./delivery-content";
 
 const HANDOFF_CHARACTERS = 32_000;
@@ -9,7 +9,7 @@ const OLDER_CHARACTERS = 4_000;
 const STEPS_CHARACTERS = 2_000;
 const HEADER_CHARACTERS = 2_000;
 const RECENT_CHARACTERS = 24_000;
-type HistoryRow = ReturnType<OpenBotDatabase["readAgentHistory"]>["messages"][number];
+type HistoryRow = ReturnType<OmniBotDatabase["readAgentHistory"]>["messages"][number];
 
 /** Cuts redacted text at both ends, so a large request keeps its final instructions. */
 function historyExcerpt(text: string, limit: number): string {
@@ -26,7 +26,7 @@ function render(message: ConversationMessage, names: ReadonlyMap<string, string>
 
 /** Reads only enough recent pages for the packet. The complete history stays in SQLite. */
 export function readHandoffHistory(
-  database: OpenBotDatabase,
+  database: OmniBotDatabase,
   agentId: string,
   threadId: string,
   names: ReadonlyMap<string, string>,

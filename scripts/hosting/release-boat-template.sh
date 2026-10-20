@@ -15,7 +15,7 @@ if [[ ! $RELEASE_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 fi
 version=${RELEASE_TAG#v}
 name="openbot-server-production-${version//./-}"
-asset="OpenBot-$version-x86_64.AppImage"
+asset="OmniBot-$version-x86_64.AppImage"
 
 require_latest() {
   local latest
@@ -50,7 +50,7 @@ bun scripts/hosting/build-boat-template.ts \
   "--in-use=$in_use" \
   "--appimage-url=https://github.com/$GITHUB_REPOSITORY/releases/download/$RELEASE_TAG/$asset" \
   "--appimage-sha256=$sha" \
-  --auth-api-url=https://api.openbot.run
+  --auth-api-url=https://api.omnibot.example.com
 
 # Check again after the build. A retry of an old run must not select its template.
 require_latest

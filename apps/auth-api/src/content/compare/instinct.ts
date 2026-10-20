@@ -10,8 +10,8 @@ import type { Comparison } from "./comparison";
 export const INSTINCT_COMPARISON: Comparison = {
   rival: { name: "Instinct", mark: "instinct" },
   answer:
-    "Choose OpenBot if you want a team of AI agents on your own computer, with your data in a database that you hold, the AI plans you already pay for, and agents that show you a draft before they send a message for you: the app is free. Choose Instinct if you have an invite, and you want one assistant that you text or call, with no app to set up.",
-  chooseOpenBot: [
+    "Choose OmniBot if you want a team of AI agents on your own computer, with your data in a database that you hold, the AI plans you already pay for, and agents that show you a draft before they send a message for you: the app is free. Choose Instinct if you have an invite, and you want one assistant that you text or call, with no app to set up.",
+  chooseOmniBot: [
     "Your mail, files and chats must stay on your own computer, not on a service's servers in the US.",
     "You want to approve a message or a payment before an agent makes it.",
     "You want ChatGPT, Claude, Gemini, Grok, Cursor and Cline agents in one team, or your own model.",
@@ -37,7 +37,7 @@ export const INSTINCT_COMPARISON: Comparison = {
     {
       icon: "laptop",
       topic: "Where agents work",
-      openbot: "On the computer that runs OpenBot.",
+      openbot: "On the computer that runs OmniBot.",
       rival:
         "On Instinct's service, which its terms say it operates in the United States. Instinct says that it can use a phone and a computer as people do.",
       better: "openbot",
@@ -46,7 +46,7 @@ export const INSTINCT_COMPARISON: Comparison = {
       icon: "cloud",
       topic: "When your computer is off",
       openbot:
-        "Agents keep working on the computer or server that runs OpenBot, and routines start them on a schedule. If you do not want to keep a computer on, use a hosted OpenBot server in the EU, from €20 or $25 a month.",
+        "Agents keep working on the computer or server that runs OmniBot, and routines start them on a schedule. If you do not want to keep a computer on, use a hosted OmniBot server in the EU, from €20 or $25 a month.",
       rival: "Instinct works on its own service, so no computer of yours must stay on.",
     },
     {
@@ -95,7 +95,7 @@ export const INSTINCT_COMPARISON: Comparison = {
       icon: "globe",
       topic: "Where you can use it",
       openbot:
-        "In any country: OpenBot has no region lock. The desktop app is in 10 languages, from English, German and Spanish to Japanese and Turkish, and hosted servers run in the EU. Each AI provider sets the countries for its own plan.",
+        "In any country: OmniBot has no region lock. The desktop app is in 10 languages, from English, German and Spanish to Japanese and Turkish, and hosted servers run in the EU. Each AI provider sets the countries for its own plan.",
       rival:
         "By invite only, in private access. Instinct operates its service in the United States and names no countries. Only for people 18 and over.",
       better: "openbot",
@@ -115,12 +115,12 @@ export const INSTINCT_COMPARISON: Comparison = {
     },
   ],
   intro:
-    "Instinct is a personal assistant that you text or call. It connects to your email, messaging apps and calendar, and to the screen, audio and location of your devices, and it acts for you: it books tables, cleans up an inbox and shops. It is in private access, by invite. OpenBot also gives you agents that do work for you. The difference is where they run, who holds your data, and who approves what they do. Instinct runs on its own service in the US, can train its models on your data, and its terms make the transactions it enters bind you. OpenBot runs a team of agents on your own computer, keeps your data there, and asks you before it sends a message or pays.",
+    "Instinct is a personal assistant that you text or call. It connects to your email, messaging apps and calendar, and to the screen, audio and location of your devices, and it acts for you: it books tables, cleans up an inbox and shops. It is in private access, by invite. OmniBot also gives you agents that do work for you. The difference is where they run, who holds your data, and who approves what they do. Instinct runs on its own service in the US, can train its models on your data, and its terms make the transactions it enters bind you. OmniBot runs a team of agents on your own computer, keeps your data there, and asks you before it sends a message or pays.",
   sections: [
     {
       title: "Models and the plans you pay for",
       openbot:
-        "OpenBot runs the provider tools you already use, with the plans you already pay for: Codex with your ChatGPT plan, Claude Code with your Claude plan, Gemini with your Google AI Pro or Ultra plan, Grok CLI with your Grok account or an xAI API key, Cursor CLI with your Cursor plan or a Cursor API key, and Cline with your Cline account. OpenCode runs free models, or your own model on any OpenAI-compatible server, also one on your computer. You choose the provider, the model and the reasoning effort for each agent. When you move an agent to a different provider, it keeps its role, workspace and conversation.",
+        "OmniBot runs the provider tools you already use, with the plans you already pay for: Codex with your ChatGPT plan, Claude Code with your Claude plan, Gemini with your Google AI Pro or Ultra plan, Grok CLI with your Grok account or an xAI API key, Cursor CLI with your Cursor plan or a Cursor API key, and Cline with your Cline account. OpenCode runs free models, or your own model on any OpenAI-compatible server, also one on your computer. You choose the provider, the model and the reasoning effort for each agent. When you move an agent to a different provider, it keeps its role, workspace and conversation.",
       rival:
         "Instinct does not say which models it uses, and you cannot choose one. Its privacy policy names third-party AI model providers among the parties that get your data. Instinct publishes no price: it is in private access, and its terms say that you pay the fees that apply and that it can change its prices at any time.",
       better: "openbot",
@@ -128,7 +128,7 @@ export const INSTINCT_COMPARISON: Comparison = {
     {
       title: "Where the work happens",
       openbot:
-        "OpenBot runs on the computer that hosts it. Agent workspaces, conversations and app data stay on that computer, so it must stay on while its agents work. Run it on a desktop or a server that stays on, and your agents keep working while your laptop is closed. If you do not want to keep a computer on, use a hosted OpenBot server. It is a Linux server in the EU (Germany, Finland or France), from €20 or $25 a month, and it keeps the workspaces and chats of its agents. Local-first is not offline: an agent that uses a hosted provider still sends its requests to that provider.",
+        "OmniBot runs on the computer that hosts it. Agent workspaces, conversations and app data stay on that computer, so it must stay on while its agents work. Run it on a desktop or a server that stays on, and your agents keep working while your laptop is closed. If you do not want to keep a computer on, use a hosted OmniBot server. It is a Linux server in the EU (Germany, Finland or France), from €20 or $25 a month, and it keeps the workspaces and chats of its agents. Local-first is not offline: an agent that uses a hosted provider still sends its requests to that provider.",
       rival:
         "Instinct works on its own service, which its terms say it operates in the United States, so no computer of yours must stay on. It connects to your email, messaging apps and calendar, and to the screen, audio and location of your devices. Instinct says that it can use a phone and a computer in the same way that people do.",
       better: "openbot",
@@ -136,7 +136,7 @@ export const INSTINCT_COMPARISON: Comparison = {
     {
       title: "Who approves what the agent does",
       openbot:
-        "OpenBot agents show a draft before they send a message for you. They send it after you approve it, or when you or a routine that you set up tells them to send. Before a payment, an agent reads back the item, price and total and asks you to confirm. A new agent has Full access: it does not ask before it runs a command. Set an agent to Ask first, and that agent asks you first; you answer in the chat or from a notification on your phone.",
+        "OmniBot agents show a draft before they send a message for you. They send it after you approve it, or when you or a routine that you set up tells them to send. Before a payment, an agent reads back the item, price and total and asks you to confirm. A new agent has Full access: it does not ask before it runs a command. Set an agent to Ask first, and that agent asks you first; you answer in the chat or from a notification on your phone.",
       rival:
         "Instinct's terms authorize it to take the actions that it decides answer your request, and appoint it as your agent to enter into agreements, commitments or transactions for you. Those bind you as if you had entered into them yourself. Testers told TechCrunch that Instinct sent an email for one of them without checking first, and found a sign-up code in another's inbox to complete a booking.",
       better: "openbot",
@@ -144,14 +144,14 @@ export const INSTINCT_COMPARISON: Comparison = {
     {
       title: "Phones and remote access",
       openbot:
-        "The OpenBot apps for iPhone and Android connect to the computer that runs your agents. From anywhere, you chat with them, follow their progress, approve their actions and send files. The connection goes directly between your devices when it can, it is encrypted, and no cloud stores your chats or files. You set up no VPN or tunnel. Agents can also answer in Slack, Discord and Telegram. Remote access needs an OpenBot account.",
+        "The OmniBot apps for iPhone and Android connect to the computer that runs your agents. From anywhere, you chat with them, follow their progress, approve their actions and send files. The connection goes directly between your devices when it can, it is encrypted, and no cloud stores your chats or files. You set up no VPN or tunnel. Agents can also answer in Slack, Discord and Telegram. Remote access needs an OmniBot account.",
       rival:
         "You talk to Instinct by text message or WhatsApp, or you call it; there is no Instinct app to install. You sign in on the web with your phone number and a code, and you manage connected apps and your data there.",
     },
     {
       title: "How agents work as a team",
       openbot:
-        "In OpenBot, each agent is a full coding agent: Codex, Claude Code, Gemini, Grok CLI, Cursor CLI, Cline or OpenCode, each with its own job and workspace. A lead agent can give parts of a task to other agents in a shared channel. You follow their work and step in when a decision needs you. For a team of people, one computer runs the host and the others join it; the chats and files stay on the host.",
+        "In OmniBot, each agent is a full coding agent: Codex, Claude Code, Gemini, Grok CLI, Cursor CLI, Cline or OpenCode, each with its own job and workspace. A lead agent can give parts of a task to other agents in a shared channel. You follow their work and step in when a decision needs you. For a team of people, one computer runs the host and the others join it; the chats and files stay on the host.",
       rival:
         "Instinct is one personal assistant for each person. It describes no teams of agents and no shared workspace.",
       better: "openbot",
@@ -159,7 +159,7 @@ export const INSTINCT_COMPARISON: Comparison = {
     {
       title: "Data and privacy",
       openbot:
-        "OpenBot keeps workspaces, conversations, attachments and browser data in a SQLite database on the computer that runs it. OpenBot keeps no other copy. On a hosted OpenBot server, the database is on that server in the EU. An account holds your profile, team memberships, invitations, sign-in sessions, the settings that let devices find each other, and any agent templates that you publish. Product analytics, which never include chat content, are on by default and linked to your account when you sign in; you can turn them off in Settings.",
+        "OmniBot keeps workspaces, conversations, attachments and browser data in a SQLite database on the computer that runs it. OmniBot keeps no other copy. On a hosted OmniBot server, the database is on that server in the EU. An account holds your profile, team memberships, invitations, sign-in sessions, the settings that let devices find each other, and any agent templates that you publish. Product analytics, which never include chat content, are on by default and linked to your account when you sign in; you can turn them off in Settings.",
       rival:
         "Instinct's privacy policy says that it can use your information to train the AI models behind its products. You can opt out, but models already trained on your data stay, and data flagged for safety review can still be used. It does not use data from Google Workspace to train models. Disconnecting an app does not delete the data that Instinct collected from it; you delete that data on the web. When you delete your account, Instinct may delete your materials, but it does not have to. A tester told TechCrunch that Instinct still summarized her inbox after she disconnected it, and that it said it kept the emails in plain text.",
       better: "openbot",
@@ -167,39 +167,39 @@ export const INSTINCT_COMPARISON: Comparison = {
   ],
   faq: [
     {
-      question: "Is OpenBot an alternative to Instinct?",
+      question: "Is OmniBot an alternative to Instinct?",
       answer:
-        "Yes, if you want your agents and your data on your own computer. Both give you AI agents that do work for you. OpenBot runs a team of agents on your computer, with the AI plans you choose, and asks you before it sends a message or pays. Instinct is one assistant that you text or call, on its own service in the US.",
+        "Yes, if you want your agents and your data on your own computer. Both give you AI agents that do work for you. OmniBot runs a team of agents on your computer, with the AI plans you choose, and asks you before it sends a message or pays. Instinct is one assistant that you text or call, on its own service in the US.",
     },
     {
       question: "Is Instinct private?",
       answer:
-        "Instinct connects to your email, messages and calendar, and to the screen, audio and location of your devices. Its privacy policy says that it can train its AI models on your information unless you opt out, that it shares data with third-party AI model providers, and that disconnecting an app does not delete the data it collected. OpenBot keeps your workspaces, chats and files in a database on your own computer.",
+        "Instinct connects to your email, messages and calendar, and to the screen, audio and location of your devices. Its privacy policy says that it can train its AI models on your information unless you opt out, that it shares data with third-party AI model providers, and that disconnecting an app does not delete the data it collected. OmniBot keeps your workspaces, chats and files in a database on your own computer.",
     },
     {
       question: "Can Instinct act for me without asking?",
       answer:
-        "Its terms authorize it to take actions for you and to enter into agreements and transactions that bind you as if you had made them. A tester said that it sent an email for her without checking first. OpenBot agents show a draft and wait for your approval before they send a message, unless you tell them to send, and confirm before a payment.",
+        "Its terms authorize it to take actions for you and to enter into agreements and transactions that bind you as if you had made them. A tester said that it sent an email for her without checking first. OmniBot agents show a draft and wait for your approval before they send a message, unless you tell them to send, and confirm before a payment.",
     },
     {
       question: "How much does Instinct cost?",
       answer:
-        "Instinct publishes no price. It is in private access, by invite, and its terms say that you pay the fees that apply and that it can change its prices at any time. OpenBot is free for noncommercial use, and it uses the AI plans you already pay for.",
+        "Instinct publishes no price. It is in private access, by invite, and its terms say that you pay the fees that apply and that it can change its prices at any time. OmniBot is free for noncommercial use, and it uses the AI plans you already pay for.",
     },
     {
       question: "Does Instinct run on my computer?",
       answer:
-        "No. Instinct runs on its own service, which it operates in the United States, and you reach it by text message, WhatsApp or a phone call. OpenBot agents work on your computer, or on a hosted OpenBot server in the EU that you choose.",
+        "No. Instinct runs on its own service, which it operates in the United States, and you reach it by text message, WhatsApp or a phone call. OmniBot agents work on your computer, or on a hosted OmniBot server in the EU that you choose.",
     },
     {
       question: "Do agents keep working when my laptop is closed?",
       answer:
-        "Yes, with both. Instinct works on its own service, so no computer of yours must stay on. OpenBot agents work on the computer or server that runs OpenBot: keep that computer on, or use a hosted OpenBot server, and connect from your laptop or phone.",
+        "Yes, with both. Instinct works on its own service, so no computer of yours must stay on. OmniBot agents work on the computer or server that runs OmniBot: keep that computer on, or use a hosted OmniBot server, and connect from your laptop or phone.",
     },
     {
       question: "Is Instinct open source?",
       answer:
-        "No. Instinct is a closed service. OpenBot's source code is on GitHub under the PolyForm Noncommercial License 1.0.0.",
+        "No. Instinct is a closed service. OmniBot's source code is on GitHub under the PolyForm Noncommercial License 1.0.0.",
     },
   ],
   sources: [
@@ -211,8 +211,8 @@ export const INSTINCT_COMPARISON: Comparison = {
       label: "TechCrunch: Instinct's AI assistant raises privacy and security concerns",
       url: "https://techcrunch.com/2026/08/24/instincts-powerful-ai-assistant-is-raising-privacy-and-security-concerns/",
     },
-    { label: "OpenBot privacy notes", url: OPENBOT_LINKS.privacy },
-    { label: "OpenBot source code", url: OPENBOT_LINKS.repository },
+    { label: "OmniBot privacy notes", url: OPENBOT_LINKS.privacy },
+    { label: "OmniBot source code", url: OPENBOT_LINKS.repository },
   ],
   checkedAt: "2026-10-15",
 };

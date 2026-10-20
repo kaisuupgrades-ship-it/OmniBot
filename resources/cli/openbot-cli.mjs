@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @ts-check
-// Runs a task on an agent of the OpenBot app that runs on this computer, through the Local scripts
+// Runs a task on an agent of the OmniBot app that runs on this computer, through the Local scripts
 // API (docs/automation.md). It needs only Node 18 or later. It reads the URL and the token from the
 // automation folder each time it runs and sends the token only in a request header, so the token is
 // never in a command line, in the output or in a log.
@@ -20,11 +20,11 @@ const USAGE = `Usage:
 <agent> is an agent ID or an agent name. Only agents with Local scripts on are found.
 A task of "-" is read from standard input.
 
-Exit codes: 0 done, 1 the turn failed or OpenBot refused, 2 wrong command line,
-3 the agent waits for a person, 4 timed out (the work continues), 5 OpenBot cannot be reached
+Exit codes: 0 done, 1 the turn failed or OmniBot refused, 2 wrong command line,
+3 the agent waits for a person, 4 timed out (the work continues), 5 OmniBot cannot be reached
 or the agent was not found.
 
-When OpenBot restarts during a wait, the CLI reads the new URL and token and continues.`;
+When OmniBot restarts during a wait, the CLI reads the new URL and token and continues.`;
 
 const EXIT = { done: 0, failed: 1, usage: 2, needsPerson: 3, timedOut: 4, unreachable: 5 };
 const POLL_MS = 2000;
@@ -35,7 +35,7 @@ class CliError extends Error {
   constructor(message, exitCode, stale = false) {
     super(message);
     this.exitCode = exitCode;
-    /** True when the URL or the token can be old: OpenBot restarted, or Local scripts went off and on. */
+    /** True when the URL or the token can be old: OmniBot restarted, or Local scripts went off and on. */
     this.stale = stale;
   }
 }
@@ -44,10 +44,10 @@ class CliError extends Error {
 function automationDir() {
   const override = process.env.OPENBOT_AUTOMATION_DIR;
   if (override) return override;
-  if (process.platform === "darwin") return join(homedir(), "Library", "Application Support", "OpenBot", "automation");
+  if (process.platform === "darwin") return join(homedir(), "Library", "Application Support", "OmniBot", "automation");
   if (process.platform === "win32")
-    return join(process.env.APPDATA ?? join(homedir(), "AppData", "Roaming"), "OpenBot", "automation");
-  return join(process.env.XDG_CONFIG_HOME ?? join(homedir(), ".config"), "OpenBot", "automation");
+    return join(process.env.APPDATA ?? join(homedir(), "AppData", "Roaming"), "OmniBot", "automation");
+  return join(process.env.XDG_CONFIG_HOME ?? join(homedir(), ".config"), "OmniBot", "automation");
 }
 
 /** @returns {Promise<{ url: string, token: string }>} */
@@ -58,7 +58,7 @@ async function connection() {
     return { url: url.trim(), token: token.trim() };
   } catch {
     throw new CliError(
-      `OpenBot is not running, or no agent has Local scripts on (no files in ${dir}).`,
+      `OmniBot is not running, or no agent has Local scripts on (no files in ${dir}).`,
       EXIT.unreachable,
     );
   }
@@ -106,7 +106,7 @@ async function requestOnce(target, method, path, body) {
       signal: AbortSignal.timeout(30_000),
     });
   } catch {
-    throw new CliError(`OpenBot does not answer at ${target.url}.`, EXIT.unreachable, true);
+    throw new CliError(`OmniBot does not answer at ${target.url}.`, EXIT.unreachable, true);
   }
   const text = await response.text();
   let value = null;
@@ -217,7 +217,7 @@ async function waitForDelivery(target, agent, deliveryId, timeoutMs) {
         if (waiting > 0) return { result: { ...delivery, state: "needs-person", pending }, exitCode: EXIT.needsPerson };
       }
     } catch (error) {
-      // OpenBot restarts: its files are gone or name a new port and token. The delivery stays in the
+      // OmniBot restarts: its files are gone or name a new port and token. The delivery stays in the
       // database, so the wait continues until the deadline.
       if (!(error instanceof CliError) || !error.stale || Date.now() >= deadline) throw error;
     }
@@ -235,7 +235,7 @@ async function main(positional, flags) {
   const [command, ...rest] = positional;
   if (!command || flags.has("--help")) throw new CliError(USAGE, command ? EXIT.done : EXIT.usage);
   // Every flag and argument is checked before the connection is read, so a wrong one never leaves a
-  // task queued and is a usage error also when OpenBot is off.
+  // task queued and is a usage error also when OmniBot is off.
   const timeout = flags.get("--timeout");
   const timeoutMs = duration(typeof timeout === "string" ? timeout : "30m");
   if (command === "list") {
@@ -263,7 +263,7 @@ async function main(positional, flags) {
     const delivery = receipt.deliveries.find((/** @type {{ recipientAgentId: string }} */ item) => {
       return item.recipientAgentId === agent.id;
     });
-    if (!delivery) throw new CliError("OpenBot did not queue the message.", EXIT.failed);
+    if (!delivery) throw new CliError("OmniBot did not queue the message.", EXIT.failed);
     if (!flags.has("--wait")) {
       return {
         result: { agent, messageId: receipt.messageId, deliveryId: delivery.id, status: delivery.status },
@@ -332,7 +332,7 @@ async function main(positional, flags) {
  */
 function describeDelivery(agent, delivery) {
   if (delivery.state === "needs-person")
-    return `${agent.name} waits for a person: answer in OpenBot, then run "openbot-cli status ${agent.id} ${delivery.id}".`;
+    return `${agent.name} waits for a person: answer in OmniBot, then run "openbot-cli status ${agent.id} ${delivery.id}".`;
   if (delivery.state === "timed-out")
     return `Timed out while ${agent.name} works (${delivery.status}). Delivery ${delivery.id} continues.`;
   if (delivery.status === "completed") return delivery.answer ?? `${agent.name} finished with no answer.`;

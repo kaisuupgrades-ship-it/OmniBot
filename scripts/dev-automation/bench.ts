@@ -9,7 +9,7 @@
 // median with its spread, and `--compare` prints the deltas against an earlier
 // report, which is what a fix PR quotes.
 //
-// Everything this touches is the bench profile (`OpenBot Dev wt-<hash of
+// Everything this touches is the bench profile (`OmniBot Dev wt-<hash of
 // this worktree>#bench`) and the process group it started. It never reaches a
 // dev instance, another worktree, or the developer's own profile.
 
@@ -17,7 +17,7 @@ import { lstat, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { developmentInstanceIdForWorktree, developmentUserDataName } from "../../src/main/development-profile";
 import { resolveDevelopmentAppDataRoot } from "../development-state-paths";
@@ -43,7 +43,7 @@ import { writeHeapSnapshot } from "./memory-profile";
 import { readStartupMarks, startRenderRecording } from "./render-metrics";
 import { ResourceSampler } from "./resource-sampler";
 
-const logger = createOpenBotLogger("dev-bench", (line) => process.stderr.write(`${line}\n`), "info");
+const logger = createOmniBotLogger("dev-bench", (line) => process.stderr.write(`${line}\n`), "info");
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const BENCH_ROOT = join(PROJECT_ROOT, ".openbot-build", "dev-automation", "bench");

@@ -1,8 +1,8 @@
-# OpenBot Remote
+# OmniBot Remote
 
 This directory holds our own control plane for WebRTC connections. The Remote API relays SDP and ICE.
 Team files, chats, commands and video never pass through the Remote API or Cloudflare. The exceptions
-are the OpenBot Slack app, the OpenBot Discord bot and the OpenBot Telegram bot: see
+are the OmniBot Slack app, the OmniBot Discord bot and the OmniBot Telegram bot: see
 [Slack requests](#slack-requests), [Discord](#discord) and [Telegram updates](#telegram-updates).
 
 ## Flow
@@ -34,11 +34,11 @@ validation window.
 
 ## Slack requests
 
-The OpenBot Slack app sends the events and button presses of every workspace to one request URL,
-`https://signal.openbot.run/v1/slack/events`. Signal checks Slack's signature with the app's signing
+The OmniBot Slack app sends the events and button presses of every workspace to one request URL,
+`https://signal.omnibot.example.com/v1/slack/events`. Signal checks Slack's signature with the app's signing
 secret, answers Slack's `url_verification` challenge, and reads only the app ID (`api_app_id`), the
 workspace ID, and the event's type, channel type, thread and bot ID (to know whether it addresses
-OpenBot, not its text). `SLACK_SIGNING_SECRET` is a comma-separated list of `<app ID>:<signing secret>`,
+OmniBot, not its text). `SLACK_SIGNING_SECRET` is a comma-separated list of `<app ID>:<signing secret>`,
 because the production and development apps share Signal. A request must name the app whose secret
 signed it, so one app's secret cannot reach the other app's hosts; a malformed value turns off only
 the Slack route. Then Signal passes the exact request body to the `ingress` socket of the host that
@@ -56,13 +56,13 @@ must be in the ticket JWKS that Signal loads (`REMOTE_TICKET_PUBLIC_JWKS` on the
 
 ## Discord
 
-The OpenBot Discord bot is one bot for every guild that installs it. Signal holds its bot token
+The OmniBot Discord bot is one bot for every guild that installs it. Signal holds its bot token
 (`DISCORD_BOT_TOKEN`) and its application ID (`DISCORD_APPLICATION_ID`). Without both, or with a
 malformed value, Discord is off: Signal logs one line without the value, keeps no Gateway
 connection, and `POST /v1/discord/api` answers 503. The remote sessions and the Slack route keep
 running.
 
-Signal asks for the privileged Message Content intent, so that OpenBot gets the text of the message
+Signal asks for the privileged Message Content intent, so that OmniBot gets the text of the message
 a person replies to and of the conversation history. Turn on **Message Content Intent** in the
 Developer Portal. When Discord refuses the intent (close code 4014), Signal logs one line and connects
 without it. `DISCORD_MESSAGE_CONTENT=false` stops Signal asking for it.
@@ -78,7 +78,7 @@ still passes on only the messages that mention the bot. From the Gateway, Signal
   channel, author, the author's role IDs, text without the bot's mention, the replied message (with
   its author, text and time when a person wrote it and Discord gave its text), the Discord CDN
   addresses of the attachments and the time to the `ingress` socket of the host that the guild is linked to;
-- each press of an OpenBot button. Signal acknowledges it to Discord at once and passes it on;
+- each press of an OmniBot button. Signal acknowledges it to Discord at once and passes it on;
 - the removal of the bot from a guild, which ends that guild's connection on the host.
 
 A direct message to the bot gets one fixed answer, at most once an hour for each user. Signal does not
@@ -109,7 +109,7 @@ guild. So a link goes also when its host is off and the first unlink failed, or 
 
 ## Telegram updates
 
-One OpenBot bot serves every user, and only Signal has its token. `TELEGRAM_BOT_TOKENS` is a
+One OmniBot bot serves every user, and only Signal has its token. `TELEGRAM_BOT_TOKENS` is a
 comma-separated list of bot tokens (`<bot ID>:<secret>`), because the production and development
 bots share Signal. `TELEGRAM_WEBHOOK_SECRET` (at least 32 bytes) is required with them: the webhook
 secret of each bot is the base64url HMAC-SHA256 of `telegram-webhook:<bot ID>` with it. A malformed
@@ -136,7 +136,7 @@ for the sealed queue of a hosted server that sleeps.
 
 All messaging platforms share one path (`src/ingress-queue.ts`). For an event whose route has no
 `ingress` socket, Signal asks the account service (`/v2/remote/route-wake`, signed), at most once a
-minute for each route. An event that addresses OpenBot starts a hosted server that sleeps. Signal
+minute for each route. An event that addresses OmniBot starts a hosted server that sleeps. Signal
 then keeps the event's delivery frame, sealed with the host's queue key (`queueKey` in the `ingress`
 hello) and the host ID, for at most 10 minutes, 64 events and 192 KB for each host. When the host's
 socket holds the route again, Signal sends each kept event in order as `queued-delivery`, and keeps it
@@ -153,19 +153,19 @@ service before Signal.
 
 - Linux with Docker Engine and Docker Compose.
 - A static public IPv4 address.
-- `signal.openbot.run` and `turn.openbot.run` records in DNS only mode.
+- `signal.omnibot.example.com` and `turn.omnibot.example.com` records in DNS only mode.
 - Open ports TCP 443, TCP/UDP 3478, TCP 5349 and UDP 49152-65535.
-- A Cloudflare token scoped to DNS edit for the `openbot.run` zone.
+- A Cloudflare token scoped to DNS edit for the `omnibot.example.com` zone.
 
-The `signal.openbot.run` and `turn.openbot.run` records must be in **DNS only** mode. Do not enable the
-Cloudflare proxy for them. `api.openbot.run` stays a Cloudflare Worker.
+The `signal.omnibot.example.com` and `turn.omnibot.example.com` records must be in **DNS only** mode. Do not enable the
+Cloudflare proxy for them. `api.omnibot.example.com` stays a Cloudflare Worker.
 
 If you already run a reverse proxy on port `443`, set `REMOTE_SIGNAL_BIND_ADDRESS=127.0.0.1`,
 `REMOTE_SIGNAL_PUBLIC_PORT=8081`, `REMOTE_SIGNAL_PORT=8081` and `REMOTE_TLS_DISABLED=true`. The reverse proxy
 must terminate TLS and forward the WebSocket to `http://127.0.0.1:8081`. Also set
 `REMOTE_TRUST_PROXY=true` so the IP limits use the client address from `X-Forwarded-For`.
 
-The configuration in `nginx/signal.openbot.run.conf` uses the certificate from the ACME volume. Install
+The configuration in `nginx/signal.omnibot.example.com.conf` uses the certificate from the ACME volume. Install
 `openbot-remote-nginx-reload.path` and `openbot-remote-nginx-reload.service` into `/etc/systemd/system/` as
 well. The unit reloads Nginx after the certificate is renewed:
 

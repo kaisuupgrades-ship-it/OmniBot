@@ -42,7 +42,7 @@ import { AgentService } from "../src/backend/agent-service";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import type { TeamApiBrowser } from "../src/main/team-api/dependencies";
 import type { TeamWebRtcChannel } from "../src/main/team-webrtc-bridge";
@@ -321,7 +321,7 @@ class LoopbackBridge extends TeamWebRtcBridge {
 const root = await mkdtemp(join(tmpdir(), "openbot-team-api-legacy-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
-const database = new OpenBotDatabase(userData);
+const database = new OmniBotDatabase(userData);
 const agentStore = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, agentStore.sharedRoot, agentStore.database);
 const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));

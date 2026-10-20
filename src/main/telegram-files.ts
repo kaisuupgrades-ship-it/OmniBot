@@ -1,4 +1,4 @@
-// The files of the OpenBot Telegram bot, over HTTPS to Signal: Signal holds the bot token, so it
+// The files of the OmniBot Telegram bot, over HTTPS to Signal: Signal holds the bot token, so it
 // fetches a file from Telegram, and posts a document to Telegram, for a token it signed. Nothing here
 // logs a token or a file.
 
@@ -25,7 +25,7 @@ function failure(errorCode: number, description: string): MessagingAdapterError 
   return new MessagingAdapterError({ cause: new TelegramCallError(errorCode, description, null) });
 }
 
-/** The HTTPS origin of a Signal socket URL: `wss://signal.openbot.run/v1/signal` gives `https://signal.openbot.run`. */
+/** The HTTPS origin of a Signal socket URL: `wss://signal.omnibot.example.com/v1/signal` gives `https://signal.omnibot.example.com`. */
 export function signalHttpOrigin(signalUrl: string): string {
   const url = new URL(signalUrl);
   url.protocol = url.protocol === "ws:" ? "http:" : "https:";

@@ -38,15 +38,15 @@ export function LandingFooter() {
       <div class="landing-footer-inner">
         <div class="landing-footer-grid">
           <div class="landing-footer-brand" data-revealed={revealState()}>
-            <Link class="landing-footer-lockup" to="/" aria-label="OpenBot home">
+            <Link class="landing-footer-lockup" to="/" aria-label="OmniBot home">
               <AppLogo variant="production" class="landing-footer-logo" />
-              <span>OpenBot</span>
+              <span>OmniBot</span>
             </Link>
 
             <p class="landing-footer-description">{FOOTER_DESCRIPTION}</p>
 
             <Link class="landing-footer-cta" to="/download">
-              <span>Download OpenBot</span>
+              <span>Download OmniBot</span>
               <LandingIcon name="download" />
             </Link>
 

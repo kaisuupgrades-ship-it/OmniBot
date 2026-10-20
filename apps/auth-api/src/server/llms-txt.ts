@@ -1,5 +1,5 @@
 // `/llms.txt` (llmstxt.org): the site as one short Markdown file, for an assistant
-// that answers a question about OpenBot. Built from the same registries as the
+// that answers a question about OmniBot. Built from the same registries as the
 // sitemap, so a new article or comparison is in it with no edit here.
 
 import { COMPARISONS } from "../content/compare";
@@ -31,17 +31,17 @@ function absolute(path: string): string {
 
 function llmsTxt(): string {
   const lines = [
-    "# OpenBot",
+    "# OmniBot",
     "",
     `> ${OPENBOT_SITE_DESCRIPTION}`,
     "",
-    "OpenBot is a desktop app for macOS, Windows and Linux. Each agent has its own workspace, thread and history, and keeps them when you change its provider or restart the app. Agents can give work to other agents. Chats, files and workspaces stay on your computer; OpenBot has no server that holds them. The app is free for noncommercial use. iPhone and Android apps connect to OpenBot on your own computer.",
+    "OmniBot is a desktop app for macOS, Windows and Linux. Each agent has its own workspace, thread and history, and keeps them when you change its provider or restart the app. Agents can give work to other agents. Chats, files and workspaces stay on your computer; OmniBot has no server that holds them. The app is free for noncommercial use. iPhone and Android apps connect to OmniBot on your own computer.",
     "",
     `Each article below also has its text as Markdown, at its URL with \`.md\` added. [llms-full.txt](${absolute("/llms-full.txt")}) holds all of them in one file.`,
     "",
     "## Models and plans",
     "",
-    "OpenBot sells no model. Each agent uses a plan or a key you already have:",
+    "OmniBot sells no model. Each agent uses a plan or a key you already have:",
     "",
     ...OPENBOT_PLANS.map((plan) => `- ${plan.name}: ${plan.plan}`),
     "",

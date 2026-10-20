@@ -13,7 +13,7 @@ export const messages = {
   "customProvider.registry.remove": "Quitar",
   "customProvider.registry.searchFailed": "No se pudo buscar en el registro. Vuelve a intentarlo.",
   "customProvider.registry.statusFailed":
-    "No se pudo comprobar el progreso de la instalación. OpenBot lo volverá a intentar.",
+    "No se pudo comprobar el progreso de la instalación. OmniBot lo volverá a intentar.",
   "customProvider.registry.installFailed": "No se pudo instalar el agente. Vuelve a intentarlo.",
   "customProvider.registry.updateFailed": "No se pudo actualizar el agente. Vuelve a intentarlo.",
   "customProvider.registry.removeFailed": "No se pudo quitar el entorno de ejecución. Vuelve a intentarlo.",
@@ -22,7 +22,7 @@ export const messages = {
   "customProvider.error.providerIdPattern":
     "Usa letras minúsculas, números, guiones o guiones bajos, empezando por una letra o un número.",
   "customProvider.error.providerIdLength": "El ID del proveedor debe tener menos de {max} caracteres.",
-  "customProvider.error.providerIdBuiltIn": "OpenBot ya tiene un proveedor llamado {id}. Elige otro ID.",
+  "customProvider.error.providerIdBuiltIn": "OmniBot ya tiene un proveedor llamado {id}. Elige otro ID.",
   "customProvider.error.providerIdSaved":
     "Ya hay un endpoint guardado con el nombre {id}. Elimínalo primero o elige otro ID.",
   "customProvider.error.displayNameRequired": "Introduce un nombre para mostrar.",
@@ -44,16 +44,16 @@ export const messages = {
   "customProvider.error.baseUrlInvalid": "Introduce una URL completa, como {example}.",
   "customProvider.error.baseUrlProtocol": "Usa una URL http:// o https://.",
   "customProvider.error.baseUrlCredential": "Pon la credencial en una cabecera, no en la URL.",
-  "customProvider.saved.restarted": "Guardado. OpenBot está cargando los modelos.",
+  "customProvider.saved.restarted": "Guardado. OmniBot está cargando los modelos.",
   "customProvider.saved.skippedBusy":
     "Guardado. OpenCode lee la lista cuando termina la tarea actual. Pulsa Conectar entonces.",
   "customProvider.saved.notRunning": "Guardado. OpenCode lee la lista la próxima vez que se inicie.",
-  "customProvider.removed.restarted": "Eliminado. OpenBot está cargando los modelos.",
+  "customProvider.removed.restarted": "Eliminado. OmniBot está cargando los modelos.",
   "customProvider.removed.skippedBusy":
     "Eliminado. OpenCode lee la lista cuando termina la tarea actual. Pulsa Conectar entonces.",
   "customProvider.removed.notRunning": "Eliminado. OpenCode lee la lista la próxima vez que se inicie.",
-  "customProvider.saveFailed": "OpenBot no pudo guardar este endpoint.",
-  "customProvider.removeFailed": "OpenBot no pudo eliminar {name}.",
+  "customProvider.saveFailed": "OmniBot no pudo guardar este endpoint.",
+  "customProvider.removeFailed": "OmniBot no pudo eliminar {name}.",
   "customProvider.saveUnavailable": "Esta versión no puede guardar endpoints.",
   "customProvider.removeUnavailable": "Esta versión no puede eliminar endpoints.",
   "customProvider.form.title": "Añadir un proveedor personalizado",
@@ -113,7 +113,7 @@ export const messages = {
   "customProvider.detected.title": "Encontrado en este equipo",
   "customProvider.detected.scanning": "Buscando modelos y agentes locales.",
   "customProvider.detected.scanAgain": "Buscar de nuevo",
-  "customProvider.detected.empty": "OpenBot no encontró ningún servidor de modelos local ni agente ACP.",
+  "customProvider.detected.empty": "OmniBot no encontró ningún servidor de modelos local ni agente ACP.",
   "customProvider.detected.add": "Añadir",
   "customProvider.detected.addLabel": "Añadir {name}",
   "customProvider.detected.added": "Añadido",
@@ -129,10 +129,10 @@ export const messages = {
   "customProvider.detected.showHidden": "Mostrar ocultos ({count})",
   "customProvider.detection.title": "Detección local",
   "customProvider.detection.saveFailed": "No se pudieron guardar los ajustes de detección.",
-  "customProvider.detection.description": "Dónde busca OpenBot servidores de modelos locales y agentes ACP.",
+  "customProvider.detection.description": "Dónde busca OmniBot servidores de modelos locales y agentes ACP.",
   "customProvider.detection.enabled": "Buscar modelos y agentes locales",
   "customProvider.detection.enabledDescription":
-    "OpenBot comprueba las direcciones predeterminadas de Ollama y LM Studio, y busca agentes ACP conocidos en tu PATH.",
+    "OmniBot comprueba las direcciones predeterminadas de Ollama y LM Studio, y busca agentes ACP conocidos en tu PATH.",
   "customProvider.detection.addresses": "Otras direcciones de servidores de modelos",
   "customProvider.detection.address.label": "Dirección {number}",
   "customProvider.detection.address.remove": "Eliminar dirección {number}",
@@ -151,7 +151,7 @@ export const messages = {
   "customProvider.acp.agentId": "ID del agente",
   "customProvider.acp.agentIdHint": "Letras minúsculas, números o guiones. No puedes cambiarlo después.",
   "customProvider.acp.command": "Comando",
-  "customProvider.acp.commandHint": "El programa que se iniciará. OpenBot lo busca en tu PATH.",
+  "customProvider.acp.commandHint": "El programa que se iniciará. OmniBot lo busca en tu PATH.",
   "customProvider.acp.args": "Argumentos",
   "customProvider.acp.argsHint":
     "Separa los argumentos con espacios. Pon entre comillas los argumentos que contengan espacios.",
@@ -162,7 +162,7 @@ export const messages = {
   "customProvider.acp.env.add": "Añadir variable",
   "customProvider.acp.check": "Conexión",
   "customProvider.acp.checkRun": "Comprobar agente",
-  "customProvider.acp.checkIdle": "OpenBot inicia el comando una vez para comprobar que responde.",
+  "customProvider.acp.checkIdle": "OmniBot inicia el comando una vez para comprobar que responde.",
   "customProvider.acp.checking": "Iniciando {command}.",
   "customProvider.acp.checkOk": "{name} respondió",
   "customProvider.acp.checkOkVersion": "{name} {version} respondió",
@@ -170,7 +170,7 @@ export const messages = {
   "customProvider.acp.checkFailed": "El agente no respondió",
   "customProvider.acp.trustTitle": "Este comando se ejecuta en tu equipo",
   "customProvider.acp.trustDescription":
-    "OpenBot lo inicia con tu cuenta de usuario. El agente puede leer y cambiar archivos y ejecutar comandos. Añade solo agentes en los que confíes.",
+    "OmniBot lo inicia con tu cuenta de usuario. El agente puede leer y cambiar archivos y ejecutar comandos. Añade solo agentes en los que confíes.",
   "customProvider.acp.submit": "Añadir agente",
   "customProvider.acp.editTitle": "Editar un agente ACP personalizado",
   "customProvider.acp.submitEdit": "Guardar agente",
@@ -185,7 +185,7 @@ export const messages = {
   "customProvider.acp.error.agentIdPattern":
     "Usa letras minúsculas, números o guiones, empezando por una letra o un número. Usa como máximo 40 caracteres.",
   "customProvider.agents.title": "Agentes personalizados",
-  "customProvider.agents.description": "Agentes ACP que OpenBot inicia en este equipo.",
+  "customProvider.agents.description": "Agentes ACP que OmniBot inicia en este equipo.",
   "customProvider.agents.empty": "Aún no hay agentes personalizados.",
   "customProvider.agents.add": "Añadir agente",
   "customProvider.agents.restart": "Reiniciar agentes",
@@ -201,13 +201,13 @@ export const messages = {
   "customProvider.agents.deleteLabel": "Eliminar {name}",
   "customProvider.agents.confirmDescription":
     "Sus variables guardadas se descartan y cada agente que lo usa pasa a un modelo predeterminado.",
-  "customProvider.agents.saveFailed": "OpenBot no pudo guardar este agente.",
-  "customProvider.agents.saved.restarted": "Guardado. OpenBot reinició los agentes personalizados.",
+  "customProvider.agents.saveFailed": "OmniBot no pudo guardar este agente.",
+  "customProvider.agents.saved.restarted": "Guardado. OmniBot reinició los agentes personalizados.",
   "customProvider.agents.saved.skippedBusy":
     "Guardado. Los agentes personalizados se reinician cuando termina la tarea actual.",
   "customProvider.agents.saved.notRunning":
     "Guardado. Los agentes personalizados lo leen la próxima vez que se inicien.",
-  "customProvider.agents.removed.restarted": "Eliminado. OpenBot reinició los agentes personalizados.",
+  "customProvider.agents.removed.restarted": "Eliminado. OmniBot reinició los agentes personalizados.",
   "customProvider.agents.removed.skippedBusy":
     "Eliminado. Los agentes personalizados se reinician cuando termina la tarea actual.",
   "customProvider.agents.removed.notRunning":

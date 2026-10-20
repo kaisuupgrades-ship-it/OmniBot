@@ -23,7 +23,7 @@ const execFileAsync = promisify(execFile);
 export type McpServerSource = () => readonly McpServerConfig[];
 
 /**
- * What OpenBot can lend a machine that does not have it: the `bin` directories of the tool runtimes
+ * What OmniBot can lend a machine that does not have it: the `bin` directories of the tool runtimes
  * it downloaded, and the command words it can answer itself.
  *
  * Both are a floor, never a choice. The directories are appended *after* the user's own `PATH`, so
@@ -47,10 +47,10 @@ export const NO_MCP_TOOL_RUNTIMES: McpToolRuntimes = { binDirectories: [], comma
 export type McpToolRuntimeSource = () => McpToolRuntimes;
 
 /**
- * Where one http server is reached, and the bearer OpenBot adds, asked at each spawn.
+ * Where one http server is reached, and the bearer OmniBot adds, asked at each spawn.
  *
  * The bearer is never stored on the row: a value in the configuration would be a credential the
- * panel shows, the Team API carries and a user edits. A server OpenBot signed in to is reached
+ * panel shows, the Team API carries and a user edits. A server OmniBot signed in to is reached
  * through the loopback OAuth proxy (`McpOAuthProxy`): `url` is then the proxy route, `authorization`
  * is that route's own bearer, and the OAuth token never leaves this process. Asked per
  * configuration rather than per URL, because two rows on one URL are two routes.
@@ -126,7 +126,7 @@ export type UsableMcpServer =
       path: string | null;
       /** Where an http server is reached: its own URL, or a route of the OAuth proxy. `""` for stdio. */
       url: string;
-      /** The bearer OpenBot adds at hand-off. `null` for all others. */
+      /** The bearer OmniBot adds at hand-off. `null` for all others. */
       authorization: string | null;
       /** See `McpEndpoint.proxied`. */
       proxied: boolean;
@@ -660,18 +660,18 @@ function secretDigest(config: McpServerConfig): string {
 }
 
 /**
- * The headers one http server is handed, with OpenBot's bearer added here and only here.
+ * The headers one http server is handed, with OmniBot's bearer added here and only here.
  *
  * The bearer is never written to the row: a credential written into `McpServerConfig.headers`
  * would be one the panel shows, the Team API carries to a remote administrator, and a user can edit
- * into something OpenBot then refreshes over. Added at the hand-off, it is a value `McpHandoffLog`
+ * into something OmniBot then refreshes over. Added at the hand-off, it is a value `McpHandoffLog`
  * has already seen, so every log, export and send path removes it.
  *
  * A proxied server is handed the proxy bearer alone. The proxy adds the row's own headers upstream,
  * so a key the user typed beside a sign-in stays in this process too.
  *
  * A header the user typed wins otherwise. Someone who pasted their own `Authorization` has said
- * which credential this server takes, and silently replacing it would be OpenBot overruling them
+ * which credential this server takes, and silently replacing it would be OmniBot overruling them
  * with an account they did not choose. Such a row is never proxied: see `McpGateway.endpoint`.
  */
 export function mcpHandoffHeaders(server: ResolvedMcpServer): Record<string, string> {

@@ -3,9 +3,9 @@ import { ContactPage } from "../components/contact/ContactPage";
 import { CONTACT_ROUTE } from "../lib/contact";
 import { OPENBOT_SOCIAL_IMAGE_ALT, OPENBOT_SOCIAL_IMAGE_URL, OPENBOT_X_HANDLE } from "../lib/site-metadata";
 
-const CONTACT_TITLE = "Contact the OpenBot team";
+const CONTACT_TITLE = "Contact the OmniBot team";
 const CONTACT_DESCRIPTION =
-  "Send the OpenBot team a message about a custom setup, a partnership or the press. A person reads each message.";
+  "Send the OmniBot team a message about a custom setup, a partnership or the press. A person reads each message.";
 
 export const Route = createFileRoute("/contact")({
   head: ({ match }) => {
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/contact")({
         { title: CONTACT_TITLE },
         { name: "description", content: CONTACT_DESCRIPTION },
         { property: "og:type", content: "website" },
-        { property: "og:site_name", content: "OpenBot" },
+        { property: "og:site_name", content: "OmniBot" },
         { property: "og:locale", content: "en_US" },
         { property: "og:url", content: url },
         { property: "og:title", content: CONTACT_TITLE },

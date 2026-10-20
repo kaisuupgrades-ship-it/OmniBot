@@ -34,7 +34,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { OmniBotDatabase } = await import("../src/backend/openbot-database");
 
 const FAKE_CODEX = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -171,7 +171,7 @@ const browser: AgentBrowserHost = {
   close: () => Effect.void,
 };
 
-/** The messages that OpenBot sent to the fake Codex. */
+/** The messages that OmniBot sent to the fake Codex. */
 function protocol(): { method: string | null; threadId: string | null }[] {
   try {
     return readFileSync(logPath, "utf8")
@@ -210,7 +210,7 @@ await writeFile(
   controlPath,
   JSON.stringify({ compactionMs: 60_000, ignoreInterrupt: false, exitDuringCompaction: true }),
 );
-const database = new OpenBotDatabase(userData);
+const database = new OmniBotDatabase(userData);
 const store = new AgentStore(userData, home, database);
 const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
 const agents = new AgentService({

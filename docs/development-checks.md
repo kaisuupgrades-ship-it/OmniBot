@@ -256,7 +256,7 @@ files in worker threads, and a thread's `process.env` does not reach the native 
 start.
 
 A key in the developer's shell could otherwise let a fake-provider test reach a real provider, and
-every profile path (`~/OpenBot`, the app data directory) comes from `homedir()`, so a path bug could
+every profile path (`~/OmniBot`, the app data directory) comes from `homedir()`, so a path bug could
 write into the developer's own conversations. A test that needs a token or a directory sets it
 itself.
 

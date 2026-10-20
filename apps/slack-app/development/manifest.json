@@ -1,7 +1,7 @@
 {
   "display_information": {
-    "name": "OpenBot (dev)",
-    "description": "Your OpenBot agents in Slack. Mention @OpenBot or send it a direct message."
+    "name": "OmniBot (dev)",
+    "description": "Your OmniBot agents in Slack. Mention @OmniBot or send it a direct message."
   },
   "features": {
     "app_home": {
@@ -10,7 +10,7 @@
       "messages_tab_read_only_enabled": false
     },
     "bot_user": {
-      "display_name": "OpenBot",
+      "display_name": "OmniBot",
       "always_online": true
     }
   },
@@ -38,7 +38,7 @@
   },
   "settings": {
     "event_subscriptions": {
-      "request_url": "https://signal.openbot.run/v1/slack/events",
+      "request_url": "https://signal.omnibot.example.com/v1/slack/events",
       "bot_events": [
         "app_mention",
         "channel_created",
@@ -52,7 +52,7 @@
     },
     "interactivity": {
       "is_enabled": true,
-      "request_url": "https://signal.openbot.run/v1/slack/events"
+      "request_url": "https://signal.omnibot.example.com/v1/slack/events"
     },
     "org_deploy_enabled": false,
     "socket_mode_enabled": false,

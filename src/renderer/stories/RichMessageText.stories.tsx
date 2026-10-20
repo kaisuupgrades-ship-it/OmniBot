@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { requireFixture, STORY_AGENTS, STORY_ATTACHMENTS, STORY_INSTALLED_SKILLS } from "./fixtures";
 
 const args: Parameters<typeof RichMessageText>[0] = {
-  body: "Ask @Research to review https://openbot.run/docs before the launch.",
+  body: "Ask @Research to review https://omnibot.example.com/docs before the launch.",
   agents: STORY_AGENTS,
   attachments: [],
   onSelectAgent: fn(),
@@ -149,7 +149,7 @@ export const InlineFileReferences: Story = {
 
 export const PlainFileReferences: Story = {
   args: {
-    body: `Here is ${firstStoryAttachment.name}. You can also review ~/OpenBot/Shared/brief.pdf.`,
+    body: `Here is ${firstStoryAttachment.name}. You can also review ~/OmniBot/Shared/brief.pdf.`,
     attachments: [firstStoryAttachment],
     onOpenAttachment: fn(),
     onOpenSharedFile: fn(),
@@ -186,7 +186,7 @@ export const FileReferenceTypes: Story = {
 export const MixedReferencesStress: Story = {
   name: "Mixed references stress",
   args: {
-    body: `Ask @Research to compare ${serializeAttachmentReference(longAttachment.name, longAttachment.id)} with ${serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id)} and https://openbot.run/docs. Keep the decision traceable to the primary paper [1], then verify the compressed handoff in ${serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id)} before shipping [2].`,
+    body: `Ask @Research to compare ${serializeAttachmentReference(longAttachment.name, longAttachment.id)} with ${serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id)} and https://omnibot.example.com/docs. Keep the decision traceable to the primary paper [1], then verify the compressed handoff in ${serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id)} before shipping [2].`,
     attachments: [longAttachment, secondFileTypeAttachment, fourthFileTypeAttachment],
     citations,
     onOpenAttachment: fn(),
@@ -235,9 +235,9 @@ const allChipKindsBody = [
   serializeAttachmentReference(logAttachment.name, logAttachment.id),
   serializeAttachmentReference(secondFileTypeAttachment.name, secondFileTypeAttachment.id),
   serializeAttachmentReference(fourthFileTypeAttachment.name, fourthFileTypeAttachment.id),
-  "and ~/OpenBot/Shared/brief.pdf, then compare",
+  "and ~/OmniBot/Shared/brief.pdf, then compare",
   serializeAttachmentReference(longAttachment.name, longAttachment.id),
-  "with https://openbot.run/docs [1].",
+  "with https://omnibot.example.com/docs [1].",
 ].join(" ");
 
 const allChipKindsArgs = {

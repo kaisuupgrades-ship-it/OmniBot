@@ -1,7 +1,7 @@
 // The routines twin of `memories-port.ts`: one settings panel, two owners.
 
 import type {
-  OpenBotDesktopApi,
+  OmniBotDesktopApi,
   RoutineFields,
   RoutineLimitPolicy,
   RoutineMissedPolicy,
@@ -59,7 +59,7 @@ export interface RoutinesPort {
    */
   limitPolicy: boolean;
   /**
-   * Whether the host keeps what a routine does with a run that came due while OpenBot was closed:
+   * Whether the host keeps what a routine does with a run that came due while OmniBot was closed:
    * this computer's host, and a remote host with `routine-recovery-v1`. `events-v1` drops the field.
    */
   missedPolicy: boolean;
@@ -129,7 +129,7 @@ export function agentRoutinesPort(agentId: string, automation = false, localHost
 
 /** The host calls a channel's routines make. The desktop sends them through preload. */
 export type ChannelRoutinesApi = Pick<
-  OpenBotDesktopApi["agent"],
+  OmniBotDesktopApi["agent"],
   | "listChannelRoutines"
   | "listChannelRoutineRuns"
   | "createChannelRoutine"

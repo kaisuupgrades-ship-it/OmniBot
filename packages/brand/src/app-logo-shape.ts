@@ -1,4 +1,4 @@
-// The OpenBot mark as plain data, so that a canvas can draw the same mark that
+// The OmniBot mark as plain data, so that a canvas can draw the same mark that
 // `AppLogo` draws as SVG: the social cards in apps/auth-api do. `scripts/omnibot/make-icons.ts`
 // draws the app icons from it too.
 

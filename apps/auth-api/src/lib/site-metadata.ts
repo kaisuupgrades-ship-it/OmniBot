@@ -6,15 +6,15 @@
 import { LANDING_FAQ_STRUCTURED_DATA } from "./landing-faq";
 import { OPENBOT_ALTERNATE_DOWNLOAD_LINKS, OPENBOT_DOWNLOAD_LINKS } from "./landing-links";
 
-export const OPENBOT_SITE_URL = "https://openbot.run/";
-export const OPENBOT_SITE_TITLE = "OpenBot: Run a team of AI agents on your computer";
+export const OPENBOT_SITE_URL = "https://omnibot.example.com/";
+export const OPENBOT_SITE_TITLE = "OmniBot: Run a team of AI agents on your computer";
 export const OPENBOT_SITE_DESCRIPTION =
   "A free desktop app that runs AI agents as a team on your own computer, with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or your own model.";
 export const OPENBOT_SOCIAL_IMAGE_URL = `${OPENBOT_SITE_URL}openbot-social.png`;
 /** The account `OPENBOT_LINKS.x` opens, which a shared card names. */
-export const OPENBOT_X_HANDLE = "@OpenBot_";
-const OPENBOT_X_URL = "https://x.com/OpenBot_";
-const OPENBOT_REPOSITORY_URL = "https://github.com/nightly-labs/openbot";
+export const OPENBOT_X_HANDLE = "@OmniBot_";
+const OPENBOT_X_URL = "https://x.com/OmniBot_";
+const OPENBOT_REPOSITORY_URL = "https://omnibot.example.com/source";
 const OPENBOT_PRODUCT_HUNT_URL = "https://www.producthunt.com/products/openbot-3";
 const OPENBOT_LICENSE_URL = "https://polyformproject.org/licenses/noncommercial/1.0.0/";
 // One id for each entity, so that every page describes the same organization,
@@ -24,7 +24,7 @@ const OPENBOT_WEBSITE_ID = `${OPENBOT_SITE_URL}#website`;
 const OPENBOT_APPLICATION_ID = `${OPENBOT_SITE_URL}#app`;
 /** Square, as schema.org wants for a publisher logo. */
 export const OPENBOT_LOGO_URL = `${OPENBOT_SITE_URL}icon-512x512.png`;
-export const OPENBOT_SOCIAL_IMAGE_ALT = "Meet OpenBot on a dark grid background";
+export const OPENBOT_SOCIAL_IMAGE_ALT = "Meet OmniBot on a dark grid background";
 
 /** The Open Graph tags of the site's own social card, which is 1600x900. */
 export const OPENBOT_SOCIAL_IMAGE_META = [
@@ -36,13 +36,13 @@ export const OPENBOT_SOCIAL_IMAGE_META = [
 ] as const;
 
 // The hosts production answers on. Both serve the same pages, and those pages go by
-// openbot.run.
-const OPENBOT_PRODUCTION_HOSTS = new Set(["openbot.run", "api.openbot.run"]);
+// omnibot.example.com.
+const OPENBOT_PRODUCTION_HOSTS = new Set(["omnibot.example.com", "api.omnibot.example.com"]);
 
 /**
  * The site that the head tags of a page served at `pageUrl` name. Social sites fetch
  * `og:url` and `og:image` themselves and show no card when those answer 404. A
- * pull-request preview serves pages and images that openbot.run does not have yet,
+ * pull-request preview serves pages and images that omnibot.example.com does not have yet,
  * so any host other than production names itself. Cloudflare marks preview URLs
  * `noindex`, so a preview canonical does not compete with production.
  */
@@ -51,19 +51,19 @@ export function siteUrlForPage(pageUrl: URL): string {
 }
 
 /** What the app's structured data names and that this file can not import: see the note at the top. */
-export interface OpenBotApplicationFacts {
+export interface OmniBotApplicationFacts {
   /** The version of the newest release. */
   version: string;
   /** An absolute URL of a picture of the app. */
   screenshot: string;
 }
 
-export function openBotSoftwareApplication(facts: OpenBotApplicationFacts) {
+export function openBotSoftwareApplication(facts: OmniBotApplicationFacts) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "@id": OPENBOT_APPLICATION_ID,
-    name: "OpenBot",
+    name: "OmniBot",
     url: OPENBOT_SITE_URL,
     image: OPENBOT_SOCIAL_IMAGE_URL,
     description: OPENBOT_SITE_DESCRIPTION,
@@ -106,14 +106,14 @@ export function openBotSoftwareApplication(facts: OpenBotApplicationFacts) {
   } as const;
 }
 
-export type OpenBotSoftwareApplication = ReturnType<typeof openBotSoftwareApplication>;
+export type OmniBotSoftwareApplication = ReturnType<typeof openBotSoftwareApplication>;
 
 // Search engines read these two for the site name and the logo next to a result.
 const OPENBOT_ORGANIZATION = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": OPENBOT_ORGANIZATION_ID,
-  name: "OpenBot",
+  name: "OmniBot",
   url: OPENBOT_SITE_URL,
   logo: OPENBOT_LOGO_URL,
   sameAs: [OPENBOT_REPOSITORY_URL, OPENBOT_X_URL, OPENBOT_PRODUCT_HUNT_URL],
@@ -123,7 +123,7 @@ const OPENBOT_WEBSITE = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": OPENBOT_WEBSITE_ID,
-  name: "OpenBot",
+  name: "OmniBot",
   url: OPENBOT_SITE_URL,
   publisher: { "@id": OPENBOT_ORGANIZATION_ID },
 } as const;
@@ -151,7 +151,7 @@ export function openBotRootHead(interLatinFont: string) {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: OPENBOT_SITE_TITLE },
       { name: "description", content: OPENBOT_SITE_DESCRIPTION },
-      { name: "application-name", content: "OpenBot" },
+      { name: "application-name", content: "OmniBot" },
       { name: "color-scheme", content: "dark" },
       { name: "theme-color", content: "#1a1a1a" },
     ],
@@ -171,14 +171,14 @@ export function openBotRootHead(interLatinFont: string) {
   };
 }
 
-export function openBotHomeHead(application: OpenBotSoftwareApplication) {
+export function openBotHomeHead(application: OmniBotSoftwareApplication) {
   return {
     meta: [
       { "script:ld+json": application },
       { "script:ld+json": OPENBOT_ORGANIZATION },
       { "script:ld+json": OPENBOT_WEBSITE },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "OpenBot" },
+      { property: "og:site_name", content: "OmniBot" },
       { property: "og:locale", content: "en_US" },
       { property: "og:url", content: OPENBOT_SITE_URL },
       { property: "og:title", content: OPENBOT_SITE_TITLE },

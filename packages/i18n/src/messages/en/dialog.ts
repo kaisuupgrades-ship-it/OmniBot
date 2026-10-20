@@ -15,5 +15,5 @@ export const messages = defineMessages("dialog", {
   "dialog.saveExportSkill": "Save the export skill",
   "dialog.saveTransfer": "Save the transfer file",
   "dialog.chooseTransfer": "Choose a transfer file",
-  "dialog.filter.transfer": "OpenBot transfer files",
+  "dialog.filter.transfer": "OmniBot transfer files",
 });

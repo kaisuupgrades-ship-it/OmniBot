@@ -23,7 +23,7 @@ import type { BrowserSiteVisit } from "../backend/browser-host";
 import { type AnalyticsOperationFailure, analyticsIO, analyticsSync } from "./analytics-effects";
 import { localDay, RESOURCE_ENUMS, RESOURCE_PROPERTY_NAMES, type ResourceProperties } from "./resource-summary";
 
-const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
 // Node fetch sends no Origin, and OpenPanel answers 401 to a client with no allowed origin or
 // secret. The SDK drops a 401 in silence. Send the renderer's origin, which the project allows.
@@ -59,7 +59,7 @@ const TOOL_KINDS = [
   "subagent",
   "other",
 ] as const;
-// OpenBot's own tool servers. Every other server name is the user's, so only these and catalog
+// OmniBot's own tool servers. Every other server name is the user's, so only these and catalog
 // plugins keep their tool names.
 const BUILTIN_TOOL_SERVERS = new Map<string, (typeof TOOL_KINDS)[number]>([
   ["openbot", "openbot"],

@@ -9,13 +9,13 @@ import type { AgentWait } from "@openbot/contracts/ipc";
 import type { DynamicRecord } from "@openbot/contracts/runtime-values";
 import { sourceText } from "@openbot/i18n/source";
 import { databaseRow, databaseRows, optionalStringColumn, requiredStringColumn } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../openbot-database";
 
 /** A refusal the agent reads: the text is already a sentence for it. */
 export class AgentWaitError extends Error {}
 
 export interface AgentWaitStoreOptions {
-  database: OpenBotDatabase;
+  database: OmniBotDatabase;
   createId?: () => string;
   now?: () => Date;
 }
@@ -29,7 +29,7 @@ export interface OpenAgentWaitInput {
 }
 
 export class AgentWaitStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: OmniBotDatabase;
   readonly #createId: () => string;
   readonly #now: () => Date;
 

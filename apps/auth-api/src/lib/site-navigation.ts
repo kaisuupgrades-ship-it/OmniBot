@@ -47,8 +47,8 @@ export type SiteNavigationSection = ArticleNavigationSection | PluginNavigationS
 
 const COLLECTION_COPY: Record<HeaderCollectionId, { summary: string; indexLabel: string }> = {
   news: { summary: "What shipped, and why it matters.", indexLabel: "All news" },
-  guides: { summary: "Learn OpenBot one step at a time.", indexLabel: "All guides" },
-  compare: { summary: "How OpenBot differs from other agent apps.", indexLabel: "All comparisons" },
+  guides: { summary: "Learn OmniBot one step at a time.", indexLabel: "All guides" },
+  compare: { summary: "How OmniBot differs from other agent apps.", indexLabel: "All comparisons" },
 };
 
 export const SITE_NAVIGATION_SECTIONS: readonly SiteNavigationSection[] = [

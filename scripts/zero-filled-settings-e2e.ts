@@ -1,6 +1,6 @@
 // Runs the real team and remote server stores against settings files that a power loss on NTFS
 // filled with zeros. JSON.parse rejected such a file with "Unexpected token '\0'", and the Windows
-// error box showed only "Unexpected token '", so OpenBot did not start. The stores must move the file
+// error box showed only "Unexpected token '", so OmniBot did not start. The stores must move the file
 // aside and start empty. An empty file gets the same result. A file that is not JSON must still stop
 // the start, with an error that names the file and quotes nothing from it. A byte order mark must not
 // stop the start.
@@ -92,7 +92,7 @@ try {
     const path = join(directory, "openbot-remote-servers-v1.json");
     await writeFile(path, '{"version":3,"servers":[{"encryptedToken":"SECRET-TOKEN-VALUE"');
     const message = await startError(() => runCauseEffect(new RemoteServerStore({ path, cipher }).load()));
-    assert.equal(message, `OpenBot cannot read ${path}. The file is damaged.`);
+    assert.equal(message, `OmniBot cannot read ${path}. The file is damaged.`);
     assert.ok(!message.includes("SECRET"));
     assert.deepEqual(await setAsideCopies(directory, "openbot-remote-servers-v1.json"), []);
     return message;

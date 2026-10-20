@@ -56,7 +56,7 @@ export const LANDING_FEATURES: readonly LandingFeature[] = [
     id: "local",
     title: "Stored on your computer",
     description:
-      "Workspaces, conversations, files and browser data stay on the computer that runs OpenBot, not on our servers.",
+      "Workspaces, conversations, files and browser data stay on the computer that runs OmniBot, not on our servers.",
   },
   {
     id: "persist",
@@ -67,7 +67,7 @@ export const LANDING_FEATURES: readonly LandingFeature[] = [
   {
     id: "browser",
     title: "A built-in browser",
-    description: "Agents open, read and control pages in a browser that is built into OpenBot.",
+    description: "Agents open, read and control pages in a browser that is built into OmniBot.",
   },
   {
     id: "queue",
@@ -125,7 +125,7 @@ export const LANDING_NETWORK_TITLE: readonly string[] = ["Your", "agents", "talk
 export const LANDING_NETWORK_DESCRIPTION =
   "They ask, hand off and review. Add agents, and the team grows around the work.";
 /** The name under the mark at the centre of the network picture. */
-export const LANDING_NETWORK_HUB = "OpenBot";
+export const LANDING_NETWORK_HUB = "OmniBot";
 
 /** What the network says in its easter eggs. Each reaction chooses one line of its list at random. */
 export const LANDING_NETWORK_EGGS = {
@@ -183,7 +183,7 @@ export const LANDING_NETWORK_EGGS = {
   ],
 } satisfies Record<string, readonly string[]>;
 
-/** The channel the team picture shows, and the line OpenBot writes when the task changes owner. */
+/** The channel the team picture shows, and the line OmniBot writes when the task changes owner. */
 export const LANDING_TEAM_CHANNEL = "launch";
 export const LANDING_TEAM_HANDOFF = "Ada gave the task to Linus";
 
@@ -233,7 +233,7 @@ export const LANDING_PERSIST_AFTER: LandingPersistReply = {
   text: "I continue from the billing migration. Next is its test.",
 };
 
-/** What stays on the computer that runs OpenBot. */
+/** What stays on the computer that runs OmniBot. */
 export const LANDING_LOCAL_DATA: readonly string[] = ["Workspaces", "Conversations", "Files", "Browser data"];
 
 /**
@@ -273,7 +273,7 @@ function isRivalMarkName(slug: string): slug is RivalMarkName {
 }
 
 /**
- * Every OpenBot comparison, labelled "OpenBot vs …": each title starts with
+ * Every OmniBot comparison, labelled "OmniBot vs …": each title starts with
  * that, and the part after the colon is too long for a card. The slug of each is
  * also the name of the compared product's mark. A matchup or the roundup has a
  * slug that names no mark, so it is not in this list.
@@ -292,7 +292,7 @@ export const LANDING_COMPARISON_LINKS: readonly LandingComparisonLink[] = COMPAR
       : [],
 );
 
-/** Each offer of OpenBot for Teams has its own colour and icon, which the section sets for this id. */
+/** Each offer of OmniBot for Teams has its own colour and icon, which the section sets for this id. */
 export type LandingTeamsOfferId = "servers" | "environments" | "integrations" | "support";
 
 export interface LandingTeamsOffer {
@@ -320,7 +320,7 @@ export const LANDING_TEAMS_OFFERS: readonly LandingTeamsOffer[] = [
     id: "integrations",
     label: "Custom integrations",
     title: "Your tools",
-    description: "We connect OpenBot to your systems, APIs and workflows.",
+    description: "We connect OmniBot to your systems, APIs and workflows.",
   },
   {
     id: "support",

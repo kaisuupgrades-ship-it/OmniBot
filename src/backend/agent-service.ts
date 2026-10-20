@@ -116,7 +116,7 @@ import {
 import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
 import type { QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { classifyFailure } from "@openbot/telemetry";
 import { Cause, Deferred, Effect, Exit, Fiber, Result, Schema, Scope, Semaphore } from "effect";
 import { AgentMemories } from "./agent/agent-memories";
@@ -151,7 +151,7 @@ import {
   startingChoice,
   startingModel,
 } from "./agent/model-choice";
-import { OpenBotToolRouter } from "./agent/openbot-tool-router";
+import { OmniBotToolRouter } from "./agent/openbot-tool-router";
 import { ProfileClients } from "./agent/profile-clients";
 import {
   GenerationUsageLimitError,
@@ -221,7 +221,7 @@ import {
   resolveWorkspaceFile,
 } from "./workspace-paths";
 
-const logger = createOpenBotLogger("agent-service");
+const logger = createOmniBotLogger("agent-service");
 
 /**
  * Only the application knows which managed CLIs it downloaded, so a caller that says nothing gets
@@ -246,7 +246,7 @@ export interface AgentServiceOptions {
   mailbox: MailboxStore;
   browser: AgentBrowserHost;
   requestTimeoutMs?: number;
-  /** How long a Codex context compaction runs before OpenBot stops it. Tests make it short. */
+  /** How long a Codex context compaction runs before OmniBot stops it. Tests make it short. */
   contextCompactionTimeoutMs?: number;
   preferredProvider?: AgentProvider;
   /** The model chosen beside `preferredProvider`, or `null` for that provider's own default. */
@@ -317,10 +317,10 @@ export interface AgentServiceOptions {
   computerUseMcpServer?: () => McpServerConfig | null;
   /**
    * The built-in GitHub connection of this computer, or `null`. Read at each spawn and each hand-off,
-   * for the same reason as `computerUseMcpServer`: the user connects and disconnects while OpenBot runs.
+   * for the same reason as `computerUseMcpServer`: the user connects and disconnects while OmniBot runs.
    */
   githubConnector?: GitHubConnectorSource | null;
-  /** The 1Password vault the user shared with OpenBot, or `null`. The browser fills logins from it. */
+  /** The 1Password vault the user shared with OmniBot, or `null`. The browser fills logins from it. */
   passwordVault?: PasswordVault | null;
   /**
    * The memory of a server, or `null` on a desktop computer. With it, no new turn starts
@@ -384,7 +384,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
   readonly #compaction: ContextCompaction;
   readonly #duplication: DuplicationGate;
   readonly #removal: AgentRemoval;
-  readonly #tools: OpenBotToolRouter;
+  readonly #tools: OmniBotToolRouter;
   readonly #sidebarLayout: AgentSidebar | null;
   readonly #localSkillTools: (() => LocalSkillTools) | undefined;
   readonly #routineFlowTools: (() => RoutineFlowTools) | undefined;
@@ -1184,7 +1184,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
       hostedSites: this.#hostedSites,
       compaction: this.#compaction,
       deleteWithRevokedApproval: options.deleteWithRevokedApproval ?? ((_agentId, remove) => remove()),
-      logger: createOpenBotLogger("agent-removal"),
+      logger: createOmniBotLogger("agent-removal"),
       hooks: {
         emit: (event) => this.#emit(event),
         listAgents: () => this.listAgents(),
@@ -1196,7 +1196,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
           }).pipe(Effect.mapError((failure) => new AgentRemovalFailed({ cause: failure.cause }))),
       },
     });
-    this.#tools = new OpenBotToolRouter({
+    this.#tools = new OmniBotToolRouter({
       capturedSteps: (session) => this.#threads.capturedWorkSteps(session).pipe(toToolOperationFailed),
       store,
       mailbox,
@@ -1632,7 +1632,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
   /**
    * The MCP servers this machine holds.
    *
-   * Configurations only: OpenBot holds no connection of its own to report. A connection is made
+   * Configurations only: OmniBot holds no connection of its own to report. A connection is made
    * when the user asks for a test, and when an agent starts - and the second is the provider's own.
    */
   listMcpServers(): McpServerConfig[] {
@@ -3863,7 +3863,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
         ),
       );
     // No provider runs a turn whose end failed part way or whose provider exited, so it has nothing to
-    // stop. The Stop then settles what OpenBot still holds for the turn, and the queue frees (#2214).
+    // stop. The Stop then settles what OmniBot still holds for the turn, and the queue frees (#2214).
     // A turn that the drain started can wait for its `turn/started` with a snapshot already on it:
     // that turn is live, and only the provider can stop it. A turn whose normal end runs settles itself.
     if (!mayStop && this.#turn.turnStartedAt(turnId) === null && !this.#turn.isCompleting(turnId)) {

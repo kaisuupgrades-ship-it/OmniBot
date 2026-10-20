@@ -3,13 +3,13 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import BrowserPreviewSidebar from "../src/features/conversation/BrowserPreviewSidebar";
 import browserPreviewUrl from "./assets/browser-takeover-preview.svg";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 const tabs = [
   {
     id: "docs",
-    title: "OpenBot documentation",
-    url: "https://openbot.run/docs",
+    title: "OmniBot documentation",
+    url: "https://omnibot.example.com/docs",
     loading: false,
     ownerThreadId: "chief",
     ownerAgentId: "chief",
@@ -43,7 +43,7 @@ const meta = {
   decorators: [
     (Story) => {
       const previous = window.openbot;
-      window.openbot = createMockOpenBot({
+      window.openbot = createMockOmniBot({
         browserPreviews: {
           docs: { dataUrl: browserPreviewUrl, width: 960, height: 600 },
           settings: null,

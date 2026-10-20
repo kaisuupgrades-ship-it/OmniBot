@@ -19,7 +19,7 @@ import {
 import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
 import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
 import { RoutineInputError } from "@openbot/team-client/routine-schedule";
 import { Effect, Exit, Schema, Scope, Semaphore } from "effect";
 import { AgentSettingsRefused } from "../backend/agent/agent-settings-refused";
@@ -34,7 +34,7 @@ import { listenLoopback } from "./listen-loopback";
 import { HttpError } from "./team-api/http-error";
 import { approvalDecision, promptAnswers } from "./team-api/request-helpers";
 
-const logger = createOpenBotLogger("automation");
+const logger = createOmniBotLogger("automation");
 
 /** A script that loops can wake an agent at most this often, so it cannot spend the user's quota. */
 const AUTOMATION_RUNS_PER_HOUR = 30;
@@ -273,7 +273,7 @@ export class AutomationServer {
         ...pending,
         prompts: pending.prompts.map((prompt) => ({
           ...prompt,
-          questions: prompt.requiresOpenBot
+          questions: prompt.requiresOmniBot
             ? []
             : prompt.questions.map(({ id, header, question, options }) => ({ id, header, question, options })),
         })),

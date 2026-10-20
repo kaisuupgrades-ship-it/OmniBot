@@ -29,7 +29,7 @@ import {
   STORY_REMOTE_DESKTOP_SESSION,
   STORY_SERVERS,
 } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 export const CONVERSATION_STORY_ATTACHMENT = requireFixture(STORY_ATTACHMENTS[0], "Story attachment");
 
@@ -145,7 +145,7 @@ export const CONVERSATION_STORY_ARGS: Parameters<typeof Conversation>[0] = {
 /** The agent chat as the app shows it, on a mocked bridge, for a story that composes screens. */
 export function StoryAgentConversation(props: { agent: Parameters<typeof Conversation>[0]["agent"] }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot();
+  const mock = createMockOmniBot();
   const controller = createConversationController({ onTypingChange: CONVERSATION_STORY_ARGS.onTypingChange });
   window.openbot = mock.api;
   onCleanup(() => {

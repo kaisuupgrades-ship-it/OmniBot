@@ -29,7 +29,7 @@ Browser tickets and session termination require the same account-session hash th
 remote session. Existing bearer-token endpoints retain their behavior. The browser edits the
 account's name, avatar, and sessions through `v1/me/profile`, `v1/me/avatar`, and `v1/me/sessions`,
 which call the same `AuthService` methods and avatar storage (`avatar-storage.ts`) as the bearer
-routes. The avatar upload is the one write that is not JSON; the origin and `X-OpenBot-Browser`
+routes. The avatar upload is the one write that is not JSON; the origin and `X-OmniBot-Browser`
 checks still apply. `web-account.ts` makes these calls, and the Profile tab of the web Settings dialog
 (`WebAccountSettings.tsx`) shows them.
 
@@ -86,7 +86,7 @@ the `media-attachments` capability; released protocol adapters keep their existi
 `browser-tools.ts` defines provider schemas and parses each call into a typed tool and its arguments.
 `browser-tool-actions.ts` maps input tools to CDP operations. It does not own tabs or import the host.
 `BrowserHost` owns tab access checks, operation queues, focus, deadlines, and persistent browser state.
-The browser session and service-worker fallback remove the `OpenBot/` and `Electron/` user-agent
+The browser session and service-worker fallback remove the `OmniBot/` and `Electron/` user-agent
 tokens. They keep the installed Chromium version and host platform. Requests to `accounts.google.com`
 keep the `Electron/` token because Google rejects the account identifier step without it. This
 exception does not change the page identity or the identity sent to other sites.

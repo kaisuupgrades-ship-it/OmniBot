@@ -14,7 +14,7 @@ interface SiteBucket {
 interface SiteRouterEnv {
   SITES: SiteBucket;
   SITE_SERVE_ENABLED?: string;
-  /** Origin of the account service, such as `https://openbot.run`. The report route and error pages use it. */
+  /** Origin of the account service, such as `https://omnibot.example.com`. The report route and error pages use it. */
   ACCOUNT_ORIGIN?: string;
 }
 
@@ -294,25 +294,25 @@ const siteErrors = {
     status: 503,
     text: "Site hosting is temporarily unavailable",
     title: "Site hosting is paused",
-    detail: "OpenBot sites are temporarily unavailable. Try again later.",
+    detail: "OmniBot sites are temporarily unavailable. Try again later.",
   },
   siteNotFound: {
     status: 404,
     text: "Site not found",
     title: "Site not found",
-    detail: "No OpenBot site uses this address. Make sure that the address is correct.",
+    detail: "No OmniBot site uses this address. Make sure that the address is correct.",
   },
   siteBlocked: {
     status: 451,
     text: "Site unavailable",
     title: "Site unavailable",
-    detail: "OpenBot blocked this site. You cannot open it.",
+    detail: "OmniBot blocked this site. You cannot open it.",
   },
   siteFailed: {
     status: 500,
     text: "Site unavailable",
     title: "Site unavailable",
-    detail: "OpenBot could not load this site. Try again in a few minutes.",
+    detail: "OmniBot could not load this site. Try again in a few minutes.",
   },
   siteGone: {
     status: 410,
@@ -387,7 +387,7 @@ function errorPage(request: Request, env: SiteRouterEnv, error: SiteError, nonce
   const home = accountUrl(env, "/");
   const links = [
     error === "pageNotFound" ? `<a href="/">Open the site home page</a>` : "",
-    home ? `<a href="${escapeHtml(home.toString())}">Go to OpenBot</a>` : "",
+    home ? `<a href="${escapeHtml(home.toString())}">Go to OmniBot</a>` : "",
   ].join("");
   return `<!doctype html>
 <html lang="en">
@@ -395,12 +395,12 @@ function errorPage(request: Request, env: SiteRouterEnv, error: SiteError, nonce
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>${escapeHtml(title)} - OpenBot</title>
+<title>${escapeHtml(title)} - OmniBot</title>
 <style nonce="${nonce}">${errorPageStyle}</style>
 </head>
 <body>
 <main>
-<p class="brand">OpenBot</p>
+<p class="brand">OmniBot</p>
 <p class="meta">Error ${status} - ${escapeHtml(hostname)}</p>
 <h1>${escapeHtml(title)}</h1>
 <p>${escapeHtml(detail)}</p>

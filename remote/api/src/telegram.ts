@@ -181,7 +181,7 @@ export class TelegramBotApi {
           allowed_updates: ALLOWED_UPDATES,
         });
         if (!answer.ok)
-          console.error(`OpenBot Remote API could not set the webhook of Telegram bot ${botId} (${answer.errorCode}).`);
+          console.error(`OmniBot Remote API could not set the webhook of Telegram bot ${botId} (${answer.errorCode}).`);
       }
     }),
   );

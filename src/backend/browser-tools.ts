@@ -138,7 +138,7 @@ const BROWSER_TOOL_DEFINITIONS = [
       submission: z
         .enum(["click", "enter", "on_input"])
         .describe(
-          "Use click with submitTarget when the page has a Continue, Verify, Next, or Sign in button, even if disabled before entry. OpenBot fills the fields then clicks that button. Use enter only for a form submitted by Enter. on_input ONLY fills fields; use it only when the site explicitly submits on the final digit without a button. It does not find or click a button.",
+          "Use click with submitTarget when the page has a Continue, Verify, Next, or Sign in button, even if disabled before entry. OmniBot fills the fields then clicks that button. Use enter only for a form submitted by Enter. on_input ONLY fills fields; use it only when the site explicitly submits on the final digit without a button. It does not find or click a button.",
         ),
       submitTarget: browserTargetSchema
         .optional()
@@ -148,14 +148,14 @@ const BROWSER_TOOL_DEFINITIONS = [
       loginId: identifier
         .optional()
         .describe(
-          "For password or authenticator: the id of a saved login from list_logins. OpenBot fills its password or current code without asking the user.",
+          "For password or authenticator: the id of a saved login from list_logins. OmniBot fills its password or current code without asking the user.",
         ),
     },
   }),
   browserTool({
     name: "list_logins",
     description:
-      "List the logins that the user shared with OpenBot for the tab's current HTTPS site: id, title, username, and whether it has an authenticator code. Passwords and codes are never returned. Type the username yourself, then call submit_secret with loginId.",
+      "List the logins that the user shared with OmniBot for the tab's current HTTPS site: id, title, username, and whether it has an authenticator code. Passwords and codes are never returned. Type the username yourself, then call submit_secret with loginId.",
     shape: { tabId },
   }),
   browserTool({
@@ -259,7 +259,7 @@ const BROWSER_TOOL_DEFINITIONS = [
   browserTool({
     name: "upload_files",
     description:
-      "Set local files readable by OpenBot on a file input after validating paths, then return a fresh snapshot.",
+      "Set local files readable by OmniBot on a file input after validating paths, then return a fresh snapshot.",
     shape: {
       ...targetAction,
       paths: z.array(z.string().min(1).max(INPUT_LIMITS.path)).min(1).max(INPUT_LIMITS.attachments),
@@ -346,7 +346,7 @@ export const BROWSER_DYNAMIC_TOOLS = [
   {
     type: "namespace" as const,
     name: OPENBOT_BROWSER_NAMESPACE,
-    description: "Operate OpenBot's private, persistent native Electron/CDP browser.",
+    description: "Operate OmniBot's private, persistent native Electron/CDP browser.",
     tools: BROWSER_TOOL_DEFINITIONS.map((definition) => ({
       type: "function" as const,
       name: definition.name,

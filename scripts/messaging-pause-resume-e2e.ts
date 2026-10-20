@@ -24,7 +24,7 @@ import type {
   MessagingDriver,
   MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseSetMessagingEnabledInput } from "../src/main/ipc/messaging-inputs";
 
@@ -200,7 +200,7 @@ interface Booted {
 }
 
 async function boot<T>(use: (services: Booted) => Promise<T>): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new OmniBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));

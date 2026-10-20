@@ -390,7 +390,7 @@ export class RemoteTeamDirectoryClient {
 
   /**
    * The account service an invitation names. The public website serves the same Worker as
-   * `api.openbot.run`, but an invitation must name `api.openbot.run`: the desktop and mobile apps
+   * `api.omnibot.example.com`, but an invitation must name `api.omnibot.example.com`: the desktop and mobile apps
    * accept only that address.
    */
   #inviteApiUrl(): string {
@@ -414,8 +414,8 @@ export class RemoteTeamDirectoryClient {
       // These production origins serve the same account Worker. Requests still use this client's origin.
       const publicWebsiteInvite =
         this.#authentication.kind === "browser" &&
-        origin === "https://openbot.run" &&
-        inviteOrigin === "https://api.openbot.run";
+        origin === "https://omnibot.example.com" &&
+        inviteOrigin === "https://api.omnibot.example.com";
       if (inviteOrigin !== origin && !publicWebsiteInvite) {
         return yield* directoryFailure(sourceText("error.remote.inviteOtherService"));
       }
@@ -508,7 +508,7 @@ export class RemoteTeamDirectoryClient {
                     ? { Authorization: `Bearer ${this.#authentication.token}` }
                     : {}),
                   ...(browser
-                    ? { "X-OpenBot-Browser": "1", "Content-Type": "application/json" }
+                    ? { "X-OmniBot-Browser": "1", "Content-Type": "application/json" }
                     : options.body
                       ? { "Content-Type": "application/json" }
                       : {}),

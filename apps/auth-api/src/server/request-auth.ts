@@ -124,7 +124,7 @@ export function requireSitePublishingEnabled(): void {
     throw new HostedSiteInputError(
       409,
       "cookie_isolation_unavailable",
-      "Site publishing is disabled until openbot.site has public-suffix cookie isolation.",
+      "Site publishing is disabled until omnibot-sites.example.com has public-suffix cookie isolation.",
     );
   }
 }
@@ -145,7 +145,7 @@ export function requestGitHubInstallationTokens(): GitHubInstallationTokens {
   const clientId = bindings.GITHUB_APP_CLIENT_ID?.trim();
   const privateKey = bindings.GITHUB_APP_PRIVATE_KEY?.trim();
   if (!clientId || !privateKey) {
-    throw new GitHubInstallationTokensError(503, "github_app_unavailable", "The OpenBot GitHub App is not configured.");
+    throw new GitHubInstallationTokensError(503, "github_app_unavailable", "The OmniBot GitHub App is not configured.");
   }
   const key = `${clientId}\u0000${privateKey}`;
   if (githubInstallationTokens?.key !== key) {
@@ -161,7 +161,7 @@ export const enforceGitHubTokenRateLimit = Effect.fn("GitHub.enforceTokenRateLim
   const result = yield* Effect.tryPromise({
     try: () => requireWorkerBindings(env).GITHUB_TOKEN_RATE_LIMITER.limit({ key: `ip:${sourceIp}` }),
     catch: () =>
-      new GitHubInstallationTokensError(503, "github_app_unavailable", "The OpenBot GitHub App is unavailable."),
+      new GitHubInstallationTokensError(503, "github_app_unavailable", "The OmniBot GitHub App is unavailable."),
   });
   if (!result.success) {
     return yield* new GitHubInstallationTokensError(
@@ -331,8 +331,8 @@ export function verifyRemoteServiceRequest(request: Request, body: string) {
   return verifyRemoteServiceSignature(
     secret,
     body,
-    request.headers.get("OpenBot-Timestamp") ?? "",
-    request.headers.get("OpenBot-Signature") ?? "",
+    request.headers.get("OmniBot-Timestamp") ?? "",
+    request.headers.get("OmniBot-Signature") ?? "",
   );
 }
 

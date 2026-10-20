@@ -58,13 +58,13 @@ export function announcementProblems(announcement: string, version: string): str
 
 /** The anchor of `version` on /changelog, as `releaseAnchor` in `apps/auth-api/src/lib/changelog.ts` makes it. */
 function changelogUrl(version: string): string {
-  return `https://openbot.run/changelog#v${version.replace(/[^0-9a-z]+/gi, "-").toLowerCase()}`;
+  return `https://omnibot.example.com/changelog#v${version.replace(/[^0-9a-z]+/gi, "-").toLowerCase()}`;
 }
 
 function announcementMessage(highlights: readonly unknown[], version: string): string {
   return [
     "@everyone",
-    `**OpenBot v${version} is out**`,
+    `**OmniBot v${version} is out**`,
     "",
     ...highlights.map((highlight) => `- ${String(highlight).trim()}`),
     "",
@@ -83,7 +83,7 @@ if (import.meta.main) {
   if (problems.length > 0) {
     process.stderr.write(
       [
-        `The Discord announcement for OpenBot ${version} is not ready:`,
+        `The Discord announcement for OmniBot ${version} is not ready:`,
         ...problems.map((problem) => `- ${problem}`),
         "",
         "See docs/RELEASING.md#discord-announcement.",
@@ -112,8 +112,8 @@ if (import.meta.main) {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          username: "OpenBot",
-          avatar_url: "https://openbot.run/icon-512x512.png",
+          username: "OmniBot",
+          avatar_url: "https://omnibot.example.com/icon-512x512.png",
           content,
           allowed_mentions: { parse: ["everyone"] },
         }),

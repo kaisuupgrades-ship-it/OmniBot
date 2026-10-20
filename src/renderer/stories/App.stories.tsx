@@ -4,8 +4,8 @@ import { onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { App } from "../src/App";
 import { LEFT_PANEL_COLLAPSED_STORAGE_KEY, SERVER_VIEW_STORAGE_KEY } from "../src/layout-constants";
-import { createMockOpenBot, type MockOpenBotOptions } from "../src/preview/mock-openbot";
-import { OpenBotPlayground } from "../src/preview/OpenBotPlayground";
+import { createMockOmniBot, type MockOmniBotOptions } from "../src/preview/mock-openbot";
+import { OmniBotPlayground } from "../src/preview/OmniBotPlayground";
 import { STORY_AGENT_STATUS, STORY_AGENT_SUMMARIES, STORY_APP_INFO, STORY_SERVERS } from "./fixtures";
 
 const [storyLocalServer, storyRemoteServer] = STORY_SERVERS;
@@ -32,14 +32,14 @@ function useStoredLayoutValue(key: string, value: string): void {
   });
 }
 
-function SidebarStatePlayground(props: { compact: boolean; serverView?: ServerView; options?: MockOpenBotOptions }) {
+function SidebarStatePlayground(props: { compact: boolean; serverView?: ServerView; options?: MockOmniBotOptions }) {
   useStoredLayoutValue(LEFT_PANEL_COLLAPSED_STORAGE_KEY, props.compact ? "true" : "false");
   if (props.serverView) useStoredLayoutValue(SERVER_VIEW_STORAGE_KEY, props.serverView);
-  return <OpenBotPlayground options={props.options} />;
+  return <OmniBotPlayground options={props.options} />;
 }
 
 export const Playground: Story = {
-  render: () => <OpenBotPlayground />,
+  render: () => <OmniBotPlayground />,
 };
 
 export const ExpandedSidebar: Story = {
@@ -63,7 +63,7 @@ export const LinuxWindow: Story = {
 
 export const EmptyWorkspace: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         agents: [],
         servers: STORY_SERVERS.filter((server) => server.kind === "local"),
@@ -79,7 +79,7 @@ export const EmptyWorkspace: Story = {
 
 export const IncompatibleRemoteHost: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         servers: [
           { ...storyLocalServer, active: false },
@@ -97,7 +97,7 @@ export const IncompatibleRemoteHost: Story = {
             },
             issue: {
               code: "host_update_required",
-              message: "Update OpenBot on the host.",
+              message: "Update OmniBot on the host.",
               retryable: true,
             },
           },
@@ -109,7 +109,7 @@ export const IncompatibleRemoteHost: Story = {
 
 export const DifferentRemoteVersions: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         servers: [
           { ...storyLocalServer, active: false },
@@ -139,10 +139,10 @@ export const DifferentRemoteVersions: Story = {
   ),
 };
 
-/** A joined server has a new OpenBot version. Entering it opens the update dialog each time. */
+/** A joined server has a new OmniBot version. Entering it opens the update dialog each time. */
 export const RemoteHostUpdate: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         servers: [
           storyLocalServer,
@@ -167,17 +167,17 @@ export const RemoteHostUpdate: Story = {
 
 export const Onboarding: Story = {
   render: () => (
-    <OpenBotPlayground options={{ setupState: { completed: false, preferredProvider: null, preferredModel: null } }} />
+    <OmniBotPlayground options={{ setupState: { completed: false, preferredProvider: null, preferredModel: null } }} />
   ),
 };
 
 export const SignedOut: Story = {
-  render: () => <OpenBotPlayground options={{ authState: { status: "signed_out" } }} />,
+  render: () => <OmniBotPlayground options={{ authState: { status: "signed_out" } }} />,
 };
 
 export const AgentStarting: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         agentStatus: {
           ...STORY_AGENT_STATUS,
@@ -196,7 +196,7 @@ export const AgentStarting: Story = {
  */
 export const ProviderSignInRequired: Story = {
   render: () => (
-    <OpenBotPlayground
+    <OmniBotPlayground
       options={{
         agentStatus: {
           ...STORY_AGENT_STATUS,
@@ -273,10 +273,10 @@ const STORY_WAITING_EVENTS: AgentEvent[] = [
 function WaitingForInputPlayground(props: { compact: boolean }) {
   useStoredLayoutValue(LEFT_PANEL_COLLAPSED_STORAGE_KEY, props.compact ? "true" : "false");
   return (
-    <OpenBotPlayground
+    <OmniBotPlayground
       dependencies={{
         createMock: (options) => {
-          const mock = createMockOpenBot(options);
+          const mock = createMockOmniBot(options);
           const subscribe = mock.api.agent.onEvent;
           mock.api.agent.onEvent = (listener) => {
             const unsubscribe = subscribe(listener);

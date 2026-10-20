@@ -3,7 +3,7 @@ import { COMPUTER_USE_MCP_SERVER_NAME } from "@openbot/contracts/ipc";
 import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
 import { isGeneratedAgentId } from "@openbot/contracts/validation";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { AGENT_MEMORY_SELECTION_SCHEMA_SQL, migrateAgentMemorySelection } from "./agent-memory-selection";
 import { AGENT_TASK_SCHEMA_SQL } from "./agent-tasks/agent-task-schema";
 import { AGENT_WAIT_SCHEMA_SQL } from "./agent-waits/agent-wait-schema";
@@ -392,7 +392,7 @@ const V28_PROVIDER_SESSIONS_COLUMN_SQL = `provider TEXT NOT NULL,`;
 // schema puts it last as well. Both routine tables end with a column, not a table constraint.
 const V27_ROUTINE_LIMIT_POLICY_COLUMN_SQL = `limit_policy TEXT NOT NULL DEFAULT 'wait' CHECK(limit_policy IN ('wait', 'skip'))`;
 
-// Migration 33 adds what a routine does with the occurrences that came due while OpenBot was closed, and
+// Migration 33 adds what a routine does with the occurrences that came due while OmniBot was closed, and
 // the run columns that record those occurrences on one cancelled run. Frozen with the migration. The policy
 // goes after the migration 27 column. ADD COLUMN puts a run column before the UNIQUE constraint that ends
 // the run tables, so the latest schema puts the two run columns there as well.
@@ -629,28 +629,28 @@ function withRunAddedColumns(tableEnd: string): string {
 function substituteOnce(source: string, search: string, replacement: string): string {
   const index = source.indexOf(search);
   if (index === -1 || source.indexOf(search, index + search.length) !== -1) {
-    throw new Error("The latest OpenBot schema could not be derived from the v8 baseline.");
+    throw new Error("The latest OmniBot schema could not be derived from the v8 baseline.");
   }
   return `${source.slice(0, index)}${replacement}${source.slice(index + search.length)}`;
 }
 
-export interface OpenBotMigrationOptions {
+export interface OmniBotMigrationOptions {
   appliedAt?: string;
   warn?: (message: string, error: unknown) => void;
   /** The last connection closed cleanly, so SQLite removed the write-ahead log. */
   closedCleanly?: boolean;
 }
 
-const logger = createOpenBotLogger("openbot-database-schema");
+const logger = createOmniBotLogger("openbot-database-schema");
 
-interface OpenBotMigration {
+interface OmniBotMigration {
   version: number;
   disableForeignKeys?: boolean;
   vacuumAfterCommit?: boolean;
   up: (db: DatabaseSync, appliedAt: string) => void;
 }
 
-const MIGRATIONS: readonly OpenBotMigration[] = [
+const MIGRATIONS: readonly OmniBotMigration[] = [
   {
     version: BASELINE_SCHEMA_VERSION,
     disableForeignKeys: true,
@@ -806,7 +806,7 @@ const MIGRATIONS: readonly OpenBotMigration[] = [
   {
     version: 37,
     // Only creates tables, so no foreign-key pause and no vacuum. No routine has a destination yet, so every
-    // routine keeps its answers in OpenBot, which is what it did before.
+    // routine keeps its answers in OmniBot, which is what it did before.
     up: (db) => db.exec(ROUTINE_RESULT_SCHEMA_SQL),
   },
   {
@@ -846,14 +846,14 @@ const MIGRATIONS: readonly OpenBotMigration[] = [
   {
     version: 44,
     // Only creates a table, so no foreign-key pause and no vacuum. No connection has a role list yet, so
-    // everyone can still mention OpenBot, which is what they could before.
+    // everyone can still mention OmniBot, which is what they could before.
     up: (db) => db.exec(MESSAGING_ALLOWED_ROLES_SCHEMA_SQL),
   },
 ];
 
 const LATEST_SCHEMA_VERSION = MIGRATIONS[MIGRATIONS.length - 1]?.version ?? BASELINE_SCHEMA_VERSION;
 
-export function migrateOpenBotDatabase(db: DatabaseSync, options: OpenBotMigrationOptions = {}): void {
+export function migrateOmniBotDatabase(db: DatabaseSync, options: OmniBotMigrationOptions = {}): void {
   validateMigrationRegistry();
   const appliedAt = options.appliedAt ?? new Date().toISOString();
   if (!hasExistingSchema(db)) {
@@ -871,7 +871,7 @@ export function migrateOpenBotDatabase(db: DatabaseSync, options: OpenBotMigrati
     try {
       runMigration(db, migration, appliedAt);
     } catch (error) {
-      throw new Error(`OpenBot database migration to version ${migration.version} failed.`, {
+      throw new Error(`OmniBot database migration to version ${migration.version} failed.`, {
         cause: error,
       });
     }
@@ -883,7 +883,7 @@ export function migrateOpenBotDatabase(db: DatabaseSync, options: OpenBotMigrati
         db.exec("PRAGMA wal_checkpoint(TRUNCATE)");
       } catch (error) {
         const warn = options.warn ?? ((message: string, cause: unknown) => logger.warn(message, toLogValue(cause)));
-        warn(`OpenBot database migration to version ${migration.version} succeeded, but VACUUM failed.`, error);
+        warn(`OmniBot database migration to version ${migration.version} succeeded, but VACUUM failed.`, error);
       }
     }
   }
@@ -943,7 +943,7 @@ function validateMigrationRegistry(): void {
   for (const migration of MIGRATIONS) {
     if (!Number.isInteger(migration.version) || migration.version !== expectedVersion) {
       throw new Error(
-        `OpenBot database migrations must be contiguous from version ${BASELINE_SCHEMA_VERSION}; expected ${expectedVersion}.`,
+        `OmniBot database migrations must be contiguous from version ${BASELINE_SCHEMA_VERSION}; expected ${expectedVersion}.`,
       );
     }
     expectedVersion += 1;
@@ -980,7 +980,7 @@ function readAppliedVersions(db: DatabaseSync): number[] {
     .all()
     .map((row) => {
       if (!isDynamicRecord(row) || !isNumber(row.version) || !Number.isInteger(row.version)) {
-        throw new Error("OpenBot database contains an invalid schema migration version.");
+        throw new Error("OmniBot database contains an invalid schema migration version.");
       }
       return row.version;
     });
@@ -990,7 +990,7 @@ function validateAppliedVersions(versions: number[]): void {
   const newestVersion = versions.at(-1) ?? 0;
   if (newestVersion > LATEST_SCHEMA_VERSION) {
     throw new Error(
-      `OpenBot database version ${newestVersion} is newer than this application supports (${LATEST_SCHEMA_VERSION}).`,
+      `OmniBot database version ${newestVersion} is newer than this application supports (${LATEST_SCHEMA_VERSION}).`,
     );
   }
 
@@ -999,7 +999,7 @@ function validateAppliedVersions(versions: number[]): void {
   const applied = new Set(baselineAndLater);
   for (let version = BASELINE_SCHEMA_VERSION; version <= newestVersion; version += 1) {
     if (!applied.has(version)) {
-      throw new Error(`OpenBot database migration history is missing version ${version}.`);
+      throw new Error(`OmniBot database migration history is missing version ${version}.`);
     }
   }
 }
@@ -1009,7 +1009,7 @@ function latestAppliedVersion(versions: number[]): number {
   return baselineAndLater.at(-1) ?? BASELINE_SCHEMA_VERSION - 1;
 }
 
-function runMigration(db: DatabaseSync, migration: OpenBotMigration, appliedAt: string): void {
+function runMigration(db: DatabaseSync, migration: OmniBotMigration, appliedAt: string): void {
   if (migration.disableForeignKeys) db.exec("PRAGMA foreign_keys = OFF");
   try {
     db.exec("BEGIN IMMEDIATE");
@@ -1028,7 +1028,7 @@ function runMigration(db: DatabaseSync, migration: OpenBotMigration, appliedAt: 
 function assertForeignKeys(db: DatabaseSync): void {
   const violations = db.prepare("PRAGMA foreign_key_check").all();
   if (violations.length > 0) {
-    throw new Error(`OpenBot database migration produced ${violations.length} foreign-key violation(s).`);
+    throw new Error(`OmniBot database migration produced ${violations.length} foreign-key violation(s).`);
   }
 }
 
@@ -1039,7 +1039,7 @@ function assertQuickCheck(db: DatabaseSync): void {
     .map((row) => (isDynamicRecord(row) ? row.quick_check : row));
   if (problems.length === 1 && problems[0] === "ok") return;
   // The lines name the damaged pages and tables, which tell a page left by a disk save from a bad index.
-  logger.error("The OpenBot database failed its integrity check.", { problems });
+  logger.error("The OmniBot database failed its integrity check.", { problems });
   throw new Error(sourceText("error.backend.databaseIntegrity"));
 }
 
@@ -1242,8 +1242,8 @@ function rebuildProviderSessions(db: DatabaseSync, providerColumnSql: string, st
  * Moves a saved MCP server off the name the Computer Use driver now takes.
  *
  * The name was free until the driver arrived, so a database written by a shipped release can hold a
- * server the user named `computer_use`. OpenBot appends its own entry under that name at spawn, and
- * all four providers key servers by name: Codex and Claude would hand the agent OpenBot's server in
+ * server the user named `computer_use`. OmniBot appends its own entry under that name at spawn, and
+ * all four providers key servers by name: Codex and Claude would hand the agent OmniBot's server in
  * place of the user's, and an ACP provider would receive two servers with one name. The row is
  * renamed rather than removed, so the user keeps the server, its command and its secrets, and sees
  * the new name where they configured it. A later save cannot take the name back: `mcpConfigErrors`
@@ -1466,19 +1466,19 @@ function containedInAnotherId(agentId: string, taken: ReadonlySet<string>): bool
   return false;
 }
 
-// The workspace root moves from `OpenBot/Bots` to `OpenBot/Agents`; the id in the leaf is rewritten by the
+// The workspace root moves from `OmniBot/Bots` to `OmniBot/Agents`; the id in the leaf is rewritten by the
 // id substitution that follows. The root is only ever substituted with its full absolute prefix attached,
 // derived from a path this database actually stored, so a user whose own checkout sits at
-// `~/Projects/OpenBot/Bots` does not get their files silently repointed.
+// `~/Projects/OmniBot/Bots` does not get their files silently repointed.
 function legacyWorkspaceRoots(renames: readonly AgentIdRename[]): readonly { from: string; to: string }[] {
   const roots = new Map<string, { from: string; to: string }>();
   for (const rename of renames) {
     if (rename.workspacePath === null) continue;
     // A Windows profile stores this path with backslashes. Matching only the POSIX form would leave the
-    // root behind and rewrite the leaf alone, giving `OpenBot\Bots\agent-<uuid>` -- a name no reader
+    // root behind and rewrite the leaf alone, giving `OmniBot\Bots\agent-<uuid>` -- a name no reader
     // recognizes, since rebasing a path out of a resumed provider transcript looks for an `Agents` parent.
     for (const separator of ["/", "\\"]) {
-      const root = ["OpenBot", "Bots", ""].join(separator);
+      const root = ["OmniBot", "Bots", ""].join(separator);
       const suffix = `${separator}${root}${rename.oldId}`;
       if (!rename.workspacePath.endsWith(suffix)) continue;
       const from = `${rename.workspacePath.slice(0, -suffix.length)}${separator}${root}`;

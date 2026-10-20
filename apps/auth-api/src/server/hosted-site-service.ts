@@ -1324,7 +1324,7 @@ export class HostedSiteService {
       for (let attempt = 0; attempt < 5; attempt += 1) {
         const words = slugWords(source);
         const descriptive = descriptiveSlug(words);
-        const hostname = `${descriptive}-${randomBase32(10)}.openbot.site`;
+        const hostname = `${descriptive}-${randomBase32(10)}.omnibot-sites.example.com`;
         const existing = yield* siteCall(() =>
           database
             .prepare("SELECT hostname FROM site_hostname_reservations WHERE hostname = ?")

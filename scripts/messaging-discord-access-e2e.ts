@@ -1,4 +1,4 @@
-// Checks two Discord servers on one OpenBot server, the role list of a Discord server, and the
+// Checks two Discord servers on one OmniBot server, the role list of a Discord server, and the
 // replied-to message as context. A Gateway event goes through Signal's normalizer
 // (`remote/api/src/discord-events.ts`), a JSON round trip and the host's decoder, into the real
 // Discord driver and messaging service on a temporary profile. Signal's API (`makeDiscordApi`) runs
@@ -29,7 +29,7 @@ import {
   MessagingAdapterError,
   type MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseSetDiscordAccessInput } from "../src/main/ipc/messaging-inputs";
 
@@ -162,7 +162,7 @@ const rest = {
           { id: GUILD_ONE, name: "@everyone", position: 0 },
           { id: MEMBERS, name: "Members", position: 1 },
           { id: MAINTAINERS, name: "Maintainers", position: 2 },
-          { id: "400000000000000009", name: "OpenBot", position: 3, managed: true },
+          { id: "400000000000000009", name: "OmniBot", position: 3, managed: true },
           // 60 emoji: 60 characters for Discord, 120 UTF-16 units.
           { id: LONG_ROLE, name: "🦊".repeat(60), position: 0 },
         ]);
@@ -175,7 +175,7 @@ const signal = new DiscordState(APP);
 signal.handle(
   gateway("READY", {
     v: 10,
-    user: { id: APP, username: "OpenBot", bot: true },
+    user: { id: APP, username: "OmniBot", bot: true },
     application: { id: APP, flags: 0 },
     guilds: [
       { id: GUILD_ONE, unavailable: true },
@@ -244,7 +244,7 @@ interface Booted {
 }
 
 async function boot<T>(use: (services: Booted) => Promise<T>): Promise<T> {
-  const database = new OpenBotDatabase(userData);
+  const database = new OmniBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const sidebar = new SidebarLayoutStore(join(userData, "sidebar-layout.json"));
@@ -300,7 +300,7 @@ interface Mention {
   replyTo?: { id: string; authorId: string; authorName: string; content: string };
 }
 
-/** One MESSAGE_CREATE that mentions OpenBot, through Signal and the relay. Returns Signal's delivery. */
+/** One MESSAGE_CREATE that mentions OmniBot, through Signal and the relay. Returns Signal's delivery. */
 async function mention(message: Mention) {
   const actions = signal.handle(
     gateway("MESSAGE_CREATE", {
@@ -343,7 +343,7 @@ const received = (messageId: string) =>
       call.method === "PUT" && call.route.includes(`/messages/${messageId}/reactions/${encodeURIComponent("👀")}/`),
   );
 
-/** Whether OpenBot reacted to the message, or posted a reply to it. */
+/** Whether OmniBot reacted to the message, or posted a reply to it. */
 function touched(messageId: string): boolean {
   return calls.some(
     (call) => call.route.includes(`/messages/${messageId}`) || JSON.stringify(call.body ?? null).includes(messageId),
@@ -373,7 +373,7 @@ try {
     return { base: DISCORD_GATEWAY_INTENTS, messageContent: DISCORD_MESSAGE_CONTENT_INTENT };
   });
 
-  // Two Discord servers connect to one OpenBot server, as after two installs.
+  // Two Discord servers connect to one OmniBot server, as after two installs.
   await boot(async ({ threads }) => {
     for (const [guildId, name] of [
       [GUILD_ONE, "Nightly"],
@@ -436,7 +436,7 @@ try {
         () => null,
         (error: unknown) => (error instanceof Error ? error.message : String(error)),
       );
-      assert.equal(failure, "OpenBot cannot list Discord roles yet. Try again later.");
+      assert.equal(failure, "OmniBot cannot list Discord roles yet. Try again later.");
       return { failure };
     });
 
@@ -454,7 +454,7 @@ try {
       return { refused: true };
     });
 
-    await step("with a role list, only members with one of its roles reach OpenBot", async () => {
+    await step("with a role list, only members with one of its roles reach OmniBot", async () => {
       const input = parseSetDiscordAccessInput({
         workspaceId: GUILD_ONE,
         allowedRoles: [{ id: MAINTAINERS, name: "Maintainers" }],
@@ -494,8 +494,8 @@ try {
       });
       await received(maintainer);
       // The role check runs before the first await, so the ignored mentions are decided by now.
-      assert.equal(touched(outsider), false, "OpenBot reacted or replied to a member without a listed role.");
-      assert.equal(touched(unknownRoles), false, "OpenBot reacted or replied to a mention without roles.");
+      assert.equal(touched(outsider), false, "OmniBot reacted or replied to a member without a listed role.");
+      assert.equal(touched(unknownRoles), false, "OmniBot reacted or replied to a mention without roles.");
       const record = services.threads.store.connectionForWorkspace("discord", GUILD_ONE);
       assert.ok(record);
       assert.equal(
@@ -537,14 +537,14 @@ try {
           id: replied,
           authorId: KAMIL,
           authorName: "Kamil",
-          content: `Feature idea: webhooks for OpenBot. <@${BOB}> agrees.`,
+          content: `Feature idea: webhooks for OmniBot. <@${BOB}> agrees.`,
         },
       });
       await received(id);
       const prompt = await promptOf(services, GUILD_ONE, id, CHANNEL_ONE);
       assert.match(
         prompt,
-        /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Kamil: Feature idea: webhooks for OpenBot\. @Bob agrees\.\n--- message ---\nmake an issue for this/u,
+        /--- the message this one replies to \(context\) ---\n\[2026-10-19T11:40:00\.000Z\] Kamil: Feature idea: webhooks for OmniBot\. @Bob agrees\.\n--- message ---\nmake an issue for this/u,
       );
       assert.doesNotMatch(prompt, /earlier messages in this conversation/u);
 
@@ -616,5 +616,5 @@ try {
   await rm(root, { recursive: true, force: true });
 }
 // The report names steps and ids only: no message text.
-assert.ok(!readFileSync(REPORT, "utf8").includes("webhooks for OpenBot"), "The report contains message text.");
+assert.ok(!readFileSync(REPORT, "utf8").includes("webhooks for OmniBot"), "The report contains message text.");
 process.stdout.write(`Discord access check passed. Report: ${REPORT}\n`);

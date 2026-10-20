@@ -3,8 +3,8 @@ import { defineMessages } from "../../../message";
 export const messages = defineMessages("error.import", {
   // Agent import errors and warnings.
   "error.import.manifestNotJson": "{manifest} is not valid JSON.",
-  "error.import.notAgentExport": "{manifest} is not an OpenBot agent export.",
-  "error.import.newerExportSkill": "This export was made by a newer export skill. Update OpenBot and try again.",
+  "error.import.notAgentExport": "{manifest} is not an OmniBot agent export.",
+  "error.import.newerExportSkill": "This export was made by a newer export skill. Update OmniBot and try again.",
   "error.import.noAgents": "The export contains no agents.",
   "error.import.tooManyAgents": "The export contains more than {limit} agents.",
   "error.import.tooManyChannels": "The export contains more than {limit} channels.",
@@ -41,11 +41,11 @@ export const messages = defineMessages("error.import", {
   "error.import.hostBusy": "The server is reading other exports. Try again in a few minutes.",
   "error.import.skillKept":
     '{name}: the server already has the skill "{skill}", so the agent uses that skill. Ask an admin to update it.',
-  // Instance transfer between two OpenBot computers.
+  // Instance transfer between two OmniBot computers.
   "error.import.transferRemoteTooLarge":
     "A transfer file for a joined server must be under 100 MB. Turn off workspace files, or export fewer agents.",
-  "error.import.transferNotFile": "This file is not an OpenBot transfer file.",
-  "error.import.transferNewer": "A newer version of OpenBot made this file. Update OpenBot and try again.",
+  "error.import.transferNotFile": "This file is not an OmniBot transfer file.",
+  "error.import.transferNewer": "A newer version of OmniBot made this file. Update OmniBot and try again.",
   "error.import.transferEmpty": "The file contains no agents and no settings.",
   "error.import.transferTooLarge":
     "A transfer file must be under 2 GB and 50,000 files. Turn off workspace files, or export fewer agents.",

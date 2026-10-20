@@ -218,7 +218,7 @@ export function ContactPage() {
             <div class="landing-faq-layout">
               <header class="landing-section-heading landing-faq-heading">
                 <h1 id="contact-title">Talk to the team</h1>
-                <p>Tell us what you need. A person on the OpenBot team reads each message.</p>
+                <p>Tell us what you need. A person on the OmniBot team reads each message.</p>
                 <ul class="contact-channels">
                   <For each={CONTACT_CHANNELS}>
                     {(channel) => (

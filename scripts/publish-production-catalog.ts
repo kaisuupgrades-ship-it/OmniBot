@@ -4,24 +4,24 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { buildProductionCatalog } from "./build-production-catalog";
 
-const logger = createOpenBotLogger("publish-production-catalog");
+const logger = createOmniBotLogger("publish-production-catalog");
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const authApiRoot = join(projectRoot, "apps", "auth-api");
 const executableSuffix = process.platform === "win32" ? ".exe" : "";
 const wrangler = join(projectRoot, "node_modules", ".bin", `wrangler${executableSuffix}`);
-const productionApiUrl = "https://api.openbot.run";
+const productionApiUrl = "https://api.omnibot.example.com";
 const productionDatabase = "openbot-auth";
 const productionBucket = "openbot-skills";
 const owner = {
   id: "openbot-production-catalog",
   identityKey: "openbot-production-catalog",
-  email: "catalog@openbot.run",
-  name: "OpenBot",
-  avatarUrl: "https://openbot.run/icon-192x192.png",
+  email: "catalog@omnibot.example.com",
+  name: "OmniBot",
+  avatarUrl: "https://omnibot.example.com/icon-192x192.png",
 } as const;
 
 interface PublishedSkill {

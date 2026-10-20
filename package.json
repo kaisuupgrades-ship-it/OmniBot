@@ -1,7 +1,7 @@
 {
   "name": "openbot",
-  "productName": "OpenBot",
-  "desktopName": "openbot.desktop",
+  "productName": "OmniBot",
+  "desktopName": "omnibot.desktop",
   "version": "0.45.0",
   "description": "A local-first multi-agent desktop workspace for Codex, Claude, and Grok.",
   "author": {
@@ -11,12 +11,12 @@
   "license": "PolyForm-Noncommercial-1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nightly-labs/openbot.git"
+    "url": "git+https://omnibot.example.com/source.git"
   },
   "bugs": {
-    "url": "https://github.com/nightly-labs/openbot/issues"
+    "url": "https://omnibot.example.com/source/issues"
   },
-  "homepage": "https://github.com/nightly-labs/openbot#readme",
+  "homepage": "https://omnibot.example.com/source#readme",
   "keywords": [
     "ai-agents",
     "bun",

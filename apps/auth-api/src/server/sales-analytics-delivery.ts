@@ -2,7 +2,7 @@ import { isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { ACCOUNT_ANALYTICS_SCHEMA_VERSION, FIRST_TOUCH_PROPERTIES } from "./account-analytics";
 
-const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const SEND_TIMEOUT_MS = 5_000;
 const CLAIM_TIMEOUT_MS = 5 * 60_000;
 const MAX_BATCH_SIZE = 50;

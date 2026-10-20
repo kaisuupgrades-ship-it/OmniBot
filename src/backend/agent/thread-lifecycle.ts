@@ -13,7 +13,7 @@ import {
 } from "@openbot/contracts/ipc";
 import type { DynamicRecord } from "@openbot/contracts/runtime-values";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Effect, Result, Schema } from "effect";
 import type { AgentClient, AgentProvider } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -53,7 +53,7 @@ import { isArchivedThreadError, isMissingProviderSessionError } from "./thread-i
 import { VISIBLE_DYNAMIC_TOOLS } from "./tool-catalog";
 import { codexSandboxConfig, codexSandboxMode, workspaceWritableRoots } from "./workspace-sandbox";
 
-const logger = createOpenBotLogger("thread-lifecycle");
+const logger = createOmniBotLogger("thread-lifecycle");
 
 /**
  * What the Codex adapter sends, versioned. Codex ignores MCP configuration on resume, so a
@@ -562,7 +562,7 @@ export class ThreadLifecycle {
    * `codexMcpServers`. Every other provider gets nothing here.
    *
    * The user's own `~/.codex/config.toml` entries are turned off in the same record, so the MCP
-   * panel is the only door to an agent's tools. OpenBot's entries are spread last: a name in both
+   * panel is the only door to an agent's tools. OmniBot's entries are spread last: a name in both
    * places resolves to the one the panel shows.
    *
    * The agent environment goes in as one dotted key for each variable. Codex applies a dotted key
@@ -653,7 +653,7 @@ export class ThreadLifecycle {
    * secret values to a digest first, so the file this string is written to holds none of them.
    *
    * The names swept out of `~/.codex/config.toml` are folded in as well, and they are the reason
-   * this is not OpenBot's set alone: a user who edits that file changes what the agent is given
+   * this is not OmniBot's set alone: a user who edits that file changes what the agent is given
    * while the stored set is untouched, and a loaded session would keep the old tools with the
    * panel saying otherwise.
    *
@@ -886,7 +886,7 @@ export class ThreadLifecycle {
 
   /**
    * Closes one provider session that the provider refuses, and keeps the public thread. The next
-   * turn opens a new session, and `startProviderThread` gives it the OpenBot transcript.
+   * turn opens a new session, and `startProviderThread` gives it the OmniBot transcript.
    */
   readonly dropRefusedProviderSession = Effect.fn("ThreadLifecycle.dropRefusedProviderSession")(function* (
     this: ThreadLifecycle,

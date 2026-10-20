@@ -51,7 +51,7 @@ export type { ExportedAttachmentFile, GeneratedAttachmentSource } from "./attach
 import { isEmptyStoredFile, parseStoredJson } from "./atomic-json-file";
 import { mailboxReactionRowKey } from "./database/mailbox-projection";
 import { MailboxDeliveryGate } from "./mailbox-delivery-gate";
-import { OpenBotDatabase } from "./openbot-database";
+import { OmniBotDatabase } from "./openbot-database";
 import { isRecord } from "./protocol";
 import { recordRestartActivity } from "./restart-activity";
 
@@ -217,7 +217,7 @@ export interface CommittedChannelAttachments {
 export class MailboxStore {
   readonly #statePath: string;
   readonly #files: AttachmentFiles;
-  readonly #database: OpenBotDatabase;
+  readonly #database: OmniBotDatabase;
   readonly #queueUpdates = new Set<string>();
   readonly #deliveryGate = new MailboxDeliveryGate();
   readonly #stagedGeneratedAttachments = new Map<string, StoredGeneratedAttachment>();
@@ -231,7 +231,7 @@ export class MailboxStore {
     reactionKeys: new Set<string>(),
   };
 
-  constructor(userDataPath: string, sharedRoot: string, database = new OpenBotDatabase(userDataPath)) {
+  constructor(userDataPath: string, sharedRoot: string, database = new OmniBotDatabase(userDataPath)) {
     this.#statePath = join(userDataPath, "mailbox.json");
     this.#files = new AttachmentFiles({ userDataPath, sharedRoot });
     this.#database = database;

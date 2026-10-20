@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a problem that you can reproduce in OpenBot.
+description: Report a problem that you can reproduce in OmniBot.
 title: "[Bug]: "
 labels: [bug, needs-triage]
 body:
@@ -33,7 +33,7 @@ body:
     attributes:
       label: Installation source
       options:
-        - Release download from GitHub or openbot.run
+        - Release download from GitHub or omnibot.example.com
         - In-app update
         - TestFlight or App Store
         - Google Play
@@ -45,7 +45,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: OpenBot version
+      label: OmniBot version
       description: "Desktop: Settings → Updates. Phone: Settings → About. From source: the commit SHA."
       placeholder: 0.42.0
     validations:

@@ -78,8 +78,8 @@ export const AGENT_IMPORT_WARNINGS = [
 /** The start of the export skill, as `agentImport.readSkill` answers it. */
 export const AGENT_IMPORT_SKILL = `---
 name: openbot-export
-description: Export the user's Grok Bot agents into one .zip file that OpenBot imports.
+description: Export the user's Grok Bot agents into one .zip file that OmniBot imports.
 ---
 
-# Export agents for OpenBot
+# Export agents for OmniBot
 `;

@@ -3,8 +3,8 @@
  * the app, and the browser client's entry for it.
  *
  * ```
- * https://openbot.run/agents/<id>    the link a person shares and the app copies
- * openbot://agents/<id>              the link the page button opens
+ * https://omnibot.example.com/agents/<id>    the link a person shares and the app copies
+ * omnibot://agents/<id>              the link the page button opens
  * /app?agent=<id>                    the page's link to the browser client, on the same origin
  * ```
  *
@@ -13,7 +13,7 @@
  * installing is still a press of Install there.
  */
 
-export const OPENBOT_AGENT_TEMPLATE_ORIGIN = "https://openbot.run";
+export const OPENBOT_AGENT_TEMPLATE_ORIGIN = "https://omnibot.example.com";
 export const OPENBOT_AGENT_TEMPLATE_PATH_PREFIX = "/agents/";
 export const OPENBOT_AGENT_TEMPLATE_HOST = "agents";
 export const WEB_APP_AGENT_TEMPLATE_PARAM = "agent";
@@ -26,7 +26,7 @@ export function isAgentTemplateId(value: string): boolean {
 }
 
 /**
- * The site a share link names: `openbot.run`, or a loopback origin while a developer runs the Account
+ * The site a share link names: `omnibot.example.com`, or a loopback origin while a developer runs the Account
  * Worker on this computer. Nothing else passes, so a configured address cannot turn the copied link
  * into another site.
  */
@@ -44,7 +44,7 @@ export function isAgentTemplateShareOrigin(origin: string): boolean {
   }
 }
 
-/** The share origin for an Account Worker: the local Worker in development, `openbot.run` otherwise. */
+/** The share origin for an Account Worker: the local Worker in development, `omnibot.example.com` otherwise. */
 export function agentTemplateShareOrigin(apiOrigin: string): string {
   return apiOrigin !== OPENBOT_AGENT_TEMPLATE_ORIGIN && isAgentTemplateShareOrigin(apiOrigin)
     ? apiOrigin
@@ -53,7 +53,7 @@ export function agentTemplateShareOrigin(apiOrigin: string): string {
 
 export function createAgentTemplateShareUrl(id: string, origin: string = OPENBOT_AGENT_TEMPLATE_ORIGIN): string {
   assertAgentTemplateId(id);
-  if (!isAgentTemplateShareOrigin(origin)) throw new Error("The OpenBot agent link origin is invalid.");
+  if (!isAgentTemplateShareOrigin(origin)) throw new Error("The OmniBot agent link origin is invalid.");
   return `${origin}${OPENBOT_AGENT_TEMPLATE_PATH_PREFIX}${id}`;
 }
 
@@ -72,9 +72,9 @@ export function agentTemplateIdFromWebAppSearch(search: string): string | null {
   return id !== null && isAgentTemplateId(id) ? id : null;
 }
 
-export function createOpenBotAgentTemplateUrl(id: string): string {
+export function createOmniBotAgentTemplateUrl(id: string): string {
   assertAgentTemplateId(id);
-  return `openbot://${OPENBOT_AGENT_TEMPLATE_HOST}/${id}`;
+  return `omnibot://${OPENBOT_AGENT_TEMPLATE_HOST}/${id}`;
 }
 
 /** The template id a link names, in either form. Throws for anything else. */
@@ -83,15 +83,15 @@ export function parseAgentTemplateUrl(value: string): string {
   try {
     url = new URL(value);
   } catch {
-    throw new Error("The OpenBot agent link is invalid.");
+    throw new Error("The OmniBot agent link is invalid.");
   }
 
-  // The origin is compared as one string, so `openbot.run.example.com` does not pass.
+  // The origin is compared as one string, so `omnibot.example.com.example.com` does not pass.
   const canonical =
     url.protocol === "https:" &&
     url.origin === OPENBOT_AGENT_TEMPLATE_ORIGIN &&
     url.pathname.startsWith(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX);
-  const customScheme = url.protocol === "openbot:" && url.hostname === OPENBOT_AGENT_TEMPLATE_HOST;
+  const customScheme = url.protocol === "omnibot:" && url.hostname === OPENBOT_AGENT_TEMPLATE_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||
@@ -100,19 +100,19 @@ export function parseAgentTemplateUrl(value: string): string {
     url.search !== "" ||
     url.hash !== ""
   ) {
-    throw new Error("The OpenBot agent link is invalid.");
+    throw new Error("The OmniBot agent link is invalid.");
   }
 
   const rest = canonical
     ? url.pathname.slice(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX.length)
     : url.pathname.replace(/^\//u, "");
   const segments = rest.split("/");
-  if (segments.length !== 1) throw new Error("The OpenBot agent link is invalid.");
+  if (segments.length !== 1) throw new Error("The OmniBot agent link is invalid.");
   const id = segments[0] ?? "";
   assertAgentTemplateId(id);
   return id;
 }
 
 function assertAgentTemplateId(id: string): void {
-  if (!isAgentTemplateId(id)) throw new Error("The OpenBot agent link is invalid.");
+  if (!isAgentTemplateId(id)) throw new Error("The OmniBot agent link is invalid.");
 }

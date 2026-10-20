@@ -9,11 +9,11 @@ import assert from "node:assert/strict";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { type AppTextKey, en, TRANSLATED_LOCALES, type TranslatedLocale, translateFor } from "@openbot/i18n";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { type FitProblem, measureFit } from "./i18n-fit-probe";
 
-const logger = createOpenBotLogger("i18n-fit-e2e");
+const logger = createOmniBotLogger("i18n-fit-e2e");
 
 /** The Storybook preview API that switches a global, such as the locale, without a reload. */
 interface StorybookPreview {
@@ -301,7 +301,7 @@ const browser: Browser = await chromium.launch(
   browserExecutable ? { executablePath: browserExecutable } : { channel: "chrome" },
 );
 const newPage = () => browser.newPage({ viewport: { width: 1280, height: 800 } });
-// A story that navigates away, such as a "Return to OpenBot" page, can leave an evaluate that never
+// A story that navigates away, such as a "Return to OmniBot" page, can leave an evaluate that never
 // settles, and a story can close its own window. The deadline and the closed-page check give the worker
 // a new page, so one story cannot stop the run.
 const STORY_DEADLINE_MS = 120_000;

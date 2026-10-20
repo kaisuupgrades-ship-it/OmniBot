@@ -21,7 +21,7 @@ import {
 import { MOBILE_APPS } from "./mobile-apps";
 import { TEAMS_ROUTE } from "./teams-page";
 
-const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
 const ANALYTICS_SCHEMA_VERSION = 9;
 
@@ -304,7 +304,7 @@ class LandingAnalytics {
     const handleClick = (event: MouseEvent) => {
       const target = event.target;
       const link = target instanceof Element ? target.closest<HTMLAnchorElement>("a[href]") : null;
-      if (link?.getAttribute("href")?.startsWith("openbot://")) {
+      if (link?.getAttribute("href")?.startsWith("omnibot://")) {
         this.#track("join_page_action", { action: "open_app" });
         return;
       }

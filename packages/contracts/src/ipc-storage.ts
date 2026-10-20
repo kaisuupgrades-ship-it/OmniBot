@@ -136,7 +136,7 @@ export interface OpenStoredFileInput {
   action: "open" | "reveal" | "download";
 }
 
-/** The provider CLI versions on this computer that no OpenBot app uses any more. */
+/** The provider CLI versions on this computer that no OmniBot app uses any more. */
 export interface OldRuntimeVersions {
   bytes: number;
 }

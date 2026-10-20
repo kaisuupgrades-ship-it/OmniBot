@@ -43,7 +43,7 @@ Issue labels do not change this workflow. Do not add or remove labels.
    - **Expected**: what the reporter expects.
    - **Surface**: desktop renderer, main process, backend, mobile, public
      web, Signal, Team API, provider, or plugin.
-   - **Version**: the OpenBot version or commit, and the provider CLI version.
+   - **Version**: the OmniBot version or commit, and the provider CLI version.
 4. When the issue does not give enough data to reproduce or to find a code
    path, go to Step 2 with the verdict `needs info`.
 
@@ -61,7 +61,7 @@ an issue, a `path:line`, or a command output.
 | `already fixed` | A commit on `origin/main` that fixes it, from `git log origin/main --grep` or `git log -S`. Give the first release tag that holds it: `git tag --contains <sha> --list 'v*' --sort=v:refname \| head -n 1`. |
 | `works as intended` | The code, a test, or a doc that defines the current behavior as correct. |
 | `out of scope` | A product constraint or a non-negotiable rule in `AGENTS.md` that the requested change breaks. Example: chats or files that leave the user's computer, or a change to a released Team API meaning. |
-| `environment` | The cause is outside OpenBot: provider CLI version, OS setting, network, or a third-party service. |
+| `environment` | The cause is outside OmniBot: provider CLI version, OS setting, network, or a third-party service. |
 | `feature request` | The issue asks for new behavior, not a fix for broken behavior. |
 | `needs info` | The data that is missing, and why you cannot get it from the code or the history. |
 | `valid` | None of the above holds. Continue to Step 3. |

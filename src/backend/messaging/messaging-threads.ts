@@ -11,10 +11,10 @@ import {
 } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
 import { Deferred, Effect, Result, Schema, type Scope } from "effect";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
 import { causeHelpers } from "../effect-boundary";
 import type { DeliveryContext, MailboxStore, MessagingOrigin } from "../mailbox-store";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../openbot-database";
 import { MessagingMemoryStore } from "./messaging-memory-store";
 import { type MessagingContextMessage, messagingPromptText } from "./messaging-prompt";
 import type { MessagingOperationFailed } from "./messaging-service";
@@ -146,7 +146,7 @@ export class MessagingThreads {
   readonly store: MessagingStore;
   /** The facts of each connection, which every prompt of its conversations shows. */
   readonly memories: MessagingMemoryStore;
-  readonly #database: OpenBotDatabase;
+  readonly #database: OmniBotDatabase;
   readonly #mailbox: MailboxStore;
   readonly #hooks: MessagingThreadsHooks;
   readonly #listeners = new Set<(activity: MessagingActivity) => void>();
@@ -173,7 +173,7 @@ export class MessagingThreads {
     | null = null;
   #outbound: MessagingOutbound | null = null;
 
-  constructor(database: OpenBotDatabase, mailbox: MailboxStore, hooks: MessagingThreadsHooks) {
+  constructor(database: OmniBotDatabase, mailbox: MailboxStore, hooks: MessagingThreadsHooks) {
     this.store = new MessagingStore(database);
     this.memories = new MessagingMemoryStore(database);
     this.#database = database;
@@ -222,7 +222,7 @@ export class MessagingThreads {
     this: MessagingThreads,
     tool: string,
     args: unknown,
-  ): Effect.fn.Return<OpenBotToolResponse> {
+  ): Effect.fn.Return<OmniBotToolResponse> {
     const call = parseMessagingOutboundTool(tool, args);
     if ("error" in call) return openBotToolFailure(call.error);
     const enabled = this.store.connections().filter((record) => record.enabled);
@@ -255,7 +255,7 @@ export class MessagingThreads {
   });
 
   /**
-   * A post that OpenBot sends on its own, such as a routine's answer, to the top level of one place.
+   * A post that OmniBot sends on its own, such as a routine's answer, to the top level of one place.
    * Only an enabled connection of this host can take it.
    */
   readonly deliver = Effect.fn("MessagingThreads.deliver")(function* (
@@ -312,7 +312,7 @@ export class MessagingThreads {
     callId: string,
     tool: string,
     args: unknown,
-  ): Effect.fn.Return<OpenBotToolResponse> {
+  ): Effect.fn.Return<OmniBotToolResponse> {
     const call = parseMessagingTool(tool, args);
     if ("error" in call) return openBotToolFailure(call.error);
     switch (call.tool) {

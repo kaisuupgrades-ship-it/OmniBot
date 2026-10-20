@@ -29,9 +29,9 @@ import {
   hostedSiteEventMessageId,
   hostedSiteTool,
 } from "./hosted-site-events";
-import { type OpenBotToolResponse, openBotToolResult, siteToolString } from "./routine-tools";
+import { type OmniBotToolResponse, openBotToolResult, siteToolString } from "./routine-tools";
 
-/** The openbot.site host, injected so the backend never depends on the account Worker directly. */
+/** The omnibot-sites.example.com host, injected so the backend never depends on the account Worker directly. */
 export interface AgentHostedSites {
   list(): Effect.Effect<HostedSiteList, HostedSiteOperationFailed>;
   publish(
@@ -80,14 +80,14 @@ interface HostedSiteApprovalDetails {
 }
 
 interface HostedSiteMutationResult {
-  response: OpenBotToolResponse;
+  response: OmniBotToolResponse;
   eventDetails: HostedSiteConversationEventDetails;
 }
 
 export const HOSTED_SITE_APPROVAL_METHOD = "openbot/hosted-site-mutation";
 
 /**
- * Owns publishing to openbot.site: the approval a mutation needs, the mutation itself, and the
+ * Owns publishing to omnibot-sites.example.com: the approval a mutation needs, the mutation itself, and the
  * conversation markers that record it.
  *
  * The markers are the reason this is a class rather than a set of functions. A terminal marker
@@ -136,7 +136,7 @@ export class HostedSiteCoordinator {
     if (!turnId || !agentId) {
       client.respondError(request.id, {
         code: -32602,
-        message: "OpenBot could not identify this hosted site request.",
+        message: "OmniBot could not identify this hosted site request.",
       });
       return null;
     }
@@ -233,7 +233,7 @@ export class HostedSiteCoordinator {
   }
 
   #requireHostedSites(): AgentHostedSites {
-    if (!this.#hostedSites) throw new Error("OpenBot site hosting is unavailable.");
+    if (!this.#hostedSites) throw new Error("OmniBot site hosting is unavailable.");
     return this.#hostedSites;
   }
 
@@ -251,7 +251,7 @@ export class HostedSiteCoordinator {
       const siteId = yield* siteStep(() => siteToolString(args.siteId, "siteId", INPUT_LIMITS.identifier));
       const site = yield* this.#ownedSiteEffect(siteId);
       return {
-        reason: `Delete ${site.hostname} from openbot.site.`,
+        reason: `Delete ${site.hostname} from omnibot-sites.example.com.`,
         permissions: { fileSystem: { read: [], write: [] }, network: true },
         eventDetails: hostedSiteEventDetails(site, siteId),
       };
@@ -266,7 +266,7 @@ export class HostedSiteCoordinator {
     const permissions = { fileSystem: { read: [sourcePath], write: [] }, network: true };
     if (tool === "publish_site") {
       return {
-        reason: `Publish ${JSON.stringify(title)} as a public site on openbot.site.`,
+        reason: `Publish ${JSON.stringify(title)} as a public site on omnibot-sites.example.com.`,
         permissions,
         eventDetails: { siteId: null, title, hostname: null, url: null },
       };

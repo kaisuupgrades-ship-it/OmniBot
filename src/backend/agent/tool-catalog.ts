@@ -68,7 +68,7 @@ export const VISIBLE_DYNAMIC_TOOLS = [
   {
     type: "namespace" as const,
     name: "openbot",
-    description: "OpenBot tools. Search, describe, then call other built-in and browser capabilities.",
+    description: "OmniBot tools. Search, describe, then call other built-in and browser capabilities.",
     tools: VISIBLE_TOOL_DEFINITIONS.map((definition) => ({
       type: "function" as const,
       name: definition.name,

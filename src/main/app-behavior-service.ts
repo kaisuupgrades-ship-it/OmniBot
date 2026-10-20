@@ -1,15 +1,15 @@
 import type { AppBehaviorPreference, AppBehaviorPreferenceChange } from "@openbot/contracts/ipc";
 import { isBoolean, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { Effect, Result, Semaphore } from "effect";
 import { isMissingFileError } from "../backend/file-errors";
 import type { LoginItem, LoginItemFailure } from "./login-item";
 import { type PreferenceFileFailure, readPreferenceFile, writePreferenceFile } from "./preference-file";
 
-const logger = createOpenBotLogger("app-behavior");
+const logger = createOmniBotLogger("app-behavior");
 
 /**
- * How OpenBot starts and stops on this computer.
+ * How OmniBot starts and stops on this computer.
  *
  * The keep-running choice is stored here, because main reads it each time the main window closes.
  * The launch-at-login choice is not stored: the operating system holds it, and the user can change

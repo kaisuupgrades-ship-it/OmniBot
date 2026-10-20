@@ -95,9 +95,9 @@ export class LocalMcpBridge {
     call: BridgeRoute["call"],
   ): Effect.fn.Return<LocalMcpSession, McpOperationError> {
     const closes = this.#closes;
-    if (this.#closing) return yield* mcpFailure(new Error("The local OpenBot MCP bridge closed."));
+    if (this.#closing) return yield* mcpFailure(new Error("The local OmniBot MCP bridge closed."));
     yield* this.#listen();
-    if (closes !== this.#closes) return yield* mcpFailure(new Error("The local OpenBot MCP bridge closed."));
+    if (closes !== this.#closes) return yield* mcpFailure(new Error("The local OmniBot MCP bridge closed."));
     const tokens: string[] = [];
     const servers = namespaces.map((namespace) => {
       const token = randomBytes(32).toString("base64url");
@@ -187,7 +187,7 @@ export class LocalMcpBridge {
           ).pipe(Effect.uninterruptible);
           const address = server.address();
           if (!address || isString(address))
-            return yield* mcpFailure(new Error("Unable to bind the local OpenBot MCP bridge."));
+            return yield* mcpFailure(new Error("Unable to bind the local OmniBot MCP bridge."));
           this.#server = server;
           this.#port = address.port;
           retained = true;

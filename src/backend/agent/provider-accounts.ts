@@ -10,7 +10,7 @@ import {
   type ProviderAccountStatus,
 } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Cause, Effect, Fiber, Schema, type Scope } from "effect";
 import type { AgentClient } from "./../agent-client";
 import type { AgentCliInfo } from "./../cli";
@@ -24,7 +24,7 @@ import type { ProviderAccountStore, StoredProviderAccount } from "./provider-acc
 import { waitForSuccessfulProcess } from "./provider-status";
 import { providerLabel } from "./thread-items";
 
-const logger = createOpenBotLogger("provider-accounts");
+const logger = createOmniBotLogger("provider-accounts");
 
 /**
  * How long an account check or a usage reading stays good. The dock asks for usage every five

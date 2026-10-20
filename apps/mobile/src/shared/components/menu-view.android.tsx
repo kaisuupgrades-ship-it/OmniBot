@@ -82,7 +82,7 @@ const ICONS: Partial<Record<string, LucideIcon>> = {
 };
 
 /**
- * OpenBot colors for the menu. HeroUI's `--muted`, `--danger`, `--separator` and `--default` keep the
+ * OmniBot colors for the menu. HeroUI's `--muted`, `--danger`, `--separator` and `--default` keep the
  * HeroUI palette, because uniwind ignores the `:root` aliases in `global.css`.
  */
 type MenuColors = { text: string; muted: string; danger: string; separator: string; pressed: string };

@@ -2,7 +2,7 @@
 // so this opens two `cloudflared` quick tunnels: one to the local Signal, which takes the
 // development Slack app's events, and one to the local account API, which takes the install's
 // return. The dev app gets a loopback port for the end of the install, so the grant reaches it and
-// not an installed OpenBot that owns `openbot://`. The tunnels live as long as this process. Their
+// not an installed OmniBot that owns `omnibot://`. The tunnels live as long as this process. Their
 // addresses change at each start: the development app's request and redirect URLs must follow.
 //
 // `.env.slack-dev` in the worktree root holds the signing secret, and local development state holds
@@ -15,15 +15,15 @@ import { type ChildProcess, spawn } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { createServer } from "node:net";
 import { join } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 
 import { developmentChildEnvironment } from "./development-environment";
 
-const logger = createOpenBotLogger("dev-slack");
+const logger = createOmniBotLogger("dev-slack");
 
 const SLACK_FILE = ".env.slack-dev";
 const SLACK_KEYS = ["OPENBOT_DEV_SLACK_SIGNING_SECRET"] as const;
-/** `OpenBot (dev)`, the app that `apps/slack-app/development` describes. */
+/** `OmniBot (dev)`, the app that `apps/slack-app/development` describes. */
 const DEVELOPMENT_SLACK_APP_ID = "A0C5G5XGS83";
 const TUNNEL_URL = /https:\/\/[a-z0-9-]+\.trycloudflare\.com/u;
 const TUNNEL_TIMEOUT_MS = 45_000;

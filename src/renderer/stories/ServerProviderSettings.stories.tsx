@@ -17,7 +17,7 @@ import { createProviderRuntimeStore } from "../src/features/provider-updates/pro
 import { ServerSettingsModal } from "../src/features/servers/ServerSettingsModal";
 import { STORY_HOST_STATUS, STORY_INVITES, STORY_PRESENCE, STORY_SERVERS } from "../src/preview/fixtures";
 import { createStoryDetection, STORY_DETECTED_PROVIDERS } from "./detected-providers-fixture";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 import { createFakeConnection } from "./provider-connection-fixture";
 import { SettingsPageStory } from "./settings-page-story";
 
@@ -127,7 +127,7 @@ function ServerProvidersStory(props: {
   providerUsers?: Partial<Record<AgentProviderId, readonly string[]>>;
 }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot({
+  const mock = createMockOmniBot({
     ...(props.providerUpdate
       ? {
           providerRuntimeSnapshot: {

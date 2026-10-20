@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { TasksView } from "../src/features/tasks/TasksView";
 import { desktopTasksSource } from "../src/features/tasks/tasks-port";
 import { requireFixture, STORY_AGENTS } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 /*
  * The Tasks page of a server: a composer that starts a task for one agent, and the tasks of all agents
@@ -182,7 +182,7 @@ function TasksPageStory(props: { tasks: readonly AgentTask[] }) {
   const previousApi = window.openbot;
   const tasks: Record<string, AgentTask[]> = {};
   for (const task of props.tasks) tasks[task.agentId] = [...(tasks[task.agentId] ?? []), task];
-  const mock = createMockOpenBot({
+  const mock = createMockOmniBot({
     tasks,
     taskConversations: Object.fromEntries(props.tasks.map((task) => [task.id, conversationOf(task)])),
   });

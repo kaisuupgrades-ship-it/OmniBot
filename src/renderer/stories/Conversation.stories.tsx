@@ -34,7 +34,7 @@ import {
   STORY_PRESENCE,
   STORY_QUEUES,
 } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 const storyAttachment = CONVERSATION_STORY_ATTACHMENT;
 const messages = CONVERSATION_STORY_MESSAGES;
@@ -229,9 +229,9 @@ const agentMessageGalleryMessages: RendererAgentMessage[] = [
     body: [
       "## Links and references",
       "",
-      "Review [OpenBot documentation](https://openbot.run/docs), the [Kobalte guide](https://kobalte.dev/docs/core/overview/introduction), and https://zaidan.carere.dev/docs/components/kobalte/bubble.",
+      "Review [OmniBot documentation](https://omnibot.example.com/docs), the [Kobalte guide](https://kobalte.dev/docs/core/overview/introduction), and https://zaidan.carere.dev/docs/components/kobalte/bubble.",
       "",
-      "You can also open [ConversationView.tsx](/Users/test/OpenBot/src/renderer/src/features/conversation/ConversationView.tsx), ask @Research, or inspect the attached source file below.",
+      "You can also open [ConversationView.tsx](/Users/test/OmniBot/src/renderer/src/features/conversation/ConversationView.tsx), ask @Research, or inspect the attached source file below.",
       "",
       `Attachment reference: ${serializeAttachmentReference(storyAttachment.name, storyAttachment.id)}.`,
       "",
@@ -523,7 +523,7 @@ const longPathReplyMessages: RendererAgentMessage[] = [
       "- **Disk after the clean-up:**",
       "  - Used: 81% → **64%**. The next full rotation is due in 12 days.",
       "  - Largest folder now: **release-candidates**, with 410 MB.",
-      "- **Copies:** I kept the list of deleted logs and their checksums in `/Users/test/OpenBot/Agents/agent-5b0c2e7a-91d4-4f3e-8a6b-2c7d9e1f0a3b/backups/build-log-cleanup-2026-10-15/deleted-build-logs-with-checksums.json`.",
+      "- **Copies:** I kept the list of deleted logs and their checksums in `/Users/test/OmniBot/Agents/agent-5b0c2e7a-91d4-4f3e-8a6b-2c7d9e1f0a3b/backups/build-log-cleanup-2026-10-15/deleted-build-logs-with-checksums.json`.",
       "",
       "Nothing else on the disk changed. Tell me if you also want the crash dumps archived.",
     ].join("\n"),
@@ -1069,7 +1069,7 @@ function MockedConversation(props: {
   conversationError?: string;
 }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot();
+  const mock = createMockOmniBot();
   const controller = createConversationController({ onTypingChange: props.args.onTypingChange });
   const previewUrls = new Set<string>();
   let storyFrameElement: HTMLDivElement | undefined;
@@ -2107,8 +2107,8 @@ const actionMarkerMessages: RendererAgentMessage[] = [
       operationId: "op-1",
       siteId: "site-1",
       title: "Launch status page",
-      hostname: "launch-status-23456789ab.openbot.site",
-      url: "https://launch-status-23456789ab.openbot.site",
+      hostname: "launch-status-23456789ab.omnibot-sites.example.com",
+      url: "https://launch-status-23456789ab.omnibot-sites.example.com",
       timestamp: "2026-08-19T22:50:00.000Z",
     },
   },

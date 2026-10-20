@@ -112,7 +112,7 @@ export interface ConversationProps {
   /**
    * Take the user to the provider's sign-in. Separate from `onConnectProvider`, which is the
    * managed-download path and is withheld when downloads are unavailable: a signed-out provider
-   * needs a way in whether or not OpenBot manages its CLI.
+   * needs a way in whether or not OmniBot manages its CLI.
    */
   onSignInProvider?: ((provider: AgentProviderId) => void | Promise<void>) | undefined;
   /** The code sign-in, for a provider that has one, when the browser sign-in is slow or fails. */

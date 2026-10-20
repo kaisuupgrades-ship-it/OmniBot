@@ -93,7 +93,7 @@ const LEASE_EXTEND_BEFORE_MS = 60 * 60_000;
 /**
  * boat can keep a stopped machine in memory and continue it at a resume, with no boot. Then `/run` keeps
  * the flag of the pre-stop hook (`scripts/hosting/openbot-boat-pre-stop`), the condition of
- * `openbot.service` fails, and OpenBot does not start. This command removes the flag and starts OpenBot.
+ * `openbot.service` fails, and OmniBot does not start. This command removes the flag and starts OmniBot.
  * With no flag it does nothing, so it does not change a machine that boat started with a boot.
  */
 const HELD_RESUME_START_COMMAND =
@@ -2496,7 +2496,7 @@ function rateLimitRetryAt(row: HostedServerRow): number {
   return row.updated_at + Math.min(RATE_LIMIT_RETRY_MAX_MS, Math.max(RATE_LIMIT_RETRY_MIN_MS, waited));
 }
 
-/** A failure does not change the wake. OpenBot then stays stopped until the next stop and resume. */
+/** A failure does not change the wake. OmniBot then stays stopped until the next stop and resume. */
 const startAfterHeldResume = Effect.fn("HostedServerService.startAfterHeldResume")(function* (
   boat: BoatClient,
   serverId: string,

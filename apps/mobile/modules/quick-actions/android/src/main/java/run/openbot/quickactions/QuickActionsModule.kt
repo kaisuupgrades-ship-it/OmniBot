@@ -30,7 +30,7 @@ class QuickActionsModule : Module() {
   private var pending: String? = null
 
   override fun definition() = ModuleDefinition {
-    Name("OpenBotQuickActions")
+    Name("OmniBotQuickActions")
 
     Events(QUICK_ACTION_EVENT)
 

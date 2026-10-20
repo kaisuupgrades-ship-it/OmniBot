@@ -29,25 +29,25 @@ export const messages = {
   "update.provider.showDetails": "Ayrıntıları göster",
   "update.provider.hideDetails": "Ayrıntıları gizle",
 
-  "update.scheduled.title": "{name} bir OpenBot güncellemesi zamanladı",
-  "update.scheduled.automaticTitle": "OpenBot bir güncelleme yüklüyor",
-  "update.scheduled.whenIdle": "OpenBot, ajanlar boştayken yeniden başlar.",
-  "update.scheduled.now": "OpenBot, güncelleme indirildiğinde yeniden başlar.",
+  "update.scheduled.title": "{name} bir OmniBot güncellemesi zamanladı",
+  "update.scheduled.automaticTitle": "OmniBot bir güncelleme yüklüyor",
+  "update.scheduled.whenIdle": "OmniBot, ajanlar boştayken yeniden başlar.",
+  "update.scheduled.now": "OmniBot, güncelleme indirildiğinde yeniden başlar.",
   "update.scheduled.cancel": "Güncellemeyi iptal et",
   "update.scheduled.cancelFailed": "Güncelleme iptal edilemedi.",
 
   // Bu bilgisayarın kullanıcısının istediği yeniden başlatma. Hiçbir çalışma kalmayana kadar bekler.
-  "update.idleRestart.relaunchTitle": "Ajanlar boştayken OpenBot yeniden başlatılır",
-  "update.idleRestart.updateTitle": "Ajanlar boştayken OpenBot güncellemeyi yükler",
+  "update.idleRestart.relaunchTitle": "Ajanlar boştayken OmniBot yeniden başlatılır",
+  "update.idleRestart.updateTitle": "Ajanlar boştayken OmniBot güncellemeyi yükler",
   "update.idleRestart.description": "Yeni rutin çalıştırmaları yeniden başlatmaya kadar bekler.",
   "update.idleRestart.waitingFor": "{reasons} bekleniyor.",
   "update.idleRestart.cancel": "Yeniden başlatmayı iptal et",
   "update.idleRestart.cancelFailed": "Yeniden başlatma iptal edilemedi.",
   "update.idleRestart.requestFailed": "Yeniden başlatma zamanlanamadı.",
-  "update.idleRestart.failedTitle": "OpenBot yeniden başlatılmadı",
+  "update.idleRestart.failedTitle": "OmniBot yeniden başlatılmadı",
 
-  "update.whatsNew.title": "OpenBot'taki yenilikler",
-  "update.whatsNew.description": "OpenBot'un bu sürümündeki yeni özellikler ve değişiklikler.",
+  "update.whatsNew.title": "OmniBot'taki yenilikler",
+  "update.whatsNew.description": "OmniBot'un bu sürümündeki yeni özellikler ve değişiklikler.",
   "update.whatsNew.version": "Sürüm {version}",
   "update.whatsNew.updatedFrom": "{from} sürümünden {to} sürümüne güncellendi",
   "update.whatsNew.group.added": "Yeni",
@@ -64,6 +64,6 @@ export const messages = {
   "update.whatsNew.empty.body":
     "Bu sürümde burada gösterilecek bir not yok. Tüm değişiklikler tam sürüm günlüğünde gösterilir.",
   "update.whatsNew.changelog": "Tam sürüm günlüğü",
-  "update.whatsNew.changelogFailed": "OpenBot sürüm günlüğünü açamadı.",
+  "update.whatsNew.changelogFailed": "OmniBot sürüm günlüğünü açamadı.",
   "update.whatsNew.done": "Anladım",
 } as const satisfies PartialTranslation<typeof source>;

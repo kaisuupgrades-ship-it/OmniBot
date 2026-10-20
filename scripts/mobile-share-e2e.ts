@@ -1,6 +1,6 @@
 // Shares text, a link, an image, a HEIC photo and a PDF to the iOS development build, as the share
 // extension does: the file goes into the App Group, the payload into the App Group defaults, and
-// `simctl openurl` opens `openbot://expo-sharing`. The last case stops the app first (cold start).
+// `simctl openurl` opens `omnibot://expo-sharing`. The last case stops the app first (cold start).
 // Each case waits until the app has taken the share: the payload key is gone and the file is in the
 // share folder in the app cache, as a JPEG for the HEIC photo. Writes
 // .openbot-build/mobile-share-e2e/report.json and one screenshot per case.
@@ -12,14 +12,14 @@ import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writ
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { bootedSimulatorIds, hasMobileRuntime } from "./dev-mobile";
 
 const BUNDLE_ID = "run.openbot.mobile";
 const APP_GROUP = "group.run.openbot.mobile";
 // The key and the payload shape of expo-sharing (`ios/shared/Constants.swift`, `ShareProtocol.swift`).
 const PAYLOAD_KEY = "expo-sharing";
-const SHARE_LINK = "openbot://expo-sharing";
+const SHARE_LINK = "omnibot://expo-sharing";
 const OUT = resolve(import.meta.dirname, "../.openbot-build/mobile-share-e2e");
 const RUNTIME_TIMEOUT_MS = 5 * 60_000;
 // A cold start loads the bundle from Metro and the session before the share sheet reads the share.
@@ -30,7 +30,7 @@ const PDF =
   "%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj " +
   "3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 72 72]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n";
 
-const logger = createOpenBotLogger("mobile-share-e2e");
+const logger = createOmniBotLogger("mobile-share-e2e");
 const run = promisify(execFile);
 
 interface SharePayload {
@@ -82,12 +82,12 @@ async function selectSimulator(): Promise<string> {
       await run("xcrun", ["simctl", "get_app_container", udid, BUNDLE_ID]);
       withApp.push(udid);
     } catch {
-      // OpenBot is not installed on this simulator.
+      // OmniBot is not installed on this simulator.
     }
   }
   const [udid, ...extra] = withApp;
-  if (!udid) throw new Error("No booted simulator has OpenBot installed. Run `bun run dev:mobile` first.");
-  if (extra.length > 0) throw new Error(`Several booted simulators have OpenBot. Pass --simulator=<udid>.`);
+  if (!udid) throw new Error("No booted simulator has OmniBot installed. Run `bun run dev:mobile` first.");
+  if (extra.length > 0) throw new Error(`Several booted simulators have OmniBot. Pass --simulator=<udid>.`);
   return udid;
 }
 
@@ -150,8 +150,8 @@ async function main(): Promise<void> {
   mkdirSync(OUT, { recursive: true });
 
   const cases: ShareCase[] = [
-    { name: "text", coldStart: false, text: [{ type: "text", value: "OpenBot share E2E text" }] },
-    { name: "link", coldStart: false, text: [{ type: "url", value: "https://openbot.run/" }] },
+    { name: "text", coldStart: false, text: [{ type: "text", value: "OmniBot share E2E text" }] },
+    { name: "link", coldStart: false, text: [{ type: "url", value: "https://omnibot.example.com/" }] },
     {
       name: "image",
       coldStart: false,
@@ -191,7 +191,7 @@ async function main(): Promise<void> {
     {
       name: "cold-start",
       coldStart: true,
-      text: [{ type: "text", value: "OpenBot share E2E cold start" }],
+      text: [{ type: "text", value: "OmniBot share E2E cold start" }],
       file: {
         source: fixtures.png,
         name: "share-e2e-cold.png",

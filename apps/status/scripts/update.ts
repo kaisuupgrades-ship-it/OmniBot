@@ -16,7 +16,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
 import { Schema } from "effect";
 import {
   type CheckDay,
@@ -37,7 +37,7 @@ import {
   statusDates,
 } from "../src/model";
 
-const logger = createOpenBotLogger("status-update");
+const logger = createOmniBotLogger("status-update");
 
 const { values: args } = parseArgs({
   options: {
@@ -69,7 +69,7 @@ const TOKEN = process.env.GITHUB_TOKEN?.trim() || null;
 if (TOKEN) registerSecretValue(TOKEN);
 if (!DRY_RUN && !TOKEN && !args["issues-file"]) throw new Error("GITHUB_TOKEN is necessary to write issues.");
 
-const SITE_URL = "https://status.openbot.run";
+const SITE_URL = "https://status.omnibot.example.com";
 const BOT_LOGIN = "github-actions[bot]";
 const TIMEOUT_MS = 10_000;
 const SLOW_MS = 5_000;
@@ -84,8 +84,8 @@ const MAX_TEXT = 2_000;
 // Probes ---------------------------------------------------------------------
 
 const ORIGINS = {
-  api: "https://api.openbot.run",
-  signal: "https://signal.openbot.run",
+  api: "https://api.omnibot.example.com",
+  signal: "https://signal.omnibot.example.com",
   github: "https://github.com",
 } as const;
 
@@ -597,12 +597,12 @@ function atomFeed(incidents: readonly Incident[]): string {
   const lines = [
     '<?xml version="1.0" encoding="utf-8"?>',
     '<feed xmlns="http://www.w3.org/2005/Atom">',
-    "  <title>OpenBot status</title>",
+    "  <title>OmniBot status</title>",
     `  <id>${SITE_URL}/</id>`,
     `  <link href="${SITE_URL}/"/>`,
     `  <link rel="self" href="${SITE_URL}/feed.xml"/>`,
     `  <updated>${updated}</updated>`,
-    "  <author><name>OpenBot</name></author>",
+    "  <author><name>OmniBot</name></author>",
   ];
   for (const { incident, update } of entries) {
     const stage = update.stage.charAt(0).toUpperCase() + update.stage.slice(1);

@@ -22,7 +22,7 @@ import { HOST_RELEASE_ROUTES } from "@openbot/contracts/team-protocol/host-relea
 import { HOST_TIMEZONE_ROUTES } from "@openbot/contracts/team-protocol/host-timezone-v1";
 import type { PROVIDERS_V5_ROUTES } from "@openbot/contracts/team-protocol/providers-v5";
 // Admin requests to one host: agent settings and skills, shared tables, agent share links, the server name and logo,
-// the server timezone, the agent memory limit, the Discord roles that can use OpenBot, the app update, MCP servers, storage, hosted sites and providers.
+// the server timezone, the agent memory limit, the Discord roles that can use OmniBot, the app update, MCP servers, storage, hosted sites and providers.
 //
 // The desktop sends the same routes from the main process. The web client and the mobile app send
 // them through their own transport, so the path, body and decoding of each request are here once.
@@ -1083,7 +1083,7 @@ function decodeDiscordAccess(value: unknown): DiscordAccess {
   return value;
 }
 
-/** Which roles can use OpenBot in one Discord server of the host (`discord-access-v1`). */
+/** Which roles can use OmniBot in one Discord server of the host (`discord-access-v1`). */
 export function discordAccess(
   request: TeamApiRequest,
   input: HostDiscordAccessInput,

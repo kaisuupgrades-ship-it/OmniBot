@@ -9,13 +9,13 @@ import {
   importIngressQueuePrivateKey,
   isIngressQueueKey,
 } from "@openbot/contracts/signal-protocol/ingress-queue";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import { writeFileAtomically } from "../backend/atomic-json-file";
 import type { SecretCipher } from "./provider-credential-store";
 
-const logger = createOpenBotLogger("ingress-queue-key");
+const logger = createOmniBotLogger("ingress-queue-key");
 
 const fileSchema = z.object({ version: z.literal(1), publicKey: z.string(), privateKey: z.string() });
 

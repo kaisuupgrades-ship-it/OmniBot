@@ -1,12 +1,12 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /**
  * What the publish and install dialogs reach in main: the agent templates of this computer, and
  * adding a template's agent on a joined server.
  */
 export interface AgentTemplatesPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "addTemplateAgent">;
-  agentTemplates: Pick<OpenBotDesktopApi["agentTemplates"], "get" | "install" | "preview" | "publish" | "unpublish">;
+  agent: Pick<OmniBotDesktopApi["agent"], "addTemplateAgent">;
+  agentTemplates: Pick<OmniBotDesktopApi["agentTemplates"], "get" | "install" | "preview" | "publish" | "unpublish">;
 }
 
 /** What the publish dialog reaches. The web client passes the host's. */

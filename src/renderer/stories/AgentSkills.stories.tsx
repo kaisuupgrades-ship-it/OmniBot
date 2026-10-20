@@ -4,7 +4,7 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_INSTALLED_SKILLS, STORY_MODELS } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 const storyAgent = STORY_AGENT;
 
@@ -14,7 +14,7 @@ function AgentSkillsStory(props: {
   onAddFromMarketplace?: (agentId: string) => void;
 }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot({ installedSkills: { chief: props.skills } });
+  const mock = createMockOmniBot({ installedSkills: { chief: props.skills } });
   window.openbot = mock.api;
 
   onCleanup(() => {

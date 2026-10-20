@@ -1,4 +1,4 @@
-// Status webhooks for the tools of the OpenBot team. The public way to follow the page is the feed.
+// Status webhooks for the tools of the OmniBot team. The public way to follow the page is the feed.
 // The `notify` job of the `status-page` workflow runs it after each run that publishes the page:
 //   bun apps/status/scripts/notify.ts --status <status.json> --state <notify.json> [--bootstrap] [--test]
 // It compares `status.json` with `notify.json` (kept on the `status-notify` branch), queues one
@@ -17,7 +17,7 @@ import { createHash, createHmac } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
 import { Schema } from "effect";
 import {
   CheckResult,
@@ -31,7 +31,7 @@ import {
   serviceName,
 } from "../src/model";
 
-const logger = createOpenBotLogger("status-notify");
+const logger = createOmniBotLogger("status-notify");
 
 const { values: args } = parseArgs({
   options: {
@@ -53,7 +53,7 @@ const NOW_MS = Date.parse(NOW);
 if (Number.isNaN(NOW_MS)) throw new Error(`--now: "${NOW}" is not a time.`);
 const IN_ACTIONS = process.env.GITHUB_ACTIONS === "true";
 
-const SITE_URL = "https://status.openbot.run";
+const SITE_URL = "https://status.omnibot.example.com";
 const TIMEOUT_MS = 10_000;
 /** The wait after each failed try. The try after the last wait is the final one. */
 const RETRY_MINUTES = [5, 10, 20, 40, 80, 160, 320] as const;
@@ -398,7 +398,7 @@ function message(event: WebhookEvent): { headline: string; lines: string[]; link
       link: SITE_URL,
     };
   }
-  return { headline: "Test event from the OpenBot status page", lines: ["The webhook works."], link: SITE_URL };
+  return { headline: "Test event from the OmniBot status page", lines: ["The webhook works."], link: SITE_URL };
 }
 
 const slackText = (text: string) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

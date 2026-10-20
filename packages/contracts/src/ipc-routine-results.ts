@@ -3,7 +3,7 @@ import { MESSAGING_LIMITS, MESSAGING_PLATFORMS, type MessagingPlatform } from ".
 import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "./runtime-values";
 
 /**
- * Routine results: the answer of an agent routine's run, sent on to a messaging place outside OpenBot.
+ * Routine results: the answer of an agent routine's run, sent on to a messaging place outside OmniBot.
  * Whether the answer reached the place is the delivery's status, not the run's: a run that succeeded
  * keeps that status when its delivery fails. Only this computer's host keeps a destination; these
  * types never cross the Team API.
@@ -24,7 +24,7 @@ export type RoutineResultDeliveryStatus = (typeof ROUTINE_RESULT_DELIVERY_STATUS
  * - `connection-gone`: the connection was removed or turned off.
  * - `refused`: the connection cannot post in that place.
  * - `send-failed`: the platform refused or did not answer the post.
- * - `restart`: OpenBot stopped during the post.
+ * - `restart`: OmniBot stopped during the post.
  * - `stopped`: the user stopped sending to a place before the answer went.
  */
 export const ROUTINE_RESULT_DELIVERY_REASONS = [

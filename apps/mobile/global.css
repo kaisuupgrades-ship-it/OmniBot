@@ -58,7 +58,7 @@
       --overlay: var(--openbot-bg-surface-raised);
     }
 
-    /* HeroUI consumes these aliases; OpenBot tokens remain the source of truth. */
+    /* HeroUI consumes these aliases; OmniBot tokens remain the source of truth. */
     --foreground: var(--openbot-text-primary);
     --surface: var(--openbot-bg-surface);
     --surface-foreground: var(--openbot-text-primary);

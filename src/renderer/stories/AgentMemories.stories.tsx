@@ -4,7 +4,7 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_MODELS } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 const storyAgent = STORY_AGENT;
 
@@ -21,7 +21,7 @@ const chiefMemories: AgentMemory[] = [
   {
     id: "memory-manual",
     agentId: "chief",
-    text: "Use Bun for package scripts in OpenBot.",
+    text: "Use Bun for package scripts in OmniBot.",
     origin: "manual",
     sourceTurnId: null,
     createdAt: "2026-08-23T11:00:00.000Z",
@@ -50,7 +50,7 @@ const fullMemoryList: AgentMemory[] = Array.from({ length: 64 }, (_, index) => (
 
 function AgentMemoriesStory(props: { memories: AgentMemory[] }) {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot({ memories: { chief: props.memories } });
+  const mock = createMockOmniBot({ memories: { chief: props.memories } });
   window.openbot = mock.api;
 
   onCleanup(() => {

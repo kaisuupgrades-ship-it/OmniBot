@@ -79,7 +79,7 @@ export const SubscriptionPath: Story = {
 };
 
 /**
- * OpenCode downloads slowly. Press "Start free", then "Open OpenBot" at once: the button waits,
+ * OpenCode downloads slowly. Press "Start free", then "Open OmniBot" at once: the button waits,
  * says why, and opens the app when OpenCode is ready.
  */
 export const FreeStillDownloading: Story = {

@@ -28,7 +28,7 @@ import { ChannelHistory, type ChannelTextModel, isMemberThinking } from "./chann
 import { ChannelMemoryStore } from "./channel-memory-store";
 import { type ChannelAssignment, ChannelStore } from "./channel-store";
 import type { DeliveryContext, MailboxStore } from "./mailbox-store";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./openbot-database";
 import { extractJsonObject, StructuredOutputError } from "./structured-output";
 
 export interface ChannelHooks {
@@ -142,7 +142,7 @@ export class ChannelService {
   readonly #activeAssignments = new Map<string, string>();
 
   constructor(
-    database: OpenBotDatabase,
+    database: OmniBotDatabase,
     readonly mailbox: MailboxStore,
     readonly hooks: ChannelHooks,
   ) {
@@ -2382,7 +2382,7 @@ export class ChannelService {
   }, Effect.uninterruptible).bind(this);
 }
 
-const RETIRE_ACTOR = { id: "openbot", name: "OpenBot" };
+const RETIRE_ACTOR = { id: "openbot", name: "OmniBot" };
 
 function terminal(task: ChannelTask): boolean {
   return task.state === "completed" || task.state === "cancelled";

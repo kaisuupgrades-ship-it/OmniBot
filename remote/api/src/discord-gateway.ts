@@ -1,4 +1,4 @@
-// The OpenBot Discord bot's connections: the Gateway WebSocket (`@discordjs/ws`) and the REST client
+// The OmniBot Discord bot's connections: the Gateway WebSocket (`@discordjs/ws`) and the REST client
 // (`@discordjs/rest`). Under Bun, both use the global WebSocket and fetch. The bot token stays in
 // this module and in the libraries; no log holds it, a payload, or Discord's error text.
 
@@ -115,7 +115,7 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
           unlinking.add(guildId);
           run(
             links.removed(guildId).pipe(
-              Effect.catch(() => Effect.sync(() => console.error("OpenBot Discord could not unlink a removed guild."))),
+              Effect.catch(() => Effect.sync(() => console.error("OmniBot Discord could not unlink a removed guild."))),
               Effect.ensuring(Effect.sync(() => unlinking.delete(guildId))),
             ),
           );
@@ -132,7 +132,7 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
                 .reconcile(guildIds, Date.now() - DISCORD_RECONCILE_GRACE_MILLISECONDS)
                 .pipe(
                   Effect.catch(() =>
-                    Effect.sync(() => console.error("OpenBot Discord could not reconcile the guild links.")),
+                    Effect.sync(() => console.error("OmniBot Discord could not reconcile the guild links.")),
                   ),
                 );
         });
@@ -166,7 +166,7 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
           run(
             call.pipe(
               Effect.catch((error) =>
-                Effect.sync(() => console.error(`OpenBot Discord ${action.type} failed with status ${error.status}.`)),
+                Effect.sync(() => console.error(`OmniBot Discord ${action.type} failed with status ${error.status}.`)),
               ),
             ),
           );
@@ -184,7 +184,7 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
                 ? Effect.tryPromise({ try: () => gateway.connect(), catch: () => new DiscordGatewayConnectError() })
                 : Effect.void,
             ).pipe(
-              Effect.tapError(() => Effect.sync(() => console.error("OpenBot Discord Gateway could not connect."))),
+              Effect.tapError(() => Effect.sync(() => console.error("OmniBot Discord Gateway could not connect."))),
               Effect.retry(DISCORD_CONNECT_RETRY),
               Effect.ignore,
             ),
@@ -203,22 +203,22 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
               actions = state.handle(payload);
             } catch {
               // The event name only: the payload can hold a message.
-              console.error(`OpenBot Discord could not read a ${payload.t} event.`);
+              console.error(`OmniBot Discord could not read a ${payload.t} event.`);
               return;
             }
             // The acknowledgement goes first: Discord waits 3 seconds for it.
             for (const action of actions) act(action);
           });
-          gateway.on(WebSocketShardEvents.Ready, () => console.log("OpenBot Discord Gateway is ready."));
+          gateway.on(WebSocketShardEvents.Ready, () => console.log("OmniBot Discord Gateway is ready."));
           gateway.on(WebSocketShardEvents.Resumed, (shardId) => {
-            console.log("OpenBot Discord Gateway resumed.");
+            console.log("OmniBot Discord Gateway resumed.");
             for (const action of state.shardResumed(shardId)) act(action);
           });
           gateway.on(WebSocketShardEvents.Closed, (code, shardId) => {
             // Until the shard resumes or is ready again, its guild list can be stale: a reconcile with
             // it could unlink a guild that installed the bot meanwhile.
             state.shardClosed(shardId);
-            console.log(`OpenBot Discord Gateway closed with code ${code}.`);
+            console.log(`OmniBot Discord Gateway closed with code ${code}.`);
             // The library does not reconnect after a refused intent. Without the Message Content
             // intent in the Developer Portal, the bot connects without it.
             if (
@@ -226,13 +226,13 @@ export class DiscordGateway extends Context.Service<DiscordGateway, { readonly a
               intents !== DISCORD_GATEWAY_INTENTS &&
               current === gateway
             ) {
-              console.error("OpenBot Discord Gateway refused the Message Content intent. It connects without it.");
+              console.error("OmniBot Discord Gateway refused the Message Content intent. It connects without it.");
               current = open(DISCORD_GATEWAY_INTENTS);
               run(release(gateway));
               connect(current);
             }
           });
-          gateway.on(WebSocketShardEvents.Error, () => console.error("OpenBot Discord Gateway failed."));
+          gateway.on(WebSocketShardEvents.Error, () => console.error("OmniBot Discord Gateway failed."));
           return gateway;
         };
 

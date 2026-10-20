@@ -88,7 +88,7 @@ import { TimeoutError } from "./with-timeout";
 /** How long OpenCode's second `session/load` waits after an internal service failure. */
 const OPENCODE_LOAD_RETRY_MS = 500;
 
-/** How many `session/list` pages OpenBot reads to find a session before it stops looking. */
+/** How many `session/list` pages OmniBot reads to find a session before it stops looking. */
 const OPENCODE_SESSION_LIST_PAGES = 50;
 
 /** Maximum replay work waiting for the storage consumer before the import fails safely. */
@@ -218,7 +218,7 @@ interface HistoryReplay {
 }
 
 /**
- * What OpenBot offers every ACP agent in `initialize`. One value, so the trial start that "Check
+ * What OmniBot offers every ACP agent in `initialize`. One value, so the trial start that "Check
  * agent" makes (`acp-agent-check.ts`) and the real client cannot differ.
  */
 export const OPENBOT_ACP_CLIENT_CAPABILITIES = {
@@ -228,7 +228,7 @@ export const OPENBOT_ACP_CLIENT_CAPABILITIES = {
   session: { configOptions: { boolean: {} } },
 } as const;
 
-export const OPENBOT_ACP_CLIENT_INFO = { name: "openbot", title: "OpenBot", version: "0.1.0" } as const;
+export const OPENBOT_ACP_CLIENT_INFO = { name: "openbot", title: "OmniBot", version: "0.1.0" } as const;
 
 export interface AcpProviderOptions {
   provider: AgentProvider;
@@ -277,7 +277,7 @@ export interface AcpProviderOptions {
    */
   servesModel?: ((modelId: string) => boolean) | undefined;
   /**
-   * The user's own MCP servers, read at spawn. OpenBot's bridge servers are appended after these,
+   * The user's own MCP servers, read at spawn. OmniBot's bridge servers are appended after these,
    * so a configuration can never displace the tools the agent depends on.
    */
   mcpServers?: McpServerSource | undefined;
@@ -514,7 +514,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
           ),
         );
       } catch (error) {
-        // A provider can delete an old session. Stored OpenBot history remains valid, so a read
+        // A provider can delete an old session. Stored OmniBot history remains valid, so a read
         // reports the available fragments and leaves the caller to create a replacement session.
         if (error instanceof MissingAcpSessionError) {
           if (stored && durableReplay) yield* readStored(request);
@@ -1111,7 +1111,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
             let id: string;
             let configOptions: SessionConfigOption[];
             let currentModelId: string | null;
-            // OpenBot's bridge servers last: all providers key MCP servers by name, so a user
+            // OmniBot's bridge servers last: all providers key MCP servers by name, so a user
             // configuration that reached one of those names would take the agent's own tools away.
             const handoff = acpMcpServers(
               providerResult(
@@ -1919,7 +1919,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
   /**
    * OpenCode retries a rate limit or a provider failure by itself. When it stops, it fails the prompt
    * with the provider's text behind `Internal error:`, so a billing refusal, a rate limit and an
-   * offline computer all read as one failure of OpenBot, and the user could not tell whether
+   * offline computer all read as one failure of OmniBot, and the user could not tell whether
    * waiting helps (#1163). The kind comes first; the provider's own text follows it.
    */
   #openCodeRequestFailure(error: unknown, detail: string): string {
@@ -2056,7 +2056,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
       .call("item/tool/call", params, signal)
       .pipe(toProviderClientOperationError);
     if (!isDynamicToolResult(result))
-      return yield* providerFailure(new Error("OpenBot returned an invalid dynamic tool result."));
+      return yield* providerFailure(new Error("OmniBot returned an invalid dynamic tool result."));
     return yield* providerSync(() => result);
   });
 

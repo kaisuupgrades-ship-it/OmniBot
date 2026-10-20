@@ -225,7 +225,7 @@ export function decodeAccountLoginStartResult(value: unknown): AccountLoginStart
 export function decodeAccountDeviceCodeLoginStartResult(value: unknown): AccountDeviceCodeLoginStartResult {
   const record = decodeRecord(value, "account device login response");
   if (requiredString(record, "type") !== "chatgptDeviceCode") throw new Error("Unexpected Codex login type.");
-  // Held to the same rule as the browser login's URL: this is the address OpenBot shows the user
+  // Held to the same rule as the browser login's URL: this is the address OmniBot shows the user
   // and offers to open, so a downgrade to plain HTTP is refused before it reaches the screen.
   const url = new URL(requiredString(record, "verificationUrl"));
   if (url.protocol !== "https:") throw new Error("Codex returned an unsafe login URL.");

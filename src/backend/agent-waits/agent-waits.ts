@@ -2,7 +2,7 @@ import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
 import type { AgentEvent, AgentWait, AgentWaitsSnapshot } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
 import { z } from "zod";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
 import type { MailboxStore } from "../mailbox-store";
 import type { DynamicToolCallParams } from "../protocol";
 import { AgentWaitError, type AgentWaitStore } from "./agent-wait-store";
@@ -91,7 +91,7 @@ export class AgentWaits {
   }
 
   /** Answers `await_event` and `close_wait`; null for every other tool. */
-  handleTool(params: DynamicToolCallParams, caller: AgentWaitCaller): OpenBotToolResponse | null {
+  handleTool(params: DynamicToolCallParams, caller: AgentWaitCaller): OmniBotToolResponse | null {
     if (params.tool !== AWAIT_EVENT_TOOL && params.tool !== CLOSE_WAIT_TOOL) return null;
     try {
       return params.tool === AWAIT_EVENT_TOOL ? this.#awaitEvent(params, caller) : this.#closeWait(params, caller);
@@ -101,7 +101,7 @@ export class AgentWaits {
     }
   }
 
-  #awaitEvent(params: DynamicToolCallParams, caller: AgentWaitCaller): OpenBotToolResponse {
+  #awaitEvent(params: DynamicToolCallParams, caller: AgentWaitCaller): OmniBotToolResponse {
     const parsed = awaitEventToolSchema.safeParse(params.arguments);
     if (!parsed.success) return openBotToolFailure(sourceText("error.backend.agentWaitNoteRequired"));
     const { note, routineId } = parsed.data;
@@ -140,7 +140,7 @@ export class AgentWaits {
     });
   }
 
-  #closeWait(params: DynamicToolCallParams, caller: AgentWaitCaller): OpenBotToolResponse {
+  #closeWait(params: DynamicToolCallParams, caller: AgentWaitCaller): OmniBotToolResponse {
     const parsed = closeWaitToolSchema.safeParse(params.arguments);
     if (!parsed.success || !this.#store.delete(caller.agentId, parsed.data.waitId))
       return openBotToolFailure(sourceText("error.backend.agentWaitGone"));

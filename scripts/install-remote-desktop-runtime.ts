@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { z } from "zod";
 import { createRemoteDesktopInputDigest, loadNativeRuntimeLock, type NativeRuntimeLock } from "./native-runtime-lock";
 import {
@@ -26,7 +26,7 @@ const githubReleaseSchema = z.object({
 type GitHubRelease = z.infer<typeof githubReleaseSchema>;
 type GitHubReleaseAsset = GitHubRelease["assets"][number];
 
-const logger = createOpenBotLogger("install-remote-desktop-runtime");
+const logger = createOmniBotLogger("install-remote-desktop-runtime");
 
 export async function installRemoteDesktopRuntime(
   input: {
@@ -57,7 +57,7 @@ export async function installRemoteDesktopRuntime(
     {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "OpenBot-runtime-installer",
+        "User-Agent": "OmniBot-runtime-installer",
         ...(githubToken ? { Authorization: `Bearer ${githubToken}` } : {}),
       },
     },

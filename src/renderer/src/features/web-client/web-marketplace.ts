@@ -21,7 +21,7 @@ import type { AgentTemplateInstallCalls } from "../agent-templates/agent-templat
 import type { MarketplaceCalls } from "../settings/marketplace-calls";
 import { webMcpRelay } from "./web-mcp-relay";
 
-/** No server id: the account is a member, or the host runs an OpenBot without agent-install-v1. */
+/** No server id: the account is a member, or the host runs an OmniBot without agent-install-v1. */
 const noAgentInstall = () => currentText().t("webClient.error.agentInstallNotAllowed");
 
 /**

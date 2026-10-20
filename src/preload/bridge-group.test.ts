@@ -1,4 +1,4 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 import { IPC_ENDPOINTS, LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
 import { beforeEach, expect, it, vi } from "vitest";
 
@@ -8,7 +8,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 
 const bridge = vi.hoisted(() => {
   vi.stubGlobal("window", { addEventListener: () => {} });
-  const api: { current: OpenBotDesktopApi | null } = { current: null };
+  const api: { current: OmniBotDesktopApi | null } = { current: null };
   return {
     api,
     invoke: vi.fn<(channel: string, ...args: unknown[]) => Promise<unknown>>(),
@@ -17,7 +17,7 @@ const bridge = vi.hoisted(() => {
 });
 vi.mock("electron", () => ({
   contextBridge: {
-    exposeInMainWorld: (_name: string, api: OpenBotDesktopApi) => {
+    exposeInMainWorld: (_name: string, api: OmniBotDesktopApi) => {
       bridge.api.current = api;
     },
   },
@@ -36,7 +36,7 @@ vi.mock("electron", () => ({
 
 import "./index";
 
-function api(): OpenBotDesktopApi {
+function api(): OmniBotDesktopApi {
   if (!bridge.api.current) throw new Error("The preload API was not exposed.");
   return bridge.api.current;
 }

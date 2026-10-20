@@ -3,7 +3,7 @@ import type { messages as source } from "../../en/error/backend";
 
 export const messages = {
   "error.backend.eventsUnavailable": "События недоступны на этом хосте.",
-  "error.backend.databaseIntegrity": "База данных OpenBot не прошла проверку целостности.",
+  "error.backend.databaseIntegrity": "База данных OmniBot не прошла проверку целостности.",
   "error.backend.webhookRouteLimit": "На хосте может быть не более {limit} регулярных задач с вебхуком.",
   "error.backend.webhookSettingsInvalid": "Проверьте настройки вебхука и повторите попытку.",
   "error.backend.webhookRouteUnavailable":
@@ -13,8 +13,8 @@ export const messages = {
   "error.backend.browserViewLimit": "На этом хосте открыто слишком много видов браузера.",
   "error.backend.browserViewEnded": "Показ этой страницы в реальном времени завершён.",
   "error.backend.browserViewFailed": "Не удалось показать эту страницу в реальном времени.",
-  "error.backend.windowTemporarilyUnavailable": "Окно OpenBot временно недоступно.",
-  "error.backend.windowUnavailable": "Окно OpenBot недоступно.",
+  "error.backend.windowTemporarilyUnavailable": "Окно OmniBot временно недоступно.",
+  "error.backend.windowUnavailable": "Окно OmniBot недоступно.",
   "error.backend.sunshineApiHttp": "API Sunshine вернул ошибку HTTP {status}.",
   "error.backend.sunshinePortsUnavailable":
     "Не удалось зарезервировать свободное семейство портов Sunshine для удалённого рабочего стола.",
@@ -32,7 +32,7 @@ export const messages = {
   "error.backend.moonlightRejectedPairing": "Moonlight отклонил сопряжение с Sunshine.",
   "error.backend.moonlightNoPin": "Moonlight не вернул PIN-код сопряжения.",
   "error.backend.moonlightPairingIncomplete": "Сопряжение Moonlight не завершено.",
-  "error.backend.moonlightWebNotEmbedded": "Moonlight Web — не встроенная сборка OpenBot.",
+  "error.backend.moonlightWebNotEmbedded": "Moonlight Web — не встроенная сборка OmniBot.",
   "error.backend.moonlightEmptyResponse": "Moonlight вернул пустой ответ.",
   "error.backend.remoteDesktopTimeout": "Время запроса к удалённому рабочему столу истекло.",
   "error.backend.moonlightApiHttp": "API Moonlight вернул ошибку HTTP {status}.",
@@ -53,7 +53,7 @@ export const messages = {
   "error.backend.sunshineNotReadyReason": "Sunshine не стал готов. {reason}",
   "error.backend.channelLeadModelUnavailable": "Модель ведущего канала недоступна.",
   "error.backend.sharedDataUnavailable": "Общие данные недоступны.",
-  "error.backend.shuttingDown": "OpenBot завершает работу.",
+  "error.backend.shuttingDown": "OmniBot завершает работу.",
   "error.backend.channelUnconfirmedStart":
     "У канала есть неподтверждённый запуск назначения. Проверьте его результат, прежде чем удалять канал.",
   "error.backend.channelNotFound": "Канал не найден.",
@@ -121,14 +121,14 @@ export const messages = {
   "error.backend.fileGone": "Файл не существует или уже удалён.",
   "error.backend.managedAttachmentChanged": "Управляемое вложение отсутствует или изменилось: {name}",
   "error.backend.mailboxStateCorrupt":
-    "Состояние почтового ящика повреждено или создано более новой версией OpenBot; перезапись отклонена.",
+    "Состояние почтового ящика повреждено или создано более новой версией OmniBot; перезапись отклонена.",
   "error.backend.recipientDeleting": "Получатель удаляется. Повторите попытку, когда удаление завершится.",
   "error.backend.recipientHidden": "Этот агент скрыт. Восстановите его, чтобы отправлять сообщения.",
   "error.backend.attachBetween": "Прикрепите от 1 до {limit} файлов.",
   "error.backend.attachmentNotFile": "Вложение не является файлом: {path}",
   "error.backend.generatedImageTooLarge": "Созданное изображение превышает лимит 100 МБ.",
   "error.backend.attachmentNotRegularFile": "Прикреплять можно только обычные файлы: {name}",
-  "error.backend.attachmentCopyFailed": "OpenBot не смог скопировать {name}.",
+  "error.backend.attachmentCopyFailed": "OmniBot не смог скопировать {name}.",
   "error.backend.routineNameRequired": "Нужно название регулярной задачи.",
   "error.backend.routineNameTooLong": "Название регулярной задачи слишком длинное.",
   "error.backend.routineInstructionRequired": "Нужна инструкция регулярной задачи.",
@@ -152,13 +152,13 @@ export const messages = {
   "error.backend.routineRunStarting":
     "Этот запуск регулярной задачи ещё начинается. Повторите попытку, когда начнётся его ход.",
   "error.backend.routineRunNoSession":
-    "OpenBot не может прервать активный запуск регулярной задачи, потому что сессия его провайдера недоступна.",
+    "OmniBot не может прервать активный запуск регулярной задачи, потому что сессия его провайдера недоступна.",
   "error.backend.interruptSelf": "Агент не может прервать сам себя.",
   "error.backend.interruptOtherWork":
     "Этот агент работает над задачей, которую начало не ваше сообщение. Остановить её могут только пользователь или отправитель этой задачи.",
   "error.backend.interruptStarting": "Этот агент ещё начинает ход. Повторите попытку, когда ход начнётся.",
   "error.backend.interruptNoSession":
-    "OpenBot не может прервать этого агента, потому что сессия его провайдера недоступна.",
+    "OmniBot не может прервать этого агента, потому что сессия его провайдера недоступна.",
   "error.backend.memoryTextRequired": "Нужен текст записи памяти.",
   "error.backend.memoryTextTooLong": "Текст записи памяти слишком длинный.",
   "error.backend.mcpServerGone": "Этого сервера MCP больше нет.",
@@ -183,32 +183,32 @@ export const messages = {
     "Ожидание пробуждает только запуск одной из ваших регулярных задач, а у вас их нет. Создайте регулярную задачу с помощью openbot.create_routine, затем откройте ожидание.",
   "error.backend.agentWaitRemoteUnsupported": "Открытые ожидания доступны только для агентов на этом компьютере.",
   "error.backend.routineFlowHandoffFailed": "Регулярной задаче не удалось передать работу этому агенту.",
-  "error.backend.mcpServerLimit": "OpenBot хранит не более {limit} серверов MCP.",
+  "error.backend.mcpServerLimit": "OmniBot хранит не более {limit} серверов MCP.",
   "error.backend.mcpServerNameTaken": "Сервер MCP с именем {name} уже существует.",
   "error.backend.mcpServerNoAnswer": "Сервер не ответил за {seconds} с.",
   "error.backend.mcpSignInNotAccepted": "Сервер не принял этот вход.",
   "error.backend.mcpCommandNotFound": "Команда не найдена: {command}",
   "error.backend.mcpRegistrationRefused":
-    "Сервер входа пока не принимает OpenBot как приложение. Дело не в вашем аккаунте. Подключитесь другим способом, например через локальный сервер MCP.",
+    "Сервер входа пока не принимает OmniBot как приложение. Дело не в вашем аккаунте. Подключитесь другим способом, например через локальный сервер MCP.",
   "error.backend.mcpSignInAbandonedGeneric": "Вход прерван.",
   "error.backend.mcpSignInForgotten": "Вход в MCP был забыт, пока выполнялся.",
   "error.backend.mcpSignInAbandoned": "Вход в MCP прерван.",
   "error.backend.mcpSignInNoBrowser": "Этот вход в MCP не может открыть браузер.",
   "error.backend.mcpSignInNotWebPage": "Адрес входа — не веб-страница.",
   "error.backend.mcpSignInRequired": "Этот сервер просит войти. Нажмите «Войти», чтобы продолжить в браузере.",
-  "error.backend.mcpSignInOnHost": "Этот сервер просит войти. Войдите в него в OpenBot на компьютере-хосте.",
+  "error.backend.mcpSignInOnHost": "Этот сервер просит войти. Войдите в него в OmniBot на компьютере-хосте.",
   "error.backend.mcpSignInNeedsHttps":
-    "Этот сервер просит войти, а OpenBot входит только по https. Измените URL на {url}.",
+    "Этот сервер просит войти, а OmniBot входит только по https. Измените URL на {url}.",
   "error.backend.mcpSignInCancelled": "Вход отменён.",
   "error.backend.mcpSignInTimedOut": "Вход в браузере не был завершён.",
   "error.backend.mcpSignInResponseTimedOut": "Ответ на вход не пришёл вовремя.",
   "error.backend.mcpServerExited":
     "Сервер остановился, не ответив. Запустите команду в терминале, чтобы увидеть ошибку.",
   "error.backend.mcpOAuthProxyUnavailable":
-    "OpenBot не смог запустить локальное подключение для входа на этот сервер. Перезапустите OpenBot и повторите попытку.",
+    "OmniBot не смог запустить локальное подключение для входа на этот сервер. Перезапустите OmniBot и повторите попытку.",
   "error.backend.mcpOAuthSignInNeeded":
-    "Вход на этот MCP-сервер завершён. Пользователю нужно снова войти на него в OpenBot.",
-  "error.backend.mcpServerUnreachable": "OpenBot не смог связаться с сервером. Проверьте URL и сеть.",
+    "Вход на этот MCP-сервер завершён. Пользователю нужно снова войти на него в OmniBot.",
+  "error.backend.mcpServerUnreachable": "OmniBot не смог связаться с сервером. Проверьте URL и сеть.",
   "error.backend.mcpLocalServerOff":
     "На этом компьютере по адресу {address} не отвечает ни один сервер. Запустите сервер или включите его в приложении, которое его запускает, и повторите попытку.",
   "error.backend.mcpServerBlocked":
@@ -216,7 +216,7 @@ export const messages = {
   "error.backend.mcpServerIncompatible":
     "По этому адресу что-то ответило, но не как сервер MCP через Streamable HTTP. Проверьте URL и обновите приложение, которое запускает сервер.",
   "error.backend.mcpRemoteBridge":
-    "{reason} Эта команда запускает мост mcp-remote. Выберите вместо него Streamable HTTP с URL {url}, и OpenBot выполнит вход.",
+    "{reason} Эта команда запускает мост mcp-remote. Выберите вместо него Streamable HTTP с URL {url}, и OmniBot выполнит вход.",
   "error.backend.oauthNotHttps": "Эндпоинт OAuth {origin} не использует https, поэтому учётные данные не отправлены.",
   "error.backend.oauthTooManyRedirects": "Эндпоинт OAuth слишком много раз перенаправлял.",
   "error.backend.oauthRedirectOrigin": "Эндпоинт OAuth перенаправил на {origin}, поэтому учётные данные не переданы.",
@@ -289,7 +289,7 @@ export const messages = {
   "error.backend.mcpSignInAppUrl": "Для приложения входа нужен правильный URL сервера.",
   "error.backend.mcpSignInAppClientId": "Введите ID клиента приложения входа.",
   "error.backend.mcpSignInAppIssuerChanged":
-    "Сервер входа этого MCP-сервера изменился, поэтому OpenBot не отправил ему приложение входа. Если это изменение верно, удалите приложение входа и добавьте его снова.",
+    "Сервер входа этого MCP-сервера изменился, поэтому OmniBot не отправил ему приложение входа. Если это изменение верно, удалите приложение входа и добавьте его снова.",
   "error.backend.mcpSignInAppNoServer":
     "Сохраните этот MCP-сервер как URL-сервер, прежде чем добавлять приложение входа.",
   "error.backend.mcpSignInAppUnavailable": "Этот компьютер не может хранить приложение входа.",
@@ -307,5 +307,5 @@ export const messages = {
   "error.backend.taskOpenLimitReached":
     "У этого агента открыто задач: {count}. Закройте задачу, затем начните или откройте другую.",
   "error.backend.taskRemoteUnsupported": "Задачи доступны только для агентов на этом компьютере.",
-  "error.backend.taskStartFailed": "OpenBot не удалось запустить задачу. Выполните работу в этом ходе.",
+  "error.backend.taskStartFailed": "OmniBot не удалось запустить задачу. Выполните работу в этом ходе.",
 } as const satisfies PartialTranslation<typeof source>;

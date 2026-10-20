@@ -24,7 +24,7 @@ import type { BusyMessageModePreferenceStore } from "../busy-message-mode-prefer
 import type { LanguageService } from "../language-service";
 import type { LogoColorService } from "../logo-color-service";
 import { MAC_PERMISSION_URLS } from "../mac-permission-urls";
-import { exportDiagnostics, exportOpenBotData } from "../maintenance-service";
+import { exportDiagnostics, exportOmniBotData } from "../maintenance-service";
 import type { RemoteSessionCache } from "../remote-session-cache";
 import type { RemoteSessionReusePreferenceStore } from "../remote-session-reuse-preference-store";
 import { readSetupState, writeSetupState } from "../setup-store";
@@ -53,16 +53,16 @@ import { stringPayload } from "./validation";
  * `mailto:` address, which `openUrl` refuses; the web client opens the same constant.
  */
 const EXTERNAL_DESTINATIONS: Record<ExternalDestination, string> = {
-  "agent-setup": "https://github.com/nightly-labs/openbot/blob/main/docs/TROUBLESHOOTING.md",
+  "agent-setup": "https://omnibot.example.com/source/blob/main/docs/TROUBLESHOOTING.md",
   "opencode-install": "https://opencode.ai/docs/",
   "opencode-auth": "https://opencode.ai/auth",
   "claude-install": "https://code.claude.com/docs",
-  feedback: "https://x.com/intent/post?text=Feedback%20for%20OpenBot%20%40norbertbodziony%3A%20",
+  feedback: "https://x.com/intent/post?text=Feedback%20for%20OmniBot%20%40norbertbodziony%3A%20",
   message: "https://x.com/norbertbodziony",
-  changelog: "https://openbot.run/changelog",
-  guides: "https://openbot.run/guides",
-  // A Redirect Rule in the openbot.run Cloudflare zone sends this to the current Discord invite.
-  discord: "https://discord.openbot.run",
+  changelog: "https://omnibot.example.com/changelog",
+  guides: "https://omnibot.example.com/guides",
+  // A Redirect Rule in the omnibot.example.com Cloudflare zone sends this to the current Discord invite.
+  discord: "https://discord.omnibot.example.com",
   "grok-bot-export": GROK_BOT_EXPORT_URL,
   "hosted-server-contact": HOSTED_SERVER_CONTACT_URL,
   "mac-screen-recording": MAC_PERMISSION_URLS["screen-recording"],
@@ -193,7 +193,7 @@ export function appIpcHandlers({
     maintenance: {
       exportData: handler(() =>
         runCauseEffect(
-          exportOpenBotData({ service, mailbox, parentWindow: getMainWindow(), translate: language.translate }),
+          exportOmniBotData({ service, mailbox, parentWindow: getMainWindow(), translate: language.translate }),
         ),
       ),
       exportDiagnostics: handler(() =>

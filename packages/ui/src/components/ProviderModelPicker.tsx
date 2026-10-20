@@ -659,7 +659,7 @@ export function ProviderModelPicker(props: ProviderModelPickerProps) {
                     if (effort) props.onReasoningEffortChange?.(effort);
                   }
                 }
-                // The provider the tab's status is for: a custom agent has no runtime OpenBot downloads.
+                // The provider the tab's status is for: a custom agent has no runtime OmniBot downloads.
                 const runtime = () => {
                   const value = props.runtimeStatuses?.[status().id];
                   if (

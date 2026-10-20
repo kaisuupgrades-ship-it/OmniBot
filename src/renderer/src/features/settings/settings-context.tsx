@@ -65,7 +65,7 @@ const Settings = createSimpleContext({
     // Undefined until main answers. The Settings preview then draws the notch it had before.
     const [builtInDisplayGeometry, setBuiltInDisplayGeometry] = createSignal<DynamicIslandGeometry | undefined>();
     /**
-     * The plugin an `openbot://plugins/<slug>` link asked for, held beside the open flag because the
+     * The plugin an `omnibot://plugins/<slug>` link asked for, held beside the open flag because the
      * marketplace is loaded lazily: the slug has to outlive the chunk load that shows it. It is a
      * slug and never a listing, so the link cannot describe what the user is about to install.
      */
@@ -76,7 +76,7 @@ const Settings = createSimpleContext({
      */
     const [pendingPluginConnect, setPendingPluginConnect] = createSignal(false);
     /**
-     * The template an `openbot://agents/<id>` link named. The install dialog reads the template by
+     * The template an `omnibot://agents/<id>` link named. The install dialog reads the template by
      * this id and installs only after the user presses Add agent.
      */
     const [pendingAgentTemplateId, setPendingAgentTemplateId] = createSignal<string | null>(null);

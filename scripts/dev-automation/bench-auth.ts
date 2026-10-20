@@ -1,6 +1,6 @@
 // The app shows the workspace only to a signed-in account, and the account
 // service is the Auth API. A bench against a missing API measures the
-// "Connecting to OpenBot" screen, so `dev:bench` signs its profile in to the
+// "Connecting to OmniBot" screen, so `dev:bench` signs its profile in to the
 // local development API: this worktree's running `dev:api`, or one the bench
 // starts and stops itself.
 //

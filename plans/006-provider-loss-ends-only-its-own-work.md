@@ -21,7 +21,7 @@
 
 ## Why this matters
 
-OpenBot runs agents on provider processes (Codex, Claude, Grok and others).
+OmniBot runs agents on provider processes (Codex, Claude, Grok and others).
 Most agents share one process for each provider. Some agents have a process of
 their own: a Codex agent on a second account, or a Grok or OpenCode agent with
 workspace access (`ProviderRuntime.runsOnOwnProcess`). When one process exits,

@@ -1,7 +1,7 @@
 import type {
   InstalledSkill,
   InstallSkillInput,
-  OpenBotDesktopApi,
+  OmniBotDesktopApi,
   SetEnabledSkillInput,
   UninstallSkillInput,
 } from "@openbot/contracts/ipc";
@@ -13,7 +13,7 @@ import type {
  */
 export interface SkillsPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    OmniBotDesktopApi["agent"],
     | "addMarketplaceAgent"
     | "cancelMcpSignIn"
     | "completeMcpSignInRelay"
@@ -31,9 +31,9 @@ export interface SkillsPort {
     | "testMcpServer"
     | "uninstallAgentSkill"
   >;
-  marketplaceAgents: Pick<OpenBotDesktopApi["marketplaceAgents"], "get" | "install" | "list">;
+  marketplaceAgents: Pick<OmniBotDesktopApi["marketplaceAgents"], "get" | "install" | "list">;
   skills: Pick<
-    OpenBotDesktopApi["skills"],
+    OmniBotDesktopApi["skills"],
     | "get"
     | "install"
     | "list"

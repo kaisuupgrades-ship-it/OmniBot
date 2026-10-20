@@ -25,7 +25,7 @@ import { isPluginSlug } from "@openbot/contracts/plugin-links";
 import { isString } from "@openbot/contracts/runtime-values";
 import { isUiBlockId, normalizeUiBlockSpec } from "@openbot/contracts/ui-blocks";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText } from "@openbot/logging";
+import { createOmniBotLogger, redactText } from "@openbot/logging";
 import { Effect, Result } from "effect";
 import { z } from "zod";
 import type { AgentClient, AgentProvider } from "../agent-client";
@@ -85,7 +85,7 @@ import {
 import { browserUserControlResult } from "./prompts";
 import { ROUTINE_NO_UPDATE_TOOL } from "./routine-quiet-runs";
 import type { RoutineScheduler } from "./routine-scheduler";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "./routine-tools";
+import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "./routine-tools";
 import {
   captureScreenToolSchema,
   type ScreenCaptureFailed,
@@ -101,7 +101,7 @@ import { discoverTools, resolveDeferredTool } from "./tool-catalog";
 import { ToolOperationFailed, toolStep, toToolOperationFailed } from "./tool-operation";
 import type { AgentBrowserHost } from "./turn-lifecycle";
 
-const logger = createOpenBotLogger("openbot-tool-router");
+const logger = createOmniBotLogger("openbot-tool-router");
 
 /** How long the plan card of `acknowledge_request` waits before the host presses its start button. */
 const ACKNOWLEDGE_START_MS = 10_000;
@@ -111,7 +111,7 @@ function captureFailure(failure: ScreenCaptureFailed) {
   return openBotToolFailure(failure.reason);
 }
 
-export interface OpenBotToolRouterHooks {
+export interface OmniBotToolRouterHooks {
   listAgents(): AgentSummary[];
   listModels(): AgentModelOption[];
   preferredProvider(): AgentProvider;
@@ -139,7 +139,7 @@ export interface OpenBotToolRouterHooks {
   requestNewChat(agentId: string): void;
 }
 
-export interface OpenBotToolRouterOptions {
+export interface OmniBotToolRouterOptions {
   capturedSteps?: (session: ProviderSession) => Effect.Effect<Map<string, string> | null, ToolOperationFailed>;
   store: AgentStore;
   mailbox: MailboxStore;
@@ -166,17 +166,17 @@ export interface OpenBotToolRouterOptions {
   visualPreview?: ChatVisualPreviewHost | null | undefined;
   /** Captures the desktop for `capture_screen`; null where this process has no desktop. */
   screenCapture?: ScreenCaptureHost | null | undefined;
-  hooks: OpenBotToolRouterHooks;
+  hooks: OmniBotToolRouterHooks;
 }
 
 /**
- * Owns the answer to every request a provider process sends to OpenBot: approvals and prompts go to
+ * Owns the answer to every request a provider process sends to OmniBot: approvals and prompts go to
  * the attention registry, browser tools to the browser, and the `openbot` tools to the controller
  * that owns each one. The profile, reaction and `send_message` tools are answered here.
  *
  * It never imports the agent service facade.
  */
-export class OpenBotToolRouter {
+export class OmniBotToolRouter {
   readonly #history: HistoryTools;
   readonly #store: AgentStore;
   readonly #mailbox: MailboxStore;
@@ -201,10 +201,10 @@ export class OpenBotToolRouter {
   readonly #approvalAutomation: ApprovalAutomationPolicy;
   readonly #visualPreview: ChatVisualPreviewHost | null;
   readonly #screenCapture: ScreenCaptureHost | null;
-  readonly #hooks: OpenBotToolRouterHooks;
+  readonly #hooks: OmniBotToolRouterHooks;
   readonly #interruptTool: AgentInterruptTool;
 
-  constructor(options: OpenBotToolRouterOptions) {
+  constructor(options: OmniBotToolRouterOptions) {
     this.#history = new HistoryTools({
       store: options.store,
       redact: options.hooks.redactMcp,
@@ -248,8 +248,8 @@ export class OpenBotToolRouter {
     });
   }
 
-  readonly handle = Effect.fn("OpenBotToolRouter.handle")(function* (
-    this: OpenBotToolRouter,
+  readonly handle = Effect.fn("OmniBotToolRouter.handle")(function* (
+    this: OmniBotToolRouter,
     client: AgentClient,
     request: AppServerRequest,
   ) {
@@ -289,7 +289,7 @@ export class OpenBotToolRouter {
           if (params.namespace === "openbot") {
             if (params.tool === "tool_search" || params.tool === "tool_describe") {
               const agentId = this.#conversation.agentForThread(params.threadId);
-              if (!agentId) throw new Error("The calling OpenBot agent is unknown.");
+              if (!agentId) throw new Error("The calling OmniBot agent is unknown.");
               try {
                 const result = discoverTools(params, this.#requireAgent(agentId));
                 client.respond(request.id, openBotToolResult(result));
@@ -333,7 +333,7 @@ export class OpenBotToolRouter {
           const toolRequest = { ...request, params };
           if (toolRequest.params.namespace === OPENBOT_BROWSER_NAMESPACE) {
             const agentId = this.#conversation.agentForThread(toolRequest.params.threadId);
-            if (!agentId) throw new Error("The browsing OpenBot agent is unknown.");
+            if (!agentId) throw new Error("The browsing OmniBot agent is unknown.");
             if (toolRequest.params.tool === "request_takeover" || toolRequest.params.tool === "submit_secret") {
               const result = yield* this.#attention.surfaceBrowserTakeover(client, toolRequest);
               // A takeover of a stopped client ends with a cancel, and that process has nothing to answer.
@@ -413,11 +413,11 @@ export class OpenBotToolRouter {
             const correctableFailure = (error: unknown) =>
               Effect.sync(() => {
                 const message = this.#hooks.redactMcp(profileToolErrorMessage(error));
-                if (!(error instanceof z.ZodError)) logger.warn("An OpenBot tool failed.", { tool, error: message });
+                if (!(error instanceof z.ZodError)) logger.warn("An OmniBot tool failed.", { tool, error: message });
                 return openBotToolFailure(message);
               });
             const correctable = PROFILE_TOOL_NAMES.has(tool) || tool === "attach_files_to_response";
-            const response = this.#handleOpenBotTool(toolRequest.params).pipe(
+            const response = this.#handleOmniBotTool(toolRequest.params).pipe(
               Effect.catch((failure) => (correctable ? correctableFailure(failure.cause) : Effect.fail(failure))),
               Effect.catchDefect((defect) => (correctable ? correctableFailure(defect) : Effect.die(defect))),
               Effect.tap((result) => Effect.sync(() => client.respond(toolRequest.id, result))),
@@ -442,7 +442,7 @@ export class OpenBotToolRouter {
         default:
           client.respondError(request.id, {
             code: -32601,
-            message: `OpenBot does not implement server request ${request.method}.`,
+            message: `OmniBot does not implement server request ${request.method}.`,
           });
       }
     }).pipe(
@@ -538,7 +538,7 @@ export class OpenBotToolRouter {
    * headers can hold secrets.
    */
 
-  readonly #readAgent = Effect.fn("OpenBotToolRouter.readAgent")(function* (this: OpenBotToolRouter, agentId: string) {
+  readonly #readAgent = Effect.fn("OmniBotToolRouter.readAgent")(function* (this: OmniBotToolRouter, agentId: string) {
     const agent = yield* toolStep(() => this.#requireAgent(agentId));
     const computerUse = agentComputerUseEnabled(agent);
     let skills: unknown[] | undefined;
@@ -594,12 +594,12 @@ export class OpenBotToolRouter {
     };
   });
 
-  readonly #handleOpenBotTool = Effect.fn("OpenBotToolRouter.handleOpenBotTool")(function* (
-    this: OpenBotToolRouter,
+  readonly #handleOmniBotTool = Effect.fn("OmniBotToolRouter.handleOmniBotTool")(function* (
+    this: OmniBotToolRouter,
     params: DynamicToolCallParams,
   ) {
     const senderAgentId = this.#conversation.agentForThread(params.threadId);
-    if (!senderAgentId) throw new Error("The sending OpenBot agent is unknown.");
+    if (!senderAgentId) throw new Error("The sending OmniBot agent is unknown.");
 
     if (LOCAL_SKILL_TOOL_DEFINITIONS.some((tool) => tool.name === params.tool)) {
       const reportFailure = (error: unknown) =>
@@ -883,8 +883,8 @@ export class OpenBotToolRouter {
    * `html_render`: stores the page as an HTML attachment and adds a visual reply message, which the
    * app shows in a sandboxed frame above the final answer. A retried call finds its message by id.
    */
-  readonly #renderVisual = Effect.fn("OpenBotToolRouter.renderVisual")(function* (
-    this: OpenBotToolRouter,
+  readonly #renderVisual = Effect.fn("OmniBotToolRouter.renderVisual")(function* (
+    this: OmniBotToolRouter,
     params: DynamicToolCallParams,
     senderAgentId: string,
     executionThreadId: string,
@@ -921,8 +921,8 @@ export class OpenBotToolRouter {
    * Stores generated bytes as the attachment of one new assistant message. The file and its message
    * are saved together, so a failed save keeps no file and a retry stores one.
    */
-  readonly #addGeneratedMessage = Effect.fn("OpenBotToolRouter.addGeneratedMessage")(function* (
-    this: OpenBotToolRouter,
+  readonly #addGeneratedMessage = Effect.fn("OmniBotToolRouter.addGeneratedMessage")(function* (
+    this: OmniBotToolRouter,
     message: {
       agentId: string;
       threadId: string;
@@ -974,15 +974,15 @@ export class OpenBotToolRouter {
    * `html_preview`: draws the page out of view and gives the agent the image, the content height and
    * the console output. A page that fails to draw is a result the agent can correct.
    */
-  readonly #previewVisual = Effect.fn("OpenBotToolRouter.previewVisual")(function* (
-    this: OpenBotToolRouter,
+  readonly #previewVisual = Effect.fn("OmniBotToolRouter.previewVisual")(function* (
+    this: OmniBotToolRouter,
     params: DynamicToolCallParams,
   ) {
     const parsed = htmlPreviewToolSchema.safeParse(params.arguments, { reportInput: true });
     if (!parsed.success) return openBotToolFailure(profileToolErrorMessage(parsed.error));
     const args = parsed.data;
     const preview = this.#visualPreview;
-    if (!preview) return openBotToolFailure("This OpenBot cannot draw a page. Call html_render without a preview.");
+    if (!preview) return openBotToolFailure("This OmniBot cannot draw a page. Call html_render without a preview.");
     return yield* preview
       .capture({
         html: args.html,
@@ -1007,8 +1007,8 @@ export class OpenBotToolRouter {
    * `list_capture_sources` and `capture_screen`. The agent's Computer Use setting allows both. Each
    * capture waits for the user's approval, and the user sees the image in the conversation.
    */
-  readonly #screenCaptureTool = Effect.fn("OpenBotToolRouter.screenCaptureTool")(function* (
-    this: OpenBotToolRouter,
+  readonly #screenCaptureTool = Effect.fn("OmniBotToolRouter.screenCaptureTool")(function* (
+    this: OmniBotToolRouter,
     client: AgentClient,
     request: AppServerRequest,
     params: DynamicToolCallParams,
@@ -1057,7 +1057,7 @@ export class OpenBotToolRouter {
   });
 
   /** What the approval card says. A window that is gone is a result the agent can correct. */
-  readonly #captureApprovalReason = Effect.fn("OpenBotToolRouter.captureApprovalReason")(function* (
+  readonly #captureApprovalReason = Effect.fn("OmniBotToolRouter.captureApprovalReason")(function* (
     host: ScreenCaptureHost,
     capture: ScreenCaptureRequest,
   ) {
@@ -1087,8 +1087,8 @@ export class OpenBotToolRouter {
    * Stores the capture as an attachment of a message in the conversation and gives the agent the
    * image. The image and its message are saved together, as for `html_render`.
    */
-  readonly #showCapture = Effect.fn("OpenBotToolRouter.showCapture")(function* (
-    this: OpenBotToolRouter,
+  readonly #showCapture = Effect.fn("OmniBotToolRouter.showCapture")(function* (
+    this: OmniBotToolRouter,
     agentId: string,
     threadId: string,
     params: DynamicToolCallParams,
@@ -1129,12 +1129,12 @@ export class OpenBotToolRouter {
     return result;
   }, Effect.uninterruptible);
 
-  readonly #createAgent = Effect.fn("OpenBotToolRouter.createAgent")(
+  readonly #createAgent = Effect.fn("OmniBotToolRouter.createAgent")(
     function* (
-      this: OpenBotToolRouter,
+      this: OmniBotToolRouter,
       params: DynamicToolCallParams,
       senderAgentId: string,
-    ): Effect.fn.Return<OpenBotToolResponse, ToolOperationFailed> {
+    ): Effect.fn.Return<OmniBotToolResponse, ToolOperationFailed> {
       const args = createAgentToolSchema.parse(params.arguments, { reportInput: true });
       const hue = args.avatarHue ?? null;
       const caller = this.#requireAgent(senderAgentId);
@@ -1220,12 +1220,12 @@ export class OpenBotToolRouter {
     Effect.uninterruptible,
   );
 
-  readonly #updateProfile = Effect.fn("OpenBotToolRouter.updateProfile")(
+  readonly #updateProfile = Effect.fn("OmniBotToolRouter.updateProfile")(
     function* (
-      this: OpenBotToolRouter,
+      this: OmniBotToolRouter,
       params: DynamicToolCallParams,
       senderAgentId: string,
-    ): Effect.fn.Return<OpenBotToolResponse, ToolOperationFailed> {
+    ): Effect.fn.Return<OmniBotToolResponse, ToolOperationFailed> {
       const args = updateProfileToolSchema.parse(params.arguments, { reportInput: true });
       const { agentId, avatarHue, avatarPath, provider, model, reasoningEffort, access, computerUse, ...fields } = args;
       if (avatarPath !== undefined && (args.avatarSeed !== undefined || avatarHue !== undefined)) {
@@ -1307,12 +1307,12 @@ export class OpenBotToolRouter {
     Effect.uninterruptible,
   );
 
-  readonly #react = Effect.fn("OpenBotToolRouter.react")(
+  readonly #react = Effect.fn("OmniBotToolRouter.react")(
     function* (
-      this: OpenBotToolRouter,
+      this: OmniBotToolRouter,
       params: DynamicToolCallParams,
       senderAgentId: string,
-    ): Effect.fn.Return<OpenBotToolResponse, ToolOperationFailed> {
+    ): Effect.fn.Return<OmniBotToolResponse, ToolOperationFailed> {
       const args = params.arguments;
       if (!isRecord(args) || !isMessageReaction(args.emoji)) {
         throw new Error("emoji must be exactly one complete Unicode emoji.");
@@ -1334,14 +1334,14 @@ export class OpenBotToolRouter {
     Effect.uninterruptible,
   );
 
-  readonly #sendMessage = Effect.fn("OpenBotToolRouter.sendMessage")(
+  readonly #sendMessage = Effect.fn("OmniBotToolRouter.sendMessage")(
     function* (
-      this: OpenBotToolRouter,
+      this: OmniBotToolRouter,
       params: DynamicToolCallParams,
       senderAgentId: string,
-    ): Effect.fn.Return<OpenBotToolResponse, ToolOperationFailed> {
+    ): Effect.fn.Return<OmniBotToolResponse, ToolOperationFailed> {
       if (params.tool !== "send_message" || !isRecord(params.arguments)) {
-        throw new Error(`Unsupported OpenBot tool: ${params.tool}`);
+        throw new Error(`Unsupported OmniBot tool: ${params.tool}`);
       }
       const recipientValues = params.arguments.recipientAgentIds;
       if (!Array.isArray(recipientValues) || !recipientValues.every((item) => isString(item))) {
@@ -1354,7 +1354,7 @@ export class OpenBotToolRouter {
       const known = new Map(this.#hooks.listAgents().map((agent) => [agent.id, agent]));
       for (const recipient of recipientValues) {
         const agent = known.get(recipient);
-        if (!agent) throw new Error(`Unknown OpenBot agent: ${recipient}`);
+        if (!agent) throw new Error(`Unknown OmniBot agent: ${recipient}`);
         // A hidden agent receives no new messages until the user restores it.
         if (agent.hiddenAt !== undefined)
           throw new Error(`${recipient}: ${sourceText("error.backend.recipientHidden")}`);

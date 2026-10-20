@@ -4,7 +4,7 @@ import { AGENT_TASK_OUTCOMES, type AgentTaskOutcome } from "@openbot/contracts/i
 import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
 import { deleteAggregateHistory, deleteThreadAttachments } from "../database/database-core";
 import { databaseRow, databaseRows, optionalStringColumn, requiredStringColumn } from "../database/database-rows";
-import type { OpenBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../openbot-database";
 
 const AGENT_TASK_ORIGINS = ["user", "agent"] as const;
 export type AgentTaskOrigin = (typeof AGENT_TASK_ORIGINS)[number];
@@ -39,9 +39,9 @@ export interface AgentTaskInput {
  * does. Its event payload holds ids only: the event log is append-only and must not keep the title.
  */
 export class AgentTaskStore {
-  readonly #database: OpenBotDatabase;
+  readonly #database: OmniBotDatabase;
 
-  constructor(database: OpenBotDatabase) {
+  constructor(database: OmniBotDatabase) {
     this.#database = database;
   }
 

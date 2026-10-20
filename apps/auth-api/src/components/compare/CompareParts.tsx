@@ -1,14 +1,14 @@
 import { AppLogo, ProviderLogo } from "@openbot/brand";
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
-import type { ComparePage, OpenBotPlan, RoundupApp } from "../../content/compare/comparison";
+import type { ComparePage, OmniBotPlan, RoundupApp } from "../../content/compare/comparison";
 import { formatArticleDate } from "../../lib/content-collection";
 import { EXTERNAL_LINK_REL } from "../../lib/landing-links";
 import { createLandingReveal } from "../landing/createLandingReveal";
 import { LandingIcon } from "../landing/LandingIcon";
 import { RivalMark, type RivalMarkName } from "./RivalMark";
 
-// The parts that every kind of comparison page draws: OpenBot against a rival, two
+// The parts that every kind of comparison page draws: OmniBot against a rival, two
 // other products against each other, and a roundup of many apps.
 
 /** A section with a heading that comes in as it scrolls into view. */
@@ -38,14 +38,14 @@ export function RevealSection(props: {
   );
 }
 
-/** One side of a comparison. A side with no `mark` is OpenBot, drawn with its own logo. */
+/** One side of a comparison. A side with no `mark` is OmniBot, drawn with its own logo. */
 export interface SideProps {
   side: string;
   name: string;
   mark?: RivalMarkName | undefined;
 }
 
-/** The mark of one side: OpenBot's logo, or the compared product's mark. */
+/** The mark of one side: OmniBot's logo, or the compared product's mark. */
 export function SideMark(props: { mark?: RivalMarkName | undefined; class: string; blink?: boolean }) {
   return (
     <Show
@@ -97,7 +97,7 @@ function CompareMarkSide(props: SideProps & { small?: boolean | undefined }) {
   );
 }
 
-export function PlanCard(props: { plan: OpenBotPlan; index: number; highlighted?: boolean }) {
+export function PlanCard(props: { plan: OmniBotPlan; index: number; highlighted?: boolean }) {
   return (
     <li
       class="compare-plan"

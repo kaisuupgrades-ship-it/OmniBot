@@ -25,7 +25,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OpenBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./openbot-database";
 import { revokeRoutineWebhooks } from "./webhook-route-store";
 
 export interface ChannelAssignment {
@@ -82,7 +82,7 @@ interface ChannelChange {
  * Deprecated: channels are archived at start. The next release removes this store and its tables.
  */
 export class ChannelStore {
-  constructor(readonly database: OpenBotDatabase) {}
+  constructor(readonly database: OmniBotDatabase) {}
 
   get(channelId: string): Channel {
     const row = databaseRow(

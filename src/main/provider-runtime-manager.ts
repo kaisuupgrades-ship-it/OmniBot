@@ -19,7 +19,7 @@ import {
 } from "@openbot/contracts/ipc";
 import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
 import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, type LogValue, redactText, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, type LogValue, redactText, toLogValue } from "@openbot/logging";
 import { Deferred, Effect, Exit, Fiber, Result, Scope, Stream } from "effect";
 import lockValue from "../../native-runtime.lock.json";
 import { type AgentRuntimeLock, parseAgentRuntimeLock } from "../../scripts/agent-runtime-lock";
@@ -45,7 +45,7 @@ import {
 } from "./provider-runtime-releases";
 
 const execFileAsync = promisify(execFile);
-const logger = createOpenBotLogger("provider-runtimes");
+const logger = createOmniBotLogger("provider-runtimes");
 const PROVIDERS = MANAGED_RUNTIME_PROVIDERS;
 /**
  * Everything the store holds. Downloading, staging, verifying, sweeping and freeing disk are the
@@ -170,7 +170,7 @@ export interface ProviderRuntimeManagerOptions {
 /**
  * Where the downloaded provider CLIs live: one store for the whole computer, not one per profile.
  *
- * `appData/OpenBot` is exactly what Electron gives the packaged app as `userData` on macOS, Windows
+ * `appData/OmniBot` is exactly what Electron gives the packaged app as `userData` on macOS, Windows
  * and Linux, so this is the path released builds already use and nothing has to be migrated. What
  * it changes is development, where every renderer port and every `--isolated` worktree gets a
  * profile of its own: each one used to start with an empty store, resolve the user's own CLI
@@ -183,7 +183,7 @@ export interface ProviderRuntimeManagerOptions {
 export function providerRuntimeRoot(input: { appData: string; userDataOverride: string }): string {
   const override = input.userDataOverride.trim();
   if (override) return join(resolve(override), "provider-runtimes");
-  return join(input.appData, "OpenBot", "provider-runtimes");
+  return join(input.appData, "OmniBot", "provider-runtimes");
 }
 
 export class ProviderRuntimeManager extends EventEmitter<ProviderRuntimeManagerEvents> {
@@ -1062,7 +1062,7 @@ export class ProviderRuntimeManager extends EventEmitter<ProviderRuntimeManagerE
       );
       const response = yield* runtimeIO((signal) =>
         this.#fetch(url, {
-          headers: { "User-Agent": "OpenBot-runtime-installer" },
+          headers: { "User-Agent": "OmniBot-runtime-installer" },
           signal: AbortSignal.any([signal, controller.signal, AbortSignal.timeout(30_000)]),
         }),
       ).pipe(Effect.mapError(({ cause }) => requestFailure(url, cause)));
@@ -1092,7 +1092,7 @@ export class ProviderRuntimeManager extends EventEmitter<ProviderRuntimeManagerE
           signal: AbortSignal.any([signal, effectSignal]),
           redirect: "follow",
           headers: {
-            "User-Agent": "OpenBot-runtime-installer",
+            "User-Agent": "OmniBot-runtime-installer",
             ...(offset > 0 ? { Range: `bytes=${offset}-`, ...(etag ? { "If-Range": etag } : {}) } : {}),
           },
         }),

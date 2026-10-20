@@ -32,8 +32,8 @@ import {
 } from "./model";
 import "./status.css";
 
-export const ISSUES_URL = "https://github.com/nightly-labs/openbot/issues?q=label%3Astatus";
-const SITE_URL = "https://openbot.run";
+export const ISSUES_URL = "https://omnibot.example.com/source/issues?q=label%3Astatus";
+const SITE_URL = "https://omnibot.example.com";
 /** A scheduled run can start late, but a check older than this means that the checks stopped. */
 const LATE_CHECK_MS = 30 * 60_000;
 
@@ -169,15 +169,15 @@ export function StatusPage(props: StatusPageProps) {
   return (
     <div class="status-page">
       <header class="status-header">
-        <a class="status-brand" href={SITE_URL} aria-label="OpenBot home">
+        <a class="status-brand" href={SITE_URL} aria-label="OmniBot home">
           <AppLogo variant="production" class="status-brand-logo" />
-          <span>OpenBot</span>
+          <span>OmniBot</span>
         </a>
       </header>
 
       <main class="status-main">
         <header class="status-hero">
-          <h1 class="status-title">OpenBot status</h1>
+          <h1 class="status-title">OmniBot status</h1>
           <div class="status-hero-actions">
             <a class="status-button" href="feed.xml" type="application/atom+xml">
               <Rss class="status-button-icon" aria-hidden="true" />
@@ -279,7 +279,7 @@ export function StatusPage(props: StatusPageProps) {
 
       <footer class="status-footer">
         <a class="status-link" href={SITE_URL}>
-          openbot.run
+          omnibot.example.com
         </a>
         <span class="status-muted">Times are in UTC. The page updates every minute.</span>
       </footer>

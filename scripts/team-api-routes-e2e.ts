@@ -31,12 +31,12 @@ import {
   TEAM_PROTOCOL_VERSION_HEADER,
 } from "@openbot/contracts/team-protocol/v1";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Effect } from "effect";
 import { SteerUnsupportedError } from "../src/backend/agent/queue-controls";
 import { AgentLifecycleFailed } from "../src/backend/agent-service";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { TeamChatStore } from "../src/backend/team-chat-store";
 import type { TeamApiAgents, TeamApiBrowser, TeamApiMailbox } from "../src/main/team-api/dependencies";
 import { TeamApiServer } from "../src/main/team-api-server";
@@ -376,7 +376,7 @@ const accountUsers: Record<string, CentralAuthUser> = {
 const redeemedServerIds: string[] = [];
 
 const store = new TeamStore(join(root, "team.json"));
-const database = new OpenBotDatabase(join(root, "user-data"));
+const database = new OmniBotDatabase(join(root, "user-data"));
 let server: TeamApiServer | null = null;
 
 try {
@@ -415,7 +415,7 @@ try {
         return accountUsers[ticket] ?? null;
       }),
     now: () => clock,
-    logger: createOpenBotLogger("team-api-e2e", (line) => logged.push(line)),
+    logger: createOmniBotLogger("team-api-e2e", (line) => logged.push(line)),
   });
   const port = await Effect.runPromise(server.start());
   const base = `http://127.0.0.1:${port}`;

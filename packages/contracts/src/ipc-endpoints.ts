@@ -585,7 +585,7 @@ export const IPC_ENDPOINTS = {
     /** Ends the sign-in that `connectProvider` started and that still waits for the browser. */
     cancelProviderSignIn: request<AgentProviderId, AgentStatus>()("app:cancel-provider-sign-in"),
     /**
-     * `automatic`: the app asks, not the user. A provider that OpenBot stopped starting after failed
+     * `automatic`: the app asks, not the user. A provider that OmniBot stopped starting after failed
      * starts in a row then stays stopped; only a refresh the user asks for starts it again.
      */
     refreshAgentProviders: request<{ automatic: boolean } | undefined, AgentStatus>()("app:refresh-agent-providers"),
@@ -599,7 +599,7 @@ export const IPC_ENDPOINTS = {
     /**
      * Runs the provider CLI's own updater, for a CLI the user installed themselves. It is their copy,
      * so the version they end on is whatever that updater fetches, which owes nothing to the version
-     * OpenBot pins for the runtime it manages.
+     * OmniBot pins for the runtime it manages.
      */
     updateProviderCli: request<ManagedProviderId, AgentStatus>()("app:update-provider-cli"),
     /**
@@ -855,7 +855,7 @@ export const IPC_ENDPOINTS = {
   },
   // The Slack workspaces, Discord guilds and Telegram chats where this computer's agents answer. Only
   // the host's own desktop can use these: a connect opens a Slack, Discord or Telegram page in this
-  // computer's browser, and a Slack or Discord page returns to this computer's `openbot://` link. A
+  // computer's browser, and a Slack or Discord page returns to this computer's `omnibot://` link. A
   // token only travels towards the host; no result carries one.
   messaging: {
     getSlackOverview: request<undefined, SlackOverview>()("messaging:get-slack-overview"),
@@ -874,12 +874,12 @@ export const IPC_ENDPOINTS = {
     addDiscordOrchestrator: request<AddMessagingOrchestratorInput, AddMessagingOrchestratorResult>()(
       "messaging:add-discord-orchestrator",
     ),
-    // Who can use OpenBot in a Discord server: the members with one of the chosen roles. The roles to
+    // Who can use OmniBot in a Discord server: the members with one of the chosen roles. The roles to
     // choose from come from Discord through Signal.
     getDiscordAccess: request<MessagingWorkspaceInput, DiscordAccess>()("messaging:get-discord-access"),
     listDiscordRoles: request<MessagingWorkspaceInput, DiscordRoleList>()("messaging:list-discord-roles"),
     setDiscordAccess: request<SetDiscordAccessInput, DiscordAccess>()("messaging:set-discord-access"),
-    // The Telegram chats that added the OpenBot bot. A connect opens a `t.me` link with a one-use code
+    // The Telegram chats that added the OmniBot bot. A connect opens a `t.me` link with a one-use code
     // in this computer's browser; the chat links itself when the bot is added.
     getTelegramOverview: request<undefined, TelegramOverview>()("messaging:get-telegram-overview"),
     connectTelegramChat: request<ConnectTelegramChatInput, void>()("messaging:connect-telegram-chat"),
@@ -891,7 +891,7 @@ export const IPC_ENDPOINTS = {
     ),
     // The same for a joined server with `connectors-v1`, which an owner or admin manages from here.
     // The host opens no page: main opens it in this computer's browser. A Slack or Discord install
-    // returns to this computer's `openbot://` link, and main sends the sealed grant on to the host.
+    // returns to this computer's `omnibot://` link, and main sends the sealed grant on to the host.
     hostOverview: scopedRequest<HostMessagingPlatformInput, MessagingOverview, "required">()("messaging:host-overview"),
     hostConnect: scopedRequest<HostMessagingConnectInput, void, "required">()("messaging:host-connect"),
     hostDisconnect: scopedRequest<HostMessagingWorkspaceInput, void, "required">()("messaging:host-disconnect"),
@@ -967,7 +967,7 @@ export const IPC_ENDPOINTS = {
     status: request<undefined, OnePasswordConnectorStatus>()("onepassword-connector:status"),
     // Looks again for the CLI and the 1Password app's CLI integration, for a page that opens or regains focus.
     checkSetup: request<undefined, OnePasswordConnectorStatus>()("onepassword-connector:check-setup"),
-    // Downloads the CLI release that main pins, into a folder that OpenBot owns.
+    // Downloads the CLI release that main pins, into a folder that OmniBot owns.
     installCli: request<undefined, OnePasswordConnectorStatus>()("onepassword-connector:install-cli"),
     // Opens the 1Password app, or its download page when it is not installed.
     openApp: request<undefined, void>()("onepassword-connector:open-app"),
@@ -1002,7 +1002,7 @@ export const IPC_ENDPOINTS = {
     getState: request<undefined, BillingState>()("billing:get-state"),
     openPortal: request<BillingPortalRequest, void>()("billing:open-portal"),
   },
-  // OpenBot servers that the account server runs for this account. `wake` also works for a server
+  // OmniBot servers that the account server runs for this account. `wake` also works for a server
   // that the account is a member of; it answers 404 for a host that is not a hosted server.
   hostedServers: {
     list: request<undefined, HostedServerList>()("hosted-servers:list"),
@@ -1025,7 +1025,7 @@ export const IPC_ENDPOINTS = {
     install: request<InstallMarketplaceAgentInput, InstallMarketplaceAgentResult>()("marketplace-agents:install"),
   },
   // Link-only agent templates. `takePendingLink` and `openLink` carry an id from an
-  // `openbot://agents/<id>` link; there is no endpoint that installs from a link without the dialog.
+  // `omnibot://agents/<id>` link; there is no endpoint that installs from a link without the dialog.
   agentTemplates: {
     preview: request<string, AgentTemplatePreview>()("agent-templates:preview"),
     publish: request<PublishAgentTemplateInput, AgentTemplatePublication>()("agent-templates:publish"),
@@ -1062,7 +1062,7 @@ export const IPC_ENDPOINTS = {
     getPreference: request<undefined, UpdatePreference>()("update:get-preference"),
     setPreference: request<UpdatePreferenceChange, UpdatePreference>()("update:set-preference"),
     cancelScheduledRestart: request<undefined, UpdateStatus>()("update:cancel-scheduled-restart"),
-    // The user of this computer restarts OpenBot, or installs the update, when no work runs.
+    // The user of this computer restarts OmniBot, or installs the update, when no work runs.
     restartWhenIdle: request<IdleRestartTarget, UpdateStatus>()("update:restart-when-idle"),
     cancelIdleRestart: request<undefined, UpdateStatus>()("update:cancel-idle-restart"),
     event: event<UpdateStatus>()("update:event"),
@@ -1073,9 +1073,9 @@ export const IPC_ENDPOINTS = {
     getPreference: request<undefined, NotificationPreference>()("notifications:get-preference"),
     setPreference: request<NotificationPreference, NotificationPreference>()("notifications:set-preference"),
     // Shows one OS notification now, even when the window has focus, so the user can check that the
-    // operating system lets OpenBot show them.
+    // operating system lets OmniBot show them.
     test: request<undefined, void>()("notifications:test"),
-    // Opens the operating system page where the user allows OpenBot notifications. It rejects on a
+    // Opens the operating system page where the user allows OmniBot notifications. It rejects on a
     // system that has no such page.
     openSettings: request<undefined, void>()("notifications:open-settings"),
     opened: event<NotificationOpenedEvent>()("notifications:opened-event"),
@@ -1486,7 +1486,7 @@ export type IpcEndpoints = typeof IPC_ENDPOINTS;
  * Where each group sits on `window.openbot`. The empty path is the top level, and several groups can
  * share one path: the agent groups are spread into `agent`. Null keeps a group off the page; only the
  * preload calls it. A new group does not compile until it has a place here, so the author decides
- * what the page can call. `OpenBotDesktopApi`, the built-preload verifier and the test harness all
+ * what the page can call. `OmniBotDesktopApi`, the built-preload verifier and the test harness all
  * read this table; the preload and the preview mock are checked against it through the type.
  */
 export const IPC_GROUP_PATHS = {
@@ -1563,7 +1563,7 @@ type ScopedArgs<Inner, Server> = [Inner] extends [null]
   : [...OptionalArgs<Inner>, ...ServerArgs<Server>];
 
 /**
- * The `OpenBotDesktopApi` signature of a typed request, so a method that passes its input straight
+ * The `OmniBotDesktopApi` signature of a typed request, so a method that passes its input straight
  * through takes its types from the endpoint instead of repeating them. An untyped endpoint is `never`.
  */
 export type Invoke<Endpoint> =
@@ -1575,7 +1575,7 @@ export type Invoke<Endpoint> =
         : (...args: OptionalArgs<Payload>) => Promise<Result>
       : never;
 
-/** The `OpenBotDesktopApi` subscription to a typed event. It answers the unsubscribe call. */
+/** The `OmniBotDesktopApi` subscription to a typed event. It answers the unsubscribe call. */
 export type Subscribe<Endpoint> =
   Endpoint extends EventEndpoint<string, infer Payload>
     ? (listener: [Payload] extends [undefined] ? () => void : (payload: Payload) => void) => () => void
@@ -1584,7 +1584,7 @@ export type Subscribe<Endpoint> =
 type MethodName<Key extends string, Endpoint> = Endpoint extends EventEndpoint ? `on${Capitalize<Key>}` : Key;
 
 /**
- * The `OpenBotDesktopApi` surface of a group whose methods pass straight through: a request keeps
+ * The `OmniBotDesktopApi` surface of a group whose methods pass straight through: a request keeps
  * its key, and an event is `on` and the key. The preload builds it with `bridgeGroup`, so a new
  * endpoint in such a group needs no line in `ipc-desktop-apis.ts`.
  */
@@ -1614,7 +1614,7 @@ type NestedPath = Exclude<IpcGroupPaths[IpcGroupName], "" | null>;
 
 /**
  * `window.openbot` as `IPC_GROUP_PATHS` lays it out, with every method passed straight through.
- * `OpenBotDesktopApi` is this, except for the few members the preload writes by hand.
+ * `OmniBotDesktopApi` is this, except for the few members the preload writes by hand.
  */
 export type BridgedDesktopApi = PathApi<""> & { [Path in NestedPath]: PathApi<Path> };
 

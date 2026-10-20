@@ -17,7 +17,7 @@ import {
 } from "@openbot/contracts/signal-protocol/messages";
 import { WEBHOOK_ROUTES_LIMIT } from "@openbot/contracts/signal-protocol/webhook-route";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
 import { Effect, Semaphore } from "effect";
 import { causeHelpers } from "../backend/effect-boundary";
 import type { RoutineRecords } from "../backend/routine-records";
@@ -28,7 +28,7 @@ import type { SecretCipher } from "./provider-credential-store";
 import type { WebhookIngressDelivery } from "./signal-ingress";
 import { verifyWebhookSignature } from "./webhook-security";
 
-const logger = createOpenBotLogger("host-events");
+const logger = createOmniBotLogger("host-events");
 const DEFAULT_ACTIVITY_LIMIT = 50;
 const DEFAULT_RUN_LIMIT = 10;
 

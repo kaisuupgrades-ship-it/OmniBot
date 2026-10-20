@@ -1,4 +1,4 @@
-import type { OpenBotDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
 
 /**
  * What the servers domain reaches in main: the server list and selection, the account changes, the local host, the
@@ -7,7 +7,7 @@ import type { OpenBotDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
  */
 export interface ServersPort {
   agent: Pick<
-    OpenBotDesktopApi["agent"],
+    OmniBotDesktopApi["agent"],
     | "getStatus"
     | "listAgents"
     | "listConversationReads"
@@ -30,25 +30,25 @@ export interface ServersPort {
     | "saveMcpSignInApp"
     | "removeMcpSignInApp"
   >;
-  events: OpenBotDesktopApi["events"];
-  auth: Pick<OpenBotDesktopApi["auth"], "onEvent">;
-  browser: Pick<OpenBotDesktopApi["browser"], "setVisible">;
+  events: OmniBotDesktopApi["events"];
+  auth: Pick<OmniBotDesktopApi["auth"], "onEvent">;
+  browser: Pick<OmniBotDesktopApi["browser"], "setVisible">;
   hostAdmin: Pick<
-    OpenBotDesktopApi["hostAdmin"],
+    OmniBotDesktopApi["hostAdmin"],
     "cancelUpdate" | "getUpdateStatus" | "startUpdate" | "updateIdentity"
   >;
-  hostedServers: Pick<OpenBotDesktopApi["hostedServers"], "list" | "restart" | "wake">;
+  hostedServers: Pick<OmniBotDesktopApi["hostedServers"], "list" | "restart" | "wake">;
   host: Pick<
-    OpenBotDesktopApi["host"],
+    OmniBotDesktopApi["host"],
     "configure" | "getStatus" | "onEvent" | "recheckScreenRecording" | "start" | "stop" | "updateIdentity"
   >;
-  notifications: Pick<OpenBotDesktopApi["notifications"], "onOpened">;
+  notifications: Pick<OmniBotDesktopApi["notifications"], "onOpened">;
   remoteDesktop: Pick<
-    OpenBotDesktopApi["remoteDesktop"],
+    OmniBotDesktopApi["remoteDesktop"],
     "checkSetup" | "connect" | "disconnect" | "list" | "openSetup" | "test"
   >;
   servers: Pick<
-    OpenBotDesktopApi["servers"],
+    OmniBotDesktopApi["servers"],
     | "getPresence"
     | "join"
     | "list"
@@ -74,7 +74,7 @@ export function serversPort(): ServersPort {
  * through `host`; a remote server answers them through `servers`, addressed by its id.
  */
 export type ServerAdminPort = Pick<
-  OpenBotDesktopApi["host"],
+  OmniBotDesktopApi["host"],
   "getPresence" | "listMembers" | "listInvites" | "createInvite" | "updateMember" | "removeMember" | "revokeInvite"
 >;
 

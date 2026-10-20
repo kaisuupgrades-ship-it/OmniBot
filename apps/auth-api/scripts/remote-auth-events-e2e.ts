@@ -73,8 +73,8 @@ function fakeSignal(now: number, answer: (body: string) => number = () => 204) {
       verifyRemoteServiceSignature(
         SECRET,
         body,
-        headers.get("OpenBot-Timestamp") ?? "",
-        headers.get("OpenBot-Signature") ?? "",
+        headers.get("OmniBot-Timestamp") ?? "",
+        headers.get("OmniBot-Signature") ?? "",
         now,
       ),
     );

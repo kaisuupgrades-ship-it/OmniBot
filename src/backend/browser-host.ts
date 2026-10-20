@@ -26,7 +26,7 @@ import {
   type BrowserViewViewport,
 } from "@openbot/contracts/team-protocol/browser-view-v1";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, redactText, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, redactText, toLogValue } from "@openbot/logging";
 import { Deferred, Effect, Exit, Fiber, Scope, Semaphore } from "effect";
 import {
   app,
@@ -226,7 +226,7 @@ interface BrowserConsoleMessageDetails {
   sourceId: string;
 }
 
-const logger = createOpenBotLogger("browser-host");
+const logger = createOmniBotLogger("browser-host");
 const BROWSER_WEB_PREFERENCES = {
   sandbox: true,
   contextIsolation: true,

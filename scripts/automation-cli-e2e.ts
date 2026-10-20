@@ -75,7 +75,7 @@ function deliveryState(
   delivery.reads += 1;
   const base = { recipientAgentId: delivery.agentId, turnId: delivery.reads > 1 ? `turn-${delivery.id}` : null };
   if (delivery.reads === 1 || delivery.outcome === "behind") return { ...base, status: "queued", error: null };
-  // OpenBot restarts while the CLI waits: the next read comes through a new port and token.
+  // OmniBot restarts while the CLI waits: the next read comes through a new port and token.
   if (delivery.reads === 2 && delivery.outcome === "restart") restarted = restart();
   if (delivery.reads < 3 || delivery.outcome === "person" || delivery.outcome === "forever")
     return { ...base, status: "running", error: null };
@@ -119,7 +119,7 @@ const options: ConstructorParameters<typeof AutomationServer>[0] = {
     return {
       prompts: [],
       approvals: [],
-      browserTakeovers: waiting ? [{ requestId: "takeover-1", requiresOpenBot: true }] : [],
+      browserTakeovers: waiting ? [{ requestId: "takeover-1", requiresOmniBot: true }] : [],
     };
   },
   respondToLocalAttention: () => Effect.void,
@@ -258,7 +258,7 @@ try {
   await check("a wrong command line exits 2", ["run", "Ada"], 2, (run) => run.stderr.includes("Usage:"));
   const oldUrl = readFileSync(join(root, "url"), "utf8");
   await check(
-    "run --wait continues after OpenBot restarts",
+    "run --wait continues after OmniBot restarts",
     ["run", "Ada", "restart", "--wait", "--json"],
     0,
     (run) => {
@@ -312,7 +312,7 @@ try {
   });
   busy = false;
   await Effect.runPromise(server.stop());
-  await check("a stopped app exits 5", ["list"], 5, (run) => run.stderr.includes("OpenBot is not running"));
+  await check("a stopped app exits 5", ["list"], 5, (run) => run.stderr.includes("OmniBot is not running"));
   await check("a wrong command line exits 2 also when the app is stopped", ["agent", "foo", "Ada"], 2, (run) =>
     run.stderr.includes("Usage:"),
   );

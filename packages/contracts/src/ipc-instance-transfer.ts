@@ -1,5 +1,5 @@
 /**
- * Instance transfer: move the agents and app settings of this computer to another OpenBot computer
+ * Instance transfer: move the agents and app settings of this computer to another OmniBot computer
  * with one `.zip` file. It is a different format from the Grok Bot agent import.
  *
  * Main writes and reads the file. The renderer never receives a path or the file's bytes: it names
@@ -65,7 +65,7 @@ export interface InstanceExportResult {
 
 export interface InstanceTransferPreview {
   token: string;
-  /** The OpenBot version that made the file. */
+  /** The OmniBot version that made the file. */
   appVersion: string;
   exportedAt: string | null;
   agents: AgentImportPreviewAgent[];

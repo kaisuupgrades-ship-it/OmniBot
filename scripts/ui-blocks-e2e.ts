@@ -63,12 +63,12 @@ interface AgentAnswer {
   next?: string;
 }
 
-/** Records what OpenBot answers to the agent. The process never starts: only the answer is read. */
+/** Records what OmniBot answers to the agent. The process never starts: only the answer is read. */
 class RecordingClient extends CodexAppServerClient {
   readonly answers = new Map<RequestId, { success: boolean; value: AgentAnswer | null }>();
   readonly #waiters = new Map<RequestId, () => void>();
 
-  /** Resolves when OpenBot answers the request, so that a host timer is awaited, not slept on. */
+  /** Resolves when OmniBot answers the request, so that a host timer is awaited, not slept on. */
   answered(id: RequestId): Promise<void> {
     if (this.answers.has(id)) return Promise.resolve();
     return new Promise((resolve) => this.#waiters.set(id, resolve));

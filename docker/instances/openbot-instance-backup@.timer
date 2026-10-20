@@ -2,7 +2,7 @@
 # `systemctl enable --now openbot-instance-backup@<name>.timer`, and change the time with
 # `systemctl edit openbot-instance-backup@<name>.timer`.
 [Unit]
-Description=Daily backup of OpenBot instance %i
+Description=Daily backup of OmniBot instance %i
 
 [Timer]
 OnCalendar=*-*-* 04:00:00

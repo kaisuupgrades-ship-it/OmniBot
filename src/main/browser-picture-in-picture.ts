@@ -60,7 +60,7 @@ export class BrowserPictureInPicture {
       maximizable: false,
       skipTaskbar: true,
       backgroundColor: "#111415",
-      title: "OpenBot Browser",
+      title: "OmniBot Browser",
       icon: this.#options.iconPath,
       webPreferences: {
         preload: this.#options.preloadPath,

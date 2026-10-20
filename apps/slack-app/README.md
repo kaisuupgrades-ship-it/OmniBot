@@ -1,18 +1,18 @@
-# OpenBot Slack app
+# OmniBot Slack app
 
-Slack CLI projects for the one OpenBot Slack app. A workspace installs it through
-`POST /v2/slack/authorize`, and the workspace is linked to the OpenBot server that connected it.
-People mention @OpenBot or send it a direct message, and the Slack Orchestrator agent on that server
+Slack CLI projects for the one OmniBot Slack app. A workspace installs it through
+`POST /v2/slack/authorize`, and the workspace is linked to the OmniBot server that connected it.
+People mention @OmniBot or send it a direct message, and the Slack Orchestrator agent on that server
 asks the right agent and answers. No code runs here: each directory holds only the manifest.
 
 | Directory | App | App ID | Home team | Redirect URL |
 | --- | --- | --- | --- | --- |
-| `production` | `OpenBot` | `A0C5H5C95NH` | `openbotdev` (`T0C5B1XG542`) | `https://api.openbot.run/v2/slack/callback` |
-| `development` | `OpenBot (dev)` | `A0C5G5XGS83` | `openbotdev` (`T0C5B1XG542`) | Test Worker (`bun run deploy:test`) |
+| `production` | `OmniBot` | `A0C5H5C95NH` | `openbotdev` (`T0C5B1XG542`) | `https://api.omnibot.example.com/v2/slack/callback` |
+| `development` | `OmniBot (dev)` | `A0C5G5XGS83` | `openbotdev` (`T0C5B1XG542`) | Test Worker (`bun run deploy:test`) |
 
 `.slack/apps.json` links each directory to its app. Run the Slack CLI from inside a directory.
 
-Both apps send events and button presses to `https://signal.openbot.run/v1/slack/events`. For local
+Both apps send events and button presses to `https://signal.omnibot.example.com/v1/slack/events`. For local
 work, `bun run dev:slack` prints a tunnel address: set it as the development app's request URL while
 you test.
 
@@ -42,4 +42,4 @@ The manifest cannot set these. Use `slack app settings --app <id>`:
 - **Manage Distribution**: turn on distribution. When it is on, any workspace can install the app.
   See `LAUNCH.md` for when to do this.
 
-Do not install the app in its home team from the settings page. Workspaces install it through OpenBot.
+Do not install the app in its home team from the settings page. Workspaces install it through OmniBot.

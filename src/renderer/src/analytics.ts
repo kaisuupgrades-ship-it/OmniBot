@@ -21,7 +21,7 @@ import {
 } from "./error-reports";
 import { MARKETPLACE_PLUGINS } from "./features/settings/marketplace-plugin-catalog";
 
-const OPENPANEL_API_URL = "https://analytics.openbot.run/api";
+const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
 const MAX_PENDING_EVENTS = 100;
 const CURATED_LISTING_PATTERN = /^openbot-curated-(?:skill|agent)-([a-z0-9][a-z0-9-]{0,63})$/u;
@@ -140,7 +140,7 @@ interface DesktopAnalyticsEvents {
     action: "view" | "install" | "update" | "uninstall" | "publish" | "enable" | "disable";
     result: AnalyticsResult;
     failure_code?: string;
-    /** A listing id or plugin slug. Only OpenBot's own curated listings and plugins are sent. */
+    /** A listing id or plugin slug. Only OmniBot's own curated listings and plugins are sent. */
     listing_slug?: string;
   };
   memory_action: {

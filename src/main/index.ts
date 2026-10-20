@@ -9,7 +9,7 @@ import {
 } from "@openbot/contracts/ipc";
 import { createFormat, resolveLocale, translateFor } from "@openbot/i18n";
 import { localizeSourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { createRemoteDirectoryRefresh } from "@openbot/team-client/remote-directory";
 import { Effect, Semaphore } from "effect";
 import {
@@ -111,7 +111,7 @@ import { TeardownRegistry } from "./teardown-registry";
 import type { TraceFile } from "./trace-file";
 import { setIpcCallObserver } from "./trusted-ipc";
 
-const logger = createOpenBotLogger("main");
+const logger = createOmniBotLogger("main");
 
 // Electron keeps running after both events: an unhandled rejection only prints a warning, and a
 // monitor leaves the default exception handling in place. These add a redacted log line and a
@@ -175,9 +175,9 @@ if (commandLineUserDataDirectory) {
     ),
   );
 }
-app.setName("OpenBot");
+app.setName("OmniBot");
 app.enableSandbox();
-if (process.platform === "win32") app.setAppUserModelId("app.openbot.desktop");
+if (process.platform === "win32") app.setAppUserModelId("app.omnibot.desktop");
 const hasSingleInstanceLock = app.requestSingleInstanceLock();
 // Linux: the GPU stays on until it fails on this computer (#992). `userData` has its final path here.
 configureLinuxGpu({
@@ -390,18 +390,18 @@ function applyAppIconColor(color: AppLogoColor): void {
 }
 
 /**
- * Outside macOS, closing the main window ends OpenBot, unless the user chose to keep it running in
+ * Outside macOS, closing the main window ends OmniBot, unless the user chose to keep it running in
  * the background. The window is then hidden, not closed, so this event does not come.
  *
  * `window-all-closed` cannot carry that on its own any more. The Computer Use overlays are hidden
  * between actions and closed only after a minute of idle, and a hidden window is still a window,
- * so the event may never arrive: the user would close the last window they can see and leave OpenBot
+ * so the event may never arrive: the user would close the last window they can see and leave OmniBot
  * and the driver running with no way back to them.
  */
 function attachQuitOnMainWindowClose(window: BrowserWindow): void {
   if (process.platform === "darwin") return;
   window.on("closed", () => {
-    // `quit`, not a teardown of its own: `before-quit` below is what OpenBot shuts down through,
+    // `quit`, not a teardown of its own: `before-quit` below is what OmniBot shuts down through,
     // and it already ignores a second request while the first one runs.
     app.quit();
   });
@@ -414,9 +414,9 @@ function attachQuitOnMainWindowClose(window: BrowserWindow): void {
  * registered when the first window is built, long before any service exists, which is why every
  * read below goes through `services?.`.
  *
- * Another app can cancel a session end after the query, and OpenBot then keeps running. Provider
+ * Another app can cancel a session end after the query, and OmniBot then keeps running. Provider
  * runtimes stop only on `session-end`: a stopped manager does not start again, so stopping it on the
- * query left every later Download failing with "OpenBot is closing." (#2518).
+ * query left every later Download failing with "OmniBot is closing." (#2518).
  */
 function attachWindowsSessionEndHandlers(window: BrowserWindow): void {
   if (process.platform !== "win32") return;
@@ -680,7 +680,7 @@ function requestDesktopNotificationPermission(
       preference,
       showWelcome: () => {
         if (!Notification.isSupported()) return;
-        showRetainedNotification(new Notification({ title: "OpenBot", body: translate("notification.welcome") }));
+        showRetainedNotification(new Notification({ title: "OmniBot", body: translate("notification.welcome") }));
       },
     }),
   );
@@ -941,8 +941,8 @@ if (!hasSingleInstanceLock) {
       // (`build/installer.nsh`), and each start writes it again for installs from before that script.
       // A Windows development build does not register: the handler would be bare `electron.exe`.
       // A macOS development build does not register either: macOS ignores the path and arguments and
-      // names the `com.github.Electron` bundle, so the link took `openbot://` from an installed
-      // OpenBot and opened some worktree's bare Electron.app. `bun run dev:slack` has a loopback return.
+      // names the `com.github.Electron` bundle, so the link took `omnibot://` from an installed
+      // OmniBot and opened some worktree's bare Electron.app. `bun run dev:slack` has a loopback return.
       await Effect.runPromise(
         installLinuxDesktopEntry({ platform: process.platform, environment: process.env, iconPath: appIconPath }),
       );
@@ -950,8 +950,8 @@ if (!hasSingleInstanceLock) {
         process.platform === "linux" ||
         ((process.platform === "darwin" || process.platform === "win32") && app.isPackaged)
       ) {
-        if (!app.setAsDefaultProtocolClient("openbot")) {
-          logger.warn("Unable to register the openbot:// scheme. Invitation links will not open OpenBot.");
+        if (!app.setAsDefaultProtocolClient("omnibot")) {
+          logger.warn("Unable to register the omnibot:// scheme. Invitation links will not open OmniBot.");
         }
       }
       if (process.platform === "darwin") app.dock?.setIcon(appIconPath);
@@ -1194,7 +1194,7 @@ if (!hasSingleInstanceLock) {
         })
       ) {
         void runCauseEffect(built.centralAuthInitialization.pipe(Effect.flatMap(() => host.start()))).catch((error) =>
-          logger.error("Unable to republish this OpenBot:", toLogValue(error)),
+          logger.error("Unable to republish this OmniBot:", toLogValue(error)),
         );
       }
       void runCauseEffect(built.agentInitialization.start()).catch((error) => {
@@ -1264,7 +1264,7 @@ if (!hasSingleInstanceLock) {
       }
       // The Windows error box ends the text at a NUL character, so control characters are replaced.
       const message = (error instanceof Error ? error.message : String(error)).replace(/[^\P{Cc}\n\t]/gu, "�");
-      logger.error("OpenBot failed to start:", toLogValue(error));
+      logger.error("OmniBot failed to start:", toLogValue(error));
       // A server has nobody at its virtual display to close the box, and the box blocks the quit.
       if (!serverMode && !hostedServer) {
         // The services, and with them the saved language, may not exist yet. Then the system language applies.
@@ -1314,7 +1314,7 @@ const SHUTDOWN_DEADLINE_MS = 30_000;
 
 function forceExitAfterShutdownDeadline(): void {
   setTimeout(() => {
-    logger.error(`OpenBot did not quit within ${SHUTDOWN_DEADLINE_MS} ms and will exit now.`);
+    logger.error(`OmniBot did not quit within ${SHUTDOWN_DEADLINE_MS} ms and will exit now.`);
     app.exit(0);
   }, SHUTDOWN_DEADLINE_MS);
 }

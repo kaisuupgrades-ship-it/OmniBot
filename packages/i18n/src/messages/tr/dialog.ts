@@ -15,5 +15,5 @@ export const messages = {
   "dialog.saveExportSkill": "Dışa aktarma becerisini kaydet",
   "dialog.saveTransfer": "Aktarım dosyasını kaydet",
   "dialog.chooseTransfer": "Bir aktarım dosyası seçin",
-  "dialog.filter.transfer": "OpenBot aktarım dosyaları",
+  "dialog.filter.transfer": "OmniBot aktarım dosyaları",
 } as const satisfies PartialTranslation<typeof source>;

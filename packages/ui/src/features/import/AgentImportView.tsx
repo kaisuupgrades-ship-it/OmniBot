@@ -36,7 +36,7 @@ import { AgentAvatar } from "../agents/AgentAvatar";
 export type AgentImportPhase = "idle" | "reading" | "review" | "importing" | "done";
 
 /** What the user says to the export agent. It is also the copy button's value. */
-export const AGENT_IMPORT_PROMPT = "Export my agents for OpenBot";
+export const AGENT_IMPORT_PROMPT = "Export my agents for OmniBot";
 
 /**
  * How the user gets the export agent into Grok Bot. `agent`: install the ready one from its link.
@@ -45,7 +45,7 @@ export const AGENT_IMPORT_PROMPT = "Export my agents for OpenBot";
 export type AgentImportSetup = "agent" | "skill";
 
 /** The name of the export agent on its Grok Bot page. */
-const EXPORT_AGENT_NAME = "OpenBot export";
+const EXPORT_AGENT_NAME = "OmniBot export";
 const EXPORT_SKILL_FILE = "SKILL.md";
 const EXPORT_SKILL_ID = "openbot-export";
 

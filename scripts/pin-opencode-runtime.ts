@@ -8,7 +8,7 @@ import { sha256, sha256File } from "./remote-desktop-runtime-release";
 
 export type OpencodeRuntimeTarget = "darwin-arm64" | "darwin-x64" | "linux-x64" | "linux-arm64" | "win32-x64";
 
-/** The npm platform package and the executable inside it, per target OpenBot supports. */
+/** The npm platform package and the executable inside it, per target OmniBot supports. */
 const TARGETS = {
   "darwin-arm64": { package: "opencode-darwin-arm64", executable: "opencode", platformDirectory: "mac" },
   "darwin-x64": { package: "opencode-darwin-x64", executable: "opencode", platformDirectory: "mac" },
@@ -222,7 +222,7 @@ async function fetchParsed<Schema extends z.ZodType>(
 
 async function fetchBytes(fetchImpl: typeof fetch, url: string): Promise<Buffer> {
   const response = await fetchImpl(url, {
-    headers: { "User-Agent": "OpenBot-runtime-pin" },
+    headers: { "User-Agent": "OmniBot-runtime-pin" },
     redirect: "follow",
   });
   if (!response.ok) throw new Error(`${url} answered HTTP ${response.status}.`);

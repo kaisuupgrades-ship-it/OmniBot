@@ -167,7 +167,7 @@ interface Card {
 
 interface Outcome {
   cards: Card[];
-  /** What OpenBot answered to Codex, in order. The tool consent comes first. */
+  /** What OmniBot answered to Codex, in order. The tool consent comes first. */
   responses: Array<{ action: string; persist: unknown; contentKeys: string[] }>;
   toolText: string | null;
   toolStatus: string | null;
@@ -179,7 +179,7 @@ const allowOnce: Choose = () => ({ [DECISION]: ["Allow once"] });
 const allowAlways: Choose = () => ({ [DECISION]: ["Always allow"] });
 const deny: Choose = () => ({ [DECISION]: ["Don't allow"] });
 
-/** Records what OpenBot answers to Codex, so a step can check the answer and not only the outcome. */
+/** Records what OmniBot answers to Codex, so a step can check the answer and not only the outcome. */
 class RecordingClient extends CodexAppServerClient {
   readonly responses: Outcome["responses"] = [];
 
@@ -281,7 +281,7 @@ class Rig {
       this.#client.request(
         "initialize",
         {
-          clientInfo: { name: "openbot_e2e", title: "OpenBot E2E", version: "0.0.0" },
+          clientInfo: { name: "openbot_e2e", title: "OmniBot E2E", version: "0.0.0" },
           capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
         },
         decodeRecordResponse,
@@ -290,7 +290,7 @@ class Rig {
     this.#client.notify("initialized");
   }
 
-  /** The thread settings are the ones OpenBot sends: `on-request`, and full access unless sandboxed. */
+  /** The thread settings are the ones OmniBot sends: `on-request`, and full access unless sandboxed. */
   async thread(agentId: string): Promise<string> {
     const existing = this.#threads.get(agentId);
     if (existing) return existing;

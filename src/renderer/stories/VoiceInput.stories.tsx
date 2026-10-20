@@ -18,7 +18,7 @@ import type { ConversationProps } from "../src/features/conversation/conversatio
 import { VOICE_LEVEL_COUNT } from "../src/features/conversation/stores/voice-store";
 import { CONVERSATION_STORY_ARGS, StoryAppProviders } from "./conversation-story-support";
 import { STORY_AGENT_STATUS } from "./fixtures";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 
 /** A fixed stretch of speech, so the waveform looks the same in each screenshot. */
 const SPEECH_LEVELS = Array.from({ length: VOICE_LEVEL_COUNT }, (_, index) =>
@@ -98,9 +98,9 @@ function VoiceInputComposer(props: { state: VoiceInputState }) {
   );
 }
 
-function useMockOpenBot() {
+function useMockOmniBot() {
   const previousApi = window.openbot;
-  const mock = createMockOpenBot();
+  const mock = createMockOmniBot();
   window.openbot = mock.api;
   onCleanup(() => {
     mock.dispose();
@@ -109,7 +109,7 @@ function useMockOpenBot() {
 }
 
 function VoiceInputStates() {
-  useMockOpenBot();
+  useMockOmniBot();
   return (
     <main class="foundation-story">
       <StoryAppProviders>
@@ -174,7 +174,7 @@ function VoiceMorphLoop() {
 }
 
 function VoiceMorph() {
-  useMockOpenBot();
+  useMockOmniBot();
   return (
     <main class="foundation-story">
       <StoryAppProviders>

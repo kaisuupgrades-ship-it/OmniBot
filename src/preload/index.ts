@@ -45,7 +45,7 @@ import {
   IPC_ENDPOINTS,
   type IpcEndpointGroup,
   LOCAL_SERVER_ID,
-  type OpenBotDesktopApi,
+  type OmniBotDesktopApi,
   type RequestEndpoint,
   type ServerScope,
   type ServerSummary,
@@ -530,7 +530,7 @@ function selectJoinedServer(server: ServerSummary): ServerSummary {
   return server;
 }
 
-const openbotApi: OpenBotDesktopApi = {
+const openbotApi: OmniBotDesktopApi = {
   ...bridgeGroup(IPC_ENDPOINTS.app, {
     getAppInfo: decodeAppInfo,
     getSetupState: decodeAppSetupState,

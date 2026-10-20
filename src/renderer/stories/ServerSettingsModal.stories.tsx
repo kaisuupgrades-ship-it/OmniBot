@@ -22,7 +22,7 @@ import {
 } from "../src/preview/fixtures";
 import { storyConnectorRegistry } from "./connector-fixtures";
 import { createSignInHost } from "./mcp-sign-in-host";
-import { createMockOpenBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-openbot";
 import { SettingsPageStory } from "./settings-page-story";
 
 const localServer = STORY_SERVERS.find((server) => server.kind === "local") ?? STORY_SERVERS[0];
@@ -429,7 +429,7 @@ function RemoteSetupStory(props: {
   const previous = window.openbot;
   // Storybook passes the args as a store, and the mock copies its options with `structuredClone`.
   const hostStatus = props.settings.hostStatus;
-  const mock = createMockOpenBot({
+  const mock = createMockOmniBot({
     ...(hostStatus ? { hostStatus: snapshot(hostStatus) } : {}),
     ...(props.hostUpdate ? { hostUpdate: props.hostUpdate } : {}),
     ...(props.hostRelease ? { hostRelease: props.hostRelease } : {}),

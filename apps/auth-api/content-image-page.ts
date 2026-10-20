@@ -173,7 +173,7 @@ function drawLockup(context: CanvasRenderingContext2D, job: ContentImageJob, loc
   context.fillStyle = "rgba(255, 255, 255, 0.86)";
   context.textAlign = "center";
   const nameBaseline = logoTop + logoSize + nameGap + nameSize * 0.9;
-  context.fillText(lockup.left?.name ?? "OpenBot", left + logoSize / 2, nameBaseline);
+  context.fillText(lockup.left?.name ?? "OmniBot", left + logoSize / 2, nameBaseline);
   context.fillText(lockup.rivalName, right + logoSize / 2, nameBaseline);
 
   // The hairline, broken around "vs".
@@ -254,12 +254,12 @@ function drawPlate(
 }
 
 function drawMark(context: CanvasRenderingContext2D, mark: ContentImageMark, x: number, y: number, size: number): void {
-  if (mark === "openbot") drawOpenBotMark(context, x, y, size);
+  if (mark === "openbot") drawOmniBotMark(context, x, y, size);
   else drawRivalMark(context, mark, x, y, size);
 }
 
 /** `AppLogo`: the rounded square and the two scribbled eyes. */
-function drawOpenBotMark(context: CanvasRenderingContext2D, x: number, y: number, size: number): void {
+function drawOmniBotMark(context: CanvasRenderingContext2D, x: number, y: number, size: number): void {
   context.save();
   context.translate(x, y);
   context.scale(size / APP_LOGO_SIZE, size / APP_LOGO_SIZE);

@@ -15,7 +15,7 @@ import { ProviderRuntime } from "../src/backend/agent/provider-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { ANTIGRAVITY_MANIFEST } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OpenBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/openbot-database";
 import { BUILT_IN_PROVIDER_DRIVERS, NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 
 const OUT = resolve(import.meta.dirname, "../.openbot-build/provider-update-busy-e2e");
@@ -111,7 +111,7 @@ function install(executable: string, hold = false) {
     });
 }
 
-const store = new AgentStore(join(root, "profile"), join(root, "home"), new OpenBotDatabase(join(root, "profile")));
+const store = new AgentStore(join(root, "profile"), join(root, "home"), new OmniBotDatabase(join(root, "profile")));
 const installedExecutable = await installVersion(INSTALLED);
 const newerExecutable = await installVersion(NEWER);
 const providers = new ProviderRuntime({

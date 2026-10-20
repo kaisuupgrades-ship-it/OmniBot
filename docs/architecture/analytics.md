@@ -24,7 +24,7 @@ semantics and native verification steps are in [the mobile README](../../apps/mo
 ## Website analytics
 
 Public website tracking lives in `apps/auth-api/src/lib/analytics.ts`. It runs only on the
-production `openbot.run` hostname. Landing and invitation events carry a bounded
+production `omnibot.example.com` hostname. Landing and invitation events carry a bounded
 `source_platform`, the existing `acquisition_source` category, and a domain-only referrer.
 
 A recognized `utm_source` tag takes precedence over the referring domain. Exact domain and
@@ -87,7 +87,7 @@ and ends between two samples, such as a short tool run, is not counted. The main
 Database time comes from `AgentDatabaseSupervisor`, from the send of a statement to its answer or to
 the end of the host; the host process is not changed. Renderer and child process exits other than a
 clean exit are counted and written to the trace as `crash` spans at the next sample. A utility
-process with the reason `killed` is not counted: OpenBot stops these processes itself. An exit in the
+process with the reason `killed` is not counted: OmniBot stops these processes itself. An exit in the
 last minute before a quit is not counted: a stop signal can end the child processes before the
 main process starts its teardown.
 
@@ -153,4 +153,4 @@ is stored by the account service or Signal service.
 
 The desktop chart adapts Zaidan's chart and interactive area composition. The pinned
 `solid-recharts` dependency has a Solid 2 compatibility patch and uses the application's single
-Solid runtime. Chart colors use OpenBot tokens. Daily tables provide exact accessible values.
+Solid runtime. Chart colors use OmniBot tokens. Daily tables provide exact accessible values.

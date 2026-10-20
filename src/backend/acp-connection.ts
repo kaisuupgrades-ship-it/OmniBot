@@ -2,7 +2,7 @@ import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import { basename } from "node:path";
 import { Readable, Writable } from "node:stream";
 import { type Client, ClientSideConnection, ndJsonStream } from "@agentclientprotocol/sdk";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Deferred, Effect } from "effect";
 import { AgentProcessExitError, type DiagnosticOrigin } from "./agent-client";
 import { type AgentCliInfo, cliSpawnTarget } from "./cli";
@@ -20,7 +20,7 @@ import { createDiagnosticStream } from "./stderr-diagnostics";
 import { endProcessTree } from "./windows-process-tree";
 
 const EXIT_REPORT_WAIT_MS = 2_000;
-const logger = createOpenBotLogger("acp-connection");
+const logger = createOmniBotLogger("acp-connection");
 interface ProcessEnd {
   ending: string;
   detail: string | null;

@@ -11,9 +11,9 @@ editor. The host must be online to receive requests.
 3. Optional: enter an event type. With no event type, all event types start the routine.
 4. Optional: add filters.
 5. Save the routine. The host makes the URL and the signing secret.
-6. Copy the secret into the secret store of the sending service. OpenBot shows it one time only.
+6. Copy the secret into the secret store of the sending service. OmniBot shows it one time only.
 7. Copy the URL. The URL is empty until the account service registers the route. The host must be
-   signed in to its OpenBot account.
+   signed in to its OmniBot account.
 
 Each webhook routine has its own URL and secret. A host can have at most 64 webhook routines.
 
@@ -23,7 +23,7 @@ stops working immediately. A secret has the format `whsec_<43 base64url characte
 When you change the routine to **Schedule**, or delete the routine, its URL stops working. If you
 change it back to **Webhook**, the routine gets a new URL and a new secret.
 
-The URL also changes when you sign in to a different OpenBot account on the host. The secret stays
+The URL also changes when you sign in to a different OmniBot account on the host. The secret stays
 the same. Copy the new URL into the sending service.
 
 ## Send a request
@@ -42,7 +42,7 @@ shape:
 | Field | Rule |
 | --- | --- |
 | `type` | Required. A string of 1 to 256 characters. |
-| `occurredAt` | Optional. A date string. If you do not send it, OpenBot uses the receipt time. |
+| `occurredAt` | Optional. A date string. If you do not send it, OmniBot uses the receipt time. |
 | `data` | Optional. Any JSON value. If you do not send it, the value is `null`. |
 
 The body must be UTF-8 and at most 64 KiB.
@@ -62,9 +62,9 @@ pointer selects all of `data`. A routine can have at most 128 filters.
 
 | Header | Value |
 | --- | --- |
-| `X-OpenBot-Timestamp` | The current Unix time in seconds |
-| `X-OpenBot-Delivery-Id` | A unique ID for this event. Use 1 to 256 ASCII letters, digits, `.`, `_`, `:`, or `-`. The first character is a letter or a digit. |
-| `X-OpenBot-Signature` | `sha256=` and the lowercase hexadecimal HMAC-SHA256 |
+| `X-OmniBot-Timestamp` | The current Unix time in seconds |
+| `X-OmniBot-Delivery-Id` | A unique ID for this event. Use 1 to 256 ASCII letters, digits, `.`, `_`, `:`, or `-`. The first character is a letter or a digit. |
+| `X-OmniBot-Signature` | `sha256=` and the lowercase hexadecimal HMAC-SHA256 |
 
 The HMAC key is the routine secret. The signed bytes are `<timestamp>.<deliveryId>.<body>`. Use the
 exact body bytes that you send. Do not parse and serialize the body again after you sign it. The
@@ -85,14 +85,14 @@ const response = await fetch(process.env.OPENBOT_WEBHOOK_URL, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "X-OpenBot-Timestamp": timestamp,
-    "X-OpenBot-Delivery-Id": deliveryId,
-    "X-OpenBot-Signature": `sha256=${signature}`,
+    "X-OmniBot-Timestamp": timestamp,
+    "X-OmniBot-Delivery-Id": deliveryId,
+    "X-OmniBot-Signature": `sha256=${signature}`,
   },
   body,
 });
 if (response.status !== 200 && response.status !== 202) {
-  throw new Error(`OpenBot did not accept the event: ${response.status}`);
+  throw new Error(`OmniBot did not accept the event: ${response.status}`);
 }
 ```
 

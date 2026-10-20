@@ -1,7 +1,7 @@
 # Camera transitions
 
-Related to [#427](https://github.com/nightly-labs/openbot/issues/427) and
-[#428](https://github.com/nightly-labs/openbot/issues/428).
+Related to [#427](https://omnibot.example.com/source/issues/427) and
+[#428](https://omnibot.example.com/source/issues/428).
 
 ## Decision
 

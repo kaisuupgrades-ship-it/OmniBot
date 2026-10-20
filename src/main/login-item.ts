@@ -11,16 +11,16 @@ export class LoginItemFailure extends Schema.TaggedError<LoginItemFailure>()("Lo
   cause: Schema.Defect(),
 }) {}
 
-/** Whether the operating system opens OpenBot when the user signs in. The system holds the value. */
+/** Whether the operating system opens OmniBot when the user signs in. The system holds the value. */
 export interface LoginItem {
   read: () => Effect.Effect<boolean, LoginItemFailure>;
   write: (enabled: boolean) => Effect.Effect<void, LoginItemFailure>;
-  /** Points an existing item at the running copy of OpenBot. Called once at start. */
+  /** Points an existing item at the running copy of OmniBot. Called once at start. */
   refresh: () => Effect.Effect<void, LoginItemFailure>;
 }
 
 /**
- * Null where OpenBot must not open itself at login: a development run would register the Electron
+ * Null where OmniBot must not open itself at login: a development run would register the Electron
  * binary with no app, and a server starts from its own service unit.
  */
 export function createLoginItem(options: { appVariant: AppVariant; server: boolean }): LoginItem | null {
@@ -30,7 +30,7 @@ export function createLoginItem(options: { appVariant: AppVariant; server: boole
   return linuxAutostartLoginItem({
     // The XDG Base Directory Specification ignores a relative path.
     configHome: configHome && isAbsolute(configHome) ? configHome : join(homedir(), ".config"),
-    fileName: options.appVariant === "production" ? "openbot.desktop" : `openbot-${options.appVariant}.desktop`,
+    fileName: options.appVariant === "production" ? "omnibot.desktop" : `openbot-${options.appVariant}.desktop`,
     // The AppImage runtime names its own file here. `execPath` is inside the mount, which ends with the run.
     executablePath: process.env.APPIMAGE || process.execPath,
   });

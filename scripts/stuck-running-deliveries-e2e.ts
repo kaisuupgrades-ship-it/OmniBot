@@ -40,7 +40,7 @@ const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OpenBotDatabase } = await import("../src/backend/openbot-database");
+const { OmniBotDatabase } = await import("../src/backend/openbot-database");
 const { StoredStateFailure } = await import("../src/backend/stored-state-effects");
 
 /**
@@ -151,7 +151,7 @@ process.stdin.on("data", (chunk) => {
 });
 `;
 
-type Database = InstanceType<typeof OpenBotDatabase>;
+type Database = InstanceType<typeof OmniBotDatabase>;
 type Mailbox = InstanceType<typeof MailboxStore>;
 type Store = InstanceType<typeof AgentStore>;
 type Service = InstanceType<typeof AgentService>;
@@ -241,7 +241,7 @@ async function control(value: {
 }
 
 async function start(): Promise<Instance> {
-  const database = new OpenBotDatabase(userData);
+  const database = new OmniBotDatabase(userData);
   const store = new AgentStore(userData, home, database);
   const mailbox = new MailboxStore(userData, store.sharedRoot, store.database);
   const agents = new AgentService({
@@ -342,7 +342,7 @@ await writeFile(fakeCodex, FAKE_CODEX, { mode: 0o755 });
 let current: Instance | null = null;
 
 try {
-  // (a) Three agents with a turn that runs when OpenBot stops, and a second message in each queue.
+  // (a) Three agents with a turn that runs when OmniBot stops, and a second message in each queue.
   await control({ holdTurns: true, turnMs: 0 });
   const first = await start();
   current = first;

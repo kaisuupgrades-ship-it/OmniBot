@@ -54,8 +54,8 @@ try {
   );
   await preparePinnedCheckout(sunshineSource, lock.remoteDesktop.sunshine, requiredSunshineSubmodules(platform));
   await preparePinnedCheckout(moonlightSource, lock.remoteDesktop.moonlightWeb);
-  await prepareOpenBotSource(sunshineSource, lock.remoteDesktop.sunshine);
-  await prepareOpenBotSource(moonlightSource, lock.remoteDesktop.moonlightWeb);
+  await prepareOmniBotSource(sunshineSource, lock.remoteDesktop.sunshine);
+  await prepareOmniBotSource(moonlightSource, lock.remoteDesktop.moonlightWeb);
   auditNpmDependencies(sunshineSource);
   auditNpmDependencies(moonlightSource);
 
@@ -96,7 +96,7 @@ try {
   await Promise.all([
     cp(join(sunshineSource, "LICENSE"), join(licenses, "Sunshine-GPL-3.0.txt")),
     cp(join(moonlightSource, "LICENSE"), join(licenses, "moonlight-web-stream-GPL-3.0.txt")),
-    // The copies the runtime now carries are OpenBot's to redistribute, so their notices ship with
+    // The copies the runtime now carries are OmniBot's to redistribute, so their notices ship with
     // them. Taken from the tree that was linked against, so the notice is the one for the binary in
     // the archive rather than whatever the formula says today.
     ...bundledLibraryLicenses(bundledLibraries).map(({ file, source }) => cp(source, join(licenses, file))),
@@ -161,7 +161,7 @@ async function packageCorrespondingSource(
   );
   await writeFile(
     join(sourceOutput, "README.txt"),
-    "These archives are the corresponding source used to build the bundled GPL-3.0 Sunshine and Moonlight Web programs. Both archives already contain the OpenBot changes. The separate patches show those changes against the pinned upstream versions.\n",
+    "These archives are the corresponding source used to build the bundled GPL-3.0 Sunshine and Moonlight Web programs. Both archives already contain the OmniBot changes. The separate patches show those changes against the pinned upstream versions.\n",
   );
 }
 
@@ -312,7 +312,7 @@ function moonlightCargoEnvironment(): NodeJS.ProcessEnv {
   return { ...process.env, [variable]: flags };
 }
 
-async function applyOpenBotPatch(source: string, entry: { path: string; sha256: string }): Promise<void> {
+async function applyOmniBotPatch(source: string, entry: { path: string; sha256: string }): Promise<void> {
   const patch = resolve(entry.path);
   if (sha256(await readFile(patch)) !== entry.sha256) {
     throw new Error(`Runtime patch checksum failed for ${entry.path}.`);
@@ -321,18 +321,18 @@ async function applyOpenBotPatch(source: string, entry: { path: string; sha256: 
   execFileSync("git", ["apply", patch], { cwd: source, stdio: "inherit" });
 }
 
-async function prepareOpenBotSource(
+async function prepareOmniBotSource(
   source: string,
   runtime: Awaited<ReturnType<typeof loadNativeRuntimeLock>>["remoteDesktop"]["sunshine"],
 ): Promise<void> {
   if (runtime.sourceMode === "upstream-with-patch") {
-    await applyOpenBotPatch(source, runtime.patch);
+    await applyOmniBotPatch(source, runtime.patch);
     await applyRuntimeOverrides(source, runtime.overrides);
     return;
   }
 
   if (runtime.overrides.length > 0) {
-    throw new Error(`The OpenBot fork must include its overrides: ${runtime.repository}.`);
+    throw new Error(`The OmniBot fork must include its overrides: ${runtime.repository}.`);
   }
 }
 

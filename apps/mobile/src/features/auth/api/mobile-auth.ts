@@ -706,7 +706,7 @@ function decodeStoredMobileCredential(value: unknown): MobileCredential {
 /** The Mobile Connect rule for an account service origin: HTTPS, or HTTP on a private network. */
 function normalizeAccountApiUrl(value: string): string | null {
   return (
-    parseMobileConnectUrl(`openbot://mobile-connect?api=${encodeURIComponent(value)}&ticket=${"x".repeat(32)}`)
+    parseMobileConnectUrl(`omnibot://mobile-connect?api=${encodeURIComponent(value)}&ticket=${"x".repeat(32)}`)
       ?.apiUrl ?? null
   );
 }

@@ -1,6 +1,6 @@
 ---
 name: smoke
-description: Start one or more local OpenBot dev instances and smoke test the features that the current changes or a pull request add. Use when asked to smoke test, QA, or check a change or PR in the real app, including two-client team flows, the browser client, and the iOS simulator.
+description: Start one or more local OmniBot dev instances and smoke test the features that the current changes or a pull request add. Use when asked to smoke test, QA, or check a change or PR in the real app, including two-client team flows, the browser client, and the iOS simulator.
 ---
 
 # Smoke
@@ -70,7 +70,7 @@ Rules:
   supervisor prints, or poll `bun run dev:status` until the service is
   live. Use the ports that the stack reports, never a fixed port.
 - Do not pass `--shared`, so that the test does not change the shared
-  `OpenBot Dev` profile. A new profile gets the showcase data of
+  `OmniBot Dev` profile. A new profile gets the showcase data of
   `bun run dev:seed`.
 - Do not run `dev:reset`, or `dev:seed` without `--dry-run`, on a profile
   that you did not create. Ask first.

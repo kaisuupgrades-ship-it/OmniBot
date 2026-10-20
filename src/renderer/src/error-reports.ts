@@ -84,7 +84,11 @@ export function webReportsEnabled(): boolean {
 }
 
 export function configureWebReports(user: Pick<CentralAuthUser, "id" | "email"> | null): void {
-  if (!PRODUCTION_ANALYTICS_ENABLED || !import.meta.env.PROD || window.location.origin !== "https://openbot.run")
+  if (
+    !PRODUCTION_ANALYTICS_ENABLED ||
+    !import.meta.env.PROD ||
+    window.location.origin !== "https://omnibot.example.com"
+  )
     return;
   queue ??= new ReportQueue(
     indexedReportStorage("openbot-web-error-reports-v1"),

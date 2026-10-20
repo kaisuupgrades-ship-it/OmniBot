@@ -1,6 +1,6 @@
 ---
 name: release-upgrade-safety
-description: Audit a pending OpenBot release for upgrade and data-loss hazards before the version is bumped or tagged. Use when asked to cut a release, create or bump a version, prepare a tag, or check whether a change is safe to ship to installed users.
+description: Audit a pending OmniBot release for upgrade and data-loss hazards before the version is bumped or tagged. Use when asked to cut a release, create or bump a version, prepare a tag, or check whether a change is safe to ship to installed users.
 ---
 
 # Release upgrade safety
@@ -128,7 +128,7 @@ a gate can be selected without opening anything:
 - **H. Signal** — no reference file.
   always triggered: an earlier release can have left Signal behind, so a range with no `remote/`
   change does not prove that Signal is current. Signal is not deployed by CI or by the release
-  workflow. Read `commit` from `curl -fsS https://signal.openbot.run/health/live`; if it is missing,
+  workflow. Read `commit` from `curl -fsS https://signal.omnibot.example.com/health/live`; if it is missing,
   `unknown`, or not a commit in this repository, the verdict is **needs a human**. Pass when
   `git diff --quiet <running commit> HEAD -- remote packages/contracts/src/signal-protocol`
   succeeds. Otherwise the verdict is **deploy Signal from the new tag** before the tag is pushed
@@ -161,7 +161,7 @@ bun run pin:opencode-runtime
 Ask two questions and report the answers with the table:
 
 - **Has the pinned version a published security fix?** If so, moving the pin is part of this
-  release, not the next one. A user cannot update Bun themselves: OpenBot downloaded it, OpenBot
+  release, not the next one. A user cannot update Bun themselves: OmniBot downloaded it, OmniBot
   owns it.
 - **Did the range move a pin?** Then read the diff as a dependency change. A moved `assetSha256`
   with an unmoved `version` is a stop and needs a human: the registry does not rewrite a published

@@ -19,17 +19,17 @@ function releaseTarget(platform: NodeJS.Platform, arch: string): ReleaseTarget |
   if (platform === "linux")
     return {
       feed: arch === "arm64" ? "latest-linux-arm64.yml" : "latest-linux.yml",
-      asset: (version) => `OpenBot-${version}-${arch === "x64" ? "x86_64" : "arm64"}.AppImage`,
+      asset: (version) => `OmniBot-${version}-${arch === "x64" ? "x86_64" : "arm64"}.AppImage`,
     };
   if (platform === "darwin")
     return {
       feed: "latest-mac.yml",
-      asset: (version) => `OpenBot-${version}-${arch}.zip`,
+      asset: (version) => `OmniBot-${version}-${arch}.zip`,
     };
   if (platform === "win32" && arch === "x64")
     return {
       feed: "latest.yml",
-      asset: (version) => `OpenBot-${version}-x64.exe`,
+      asset: (version) => `OmniBot-${version}-x64.exe`,
     };
   return null;
 }
@@ -48,7 +48,7 @@ interface HostReleaseOptions {
 /** Reads only the install marker. No command or application file is executed. */
 export const readInstallationMode = Effect.fn("HostRelease.readInstallationMode")(function* () {
   return yield* Effect.tryPromise({
-    try: (signal) => readFile("/opt/OpenBot/hosted/mode", { encoding: "utf8", signal }),
+    try: (signal) => readFile("/opt/OmniBot/hosted/mode", { encoding: "utf8", signal }),
     catch: () => new ReleaseCheckFailed(),
   }).pipe(
     Effect.map((value) => value.trim()),
@@ -128,7 +128,7 @@ export class HostReleaseService {
 
 /** The version of the latest published release for `target`. Rejects on any fault of the feed. */
 async function fetchLatestRelease(target: ReleaseTarget, request: typeof fetch, signal: AbortSignal): Promise<string> {
-  const response = await request(`https://github.com/nightly-labs/openbot/releases/latest/download/${target.feed}`, {
+  const response = await request(`https://updates.omnibot.example.com/${target.feed}`, {
     signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]),
   });
   if (!response.ok || !response.body) {

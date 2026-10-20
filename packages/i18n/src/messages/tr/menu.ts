@@ -6,7 +6,7 @@ export const messages = {
   "menu.checkForUpdates": "Güncellemeleri Denetle…",
   "menu.preferences": "Ayarlar…",
   "menu.copyLink": "Bağlantıyı Kopyala",
-  "menu.trayOpen": "OpenBot'u aç",
-  "menu.trayQuit": "OpenBot'tan çık",
-  "menu.trayTooltip": "OpenBot",
+  "menu.trayOpen": "OmniBot'u aç",
+  "menu.trayQuit": "OmniBot'tan çık",
+  "menu.trayTooltip": "OmniBot",
 } as const satisfies PartialTranslation<typeof source>;

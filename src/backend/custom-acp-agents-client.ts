@@ -59,7 +59,7 @@ export type CustomAgentSource = () => readonly CustomAgentConfig[];
 /**
  * Builds the ACP client of one agent, on the file its command resolved to, for the sessions of one
  * working folder. `null` is the process that lists the agent's models. `launchPath` is the `PATH`
- * the process starts with, or null to leave the `PATH` of OpenBot unchanged.
+ * the process starts with, or null to leave the `PATH` of OmniBot unchanged.
  */
 export type CustomAgentChildFactory = (
   config: CustomAgentConfig,

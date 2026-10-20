@@ -1,5 +1,5 @@
 // Adapted from the reproduction in nightly-labs/openbot#1824.
-// A custom ACP agent whose interpreter is only on the user's login-shell PATH, with OpenBot started
+// A custom ACP agent whose interpreter is only on the user's login-shell PATH, with OmniBot started
 // the way Finder, the Dock or a login item starts it: PATH=/usr/bin:/bin:/usr/sbin:/sbin.
 // Most ACP adapters are `#!/usr/bin/env node` scripts and Node comes from Homebrew, nvm or mise, so
 // this is the normal macOS setup. Both ways the agent starts must work: Check agent, and the `acp`
@@ -76,9 +76,9 @@ try {
   delete process.env.ZDOTDIR;
   if (process.platform !== "darwin") process.env.SHELL = "/bin/bash";
 
-  // OpenBot started from Finder, the Dock or a login item.
+  // OmniBot started from Finder, the Dock or a login item.
   process.env.PATH = "/usr/bin:/bin:/usr/sbin:/sbin";
-  // Control run: the same agent with the tool folder on OpenBot's own PATH, as when started from a terminal.
+  // Control run: the same agent with the tool folder on OmniBot's own PATH, as when started from a terminal.
   if (process.env.LOGIN_PATH_CONTROL) process.env.PATH = `${tools}:${process.env.PATH}`;
 
   const found = await runCauseEffect(runInLoginShell(`command -v ${INTERPRETER}`));

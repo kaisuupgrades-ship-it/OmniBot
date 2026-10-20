@@ -1,5 +1,5 @@
 #!/bin/bash
-# The firewall of the OpenBot instances. See docs/docker.md#several-instances-on-one-host.
+# The firewall of the OmniBot instances. See docs/docker.md#several-instances-on-one-host.
 #
 # Agents have full access in their container, so the containers on the `openbot` network
 # (bridge br-openbot) reach only the internet: not the host, not private or local addresses, and not

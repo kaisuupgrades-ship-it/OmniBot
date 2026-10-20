@@ -96,7 +96,7 @@
   height: 36px;
 }
 
-/* Dots flow from OpenBot to the other app while the flow runs. */
+/* Dots flow from OmniBot to the other app while the flow runs. */
 .integration-wizard-link {
   width: 40px;
   height: 2px;
@@ -124,7 +124,7 @@
   animation: none;
 }
 
-/* The other app breathes while OpenBot waits for it. */
+/* The other app breathes while OmniBot waits for it. */
 .integration-wizard-target {
   display: inline-grid;
   border-radius: var(--openbot-radius-md);

@@ -53,7 +53,7 @@ export function providerFailureStatus(
     // A CLI that did not answer in time is not broken, so the message must not ask for a reinstall.
     if (error.code === "timeout") return { state: "error", version: version ?? null, message };
     // An app update can require a newer CLI than the one in the runtime store.
-    // Keep the version error so the user can update the provider in OpenBot.
+    // Keep the version error so the user can update the provider in OmniBot.
     if (error.code === "outdated") {
       return { state: "outdated", version: version ?? null, message };
     }
@@ -61,8 +61,8 @@ export function providerFailureStatus(
       const label = provider === "codex" ? "ChatGPT" : "Claude";
       const bundledMessage =
         error.code === "missing"
-          ? `OpenBot's included ${label} runtime is missing. Reinstall OpenBot.`
-          : `OpenBot could not start its included ${label} runtime. Update or reinstall OpenBot.`;
+          ? `OmniBot's included ${label} runtime is missing. Reinstall OmniBot.`
+          : `OmniBot could not start its included ${label} runtime. Update or reinstall OmniBot.`;
       return { state: "error", version: version ?? null, message: bundledMessage };
     }
     if (error.code === "missing") {

@@ -33,7 +33,7 @@ import {
   type RemoteTicketClaims,
 } from "@openbot/contracts/signal-protocol/ticket";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { referenceFrom, safeReference } from "@openbot/user-errors";
 import { Deferred, Effect, type Layer, Result, Schema, Semaphore } from "effect";
 import { createLocalJWKSet, jwtVerify } from "jose";
@@ -93,7 +93,7 @@ interface StoredMobileConnectLink {
 
 const MOBILE_CONNECT_LINK_TOKEN = /^[A-Za-z0-9_-]{32,128}$/u;
 
-const logger = createOpenBotLogger("central-auth");
+const logger = createOmniBotLogger("central-auth");
 
 /** The step of a session file read or write that failed, for the account log. */
 type StoredSessionStage = "read" | "decrypt" | "decode" | "encrypt" | "write";
@@ -772,7 +772,7 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
     (operation) => this.#owned(operation),
   ).bind(this);
 
-  /** A one-use code that links the next Telegram chat that adds the OpenBot bot to this host. */
+  /** A one-use code that links the next Telegram chat that adds the OmniBot bot to this host. */
 
   readonly createTelegramLink = Effect.fn("CentralAuth.createTelegramLink")(
     function* (
@@ -1186,7 +1186,7 @@ export class CentralAuthManager extends EventEmitter<CentralAuthEvents> {
         `/v2/remote/hosts/${encodeURIComponent(hostId)}/logo`,
         {
           method: "PUT",
-          headers: { "Content-Type": image.mimeType, ...(version ? { "OpenBot-Logo-Version": version } : {}) },
+          headers: { "Content-Type": image.mimeType, ...(version ? { "OmniBot-Logo-Version": version } : {}) },
           body: Buffer.from(image.bytes),
         },
         (value) => requiredString(decodeRecord(value, "remote host logo"), "logoKey"),

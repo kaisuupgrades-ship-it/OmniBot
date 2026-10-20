@@ -6,10 +6,10 @@ const BOAT_API_URL = "https://boat.dev/api/v1";
 const REQUEST_TIMEOUT_MS = 15_000;
 /**
  * boat gives the sandbox `env` to its tool environment and to the create-time setup script, not to
- * systemd. The template's helper copies the two hosted variables to a file that the OpenBot service
+ * systemd. The template's helper copies the two hosted variables to a file that the OmniBot service
  * waits for. See `scripts/hosting/openbot-hosted-env`.
  */
-const HOSTED_SERVER_SETUP_SCRIPT = "exec /opt/OpenBot/hosted/openbot-hosted-env\n";
+const HOSTED_SERVER_SETUP_SCRIPT = "exec /opt/OmniBot/hosted/openbot-hosted-env\n";
 
 export type BoatSandboxType = "small" | "default" | "large";
 

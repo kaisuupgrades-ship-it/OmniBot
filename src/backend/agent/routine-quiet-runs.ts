@@ -10,14 +10,14 @@ import { bridgedToolName, getString, type ThreadItem } from "../protocol";
 
 /**
  * The whole answer of a quiet routine run that has nothing to report. The user asks for it in
- * the routine task; OpenBot does not add it to the prompt. A fixed token, not a phrase: the model
+ * the routine task; OmniBot does not add it to the prompt. A fixed token, not a phrase: the model
  * answers in the user's language, and a phrase match in every language is a guess. The brackets make
  * it unlikely as the start or the whole of a real report.
  */
 const ROUTINE_NO_UPDATE_MARKER = "[[no-update]]";
 
 /**
- * The OpenBot tool that a quiet routine run calls when it has nothing to report. A model often
+ * The OmniBot tool that a quiet routine run calls when it has nothing to report. A model often
  * writes a short sentence instead of the exact marker; a tool call does not depend on the wording or
  * the language. It has no arguments, so the provider history shows the decision by the tool name.
  */

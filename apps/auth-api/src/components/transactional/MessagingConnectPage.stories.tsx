@@ -41,8 +41,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /** After a Slack install: one action, in the middle of the card. */
-export const SlackReturnToOpenBot: Story = {
-  args: { openUrl: "openbot://slack-workspace?nonce=example&grant=example" },
+export const SlackReturnToOmniBot: Story = {
+  args: { openUrl: "omnibot://slack-workspace?nonce=example&grant=example" },
 };
 
 /** The browser client tab took the grant. */
@@ -68,8 +68,8 @@ export const SlackUnknownError: Story = {
   args: { failure: "slack_something_new" },
 };
 
-export const DiscordReturnToOpenBot: Story = {
-  args: { provider: "discord", text: DISCORD_TEXT, openUrl: "openbot://discord-guild?nonce=example&grant=example" },
+export const DiscordReturnToOmniBot: Story = {
+  args: { provider: "discord", text: DISCORD_TEXT, openUrl: "omnibot://discord-guild?nonce=example&grant=example" },
 };
 
 export const DiscordGuildTaken: Story = {

@@ -27,19 +27,19 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { set as dotenvSet } from "@dotenvx/dotenvx";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { z } from "zod";
 import { loadSharedDevelopmentEnvironment } from "../development-environment";
 import { bootstrapStripe } from "../stripe-bootstrap";
 
-const logger = createOpenBotLogger("hosting-setup");
+const logger = createOmniBotLogger("hosting-setup");
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const BOAT_API_URL = "https://boat.dev/api/v1";
 /** The events that `HostedServerService` reads from a boat webhook delivery. */
 const BOAT_EVENTS = ["sandbox.ready", "sandbox.error", "sandbox.archived", "sandbox.hydrated"];
 const GITHUB_ENVIRONMENT = "cloudflare-production";
 const TARGETS = {
-  production: { api: "https://api.openbot.run" },
+  production: { api: "https://api.omnibot.example.com" },
   test: { api: "https://openbot-auth-api-test.internal9671.workers.dev" },
 } as const;
 

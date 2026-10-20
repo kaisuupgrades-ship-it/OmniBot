@@ -22,7 +22,7 @@ const hosts = new Map<string, LiveActivityHostKeys>();
 
 /**
  * The phone secret. Each host gets its own secret made from it, which seals the Live Activity
- * content and signs its button links. So Apple and the OpenBot relay cannot read or change an
+ * content and signs its button links. So Apple and the OmniBot relay cannot read or change an
  * update, and one host cannot sign an action for another.
  */
 export function loadLiveActivitySecret(): Promise<Uint8Array> {

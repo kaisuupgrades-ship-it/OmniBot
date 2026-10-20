@@ -1,8 +1,8 @@
 # Docker
 
-The OpenBot image is the Linux release, run as a [self-hosted server](self-hosted-server.md) in a
+The OmniBot image is the Linux release, run as a [self-hosted server](self-hosted-server.md) in a
 container. It is a normal Remote host of your account. You use it from the desktop app, the iPhone
-app or `openbot.run/app`. The image is `ghcr.io/nightly-labs/openbot`, for `linux/amd64` and
+app or `omnibot.example.com/app`. The image is `registry.omnibot.example.com/omnibot`, for `linux/amd64` and
 `linux/arm64`.
 
 ## Run
@@ -10,8 +10,8 @@ app or `openbot.run/app`. The image is `ghcr.io/nightly-labs/openbot`, for `linu
 With Docker Compose:
 
 ```sh
-curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/compose.yaml
-curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/seccomp.json
+curl -fsSLO https://updates.omnibot.example.com/docker/compose.yaml
+curl -fsSLO https://updates.omnibot.example.com/docker/seccomp.json
 docker compose up -d
 docker compose exec openbot openbot login
 ```
@@ -19,16 +19,16 @@ docker compose exec openbot openbot login
 With `docker run`:
 
 ```sh
-curl -fsSLO https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/seccomp.json
+curl -fsSLO https://updates.omnibot.example.com/docker/seccomp.json
 docker run -d --name openbot --restart unless-stopped \
   --security-opt seccomp=seccomp.json --security-opt no-new-privileges:true \
   --shm-size 1g --stop-timeout 60 \
   -v openbot-data:/data \
-  ghcr.io/nightly-labs/openbot:latest
+  registry.omnibot.example.com/omnibot:latest
 docker exec -it openbot openbot login
 ```
 
-`openbot login` asks for your email and the code that OpenBot sends to it. An operator who sets up
+`openbot login` asks for your email and the code that OmniBot sends to it. An operator who sets up
 the container for somebody else can use `openbot login --claim` instead (see
 [server claims](self-hosted-server.md#sign-in-with-a-server-claim)). After the sign-in, the
 server shows in the server list of that account. Then connect a provider from the app, as on a
@@ -48,15 +48,15 @@ The options in both examples are necessary:
 | --- | --- |
 | `seccomp=seccomp.json` | The Electron sandbox makes user namespaces. The default seccomp profile of Docker refuses them, and the container stops with a message. See [Security](#security). |
 | `--shm-size 1g` | Chromium uses shared memory. The Docker default of 64 MB is too small. When `/dev/shm` is smaller than 1 GiB, Chromium uses `/tmp`, which is slower. |
-| `--stop-timeout 60` | OpenBot stops its agents and closes its database before it exits. |
+| `--stop-timeout 60` | OmniBot stops its agents and closes its database before it exits. |
 | `-v openbot-data:/data` | All data is in `/data`. Without a volume, it goes away with the container. |
 
 For Amazon ECS, see [AWS ECS](aws-ecs.md).
 
-The container publishes no port. OpenBot only connects out: to the account server, to the providers,
+The container publishes no port. OmniBot only connects out: to the account server, to the providers,
 and to Signal and TURN for remote use. The Team API listens on `127.0.0.1` in the container.
 The container does not serve a web interface. After `openbot login`, use
-[`openbot.run/app`](https://openbot.run/app) with the same account to select the server. A web
+[`omnibot.example.com/app`](https://omnibot.example.com/app) with the same account to select the server. A web
 client at your own origin is not included in this image. The
 [self-hosted account service](self-hosting.md#what-changes) is a separate deployment with its own
 client limits.
@@ -77,13 +77,13 @@ Public images need no GHCR sign-in. If `latest` or a version without `v` returns
 
 ## Data
 
-`/data` is the home folder of the user `openbot` (UID 1000, GID 1000). OpenBot and its agents run as
+`/data` is the home folder of the user `openbot` (UID 1000, GID 1000). OmniBot and its agents run as
 that user and keep everything there:
 
 | Path | Contents |
 | --- | --- |
-| `/data/.config/OpenBot` | The database `openbot.db`, logs, the downloaded provider runtimes and the browser data. |
-| `/data/OpenBot` | The agent workspaces (`Agents`), `Shared` and `Downloads`. |
+| `/data/.config/OmniBot` | The database `openbot.db`, logs, the downloaded provider runtimes and the browser data. |
+| `/data/OmniBot` | The agent workspaces (`Agents`), `Shared` and `Downloads`. |
 | `/data/.local/share/keyrings`, `/data/.config/openbot-container` | The keyring and its password. The keyring has the key of the encrypted data in `/data`. |
 | Other files in `/data` | Provider sign-ins and the files of agent tools, for example `~/.codex` and `~/.claude`. |
 
@@ -114,7 +114,7 @@ In the container, `openbot status`, `login`, `mobile-connect`, `logout`, `name` 
 
 ## Several instances on one host
 
-`docker/instances/` runs more than one OpenBot container on one Linux host with systemd. Each
+`docker/instances/` runs more than one OmniBot container on one Linux host with systemd. Each
 instance has its own CPU, memory and disk limit, its own data and its own account. Copy the `docker`
 folder of the repository to the host, for example to `/opt/openbot-docker`, and run as root:
 
@@ -203,7 +203,7 @@ There is no command to remove an instance. To remove one and delete its data: `r
 ### Updates from the app
 
 The owner or an admin updates an instance in Server settings › Updates, or in the update dialog, as on a
-hosted server. The container never gets the Docker socket. OpenBot writes an empty request file to
+hosted server. The container never gets the Docker socket. OmniBot writes an empty request file to
 `/srv/openbot/<name>/update-requests`. `openbot-instance-update@<name>.path` sees it and runs
 `openbot-instance update-request <name>` as root. Root only tests and removes the request; it never
 reads or follows it. It pulls the image of the instance and writes its version to `update-status` only
@@ -239,14 +239,14 @@ echo OPENBOT_BACKUP_DIR=/var/backups/openbot >>/opt/openbot-docker/instances/mai
 | `OPENBOT_BACKUP_MAX_AGE` | Hours. When the newest complete backup is older, `backups` shows it as overdue and exits with 1. |
 | `OPENBOT_BACKUP_WORK` | The folder where `verify` unpacks a backup. The default is `/var/tmp`. It needs free space for the data, and the user of the data must be able to reach it. |
 
-A backup stops the container, waits until OpenBot closes its databases, writes the archive and starts
+A backup stops the container, waits until OmniBot closes its databases, writes the archive and starts
 the container again. The instance is offline while the archive is written. The output and the status
 show how long. A running turn stops, as on a restart. Each backup is a folder `<UTC time>` with:
 
 | File | Contents |
 | --- | --- |
 | `data.tar.zst` | `/data` without `lost+found`. With `gzip` (`data.tar.gz`) when the host has no `zstd`. |
-| `manifest.json` | The OpenBot version and image, the size, the checksum of the archive, the folders in `/data`, the stop and the time offline. |
+| `manifest.json` | The OmniBot version and image, the size, the checksum of the archive, the folders in `/data`, the stop and the time offline. |
 | `required.sha256` | The checksums of `openbot.db`, the keyring, its password and `agent-data.db`. |
 | `instance.env` | A copy of the env file of the instance. |
 | `SHA256SUMS` | The checksums of the other files. |
@@ -307,19 +307,19 @@ the backup. When it has less, copy the old data to another disk, delete it from
 
 - Start it only when the instance of the backup does not run anywhere else. Two copies would use the
   same server identity and the same account session.
-- `restore` refuses a backup from a newer OpenBot than the image of the instance. Pull a newer image
-  first. An older OpenBot cannot open a database that a newer one migrated. Do not use a backup to go
+- `restore` refuses a backup from a newer OmniBot than the image of the instance. Pull a newer image
+  first. An older OmniBot cannot open a database that a newer one migrated. Do not use a backup to go
   back to an older version.
-- A newer OpenBot migrates the database on its first start. Back up the restored data again before you
+- A newer OmniBot migrates the database on its first start. Back up the restored data again before you
   upgrade when you want to keep the version that the backup had.
 - The provider sign-ins are in the backup. A provider can still ask for a new sign-in when its session
   expired. The account session is in the backup too.
 
 ## Upgrades
 
-OpenBot does not update itself in a container. A new image replaces it. An instance of
+OmniBot does not update itself in a container. A new image replaces it. An instance of
 `docker/instances` can ask the host for that from the app, see
-[Updates from the app](#updates-from-the-app). Do not go back to an older tag: an older OpenBot cannot
+[Updates from the app](#updates-from-the-app). Do not go back to an older tag: an older OmniBot cannot
 open a database that a newer one migrated, so it does not start.
 
 ### Update automation
@@ -381,12 +381,12 @@ sees only the memory of the host, so the guard uses it, and the log has one warn
 
 Main has an OOM score adjustment of 0 in the container, and each process that it starts gets 500.
 So when the container is out of memory, the kernel is more likely to stop a provider CLI, an MCP
-server or an agent tool than OpenBot.
+server or an agent tool than OmniBot.
 
 ## Environment
 
 Pass these with `-e` or the `environment` of the Compose file, never in an image. Agents inherit the
-environment of OpenBot, so they can read these values.
+environment of OmniBot, so they can read these values.
 
 | Variable | Use |
 | --- | --- |
@@ -411,24 +411,24 @@ environment of OpenBot, so they can read these values.
 - **Check the image.** Each release image has a build provenance attestation:
 
   ```sh
-  gh attestation verify oci://ghcr.io/nightly-labs/openbot:<version> --repo nightly-labs/openbot
+  gh attestation verify oci://registry.omnibot.example.com/omnibot:<version> --repo nightly-labs/openbot
   ```
 
 ## How it works
 
 The release workflow (`.github/workflows/release.yml`) builds the image on a runner of each
 architecture from the AppImage of that release, after it checks the AppImage against the release
-checksums. `docker/Dockerfile` unpacks the AppImage to `/opt/OpenBot/app` and installs the packages
+checksums. `docker/Dockerfile` unpacks the AppImage to `/opt/OmniBot/app` and installs the packages
 of a self-hosted server from that release. The workflow starts and stops each image once, and pushes
 the images to GHCR only after the GitHub Release is published.
 
 `tini` is process 1. It starts `resources/hosting/openbot-container` from the release, which checks
 that it can make a user namespace, starts D-Bus, two virtual displays and the keyring, and then
-becomes OpenBot with `OPENBOT_SERVER=1`. OpenBot shows its windows on `:0`, at 1280x800. The agents
+becomes OmniBot with `OPENBOT_SERVER=1`. OmniBot shows its windows on `:0`, at 1280x800. The agents
 work on `:1`, at the size of `OPENBOT_DISPLAY_SIZE`, which the script names in
-`OPENBOT_AGENT_DISPLAY`. Computer Use and remote desktop use `:1`, so they do not show the OpenBot
-window. On a stop, tini gives the signal to OpenBot and waits for it.
-`/opt/OpenBot/hosted/mode` is `container`, so the `openbot` command talks to the control socket and
+`OPENBOT_AGENT_DISPLAY`. Computer Use and remote desktop use `:1`, so they do not show the OmniBot
+window. On a stop, tini gives the signal to OmniBot and waits for it.
+`/opt/OmniBot/hosted/mode` is `container`, so the `openbot` command talks to the control socket and
 does not use systemd.
 
 ## Limits
@@ -450,7 +450,7 @@ does not use systemd.
   Podman, Kubernetes, rootless Docker, and hosts that restrict user namespaces with AppArmor, such as
   Ubuntu 23.10 or newer. On such a host, the container can need an AppArmor profile that permits
   `userns`.
-- The two displays of the entrypoint were tested with a stand-in for OpenBot: `:0` is 1280x800 and
+- The two displays of the entrypoint were tested with a stand-in for OmniBot: `:0` is 1280x800 and
   `:1` has the display size. Computer Use and remote desktop on `:1` were not tested.
 - Not tested: a Codex agent with Workspace only access in a container. Codex runs its commands in
   bubblewrap, which mounts its root in a user namespace. The seccomp profile allows `mount` only with

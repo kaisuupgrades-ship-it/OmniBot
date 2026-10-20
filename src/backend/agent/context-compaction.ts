@@ -24,7 +24,7 @@ const CONTEXT_COMPACTION_TIMEOUT_MS = 120_000;
 const USAGE_CHANGE_DELAY_MS = 250;
 
 export interface ContextCompactionOptions {
-  /** How long a compaction runs before OpenBot stops it. Tests make it short. */
+  /** How long a compaction runs before OmniBot stops it. Tests make it short. */
   timeoutMs?: number | undefined;
   store: AgentStore;
   providers: ProviderPort;

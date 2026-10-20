@@ -21,7 +21,7 @@ export const DEVELOPMENT_DEFAULT_REASONING_EFFORT: AgentReasoningEffort = "mediu
  *
  * Two conditions, because the catalog alone does not say a model can answer. `opencode-go/` is the
  * paid tier: without an OpenCode Go key, and without the user's own OpenCode sign-in, the CLI lists
- * the free tier only -- but a CLI that lists the Go catalog from a sign-in OpenBot cannot see is
+ * the free tier only -- but a CLI that lists the Go catalog from a sign-in OmniBot cannot see is
  * still one whose provider has to be installed, current and signed in before an agent reaches it.
  * A model that fails either test is not a default, it is a first turn that answers
  * "Invalid API key.".

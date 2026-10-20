@@ -93,14 +93,14 @@ async function verifyApplication(): Promise<void> {
   const installed = await macHostOperations().installedVersion();
   const release = await runCauseEffect(readOwnedJson(join(ROOT, "host-release.json"), 0, hostReleaseSchema));
   if (isNewerRelease(release.version, installed))
-    throw new Error("Install the matching or a newer OpenBot application first.");
+    throw new Error("Install the matching or a newer OmniBot application first.");
 }
 
 async function prepareApplication(): Promise<void> {
   await verifySharedAppParent();
   await verifyBundleTree(SHARED_APP, false);
   await verifySignature(SHARED_APP);
-  if (await macHostOperations().applicationInUse()) throw new Error("Quit all OpenBot sessions before initial setup.");
+  if (await macHostOperations().applicationInUse()) throw new Error("Quit all OmniBot sessions before initial setup.");
   // A normal DMG copy may belong to its installing administrator. Never adopt a tenant-owned bundle.
   const admins = new Set<number>([0]);
   const checkOwner = async (path: string): Promise<void> => {
@@ -175,7 +175,7 @@ async function verifyIsolation(tenants: HostTenant[]): Promise<void> {
     for (const tenant of tenants) {
       const area = join(directory, String(tenant.uid));
       await mkdir(area, { mode: 0o700 });
-      await writeFile(join(area, "probe"), "OpenBot permission test\n", { flag: "wx", mode: 0o600 });
+      await writeFile(join(area, "probe"), "OmniBot permission test\n", { flag: "wx", mode: 0o600 });
       await chown(join(area, "probe"), tenant.uid, 20);
       await chown(area, tenant.uid, 20);
     }
@@ -268,7 +268,7 @@ export function macHostAdminOperations(): HostAdminOperations {
           continue;
         } // Logged-out users load the global Aqua agent at next GUI login.
         try {
-          await hostCommand("/bin/launchctl", ["print", `gui/${tenant.uid}/app.openbot.desktop.relaunch`]);
+          await hostCommand("/bin/launchctl", ["print", `gui/${tenant.uid}/app.omnibot.desktop.relaunch`]);
         } catch {
           await hostCommand("/bin/launchctl", ["bootstrap", `gui/${tenant.uid}`, HOST_AGENT_PLIST]);
         }

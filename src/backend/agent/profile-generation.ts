@@ -91,7 +91,7 @@ export const generateTextWithoutTools = Effect.fn("Agent.generateTextWithoutTool
           .request(
             "initialize",
             {
-              clientInfo: { name: "openbot-profile", title: "OpenBot profile generation", version: "0.1.0" },
+              clientInfo: { name: "openbot-profile", title: "OmniBot profile generation", version: "0.1.0" },
               capabilities: { experimentalApi: true },
             },
             decodeRecordResponse,

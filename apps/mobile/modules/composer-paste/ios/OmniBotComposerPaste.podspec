@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
-  s.name           = 'OpenBotComposerPaste'
+  s.name           = 'OmniBotComposerPaste'
   s.version        = '1.0.0'
-  s.summary        = 'File paste for the OpenBot chat composer'
+  s.summary        = 'File paste for the OmniBot chat composer'
   s.description    = 'Gives photos, videos and other files pasted in the chat composer to JavaScript as files.'
   s.license        = 'PolyForm-Noncommercial-1.0.0'
-  s.author         = 'OpenBot'
-  s.homepage       = 'https://openbot.run'
+  s.author         = 'OmniBot'
+  s.homepage       = 'https://omnibot.example.com'
   s.platforms      = { :ios => '16.4' }
   s.swift_version  = '5.9'
   s.source         = { git: '' }

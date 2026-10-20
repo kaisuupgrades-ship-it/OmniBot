@@ -102,7 +102,7 @@ export async function verifyHost(ops: HostAdminOperations): Promise<HostVerifica
       return false;
     }
   };
-  await check("OpenBot.app signature, ownership and permissions", ops.verifyApplication);
+  await check("OmniBot.app signature, ownership and permissions", ops.verifyApplication);
   await check("Host executables, signatures and launchd definitions", ops.verifyInstallation);
   await check("LaunchDaemon loaded and running", ops.verifyDaemon);
   const registered: number[] = [];
@@ -278,7 +278,7 @@ function summarize(report: Omit<HostStatusReport, "summary">): string {
   // HostManager.#waitForIdle clears the idle map for an unregistered main process. No other phase
   // reads it that way, and this text must not hide an installation warning or a failure reason.
   if (report.unregisteredMain.length && report.phase === "waiting") {
-    return `OpenBot runs under unregistered UID ${report.unregisteredMain.join(", ")}. The host cannot start maintenance until it quits.`;
+    return `OmniBot runs under unregistered UID ${report.unregisteredMain.join(", ")}. The host cannot start maintenance until it quits.`;
   }
   switch (report.phase) {
     case null:
@@ -299,9 +299,9 @@ function summarize(report: Omit<HostStatusReport, "summary">): string {
         : `Update ${version} is staged. Shutdown starts in ${formatDuration(soonest)} at the earliest.`;
     }
     case "stopping":
-      return `Every tenant was idle. OpenBot is quitting; installation starts when all ${report.remainingProcesses} remaining bundle processes have exited.`;
+      return `Every tenant was idle. OmniBot is quitting; installation starts when all ${report.remainingProcesses} remaining bundle processes have exited.`;
     case "installing":
-      return `Replacing OpenBot.app with ${report.pendingVersion ?? "the staged release"}. Do not interrupt.`;
+      return `Replacing OmniBot.app with ${report.pendingVersion ?? "the staged release"}. Do not interrupt.`;
     case "released":
       return `Version ${report.stateVersion ?? "unknown"} is installed. Waiting for tenant health reports${
         blocked.length ? `: ${names}` : "."
@@ -382,7 +382,7 @@ export function formatHostStatus(report: HostStatusReport): string {
   if (report.stateAgeMs !== null) lines.push(`State age   ${formatDuration(report.stateAgeMs)}`);
   if (report.error) lines.push(`Error       ${report.error}`);
   if (report.unregisteredProcesses.length)
-    lines.push(`Unregistered OpenBot processes under UID ${report.unregisteredProcesses.join(", ")}`);
+    lines.push(`Unregistered OmniBot processes under UID ${report.unregisteredProcesses.join(", ")}`);
   lines.push("", report.summary, "", "Tenants");
   for (const tenant of report.tenants) {
     const label = `${tenant.name ?? "unknown"} (${tenant.uid})`.padEnd(24);

@@ -8,7 +8,7 @@ import { Portal } from "@solidjs/web";
 import { createEffect, createSignal, For, onSettled, Show } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
-import { OpenBotPlayground } from "../src/preview/OpenBotPlayground";
+import { OmniBotPlayground } from "../src/preview/OmniBotPlayground";
 import {
   CDN_CHART,
   COMPARISON_MOCKUP,
@@ -364,7 +364,7 @@ function AppShellStage(props: { onOpenLink: (url: string) => void }) {
   });
   return (
     <div ref={shell} class="chat-visual-app">
-      <OpenBotPlayground />
+      <OmniBotPlayground />
       <Show when={content()}>
         {(mount) => (
           <Portal mount={mount()}>

@@ -29,14 +29,14 @@ import {
   WEBHOOK_SIGNATURE_HEADER,
   WEBHOOK_TIMESTAMP_HEADER,
 } from "@openbot/contracts/signal-protocol/webhook-route";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { exportJWK, type JWTPayload, SignJWT } from "jose";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const OUT = resolve(ROOT, ".openbot-build/signal-security-e2e");
 const WAIT_MS = 10_000;
 
-const logger = createOpenBotLogger("signal-security-e2e");
+const logger = createOmniBotLogger("signal-security-e2e");
 
 // Throwaway values for this run only. The bot token's secret part must never leave Signal.
 const BOT_ID = "777000111";
@@ -289,7 +289,7 @@ const update = (chatId: string, text: string) =>
 const postAuthEvent = (body: string, timestamp: string, signature: string) =>
   fetch(`${base}/internal/auth-events`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "OpenBot-Timestamp": timestamp, "OpenBot-Signature": signature },
+    headers: { "Content-Type": "application/json", "OmniBot-Timestamp": timestamp, "OmniBot-Signature": signature },
     body,
   });
 const postSlack = (body: string, timestamp: string, signature: string) =>
@@ -548,8 +548,8 @@ try {
       withDeadline(fetch(`${base}${path}`, { method: "POST", headers, body: endless() }), path);
     const event = await post("/internal/auth-events", {
       "Content-Type": "application/json",
-      "OpenBot-Timestamp": nowSeconds(),
-      "OpenBot-Signature": "v1=bad",
+      "OmniBot-Timestamp": nowSeconds(),
+      "OmniBot-Signature": "v1=bad",
     });
     const slack = await post(SLACK_EVENTS_PATH, {
       "Content-Type": "application/json",

@@ -92,16 +92,16 @@ jobs:
           join_status="$(curl --silent --show-error --retry 5 --retry-all-errors \
             --max-redirs 0 --dump-header "$verification_dir/join.headers" \
             --output "$verification_dir/join.html" --write-out '%{http_code}' \
-            https://openbot.run/join)"
+            https://omnibot.example.com/join)"
           test "$join_status" = "200"
           tr -d '\r' < "$verification_dir/join.headers" | grep -Eiq '^cache-control:.*no-store'
           association_status="$(curl --silent --show-error --retry 5 --retry-all-errors \
             --max-redirs 0 --dump-header "$verification_dir/association.headers" \
             --output "$verification_dir/association.json" --write-out '%{http_code}' \
-            https://openbot.run/.well-known/apple-app-site-association)"
+            https://omnibot.example.com/.well-known/apple-app-site-association)"
           test "$association_status" = "200"
           tr -d '\r' < "$verification_dir/association.headers" | grep -Eiq '^content-type: application/json'
-          jq -e '.applinks.details == [{"appID":"ZTRDTUL87R.app.openbot.desktop","paths":["/join"]},{"appID":"ZTRDTUL87R.run.openbot.mobile","paths":["/join","/agents/*"]}]' \
+          jq -e '.applinks.details == [{"appID":"ZTRDTUL87R.app.omnibot.desktop","paths":["/join"]},{"appID":"ZTRDTUL87R.run.openbot.mobile","paths":["/join","/agents/*"]}]' \
             "$verification_dir/association.json" >/dev/null
 
   host-signing:
@@ -328,7 +328,7 @@ jobs:
         env:
           MAC_PROVISIONING_PROFILE: ${{ secrets.MAC_PROVISIONING_PROFILE }}
         run: |
-          profile_path="$RUNNER_TEMP/OpenBot.provisionprofile"
+          profile_path="$RUNNER_TEMP/OmniBot.provisionprofile"
           printf '%s' "$MAC_PROVISIONING_PROFILE" | /usr/bin/base64 -D > "$profile_path"
           security cms -D -i "$profile_path" >/dev/null
           echo "OPENBOT_PROVISIONING_PROFILE=$profile_path" >> "$GITHUB_ENV"
@@ -373,7 +373,7 @@ jobs:
       - name: Verify application signature and notarization
         shell: bash
         run: |
-          app_path="dist/${{ matrix.app_dir }}/OpenBot.app"
+          app_path="dist/${{ matrix.app_dir }}/OmniBot.app"
           test -d "$app_path"
           codesign --verify --deep --strict --verbose=2 "$app_path"
           runtime_path="$app_path/Contents/Resources/remote-desktop-runtime/darwin/${{ matrix.arch }}"
@@ -394,7 +394,7 @@ jobs:
           test -s "$RUNNER_TEMP/openbot-entitlements.plist"
           plutil -lint "$RUNNER_TEMP/openbot-entitlements.plist"
           /usr/libexec/PlistBuddy -c 'Print :com.apple.developer.associated-domains:0' \
-            "$RUNNER_TEMP/openbot-entitlements.plist" | grep -Fx 'applinks:openbot.run'
+            "$RUNNER_TEMP/openbot-entitlements.plist" | grep -Fx 'applinks:omnibot.example.com'
           /usr/libexec/PlistBuddy -c 'Print :com.apple.developer.team-identifier' \
             "$RUNNER_TEMP/openbot-entitlements.plist" | grep -Fx 'ZTRDTUL87R'
           /usr/libexec/PlistBuddy -c 'Print :com.apple.security.device.audio-input' \
@@ -471,7 +471,7 @@ jobs:
           set -euo pipefail
           source scripts/host-signing-keychain.sh
           bun scripts/build-host-installer.ts
-          host_pkg="dist/OpenBot-Host-$RELEASE_VERSION-arm64.pkg"
+          host_pkg="dist/OmniBot-Host-$RELEASE_VERSION-arm64.pkg"
           xcrun notarytool store-credentials openbot-host-release --keychain "$HOST_SIGNING_KEYCHAIN" \
             --apple-id "$APPLE_ID" --password "$APPLE_APP_SPECIFIC_PASSWORD" --team-id "$APPLE_TEAM_ID"
           xcrun notarytool submit "$host_pkg" --keychain "$HOST_SIGNING_KEYCHAIN" \
@@ -493,17 +493,17 @@ jobs:
         run: |
           cd dist
           shopt -s nullglob
-          artifacts=("OpenBot-$RELEASE_VERSION-${{ matrix.arch }}.dmg" "OpenBot-$RELEASE_VERSION-${{ matrix.arch }}.zip")
-          if [[ "${{ matrix.arch }}" == "arm64" ]]; then artifacts+=("OpenBot-Host-$RELEASE_VERSION-arm64.pkg"); fi
+          artifacts=("OmniBot-$RELEASE_VERSION-${{ matrix.arch }}.dmg" "OmniBot-$RELEASE_VERSION-${{ matrix.arch }}.zip")
+          if [[ "${{ matrix.arch }}" == "arm64" ]]; then artifacts+=("OmniBot-Host-$RELEASE_VERSION-arm64.pkg"); fi
           shasum -a 256 "${artifacts[@]}" > "SHA256SUMS-${{ matrix.suffix }}.txt"
 
       - name: Generate macOS release SBOM
         uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
         with:
-          path: dist/${{ matrix.app_dir }}/OpenBot.app
+          path: dist/${{ matrix.app_dir }}/OmniBot.app
           format: spdx-json
-          output-file: dist/OpenBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}.spdx.json
-          artifact-name: OpenBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}-SBOM
+          output-file: dist/OmniBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}.spdx.json
+          artifact-name: OmniBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}-SBOM
           upload-artifact: false
           upload-release-assets: false
 
@@ -513,8 +513,8 @@ jobs:
         with:
           path: dist/host-sbom
           format: spdx-json
-          output-file: dist/OpenBot-Host-${{ env.RELEASE_VERSION }}-macos.spdx.json
-          artifact-name: OpenBot-Host-${{ env.RELEASE_VERSION }}-macOS-SBOM
+          output-file: dist/OmniBot-Host-${{ env.RELEASE_VERSION }}-macos.spdx.json
+          artifact-name: OmniBot-Host-${{ env.RELEASE_VERSION }}-macOS-SBOM
           upload-artifact: false
           upload-release-assets: false
 
@@ -527,7 +527,7 @@ jobs:
       - name: Include macOS provenance bundle
         env:
           BUNDLE_PATH: ${{ steps.macos-provenance.outputs.bundle-path }}
-        run: cp "$BUNDLE_PATH" "dist/OpenBot-$RELEASE_VERSION-${{ matrix.suffix }}.sigstore.json"
+        run: cp "$BUNDLE_PATH" "dist/OmniBot-$RELEASE_VERSION-${{ matrix.suffix }}.sigstore.json"
 
       - name: Upload macOS release assets
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -536,7 +536,7 @@ jobs:
           path: |
             dist/*.dmg
             dist/*.zip
-            dist/OpenBot-Host-*-arm64.pkg
+            dist/OmniBot-Host-*-arm64.pkg
             dist/latest-mac.yml
             dist/*.blockmap
             dist/*.spdx.json
@@ -638,11 +638,11 @@ jobs:
           if ($installers.Count -ne 1 -or -not (Test-Path dist/latest.yml)) {
             Write-Error "Expected one EXE installer and latest.yml."
           }
-          # The package verifier ties the signer of OpenBot.exe to the publisher in app-update.yml.
+          # The package verifier ties the signer of OmniBot.exe to the publisher in app-update.yml.
           # A signed install verifies the next update's installer against that publisher.
           $signature = Get-AuthenticodeSignature -LiteralPath $installers[0].FullName
           if ($env:WINDOWS_SIGNED -eq "true") {
-            $applicationSigner = (Get-AuthenticodeSignature -LiteralPath dist/win-unpacked/OpenBot.exe).SignerCertificate.Subject
+            $applicationSigner = (Get-AuthenticodeSignature -LiteralPath dist/win-unpacked/OmniBot.exe).SignerCertificate.Subject
             if ($signature.Status -ne "Valid" -or $signature.SignerCertificate.Subject -ne $applicationSigner) {
               Write-Error "The installer signer differs from the application signer: $($signature.Status) $($signature.SignerCertificate.Subject)."
             }
@@ -689,8 +689,8 @@ jobs:
         with:
           path: dist/win-unpacked
           format: spdx-json
-          output-file: dist/OpenBot-${{ env.RELEASE_VERSION }}-windows.spdx.json
-          artifact-name: OpenBot-${{ env.RELEASE_VERSION }}-Windows-SBOM
+          output-file: dist/OmniBot-${{ env.RELEASE_VERSION }}-windows.spdx.json
+          artifact-name: OmniBot-${{ env.RELEASE_VERSION }}-Windows-SBOM
           upload-artifact: false
           upload-release-assets: false
 
@@ -829,8 +829,8 @@ jobs:
         with:
           path: dist/${{ matrix.suffix }}-unpacked
           format: spdx-json
-          output-file: dist/OpenBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}.spdx.json
-          artifact-name: OpenBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}-SBOM
+          output-file: dist/OmniBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}.spdx.json
+          artifact-name: OmniBot-${{ env.RELEASE_VERSION }}-${{ matrix.suffix }}-SBOM
           upload-artifact: false
           upload-release-assets: false
 
@@ -894,7 +894,7 @@ jobs:
           set -euo pipefail
           (cd release-assets && sha256sum --check --strict "SHA256SUMS-$SUFFIX.txt")
           mkdir image
-          mv release-assets/*.AppImage image/OpenBot.AppImage
+          mv release-assets/*.AppImage image/OmniBot.AppImage
         env:
           SUFFIX: ${{ matrix.suffix }}
 
@@ -906,7 +906,7 @@ jobs:
         env:
           PLATFORM: ${{ matrix.platform }}
 
-      # The image starts with the sandbox on, its control socket answers, and a stop lets OpenBot
+      # The image starts with the sandbox on, its control socket answers, and a stop lets OmniBot
       # exit by itself. A signed-out server needs no account.
       - name: Start and stop the image
         shell: bash
@@ -925,7 +925,7 @@ jobs:
             sleep 1
           done
           echo "$status"
-          grep -Fxq "OpenBot $RELEASE_VERSION" <<<"$status"
+          grep -Fxq "OmniBot $RELEASE_VERSION" <<<"$status"
           grep -Fxq "Account: signed out. Sign in with: openbot login" <<<"$status"
           docker stop --time 60 openbot
           test "$(docker inspect openbot --format '{{.State.ExitCode}}')" = 0
@@ -1034,11 +1034,11 @@ jobs:
               --generate-notes \
               --latest \
               --repo "$GITHUB_REPOSITORY" \
-              --title "OpenBot $RELEASE_TAG"
+              --title "OmniBot $RELEASE_TAG"
           fi
 
   # Posts the highlights of `.github/release-announcement.json`, which the `validate` job checked, as
-  # OpenBot through a channel webhook (docs/RELEASING.md#discord-announcement). It waits for the
+  # OmniBot through a channel webhook (docs/RELEASING.md#discord-announcement). It waits for the
   # Docker image and the boat snapshot, so the post says "is out" only when every channel has the
   # version. A failure here does not undo the release: re-run this job. A re-run after a success
   # posts the message again.

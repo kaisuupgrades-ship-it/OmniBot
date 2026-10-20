@@ -34,7 +34,7 @@ export function createWebAccountCalls(
           ? {}
           : {
               "Content-Type": init.contentType ?? "application/json",
-              "X-OpenBot-Browser": "1",
+              "X-OmniBot-Browser": "1",
             },
       ...(init.body === undefined ? {} : { body: init.body }),
     }).catch(() => {

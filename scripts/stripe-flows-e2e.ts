@@ -13,7 +13,7 @@
  *
  * The `boat` scenario runs only when named. It makes a real VM: the Worker needs the real `BOAT_API_KEY`
  * and `HOSTED_SERVER_TEMPLATE`, and the template must know a public origin of this Worker. It waits
- * until OpenBot in the VM redeems its claim and publishes its host. Then it keeps a focused web client
+ * until OmniBot in the VM redeems its claim and publishes its host. Then it keeps a focused web client
  * open with no input for 20 minutes and checks that the server stays on, waits for the idle stop
  * (about 15 minutes), starts the server, changes the plan, ends it, renews it, and deletes the server.
  * `--checkout` pays each Checkout page with a test card in the local Chrome. The web client then
@@ -301,7 +301,7 @@ class Account {
       method,
       headers: {
         Cookie: `__Host-openbot-web=${this.token}`,
-        ...(method === "GET" ? {} : { Origin: this.api, "X-OpenBot-Browser": "1", "Content-Type": "application/json" }),
+        ...(method === "GET" ? {} : { Origin: this.api, "X-OmniBot-Browser": "1", "Content-Type": "application/json" }),
         ...headers,
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
@@ -1278,7 +1278,7 @@ const scenarios: Record<Scenario, (account: Account) => Promise<void>> = {
       );
       record(
         "boat",
-        "OpenBot in the VM redeems its claim and publishes the host with the server name",
+        "OmniBot in the VM redeems its claim and publishes the host with the server name",
         host.host_name === name,
         host,
       );
@@ -1288,7 +1288,7 @@ const scenarios: Record<Scenario, (account: Account) => Promise<void>> = {
       // app signs in before it starts the host, so 60 seconds of a clean log is a complete start.
       const restart = await boat("POST", `/sandboxes/${sandboxId}/commands`, {
         command: [
-          'test -s "$HOME/.config/OpenBot/openbot-central-auth-v1.bin" || { echo "no stored session"; exit 1; }',
+          'test -s "$HOME/.config/OmniBot/openbot-central-auth-v1.bin" || { echo "no stored session"; exit 1; }',
           "sudo -n systemctl restart openbot.service",
           "id=$(systemctl show -p InvocationID --value openbot.service)",
           "for _ in $(seq 1 30); do",

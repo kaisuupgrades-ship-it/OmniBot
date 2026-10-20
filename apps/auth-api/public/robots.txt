@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://openbot.run/sitemap.xml
+Sitemap: https://omnibot.example.com/sitemap.xml

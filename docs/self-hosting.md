@@ -1,22 +1,22 @@
 # Self-hosted remote access
 
 This guide tells you how to run your own account service (the Account API Worker), Signal and TURN
-for remote access. Use it when you do not want `api.openbot.run` and `signal.openbot.run` to carry
+for remote access. Use it when you do not want `api.omnibot.example.com` and `signal.omnibot.example.com` to carry
 your account and connection set-up.
 
 Our Worker does not issue a ticket for another Signal. A ticket gives access to a host, and our key
 signs it, so a ticket for your Signal would also open our Signal. Thus a self-hosted Signal needs a
 self-hosted account service with its own keys. See
-[issue #1263](https://github.com/nightly-labs/openbot/issues/1263).
+[issue #1263](https://omnibot.example.com/source/issues/1263).
 
 ## What changes
 
-- Accounts on your service are separate from accounts on `openbot.run`. Each person signs in again.
+- Accounts on your service are separate from accounts on `omnibot.example.com`. Each person signs in again.
 - Each desktop and phone that connects to a host must use the same service.
-- Invitations are `openbot://join` links. Copy a link from the app and send it yourself. The app
+- Invitations are `omnibot://join` links. Copy a link from the app and send it yourself. The app
   does not send an invitation by email.
-- The browser client at `openbot.run/app` does not work with your service.
-- Hosted servers, the OpenBot GitHub App, Slack, the OpenBot Telegram bot and the iPhone Live
+- The browser client at `omnibot.example.com/app` does not work with your service.
+- Hosted servers, the OmniBot GitHub App, Slack, the OmniBot Telegram bot and the iPhone Live
   Activity relay stay off. Each needs secrets that only we have.
 - The other network connections in [PRIVACY.md](../PRIVACY.md) do not change.
 
@@ -26,7 +26,7 @@ self-hosted account service with its own keys. See
 - A Linux server with Docker Engine, Docker Compose and a static public IPv4 address. See the
   [Signal production requirements](../remote/README.md#production-requirements) for ports and DNS.
 - An SMTP account that accepts TLS on port 465. Sign-in sends a one-time code by email.
-- A clone of the OpenBot release that you run, and [Bun](https://bun.sh).
+- A clone of the OmniBot release that you run, and [Bun](https://bun.sh).
 
 In the examples, the account service is `api.example.com`, Signal is `signal.example.com` and TURN is
 `turn.example.com`. Use your own names.
@@ -122,7 +122,7 @@ Keep the private JWK secret. With it, a person can open each host that uses your
 
 Do these steps on each computer that hosts or connects.
 
-1. If you signed in to `openbot.run` before, sign out in the app. Otherwise the app sends the old
+1. If you signed in to `omnibot.example.com` before, sign out in the app. Otherwise the app sends the old
    session token to your service.
 2. Quit the app. Then start it with the two variables. `OPENBOT_REMOTE_SIGNAL_URL` must be equal to
    the `REMOTE_SIGNAL_URL` of your Worker.
@@ -132,7 +132,7 @@ Do these steps on each computer that hosts or connects.
    ```sh
    OPENBOT_AUTH_API_URL=https://api.example.com \
    OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
-   /Applications/OpenBot.app/Contents/MacOS/OpenBot
+   /Applications/OmniBot.app/Contents/MacOS/OmniBot
    ```
 
    Linux:
@@ -140,7 +140,7 @@ Do these steps on each computer that hosts or connects.
    ```sh
    OPENBOT_AUTH_API_URL=https://api.example.com \
    OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
-   ./OpenBot-<version>-x86_64.AppImage
+   ./OmniBot-<version>-x86_64.AppImage
    ```
 
    Windows (PowerShell):
@@ -148,22 +148,22 @@ Do these steps on each computer that hosts or connects.
    ```powershell
    $env:OPENBOT_AUTH_API_URL = "https://api.example.com"
    $env:OPENBOT_REMOTE_SIGNAL_URL = "wss://signal.example.com/v1/signal"
-   & "$env:LOCALAPPDATA\Programs\OpenBot\OpenBot.exe"
+   & "$env:LOCALAPPDATA\Programs\OmniBot\OmniBot.exe"
    ```
 
 3. Sign in with an email address. The code comes from your SMTP account.
 4. To connect an iPhone, scan the connection QR code from the desktop app. The phone then uses the
-   service of that desktop. Email sign-in on the phone always uses `openbot.run`, so it cannot
+   service of that desktop. Email sign-in on the phone always uses `omnibot.example.com`, so it cannot
    connect to a self-hosted service.
 
-Set the variables each time that you start the app. Without them, the app uses `openbot.run` and
-sends your session token there. To go back to `openbot.run`, sign out first.
+Set the variables each time that you start the app. Without them, the app uses `omnibot.example.com` and
+sends your session token there. To go back to `omnibot.example.com`, sign out first.
 
 The app does not start, and shows an error, if `OPENBOT_REMOTE_SIGNAL_URL` is not a `wss:` URL, has
 a user name or password, or is set without `OPENBOT_AUTH_API_URL`.
 
 ## Updates
 
-After each OpenBot update, pull the same release, keep your `wrangler.jsonc` changes and deploy the
+After each OmniBot update, pull the same release, keep your `wrangler.jsonc` changes and deploy the
 Worker again. The deploy applies the new D1 migrations. Then rebuild Signal with the same
 `docker compose` command.

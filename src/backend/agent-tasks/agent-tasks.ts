@@ -12,17 +12,17 @@ import {
   type ConversationSnapshot,
 } from "@openbot/contracts/ipc";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { ConversationRuntime } from "../agent/conversation-runtime";
 import type { TaskLanes } from "../agent/drain-scheduler";
-import { type OpenBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
 import type { MailboxStore } from "../mailbox-store";
 import type { DynamicToolCallParams } from "../protocol";
 import type { AgentTaskOrigin, AgentTaskRecord, AgentTaskStore } from "./agent-task-store";
 
-const logger = createOpenBotLogger("agent-tasks");
+const logger = createOmniBotLogger("agent-tasks");
 
 /** The most open tasks that an agent can have when it starts one more itself. The user can have up to `INPUT_LIMITS.agentTasks`. */
 const AGENT_STARTED_OPEN_TASKS = 8;
@@ -229,7 +229,7 @@ export class AgentTasks implements TaskLanes {
     this: AgentTasks,
     params: DynamicToolCallParams,
     caller: AgentTaskCaller,
-  ): Effect.fn.Return<OpenBotToolResponse | null> {
+  ): Effect.fn.Return<OmniBotToolResponse | null> {
     if (params.tool !== START_TASK_TOOL) return null;
     const parsed = startTaskToolSchema.safeParse(params.arguments);
     if (!parsed.success) return openBotToolFailure(sourceText("error.backend.taskToolInvalid"));
@@ -371,7 +371,7 @@ export class AgentTasks implements TaskLanes {
   }
 }
 
-function startedTaskResult(task: AgentTaskRecord): OpenBotToolResponse {
+function startedTaskResult(task: AgentTaskRecord): OmniBotToolResponse {
   return openBotToolResult({
     taskId: task.taskId,
     title: task.title,

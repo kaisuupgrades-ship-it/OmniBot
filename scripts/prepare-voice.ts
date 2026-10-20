@@ -3,10 +3,10 @@ import { createHash } from "node:crypto";
 import { copyFileSync, createReadStream, existsSync } from "node:fs";
 import { mkdir, mkdtemp, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { createOpenBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@openbot/logging";
 import { PARAKEET_MODEL_FILES, VOICE_RUNTIME_ADDON } from "../src/main/voice-model-service";
 
-const logger = createOpenBotLogger("prepare-voice");
+const logger = createOmniBotLogger("prepare-voice");
 
 const SHERPA_ONNX_VERSION = "1.13.8";
 

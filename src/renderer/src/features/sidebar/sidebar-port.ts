@@ -1,10 +1,10 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /**
  * What the sidebar reaches in main: the saved sidebar layout and its changes.
  */
 export interface SidebarPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "getSidebarLayout" | "mutateSidebarLayout">;
+  agent: Pick<OmniBotDesktopApi["agent"], "getSidebarLayout" | "mutateSidebarLayout">;
 }
 
 /** Read on each call: tests and stories replace `window.openbot` per case. */

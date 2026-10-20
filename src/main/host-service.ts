@@ -36,7 +36,7 @@ import { conversationMessageSender, SIGNED_OUT_CHANNEL_MEMBER_ID } from "@openbo
 import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
 import type { HostRestartState } from "@openbot/contracts/team-protocol/host-update-v1";
 import { sourceText } from "@openbot/i18n/source";
-import { createOpenBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@openbot/logging";
 import { Cause, Context, Deferred, Effect, Fiber, Layer, ManagedRuntime, Result } from "effect";
 import type { AgentService } from "../backend/agent-service";
 import type { ChannelService } from "../backend/channel-service";
@@ -61,7 +61,7 @@ import { TeamWebRtcHostGateway } from "./team-webrtc-host-gateway";
 
 export const DEVELOPMENT_REMOTE_CLIENT_USERNAME = "openbot-dev-client";
 
-const logger = createOpenBotLogger("host-service");
+const logger = createOmniBotLogger("host-service");
 
 interface HostEvents {
   changed: [status: HostStatus];
@@ -840,7 +840,7 @@ export class HostService extends EventEmitter<HostEvents> {
     function* (this: HostService): Effect.fn.Return<HostStatus, RemoteWorkflowError, HostApiRuntime> {
       if (!this.#options.store.configured)
         return yield* new RemoteWorkflowError({
-          cause: new Error("Name this OpenBot before starting local development."),
+          cause: new Error("Name this OmniBot before starting local development."),
         });
       if (this.#status.phase === "online") return this.getStatus();
       const apiPort = yield* HostApiRuntime.use((api) => api.start());

@@ -1,4 +1,4 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /**
  * What the updates context reaches in main: the app update status, its check, download and
@@ -6,7 +6,7 @@ import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
  */
 export interface UpdatesPort {
   update: Pick<
-    OpenBotDesktopApi["update"],
+    OmniBotDesktopApi["update"],
     | "check"
     | "download"
     | "getStatus"

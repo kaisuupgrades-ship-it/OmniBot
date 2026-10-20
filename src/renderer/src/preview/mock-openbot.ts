@@ -66,8 +66,8 @@ import {
   isReleasedRoutineSchedule,
   type MacPermissionId,
   normalizeMcpConfig,
+  type OmniBotDesktopApi,
   type OpenAttachmentInput,
-  type OpenBotDesktopApi,
   type OpenSharedFileInput,
   type OpenWorkspaceFileInput,
   type ProviderAccountStatus,
@@ -151,7 +151,7 @@ import { clone, type Listener, type MockRuntime, matchesQuery } from "./mock-sup
 import { createMockTeam, type MockTeamOptions } from "./mock-team";
 import { createMockVoice, type MockVoiceOptions } from "./mock-voice";
 
-export interface MockOpenBotOptions
+export interface MockOmniBotOptions
   extends MockProviderRuntimeOptions,
     MockVoiceOptions,
     MockAuthOptions,
@@ -198,8 +198,8 @@ function mockCustomProviderModels(provider: CustomProviderSummary): AgentModelOp
   }));
 }
 
-export interface MockOpenBotControls {
-  api: OpenBotDesktopApi;
+export interface MockOmniBotControls {
+  api: OmniBotDesktopApi;
   emitAgentEvent: (event: AgentEvent) => void;
   onLatestConversationOpened: (listener: (agentId: string) => void) => () => void;
   onLatestDirectConversationOpened: (listener: (memberId: string) => void) => () => void;
@@ -247,7 +247,7 @@ function mockWorkspaceDirectory(path: string): WorkspaceDirectory {
   return {
     name: folder.split("/").at(-1) ?? folder,
     path: folder,
-    root: "/Users/demo/OpenBot/Agents/research",
+    root: "/Users/demo/OmniBot/Agents/research",
     parentPath: folder === "." ? null : folder.split("/").slice(0, -1).join("/") || ".",
     entries: [
       { name: "sources", path: child("sources"), kind: "directory", size: 0, modifiedAt },
@@ -263,7 +263,7 @@ const MOCK_MCP_TOOL_COUNTS: Record<string, number> = { "Local SQLite": 12, Linea
 /** The one address that asks for a sign-in until it has one, so the preview shows Save signing in. */
 const MOCK_MCP_SIGN_IN_URL = "https://mcp.granola.ai/mcp";
 
-export function createMockOpenBot(options: MockOpenBotOptions = {}): MockOpenBotControls {
+export function createMockOmniBot(options: MockOmniBotOptions = {}): MockOmniBotControls {
   const appInfo = clone(options.appInfo ?? STORY_APP_INFO);
   let setupState = clone<AppSetupState>(
     options.setupState ?? { completed: true, preferredProvider: "codex", preferredModel: null },
@@ -702,7 +702,7 @@ export function createMockOpenBot(options: MockOpenBotOptions = {}): MockOpenBot
       computerUse: input.computerUse ?? true,
       ...(input.allowAutomation ? { allowAutomation: true } : {}),
       threadId: input.threadId ?? `thread-${id}`,
-      workspacePath: input.workspacePath ?? `/mock/OpenBot/Agents/${id}`,
+      workspacePath: input.workspacePath ?? `/mock/OmniBot/Agents/${id}`,
       preview: input.preview ?? "No messages yet",
       updatedAt: input.updatedAt ?? null,
       avatarSeed: input.avatarSeed ?? id,
@@ -764,7 +764,7 @@ export function createMockOpenBot(options: MockOpenBotOptions = {}): MockOpenBot
   );
   const billingPlans = previewBillingServers();
 
-  const api: OpenBotDesktopApi = {
+  const api: OmniBotDesktopApi = {
     getAppInfo: async () => clone(appInfo),
     getSetupState: async () => clone(setupState),
     saveSetup: async ({ preferredProvider, preferredModel }) => {
@@ -986,9 +986,9 @@ export function createMockOpenBot(options: MockOpenBotOptions = {}): MockOpenBot
         limit: 3,
         used: hostedSites.filter((site) => site.status === "active").length,
       }),
-      chooseDirectory: async () => "/mock/OpenBot/Sites/launch-notes",
+      chooseDirectory: async () => "/mock/OmniBot/Sites/launch-notes",
       publish: async (input) => {
-        const hostname = `${input.title.toLowerCase().replaceAll(/[^a-z0-9]+/gu, "-")}.openbot.site`;
+        const hostname = `${input.title.toLowerCase().replaceAll(/[^a-z0-9]+/gu, "-")}.omnibot-sites.example.com`;
         const site: HostedSiteSummary = {
           id: `site-${hostedSites.length + 1}`,
           hostname,

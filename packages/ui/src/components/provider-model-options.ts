@@ -34,7 +34,7 @@ export interface PickerModelGroup {
 }
 
 /**
- * How a provider id inside a custom agent reads in a group heading. An id that is also an OpenBot
+ * How a provider id inside a custom agent reads in a group heading. An id that is also an OmniBot
  * provider takes its display name; a few other well-known ids keep their brand casing here; any
  * other id falls back to one capitalized word per `-`, `_` or space.
  */

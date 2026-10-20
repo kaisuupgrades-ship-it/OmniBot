@@ -1,13 +1,13 @@
-import type { OpenBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
 
 /**
- * What the account context reaches in main: the OpenBot account session, its devices, and the
+ * What the account context reaches in main: the OmniBot account session, its devices, and the
  * usage the page rail and the Usage page show.
  */
 export interface AccountPort {
-  agent: Pick<OpenBotDesktopApi["agent"], "getUsage">;
+  agent: Pick<OmniBotDesktopApi["agent"], "getUsage">;
   auth: Pick<
-    OpenBotDesktopApi["auth"],
+    OmniBotDesktopApi["auth"],
     | "cancelMobileConnect"
     | "createMobileConnect"
     | "createMobileConnectLink"

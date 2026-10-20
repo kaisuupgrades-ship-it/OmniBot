@@ -9,7 +9,7 @@ import { AgentSkillsModal } from "../src/features/conversation/AgentSkillsModal"
 const agents: AgentProfile[] = [
   agent("research", "Research"),
   agent("sales", "Sales"),
-  agent("social", "OpenBot SM manager for very long names"),
+  agent("social", "OmniBot SM manager for very long names"),
 ];
 const onSelectAgent = fn();
 const onOpenRoutine = fn();
@@ -398,8 +398,8 @@ function siteMarker(
     operationId: `${action}-${status}`,
     siteId: hasPublishedSite ? "site-1" : null,
     title: "Launch page",
-    hostname: hasPublishedSite ? "launch-page-23456789ab.openbot.site" : null,
-    url: hasPublishedSite ? "https://launch-page-23456789ab.openbot.site" : null,
+    hostname: hasPublishedSite ? "launch-page-23456789ab.omnibot-sites.example.com" : null,
+    url: hasPublishedSite ? "https://launch-page-23456789ab.omnibot-sites.example.com" : null,
     timestamp,
   };
 }

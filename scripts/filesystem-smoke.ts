@@ -486,7 +486,7 @@ async function runImagegenSmoke(): Promise<void> {
 
 /**
  * The smoke's client. `confinement` is for the Workspace only smoke: Codex and Claude take the sandbox
- * with each session, and Grok and OpenCode start in the process sandbox that OpenBot gives them. A
+ * with each session, and Grok and OpenCode start in the process sandbox that OmniBot gives them. A
  * null model means the first one the provider lists, or `--model`. `stateDirectory` is where a
  * Workspace only Claude query keeps its skill plugin.
  */
@@ -539,7 +539,7 @@ async function initialize(client: AgentClient): Promise<void> {
       {
         clientInfo: {
           name: "openbot_filesystem_smoke",
-          title: "OpenBot Filesystem Smoke",
+          title: "OmniBot Filesystem Smoke",
           version: "0.1.0",
         },
         capabilities: { experimentalApi: true },

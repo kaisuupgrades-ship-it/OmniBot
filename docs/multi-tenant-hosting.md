@@ -1,7 +1,7 @@
 # Multi-tenant hosting on one Mac
 
-Use one native macOS **Standard user** and one OpenBot instance per tenant. The shared
-application is `/Applications/OpenBot.app`. Client connections use the existing Team API,
+Use one native macOS **Standard user** and one OmniBot instance per tenant. The shared
+application is `/Applications/OmniBot.app`. Client connections use the existing Team API,
 WebRTC, and the operator's STUN/TURN infrastructure. No VM or Docker is involved.
 
 This setup protects tenant files through macOS ownership and permissions. It does **not**
@@ -17,8 +17,8 @@ owner is that tenant, mode `0700`, and no ACL that grants another tenant access.
 metadata without opening tenant content. Do not share writable groups or grant Full Disk Access
 or administrator rights to tenants. Do not enable shared folders for tenant content.
 
-The home boundary protects `~/OpenBot`, OpenBot's database and browser profiles under
-`~/Library/Application Support/OpenBot`, `.codex`, `.claude`, credentials, and conversations.
+The home boundary protects `~/OmniBot`, OmniBot's database and browser profiles under
+`~/Library/Application Support/OmniBot`, `.codex`, `.claude`, credentials, and conversations.
 A tenant can deliberately share its own files; that is outside the private-account policy.
 
 The application and all its real contents must be root-owned with no group/public write bits
@@ -42,13 +42,13 @@ A standalone compiled helper runs as the root LaunchDaemon `app.openbot.host-man
 Its entry point is `scripts/host-manager.ts`. It owns only these functions:
 
 1. Read the admin configuration and non-sensitive tenant status.
-2. Download the latest stable Apple Silicon release from the fixed OpenBot GitHub repository.
+2. Download the latest stable Apple Silicon release from the fixed OmniBot GitHub repository.
 3. Check code signing, notarization assessment, bundle version, ownership, and permissions.
 4. Wait for every registered tenant to report safe status for five minutes.
 5. Publish a stop request; each tenant rechecks its own state and quits itself.
-6. Verify through the OS process list that all OpenBot main processes have exited.
+6. Verify through the OS process list that all OmniBot main processes have exited.
 7. Replace the shared bundle, then verify its signature, permissions, and installed version.
-8. Publish `released`; per-user LaunchAgents start OpenBot in their existing Aqua sessions.
+8. Publish `released`; per-user LaunchAgents start OmniBot in their existing Aqua sessions.
 9. Collect fresh health reports, or record a host error.
 
 The helper never opens a tenant home, workspace, database, provider directory, browser profile,
@@ -58,7 +58,7 @@ The retired application is removed after verification; it is never used for auto
 The helper itself is updated separately by an administrator, not by a tenant or downloaded code.
 
 ```text
-/Library/Application Support/OpenBot/HostManager/    root:wheel 0755
+/Library/Application Support/OmniBot/HostManager/    root:wheel 0755
   config.json       root:wheel 0644; managed flag and registered numeric UIDs
   state.json        root:wheel 0644; phase, cycle, version, timestamp, error
   host-manager      root:wheel 0755; compiled daemon
@@ -90,22 +90,22 @@ The host download does not use or change a tenant's `autoDownload` preference.
 
 ## Production installation
 
-Normal desktop users need only `OpenBot-<VERSION>-arm64.dmg`. Managed multi-tenant hosts also
-need `OpenBot-Host-<VERSION>-arm64.pkg` from the same GitHub Release. The Host package contains
+Normal desktop users need only `OmniBot-<VERSION>-arm64.dmg`. Managed multi-tenant hosts also
+need `OmniBot-Host-<VERSION>-arm64.pkg` from the same GitHub Release. The Host package contains
 standalone ARM64 executables, the global Aqua LaunchAgent, the root LaunchDaemon, and the
 `/usr/local/bin/openbot-host` administrator command. The target Mac needs no Git checkout, Bun,
 Node, Xcode, or compilation.
 
 1. Download the normal DMG and the Host PKG from the same release.
-2. Open the DMG and copy OpenBot.app to `/Applications`. Quit OpenBot before initial host setup.
+2. Open the DMG and copy OmniBot.app to `/Applications`. Quit OmniBot before initial host setup.
 3. Open the Host PKG in Installer, or run the command below with the downloaded filename.
 4. Create and register the new Standard accounts. Save the passwords shown at completion.
-5. Log into `client-acme` once and sign into that client's OpenBot and providers.
-6. Use Fast User Switching, log into `client-bravo`, and configure that client's OpenBot.
+5. Log into `client-acme` once and sign into that client's OmniBot and providers.
+6. Use Fast User Switching, log into `client-bravo`, and configure that client's OmniBot.
 7. Run verification as the host administrator.
 
 ```sh
-sudo installer -pkg "$HOME/Downloads/OpenBot-Host-<VERSION>-arm64.pkg" -target /
+sudo installer -pkg "$HOME/Downloads/OmniBot-Host-<VERSION>-arm64.pkg" -target /
 sudo /usr/local/bin/openbot-host setup --create-user client-acme --create-user client-bravo
 sudo /usr/local/bin/openbot-host verify
 ```
@@ -169,7 +169,7 @@ start an unconfigured daemon. Existing config, state and tenant status directori
 package payload and remain in place. A failed package installation can leave the daemon stopped;
 resolve the package failure and run verification before returning the host to service.
 
-OpenBot.app continues to update through the Host Manager. The Host Manager does not update itself,
+OmniBot.app continues to update through the Host Manager. The Host Manager does not update itself,
 download a Host PKG, or alter its own executable. A newer application may run with an older Host
 package. Initial setup requires the matching or a newer application. Host PKGs are never listed in
 `latest-mac.yml` and normal desktop users never receive them through Electron auto-update.
@@ -178,7 +178,7 @@ package. Initial setup requires the matching or a newer application. Host PKGs a
 
 The repository-only `scripts/install-host-update-agent.sh` remains a development setup path.
 Production uses the release PKG and installed CLI. Release CI builds the binaries from the same
-release commit as OpenBot.app. Native tests use a fake account service and temporary files:
+release commit as OmniBot.app. Native tests use a fake account service and temporary files:
 
 ```sh
 xcrun swiftc -parse-as-library -D TENANT_SETUP_TESTS scripts/macos-tenant-setup.swift scripts/macos-tenant-setup-tests.swift -o /tmp/openbot-tenant-setup-tests
@@ -209,7 +209,7 @@ A staged version is named only while one is pending, because the host keeps its 
 a finished update. A failed process scan makes `status` fail and `watch` report the reading as
 unavailable; it never becomes an empty process list. A tenant gets a blocker only in `waiting`,
 `stopping`, and `released`, the phases whose rules read that information; in every other phase its
-report is still shown, but it blocks nothing. An OpenBot process under an unregistered UID is always
+report is still shown, but it blocks nothing. An OmniBot process under an unregistered UID is always
 listed on its own line, helpers included, because a helper alone still holds the bundle during
 `stopping`. That process becomes the summary only in `waiting`, and only for a main process,
 the one case the host treats as a blocker. When a `waiting` or `stopping` state stops
@@ -274,6 +274,6 @@ This is not replaced by tests that run under one UID:
 - Confirm fresh health reports for the new version. Disable and re-enable management and verify
   that unmanaged mode never requests automatic tenant shutdown.
 
-The development computer used for this change has no `/Applications/OpenBot.app`, no native
+The development computer used for this change has no `/Applications/OmniBot.app`, no native
 Remote Desktop runtime artifact, and no two-tenant acceptance setup. Actual signing assessment,
 DMG installation, cross-UID permissions, and Aqua relaunch still require this target-host run.

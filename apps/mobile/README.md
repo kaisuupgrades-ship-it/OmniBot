@@ -1,4 +1,4 @@
-# OpenBot Mobile
+# OmniBot Mobile
 
 React Native app built with Expo SDK 57, Expo Router, TypeScript 7, Biome, and Bun. The app uses Expo Continuous Native Generation, so native `ios/` and `android/` directories are intentionally not committed.
 
@@ -337,13 +337,13 @@ One-time setup:
 1. In GitHub repository settings, create the `release-ios` environment. Under deployment branches
    and tags, select only the `main` branch.
 2. Add environment secrets `EXPO_TOKEN`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, and `ASC_PRIVATE_KEY`.
-   The Expo token needs access to the OpenBot project. The Apple secrets are the Key ID, Issuer ID,
+   The Expo token needs access to the OmniBot project. The Apple secrets are the Key ID, Issuer ID,
    and full `.p8` contents of an App Store Connect team API key with the App Manager role.
 3. Keep the iOS distribution certificate and provisioning profiles configured in EAS. CI downloads
    these existing credentials. If they expire or need repair, update them interactively through
    EAS before retrying; the upload API key is not passed to the build step. Each target has its own
    profile: the app, `ExpoWidgetsTarget` (`run.openbot.mobile.ExpoWidgetsTarget`),
-   `OpenBotNotificationService` (`run.openbot.mobile.NotificationService`, the Notification Service
+   `OmniBotNotificationService` (`run.openbot.mobile.NotificationService`, the Notification Service
    Extension) and `expo-sharing-extension` (`run.openbot.mobile.ShareExtension`, the share extension).
    Each extension needs the App Group `group.run.openbot.mobile`. When a release adds a
    target, set up its profile interactively once (`bunx eas-cli credentials -p ios`) before CI builds
@@ -456,13 +456,13 @@ See [Fastlane Google Play upload](https://docs.fastlane.tools/actions/upload_to_
 
 The app uses the official [`@openpanel/react-native` SDK](https://openpanel.dev/docs/sdks/react-native)
 and `expo-application`, following the [React Native guide](https://openpanel.dev/guides/react-native-analytics).
-The endpoint is fixed to `https://analytics.openbot.run/api`. No analytics credentials are committed.
+The endpoint is fixed to `https://analytics.omnibot.example.com/api`. No analytics credentials are committed.
 
 ### Production configuration
 
 1. In the self-hosted OpenPanel dashboard, open the existing **Openbot** project used by desktop and the website.
    Do not create or select a separate **Openbot Mobile** project.
-   Create a separate client for OpenBot Mobile with **write** access only. Copy its Client ID and
+   Create a separate client for OmniBot Mobile with **write** access only. Copy its Client ID and
    Client Secret. Do not use an organization/root client or a client with read access.
 2. In the Expo dashboard, open the **openbot** project → **Environment variables**, select the
    **production** environment, and add:
@@ -488,7 +488,7 @@ The endpoint is fixed to `https://analytics.openbot.run/api`. No analytics crede
 React Native requires a Client Secret according to OpenPanel's native SDK guide. In this direct
 native integration it is an **embedded write credential**, not a confidential server secret.
 Expo's `EXPO_PUBLIC_` values are visible in the shipped bundle. Use only a dedicated write client;
-never embed a key for Export, Insights, Manage, or an OpenBot account/session. EAS visibility can hide
+never embed a key for Export, Insights, Manage, or an OmniBot account/session. EAS visibility can hide
 values in its UI but does not hide them in the app. See [OpenPanel client access levels](https://openpanel.dev/docs/api/authentication)
 and [Expo environment variables](https://docs.expo.dev/guides/environment-variables/).
 
@@ -527,7 +527,7 @@ where available, `duration_ms`. Failure codes are fixed categories, never raw er
 | `account_sign_out` | Sign-out result under the initiating account |
 
 Use a mobile activation funnel from open → successful QR redemption → successful connection →
-conversation load or message send. Measure signed-in D1/D7 retention by OpenBot account ID. Eligible
+conversation load or message send. Measure signed-in D1/D7 retention by OmniBot account ID. Eligible
 pre-session events join that account after sign-in. Unclaimed and expired attempts are not sent, so
 this funnel does not measure all abandoned pairing attempts.
 A message receipt means the host accepted the message, not that the agent finished its work.
