@@ -1,5 +1,5 @@
-import type { BillingPlanId } from "@openbot/contracts/billing";
-import { OPENBOT_LINKS } from "../lib/landing-links";
+import type { BillingPlanId } from "@omnibot/contracts/billing";
+import { OMNIBOT_LINKS } from "../lib/landing-links";
 
 // HTML and plain-text bodies for account email. Mail clients render HTML very differently, so the
 // markup keeps to what all of them share:
@@ -52,8 +52,8 @@ const PLAN_NAMES: Record<BillingPlanId, string> = { starter: "Starter", standard
 const LOGO_URL = `${SITE_URL}/icon-192x192.png`;
 const FOOTER_LINKS = [
   { label: "omnibot.example.com", href: SITE_URL },
-  { label: "X", href: OPENBOT_LINKS.x },
-  { label: "GitHub", href: OPENBOT_LINKS.repository },
+  { label: "X", href: OMNIBOT_LINKS.x },
+  { label: "GitHub", href: OMNIBOT_LINKS.repository },
 ] as const;
 const FONT_STACK = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif";
 const MONO_STACK = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace";

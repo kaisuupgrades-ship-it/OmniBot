@@ -20,7 +20,7 @@ import {
 
 async function main(): Promise<void> {
   if (process.argv[2] === "--help") {
-    process.stdout.write("OmniBot Host Manager: run through launchd; administrator setup uses openbot-host.\n");
+    process.stdout.write("OmniBot Host Manager: run through launchd; administrator setup uses omnibot-host.\n");
     return;
   }
   if (process.argv[2] === "--runtime-check") {

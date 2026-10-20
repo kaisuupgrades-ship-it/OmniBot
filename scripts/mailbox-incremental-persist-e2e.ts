@@ -4,7 +4,7 @@
 // the two after each step. No app, provider, account or network is started.
 //
 // Run: bun scripts/mailbox-incremental-persist-e2e.ts
-// Writes .openbot-build/mailbox-incremental-persist-e2e/report.json and exits non-zero on a failure.
+// Writes .omnibot-build/mailbox-incremental-persist-e2e/report.json and exits non-zero on a failure.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
@@ -15,9 +15,9 @@ import { databaseRows } from "../src/backend/database/database-rows";
 import type { MailboxProjectionChanges, MailboxProjectionState } from "../src/backend/database/mailbox-projection";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mailbox-incremental-persist-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/mailbox-incremental-persist-e2e");
 const AGENT = "agent-a";
 const OTHER_AGENT = "agent-b";
 const CHANNEL = "channel-1";
@@ -340,7 +340,7 @@ async function timing(root: string): Promise<NonNullable<Report["timing"]>> {
   };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-mailbox-persist-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-mailbox-persist-"));
 try {
   await parity(root);
   report.timing = await timing(root);

@@ -2,7 +2,7 @@ import {
   LIVE_ACTIVITY_SEALED_LIMIT,
   LIVE_ACTIVITY_TOKEN_PATTERN,
   type LiveActivityRelayPush,
-} from "@openbot/contracts/live-activity-relay";
+} from "@omnibot/contracts/live-activity-relay";
 import {
   NOTIFICATION_SEALED_LIMIT,
   NOTIFICATION_SOUND_FILES,
@@ -10,8 +10,8 @@ import {
   NOTIFICATION_TOKEN_PATTERN,
   type NotificationRelayPush,
   type NotificationSound,
-} from "@openbot/contracts/notification-relay";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/notification-relay";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { importPKCS8, SignJWT } from "jose";
 

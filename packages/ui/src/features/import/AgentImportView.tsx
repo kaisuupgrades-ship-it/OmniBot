@@ -3,8 +3,8 @@ import type {
   AgentImportPreviewAgent,
   AgentImportPreviewChannel,
   AgentImportResult,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppFormat, AppTranslate } from "@omnibot/i18n";
 import {
   Button,
   Checkbox,
@@ -23,7 +23,7 @@ import {
   SlidingTabs,
   TriangleAlert,
   Upload,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { createMemo, createSignal, createUniqueId, For, Show } from "solid-js";
 import { useText } from "../../text";
 import { AgentAvatar } from "../agents/AgentAvatar";
@@ -47,7 +47,7 @@ export type AgentImportSetup = "agent" | "skill";
 /** The name of the export agent on its Grok Bot page. */
 const EXPORT_AGENT_NAME = "OmniBot export";
 const EXPORT_SKILL_FILE = "SKILL.md";
-const EXPORT_SKILL_ID = "openbot-export";
+const EXPORT_SKILL_ID = "omnibot-export";
 
 type CountKind = "agent" | "channel" | "skill" | "routine" | "memory" | "file";
 
@@ -159,7 +159,7 @@ function ImportGuide(props: {
               <SlidingTabs.ContentSlot>
                 <SlidingTabs.Content value="agent" class="agent-import-setup-panel">
                   <div class="agent-import-card">
-                    <AgentAvatar seed="openbot-export" class="storage-row-avatar" />
+                    <AgentAvatar seed="omnibot-export" class="storage-row-avatar" />
                     <span class="agent-import-card-copy">
                       <span class="agent-import-card-name">{EXPORT_AGENT_NAME}</span>
                       <span class="agent-import-card-meta">{t("import.guide.agentMeta")}</span>

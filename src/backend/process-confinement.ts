@@ -1,7 +1,7 @@
 import { existsSync, realpathSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@omnibot/i18n/source";
 import { workspaceTemporaryPaths } from "./agent/workspace-sandbox";
 
 /**
@@ -85,7 +85,7 @@ export function openCodeStatePaths(env: NodeJS.ProcessEnv = process.env, home = 
   };
 }
 
-const OPENCODE_CONFINED_CACHE = join(tmpdir(), "openbot-confined-cache");
+const OPENCODE_CONFINED_CACHE = join(tmpdir(), "omnibot-confined-cache");
 
 /**
  * The Antigravity server keeps its sign-in, sessions and harness files in `antigravity-acp` under
@@ -146,11 +146,11 @@ export function cursorStatePaths(env: NodeJS.ProcessEnv = process.env, home = ho
   };
 }
 
-const CURSOR_CONFINED_CACHE = join(tmpdir(), "openbot-confined-cursor-cache");
+const CURSOR_CONFINED_CACHE = join(tmpdir(), "omnibot-confined-cursor-cache");
 
 /** The config folder of every confined Cursor process. Only confined processes read it. */
 function cursorConfinedConfig(home: string): string {
-  return join(home, ".cursor", "openbot-confined");
+  return join(home, ".cursor", "omnibot-confined");
 }
 
 /**

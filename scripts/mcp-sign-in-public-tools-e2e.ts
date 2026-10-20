@@ -8,13 +8,13 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { resolve } from "node:path";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
+import type { McpServerConfig } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { McpOAuth, type McpOAuthRecord } from "../src/backend/mcp-oauth-provider";
 import { testMcpServer } from "../src/backend/mcp-probe";
 
-const out = resolve(import.meta.dirname, "../.openbot-build/mcp-sign-in-public-tools-e2e");
+const out = resolve(import.meta.dirname, "../.omnibot-build/mcp-sign-in-public-tools-e2e");
 const ACCESS_TOKEN = "e2e-access-token";
 const CLIENT_ID = "e2e-client";
 

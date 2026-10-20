@@ -1,5 +1,5 @@
-import type { AppInfo } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AppInfo } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Bell,
   CircleArrowDown,
@@ -11,7 +11,7 @@ import {
   Settings,
   Smartphone,
   UserRound,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { voiceSupported } from "../conversation/voice-status";
 
 export type SettingsTab =

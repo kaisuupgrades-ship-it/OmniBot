@@ -2,7 +2,7 @@
 // fake account service, then checks its secret and authentication rules over real HTTP and
 // WebSocket connections: the Telegram secret header, the Slack signature, the signed account
 // events, the body limits, the remote and route tickets, the generic webhook headers, the hello deadline, the reuse of
-// TURN credentials, and that no frame or log line holds the Telegram bot token. Writes .openbot-build/signal-security-e2e/report.json and exits
+// TURN credentials, and that no frame or log line holds the Telegram bot token. Writes .omnibot-build/signal-security-e2e/report.json and exits
 // non-zero when a check fails. It makes no request to Telegram, Slack or Discord.
 import { type ChildProcess, spawn } from "node:child_process";
 import { createHmac, generateKeyPairSync, randomBytes, randomUUID } from "node:crypto";
@@ -14,26 +14,26 @@ import {
   createIngressQueueKeyPair,
   importIngressQueuePrivateKey,
   openQueuedDelivery,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
-import { SLACK_EVENTS_PATH } from "@openbot/contracts/signal-protocol/slack-route";
-import { TELEGRAM_ROUTE_AUDIENCE, TELEGRAM_UPDATES_PATH } from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@omnibot/contracts/signal-protocol/ingress-queue";
+import { SLACK_EVENTS_PATH } from "@omnibot/contracts/signal-protocol/slack-route";
+import { TELEGRAM_ROUTE_AUDIENCE, TELEGRAM_UPDATES_PATH } from "@omnibot/contracts/signal-protocol/telegram-route";
 import {
   REMOTE_TICKET_AUDIENCE,
   REMOTE_TICKET_PROTOCOL_VERSION,
   type RemoteTicketClaims,
-} from "@openbot/contracts/signal-protocol/ticket";
+} from "@omnibot/contracts/signal-protocol/ticket";
 import {
   WEBHOOK_DELIVERY_ID_HEADER,
   WEBHOOK_EVENTS_PATH,
   WEBHOOK_ROUTE_AUDIENCE,
   WEBHOOK_SIGNATURE_HEADER,
   WEBHOOK_TIMESTAMP_HEADER,
-} from "@openbot/contracts/signal-protocol/webhook-route";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/signal-protocol/webhook-route";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { exportJWK, type JWTPayload, SignJWT } from "jose";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = resolve(ROOT, ".openbot-build/signal-security-e2e");
+const OUT = resolve(ROOT, ".omnibot-build/signal-security-e2e");
 const WAIT_MS = 10_000;
 
 const logger = createOmniBotLogger("signal-security-e2e");
@@ -110,8 +110,8 @@ function readBody(request: IncomingMessage): Promise<string> {
 function startControlPlane(port: number): Promise<Server> {
   const server = createServer(async (request, response) => {
     const body = await readBody(request);
-    const timestamp = String(request.headers["openbot-timestamp"] ?? "");
-    const signature = String(request.headers["openbot-signature"] ?? "");
+    const timestamp = String(request.headers["omnibot-timestamp"] ?? "");
+    const signature = String(request.headers["omnibot-signature"] ?? "");
     const signed =
       signature === hmac(AUTH_WEBHOOK_SECRET, `${timestamp}.${body}`, "base64url") &&
       Math.abs(Date.now() / 1_000 - Number(timestamp)) < 300;
@@ -658,5 +658,5 @@ const report = {
   ],
 };
 writeFileSync(resolve(OUT, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
-logger.info(`Wrote .openbot-build/signal-security-e2e/report.json: ${report.passed} passed, ${report.failed} failed.`);
+logger.info(`Wrote .omnibot-build/signal-security-e2e/report.json: ${report.passed} passed, ${report.failed} failed.`);
 process.exit(failed.length === 0 ? 0 : 1);

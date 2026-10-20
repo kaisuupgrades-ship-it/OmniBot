@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentModelOption } from "@openbot/contracts/ipc";
-import { isFreeOpencodeModel } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentModelOption } from "@omnibot/contracts/ipc";
+import { isFreeOpencodeModel } from "@omnibot/contracts/ipc";
 import type { AgentProvider } from "./../agent-client";
 
 /**

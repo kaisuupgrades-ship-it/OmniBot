@@ -1,20 +1,20 @@
 export const EXTERNAL_LINK_REL = "noopener noreferrer";
 
 /** The installer each platform's download button starts: Apple silicon on macOS, x64 elsewhere. */
-export const OPENBOT_DOWNLOAD_LINKS = {
+export const OMNIBOT_DOWNLOAD_LINKS = {
   macos: "/download/macos/latest",
   windows: "/download/windows/latest",
   linux: "/download/linux/latest",
 } as const;
 
 /** The other installer of a platform that ships two architectures. Windows ships x64 only. */
-export const OPENBOT_ALTERNATE_DOWNLOAD_LINKS = {
+export const OMNIBOT_ALTERNATE_DOWNLOAD_LINKS = {
   macos: "/download/macos/latest?arch=x64",
   linux: "/download/linux/latest?arch=arm64",
 } as const;
 
 /** The pages that describe each installer: requirements, install steps and known limits. */
-export const OPENBOT_DOWNLOAD_PAGE_LINKS = {
+export const OMNIBOT_DOWNLOAD_PAGE_LINKS = {
   hub: "/download",
   macos: "/download/macos",
   windows: "/download/windows",
@@ -23,10 +23,11 @@ export const OPENBOT_DOWNLOAD_PAGE_LINKS = {
   android: "/download/android",
 } as const;
 
-export const OPENBOT_LINKS = {
+export const OMNIBOT_LINKS = {
   /** The contact form page. */
   contact: "/contact",
-  x: "https://x.com/OmniBot_",
+  /** A Redirect Rule in the omnibot.example.com Cloudflare zone sends this to your X account. */
+  x: "https://x.omnibot.example.com",
   /** A Redirect Rule in the omnibot.example.com Cloudflare zone sends this to the current Discord invite. */
   discord: "https://discord.omnibot.example.com",
   download: "#download",
@@ -44,7 +45,6 @@ export const OPENBOT_LINKS = {
   status: "https://status.omnibot.example.com",
   selfHostedServer: "https://omnibot.example.com/source/blob/main/docs/self-hosted-server.md",
   architecture: "https://omnibot.example.com/source#architecture",
-  contributing: "https://omnibot.example.com/source/blob/main/CONTRIBUTING.md",
   codex: "https://learn.chatgpt.com/docs/app-server",
   claude: "https://code.claude.com/docs/en/overview",
   anthropicAgents: "https://www.anthropic.com/engineering/building-effective-agents",
@@ -97,23 +97,22 @@ export const FOOTER_COLUMNS: readonly FooterColumn[] = [
       { label: "Changelog", external: false, to: "/changelog" },
       { label: "Teams", external: false, to: "/teams" },
       { label: "Contact", external: false, to: "/contact" },
-      { label: "Source code", external: true, href: OPENBOT_LINKS.repository },
-      { label: "License", external: true, href: OPENBOT_LINKS.license },
-      { label: "Privacy", external: true, href: OPENBOT_LINKS.privacy },
+      { label: "Source code", external: true, href: OMNIBOT_LINKS.repository },
+      { label: "License", external: true, href: OMNIBOT_LINKS.license },
+      { label: "Privacy", external: true, href: OMNIBOT_LINKS.privacy },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Documentation", external: true, href: OPENBOT_LINKS.documentation },
-      { label: "Troubleshooting", external: true, href: OPENBOT_LINKS.troubleshooting },
-      { label: "Status", external: true, href: OPENBOT_LINKS.status },
-      { label: "Self-hosted server", external: true, href: OPENBOT_LINKS.selfHostedServer },
-      { label: "Architecture", external: true, href: OPENBOT_LINKS.architecture },
-      { label: "Contributing", external: true, href: OPENBOT_LINKS.contributing },
-      { label: "Codex", external: true, href: OPENBOT_LINKS.codex },
-      { label: "Claude Code", external: true, href: OPENBOT_LINKS.claude },
-      { label: "Discord", external: true, href: OPENBOT_LINKS.discord },
+      { label: "Documentation", external: true, href: OMNIBOT_LINKS.documentation },
+      { label: "Troubleshooting", external: true, href: OMNIBOT_LINKS.troubleshooting },
+      { label: "Status", external: true, href: OMNIBOT_LINKS.status },
+      { label: "Self-hosted server", external: true, href: OMNIBOT_LINKS.selfHostedServer },
+      { label: "Architecture", external: true, href: OMNIBOT_LINKS.architecture },
+      { label: "Codex", external: true, href: OMNIBOT_LINKS.codex },
+      { label: "Claude Code", external: true, href: OMNIBOT_LINKS.claude },
+      { label: "Discord", external: true, href: OMNIBOT_LINKS.discord },
     ],
   },
   {

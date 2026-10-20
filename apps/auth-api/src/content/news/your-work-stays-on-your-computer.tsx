@@ -1,4 +1,4 @@
-import { EXTERNAL_LINK_REL, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, OMNIBOT_LINKS } from "../../lib/landing-links";
 
 export function YourWorkStaysOnYourComputer() {
   return (
@@ -28,7 +28,7 @@ export function YourWorkStaysOnYourComputer() {
       <p>
         The honest version of the promise is narrower than the slogan: OmniBot adds no hop of its own. We wrote down
         exactly which data leaves your machine and why in the{" "}
-        <a href={OPENBOT_LINKS.privacy} target="_blank" rel={EXTERNAL_LINK_REL}>
+        <a href={OMNIBOT_LINKS.privacy} target="_blank" rel={EXTERNAL_LINK_REL}>
           privacy notes
         </a>
         .

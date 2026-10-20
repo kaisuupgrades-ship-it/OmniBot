@@ -1,4 +1,4 @@
-import type { ProviderLogoVariant } from "@openbot/brand";
+import type { ProviderLogoVariant } from "@omnibot/brand";
 import type { RivalMarkName } from "../../components/compare/rival-mark-shapes";
 import type { LandingIconName } from "../../components/landing/LandingIcon";
 
@@ -7,7 +7,7 @@ import type { LandingIconName } from "../../components/landing/LandingIcon";
 // There are three kinds: OmniBot against one rival, two other products against
 // each other (a matchup), and a roundup of many apps.
 
-type ComparisonSide = "openbot" | "rival";
+type ComparisonSide = "omnibot" | "rival";
 type MatchupSide = "a" | "b";
 
 /** One row of the table: the text of each side, keyed by the side. */
@@ -44,7 +44,7 @@ export interface OmniBotPlan {
 // The released providers (`packages/contracts/src/agent-providers.ts`), with the
 // sign-in each one uses (`src/backend/provider-drivers.ts`), and the custom
 // OpenAI-compatible provider that OpenCode runs.
-export const OPENBOT_PLANS: readonly OmniBotPlan[] = [
+export const OMNIBOT_PLANS: readonly OmniBotPlan[] = [
   { provider: "codex", name: "ChatGPT", plan: "Your ChatGPT plan, through Codex." },
   { provider: "claude", name: "Claude", plan: "Your Claude plan, through Claude Code." },
   { provider: "antigravity", name: "Gemini", plan: "Your Google AI Pro or Ultra plan." },
@@ -57,7 +57,7 @@ export const OPENBOT_PLANS: readonly OmniBotPlan[] = [
 
 /** OmniBot against one rival. The kind is optional, so the first pages need no edit. */
 export interface Comparison {
-  kind?: "openbot";
+  kind?: "omnibot";
   rival: {
     /** The product's own spelling. */
     name: string;
@@ -67,7 +67,7 @@ export interface Comparison {
   answer: string;
   chooseOmniBot: readonly string[];
   chooseRival: readonly string[];
-  /** How the rival gets its models and how you pay for them, next to `OPENBOT_PLANS`. */
+  /** How the rival gets its models and how you pay for them, next to `OMNIBOT_PLANS`. */
   rivalPlans: string;
   rows: readonly ComparisonRow[];
   /** What the two have in common, before the differences. */
@@ -154,7 +154,7 @@ export interface MatchupComparison {
 
 export interface RoundupApp {
   name: string;
-  mark: RivalMarkName | "openbot";
+  mark: RivalMarkName | "omnibot";
   /** The slugs of the comparisons that include this app. */
   comparisons: readonly string[];
   bestFor: string;

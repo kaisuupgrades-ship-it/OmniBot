@@ -1,7 +1,7 @@
-import { accountUsageProviderRows } from "@openbot/ui/features/account/account-usage-view";
-import { HelpMenu } from "@openbot/ui/features/updates/HelpMenu";
-import { PageRail, type PageRailPage } from "@openbot/ui/features/window/PageRail";
-import { useText } from "@openbot/ui/text";
+import { accountUsageProviderRows } from "@omnibot/ui/features/account/account-usage-view";
+import { HelpMenu } from "@omnibot/ui/features/updates/HelpMenu";
+import { PageRail, type PageRailPage } from "@omnibot/ui/features/window/PageRail";
+import { useText } from "@omnibot/ui/text";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

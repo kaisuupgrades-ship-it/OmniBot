@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import { z } from "zod";
 import {
   BROWSER_FILL_FIELDS_MAX_FIELDS,
@@ -6,7 +6,7 @@ import {
   BROWSER_FILL_FIELDS_MAX_TIMEOUT_MS,
 } from "./browser-fill-fields";
 
-export const OPENBOT_BROWSER_NAMESPACE = "openbot_browser";
+export const OMNIBOT_BROWSER_NAMESPACE = "omnibot_browser";
 
 const identifier = z.string().min(1).max(INPUT_LIMITS.identifier);
 const requiredString = (max: number) =>
@@ -345,7 +345,7 @@ const BROWSER_TOOL_DEFINITIONS = [
 export const BROWSER_DYNAMIC_TOOLS = [
   {
     type: "namespace" as const,
-    name: OPENBOT_BROWSER_NAMESPACE,
+    name: OMNIBOT_BROWSER_NAMESPACE,
     description: "Operate OmniBot's private, persistent native Electron/CDP browser.",
     tools: BROWSER_TOOL_DEFINITIONS.map((definition) => ({
       type: "function" as const,

@@ -8,9 +8,9 @@ import {
   COMPUTER_USE_MCP_SERVER_ID,
   isReservedMcpServerName,
   type McpServerConfig,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Deferred, Effect, Schema } from "effect";
 import { runInLoginShell } from "./cli";
 import { causeHelpers } from "./effect-boundary";

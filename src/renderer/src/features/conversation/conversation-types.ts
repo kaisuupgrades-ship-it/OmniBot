@@ -27,12 +27,12 @@ import type {
   UpdateAgentAdminSettingsInput,
   UpdateAgentInput,
   WorkspaceDirectory,
-} from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
-import type { UsageLimitAskCardProps } from "@openbot/ui/features/conversation/BackupModels";
-import type { UnloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
+} from "@omnibot/contracts/ipc";
+import type { ConversationUiBlock } from "@omnibot/contracts/ui-blocks";
+import type { AgentMessage, AgentProfile } from "@omnibot/ui/data";
+import type { BrowserViewRuntime } from "@omnibot/ui/features/browser/BrowserLiveView";
+import type { UsageLimitAskCardProps } from "@omnibot/ui/features/conversation/BackupModels";
+import type { UnloadedHistory } from "@omnibot/ui/features/conversation/ChatScrollRail";
 import type { JSX } from "@solidjs/web";
 import type { ConnectorRegistry } from "../connectors/connector-registry";
 import type { ConversationRuntime } from "./conversation-runtime";
@@ -85,7 +85,7 @@ export interface ConversationProps {
   onOpenMarketplaceApp?: ((request: { appId: string; connect: boolean }) => void) | undefined;
   /** The connectors of the server on screen, which a suggestion card for a connector reads. */
   connectors?: ConnectorRegistry | undefined;
-  platform?: import("@openbot/contracts/ipc").AppInfo["platform"] | undefined;
+  platform?: import("@omnibot/contracts/ipc").AppInfo["platform"] | undefined;
 
   agentStatus: AgentStatus;
   /** A joined server's agents are still on their way, so the composer says that it connects. */
@@ -302,7 +302,7 @@ export type RightPanelMode =
   | "voice"
   | "subagent";
 
-export type { SidePanelPane } from "@openbot/ui/features/conversation/SidePanel";
+export type { SidePanelPane } from "@omnibot/ui/features/conversation/SidePanel";
 
 /** The tasks of the active agent, and the task actions. Each action names the task, not the agent. */
 export interface ConversationTasks {

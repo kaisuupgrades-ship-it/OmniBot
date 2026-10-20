@@ -1,6 +1,6 @@
-import type { AgentEvent, AgentTask, AgentTasksSnapshot, ConversationSnapshot } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { currentText } from "@openbot/ui/text";
+import type { AgentEvent, AgentTask, AgentTasksSnapshot, ConversationSnapshot } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createStore } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { createScopeGuard } from "../../scope-lifetime";

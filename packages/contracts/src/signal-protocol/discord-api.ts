@@ -8,7 +8,7 @@
 
 import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "../runtime-values";
 
-/** The prefix of the custom id of every button OmniBot posts: `openbot:<action>:<token>`. */
+/** The prefix of the custom id of every button OmniBot posts: `omnibot:<action>:<token>`. */
 export const DISCORD_CUSTOM_ID_PREFIX = "omnibot:";
 
 /** Discord's limit for one message's text. */

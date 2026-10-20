@@ -1,5 +1,5 @@
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
-import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { decodeRecord, requiredString } from "@omnibot/contracts/ipc-decoding";
+import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
 
 export type RequestId = string | number;
 
@@ -428,7 +428,7 @@ export function getRecord(record: unknown, key: string): DynamicRecord | null {
 /** The qualified name that a `tool_call` bridge item asks for. The model writes it, so check it before use. */
 export function bridgedToolName(item: ThreadItem): string | null {
   const tool = getString(item, "tool") ?? getString(item, "name");
-  if (tool !== "tool_call" && tool !== "mcp__openbot__tool_call") return null;
+  if (tool !== "tool_call" && tool !== "mcp__omnibot__tool_call") return null;
   return getString(getRecord(item, "arguments"), "name");
 }
 

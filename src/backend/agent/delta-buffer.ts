@@ -1,5 +1,5 @@
-import type { AgentEvent } from "@openbot/contracts/ipc";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { AgentEvent } from "@omnibot/contracts/ipc";
+import type { OmniBotDatabase } from "../omnibot-database";
 import type { ConversationRuntime } from "./conversation-runtime";
 
 export interface PendingDeltaInput {

@@ -1,4 +1,4 @@
-import { VoicePanel } from "@openbot/ui/features/conversation/VoicePanel";
+import { VoicePanel } from "@omnibot/ui/features/conversation/VoicePanel";
 import { createSignal, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

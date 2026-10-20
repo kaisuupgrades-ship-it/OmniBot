@@ -1,11 +1,11 @@
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
 import type { InboundAction, InboundFile, InboundMessage } from "../messaging-types";
 
 /** The Block Kit action ids of the buttons the agent posts. */
 export const SLACK_ACTION_IDS = {
-  accept: "openbot_accept",
-  decline: "openbot_decline",
-  stop: "openbot_stop",
+  accept: "omnibot_accept",
+  decline: "omnibot_decline",
+  stop: "omnibot_stop",
 } as const;
 
 /**

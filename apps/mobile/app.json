@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "OmniBot",
-    "slug": "openbot",
+    "slug": "omnibot",
     "platforms": ["ios", "android"],
     "version": "1.3.3",
     "orientation": "portrait",
@@ -9,7 +9,7 @@
     "scheme": "omnibot",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "bundleIdentifier": "run.openbot.mobile",
+      "bundleIdentifier": "run.omnibot.mobile",
       "associatedDomains": ["applinks:omnibot.example.com"],
       "infoPlist": {
         "NSLocalNetworkUsageDescription": "Allow OmniBot to connect to your desktop during local development.",
@@ -21,7 +21,7 @@
       "icon": "./assets/icons/app-icon.icon"
     },
     "android": {
-      "package": "run.openbot.mobile",
+      "package": "run.omnibot.mobile",
       "icon": "./assets/icons/app-icon.png",
       "predictiveBackGestureEnabled": false,
       "permissions": ["android.permission.CAMERA"],
@@ -84,11 +84,11 @@
         "./plugins/with-notification-sounds",
         {
           "sounds": [
-            "./assets/sounds/openbot-task.wav",
-            "./assets/sounds/openbot-warm.wav",
-            "./assets/sounds/openbot-mech.wav",
-            "./assets/sounds/openbot-bubble.wav",
-            "./assets/sounds/openbot-press.wav"
+            "./assets/sounds/omnibot-task.wav",
+            "./assets/sounds/omnibot-warm.wav",
+            "./assets/sounds/omnibot-mech.wav",
+            "./assets/sounds/omnibot-bubble.wav",
+            "./assets/sounds/omnibot-press.wav"
           ]
         }
       ],
@@ -111,8 +111,8 @@
         {
           "ios": {
             "enabled": true,
-            "appGroupId": "group.run.openbot.mobile",
-            "extensionBundleIdentifier": "run.openbot.mobile.ShareExtension",
+            "appGroupId": "group.run.omnibot.mobile",
+            "extensionBundleIdentifier": "run.omnibot.mobile.ShareExtension",
             "activationRule": {
               "supportsText": true,
               "supportsWebUrlWithMaxCount": 1,
@@ -139,8 +139,8 @@
       [
         "expo-widgets",
         {
-          "bundleIdentifier": "run.openbot.mobile.ExpoWidgetsTarget",
-          "groupIdentifier": "group.run.openbot.mobile",
+          "bundleIdentifier": "run.omnibot.mobile.ExpoWidgetsTarget",
+          "groupIdentifier": "group.run.omnibot.mobile",
           "enablePushNotifications": true,
           "frequentUpdates": true
         }
@@ -149,8 +149,8 @@
         "./plugins/with-notification-service",
         {
           "targetName": "OmniBotNotificationService",
-          "bundleIdentifier": "run.openbot.mobile.NotificationService",
-          "groupIdentifier": "group.run.openbot.mobile"
+          "bundleIdentifier": "run.omnibot.mobile.NotificationService",
+          "groupIdentifier": "group.run.omnibot.mobile"
         }
       ]
     ],
@@ -161,15 +161,15 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "eeec730f-c8f4-42c0-a750-64df8af14940"
+        "projectId": "REPLACE_WITH_YOUR_EAS_PROJECT_ID"
       }
     },
-    "owner": "openbot",
+    "owner": "REPLACE_WITH_YOUR_EXPO_ACCOUNT",
     "runtimeVersion": {
       "policy": "fingerprint"
     },
     "updates": {
-      "url": "https://u.expo.dev/eeec730f-c8f4-42c0-a750-64df8af14940"
+      "url": "https://u.expo.dev/REPLACE_WITH_YOUR_EAS_PROJECT_ID"
     }
   }
 }

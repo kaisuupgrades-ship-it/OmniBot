@@ -1,5 +1,5 @@
-import type { GitHubConnectorRepositories, GitHubConnectorStatus } from "@openbot/contracts/ipc";
-import { GitHubConnectorPanel } from "@openbot/ui/features/settings/GitHubConnectorPanel";
+import type { GitHubConnectorRepositories, GitHubConnectorStatus } from "@omnibot/contracts/ipc";
+import { GitHubConnectorPanel } from "@omnibot/ui/features/settings/GitHubConnectorPanel";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

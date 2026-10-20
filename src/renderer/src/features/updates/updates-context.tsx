@@ -1,4 +1,4 @@
-import type { UpdateStatus } from "@openbot/contracts/ipc";
+import type { UpdateStatus } from "@omnibot/contracts/ipc";
 import { createSignal, flush, onSettled } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { FALLBACK_UPDATE_STATUS } from "../../app-defaults";

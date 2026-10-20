@@ -1,5 +1,5 @@
-import type { AccountUsage, AccountUsageLimit, AccountUsageWindow } from "@openbot/contracts/ipc";
-import { isNumber } from "@openbot/contracts/runtime-values";
+import type { AccountUsage, AccountUsageLimit, AccountUsageWindow } from "@omnibot/contracts/ipc";
+import { isNumber } from "@omnibot/contracts/runtime-values";
 import type { AccountRateLimitResult, AccountRateLimitsReadResult } from "../protocol";
 
 export function normalizeAccountUsage(rateLimits: AccountRateLimitsReadResult | null, model?: string): AccountUsage {

@@ -5,10 +5,10 @@ import {
   AGENT_PROVIDER_DESCRIPTORS,
   agentProviderCliName,
   agentProviderDescriptor,
-} from "@openbot/contracts/agent-providers";
-import { type AgentSummary, type InstalledSkill, SKILL_DESCRIPTION_MAX_LENGTH } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/agent-providers";
+import { type AgentSummary, type InstalledSkill, SKILL_DESCRIPTION_MAX_LENGTH } from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { parse as parseYaml } from "yaml";
 import { type ArchiveOperationError, archiveCall, archiveResult } from "./archive-effects";
@@ -73,8 +73,8 @@ const skillFoldersEffect = Effect.fn("SkillFolder.skillFolders")(function* (
     }
     const names = entries
       .map((entry) => entry.name)
-      // `.openbot-stage-` and `.openbot-backup-` folders are an install in progress.
-      .filter((name) => !name.startsWith(".") && !name.includes(".openbot-") && !exclude.has(name))
+      // `.omnibot-stage-` and `.omnibot-backup-` folders are an install in progress.
+      .filter((name) => !name.startsWith(".") && !name.includes(".omnibot-") && !exclude.has(name))
       .sort()
       .slice(0, MAX_SKILLS_PER_FOLDER);
     for (const name of names) {

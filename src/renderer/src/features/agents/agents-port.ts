@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the agents domain reaches in main: agent records, their models and read state, and the agent
@@ -25,7 +25,7 @@ export interface AgentsPort {
   providerAdmin: Pick<OmniBotDesktopApi["providerAdmin"], "accounts" | "accountUsage">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function agentsPort(): AgentsPort {
-  return window.openbot;
+  return window.omnibot;
 }

@@ -6,7 +6,7 @@
  *     --auth-api-url=https://<test worker origin>
  *
  * It creates a builder sandbox with no account env, runs provision.sh there, checks the install,
- * saves the builder as `openbot-server-<version>`, and deletes the builder. The builder never starts
+ * saves the builder as `omnibot-server-<version>`, and deletes the builder. The builder never starts
  * OmniBot, so the template holds no host identity and no session. The key needs sandbox, files,
  * commands, and named snapshot access; the Worker's key must not have that access.
  *
@@ -18,29 +18,29 @@ import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("build-boat-template");
 const BOAT_API_URL = "https://boat.dev/api/v1";
 const TEMPLATE_FILES = [
   "provision.sh",
   "packages.txt",
-  "openbot-hosted-server",
-  "openbot-hosted-env",
-  "openbot-hosted-update",
-  "openbot",
-  "openbot-boat-pre-stop",
-  "openbot-hosted.apparmor",
-  "openbot.service",
-  "openbot-update.service",
-  "openbot-update.timer",
-  "openbot-update-apply.service",
-  "openbot-update-request.path",
-  "openbot-update-request.service",
+  "omnibot-hosted-server",
+  "omnibot-hosted-env",
+  "omnibot-hosted-update",
+  "omnibot",
+  "omnibot-boat-pre-stop",
+  "omnibot-hosted.apparmor",
+  "omnibot.service",
+  "omnibot-update.service",
+  "omnibot-update.timer",
+  "omnibot-update-apply.service",
+  "omnibot-update-request.path",
+  "omnibot-update-request.service",
 ];
-const REMOTE_DIRECTORY = "/tmp/openbot-template";
-const PRODUCTION_PREFIX = "openbot-server-production-";
+const REMOTE_DIRECTORY = "/tmp/omnibot-template";
+const PRODUCTION_PREFIX = "omnibot-server-production-";
 const SNAPSHOT_NAME = /^[a-z0-9][a-z0-9-]{0,62}$/u;
 const READY_STATES = new Set(["ready", "idle", "running"]);
 const FAILED_STATES = new Set(["error", "cancelled", "archived"]);
@@ -119,18 +119,18 @@ async function main(): Promise<void> {
       boat,
       builderId,
       [
-        "test -x /opt/OmniBot/app/openbot",
+        "test -x /opt/OmniBot/app/omnibot",
         `test "$(sed -n 's/^X-AppImage-Version=//p' /opt/OmniBot/app/*.desktop)" = ${shellQuote(options.version)}`,
-        "systemctl is-enabled --quiet openbot.service",
-        "! systemctl is-active --quiet openbot.service",
+        "systemctl is-enabled --quiet omnibot.service",
+        "! systemctl is-active --quiet omnibot.service",
         // With more than one unit, `is-enabled` passes when one of them is enabled.
-        "systemctl is-enabled --quiet openbot-update.timer",
-        "systemctl is-enabled --quiet openbot-update-apply.service",
-        "systemctl is-enabled --quiet openbot-update-request.path",
-        "! systemctl is-active --quiet openbot-update.timer",
+        "systemctl is-enabled --quiet omnibot-update.timer",
+        "systemctl is-enabled --quiet omnibot-update-apply.service",
+        "systemctl is-enabled --quiet omnibot-update-request.path",
+        "! systemctl is-active --quiet omnibot-update.timer",
         'test ! -e "$HOME/.config/OmniBot"',
-        'test ! -e "$HOME/.config/openbot-hosted"',
-        'test -z "$(ls -A /srv/openbot-hosted)"',
+        'test ! -e "$HOME/.config/omnibot-hosted"',
+        'test -z "$(ls -A /srv/omnibot-hosted)"',
         `rm -rf ${REMOTE_DIRECTORY}`,
       ].join(" && "),
     );
@@ -352,7 +352,7 @@ function parseOptions(args: string[]): TemplateOptions {
   if (authApiUrl.protocol !== "https:") throw new Error("--auth-api-url must use HTTPS.");
   const name =
     args.find((argument) => argument.startsWith("--name="))?.slice(7) ??
-    `openbot-server-${version.replaceAll(".", "-")}`;
+    `omnibot-server-${version.replaceAll(".", "-")}`;
   if (!SNAPSHOT_NAME.test(name)) throw new Error("--name must be a boat snapshot name.");
   const keepArgument = args.find((argument) => argument.startsWith("--keep-releases="))?.slice(16);
   const keepReleases = keepArgument === undefined ? null : Number(keepArgument);

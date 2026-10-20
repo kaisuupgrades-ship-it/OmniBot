@@ -7,7 +7,7 @@
  * is not on yet, and the steps are what turns it on.
  */
 
-import { Alert, AlertContent, AlertDescription, AlertIcon, Button, ExternalLink, Info, Text } from "@openbot/ui";
+import { Alert, AlertContent, AlertDescription, AlertIcon, Button, ExternalLink, Info, Text } from "@omnibot/ui";
 import { createMemo, For, Show } from "solid-js";
 import { useText } from "../../text";
 import { createConnectRun, type McpConnectBaseProps, McpConnectShell } from "./McpConnectShell";

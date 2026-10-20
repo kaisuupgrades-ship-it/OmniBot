@@ -1,7 +1,7 @@
 import { RequestError } from "@agentclientprotocol/sdk";
-import { agentProviderName, COMPUTER_USE_MCP_SERVER_NAME, DEFAULT_PROVIDER_ACCOUNT_ID } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { agentProviderName, COMPUTER_USE_MCP_SERVER_NAME, DEFAULT_PROVIDER_ACCOUNT_ID } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { type AgentProvider, MissingClaudeSessionError, RequestTimeoutError } from "../agent-client";
 import { AppServerError } from "../app-server-client";
 import {
@@ -230,7 +230,7 @@ export function toolUsage(item: ThreadItem): ToolUsage | null {
   if (claudeKind) return { kind: claudeKind, failed };
   const mcp = /^mcp__(.+?)__(.+)$/u.exec(name);
   if (!mcp?.[1] || !mcp[2]) return { kind: "other", failed };
-  // A server name can contain `__`, so `mcp__openbot__acme__list` does not show where the server
+  // A server name can contain `__`, so `mcp__omnibot__acme__list` does not show where the server
   // name stops. Such a step keeps no names: a user's server must never pass as a built-in one.
   if (mcp[2].includes("__")) return { kind: "mcp", failed };
   return { kind: "mcp", server: mcp[1], tool: mcp[2], failed };

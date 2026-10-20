@@ -11,8 +11,8 @@ import {
   decodeDiscordMessageId,
   decodeDiscordName,
   decodeDiscordRoles,
-} from "@openbot/contracts/signal-protocol/discord-api";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/signal-protocol/discord-api";
+import { sourceText } from "@omnibot/i18n/source";
 import { Deferred, Effect, Result } from "effect";
 import { causeHelpers } from "../../effect-boundary";
 import { chunkMarkdown } from "../messaging-chunks";

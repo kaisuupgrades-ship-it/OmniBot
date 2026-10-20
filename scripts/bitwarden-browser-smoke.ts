@@ -8,7 +8,7 @@ import { passwordVaultRouter } from "../src/backend/password-vault-router";
 import { BitwardenConnectorService } from "../src/main/bitwarden-connector-service";
 import { waitForPresentedFrame } from "./browser-smoke-frames";
 
-const ORIGIN = "https://authentication.openbot.test";
+const ORIGIN = "https://authentication.omnibot.test";
 const ID = "12345678-1234-1234-1234-123456789abc";
 const PASSWORD = "fixture-bitwarden-password";
 const CODE = "739182";
@@ -72,7 +72,7 @@ export async function runBitwardenBrowserSmoke(browser: BrowserHost): Promise<vo
         await waitForPresentedFrame(contents);
         const prepared = await runCauseEffect(
           browser.prepareSecret({
-            namespace: "openbot_browser",
+            namespace: "omnibot_browser",
             tool: "submit_secret",
             threadId: "secret-thread",
             ownerAgentId: "secret-agent",
@@ -107,7 +107,7 @@ export async function runBitwardenBrowserSmoke(browser: BrowserHost): Promise<vo
     if (await runCauseEffect(vault.secretFor(login.id, ORIGIN, "password")))
       throw new Error("Disconnected vault returned a password.");
     checks.push("disconnect blocks further reads");
-    const directory = join(process.cwd(), ".openbot-build", "bitwarden");
+    const directory = join(process.cwd(), ".omnibot-build", "bitwarden");
     await mkdir(directory, { recursive: true });
     await writeFile(
       join(directory, "browser-smoke.json"),

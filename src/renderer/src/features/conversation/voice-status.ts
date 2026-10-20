@@ -1,5 +1,5 @@
-import type { AppInfo } from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+import type { AppInfo } from "@omnibot/contracts/ipc";
+import { currentText } from "@omnibot/ui/text";
 /**
  * Whether this build can transcribe at all. The voice runtime is prepared for macOS and Windows
  * only, so the Linux package ships without one and the composer offers no microphone rather than a

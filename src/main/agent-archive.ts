@@ -4,9 +4,9 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { dirname, extname, isAbsolute, resolve } from "node:path";
-import { AVATAR_MIME_TYPES, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { AGENT_IMPORT_LIMITS, type AvatarImageInput } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { AVATAR_MIME_TYPES, isValidAvatarImage } from "@omnibot/contracts/avatar-images";
+import { AGENT_IMPORT_LIMITS, type AvatarImageInput } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Schema } from "effect";
 import { strFromU8, unzipSync } from "fflate";
 import { isPathInside } from "../backend/path-containment";

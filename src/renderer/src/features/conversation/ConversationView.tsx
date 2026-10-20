@@ -1,5 +1,5 @@
-import { MessageSelectionActions } from "@openbot/ui/features/conversation/SelectionActions";
-import { useText } from "@openbot/ui/text";
+import { MessageSelectionActions } from "@omnibot/ui/features/conversation/SelectionActions";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, Show } from "solid-js";
 import { currentDevicePlatform } from "../../send-shortcut-preference";
 import { ConversationComposer } from "./ConversationComposer";

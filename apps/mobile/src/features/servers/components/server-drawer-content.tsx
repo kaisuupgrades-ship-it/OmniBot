@@ -1,4 +1,4 @@
-import type { MobileTranslate } from "@openbot/i18n/mobile";
+import type { MobileTranslate } from "@omnibot/i18n/mobile";
 import type { Href } from "expo-router";
 import { Typography } from "heroui-native";
 import type { LucideIcon } from "lucide-react-native";
@@ -584,7 +584,7 @@ function DrawerRow({
   accentValue?: boolean;
   onPress: () => void;
 }) {
-  const [secondary, control] = useCSSVariable(["--openbot-text-secondary", "--openbot-bg-control"]);
+  const [secondary, control] = useCSSVariable(["--omnibot-text-secondary", "--omnibot-bg-control"]);
   return (
     <Pressable
       accessibilityRole="button"

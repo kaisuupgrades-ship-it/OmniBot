@@ -1,5 +1,5 @@
-import { type AgentSummary, analyticsRange, type HostAnalytics, type HostAnalyticsInput } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import { type AgentSummary, analyticsRange, type HostAnalytics, type HostAnalyticsInput } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   ArrowLeft,
   Button,
@@ -11,8 +11,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@openbot/ui";
-import { AgentUsageReport } from "@openbot/ui/features/usage/AgentUsageReport";
+} from "@omnibot/ui";
+import { AgentUsageReport } from "@omnibot/ui/features/usage/AgentUsageReport";
 import {
   type UsageAgentLabel,
   type UsageMetric,
@@ -22,9 +22,9 @@ import {
   usagePeriodDays,
   usagePeriodLabels,
   usagePeriods,
-} from "@openbot/ui/features/usage/usage-format";
-import { useText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+} from "@omnibot/ui/features/usage/usage-format";
+import { useText } from "@omnibot/ui/text";
+import { errorReference } from "@omnibot/user-errors";
 import { createEffect, createStore, onSettled, Show } from "solid-js";
 import { type UsagePort, usagePort } from "./usage-port";
 

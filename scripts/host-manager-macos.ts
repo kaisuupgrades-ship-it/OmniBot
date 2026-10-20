@@ -9,7 +9,7 @@ import { HOST_MANAGER_DIRECTORY, verifyHostDirectory } from "../src/main/host-up
 
 const exec = promisify(execFile);
 export const SHARED_APP = "/Applications/OmniBot.app";
-const STAGING = "/Applications/.openbot-host-stage";
+const STAGING = "/Applications/.omnibot-host-stage";
 const PRIVATE = join(HOST_MANAGER_DIRECTORY, "private");
 const SIGNING_REQUIREMENT =
   '=anchor apple generic and identifier "app.omnibot.desktop" and certificate leaf[subject.OU] = "ZTRDTUL87R"';
@@ -157,7 +157,7 @@ export function macHostOperations(): HostManagerOperations {
       await verifySharedAppParent();
       await verifyBundleTree(SHARED_APP, true);
       await verifySignature(SHARED_APP);
-      const response = await fetch("https://api.github.com/repos/nightly-labs/openbot/releases/latest", {
+      const response = await fetch("https://api.github.com/repos/kaisuupgrades-ship-it/OmniBot/releases/latest", {
         signal: AbortSignal.timeout(30_000),
         headers: { Accept: "application/vnd.github+json" },
       });

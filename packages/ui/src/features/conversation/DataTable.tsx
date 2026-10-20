@@ -1,4 +1,4 @@
-import { Button, Check, Copy } from "@openbot/ui";
+import { Button, Check, Copy } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, onCleanup } from "solid-js";
 import { useText } from "../../text";

@@ -1,4 +1,4 @@
-import { pluginLinkText } from "@openbot/contracts/plugin-links";
+import { pluginLinkText } from "@omnibot/contracts/plugin-links";
 import {
   Button,
   ExternalLink,
@@ -12,8 +12,8 @@ import {
   Plug,
   SettingsSection,
   Text,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, For, Match, Show, Switch } from "solid-js";
 import { ConnectorDetailPanel } from "../connectors/ConnectorDetailPanel";
 import { DangerZone, DetailHeader, WizardDialog } from "../settings/IntegrationLayout";

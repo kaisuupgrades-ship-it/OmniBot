@@ -5,7 +5,7 @@
 // sends the events of its deletes once, after the deletes, not inside each one.
 //
 // Run: bun run test:remote-auth-events
-// It writes .openbot-build/remote-auth-events-e2e/report.json and exits non-zero on a failure.
+// It writes .omnibot-build/remote-auth-events-e2e/report.json and exits non-zero on a failure.
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
@@ -15,7 +15,7 @@ import { createWorkerHandler } from "../src/server/worker-handler";
 import { sqliteD1 } from "./sqlite-d1";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const OUT = join(ROOT, ".openbot-build", "remote-auth-events-e2e");
+const OUT = join(ROOT, ".omnibot-build", "remote-auth-events-e2e");
 const MIGRATIONS = join(ROOT, "apps", "auth-api", "migrations");
 const SIGNAL_URL = "https://signal.test/internal/auth-events";
 const SECRET = "webhook-secret";

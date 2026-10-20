@@ -59,7 +59,7 @@ export const messages = {
   "files.storage.allFiles": "Tous les fichiers",
   "files.storage.allFilesOn": "Tous les fichiers sur {host}",
   "files.storage.allFilesDescription": "Fichiers de tous les agents et de toutes les discussions",
-  "files.storage.openBotOn": "OmniBot sur {host}",
+  "files.storage.omniBotOn": "OmniBot sur {host}",
   "files.storage.measuring": "Mesure…",
   "files.storage.measureAgain": "Mesurer à nouveau",
   "files.storage.measuringStorage": "Mesure du stockage",

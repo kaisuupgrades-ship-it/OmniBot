@@ -4,15 +4,15 @@ import type {
   DynamicIslandNotchSize,
   DynamicIslandPreference,
   DynamicIslandPresentation,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   DEFAULT_DYNAMIC_ISLAND_PREFERENCE,
   dynamicIslandCompactHeight,
   IDLE_DYNAMIC_ISLAND_PRESENTATION,
   IPC_ENDPOINTS,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, type Logger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, type Logger, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Schema, Semaphore } from "effect";
 import type { BrowserWindow, Display, Rectangle } from "electron";
 import { causeHelpers } from "../backend/effect-boundary";

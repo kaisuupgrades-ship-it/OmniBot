@@ -36,7 +36,7 @@ Two files still mirror the list, and they are not enforced the same way.
 | --- | --- | --- |
 | `src/preload/index.ts`, bridged groups | one `bridgeGroup(IPC_ENDPOINTS.group, decoders)` per group; the decoder map is keyed by every endpoint | `tsc` (`TS2741` / `TS2353`), and the coverage test for the group reference |
 | `src/preload/index.ts`, hand-written groups | the `invokeAgentForServer`, `ipcRenderer.invoke` and `listen` calls | `src/main/ipc-channel-coverage.test.ts` |
-| `src/renderer/src/preview/mock-openbot.ts` | the second implementation Storybook and the preview run against | `tsc`, against `OmniBotDesktopApi` |
+| `src/renderer/src/preview/mock-omnibot.ts` | the second implementation Storybook and the preview run against | `tsc`, against `OmniBotDesktopApi` |
 
 The main process is no longer one of them. `registerIpcGroups` in `src/main/ipc/define-ipc-group.ts`
 takes one object per group, keyed by every request endpoint in it, so a channel with no handler is
@@ -60,7 +60,7 @@ A group whose methods all pass straight through is generated whole: `GroupApi<Ip
 gives its interface, a request keeps its key, and an event is `on` and the key (`voice.modelStatus`
 is `onModelStatus`). The preload builds it with `bridgeGroup`,
 so a new endpoint in it needs no line in `ipc-desktop-apis.ts`. `IPC_GROUP_PATHS`, beside
-`IPC_ENDPOINTS`, gives the place of each group on `window.openbot`: its own key, `""` for the top
+`IPC_ENDPOINTS`, gives the place of each group on `window.omnibot`: its own key, `""` for the top
 level (`app` and `providers`), a shared path (the agent groups are all `agent`), or null for a group
 the page must not reach (`attachmentImports`). `OmniBotDesktopApi` is built from this table, so a new
 group needs no line in `ipc-desktop-apis.ts` either. The built-preload verifier
@@ -82,7 +82,7 @@ The mock needs no test. Both it and the preload bridge are annotated `: OmniBotD
 missing method is `TS2741` and a method the interface never declared is `TS2353` — the type checker
 already covers both directions, and the root Tests rule against assertions that TypeScript already
 enforces ends it there. What it cannot cover is
-the *behaviour*: `mock-openbot.ts` is a product surface, not a test double, and it is what the preview
+the *behaviour*: `mock-omnibot.ts` is a product surface, not a test double, and it is what the preview
 and every Storybook story exercise. A method that satisfies the type by returning an empty array is a
 story that silently shows nothing.
 

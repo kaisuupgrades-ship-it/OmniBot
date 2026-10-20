@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentApproval,
   AgentEvent,
@@ -23,22 +23,22 @@ import type {
   SidebarLayoutSnapshot,
   TeamPresenceSnapshot,
   TeamRealtimeEvent,
-} from "@openbot/contracts/ipc";
-import { canAdministerServer } from "@openbot/contracts/ipc";
-import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { FOCUS_USE_CAPABILITY } from "@openbot/contracts/team-protocol/focus-use-v1";
-import { cleanAgentMessageText } from "@openbot/team-client/agent-message-text";
-import { createFocusUsePing } from "@openbot/team-client/focus-use";
-import { WAKE_RECONNECT_DELAY_MS } from "@openbot/team-client/hosted-server-wake";
-import type { RemoteTeamHost } from "@openbot/team-client/remote-directory";
+} from "@omnibot/contracts/ipc";
+import { canAdministerServer } from "@omnibot/contracts/ipc";
+import { AGENT_HIDDEN_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { FOCUS_USE_CAPABILITY } from "@omnibot/contracts/team-protocol/focus-use-v1";
+import { cleanAgentMessageText } from "@omnibot/team-client/agent-message-text";
+import { createFocusUsePing } from "@omnibot/team-client/focus-use";
+import { WAKE_RECONNECT_DELAY_MS } from "@omnibot/team-client/hosted-server-wake";
+import type { RemoteTeamHost } from "@omnibot/team-client/remote-directory";
 import {
   createRemoteConnectionRecovery,
   isSafeConnectionError,
   type RemoteRecoveryStatus,
-} from "@openbot/team-client/remote-recovery";
-import { reconcilePendingRequests } from "@openbot/team-client/runtime-attention";
-import { currentText } from "@openbot/ui/text";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/team-client/remote-recovery";
+import { reconcilePendingRequests } from "@omnibot/team-client/runtime-attention";
+import { currentText } from "@omnibot/ui/text";
+import { errorReference, type UserErrorDetails } from "@omnibot/user-errors";
 import { createEffect, createMemo, createSignal, createStore, onSettled } from "solid-js";
 import { toAgentProfile } from "../../app-message-projection";
 import { mergeConversationPage, missingReplyOriginals } from "../conversation/conversation-merge";

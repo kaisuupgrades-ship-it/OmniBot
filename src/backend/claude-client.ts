@@ -14,10 +14,10 @@ import {
   tool,
 } from "@anthropic-ai/claude-agent-sdk";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { type AgentContextCategoryUsage, defaultProviderModel } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { type AgentContextCategoryUsage, defaultProviderModel } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Fiber, Scope } from "effect";
 import { agentLaunchPath } from "./acp-agent-command";
 import { isMemoryContextBlock, type MemoryContext, memoryContextUpdate } from "./agent/developer-instructions";
@@ -517,7 +517,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
       env: {
         ...claudeEnvironment(this.#cli),
         ...this.#agentEnvironment?.(),
-        CLAUDE_AGENT_SDK_CLIENT_APP: "openbot/0.1.0",
+        CLAUDE_AGENT_SDK_CLIENT_APP: "omnibot/0.1.0",
       },
     };
   }
@@ -830,7 +830,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
             // tools when Finder starts OmniBot. An `env.PATH` in the Claude settings still wins.
             ...(launchPath ? { PATH: launchPath } : {}),
             ...this.#agentEnvironment?.(),
-            CLAUDE_AGENT_SDK_CLIENT_APP: "openbot/0.1.0",
+            CLAUDE_AGENT_SDK_CLIENT_APP: "omnibot/0.1.0",
             // Without a terminal, the CLI gives the newer models no TodoWrite or task tools, so the
             // agent has no plan for OmniBot to show as a task list.
             CLAUDE_CODE_ENABLE_TODO_TOOLS: "1",
@@ -1061,7 +1061,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
               : null;
       if (status) runtime.compacting = status === "running";
       if (status)
-        this.emit("notification", { method: "openbot/context-compaction", params: { threadId: runtime.id, status } });
+        this.emit("notification", { method: "omnibot/context-compaction", params: { threadId: runtime.id, status } });
       return;
     }
     if (message.type === "system" && message.subtype === "background_tasks_changed") {
@@ -1087,7 +1087,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
       if (memory) memory.delivered = null;
       // Claude's post_tokens counts messages only, not the full context.
       this.emit("notification", {
-        method: "openbot/context-compaction",
+        method: "omnibot/context-compaction",
         params: {
           threadId: runtime.id,
           status: "completed",
@@ -1234,7 +1234,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
       runtime.usageCost = message.total_cost_usd ?? runtime.usageCost;
     if (runtime.activeTurn && message.modelUsage)
       this.emit("notification", {
-        method: "openbot/usage",
+        method: "omnibot/usage",
         params: {
           threadId: runtime.id,
           turnId: runtime.activeTurn.id,
@@ -1504,7 +1504,7 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
     if (runtime.compacting && status !== "completed") {
       runtime.compacting = false;
       this.emit("notification", {
-        method: "openbot/context-compaction",
+        method: "omnibot/context-compaction",
         params: { threadId: runtime.id, status: "failed" },
       });
     }
@@ -1676,13 +1676,13 @@ export class ClaudeAgentClient extends EventEmitter<ClientEvents> {
     const call = (namespace: string, name: string, args: unknown) =>
       runCauseEffect(this.#callDynamicTool(threadId, namespace, name, args));
     return {
-      openbot: createSdkMcpServer({
-        name: "openbot",
+      omnibot: createSdkMcpServer({
+        name: "omnibot",
         version: "0.1.0",
         // Claude uses the SDK's AskUserQuestion permission flow.
         tools: VISIBLE_TOOL_DEFINITIONS.filter((definition) => definition.name !== "ask_user").map((definition) =>
           tool(definition.name, definition.description, definition.shape, (args) =>
-            call("openbot", definition.name, args),
+            call("omnibot", definition.name, args),
           ),
         ),
       }),

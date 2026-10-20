@@ -25,7 +25,7 @@ and state which default you set aside. Do not argue by citing this file.
 
 ## Non-negotiable
 
-- **Migrations are irreversible.** No backup of `openbot.db` is made before an upgrade. Preserve all
+- **Migrations are irreversible.** No backup of `omnibot.db` is made before an upgrade. Preserve all
   user data and support every shipped source schema. Never assume a backup exists.
 - **Released Team API adapters are permanent.** Do not change a shipped wire protocol's meaning.
 - **Keep the renderer-to-main trust boundary:** Electron sandboxing, context isolation, navigation
@@ -33,9 +33,8 @@ and state which default you set aside. Do not argue by citing this file.
 - **Redact secrets** on every log, export, and send path, including diagnostics and analytics.
 - **Keep PolyForm Noncommercial 1.0.0.** Do not add incompatible dependencies or relicense files.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md#security-sensitive-changes) when a change touches the trust
-boundary or a security test, and [architecture change rules](docs/architecture/change-rules.md#change-rules) when
-adding a module or moving ownership between workspaces.
+Read the [architecture change rules](docs/architecture/change-rules.md#change-rules) when adding a module
+or moving ownership between workspaces.
 
 ## Product constraints
 
@@ -74,13 +73,13 @@ adding a module or moving ownership between workspaces.
 
 ## Shared UI
 
-`packages/ui` (`@openbot/ui`) owns shared SolidJS controls and feature components used by
+`packages/ui` (`@omnibot/ui`) owns shared SolidJS controls and feature components used by
 desktop, public web, and Storybook. Reuse these components before adding UI. Import primitives
-from `@openbot/ui` and feature components from explicit subpaths such as
-`@openbot/ui/features/sidebar/Sidebar`. Do not copy them back into an app.
+from `@omnibot/ui` and feature components from explicit subpaths such as
+`@omnibot/ui/features/sidebar/Sidebar`. Do not copy them back into an app.
 
 Keep shared components independent of application contexts, desktop storage, host connections,
-and `window.openbot`. Pass data and actions through typed props. Platform adapters and the main
+and `window.omnibot`. Pass data and actions through typed props. Platform adapters and the main
 conversation controller stay in the renderer. Component extraction must preserve the existing
 UI, styles, and behavior unless the user requests a design change. Native mobile shares brand
 tokens and contracts; it does not render SolidJS DOM components.
@@ -89,7 +88,7 @@ Read [packages/ui/AGENTS.md](packages/ui/AGENTS.md) before changing shared UI.
 
 ## Interface text
 
-Text that a user reads comes from `@openbot/i18n` catalog keys, on desktop, web and mobile. Do not
+Text that a user reads comes from `@omnibot/i18n` catalog keys, on desktop, web and mobile. Do not
 write a literal. Errors that the main process, backend or team client send use `sourceText(key)`.
 Read [docs/i18n.md](docs/i18n.md) before adding a key or a language.
 
@@ -132,7 +131,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
 - Desktop renderer (`src/renderer`), mobile (`apps/mobile`), public web (`apps/auth-api`; no separate
   landing app), hosted-site routing (`apps/site-router`), and Signal (`remote/api`).
 - IPC contracts (`packages/contracts`) and their preview implementation
-  (`src/renderer/src/preview/mock-openbot.ts`).
+  (`src/renderer/src/preview/mock-omnibot.ts`).
 - Reverse actions: snooze/unsnooze, pause/resume, revoke/reconnect, mute/unmute.
 - Migrations and the separate latest schema for new databases.
 - Documentation: `README.md` commands, `docs/architecture/`, and `PRIVACY.md` when outbound data
@@ -149,7 +148,7 @@ State which surfaces a change touches. Check all affected consumers and reverse 
 - Use the development loader. It reads the development key from the shell; without the key,
   local development must work with generated defaults. Commands that need external secrets must
   stop before remote changes when those secrets are missing. An invalid key must fail safely.
-- Keep generated identity and saved local overrides in ignored `.openbot/dev-state.json`.
+- Keep generated identity and saved local overrides in ignored `.omnibot/dev-state.json`.
   New manual overrides use shell variables. Do not add `.env.local` or `.env.generated`.
 - `.env.keys` stores decryption keys, not service settings. Keep it ignored. Preserve existing
   production key handling and CI/GitHub secrets unless the developer requests a change.
@@ -226,7 +225,7 @@ risks since the last release.
 - Use E2E tests only. Do not add unit tests. An E2E test is a script under `scripts/` (such as
   `scripts/*-e2e.ts` or `scripts/*-smoke.ts`) that drives the real app, process or service. At the
   end, it writes a verifiable and repeatable artifact, such as a JSON report or a screenshot under
-  `.openbot-build/`.
+  `.omnibot-build/`.
 - Vitest files are permitted only for these protected areas:
   - Database migrations: data-preservation fixtures for every affected released schema, plus the
     failure and rollback cases that [src/backend/AGENTS.md](src/backend/AGENTS.md) lists. A

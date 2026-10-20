@@ -1,5 +1,5 @@
-import type { OmniBotDesktopApi, OnePasswordConnectorStatus } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { OmniBotDesktopApi, OnePasswordConnectorStatus } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 
 /** What the 1Password page reaches: one 1Password connection, of this computer or of a joined server. */
 export type OnePasswordConnectorPort = Omit<
@@ -7,9 +7,9 @@ export type OnePasswordConnectorPort = Omit<
   "hostStatus" | "hostConnectWithToken" | "hostDisconnect"
 >;
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function onePasswordConnectorPort(): OnePasswordConnectorPort {
-  return window.openbot.onePasswordConnector;
+  return window.omnibot.onePasswordConnector;
 }
 
 /** The actions of a joined server's connection (`onepassword-connector-v1`): a token connects it. */
@@ -81,7 +81,7 @@ export function hostOnePasswordConnectorPort(serverId: () => string | undefined)
     if (!id) throw new Error(sourceText("error.team.connectorsUnsupported"));
     return id;
   };
-  const api = () => window.openbot.onePasswordConnector;
+  const api = () => window.omnibot.onePasswordConnector;
   return polledOnePasswordConnectorPort({
     status: async () => api().hostStatus(server()),
     connectWithToken: async (token) => api().hostConnectWithToken({ token }, server()),

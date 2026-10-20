@@ -1,8 +1,8 @@
-import { type ChannelTask, isQueuedAgentReply, type QueueDelivery, type QueueSnapshot } from "@openbot/contracts/ipc";
-import { markdownPreviewText } from "@openbot/contracts/markdown-preview-text";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import type { AwaitingReplyItem, AwaitingReplyState } from "@openbot/ui/features/conversation/AwaitingReplies";
-import { currentText } from "@openbot/ui/text";
+import { type ChannelTask, isQueuedAgentReply, type QueueDelivery, type QueueSnapshot } from "@omnibot/contracts/ipc";
+import { markdownPreviewText } from "@omnibot/contracts/markdown-preview-text";
+import type { AgentMessage, AgentProfile } from "@omnibot/ui/data";
+import type { AwaitingReplyItem, AwaitingReplyState } from "@omnibot/ui/features/conversation/AwaitingReplies";
+import { currentText } from "@omnibot/ui/text";
 
 /**
  * The rows of the waiting block: which agents this agent asked, and where each answer is.

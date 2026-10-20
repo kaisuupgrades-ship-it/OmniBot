@@ -5,8 +5,8 @@ import type {
   McpServerConfig,
   McpSignInState,
   McpTestResult,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { createSignal, createStore, onSettled, snapshot } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -22,7 +22,7 @@ import {
 } from "../src/preview/fixtures";
 import { storyConnectorRegistry } from "./connector-fixtures";
 import { createSignInHost } from "./mcp-sign-in-host";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 import { SettingsPageStory } from "./settings-page-story";
 
 const localServer = STORY_SERVERS.find((server) => server.kind === "local") ?? STORY_SERVERS[0];
@@ -147,7 +147,7 @@ export const LocalOnline: Story = {
   args: {
     hostStatus: {
       ...STORY_HOST_STATUS,
-      apiUrl: "https://eu-west-1.gateway.example.com/openbot/servers/team_7f3c19a2",
+      apiUrl: "https://eu-west-1.gateway.example.com/omnibot/servers/team_7f3c19a2",
     },
   },
 };
@@ -426,7 +426,7 @@ function RemoteSetupStory(props: {
   hostUpdate?: HostUpdateStatus;
   hostRelease?: HostReleaseStatus;
 }) {
-  const previous = window.openbot;
+  const previous = window.omnibot;
   // Storybook passes the args as a store, and the mock copies its options with `structuredClone`.
   const hostStatus = props.settings.hostStatus;
   const mock = createMockOmniBot({
@@ -434,10 +434,10 @@ function RemoteSetupStory(props: {
     ...(props.hostUpdate ? { hostUpdate: props.hostUpdate } : {}),
     ...(props.hostRelease ? { hostRelease: props.hostRelease } : {}),
   });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onSettled(() => () => {
     mock.dispose();
-    window.openbot = previous;
+    window.omnibot = previous;
   });
   return (
     <SettingsPageStory title="Server settings">

@@ -1,13 +1,13 @@
 /**
- * The `openbot` tools that let an agent read and change routine flows, as the canvas does. A
+ * The `omnibot` tools that let an agent read and change routine flows, as the canvas does. A
  * request the model can correct, such as a cycle or an unknown agent, is a tool failure it reads;
  * other errors are faults.
  */
 
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import { Effect } from "effect";
 import { z } from "zod";
-import { openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { omniBotToolFailure, omniBotToolResult } from "../agent/routine-tools";
 import { ToolOperationFailed, toolStep } from "../agent/tool-operation";
 import { RoutineFlowError } from "./routine-flow-store";
 import type { RoutineFlowsShape } from "./routine-flows";
@@ -63,9 +63,9 @@ export const handleRoutineFlowTool = Effect.fn("RoutineFlowTools.handle")(functi
     if (tool === "list_routine_flows") {
       const input = yield* toolStep(() => listSchema.parse(args ?? {}));
       const agentId = input.agentId ?? senderAgentId;
-      if (unknownAgent([agentId])) return openBotToolFailure(`Unknown agent: ${agentId}.`);
+      if (unknownAgent([agentId])) return omniBotToolFailure(`Unknown agent: ${agentId}.`);
       const canvas = yield* flows.canvas(agentId);
-      return openBotToolResult({
+      return omniBotToolResult({
         routines: canvas.routines.map(({ routine }) => ({
           routineId: routine.id,
           name: routine.name,
@@ -84,23 +84,23 @@ export const handleRoutineFlowTool = Effect.fn("RoutineFlowTools.handle")(functi
     if (tool === "connect_routine_agents") {
       const input = yield* toolStep(() => connectSchema.parse(args));
       const unknown = unknownAgent([input.fromAgentId, input.toAgentId]);
-      if (unknown) return openBotToolFailure(`Unknown agent: ${unknown}.`);
+      if (unknown) return omniBotToolFailure(`Unknown agent: ${unknown}.`);
       const link = yield* flows.connect({
         routineId: input.routineId,
         fromAgentId: input.fromAgentId,
         toAgentId: input.toAgentId,
         ...(input.instruction === undefined ? {} : { instruction: input.instruction }),
       });
-      return openBotToolResult({ linkId: link.id });
+      return omniBotToolResult({ linkId: link.id });
     }
     const input = yield* toolStep(() => disconnectSchema.parse(args));
     yield* flows.disconnect(input);
-    return openBotToolResult({ removed: input.linkId });
+    return omniBotToolResult({ removed: input.linkId });
   });
   return yield* operation.pipe(
     Effect.catchTag("RoutineFlowFailed", (failure) =>
       failure.cause instanceof RoutineFlowError
-        ? Effect.succeed(openBotToolFailure(failure.cause.message))
+        ? Effect.succeed(omniBotToolFailure(failure.cause.message))
         : Effect.fail(new ToolOperationFailed({ cause: failure.cause })),
     ),
   );

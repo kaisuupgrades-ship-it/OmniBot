@@ -2,9 +2,9 @@
 set -eu
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin LC_ALL=C
 ROOT='/Library/Application Support/OmniBot/HostManager'
-"$ROOT/openbot-host" --verify-installation
+"$ROOT/omnibot-host" --verify-installation
 # Payload files have explicit root:wheel modes. Never recurse through tenant status or homes.
 if [ -f "$ROOT/config.json" ] && [ ! -L "$ROOT/config.json" ]; then
-  launchctl bootstrap system /Library/LaunchDaemons/app.openbot.host-manager.plist
+  launchctl bootstrap system /Library/LaunchDaemons/app.omnibot.host-manager.plist
 fi
-echo 'OmniBot Host installed. Run sudo openbot-host setup, then sudo openbot-host verify.'
+echo 'OmniBot Host installed. Run sudo omnibot-host setup, then sudo omnibot-host verify.'

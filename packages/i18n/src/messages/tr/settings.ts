@@ -31,7 +31,7 @@ export const messages = {
   "settings.externalLinks.title": "Harici bağlantıları şurada aç",
   "settings.externalLinks.description": "Konuşmalardaki bağlantıların nerede açılacağını seçin.",
   "settings.externalLinks.defaultBrowser": "Varsayılan tarayıcı",
-  "settings.externalLinks.openbot": "OmniBot",
+  "settings.externalLinks.omnibot": "OmniBot",
   "settings.sendShortcut.title": "Gönderme kısayolu",
   "settings.sendShortcut.description": "Bu cihazda ve tarayıcıda mesaj gönderen tuşları seçin.",
   "settings.sendShortcut.enter": "Göndermek için Enter",
@@ -238,7 +238,7 @@ export const messages = {
   "settings.profile.share.copied": "Görüntü kopyalandı",
   "settings.profile.share.copyFailed": "Görüntü kopyalanamadı.",
   "settings.profile.share.createFailed": "Görüntü oluşturulamadı.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "omnibot-activity.png",
   // The text in the image to share.
   "settings.profile.share.caption": "OmniBot ile son altı ayım",
   "settings.profile.activity.title": "Etkinlik",

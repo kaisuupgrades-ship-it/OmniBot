@@ -1,4 +1,4 @@
-import { TELEGRAM_BOT_ID_PATTERN } from "@openbot/contracts/signal-protocol/telegram-route";
+import { TELEGRAM_BOT_ID_PATTERN } from "@omnibot/contracts/signal-protocol/telegram-route";
 
 export interface RemoteApiConfig {
   host: string;
@@ -165,7 +165,7 @@ export function readRemoteApiConfig(environment: Record<string, string | undefin
     maximumConnectionsPerIp: positiveInteger(environment.REMOTE_MAX_CONNECTIONS_PER_IP, 32),
     maximumMessagesPerMinute: positiveInteger(environment.REMOTE_MAX_MESSAGES_PER_MINUTE, 600),
     trustProxy: environment.REMOTE_TRUST_PROXY === "true",
-    sourceCommit: optional(environment.OPENBOT_SOURCE_COMMIT) ?? "unknown",
+    sourceCommit: optional(environment.OMNIBOT_SOURCE_COMMIT) ?? "unknown",
     slackSigningSecrets: readSlackSigningSecrets(environment.SLACK_SIGNING_SECRET),
     telegram: readTelegramConfig(environment),
     discord: readDiscordBot(

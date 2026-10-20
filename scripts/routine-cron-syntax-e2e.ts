@@ -6,9 +6,9 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { homedir, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { ChannelRoutine, Routine } from "@openbot/contracts/ipc";
-import { redactText } from "@openbot/logging";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+import type { ChannelRoutine, Routine } from "@omnibot/contracts/ipc";
+import { redactText } from "@omnibot/logging";
+import { RoutineInputError } from "@omnibot/team-client/routine-schedule";
 import { Effect } from "effect";
 import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { RoutineScheduler } from "../src/backend/agent/routine-scheduler";
@@ -21,7 +21,7 @@ import { ChannelStore } from "../src/backend/channel-store";
 import { databaseRows, requiredStringColumn } from "../src/backend/database/database-rows";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MailboxStore } from "../src/backend/mailbox-store";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { RoutineTimer } from "../src/backend/routine-timer";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -58,7 +58,7 @@ const SOURCES = [
   "packages/contracts/src/ipc-chat-channels.ts",
   "src/backend/agent/routine-scheduler.ts",
   "src/backend/mailbox-store.ts",
-  "src/backend/openbot-database.ts",
+  "src/backend/omnibot-database.ts",
   "packages/team-client/src/routine-schedule.ts",
 ];
 
@@ -504,7 +504,7 @@ async function runCase(name: string, work: (fixture: Fixture, row: CaseResult) =
   let root: string | undefined;
   let fixture: Fixture | undefined;
   try {
-    root = await mkdtemp(join(tmpdir(), "openbot-cron-syntax-"));
+    root = await mkdtemp(join(tmpdir(), "omnibot-cron-syntax-"));
     roots.push(root);
     fixture = await openFixture(root);
     await work(fixture, row);
@@ -544,7 +544,7 @@ async function runCase(name: string, work: (fixture: Fixture, row: CaseResult) =
 const phaseArgument = process.argv.find((value) => value.startsWith("--phase="));
 const requestedPhase = phaseArgument?.slice("--phase=".length) ?? "before";
 const phase = /^[a-zA-Z0-9_-]+$/.test(requestedPhase) ? requestedPhase : "invalid-phase";
-const out = join(ROOT, ".openbot-build", "routine-cron-syntax-e2e", phase);
+const out = join(ROOT, ".omnibot-build", "routine-cron-syntax-e2e", phase);
 try {
   assert.notEqual(phase, "invalid-phase", "Phase must be a folder name.");
   for (const path of SOURCES) {
@@ -588,6 +588,6 @@ try {
     `${safe(JSON.stringify({ phase, passed, fatal, sources: hashes, expectedCases, cases }, null, 2))}\n`,
     { mode: 0o600 },
   );
-  process.stdout.write(`${passed ? "PASS" : "FAIL"}: .openbot-build/routine-cron-syntax-e2e/${phase}/report.json\n`);
+  process.stdout.write(`${passed ? "PASS" : "FAIL"}: .omnibot-build/routine-cron-syntax-e2e/${phase}/report.json\n`);
   if (!passed) process.exitCode = 1;
 }

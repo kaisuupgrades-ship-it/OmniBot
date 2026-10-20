@@ -50,7 +50,7 @@ import {
   type ServerScope,
   type ServerSummary,
   type Untyped,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   decodeEventActivity,
   decodeEventRoutineRuns,
@@ -58,7 +58,7 @@ import {
   decodeEventStatus,
   decodeSaveEventRoutineResult,
   decodeWebhookSecret,
-} from "@openbot/contracts/ipc-events";
+} from "@omnibot/contracts/ipc-events";
 import { contextBridge, ipcRenderer, webUtils } from "electron";
 import {
   decodeAccountUsageFromMain,
@@ -420,7 +420,7 @@ window.addEventListener("paste", (event) => {
 });
 window.addEventListener("change", (event) => {
   const input = event.target;
-  if (!(input instanceof HTMLInputElement) || input.dataset.openbotAttachmentPicker !== "true") return;
+  if (!(input instanceof HTMLInputElement) || input.dataset.omnibotAttachmentPicker !== "true") return;
   void importFiles([...(input.files ?? [])]);
 });
 
@@ -530,7 +530,7 @@ function selectJoinedServer(server: ServerSummary): ServerSummary {
   return server;
 }
 
-const openbotApi: OmniBotDesktopApi = {
+const omnibotApi: OmniBotDesktopApi = {
   ...bridgeGroup(IPC_ENDPOINTS.app, {
     getAppInfo: decodeAppInfo,
     getSetupState: decodeAppSetupState,
@@ -1113,4 +1113,4 @@ const openbotApi: OmniBotDesktopApi = {
   }),
 };
 
-contextBridge.exposeInMainWorld("openbot", openbotApi);
+contextBridge.exposeInMainWorld("omnibot", omnibotApi);

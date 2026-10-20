@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: migration 13 leaves a workspace root at `OmniBot/Bots` while it renames the leaf, misses the
 // Windows or the JSON-escaped form of a path, changes a path that only looks like the root (`Botsy`, a user's own
@@ -50,17 +50,17 @@ function seed(db: DatabaseSync): void {
   // An id that the app did not generate keeps its spelling.
   agent.run(
     "chief",
-    "openbot-thread-chief",
+    "omnibot-thread-chief",
     2,
     JSON.stringify({ id: "chief", workspacePath: "/Users/user/OmniBot/Bots/chief" }),
   );
   db.exec(`INSERT INTO projection_threads
       (thread_id, agent_id, title, active_turn_id, created_at, updated_at, last_event_sequence)
-    VALUES ('openbot-thread-chief', 'chief', 'Chief', NULL, '2026-03-01T09:00:00.000Z', '2026-03-01T09:00:00.000Z', 1)`);
+    VALUES ('omnibot-thread-chief', 'chief', 'Chief', NULL, '2026-03-01T09:00:00.000Z', '2026-03-01T09:00:00.000Z', 1)`);
   db.prepare(
     `INSERT INTO projection_thread_messages (thread_id, message_id, turn_id, author, status, item_type, created_at,
        ordinal, message_json, last_event_sequence)
-     VALUES ('openbot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-03-01T09:00:00.000Z', 0, ?, 1)`,
+     VALUES ('omnibot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-03-01T09:00:00.000Z', 0, ?, 1)`,
   ).run(JSON.stringify({ id: "message-1", text: quotedPaths.join("\n") }));
   // A raw column, which holds the Windows separator once.
   db.prepare(

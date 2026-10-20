@@ -81,7 +81,7 @@ export const messages = {
     'Kayıtlı bir ajan profili okunamayan bir "{field}" değerine sahip; OmniBot\'u başlatmadan önce verileri güncelleyin.',
   "error.agent.storedProfileUnreadableId":
     '{id} kayıtlı ajan profili okunamayan bir "{field}" değerine sahip; OmniBot\'u başlatmadan önce verileri güncelleyin.',
-  // Written by `QueueEditRejectedError` in @openbot/contracts, which cannot import this package.
+  // Written by `QueueEditRejectedError` in @omnibot/contracts, which cannot import this package.
   "error.agent.queueEditRejected": "Kuyruk düzenlemesi reddedildi: {reason}",
   "error.agent.computerUseLocalOnly": "Bilgisayar Kullanımı yalnızca ajanı çalıştıran bilgisayarda değiştirilebilir.",
   "error.agent.automationLocalOnly": "Yerel betiklere yalnızca ajanı çalıştıran bilgisayarda izin verilebilir.",

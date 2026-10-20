@@ -1,7 +1,7 @@
-import type { MarketplaceAgentSummary, MarketplaceSkillSummary } from "@openbot/contracts/ipc";
-import { Badge, Button, Heading, Plus, Text } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+import type { MarketplaceAgentSummary, MarketplaceSkillSummary } from "@omnibot/contracts/ipc";
+import { Badge, Button, Heading, Plus, Text } from "@omnibot/ui";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { useText } from "@omnibot/ui/text";
 import { For, Match, Show, Switch } from "solid-js";
 import { InstallSkill } from "./MarketplaceInstallSkill";
 import { AppLogo, Done, SkillMark } from "./MarketplaceParts";

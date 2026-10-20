@@ -6,8 +6,8 @@ import type {
   OmniBotDesktopApi,
   ResetAgentSessionSettingInput,
   SetAgentSessionSettingInput,
-} from "@openbot/contracts/ipc";
-import type { AttachmentMediaSource } from "@openbot/ui/features/conversation/AttachmentCards";
+} from "@omnibot/contracts/ipc";
+import type { AttachmentMediaSource } from "@omnibot/ui/features/conversation/AttachmentCards";
 import type { AgentSkillCalls } from "../../skills-port";
 import type { AgentTemplatePublishCalls } from "../agent-templates/agent-templates-port";
 import type { SharedTableCalls } from "./conversation-port";
@@ -93,5 +93,5 @@ export interface ConversationRuntime {
 }
 
 export function conversationRuntime(props: Pick<ConversationProps, "runtime">): ConversationRuntime {
-  return props.runtime ?? window.openbot;
+  return props.runtime ?? window.omnibot;
 }

@@ -4,22 +4,22 @@ import type {
   ExternalDestination,
   ProviderAdminDesktopApi,
   ServerSummary,
-} from "@openbot/contracts/ipc";
-import { decodeRegistryEntries, decodeRegistryInstallResult, decodeRegistryOperations } from "@openbot/contracts/ipc";
-import { ACP_REGISTRY_ROUTES } from "@openbot/contracts/team-protocol/acp-registry-v1";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { PROVIDERS_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/providers-v1";
+} from "@omnibot/contracts/ipc";
+import { decodeRegistryEntries, decodeRegistryInstallResult, decodeRegistryOperations } from "@omnibot/contracts/ipc";
+import { ACP_REGISTRY_ROUTES } from "@omnibot/contracts/team-protocol/acp-registry-v1";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import { PROVIDERS_ADMIN_ROUTES } from "@omnibot/contracts/team-protocol/providers-v1";
 import {
   PROVIDERS_RUNTIMES_V2_CAPABILITY,
   PROVIDERS_RUNTIMES_V2_ROUTES,
-} from "@openbot/contracts/team-protocol/providers-v2";
+} from "@omnibot/contracts/team-protocol/providers-v2";
 import {
   PROVIDERS_SIGN_IN_V3_CAPABILITY,
   PROVIDERS_SIGN_IN_V3_ROUTES,
-} from "@openbot/contracts/team-protocol/providers-v3";
-import { PROVIDERS_V4_CAPABILITY, PROVIDERS_V4_ROUTES } from "@openbot/contracts/team-protocol/providers-v4";
-import { PROVIDERS_V5_CAPABILITY, PROVIDERS_V5_ROUTES } from "@openbot/contracts/team-protocol/providers-v5";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@omnibot/contracts/team-protocol/providers-v3";
+import { PROVIDERS_V4_CAPABILITY, PROVIDERS_V4_ROUTES } from "@omnibot/contracts/team-protocol/providers-v4";
+import { PROVIDERS_V5_CAPABILITY, PROVIDERS_V5_ROUTES } from "@omnibot/contracts/team-protocol/providers-v5";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   cancelProviderAccountSignIn,
   cancelProviderCodeLogin,
@@ -46,14 +46,14 @@ import {
   startProviderCodeLogin,
   startProviderHostSignIn,
   submitProviderCodeLogin,
-} from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
-import type { ProviderAccountActions } from "@openbot/ui/components/provider-accounts";
-import { isAgentAccount } from "@openbot/ui/components/provider-accounts";
-import type { AgentProfile } from "@openbot/ui/data";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
-import type { AcpRegistrySettingsApi } from "@openbot/ui/features/custom-providers/AcpRegistrySettings";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@omnibot/team-client/team-api-requests";
+import type { ProviderAccountActions } from "@omnibot/ui/components/provider-accounts";
+import { isAgentAccount } from "@omnibot/ui/components/provider-accounts";
+import type { AgentProfile } from "@omnibot/ui/data";
+import type { BrowserViewRuntime } from "@omnibot/ui/features/browser/BrowserLiveView";
+import type { AcpRegistrySettingsApi } from "@omnibot/ui/features/custom-providers/AcpRegistrySettings";
+import { currentText } from "@omnibot/ui/text";
 import { Effect } from "effect";
 import { createEffect, createMemo } from "solid-js";
 import { createHostAccounts, withHostAccounts, withHostProfileAccount } from "../agents/host-provider-accounts";
@@ -76,8 +76,8 @@ const CODE_LOGIN_POLL_MS = 3000;
  */
 const WEB_EXTERNAL_DESTINATIONS: Partial<Record<ExternalDestination, string>> = {
   "opencode-auth": "https://opencode.ai/auth",
-  feedback: "https://x.com/intent/post?text=Feedback%20for%20OmniBot%20%40norbertbodziony%3A%20",
-  message: "https://x.com/norbertbodziony",
+  feedback: "https://omnibot.example.com/contact",
+  message: "https://omnibot.example.com/contact",
   changelog: "https://omnibot.example.com/changelog",
   guides: "https://omnibot.example.com/guides",
   discord: "https://discord.omnibot.example.com",

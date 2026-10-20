@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { SaveCustomProviderInput } from "@openbot/contracts/ipc";
-import { CUSTOM_PROVIDER_LIMITS } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { SaveCustomProviderInput } from "@omnibot/contracts/ipc";
+import { CUSTOM_PROVIDER_LIMITS } from "@omnibot/contracts/ipc";
 import {
   ArrowLeft,
   Button,
@@ -15,7 +15,7 @@ import {
   Spinner,
   Text,
   X,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import {
   createEffect,
   createSignal,

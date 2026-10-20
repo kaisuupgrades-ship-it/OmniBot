@@ -1,5 +1,5 @@
-import type { HostedServerSummary } from "@openbot/contracts/hosted-servers";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { HostedServerSummary } from "@omnibot/contracts/hosted-servers";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { router, useLocalSearchParams } from "expo-router";
 import { Button, Spinner, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";

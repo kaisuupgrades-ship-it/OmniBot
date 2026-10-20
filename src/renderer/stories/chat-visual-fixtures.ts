@@ -1,9 +1,9 @@
-import { chatVisualDocument } from "@openbot/contracts/chat-visual";
-import logoUrl from "../src/assets/openbot-logo-production.png?inline";
+import { chatVisualDocument } from "@omnibot/contracts/chat-visual";
+import logoUrl from "../src/assets/omnibot-logo-production.png?inline";
 import takeoverUrl from "./assets/browser-takeover-preview.svg?inline";
 import macMockUrl from "./assets/remote-desktop-mac-mock.png?inline";
 
-const PAGES_ROUTE = "/__openbot/chat-visual";
+const PAGES_ROUTE = "/__omnibot/chat-visual";
 
 /** Publishes a page to the Storybook server (`.storybook/chat-visual-pages.ts`) and gives its URL. */
 export async function publishChatVisualPage(html: string): Promise<string> {

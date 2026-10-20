@@ -3,19 +3,19 @@
 // sitemap, so a new article or comparison is in it with no edit here.
 
 import { COMPARISONS } from "../content/compare";
-import { OPENBOT_PLANS } from "../content/compare/comparison";
+import { OMNIBOT_PLANS } from "../content/compare/comparison";
 import { PROVIDER_PAGES } from "../content/providers";
 import { CHANGELOG_DESCRIPTION, changelogUrl } from "../lib/changelog";
 import { CONTENT_COLLECTIONS } from "../lib/content";
 import { articleUrl, type CollectionId, collectionIndexUrl } from "../lib/content-collection";
 import {
-  OPENBOT_ALTERNATE_DOWNLOAD_LINKS,
-  OPENBOT_DOWNLOAD_LINKS,
-  OPENBOT_DOWNLOAD_PAGE_LINKS,
-  OPENBOT_LINKS,
+  OMNIBOT_ALTERNATE_DOWNLOAD_LINKS,
+  OMNIBOT_DOWNLOAD_LINKS,
+  OMNIBOT_DOWNLOAD_PAGE_LINKS,
+  OMNIBOT_LINKS,
 } from "../lib/landing-links";
 import { PLUGINS_DESCRIPTION, pluginIndexUrl } from "../lib/plugins";
-import { OPENBOT_SITE_DESCRIPTION, OPENBOT_SITE_URL } from "../lib/site-metadata";
+import { OMNIBOT_SITE_DESCRIPTION, OMNIBOT_SITE_URL } from "../lib/site-metadata";
 import { FEED_CACHE_CONTROL } from "./content-feed";
 
 /** The one-sentence answer of a page drawn from data. A prose article has none, and uses its description. */
@@ -26,14 +26,14 @@ function referenceAnswer(collection: CollectionId, slug: string): string | undef
 }
 
 function absolute(path: string): string {
-  return new URL(path, OPENBOT_SITE_URL).href;
+  return new URL(path, OMNIBOT_SITE_URL).href;
 }
 
 function llmsTxt(): string {
   const lines = [
     "# OmniBot",
     "",
-    `> ${OPENBOT_SITE_DESCRIPTION}`,
+    `> ${OMNIBOT_SITE_DESCRIPTION}`,
     "",
     "OmniBot is a desktop app for macOS, Windows and Linux. Each agent has its own workspace, thread and history, and keeps them when you change its provider or restart the app. Agents can give work to other agents. Chats, files and workspaces stay on your computer; OmniBot has no server that holds them. The app is free for noncommercial use. iPhone and Android apps connect to OmniBot on your own computer.",
     "",
@@ -43,18 +43,18 @@ function llmsTxt(): string {
     "",
     "OmniBot sells no model. Each agent uses a plan or a key you already have:",
     "",
-    ...OPENBOT_PLANS.map((plan) => `- ${plan.name}: ${plan.plan}`),
+    ...OMNIBOT_PLANS.map((plan) => `- ${plan.name}: ${plan.plan}`),
     "",
     "## Download",
     "",
-    `System requirements and install steps: [macOS](${absolute(OPENBOT_DOWNLOAD_PAGE_LINKS.macos)}), [Windows](${absolute(OPENBOT_DOWNLOAD_PAGE_LINKS.windows)}), [Linux](${absolute(OPENBOT_DOWNLOAD_PAGE_LINKS.linux)}), [iPhone](${absolute(OPENBOT_DOWNLOAD_PAGE_LINKS.ios)}), [Android](${absolute(OPENBOT_DOWNLOAD_PAGE_LINKS.android)}).`,
+    `System requirements and install steps: [macOS](${absolute(OMNIBOT_DOWNLOAD_PAGE_LINKS.macos)}), [Windows](${absolute(OMNIBOT_DOWNLOAD_PAGE_LINKS.windows)}), [Linux](${absolute(OMNIBOT_DOWNLOAD_PAGE_LINKS.linux)}), [iPhone](${absolute(OMNIBOT_DOWNLOAD_PAGE_LINKS.ios)}), [Android](${absolute(OMNIBOT_DOWNLOAD_PAGE_LINKS.android)}).`,
     "",
-    `- [macOS](${absolute(OPENBOT_DOWNLOAD_LINKS.macos)}): macOS 13 or later, Apple silicon`,
-    `- [macOS for Intel](${absolute(OPENBOT_ALTERNATE_DOWNLOAD_LINKS.macos)}): macOS 13 or later, Intel`,
-    `- [Windows](${absolute(OPENBOT_DOWNLOAD_LINKS.windows)}): Windows 10 or later, x64`,
-    `- [Linux](${absolute(OPENBOT_DOWNLOAD_LINKS.linux)}): x64 AppImage`,
-    `- [Linux for arm64](${absolute(OPENBOT_ALTERNATE_DOWNLOAD_LINKS.linux)}): arm64 AppImage`,
-    `- [Source code](${OPENBOT_LINKS.repository}): PolyForm Noncommercial 1.0.0`,
+    `- [macOS](${absolute(OMNIBOT_DOWNLOAD_LINKS.macos)}): macOS 13 or later, Apple silicon`,
+    `- [macOS for Intel](${absolute(OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.macos)}): macOS 13 or later, Intel`,
+    `- [Windows](${absolute(OMNIBOT_DOWNLOAD_LINKS.windows)}): Windows 10 or later, x64`,
+    `- [Linux](${absolute(OMNIBOT_DOWNLOAD_LINKS.linux)}): x64 AppImage`,
+    `- [Linux for arm64](${absolute(OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.linux)}): arm64 AppImage`,
+    `- [Source code](${OMNIBOT_LINKS.repository}): PolyForm Noncommercial 1.0.0`,
     "",
   ];
 

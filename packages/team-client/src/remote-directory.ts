@@ -4,16 +4,16 @@ import {
   type InviteLinkOptions,
   inviteUseCount,
   isPermanentInvite,
-  OPENBOT_CONTROL_PLANE_ORIGIN,
-  OPENBOT_INVITE_ORIGIN,
+  OMNIBOT_CONTROL_PLANE_ORIGIN,
+  OMNIBOT_INVITE_ORIGIN,
   parseInviteUrl,
   selfHostedApiOrigin,
-} from "@openbot/contracts/invite-links";
-import type { MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
-import { decodeRemoteSession, decodeRemoteSessionTicket } from "@openbot/contracts/remote-control-plane";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { referenceFrom, safeReference } from "@openbot/user-errors/reference";
+} from "@omnibot/contracts/invite-links";
+import type { MobileConnectHostBinding } from "@omnibot/contracts/mobile-connect";
+import { decodeRemoteSession, decodeRemoteSessionTicket } from "@omnibot/contracts/remote-control-plane";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { referenceFrom, safeReference } from "@omnibot/user-errors/reference";
 import { Deferred, Effect, Schema, Semaphore } from "effect";
 import { bytesToBase64Url } from "./base64";
 import { runTeamEffect } from "./effect-boundary";
@@ -395,8 +395,8 @@ export class RemoteTeamDirectoryClient {
    */
   #inviteApiUrl(): string {
     const url = new URL(this.#apiUrl);
-    return this.#authentication.kind === "browser" && url.origin === OPENBOT_INVITE_ORIGIN
-      ? new URL(OPENBOT_CONTROL_PLANE_ORIGIN).toString()
+    return this.#authentication.kind === "browser" && url.origin === OMNIBOT_INVITE_ORIGIN
+      ? new URL(OMNIBOT_CONTROL_PLANE_ORIGIN).toString()
       : url.toString();
   }
 

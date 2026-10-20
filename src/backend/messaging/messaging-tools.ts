@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import { z } from "zod";
 import type { ContextEntry } from "./messaging-types";
 

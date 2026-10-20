@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { AGENT_TEMPLATE_CARD, type AgentTemplatePreview } from "@openbot/contracts/ipc";
-import { avatarHeadColor, createStaticAvatarSvg } from "@openbot/ui/bloub-avatar";
+import { AppLogo } from "@omnibot/brand";
+import { AGENT_TEMPLATE_CARD, type AgentTemplatePreview } from "@omnibot/contracts/ipc";
+import { avatarHeadColor, createStaticAvatarSvg } from "@omnibot/ui/bloub-avatar";
 import { render } from "@solidjs/web";
 import { flush } from "solid-js";
 import { loadImage, loadSvg, withAlpha } from "../../avatar-canvas";
@@ -60,12 +60,12 @@ function themeColors(): ThemeColors {
     return value;
   };
   return {
-    canvas: token("--openbot-bg-native-canvas"),
-    primary: token("--openbot-text-primary"),
-    secondary: token("--openbot-text-secondary"),
-    muted: token("--openbot-text-muted"),
-    logo: token("--openbot-logo-production"),
-    logoEye: token("--openbot-logo-production-eye"),
+    canvas: token("--omnibot-bg-native-canvas"),
+    primary: token("--omnibot-text-primary"),
+    secondary: token("--omnibot-text-secondary"),
+    muted: token("--omnibot-text-muted"),
+    logo: token("--omnibot-logo-production"),
+    logoEye: token("--omnibot-logo-production-eye"),
   };
 }
 
@@ -171,7 +171,7 @@ async function drawColumn(
   context.fillText("omnibot.example.com", x + pillWidth + 24, pillTop + 38);
 }
 
-/** The app mark from `@openbot/brand`, with its CSS colours written onto the shapes. */
+/** The app mark from `@omnibot/brand`, with its CSS colours written onto the shapes. */
 export async function drawLogo(
   context: CanvasRenderingContext2D,
   x: number,

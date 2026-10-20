@@ -12,12 +12,12 @@ import {
   type UpdateCheckOutcome,
 } from "./update-service";
 
-/** The path unit that starts `openbot-hosted-update request`. Without it, no request is acted on. */
-export const HOSTED_UPDATE_TRIGGER = "/etc/systemd/system/openbot-update-request.path";
+/** The path unit that starts `omnibot-hosted-update request`. Without it, no request is acted on. */
+export const HOSTED_UPDATE_TRIGGER = "/etc/systemd/system/omnibot-update-request.path";
 
-/** The paths that scripts/hosting/openbot-hosted-update and openbot-update-request.path use. */
+/** The paths that scripts/hosting/omnibot-hosted-update and omnibot-update-request.path use. */
 export interface HostedUpdatePaths {
-  /** The runtime directory of openbot.service, which the service user owns. */
+  /** The runtime directory of omnibot.service, which the service user owns. */
   readonly requests: string;
   /** Root writes the step of a request here while it runs. */
   readonly state: string;
@@ -26,23 +26,23 @@ export interface HostedUpdatePaths {
 }
 
 const HOSTED_UPDATE_PATHS: HostedUpdatePaths = {
-  requests: "/run/openbot",
-  state: "/run/openbot-update.state",
+  requests: "/run/omnibot",
+  state: "/run/omnibot-update.state",
   stagedReady: "/opt/OmniBot/staged.ready",
 };
 
 /**
  * The folders that docker/instances/compose.yaml mounts in a container. OmniBot writes requests, and
- * `openbot-instance update-request` on the host pulls the image and makes the container again.
+ * `omnibot-instance update-request` on the host pulls the image and makes the container again.
  */
 export const CONTAINER_UPDATE_PATHS: HostedUpdatePaths = {
-  requests: "/var/lib/openbot-update/requests",
-  state: "/var/lib/openbot-update/status/state",
-  stagedReady: "/var/lib/openbot-update/status/staged.ready",
+  requests: "/var/lib/omnibot-update/requests",
+  state: "/var/lib/omnibot-update/status/state",
+  stagedReady: "/var/lib/omnibot-update/status/staged.ready",
 };
 
 /** The host writes this file when its path unit acts on the requests of the container. */
-export const CONTAINER_UPDATE_TRIGGER = "/var/lib/openbot-update/status/enabled";
+export const CONTAINER_UPDATE_TRIGGER = "/var/lib/omnibot-update/status/enabled";
 
 interface HostedUpdateOptions {
   currentVersion: string;
@@ -70,14 +70,14 @@ class RequestCancellation implements UpdateCancellationToken {
 /**
  * The updater of a hosted or self-installed Linux server. OmniBot runs as the service user from a
  * release that root owns, so it cannot replace itself. It asks root instead: an empty file in its
- * runtime directory starts `openbot-hosted-update request` through a path unit. That stages the
+ * runtime directory starts `omnibot-hosted-update request` through a path unit. That stages the
  * newest release, or stops OmniBot, moves the staged release into place and starts OmniBot again.
  *
  * UpdateService drives this as it drives electron-updater, so its deadlines apply. While root works,
  * the time of the state file changes, and each change is a progress event. When root stops without
  * a staged release, or never takes the request, the download fails. An install request has no
  * answer: shutdown preparation exits OmniBot after its deadline, and when root did not take the
- * request, systemd starts the same release again. Each start of openbot.service starts the path
+ * request, systemd starts the same release again. Each start of omnibot.service starts the path
  * unit, so this happens only when an administrator stopped it.
  */
 export class HostedUpdateAdapter implements UpdateAdapter {

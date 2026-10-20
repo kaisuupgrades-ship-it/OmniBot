@@ -3,9 +3,9 @@ import {
   type HostedServerState,
   parseHostedServerStatus,
   parseHostedServerSummary,
-} from "@openbot/contracts/hosted-servers";
-import type { HostedServerStartStep } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/hosted-servers";
+import type { HostedServerStartStep } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
 import { Deferred, Effect, Schema } from "effect";
 
 class HostedServerWakeError extends Schema.TaggedError<HostedServerWakeError>()("HostedServerWakeError", {}) {}
@@ -51,7 +51,7 @@ export function hostedStartStep(server: {
 }): HostedServerStartStep | null {
   if (server.state === "stopped") return server.error === null ? "machine" : null;
   if (!WAKE_RECONNECT_STATES.has(server.state) || server.error === "plan_ended") return null;
-  if (server.state === "running") return "openbot";
+  if (server.state === "running") return "omnibot";
   return server.state === "waking" && server.error === "provider_limit" ? "provider_limit" : "machine";
 }
 /** The delay between a wake reply and the next connection attempt. */

@@ -1,6 +1,6 @@
-import { SKILL_CATEGORIES, type SkillCategory } from "@openbot/contracts/ipc";
-import { Button, Input, Search, Skeleton, SlidingTabs, Text } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { SKILL_CATEGORIES, type SkillCategory } from "@omnibot/contracts/ipc";
+import { Button, Input, Search, Skeleton, SlidingTabs, Text } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { createEffect, For, Show } from "solid-js";
 import { AgentGrid, AppCard, SkillGrid } from "./MarketplaceCards";

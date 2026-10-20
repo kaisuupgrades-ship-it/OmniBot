@@ -148,11 +148,11 @@ rather than passed through. Paths are followed by the allowlisted campaign tags 
 hash is ever included. Session replay and automatic interaction capture remain disabled.
 
 To check the desktop send paths, start the dev app with
-`OPENBOT_ANALYTICS_CAPTURE_URL=http://localhost:47321 bun run dev`, then run
+`OMNIBOT_ANALYTICS_CAPTURE_URL=http://localhost:47321 bun run dev`, then run
 `bun run test:analytics-redaction -- --allow-mutations`. The app sends its analytics and failure
 reports to that local capture server instead of OpenPanel. The script seeds a secret marker into an
 agent, an MCP server, a routine and browser addresses, and checks that no captured request holds it.
-It writes `.openbot-build/analytics-redaction-e2e/report.json`. A packaged build ignores the setting,
+It writes `.omnibot-build/analytics-redaction-e2e/report.json`. A packaged build ignores the setting,
 and only a loopback `http:` origin is accepted.
 
 ## Required dashboards
@@ -195,7 +195,7 @@ A campaign session ends before most visitors make an account or pay. To link a p
 visit, the website saves the first visit of each browser and the account service keeps it on the
 account.
 
-1. A production website page saves `openbot.first-touch.v1` in the browser's `localStorage` once:
+1. A production website page saves `omnibot.first-touch.v1` in the browser's `localStorage` once:
    the `acquisition_source`, the `source_platform`, the first screen path, the UTC day, and the
    allowlisted campaign tags of that visit. A later visit does not replace it. After 90 days it is not
    read, and the next visit replaces it.

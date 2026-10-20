@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: the upgrade changes or loses a row of any table; a failed upgrade leaves the table
 // or its marker; a newer or incomplete history is accepted; a deleted routine deletes its waits

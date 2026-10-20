@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { access, readdir, readFile } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { bundledLibraryLicense, isPortableLoadPath, readMachOLoadPaths } from "./mac-runtime-dylibs";
 import { createRemoteDesktopInputDigest, loadNativeRuntimeLock } from "./native-runtime-lock";
 import { runtimeTarget } from "./remote-desktop-runtime-release";
@@ -42,7 +42,7 @@ await Promise.all([
   access(resolve("build/remote-desktop-runtime/sources", sunshinePatch)),
   access(
     resolve(
-      `build/remote-desktop-runtime/sources/moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`,
+      `build/remote-desktop-runtime/sources/moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-omnibot-source.tar.gz`,
     ),
   ),
   access(resolve("build/remote-desktop-runtime/sources", moonlightPatch)),

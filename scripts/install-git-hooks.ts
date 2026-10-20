@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("install-git-hooks");
 

@@ -8,9 +8,9 @@ import {
   mcpConfigErrors,
   normalizeMcpConfig,
   type SkillCategory,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("build-plugin-catalog");
 
@@ -603,8 +603,8 @@ function renderRendererModule(plugins: PluginDetail[]): string {
  * bun run marketplace:build:plugins -- --check to verify.
  */
 
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import type { MarketplacePluginApp, MarketplacePluginDetail } from "@openbot/ui/features/settings/marketplace-plugins";
+import type { McpServerConfig } from "@omnibot/contracts/ipc";
+import type { MarketplacePluginApp, MarketplacePluginDetail } from "@omnibot/ui/features/settings/marketplace-plugins";
 
 /**
  * The configuration an app installs as. The catalog states the name and how the server is reached -

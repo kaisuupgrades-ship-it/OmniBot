@@ -1,4 +1,4 @@
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
+import type { AgentProviderId } from "@omnibot/contracts/agent-providers";
 import {
   type AgentModelChoice,
   agentPermissionLevel,
@@ -8,15 +8,15 @@ import {
   sameAgentModelChoice,
   type UpdateAgentAdminSettingsInput,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { hasVisibleToasts } from "@openbot/ui";
+} from "@omnibot/contracts/ipc";
+import { hasVisibleToasts } from "@omnibot/ui";
 import {
   type BackupModelSource,
   rememberedBackupModels,
   type UsageLimitAskCardProps,
   usageLimitAskOptions,
-} from "@openbot/ui/features/conversation/BackupModels";
-import { unloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
+} from "@omnibot/ui/features/conversation/BackupModels";
+import { unloadedHistory } from "@omnibot/ui/features/conversation/ChatScrollRail";
 import { createMemo } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";
 import { useNavigation } from "../../navigation";

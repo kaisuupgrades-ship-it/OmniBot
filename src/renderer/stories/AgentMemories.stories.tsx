@@ -1,10 +1,10 @@
-import type { AgentMemory } from "@openbot/contracts/ipc";
+import type { AgentMemory } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_MODELS } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 const storyAgent = STORY_AGENT;
 
@@ -49,13 +49,13 @@ const fullMemoryList: AgentMemory[] = Array.from({ length: 64 }, (_, index) => (
 }));
 
 function AgentMemoriesStory(props: { memories: AgentMemory[] }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot({ memories: { chief: props.memories } });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
 
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
 
   return (

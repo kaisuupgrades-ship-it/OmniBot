@@ -1,10 +1,9 @@
-// Adapted from the reproduction in nightly-labs/openbot#1824.
 // A custom ACP agent whose interpreter is only on the user's login-shell PATH, with OmniBot started
 // the way Finder, the Dock or a login item starts it: PATH=/usr/bin:/bin:/usr/sbin:/sbin.
 // Most ACP adapters are `#!/usr/bin/env node` scripts and Node comes from Homebrew, nvm or mise, so
 // this is the normal macOS setup. Both ways the agent starts must work: Check agent, and the `acp`
 // provider driver that lists its models. `bun run test:custom-agents:login-path`; exit 0 = both
-// worked. Writes .openbot-build/custom-acp-agent-login-path-e2e/report.json.
+// worked. Writes .omnibot-build/custom-acp-agent-login-path-e2e/report.json.
 import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -20,7 +19,7 @@ import type { CustomProviderCipher } from "../src/main/custom-provider-store";
 
 // The interpreter has a name no system folder holds, so the result does not depend on whether this
 // machine also has a `node` in /usr/bin.
-const INTERPRETER = "openbot-login-path-node";
+const INTERPRETER = "omnibot-login-path-node";
 
 const FAKE_AGENT = `#!/usr/bin/env ${INTERPRETER}
 const NL = String.fromCharCode(10);
@@ -57,10 +56,10 @@ const cipher: CustomProviderCipher = {
   decrypt: (value) => Buffer.from(value.map((byte) => byte ^ 0x5a)).toString("utf8"),
 };
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/custom-acp-agent-login-path-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/custom-acp-agent-login-path-e2e");
 const report: { passed: boolean; check?: unknown; models?: unknown; error?: string } = { passed: false };
 
-const root = await mkdtemp(join(tmpdir(), "openbot-login-path-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-login-path-e2e-"));
 const clients: AgentClient[] = [];
 let passed = false;
 

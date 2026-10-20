@@ -1483,7 +1483,7 @@ export const IPC_ENDPOINTS = {
 export type IpcEndpoints = typeof IPC_ENDPOINTS;
 
 /**
- * Where each group sits on `window.openbot`. The empty path is the top level, and several groups can
+ * Where each group sits on `window.omnibot`. The empty path is the top level, and several groups can
  * share one path: the agent groups are spread into `agent`. Null keeps a group off the page; only the
  * preload calls it. A new group does not compile until it has a place here, so the author decides
  * what the page can call. `OmniBotDesktopApi`, the built-preload verifier and the test harness all
@@ -1607,13 +1607,13 @@ type UnionToIntersection<Union> = (Union extends unknown ? (value: Union) => voi
 // Distributes over a union of groups, one `GroupApi` each.
 type GroupApis<Group extends IpcGroupName> = Group extends IpcGroupName ? GroupApi<IpcEndpoints[Group]> : never;
 
-/** Every group at one path of `window.openbot`, as one surface: `PathApi<"agent">` is all nine agent groups. */
+/** Every group at one path of `window.omnibot`, as one surface: `PathApi<"agent">` is all nine agent groups. */
 export type PathApi<Path extends string> = UnionToIntersection<GroupApis<GroupsAt<Path>>>;
 
 type NestedPath = Exclude<IpcGroupPaths[IpcGroupName], "" | null>;
 
 /**
- * `window.openbot` as `IPC_GROUP_PATHS` lays it out, with every method passed straight through.
+ * `window.omnibot` as `IPC_GROUP_PATHS` lays it out, with every method passed straight through.
  * `OmniBotDesktopApi` is this, except for the few members the preload writes by hand.
  */
 export type BridgedDesktopApi = PathApi<""> & { [Path in NestedPath]: PathApi<Path> };

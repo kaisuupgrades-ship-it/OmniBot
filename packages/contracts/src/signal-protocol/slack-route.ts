@@ -10,7 +10,7 @@
 // claim another host's workspace. It is signed with its own key, not the ticket key, and it expires:
 // the host asks for a new one each time its `ingress` socket connects.
 
-export const SLACK_ROUTE_AUDIENCE = "openbot-slack-route";
+export const SLACK_ROUTE_AUDIENCE = "omnibot-slack-route";
 
 export const SLACK_EVENTS_PATH = "/v1/slack/events";
 

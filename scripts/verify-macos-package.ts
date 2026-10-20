@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 
 const logger = createOmniBotLogger("verify-macos-package");
@@ -79,7 +79,7 @@ await Promise.all([
   access(resolve(resourcesPath, "remote-desktop-runtime/DISTRIBUTION-SHA256SUMS.txt")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/Sunshine-v2026.516.143833-source.tar.gz")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-openbot.patch")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot-source.tar.gz")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-omnibot-source.tar.gz")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot.patch")),
   access(resolve(remoteRuntimePath, "Sunshine.app/Contents/MacOS/Sunshine")),
   access(resolve(remoteRuntimePath, "web-server")),
@@ -218,7 +218,7 @@ async function verifyPackagedIcon(packagedPath: string, sourcePath: string): Pro
     throw new Error("The packaged macOS icon does not match build/icon-production.icns.");
   }
 
-  const iconRoot = await mkdtemp(join(tmpdir(), "openbot-icon-"));
+  const iconRoot = await mkdtemp(join(tmpdir(), "omnibot-icon-"));
   const iconSetPath = join(iconRoot, "OmniBot.iconset");
   try {
     run("iconutil", ["--convert", "iconset", packagedPath, "--output", iconSetPath]);
@@ -254,15 +254,15 @@ function run(command: string, args: string[], includeStderr = false): string {
 }
 
 async function verifyLaunch(executable: string): Promise<void> {
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "omnibot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`, "--use-mock-keychain"], {
     env: {
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+      OMNIBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+      OMNIBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+      OMNIBOT_GROK_PATH: join(userDataPath, "missing-grok"),
     },
     stdio: ["ignore", "ignore", "pipe"],
   });
@@ -379,9 +379,9 @@ async function verifySecondInstanceExits(
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+      OMNIBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+      OMNIBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+      OMNIBOT_GROK_PATH: join(userDataPath, "missing-grok"),
     },
     stdio: ["ignore", "ignore", "pipe"],
   });

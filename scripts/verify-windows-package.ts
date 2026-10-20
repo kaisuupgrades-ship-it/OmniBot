@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { parse as parseYaml } from "yaml";
 import { isMissingFileError } from "../src/backend/file-errors";
 
@@ -61,7 +61,7 @@ await Promise.all([
   access(resolve(resourcesPath, "remote-desktop-runtime/DISTRIBUTION-SHA256SUMS.txt")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/Sunshine-v2026.516.143833-source.tar.gz")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/sunshine-v2026.516.143833-openbot.patch")),
-  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot-source.tar.gz")),
+  access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-omnibot-source.tar.gz")),
   access(resolve(resourcesPath, "remote-desktop-runtime/sources/moonlight-web-stream-v2.10.0-openbot.patch")),
   access(resolve(resourcesPath, "remote-desktop-runtime/win32/x64/sunshine.exe")),
   access(resolve(resourcesPath, "remote-desktop-runtime/win32/x64/web-server.exe")),
@@ -227,15 +227,15 @@ function verifyAuthenticode(path: string, expectedStatus: "NotSigned" | "Valid",
 }
 
 async function verifyLaunch(executable: string): Promise<void> {
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "omnibot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`], {
     env: {
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
+      OMNIBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
+      OMNIBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
+      OMNIBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
     },
     stdio: ["ignore", "ignore", "pipe"],
     windowsHide: true,
@@ -360,9 +360,9 @@ async function verifySecondInstanceExits(
       ...process.env,
       CODEX_HOME: join(userDataPath, "codex-home"),
       CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-      OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
-      OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
-      OPENBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
+      OMNIBOT_CODEX_PATH: join(userDataPath, "missing-codex.exe"),
+      OMNIBOT_CLAUDE_PATH: join(userDataPath, "missing-claude.exe"),
+      OMNIBOT_GROK_PATH: join(userDataPath, "missing-grok.exe"),
     },
     stdio: ["ignore", "ignore", "pipe"],
     windowsHide: true,

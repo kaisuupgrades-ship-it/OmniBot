@@ -4,8 +4,8 @@ import {
   canPreviewAttachment,
   type FileAction,
   type WorkspaceDirectory,
-} from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { currentText } from "@omnibot/ui/text";
 import { createMemo, createSignal, type Store, type StoreSetter } from "solid-js";
 import { createScopeGuard } from "../../../scope-lifetime";
 import { attachmentFilePreview } from "../attachment-preview";
@@ -77,9 +77,9 @@ export interface PanelsStoreDeps {
   /** Owned with `rightPanels`, so that the tabs stay with the open pane when the view of the chat closes. */
   panels: Store<SidePanelsState>;
   setPanels: StoreSetter<SidePanelsState>;
-  settingsProvider: () => import("@openbot/contracts/ipc").AgentProviderId;
-  settingsModel: () => import("@openbot/contracts/ipc").AgentModelId;
-  settingsReasoning: () => import("@openbot/contracts/ipc").AgentReasoningEffort;
+  settingsProvider: () => import("@omnibot/contracts/ipc").AgentProviderId;
+  settingsModel: () => import("@omnibot/contracts/ipc").AgentModelId;
+  settingsReasoning: () => import("@omnibot/contracts/ipc").AgentReasoningEffort;
   setBrowserPipBounds: (bounds: BrowserBounds | null) => void;
   sidebarFilePreview: () => SidebarFilePreview | null;
   setSidebarFilePreview: (preview: SidebarFilePreview | null) => void;
@@ -237,7 +237,7 @@ export function createPanelsStore(deps: PanelsStoreDeps) {
   function saveBrowserPipBounds(bounds: BrowserBounds) {
     deps.setBrowserPipBounds(bounds);
     window.localStorage.setItem(
-      "openbot:browser-pip-native-bounds",
+      "omnibot:browser-pip-native-bounds",
       [bounds.x, bounds.y, bounds.width, bounds.height].join(","),
     );
   }

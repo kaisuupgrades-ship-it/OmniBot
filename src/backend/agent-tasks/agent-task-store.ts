@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { AGENT_TASK_OUTCOMES, type AgentTaskOutcome } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { AGENT_TASK_OUTCOMES, type AgentTaskOutcome } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@omnibot/contracts/runtime-values";
 import { deleteAggregateHistory, deleteThreadAttachments } from "../database/database-core";
 import { databaseRow, databaseRows, optionalStringColumn, requiredStringColumn } from "../database/database-rows";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 
 const AGENT_TASK_ORIGINS = ["user", "agent"] as const;
 export type AgentTaskOrigin = (typeof AGENT_TASK_ORIGINS)[number];
@@ -104,7 +104,7 @@ export class AgentTaskStore {
   /** Creates the task and its thread in one transaction. */
   create(input: AgentTaskInput): AgentTaskRecord {
     const taskId = `agent-task-${randomUUID()}`;
-    const threadId = `openbot-thread-${randomUUID()}`;
+    const threadId = `omnibot-thread-${randomUUID()}`;
     this.#database.dispatch(
       `agent-task:${taskId}`,
       [

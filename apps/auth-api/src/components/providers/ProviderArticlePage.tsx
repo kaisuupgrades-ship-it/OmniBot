@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/solid-router";
 import { For, Show } from "solid-js";
-import { type OmniBotPlan, OPENBOT_PLANS } from "../../content/compare/comparison";
-import { OPENBOT_ADDS, type ProviderPage } from "../../content/providers/provider-page";
+import { OMNIBOT_PLANS, type OmniBotPlan } from "../../content/compare/comparison";
+import { OMNIBOT_ADDS, type ProviderPage } from "../../content/providers/provider-page";
 import { COMPARE_COLLECTION } from "../../lib/compare";
 import {
   type CollectionArticle,
@@ -28,10 +28,10 @@ export function ProviderArticlePage(props: ProviderArticlePageProps) {
   const isThisProvider = (plan: OmniBotPlan) => plan.provider === props.page.provider;
   // This provider's plan first, then the rest in their usual order.
   const plans = () => [
-    ...OPENBOT_PLANS.filter(isThisProvider),
-    ...OPENBOT_PLANS.filter((plan) => !isThisProvider(plan)),
+    ...OMNIBOT_PLANS.filter(isThisProvider),
+    ...OMNIBOT_PLANS.filter((plan) => !isThisProvider(plan)),
   ];
-  const adds = () => [...props.page.adds, ...OPENBOT_ADDS];
+  const adds = () => [...props.page.adds, ...OMNIBOT_ADDS];
   const comparisons = () =>
     props.page.comparisons.flatMap((slug) => {
       const article = findArticle(COMPARE_COLLECTION, slug);

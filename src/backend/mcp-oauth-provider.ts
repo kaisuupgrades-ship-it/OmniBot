@@ -44,9 +44,9 @@ import {
   OAuthTokensSchema,
 } from "@modelcontextprotocol/sdk/shared/auth.js";
 import type { FetchLike } from "@modelcontextprotocol/sdk/shared/transport.js";
-import { MCP_SIGN_IN_TIMEOUT_MS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import type { Logger } from "@openbot/logging";
+import { MCP_SIGN_IN_TIMEOUT_MS } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import type { Logger } from "@omnibot/logging";
 import { z } from "zod";
 import { runCauseEffect } from "./effect-boundary";
 import { readLimitedBody } from "./limited-body";

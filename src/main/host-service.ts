@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { dirname, join } from "node:path";
-import { createInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+import { createInviteUrl, selfHostedApiOrigin } from "@omnibot/contracts/invite-links";
 import type {
   AvatarImageInput,
   CentralAuthUser,
@@ -31,12 +31,12 @@ import type {
   TeamSessionSummary,
   UpdateHostIdentityInput,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
-import { conversationMessageSender, SIGNED_OUT_CHANNEL_MEMBER_ID } from "@openbot/contracts/ipc";
-import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
-import type { HostRestartState } from "@openbot/contracts/team-protocol/host-update-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { conversationMessageSender, SIGNED_OUT_CHANNEL_MEMBER_ID } from "@omnibot/contracts/ipc";
+import type { LiveActivityRelayPush } from "@omnibot/contracts/live-activity-relay";
+import type { HostRestartState } from "@omnibot/contracts/team-protocol/host-update-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Cause, Context, Deferred, Effect, Fiber, Layer, ManagedRuntime, Result } from "effect";
 import type { AgentService } from "../backend/agent-service";
 import type { ChannelService } from "../backend/channel-service";
@@ -59,7 +59,7 @@ import type { RemoteDirectoryMember, TeamIdentity, TeamStore } from "./team-stor
 import type { TeamWebRtcBridge } from "./team-webrtc-bridge";
 import { TeamWebRtcHostGateway } from "./team-webrtc-host-gateway";
 
-export const DEVELOPMENT_REMOTE_CLIENT_USERNAME = "openbot-dev-client";
+export const DEVELOPMENT_REMOTE_CLIENT_USERNAME = "omnibot-dev-client";
 
 const logger = createOmniBotLogger("host-service");
 
@@ -205,7 +205,7 @@ class HostApiRuntime extends Context.Service<
   {
     start(): Effect.Effect<number, RemoteWorkflowError>;
   }
->()("openbot/main/HostApiRuntime") {}
+>()("omnibot/main/HostApiRuntime") {}
 
 export class HostService extends EventEmitter<HostEvents> {
   readonly #options: Required<Pick<HostServiceOptions, "localDevelopmentHost">> &
@@ -240,10 +240,10 @@ export class HostService extends EventEmitter<HostEvents> {
       platform: options.platform ?? normalizeRemoteDesktopPlatform(process.platform),
       unattended: options.unattended ?? false,
       runtimePaths: options.remoteDesktopRuntimePaths ?? null,
-      runtimeStateDirectory: options.remoteDesktopStateDirectory ?? ".openbot-remote-desktop",
+      runtimeStateDirectory: options.remoteDesktopStateDirectory ?? ".omnibot-remote-desktop",
       getRuntimeCredentials:
         options.getRemoteDesktopRuntimeCredentials ??
-        (() => Effect.succeed({ username: "openbot", password: "development-runtime-not-for-release" })),
+        (() => Effect.succeed({ username: "omnibot", password: "development-runtime-not-for-release" })),
       ...(options.getRemoteDesktopDisplays ? { getDisplays: options.getRemoteDesktopDisplays } : {}),
       getIceServers:
         options.getRemoteDesktopIceServers ??
@@ -412,7 +412,7 @@ export class HostService extends EventEmitter<HostEvents> {
           bridge: options.teamWebRtcBridge,
           store: options.store,
           appVersion: options.appVersion,
-          transferDirectory: join(options.logDirectory ?? ".openbot-remote", "transfers"),
+          transferDirectory: join(options.logDirectory ?? ".omnibot-remote", "transfers"),
           renewSignal: (hostId) =>
             Effect.gen(function* () {
               const issueTicket = options.issueRemoteHostTicket;
@@ -881,7 +881,7 @@ export class HostService extends EventEmitter<HostEvents> {
       if (!identity || !apiUrl)
         return yield* new RemoteWorkflowError({ cause: new Error("The local development host is not ready.") });
       const username = DEVELOPMENT_REMOTE_CLIENT_USERNAME;
-      const password = "openbot-local-development-client";
+      const password = "omnibot-local-development-client";
       const authenticated = yield* this.#options.store.login(username, password).pipe(
         Effect.catch(() =>
           Effect.gen({ self: this }, function* () {
@@ -1554,7 +1554,7 @@ function initialHostStatus(identity: TeamIdentity | null, unattended: boolean): 
 }
 
 function serverLogoUrl(version: string): string {
-  return `openbot-server-logo://local/logo?v=${encodeURIComponent(version)}`;
+  return `omnibot-server-logo://local/logo?v=${encodeURIComponent(version)}`;
 }
 
 function normalizeRemoteDesktopPlatform(platform: NodeJS.Platform): "darwin" | "win32" | "linux" {

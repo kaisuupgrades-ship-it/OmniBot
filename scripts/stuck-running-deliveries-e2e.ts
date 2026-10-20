@@ -8,18 +8,18 @@
 // (e) Stop while the normal turn end runs does not settle the completed turn as interrupted;
 // (f) a turn end that fails after its deliveries settled still closes the stored turn;
 // (g) a delivery that runs again under the same turn id, after its session was refused, runs to its end (#2468).
-// `bun scripts/stuck-running-deliveries-e2e.ts`. Writes .openbot-build/stuck-running-deliveries-e2e/report.json.
+// `bun scripts/stuck-running-deliveries-e2e.ts`. Writes .omnibot-build/stuck-running-deliveries-e2e/report.json.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_PROVIDERS, type AgentEvent } from "@openbot/contracts/ipc";
+import { AGENT_PROVIDERS, type AgentEvent } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { getRecord, getString, isRecord } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/stuck-running-deliveries-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-stuck-deliveries-"));
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/stuck-running-deliveries-e2e");
+const root = await mkdtemp(join(tmpdir(), "omnibot-stuck-deliveries-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const logPath = join(root, "protocol.jsonl");
@@ -31,16 +31,16 @@ const SETTLE_MS = 10_000;
 // Before the service modules load: the Codex process and the stores read the home folder.
 process.env.HOME = home;
 process.env.CODEX_HOME = join(home, ".codex");
-process.env.OPENBOT_CODEX_PATH = fakeCodex;
-process.env.OPENBOT_FAKE_CODEX_LOG = logPath;
-process.env.OPENBOT_FAKE_CODEX_CONTROL = controlPath;
+process.env.OMNIBOT_CODEX_PATH = fakeCodex;
+process.env.OMNIBOT_FAKE_CODEX_LOG = logPath;
+process.env.OMNIBOT_FAKE_CODEX_CONTROL = controlPath;
 mkdirSync(home, { recursive: true });
 
 const { AgentService } = await import("../src/backend/agent-service");
 const { AgentStore } = await import("../src/backend/agent-store");
 const { runCauseEffect } = await import("../src/backend/effect-boundary");
 const { MailboxStore } = await import("../src/backend/mailbox-store");
-const { OmniBotDatabase } = await import("../src/backend/openbot-database");
+const { OmniBotDatabase } = await import("../src/backend/omnibot-database");
 const { StoredStateFailure } = await import("../src/backend/stored-state-effects");
 
 /**
@@ -58,8 +58,8 @@ if (process.argv.includes("--version")) {
   process.stdout.write("codex-cli 0.160.1\\n");
   process.exit(0);
 }
-const log = (entry) => fs.appendFileSync(process.env.OPENBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
-const control = () => JSON.parse(fs.readFileSync(process.env.OPENBOT_FAKE_CODEX_CONTROL, "utf8"));
+const log = (entry) => fs.appendFileSync(process.env.OMNIBOT_FAKE_CODEX_LOG, JSON.stringify(entry) + "\\n");
+const control = () => JSON.parse(fs.readFileSync(process.env.OMNIBOT_FAKE_CODEX_CONTROL, "utf8"));
 const config = { config: { mcp_servers: {} }, layers: [{ name: { type: "user", file: "/fake/.codex/config.toml", profile: null }, version: "1", config: { mcp_servers: {} } }] };
 const prefix = "p" + process.pid + "-";
 let buffer = "";

@@ -149,7 +149,7 @@ function SignInTitle({
     setHeights((current) => (current[key] === height ? current : { ...current, [key]: height }));
   const block = (key: SignInStep) => (
     <>
-      <Typography.Heading type="h2" accessibilityRole="header" align="center" className="tracking-openbot-tight">
+      <Typography.Heading type="h2" accessibilityRole="header" align="center" className="tracking-omnibot-tight">
         {texts[key][0]}
       </Typography.Heading>
       <Typography.Paragraph color="muted" align="center">
@@ -183,12 +183,12 @@ function SignInTitle({
             reduced={reduced}
             measure
             renderText={(text, props) => (
-              <Typography.Heading type="h2" align="center" className="tracking-openbot-tight" {...props}>
+              <Typography.Heading type="h2" align="center" className="tracking-omnibot-tight" {...props}>
                 {text}
               </Typography.Heading>
             )}
             renderLetter={(letter) => (
-              <Typography.Heading type="h2" className="tracking-openbot-tight">
+              <Typography.Heading type="h2" className="tracking-omnibot-tight">
                 {letter}
               </Typography.Heading>
             )}

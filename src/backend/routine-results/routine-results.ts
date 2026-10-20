@@ -24,9 +24,9 @@ import type {
   RoutineResultDestination,
   RoutineResultRoutineInput,
   SetRoutineResultDestinationInput,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Cause, Context, Effect, Exit, Fiber, Layer, ManagedRuntime, Schema, Scope, Semaphore } from "effect";
 import { isNoUpdateAnswer } from "../agent/routine-quiet-runs";
 import type { MessagingPostFailure } from "../messaging/messaging-threads";
@@ -81,7 +81,7 @@ interface RoutineResultsShape {
   notice(event: AgentEvent): Effect.Effect<void>;
 }
 
-class RoutineResults extends Context.Service<RoutineResults, RoutineResultsShape>()("openbot/backend/RoutineResults") {
+class RoutineResults extends Context.Service<RoutineResults, RoutineResultsShape>()("omnibot/backend/RoutineResults") {
   static layer(dependencies: RoutineResultsDependencies) {
     return Layer.effect(
       RoutineResults,

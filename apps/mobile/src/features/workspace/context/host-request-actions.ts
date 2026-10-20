@@ -1,4 +1,4 @@
-import { isAvatarMimeType } from "@openbot/contracts/avatar-images";
+import { isAvatarMimeType } from "@omnibot/contracts/avatar-images";
 import {
   assertStorageUsageScope,
   canAdministerServer,
@@ -16,45 +16,45 @@ import {
   type SetAgentHiddenInput,
   STORAGE_CAPABILITY,
   type TeamRole,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_ADMIN_CAPABILITY, AGENT_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/agent-admin-v1";
-import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/agent-hidden-v1";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { AGENT_ADMIN_CAPABILITY, AGENT_ADMIN_ROUTES } from "@omnibot/contracts/team-protocol/agent-admin-v1";
+import { AGENT_HIDDEN_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-hidden-v1";
 import {
   AGENT_HOST_SETTINGS_CAPABILITY,
   AGENT_HOST_SETTINGS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-host-settings-v1";
-import { AGENT_INSTALL_CAPABILITY } from "@openbot/contracts/team-protocol/agent-install-v1";
-import { AGENT_MEMORIES_CAPABILITY } from "@openbot/contracts/team-protocol/agent-memories-v1";
-import { AGENT_PUBLISH_CAPABILITY } from "@openbot/contracts/team-protocol/agent-publish-v1";
-import { AGENT_SESSION_SETTINGS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-session-settings-v1";
-import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { CONTEXT_RESET_CAPABILITY } from "@openbot/contracts/team-protocol/context-reset-v1";
+} from "@omnibot/contracts/team-protocol/agent-host-settings-v1";
+import { AGENT_INSTALL_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-install-v1";
+import { AGENT_MEMORIES_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-memories-v1";
+import { AGENT_PUBLISH_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-publish-v1";
+import { AGENT_SESSION_SETTINGS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-session-settings-v1";
+import { AGENT_TASKS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import { CONTEXT_RESET_CAPABILITY } from "@omnibot/contracts/team-protocol/context-reset-v1";
 import {
   CONVERSATION_FILE_SEARCH_CAPABILITY,
   CONVERSATION_FILE_SEARCH_ROUTES,
   type ConversationFileSearchRequest,
   decodeConversationFileSearchResponse,
-} from "@openbot/contracts/team-protocol/conversation-file-search-v1";
+} from "@omnibot/contracts/team-protocol/conversation-file-search-v1";
 import {
   TEAM_AGENT_CREATE_MODEL_CAPABILITY,
   TEAM_EML_ATTACHMENTS_CAPABILITY,
   TEAM_MEDIA_ATTACHMENTS_CAPABILITY,
   TEAM_MESSAGE_CLIENT_ID_CAPABILITY,
   TEAM_SEMANTIC_TAGS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/current";
-import { EVENTS_CAPABILITY } from "@openbot/contracts/team-protocol/events-v1";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { TEAM_QUEUE_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { SHARED_TABLES_CAPABILITY } from "@openbot/contracts/team-protocol/shared-tables-v1";
-import { SKILLS_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/skills-admin-v1";
-import { STORAGE_ROUTES } from "@openbot/contracts/team-protocol/storage-v1";
-import type { TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
-import { readHostAnalytics } from "@openbot/team-client";
-import type { RemoteFileUpload } from "@openbot/team-client/remote-peer";
-import { buildRoutineCalendar, type RoutineCalendarSource } from "@openbot/team-client/routine-calendar";
+} from "@omnibot/contracts/team-protocol/current";
+import { EVENTS_CAPABILITY } from "@omnibot/contracts/team-protocol/events-v1";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import { TEAM_QUEUE_EDIT_CAPABILITY } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import { SHARED_TABLES_CAPABILITY } from "@omnibot/contracts/team-protocol/shared-tables-v1";
+import { SKILLS_ADMIN_CAPABILITY } from "@omnibot/contracts/team-protocol/skills-admin-v1";
+import { STORAGE_ROUTES } from "@omnibot/contracts/team-protocol/storage-v1";
+import type { TeamProtocolV2Json } from "@omnibot/contracts/team-protocol/v2";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
+import { readHostAnalytics } from "@omnibot/team-client";
+import type { RemoteFileUpload } from "@omnibot/team-client/remote-peer";
+import { buildRoutineCalendar, type RoutineCalendarSource } from "@omnibot/team-client/routine-calendar";
 import {
   deleteEventRoutine,
   deleteSharedTable,
@@ -78,7 +78,7 @@ import {
   testEventRoutine,
   uninstallAgentSkill,
   unpublishAgentTemplate,
-} from "@openbot/team-client/team-admin-requests";
+} from "@omnibot/team-client/team-admin-requests";
 import {
   type AgentMemoriesRequest,
   agentTaskControl,
@@ -92,7 +92,7 @@ import {
   startAgentTask,
   type TeamApiRequest,
   TeamRequestError,
-} from "@openbot/team-client/team-api-requests";
+} from "@omnibot/team-client/team-api-requests";
 import type { QueryClient } from "@tanstack/react-query";
 import { Effect } from "effect";
 import * as Crypto from "expo-crypto";

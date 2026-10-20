@@ -1,10 +1,10 @@
-import { BILLING_PLANS, type BillingPlanId } from "@openbot/contracts/billing";
+import { BILLING_PLANS, type BillingPlanId } from "@omnibot/contracts/billing";
 import {
   HOSTED_SERVER_SIZES,
   type HostedServerState,
   type HostedServerSummary,
-} from "@openbot/contracts/hosted-servers";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/hosted-servers";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Badge,
   Button,
@@ -22,7 +22,7 @@ import {
   Spinner,
   Text,
   Trash2,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 import type { SettingsHostedServersStore } from "./stores/hosted-servers-store";

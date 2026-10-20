@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi, ServerSummary } from "@omnibot/contracts/ipc";
 
 /**
  * What the servers domain reaches in main: the server list and selection, the account changes, the local host, the
@@ -64,9 +64,9 @@ export interface ServersPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function serversPort(): ServersPort {
-  return window.openbot;
+  return window.omnibot;
 }
 
 /**
@@ -79,21 +79,21 @@ export type ServerAdminPort = Pick<
 >;
 
 export function serverAdminPort(server: Pick<ServerSummary, "id" | "kind">): ServerAdminPort {
-  if (server.kind === "local") return window.openbot.host;
+  if (server.kind === "local") return window.omnibot.host;
   const serverId = server.id;
   return {
-    getPresence: () => window.openbot.servers.getPresenceFor(serverId),
-    listMembers: () => window.openbot.servers.listMembers(serverId),
-    listInvites: () => window.openbot.servers.listInvites(serverId),
-    createInvite: (input) => window.openbot.servers.createInvite(input, serverId),
-    updateMember: (input) => window.openbot.servers.updateMember(input, serverId),
-    removeMember: (memberId) => window.openbot.servers.removeMember(memberId, serverId),
-    revokeInvite: (inviteId) => window.openbot.servers.revokeInvite(inviteId, serverId),
+    getPresence: () => window.omnibot.servers.getPresenceFor(serverId),
+    listMembers: () => window.omnibot.servers.listMembers(serverId),
+    listInvites: () => window.omnibot.servers.listInvites(serverId),
+    createInvite: (input) => window.omnibot.servers.createInvite(input, serverId),
+    updateMember: (input) => window.omnibot.servers.updateMember(input, serverId),
+    removeMember: (memberId) => window.omnibot.servers.removeMember(memberId, serverId),
+    revokeInvite: (inviteId) => window.omnibot.servers.revokeInvite(inviteId, serverId),
   };
 }
 
 /** The server main marks active. A test teardown can remove the bridge while a join is pending. */
 export async function activeServerId(): Promise<string> {
-  if (!window.openbot) return "local";
-  return (await window.openbot.servers.list()).find((item) => item.active)?.id ?? "local";
+  if (!window.omnibot) return "local";
+  return (await window.omnibot.servers.list()).find((item) => item.active)?.id ?? "local";
 }

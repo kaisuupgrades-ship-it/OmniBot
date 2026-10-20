@@ -1,4 +1,4 @@
-import type { CustomProvidersDesktopApi, OmniBotDesktopApi, ProviderAdminDesktopApi } from "@openbot/contracts/ipc";
+import type { CustomProvidersDesktopApi, OmniBotDesktopApi, ProviderAdminDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the custom providers context reaches in main: the endpoints the user named.
@@ -14,9 +14,9 @@ export interface CustomProvidersPort {
 export type CustomProvidersEndpointApi = Omit<CustomProvidersDesktopApi, "update"> &
   Partial<Pick<CustomProvidersDesktopApi, "update">>;
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function customProvidersPort(): CustomProvidersPort {
-  return window.openbot;
+  return window.omnibot;
 }
 
 /** The endpoints of a joined server's host, for an account that administers it. */
@@ -38,5 +38,5 @@ export interface ProviderDetectionPort {
 
 /** Read on each call, like `customProvidersPort`. */
 export function providerDetectionPort(): ProviderDetectionPort {
-  return window.openbot;
+  return window.omnibot;
 }

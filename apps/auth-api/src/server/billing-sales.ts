@@ -6,8 +6,8 @@ import {
   type BillingInterval,
   type BillingPlanId,
   isBillingAmount,
-} from "@openbot/contracts/billing";
-import { isOneOf } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/billing";
+import { isOneOf } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { firstTouchProperties, NO_ACCOUNT_ANALYTICS } from "./account-analytics";
 import { AccountAttribution } from "./account-attribution";
@@ -350,8 +350,8 @@ export class BillingSales {
         .first<CheckoutRow>(),
     );
     const metadata = recordValue(object.metadata);
-    const userId = row?.user_id ?? safeId(metadata?.openbot_user_id);
-    const serverId = row?.server_id ?? safeId(metadata?.openbot_server_id);
+    const userId = row?.user_id ?? safeId(metadata?.omnibot_user_id);
+    const serverId = row?.server_id ?? safeId(metadata?.omnibot_server_id);
     if (row) {
       yield* d1(this.#database, () =>
         this.#database
@@ -408,8 +408,8 @@ export class BillingSales {
         .first<CheckoutRow>(),
     );
     const metadata = recordValue(object.metadata);
-    const userId = row?.user_id ?? safeId(metadata?.openbot_user_id);
-    const serverId = row?.server_id ?? safeId(metadata?.openbot_server_id);
+    const userId = row?.user_id ?? safeId(metadata?.omnibot_user_id);
+    const serverId = row?.server_id ?? safeId(metadata?.omnibot_server_id);
     if (row) {
       yield* d1(this.#database, () =>
         this.#database
@@ -476,8 +476,8 @@ export class BillingSales {
         )
       : null;
     const metadata = recordValue(object.metadata);
-    const userId = synced?.userId ?? stored?.user_id ?? safeId(metadata?.openbot_user_id);
-    const serverId = stored?.server_id ?? safeId(metadata?.openbot_server_id);
+    const userId = synced?.userId ?? stored?.user_id ?? safeId(metadata?.omnibot_user_id);
+    const serverId = stored?.server_id ?? safeId(metadata?.omnibot_server_id);
     const plan = synced?.plan ?? stored?.plan;
     const interval = synced?.interval ?? stored?.interval;
     const currency = billingCurrency(stringValue(object.currency)) ?? synced?.currency ?? stored?.currency;
@@ -902,9 +902,9 @@ function validReturnUrl(value: string): boolean {
   if (!value || value.length > 1024 || hasControlCharacter(value)) return false;
   if (!value.startsWith("/")) return false;
   // `//host/app` and `/\host/app` start with a slash but resolve to another origin.
-  const parsed = new URL(value, "https://openbot.invalid");
+  const parsed = new URL(value, "https://omnibot.invalid");
   return (
-    parsed.origin === "https://openbot.invalid" &&
+    parsed.origin === "https://omnibot.invalid" &&
     (parsed.pathname === "/app" || parsed.pathname === "/billing/return") &&
     !parsed.username &&
     !parsed.password

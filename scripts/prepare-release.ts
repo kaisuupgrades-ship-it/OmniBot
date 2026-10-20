@@ -1,8 +1,8 @@
 import { execFileSync } from "node:child_process";
 import { readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
 import {
   assembleSection,
   FRAGMENT_DIR,

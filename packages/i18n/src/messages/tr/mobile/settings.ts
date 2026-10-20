@@ -110,7 +110,7 @@ export const messages = {
     "Bir yanıtın başını, bir soruyu veya onaylanacak işlemi gösterir. Google ve OmniBot hesap hizmeti bunu okuyamaz.",
   "mobile.settings.notifications.sound": "Ses",
   "mobile.settings.notifications.playSound": "Ses çal",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "Sıcak",
   "mobile.settings.notifications.sound.mech": "Mekanik",
   "mobile.settings.notifications.sound.bubble": "Köpüklü",

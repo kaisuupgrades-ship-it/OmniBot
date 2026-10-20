@@ -6,10 +6,10 @@ import type { RemoteFailure } from "./remote-control-plane";
 // it revokes the user token that the exchange gives. The sealed grant goes back to the desktop in the
 // URL fragment of `/discord/connect`.
 
-import { DISCORD_BOT_PERMISSIONS } from "@openbot/contracts/discord-app";
-import { sealDiscordGuildGrant } from "@openbot/contracts/discord-guild-grant";
-import { isRawP256PublicKey } from "@openbot/contracts/host-grant";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { DISCORD_BOT_PERMISSIONS } from "@omnibot/contracts/discord-app";
+import { sealDiscordGuildGrant } from "@omnibot/contracts/discord-guild-grant";
+import { isRawP256PublicKey } from "@omnibot/contracts/host-grant";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { hmacSha256 } from "./crypto";
 import { authEventStatement } from "./remote-control-plane";

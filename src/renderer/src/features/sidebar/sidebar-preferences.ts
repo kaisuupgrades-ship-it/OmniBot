@@ -3,7 +3,7 @@ import {
   reownSidebarPinnedItems,
   type SidebarPinnedItem,
   sidebarPinnedItemKey,
-} from "@openbot/ui/features/sidebar/sidebar-pins";
+} from "@omnibot/ui/features/sidebar/sidebar-pins";
 import { createMemo, createSignal } from "solid-js";
 import { readSidebarPins, type SidebarPinsByServer, writeSidebarPins } from "./sidebar-pins-storage";
 import { readSidebarCollapsed, type SidebarCollapsedByServer, writeSidebarCollapsed } from "./sidebar-sections-storage";

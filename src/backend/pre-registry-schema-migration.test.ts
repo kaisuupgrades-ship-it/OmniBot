@@ -2,7 +2,7 @@
 import { readFileSync } from "node:fs";
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: a database that v0.1.12 to v0.2.1 made loses a row on its first upgrade to the migration
 // registry; the upgrade leaves a schema that a new install does not have; a foreign key or a page is broken.
@@ -57,11 +57,11 @@ function seedSharedTables(db: DatabaseSync): void {
     INSERT INTO orchestration_events
       (sequence, event_id, command_id, aggregate_type, aggregate_id, event_type, occurred_at, payload_json)
     VALUES
-      (1, 'event-1', 'command-1', 'thread', 'openbot-thread-chief', 'thread.snapshot', '2026-01-02T10:00:00.000Z',
+      (1, 'event-1', 'command-1', 'thread', 'omnibot-thread-chief', 'thread.snapshot', '2026-01-02T10:00:00.000Z',
         '{"snapshot":{"messages":[{"id":"message-1"}]}}'),
-      (2, 'event-2', 'command-2', 'thread', 'openbot-thread-chief', 'thread.snapshot', '2026-01-02T10:01:00.000Z',
+      (2, 'event-2', 'command-2', 'thread', 'omnibot-thread-chief', 'thread.snapshot', '2026-01-02T10:01:00.000Z',
         '${JSON.stringify({ snapshot })}'),
-      (3, 'event-3', 'command-3', 'thread', 'openbot-thread-chief', 'thread.renamed', '2026-01-02T10:02:00.000Z',
+      (3, 'event-3', 'command-3', 'thread', 'omnibot-thread-chief', 'thread.renamed', '2026-01-02T10:02:00.000Z',
         '{"title":"Plans"}'),
       (4, 'event-4', 'command-4', 'mailbox', 'mailbox', 'mailbox.snapshot', '2026-01-02T10:03:00.000Z',
         '{"messages":[]}'),
@@ -77,44 +77,44 @@ function seedSharedTables(db: DatabaseSync): void {
     INSERT INTO projection_threads
       (thread_id, agent_id, title, active_turn_id, created_at, updated_at, last_event_sequence)
     VALUES
-      ('openbot-thread-chief', 'chief', 'Plans', NULL, '2026-01-02T09:00:00.000Z', '2026-01-02T10:02:00.000Z', 3),
-      ('openbot-thread-scout', 'scout', 'Scout', NULL, '2026-01-02T09:00:00.000Z', '2026-01-02T09:30:00.000Z', 2);
+      ('omnibot-thread-chief', 'chief', 'Plans', NULL, '2026-01-02T09:00:00.000Z', '2026-01-02T10:02:00.000Z', 3),
+      ('omnibot-thread-scout', 'scout', 'Scout', NULL, '2026-01-02T09:00:00.000Z', '2026-01-02T09:30:00.000Z', 2);
     INSERT INTO projection_agents (agent_id, thread_id, model, updated_at, sort_order, agent_json, last_event_sequence)
     VALUES
-      ('chief', 'openbot-thread-chief', 'gpt-5', '2026-01-02T09:00:00.000Z', 0,
+      ('chief', 'omnibot-thread-chief', 'gpt-5', '2026-01-02T09:00:00.000Z', 0,
         '{"id":"chief","name":"Chief","workspacePath":"/Users/user/OmniBot/Bots/chief"}', 1),
-      ('scout', 'openbot-thread-scout', 'claude-opus', NULL, 1, '{"id":"scout","name":"Scout"}', 2);
+      ('scout', 'omnibot-thread-scout', 'claude-opus', NULL, 1, '{"id":"scout","name":"Scout"}', 2);
     INSERT INTO projection_provider_sessions (id, thread_id, provider, external_session_id, model, effort, state,
       created_at, updated_at, resume_cursor, last_event_sequence)
     VALUES
-      ('session-1', 'openbot-thread-chief', 'codex', 'codex-thread-1', 'gpt-5', 'high', 'active',
+      ('session-1', 'omnibot-thread-chief', 'codex', 'codex-thread-1', 'gpt-5', 'high', 'active',
         '2026-01-02T09:00:00.000Z', '2026-01-02T10:00:00.000Z', 'cursor-1', 2),
-      ('session-2', 'openbot-thread-scout', 'claude', 'claude-session-2', 'claude-opus', 'medium', 'inactive',
+      ('session-2', 'omnibot-thread-scout', 'claude', 'claude-session-2', 'claude-opus', 'medium', 'inactive',
         '2026-01-02T09:00:00.000Z', '2026-01-02T09:30:00.000Z', NULL, 2);
     INSERT INTO projection_turns
       (turn_id, thread_id, provider_session_id, status, started_at, completed_at, last_event_sequence)
     VALUES
-      ('turn-1', 'openbot-thread-chief', 'session-1', 'completed', '2026-01-02T10:00:00.000Z',
+      ('turn-1', 'omnibot-thread-chief', 'session-1', 'completed', '2026-01-02T10:00:00.000Z',
         '2026-01-02T10:01:00.000Z', 2),
-      ('turn-2', 'openbot-thread-scout', 'session-2', 'completed', '2026-01-02T09:10:00.000Z', NULL, 2);
+      ('turn-2', 'omnibot-thread-scout', 'session-2', 'completed', '2026-01-02T09:10:00.000Z', NULL, 2);
     INSERT INTO projection_thread_messages (thread_id, message_id, turn_id, author, status, item_type, created_at,
       ordinal, message_json, last_event_sequence)
     VALUES
-      ('openbot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-01-02T10:00:00.000Z', 0,
+      ('omnibot-thread-chief', 'message-1', NULL, 'user', 'completed', NULL, '2026-01-02T10:00:00.000Z', 0,
         '{"id":"message-1","text":"Plan the week."}', 1),
-      ('openbot-thread-chief', 'message-2', 'turn-1', 'agent', 'completed', 'agentMessage',
+      ('omnibot-thread-chief', 'message-2', 'turn-1', 'agent', 'completed', 'agentMessage',
         '2026-01-02T10:00:30.000Z', 1, '{"id":"message-2","text":"Here is the plan."}', 2),
-      ('openbot-thread-scout', 'scout-1', 'turn-2', 'agent', 'completed', 'agentMessage', '2026-01-02T09:20:00.000Z',
+      ('omnibot-thread-scout', 'scout-1', 'turn-2', 'agent', 'completed', 'agentMessage', '2026-01-02T09:20:00.000Z',
         0, '{"id":"scout-1","text":"Found it."}', 2);
     INSERT INTO projection_thread_reads (thread_id, member_id, through_message_id, updated_at)
-    VALUES ('openbot-thread-chief', 'user', 'message-1', '2026-01-02T10:00:10.000Z');
+    VALUES ('omnibot-thread-chief', 'user', 'message-1', '2026-01-02T10:00:10.000Z');
     INSERT INTO projection_thread_read_baselines (thread_id, through_message_id, initialized_at)
-    VALUES ('openbot-thread-chief', 'message-1', '2026-01-02T10:00:05.000Z');
+    VALUES ('omnibot-thread-chief', 'message-1', '2026-01-02T10:00:05.000Z');
     INSERT INTO projection_thread_activities
       (activity_id, thread_id, turn_id, activity_type, payload_json, created_at, last_event_sequence)
     VALUES
-      ('activity-1', 'openbot-thread-chief', 'turn-1', 'thread.snapshot', '{"step":1}', '2026-01-02T10:00:00.000Z', 1),
-      ('activity-3', 'openbot-thread-chief', NULL, 'thread.renamed', '{"title":"Plans"}', '2026-01-02T10:02:00.000Z', 3);
+      ('activity-1', 'omnibot-thread-chief', 'turn-1', 'thread.snapshot', '{"step":1}', '2026-01-02T10:00:00.000Z', 1),
+      ('activity-3', 'omnibot-thread-chief', NULL, 'thread.renamed', '{"title":"Plans"}', '2026-01-02T10:02:00.000Z', 3);
     INSERT INTO projection_mailbox_messages (message_id, sender_kind, sender_agent_id, text, reply_to_message_id,
       created_at, message_json, last_event_sequence)
     VALUES ('mailbox-1', 'agent', 'chief', 'Done.', NULL, '2026-01-02T10:04:00.000Z', '{"id":"mailbox-1"}', 5);
@@ -128,11 +128,11 @@ function seedSharedTables(db: DatabaseSync): void {
     VALUES ('chief', 'mailbox-1', '👍', '2026-01-02T10:05:00.000Z', 5);
     INSERT INTO projection_attachments
       (attachment_id, owner_kind, owner_id, name, path, metadata_json, created_at, last_event_sequence)
-    VALUES ('openbot-thread-chief:message-1:file-1', 'thread-message', 'openbot-thread-chief:message-1', 'notes.md',
+    VALUES ('omnibot-thread-chief:message-1:file-1', 'thread-message', 'omnibot-thread-chief:message-1', 'notes.md',
       '/Users/user/OmniBot/Attachments/notes.md', '{"id":"file-1"}', '2026-01-02T10:00:00.000Z', 1);
     INSERT INTO projection_thread_summaries
       (summary_id, thread_id, through_message_id, summary_text, estimated_tokens, created_at, last_event_sequence)
-    VALUES ('summary-1', 'openbot-thread-chief', 'message-1', 'The user asked for a plan.', 12,
+    VALUES ('summary-1', 'omnibot-thread-chief', 'message-1', 'The user asked for a plan.', 12,
       '2026-01-02T10:01:00.000Z', 2);
     INSERT INTO projection_direct_threads
       (thread_id, member_a_id, member_b_id, created_at, updated_at, last_message_id, last_event_sequence)
@@ -305,11 +305,11 @@ describe("upgrade from a released schema before the migration registry", () => {
     // A thread with no baseline gets its newest message; a direct thread member with no read gets one.
     expect(db.prepare("SELECT * FROM projection_thread_read_baselines ORDER BY thread_id").all()).toEqual([
       {
-        thread_id: "openbot-thread-chief",
+        thread_id: "omnibot-thread-chief",
         through_message_id: "message-1",
         initialized_at: "2026-01-02T10:00:05.000Z",
       },
-      { thread_id: "openbot-thread-scout", through_message_id: "scout-1", initialized_at: appliedAt },
+      { thread_id: "omnibot-thread-scout", through_message_id: "scout-1", initialized_at: appliedAt },
     ]);
     expect(db.prepare("SELECT * FROM projection_direct_reads ORDER BY member_id").all()).toEqual([
       { thread_id: "direct-1", member_id: "chief", last_read_sequence: 4, updated_at: "2026-01-02T09:05:00.000Z" },

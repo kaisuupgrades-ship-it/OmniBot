@@ -1,6 +1,6 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { ServerMark } from "@openbot/ui/features/servers/ServerRail";
-import type { SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import { ServerMark } from "@omnibot/ui/features/servers/ServerRail";
+import type { SettingsPagePlacement } from "@omnibot/ui/features/settings/SettingsDialogShell";
 import type { JSX } from "@solidjs/web";
 import { onSettled } from "solid-js";
 

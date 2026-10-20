@@ -3,7 +3,7 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { AvatarHue, MarketplaceAgentRoutine, MarketplaceAgentSkill } from "@openbot/contracts/ipc";
+import type { AvatarHue, MarketplaceAgentRoutine, MarketplaceAgentSkill } from "@omnibot/contracts/ipc";
 
 interface SeedAgent {
   slug: string;
@@ -22,9 +22,9 @@ const authApiRoot = join(projectRoot, "apps", "auth-api");
 const wrangler = join(authApiRoot, "node_modules", ".bin", "wrangler");
 const seededAt = Date.parse("2026-08-25T12:00:00.000Z");
 const creator = {
-  id: "seed-agents-openbot",
-  subject: "seed-agents-openbot",
-  email: "agents@openbot.local",
+  id: "seed-agents-omnibot",
+  subject: "seed-agents-omnibot",
+  email: "agents@omnibot.local",
   name: "OmniBot",
 };
 
@@ -172,13 +172,13 @@ const agents: SeedAgent[] = [
 ];
 
 async function main(): Promise<void> {
-  await runWrangler(["d1", "migrations", "apply", "openbot-auth", "--local"]);
+  await runWrangler(["d1", "migrations", "apply", "omnibot-auth", "--local"]);
   await import("./seed-marketplace-skills");
-  const staging = await mkdtemp(join(tmpdir(), "openbot-agent-seed-"));
+  const staging = await mkdtemp(join(tmpdir(), "omnibot-agent-seed-"));
   try {
     const sqlPath = join(staging, "seed.sql");
     await writeFile(sqlPath, seedSql());
-    await runWrangler(["d1", "execute", "openbot-auth", "--local", "--file", sqlPath, "--yes"]);
+    await runWrangler(["d1", "execute", "omnibot-auth", "--local", "--file", sqlPath, "--yes"]);
     process.stdout.write(`Seeded ${agents.length} approved marketplace agents with exact skills and routines.\n`);
   } finally {
     await rm(staging, { recursive: true, force: true });

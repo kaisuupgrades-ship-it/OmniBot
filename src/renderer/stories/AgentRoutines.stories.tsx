@@ -1,4 +1,4 @@
-import type { Routine, RoutineResultDelivery, RoutineResultDestination, RoutineRun } from "@openbot/contracts/ipc";
+import type { Routine, RoutineResultDelivery, RoutineResultDestination, RoutineRun } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -7,7 +7,7 @@ import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel"
 import { desktopEventRoutinesApi } from "../src/features/conversation/routine-webhooks-api";
 import { agentRoutinesPort, eventRoutinesPort } from "../src/features/conversation/routines-port";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_MODELS } from "./fixtures";
-import { createMockOmniBot, type MockOmniBotOptions } from "./mock-openbot";
+import { createMockOmniBot, type MockOmniBotOptions } from "./mock-omnibot";
 
 const morningBrief: Routine = {
   id: "routine-morning-brief",
@@ -61,16 +61,16 @@ function RoutinesStory(props: {
   localHost?: boolean;
   results?: Pick<MockOmniBotOptions, "routineResultOptions" | "routineResultDestinations" | "routineResultDeliveries">;
 }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot({ routines: { chief: props.routines ?? storyRoutines }, ...props.results });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   if (props.runs) mock.api.agent.listRoutineRuns = async () => structuredClone(props.runs ?? []);
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
-    <main style={{ width: "380px", height: "720px", overflow: "auto", background: "var(--openbot-bg-canvas)" }}>
+    <main style={{ width: "380px", height: "720px", overflow: "auto", background: "var(--omnibot-bg-canvas)" }}>
       <AgentRoutinesSettings
         port={agentRoutinesPort("chief", false, props.localHost === true)}
         onCountChange={fn()}
@@ -83,9 +83,9 @@ function RoutinesStory(props: {
 
 /** A routine that a webhook starts, on the preview host. */
 function WebhookRoutineStory() {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot({ routines: { chief: [] } });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   const owner = { kind: "agent", id: "chief" } as const;
   const api = desktopEventRoutinesApi("story-server");
   const seeded = api.saveRoutine({
@@ -126,32 +126,32 @@ function WebhookRoutineStory() {
   );
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
-    <main style={{ width: "380px", height: "720px", overflow: "auto", background: "var(--openbot-bg-canvas)" }}>
+    <main style={{ width: "380px", height: "720px", overflow: "auto", background: "var(--omnibot-bg-canvas)" }}>
       <AgentRoutinesSettings port={port} onCountChange={fn()} onBack={fn()} onClose={fn()} />
     </main>
   );
 }
 
 function FullSettingsPanelStory() {
-  const previousApi = window.openbot;
-  const previousWidth = window.localStorage.getItem("openbot:settings-panel-width");
+  const previousApi = window.omnibot;
+  const previousWidth = window.localStorage.getItem("omnibot:settings-panel-width");
   const mock = createMockOmniBot({ routines: { chief: storyRoutines } });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   mock.api.agent.listRoutineRuns = async (input) =>
     input.routineId === morningBrief.id ? structuredClone(fullPanelRuns) : [];
-  window.localStorage.setItem("openbot:settings-panel-width", "380");
+  window.localStorage.setItem("omnibot:settings-panel-width", "380");
 
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
     if (previousWidth === null) {
-      window.localStorage.removeItem("openbot:settings-panel-width");
+      window.localStorage.removeItem("omnibot:settings-panel-width");
       return;
     }
-    window.localStorage.setItem("openbot:settings-panel-width", previousWidth);
+    window.localStorage.setItem("omnibot:settings-panel-width", previousWidth);
   });
 
   return (

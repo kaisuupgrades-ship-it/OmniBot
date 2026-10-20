@@ -1,5 +1,5 @@
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect } from "effect";
 import {
   ScreenCaptureFailed,

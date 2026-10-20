@@ -2,7 +2,7 @@
 
 ## iPhone Live Activity updates
 
-The phone and a host build the same Live Activity view with `@openbot/team-client`:
+The phone and a host build the same Live Activity view with `@omnibot/team-client`:
 `dynamic-island-coordinator.ts` gives the state, and `live-activity-props.ts` turns it into the props
 that the widget shows. While the app runs, `use-live-activity.ts` publishes them itself.
 
@@ -31,7 +31,7 @@ to, so one host cannot sign an action for another.
 A host sends an iOS notification when an agent finishes a turn, stops with an error, or waits for
 input, an approval, or a step in the browser (`browser-takeover-requested`, also for a password or a
 code). For all but the browser step, it decides as the desktop does: `notificationForAgentEvent` in
-`@openbot/team-client` applies the level of the server (`all` or `needs-me`), the switch of the agent,
+`@omnibot/team-client` applies the level of the server (`all` or `needs-me`), the switch of the agent,
 and the quiet routine runs. The title is the agent name. When the phone shows previews, the text is the
 preview of a desktop notification: the start of the answer of that turn, the question, or the action
 to approve, with secrets redacted. Otherwise it is the fixed desktop text, such as "Finished working.".
@@ -45,7 +45,7 @@ sends no notification, and uses the registration only to make the Live Activity 
 tells each host again after each connection and when a choice changes, and removes the registration
 when nothing is left for that host or the user signs out. A level of
 "Nothing" and a mute with no end remove it too. `PushNotificationService` in `src/main` keeps the
-registrations in `openbot-push-notifications-v1.json` in the user data folder, readable only by the
+registrations in `omnibot-push-notifications-v1.json` in the user data folder, readable only by the
 user, so a phone that does not connect after the host restarts still gets notifications. It sends
 only while the phone is away or its connection is closed. No event goes while the member uses a
 desktop app, which shows the event and asks for input, an approval, or a browser step itself: that
@@ -108,7 +108,7 @@ and the web view that holds the connection does not connect again after Android 
 
 > **Deprecated.** The application archives every channel at start (`ChannelService.retire`), the host
 > does not advertise `channel-chats-v1`, and agents get no channel tools. The data stays in
-> `openbot.db`. The next release removes the channel code and data. Agents in one sidebar section work
+> `omnibot.db`. The next release removes the channel code and data. Agents in one sidebar section work
 > together through `section_teammates` in their instructions.
 
 Channels are separate from sidebar sections. A channel has one host, a purpose, participating agents,
@@ -188,7 +188,7 @@ the answer. Every answer comes from OmniBot.
 - **Install.** The desktop asks `POST /v2/slack/authorize` for Slack's install URL, with a one-use host
   key. The Worker exchanges the code at `/v2/slack/callback`, because the app's client secret lives
   there. It links the workspace to the host in D1 (`slack_workspace_routes`: team, host, account; no
-  token) and seals the bot token to the host key (`@openbot/contracts/slack-workspace-grant`). The
+  token) and seals the bot token to the host key (`@omnibot/contracts/slack-workspace-grant`). The
   page `/slack/connect` opens `omnibot://slack-workspace`. Only the account that linked a workspace
   can move it to another of its hosts; another account gets `slack_workspace_taken`.
 - **Events.** Slack posts every workspace's events and button presses to one URL,
@@ -210,7 +210,7 @@ the answer. Every answer comes from OmniBot.
 
 Telegram uses the same socket with one difference: one OmniBot bot serves every user, so its token
 must not reach any host. Only Signal has it (`TELEGRAM_BOT_TOKENS`), and the contract is
-`@openbot/contracts/signal-protocol/telegram-route`.
+`@omnibot/contracts/signal-protocol/telegram-route`.
 
 - **Link.** A connection is one chat. The desktop asks `POST /v2/remote/hosts/<id>/telegram-link`
   (machine token) for a one-use code, and opens `t.me/<bot>?startgroup=<code>` or `?start=<code>`.
@@ -225,7 +225,7 @@ must not reach any host. Only Signal has it (`TELEGRAM_BOT_TOKENS`), and the con
   secret header that Signal derives for each bot. Signal reads only the chat ID, a link code and a
   callback query ID, and sends `telegram-delivery` to the socket that holds the chat. It always
   answers 200: Telegram would hold back the bot's other chats behind one offline host. The Telegram
-  route ticket (`telegramRoute` in the hello, audience `openbot-telegram-route`, the Slack route key)
+  route ticket (`telegramRoute` in the hello, audience `omnibot-telegram-route`, the Slack route key)
   and `telegram-route-revoked` work as the Slack ones do.
 - **Calls.** The host sends `telegram-call` only to a Signal whose `ready` names the `telegram`
   capability, because Signal closes a socket on a frame it does not know. Signal accepts only the
@@ -281,7 +281,7 @@ transport for its events. `messaging-types.ts` is the seam; the core never reads
   `MessagingService.#receive` names each user mention (`InboundMessage.mentionedUserIds`) with the
   adapter's name cache; the adapters do the same for context messages.
 - **Tools.** `messaging_remember`, `messaging_forget_memory` and `messaging_history` are deferred
-  `openbot` tools. `OmniBotToolRouter` finds the link from the calling turn's execution thread and
+  `omnibot` tools. `OmniBotToolRouter` finds the link from the calling turn's execution thread and
   refuses a call from any other thread; no argument names a connection or a channel. The history
   tool calls the adapter's `recent` through `MessagingThreads.setHistorySource`. A fact is not saved
   from a direct message. The two outbound tools, `messaging_list_places` and `messaging_post`, are
@@ -322,15 +322,15 @@ the token and does the platform work for the hosts:
 - **Install.** As for Slack: `POST /v2/discord/authorize`, `/v2/discord/callback` (scope `bot`, the
   Worker exchanges the code, revokes the user token it gets, and links the guild in D1
   `discord_guild_routes`), the page `/discord/connect` and `omnibot://discord-guild`. The sealed grant
-  (`@openbot/contracts/discord-guild-grant`, on `host-grant.ts`) names the guild and holds no token.
+  (`@omnibot/contracts/discord-guild-grant`, on `host-grant.ts`) names the guild and holds no token.
   Another account gets `discord_guild_taken`.
 - **Events.** Signal keeps one Gateway connection (`@discordjs/ws`) with the guilds, guild messages
   and direct messages intents, and no privileged intent. It passes on only a guild message that
   mentions the bot, and a press of an OmniBot button, which it acknowledges to Discord at once. It
-  normalizes each into `DiscordDelivery` (`@openbot/contracts/signal-protocol/discord-api`), takes the
+  normalizes each into `DiscordDelivery` (`@omnibot/contracts/signal-protocol/discord-api`), takes the
   bot's own mention out, and sends a `discord-delivery` frame to the `ingress` socket that holds a
   Discord route ticket for the guild. The ticket mirrors the Slack one (audience
-  `openbot-discord-route`, `/v2/remote/hosts/:id/discord-route`, `discord-route-revoked`,
+  `omnibot-discord-route`, `/v2/remote/hosts/:id/discord-route`, `discord-route-revoked`,
   `/v2/remote/discord-route/validate`). The socket asks for a route only for the platforms whose
   connections hold it.
 - **Removal.** When the bot leaves a guild, Signal drops its route and asks the account service to

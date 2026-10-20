@@ -11,8 +11,8 @@ import {
   type VoiceModelStatus,
   WHISPER_LANGUAGES,
   type WhisperLanguage,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Badge,
   Button,
@@ -35,8 +35,8 @@ import {
   SettingsSection,
   Square,
   SwitchField,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { createMemo, createStore, For, Show } from "solid-js";
 import type { SettingsVoiceStore } from "./settings-voice-store";
 

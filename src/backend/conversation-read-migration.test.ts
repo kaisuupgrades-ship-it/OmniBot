@@ -4,12 +4,12 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import type { ConversationSnapshot } from "@openbot/contracts/ipc";
+import type { ConversationSnapshot } from "@omnibot/contracts/ipc";
 import { afterEach, describe, expect, it } from "vitest";
 import { ConversationReadStore } from "./conversation-read-store";
 import { runCauseEffect } from "./effect-boundary";
-import { OmniBotDatabase } from "./openbot-database";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { OmniBotDatabase } from "./omnibot-database";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 import { directThreadId, TeamChatStore } from "./team-chat-store";
 
 const roots: string[] = [];
@@ -20,9 +20,9 @@ afterEach(async () => {
 
 describe("conversation read-state migration", () => {
   it("baselines agent history that existed before the read-state migration", async () => {
-    const root = await mkdtemp(join(tmpdir(), "openbot-conversation-read-migration-"));
+    const root = await mkdtemp(join(tmpdir(), "omnibot-conversation-read-migration-"));
     roots.push(root);
-    const legacy = legacyDatabase(join(root, "openbot.db"));
+    const legacy = legacyDatabase(join(root, "omnibot.db"));
     legacy
       .prepare(
         `INSERT INTO projection_threads (

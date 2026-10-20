@@ -5,12 +5,12 @@
 // key reaches a new process and the same thread there, although `auth.json` still holds the old
 // key; that with no stored key the config names no key, so the user's own sign-in stays in use; and
 // that a custom endpoint saved as `opencode-go` keeps its URL when a key is stored.
-// `bun run test:opencode-expired-key`. Writes .openbot-build/opencode-expired-key-e2e/report.json.
+// `bun run test:opencode-expired-key`. Writes .omnibot-build/opencode-expired-key-e2e/report.json.
 import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@omnibot/i18n/source";
 import type { AgentClient } from "../src/backend/agent-client";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -18,7 +18,7 @@ import type { CustomProviderConfig } from "../src/backend/opencode-config";
 import { type AppServerNotification, getString } from "../src/backend/protocol";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-expired-key-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/opencode-expired-key-e2e");
 
 // `FAKE_AUTH_KEY` stands for the key in OpenCode's own `auth.json`. The key named `expired` gets
 // the text OpenCode Console sends for an expired key, behind the ACP SDK's `Internal error:`.
@@ -98,7 +98,7 @@ interface Report {
   endpoint?: { baseURL: string | null; zenKey: string | null };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-expired-key-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-opencode-expired-key-e2e-"));
 const log = join(root, "opencode.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentApprovalPermissions,
   AgentPromptQuestion,
   AgentPromptResolution,
   RespondToBrowserTakeoverInput,
-} from "@openbot/contracts/ipc";
-import { COMPUTER_USE_MCP_SERVER_NAME } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import type { UiBlockResponse } from "@openbot/contracts/ui-blocks";
+} from "@omnibot/contracts/ipc";
+import { COMPUTER_USE_MCP_SERVER_NAME } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import type { UiBlockResponse } from "@omnibot/contracts/ui-blocks";
 import { type DynamicToolResult, getArray, getRecord, getString, isRecord } from "../protocol";
 
 const MCP_ELICITATION_DECISION_ID = "mcp-elicitation-decision";

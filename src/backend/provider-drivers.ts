@@ -2,8 +2,8 @@ import { mkdirSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { basename, dirname, join } from "node:path";
 import type { ClientSideConnection, InitializeResponse } from "@agentclientprotocol/sdk";
-import type { AgentAuthState, AgentProviderId } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { AgentAuthState, AgentProviderId } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { AcpAgentClient, type AcpHistoryPersistence } from "./acp-client";
 import { readMuseAccount } from "./agent/muse-login";
@@ -326,7 +326,7 @@ export const NO_PROVIDER_CREDENTIALS: ProviderClientContext = {
 
 /**
  * What a provider *does*. What it is called, how it is described and where its sign-in help points
- * live in the provider registry in `@openbot/contracts/agent-providers`; a driver holds only the
+ * live in the provider registry in `@omnibot/contracts/agent-providers`; a driver holds only the
  * behaviour, so a new provider is one registry row plus one driver.
  */
 export interface BuiltInProviderDriver {
@@ -493,7 +493,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       kind: "cli-command",
       command: {
         argv: ["--no-auto-update", "login"],
-        env: () => ({ GROK_OAUTH2_REFERRER: "openbot" }),
+        env: () => ({ GROK_OAUTH2_REFERRER: "omnibot" }),
         timeoutMs: CLI_LOGIN_TIMEOUT_MS,
       },
     },
@@ -502,7 +502,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       flow: "device",
       command: {
         argv: ["--no-auto-update", "login", "--device-auth"],
-        env: () => ({ GROK_OAUTH2_REFERRER: "openbot" }),
+        env: () => ({ GROK_OAUTH2_REFERRER: "omnibot" }),
         timeoutMs: CLI_LOGIN_TIMEOUT_MS,
       },
     },
@@ -510,7 +510,7 @@ export const BUILT_IN_PROVIDER_DRIVERS: readonly BuiltInProviderDriver[] = [
       homeVariable: "GROK_HOME",
       signIn: {
         argv: ["--no-auto-update", "login"],
-        env: () => ({ GROK_OAUTH2_REFERRER: "openbot" }),
+        env: () => ({ GROK_OAUTH2_REFERRER: "omnibot" }),
         timeoutMs: CLI_LOGIN_TIMEOUT_MS,
       },
     },
@@ -814,7 +814,7 @@ let customAgentDiscoveryRoot: string | undefined;
  * the folder `antigravity`, an id that no custom agent can have.
  */
 function discoveryFolder(agentId: string): string {
-  customAgentDiscoveryRoot ??= mkdtempSync(join(tmpdir(), "openbot-custom-agents-"));
+  customAgentDiscoveryRoot ??= mkdtempSync(join(tmpdir(), "omnibot-custom-agents-"));
   const folder = join(customAgentDiscoveryRoot, agentId);
   mkdirSync(folder, { recursive: true, mode: 0o700 });
   return folder;

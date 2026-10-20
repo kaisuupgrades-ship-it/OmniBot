@@ -13,9 +13,9 @@ import {
   type GitHubConnectorState,
   type GitHubConnectorStatus,
   type McpServerConfig,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, redactText, registerSecretValue, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, redactText, registerSecretValue, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Exit, type Layer, Result, Scope, Semaphore } from "effect";
 import { z } from "zod";
 import { writeFileAtomically } from "../backend/atomic-json-file";

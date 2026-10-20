@@ -19,7 +19,7 @@
 // the account service links to that host, and it expires: the host asks for a new one each time its
 // `ingress` socket connects.
 
-export const TELEGRAM_ROUTE_AUDIENCE = "openbot-telegram-route";
+export const TELEGRAM_ROUTE_AUDIENCE = "omnibot-telegram-route";
 
 /** Followed by `/<bot ID>`. */
 export const TELEGRAM_UPDATES_PATH = "/v1/telegram/updates";

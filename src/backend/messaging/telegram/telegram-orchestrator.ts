@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { sourceText } from "@omnibot/i18n/source";
 
 /**
  * The Telegram Orchestrator: the agent that receives every new Telegram conversation, in every chat

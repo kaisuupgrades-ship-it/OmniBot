@@ -10,8 +10,8 @@ import type {
   SaveEventRoutineInput,
   SaveEventRoutineResult,
   WebhookSecret,
-} from "@openbot/contracts/ipc-events";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@omnibot/contracts/ipc-events";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   deleteEventRoutine,
   getEventStatus,
@@ -21,8 +21,8 @@ import {
   rotateEventRoutineSecret,
   saveEventRoutine,
   testEventRoutine,
-} from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
+} from "@omnibot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@omnibot/team-client/team-api-requests";
 import { Effect } from "effect";
 
 /** The webhook operations of one host that the routine editor uses. Every action names its routine. */
@@ -50,7 +50,7 @@ export interface EventRoutinesApi extends RoutineWebhooksApi {
  * routes for a host that has them; `recovery` adds the run list of those routes.
  */
 export function desktopEventRoutinesApi(serverId: string, recovery = false): EventRoutinesApi {
-  const events = window.openbot.events;
+  const events = window.omnibot.events;
   return {
     ...(recovery ? { listRuns: (input: ListEventRoutineRunsInput) => events.listRoutineRuns(input, serverId) } : {}),
     getStatus: () => events.getStatus(serverId),

@@ -4,9 +4,9 @@ import { access, readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, extname, join, posix, resolve, win32 } from "node:path";
 import { promisify } from "node:util";
-import { type AgentProviderId, agentProviderName } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { type AgentProviderId, agentProviderName } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Result } from "effect";
 import { type ProviderClientOperationError, providerCall, providerFailure } from "./provider-client-effects";
 
@@ -296,7 +296,7 @@ export function antigravityHarnessName(target: string): "localharness_external" 
 /**
  * The Antigravity server is never looked for on `PATH`: the Antigravity IDE installs an
  * `antigravity` command that is an editor, not this server. Only the copy OmniBot downloaded, or the
- * path in `OPENBOT_ANTIGRAVITY_PATH`, is used. The server takes no `--version`, so the version comes
+ * path in `OMNIBOT_ANTIGRAVITY_PATH`, is used. The server takes no `--version`, so the version comes
  * from the manifest two levels above the program, which a managed install writes.
  *
  * A path the user set is the only candidate: when it cannot start, the error says so, and the
@@ -629,7 +629,7 @@ function cliCommandName(provider: AgentProviderId): string {
 
 /** An explicit path remains under the user's control, including during managed updates. */
 export function configuredCliPath(provider: AgentProviderId): string | null {
-  return process.env[`OPENBOT_${provider.toUpperCase()}_PATH`]?.trim() || null;
+  return process.env[`OMNIBOT_${provider.toUpperCase()}_PATH`]?.trim() || null;
 }
 
 const cliCandidates = Effect.fn("Cli.candidates")(function* (

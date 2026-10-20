@@ -1,13 +1,13 @@
-import { isManagedRuntimeProvider, type ManagedProviderId } from "@openbot/contracts/agent-providers";
-import type { AgentProviderId, AgentProviderStatus, AgentStatus, ProviderRuntimeStatus } from "@openbot/contracts/ipc";
-import { Toaster, toast } from "@openbot/ui";
+import { isManagedRuntimeProvider, type ManagedProviderId } from "@omnibot/contracts/agent-providers";
+import type { AgentProviderId, AgentProviderStatus, AgentStatus, ProviderRuntimeStatus } from "@omnibot/contracts/ipc";
+import { Toaster, toast } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, onCleanup, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { FirstRunFlowProps } from "../src/features/onboarding/FirstRunFlow";
 import { providerKeyApi } from "../src/features/settings/provider-key-api";
 import { STORY_AGENT_STATUS } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 import { createFakeConnection } from "./provider-connection-fixture";
 
 export const noProvidersConnectedAgentStatus: AgentStatus = {
@@ -84,9 +84,9 @@ const downloadedRuntimeStatuses = (): Record<ManagedProviderId, ProviderRuntimeS
   grok: { phase: "ready", progress: 100, message: null, version: "1.0.5" },
 });
 
-/** Installs the mock `window.openbot` before the flow renders, and a toaster beside it. */
+/** Installs the mock `window.omnibot` before the flow renders, and a toaster beside it. */
 export function MockedOnboardingApi(props: { permissions?: boolean; children: JSX.Element }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot();
   if (props.permissions) {
     mock.api.computerUse.getState = async () => ({
@@ -98,11 +98,11 @@ export function MockedOnboardingApi(props: { permissions?: boolean; children: JS
       message: null,
     });
   }
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onCleanup(() => {
     mock.dispose();
     toast.dismiss();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
     <>

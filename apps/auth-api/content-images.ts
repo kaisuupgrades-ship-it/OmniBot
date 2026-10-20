@@ -12,7 +12,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
 import type { Plugin } from "vite";
 import type { RivalMarkName } from "./src/components/compare/rival-mark-shapes";
 import { COMPARISONS } from "./src/content/compare";
@@ -61,7 +61,7 @@ export interface ContentImageJob {
 }
 
 /** A compared product's mark, or OmniBot's own logo. */
-export type ContentImageMark = RivalMarkName | "openbot";
+export type ContentImageMark = RivalMarkName | "omnibot";
 
 export interface ContentImageLockup {
   rivalMark: RivalMarkName;
@@ -74,7 +74,7 @@ export type ContentArtManifest = Record<string, string>;
 
 export function contentImages(): Plugin {
   return {
-    name: "openbot-content-images",
+    name: "omnibot-content-images",
     apply: "build",
     async generateBundle() {
       if (this.environment.name !== "client") return;
@@ -131,7 +131,7 @@ function comparisonLockup(collection: ContentCollection, slug: string): ContentI
   const page = collection.id === "compare" ? COMPARISONS[slug] : undefined;
   switch (page?.kind) {
     case undefined:
-    case "openbot":
+    case "omnibot":
       return page && { rivalMark: page.rival.mark, rivalName: page.rival.name };
     case "matchup": {
       const [a, b] = page.products;

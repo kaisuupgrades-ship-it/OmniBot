@@ -1,5 +1,5 @@
-import { CustomProviderDialog } from "@openbot/ui/features/custom-providers/CustomProviderDialog";
-import type { CustomProviderDraft } from "@openbot/ui/features/custom-providers/custom-provider-form";
+import { CustomProviderDialog } from "@omnibot/ui/features/custom-providers/CustomProviderDialog";
+import type { CustomProviderDraft } from "@omnibot/ui/features/custom-providers/custom-provider-form";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

@@ -13,7 +13,7 @@ React Native app built with Expo SDK 57, Expo Router, TypeScript 7, Biome, and B
 The repository uses Bun’s hoisted linker so native Expo modules resolve to one installation.
 The root `postinstall` runs `bun run --cwd apps/mobile setup:skia` after dependency installation.
 Skia 2.6.2 needs this step to copy its packaged native libraries before CocoaPods runs;
-EAS and local installs use the same setup. `OPENBOT_SKIP_SKIA=1` skips the step for desktop and
+EAS and local installs use the same setup. `OMNIBOT_SKIP_SKIA=1` skips the step for desktop and
 API work. If you installed with it, run `bun run --cwd apps/mobile setup:skia` before a native build.
 
 EAS profiles pin Bun 1.4.2 to match the root `packageManager`. Use the same Bun version
@@ -91,7 +91,7 @@ then build and launch the app with Expo. Expo arguments such as `--device` and
 `--port` pass through. The RocketSim command requires the app in `/Applications`
 or `~/Applications`, or `ROCKETSIM_APP_PATH` set to its `.app` directory. If it is
 missing, the command stops with setup instructions. The standard command does not
-look for RocketSim, even if `ROCKETSIM_APP_PATH` or the old `OPENBOT_ROCKETSIM`
+look for RocketSim, even if `ROCKETSIM_APP_PATH` or the old `OMNIBOT_ROCKETSIM`
 variable is set.
 
 The local launcher enables RocketSim Connect in the local native project. The config plugin
@@ -313,7 +313,7 @@ bun run mobile:ios:build:local
 
 From `apps/mobile`, the equivalent command is `bun run ios:build:local`.
 This runs EAS Build locally with the `production` profile and writes
-`/private/tmp/openbot-testflight.ipa`. Each successful build replaces that output file.
+`/private/tmp/omnibot-testflight.ipa`. Each successful build replaces that output file.
 The profile uses remote build numbers and increments the build number automatically.
 EAS CLI prompts for signing credentials when needed.
 
@@ -342,15 +342,15 @@ One-time setup:
 3. Keep the iOS distribution certificate and provisioning profiles configured in EAS. CI downloads
    these existing credentials. If they expire or need repair, update them interactively through
    EAS before retrying; the upload API key is not passed to the build step. Each target has its own
-   profile: the app, `ExpoWidgetsTarget` (`run.openbot.mobile.ExpoWidgetsTarget`),
-   `OmniBotNotificationService` (`run.openbot.mobile.NotificationService`, the Notification Service
-   Extension) and `expo-sharing-extension` (`run.openbot.mobile.ShareExtension`, the share extension).
-   Each extension needs the App Group `group.run.openbot.mobile`. When a release adds a
+   profile: the app, `ExpoWidgetsTarget` (`run.omnibot.mobile.ExpoWidgetsTarget`),
+   `OmniBotNotificationService` (`run.omnibot.mobile.NotificationService`, the Notification Service
+   Extension) and `expo-sharing-extension` (`run.omnibot.mobile.ShareExtension`, the share extension).
+   Each extension needs the App Group `group.run.omnibot.mobile`. When a release adds a
    target, set up its profile interactively once (`bunx eas-cli credentials -p ios`) before CI builds
    it. Keep the saved push key; do not let EAS make a new one.
 4. Keep the OpenPanel variables in EAS `production` with `Plain text` or `Sensitive` visibility.
    `Secret` variables are unavailable to this local build. Do not copy these values into source.
-5. Ensure App Store Connect has the app `run.openbot.mobile` and the intended TestFlight group.
+5. Ensure App Store Connect has the app `run.omnibot.mobile` and the intended TestFlight group.
 
 After this workflow is merged into `main`, authenticate GitHub CLI with `gh auth login`, then run
 from the repository root:
@@ -414,7 +414,7 @@ One-time setup:
    same as in `release-ios`. The Google secret is the full JSON key of a Google Cloud service account.
 3. In the Google Cloud project of that service account, enable the Google Play Android Developer API.
    In Play Console, under **Users and permissions**, invite the service account email and give it
-   access to `run.openbot.mobile` with the release permissions for testing tracks.
+   access to `run.omnibot.mobile` with the release permissions for testing tracks.
 4. Keep the Android upload keystore configured in EAS as the default build credentials. CI downloads
    it. Play App Signing keeps the app signing key; the EAS keystore is the upload key.
 5. Keep the OpenPanel variables in EAS `production`, as for iOS.
@@ -424,7 +424,7 @@ One-time setup:
    published release, Play accepts only draft releases: dispatch with `release_status` set to `draft`
    and roll out the release in Play Console.
 7. Commit `apps/mobile/google-services.json`, the Firebase file of the Android app
-   `run.openbot.mobile`. `app.config.js` adds it when it exists. Without it the build has no Firebase,
+   `run.omnibot.mobile`. `app.config.js` adds it when it exists. Without it the build has no Firebase,
    and Android gets no notifications. The file has public identifiers only. The account service has
    the key that sends (`FCM_SERVICE_ACCOUNT` in [the account service](../auth-api/README.md)).
 
@@ -449,7 +449,7 @@ A successful workflow means Google Play accepted the bundle on the selected trac
 upload store metadata, screenshots or release notes. Write the release notes in Play Console.
 
 To build a signed `.aab` on your computer, run `bun run mobile:android:build:local`. It needs JDK 17
-and the Android SDK, and writes `/private/tmp/openbot-play.aab`.
+and the Android SDK, and writes `/private/tmp/omnibot-play.aab`.
 See [Fastlane Google Play upload](https://docs.fastlane.tools/actions/upload_to_play_store/).
 
 ## OpenPanel product analytics
@@ -460,11 +460,11 @@ The endpoint is fixed to `https://analytics.omnibot.example.com/api`. No analyti
 
 ### Production configuration
 
-1. In the self-hosted OpenPanel dashboard, open the existing **Openbot** project used by desktop and the website.
-   Do not create or select a separate **Openbot Mobile** project.
+1. In the self-hosted OpenPanel dashboard, open the existing **Omnibot** project used by desktop and the website.
+   Do not create or select a separate **Omnibot Mobile** project.
    Create a separate client for OmniBot Mobile with **write** access only. Copy its Client ID and
    Client Secret. Do not use an organization/root client or a client with read access.
-2. In the Expo dashboard, open the **openbot** project → **Environment variables**, select the
+2. In the Expo dashboard, open the **omnibot** project → **Environment variables**, select the
    **production** environment, and add:
 
    | Variable | Value |
@@ -553,7 +553,7 @@ Opt-out and process exit discard the buffer. Sign-out ends the previous account'
 new signed-out activity can be claimed by the next sign-in. There is no disk queue.
 Existing anonymous events already sent by older builds are not reassigned by this fix.
 If mobile credentials belong to another project, replace both production variables with credentials
-for a write-only client in **Openbot**, then ship a build or compatible update with those values.
+for a write-only client in **Omnibot**, then ship a build or compatible update with those values.
 
 Mobile schema generation 2 adds safe error diagnostics. Native error alerts and chat send errors
 emit `notification_shown`; existing failed actions emit a separate `client_operation_failed`.

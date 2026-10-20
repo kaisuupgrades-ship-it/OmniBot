@@ -1,6 +1,6 @@
-import { ANDROID_PLAY_STORE_URL } from "@openbot/ui/features/mobile-app/android-play-store";
-import { IOS_TESTFLIGHT_URL } from "@openbot/ui/features/mobile-app/ios-testflight";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { ANDROID_PLAY_STORE_URL } from "@omnibot/ui/features/mobile-app/android-play-store";
+import { IOS_TESTFLIGHT_URL } from "@omnibot/ui/features/mobile-app/ios-testflight";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createEffect, createSignal, For, onSettled, Show, untrack } from "solid-js";
 import { landingAnalytics } from "../../lib/analytics";
 import { CHANGELOG_ROUTE, type ChangelogPlatform, type ChangelogRelease as Release } from "../../lib/changelog";

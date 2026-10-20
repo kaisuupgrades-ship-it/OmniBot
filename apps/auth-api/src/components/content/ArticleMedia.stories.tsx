@@ -1,4 +1,4 @@
-import { AppLogo } from "@openbot/brand";
+import { AppLogo } from "@omnibot/brand";
 import type { JSX } from "@solidjs/web";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 // The site's stylesheet, not the desktop app's. It is imported here rather than in
@@ -7,12 +7,12 @@ import type { Meta, StoryObj } from "storybook-solidjs-vite";
 // here it arrives only once this story is opened.
 import "../../styles.css";
 import "./ArticleMedia.stories.css";
-import aChannel from "../../content/guides/media/openbot-101/a-channel.webp";
-import aThread from "../../content/guides/media/openbot-101/a-thread.webp";
-import pickAModel from "../../content/guides/media/openbot-101/pick-a-model.webp";
+import aChannel from "../../content/guides/media/omnibot-101/a-channel.webp";
+import aThread from "../../content/guides/media/omnibot-101/a-thread.webp";
+import pickAModel from "../../content/guides/media/omnibot-101/pick-a-model.webp";
 import { formatArticleDate } from "../../lib/content-collection";
 import { GUIDES_COLLECTION } from "../../lib/guides";
-import { EXTERNAL_LINK_REL, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, OMNIBOT_LINKS } from "../../lib/landing-links";
 import { Button } from "../ui/button";
 import { ArticleGradient } from "./ArticleGradient";
 import { ArticleImage } from "./ArticleMedia";
@@ -21,7 +21,7 @@ import { ArticleImage } from "./ArticleMedia";
 // title, so a mounted picture matches the artwork on the card the reader arrived
 // from; here it is a control, so the colour families can be compared.
 const ARTICLE_TITLE = "OmniBot 101";
-const GUIDE = GUIDES_COLLECTION.articles.find((article) => article.slug === "openbot-101");
+const GUIDE = GUIDES_COLLECTION.articles.find((article) => article.slug === "omnibot-101");
 if (!GUIDE) throw new Error("OmniBot 101 must be in the guides registry.");
 
 const meta = {
@@ -40,7 +40,7 @@ function StoryHeader() {
       </a>
       <div class="site-header-actions">
         <Button
-          href={OPENBOT_LINKS.contact}
+          href={OMNIBOT_LINKS.contact}
           target="_blank"
           rel={EXTERNAL_LINK_REL}
           variant="secondary"
@@ -90,7 +90,7 @@ export const ProductShot: Story = {
 
 /**
  * How a mounted screenshot reads on a real article page: the same header, title,
- * hero artwork and column as /guides/openbot-101, with the article gradient moving
+ * hero artwork and column as /guides/omnibot-101, with the article gradient moving
  * around the pictures.
  */
 export const InTheArticle: Story = {

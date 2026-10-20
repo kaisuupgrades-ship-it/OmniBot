@@ -1,0 +1,10 @@
+# Pulls the image of instance %i, and for an install makes the container again. `setup` replaces
+# /opt/omnibot-docker/instances/ with the folder of omnibot-instance.
+[Unit]
+Description=Update OmniBot instance %i
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/omnibot-docker/instances/omnibot-instance update-request %i
+TimeoutStartSec=45min

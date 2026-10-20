@@ -4,7 +4,7 @@ This guide tells you how a sign-in reaches OmniBot, how a joined server signs in
 computer of its user, and how to add a provider, an application or a connector. Each section has a
 working example with real file paths.
 
-- [How a sign-in reaches OmniBot](#how-a-sign-in-reaches-openbot)
+- [How a sign-in reaches OmniBot](#how-a-sign-in-reaches-omnibot)
 - [Remote sign-in: the callback relay](#remote-sign-in-the-callback-relay)
 - [Add a provider](#add-a-provider)
 - [Add an application](#add-an-application)
@@ -88,7 +88,7 @@ editing or signing out of a row refuses its route at once; there is no list of r
 current. A proxy that cannot start drops the row from the hand-off with
 `error.backend.mcpOAuthProxyUnavailable`. The raw token is never the fallback.
 
-The port and the secret are kept encrypted in `openbot-mcp-oauth-proxy-v1.json`. Codex keeps the
+The port and the secret are kept encrypted in `omnibot-mcp-oauth-proxy-v1.json`. Codex keeps the
 MCP configuration of a resumed thread, so the same address must work after a restart. When the
 saved port is in use, the proxy takes a new port and a new secret, so the old bearers stop working.
 The Codex tool manifest records the proxy address and the proxied rows; a change replaces the Codex
@@ -313,7 +313,7 @@ is one folder per plugin in [`marketplace/plugin-catalog/`](../../marketplace/pl
    them by hand.
 5. For an `http` server, run `bun run test:mcp-catalog`
    ([`mcp-catalog-smoke.ts`](../../scripts/mcp-catalog-smoke.ts)). It connects to the live servers
-   with no account and writes `.openbot-build/mcp-catalog-smoke/report.json`. It needs the network,
+   with no account and writes `.omnibot-build/mcp-catalog-smoke/report.json`. It needs the network,
    so it is a manual run and not a CI gate.
 
 The smoke checks an `http` server with no `auth` or with a `link` flow. It skips `stdio` servers and
@@ -477,7 +477,7 @@ Team API adapters are permanent (see [Team API compatibility](team-api.md)). Wor
    [`team-admin-requests.ts`](../../packages/team-client/src/team-admin-requests.ts), and gate them
    on the host's capabilities in the web client.
 8. **Bootstrap.** Make sure that the capability is not in bootstrap.
-9. **Text.** Error messages use `sourceText(key)` with keys in all languages of `@openbot/i18n`.
+9. **Text.** Error messages use `sourceText(key)` with keys in all languages of `@omnibot/i18n`.
 
 ## Test a sign-in through a joined server
 

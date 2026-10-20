@@ -30,7 +30,7 @@ export interface PushNotificationContent {
 
 export function pushNotificationKeys(secret: Uint8Array): PushNotificationKeys {
   if (secret.length !== LIVE_ACTIVITY_SECRET_BYTES) throw new Error("The notification secret has a wrong size.");
-  const derive = (label: string) => hmac(sha256, secret, utf8ToBytes(`openbot push notification ${label}`));
+  const derive = (label: string) => hmac(sha256, secret, utf8ToBytes(`omnibot push notification ${label}`));
   return { seal: derive("seal"), tag: derive("tag") };
 }
 

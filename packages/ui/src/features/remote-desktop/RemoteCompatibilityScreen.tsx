@@ -1,6 +1,6 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { Alert, AlertContent, AlertDescription, Button } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import { Alert, AlertContent, AlertDescription, Button } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { For, Show } from "solid-js";
 
 /**

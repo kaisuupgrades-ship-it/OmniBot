@@ -6,15 +6,15 @@ import {
   type BillingInterval,
   type BillingPlanId,
   isBillingAmount,
-} from "@openbot/contracts/billing";
-import { FIRST_TOUCH_CAMPAIGN_FIELDS, type FirstTouch, parseFirstTouch } from "@openbot/contracts/first-touch";
+} from "@omnibot/contracts/billing";
+import { FIRST_TOUCH_CAMPAIGN_FIELDS, type FirstTouch, parseFirstTouch } from "@omnibot/contracts/first-touch";
 import {
   HOSTED_SERVER_ERRORS,
   HOSTED_SERVER_SIZE_NAMES,
   type HostedServerError,
   type HostedServerSize,
-} from "@openbot/contracts/hosted-servers";
-import { isOneOf } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/hosted-servers";
+import { isOneOf } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 
 /** The same OpenPanel project as the desktop app and the website. ANALYTICS.md is the contract. */

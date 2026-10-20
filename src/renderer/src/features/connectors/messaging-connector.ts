@@ -6,17 +6,17 @@ import type {
   MessagingOverview,
   MessagingPlatform,
   MessagingRole,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import type { AgentProfile } from "@openbot/ui/data";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import type { AgentProfile } from "@omnibot/ui/data";
 import type {
   DiscordAccessControl,
   SlackOrchestratorChoice,
   SlackOrchestratorModels,
   WorkspacePlatform,
-} from "@openbot/ui/features/settings/SlackIntegrationPanel";
-import type { TelegramChatPlace } from "@openbot/ui/features/settings/TelegramIntegrationPanel";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/settings/SlackIntegrationPanel";
+import type { TelegramChatPlace } from "@omnibot/ui/features/settings/TelegramIntegrationPanel";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, createStore, untrack } from "solid-js";
 import { type ConnectorController, createConnectorActions } from "./connector-controller";
 
@@ -44,8 +44,8 @@ export interface MessagingApi {
   setDiscordAccess: (workspaceId: string, allowedRoles: MessagingRole[]) => Promise<DiscordAccess>;
 }
 
-/** The connections of this computer, through main. Read on each call: tests and stories replace `window.openbot`. */
-export function localMessagingApi(messaging: () => MessagingDesktopApi = () => window.openbot.messaging): MessagingApi {
+/** The connections of this computer, through main. Read on each call: tests and stories replace `window.omnibot`. */
+export function localMessagingApi(messaging: () => MessagingDesktopApi = () => window.omnibot.messaging): MessagingApi {
   return {
     overview: (platform) =>
       platform === "slack"

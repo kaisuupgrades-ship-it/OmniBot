@@ -2,9 +2,9 @@ import { execFile } from "node:child_process";
 import { constants } from "node:fs";
 import { access, realpath } from "node:fs/promises";
 import { delimiter, isAbsolute, join } from "node:path";
-import type { BitwardenConnectorStatus } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { registerSecretValue } from "@openbot/logging";
+import type { BitwardenConnectorStatus } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { registerSecretValue } from "@omnibot/logging";
 import { Effect, Exit, Schema, Semaphore } from "effect";
 import { type PasswordVault, PasswordVaultError, type VaultLogin } from "../backend/password-vault";
 

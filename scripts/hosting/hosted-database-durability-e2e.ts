@@ -8,29 +8,29 @@
  * The run starts with a new test database. Each cycle resumes the sandbox, checks the test database
  * that the last cycle left, starts a writer in WAL mode as OmniBot uses it, and stops the sandbox while
  * the writer runs. `live` stops during writes, with no hook for the writer. `pre-stop` runs the writer as a
- * systemd unit and installs openbot-boat-pre-stop for that unit, as a hosted server does for
- * openbot.service. The writer then closes the database before boat saves the disk, and each check
+ * systemd unit and installs omnibot-boat-pre-stop for that unit, as a hosted server does for
+ * omnibot.service. The writer then closes the database before boat saves the disk, and each check
  * must find every row that the writer committed. The first damaged or incomplete check ends the run.
- * The test database is in /home/user/openbot-durability; OmniBot's own data is not touched. The test
+ * The test database is in /home/user/omnibot-durability; OmniBot's own data is not touched. The test
  * hook also runs the OmniBot hook of the sandbox, and the run puts that hook back at the end. The
- * report is in .openbot-build/hosted-database-durability/.
+ * report is in .omnibot-build/hosted-database-durability/.
  */
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, registerSecretValue } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("hosted-database-durability-e2e");
 const BOAT_API_URL = "https://boat.dev/api/v1";
 const TTL_SECONDS = 7200;
-const REMOTE_DIRECTORY = "/home/user/openbot-durability";
-const REPORT_DIRECTORY = join(process.cwd(), ".openbot-build", "hosted-database-durability");
-const WRITER_UNIT = "openbot-durability-writer.service";
-const PRE_STOP_FLAG = "/run/openbot-durability-pre-stop";
+const REMOTE_DIRECTORY = "/home/user/omnibot-durability";
+const REPORT_DIRECTORY = join(process.cwd(), ".omnibot-build", "hosted-database-durability");
+const WRITER_UNIT = "omnibot-durability-writer.service";
+const PRE_STOP_FLAG = "/run/omnibot-durability-pre-stop";
 const BOAT_PRE_STOP = "/home/user/.boat/pre-stop";
-const SAVED_PRE_STOP = `${REMOTE_DIRECTORY}/openbot-pre-stop`;
+const SAVED_PRE_STOP = `${REMOTE_DIRECTORY}/omnibot-pre-stop`;
 const WRITER_PRE_STOP = `${REMOTE_DIRECTORY}/writer-pre-stop`;
 
 const MODES = ["live", "pre-stop"] as const;
@@ -276,7 +276,7 @@ async function checkDatabase(boat: BoatRequester, sandboxId: string): Promise<Dy
   const output = await command(
     boat,
     sandboxId,
-    `mkdir -p ${REMOTE_DIRECTORY} && python3 -I -c ${shellQuote(CHECK)} ${REMOTE_DIRECTORY} /tmp/openbot-durability-check ${PRE_STOP_FLAG}`,
+    `mkdir -p ${REMOTE_DIRECTORY} && python3 -I -c ${shellQuote(CHECK)} ${REMOTE_DIRECTORY} /tmp/omnibot-durability-check ${PRE_STOP_FLAG}`,
   );
   return parseJson(output);
 }
@@ -289,7 +289,7 @@ async function saveOmniBotHook(boat: BoatRequester, sandboxId: string): Promise<
   await command(
     boat,
     sandboxId,
-    `mkdir -p ${REMOTE_DIRECTORY} && if grep -q '^# openbot-boat-pre-stop:' ${BOAT_PRE_STOP} 2>/dev/null; then cp -p ${BOAT_PRE_STOP} ${SAVED_PRE_STOP}; fi`,
+    `mkdir -p ${REMOTE_DIRECTORY} && if grep -q '^# omnibot-boat-pre-stop:' ${BOAT_PRE_STOP} 2>/dev/null; then cp -p ${BOAT_PRE_STOP} ${SAVED_PRE_STOP}; fi`,
   );
 }
 
@@ -306,9 +306,9 @@ async function restoreOmniBotHook(boat: BoatRequester, sandboxId: string): Promi
  * hook. It has no OmniBot first line, so a start of OmniBot does not replace it during the run.
  */
 async function installHook(boat: BoatRequester, sandboxId: string, mode: Mode): Promise<void> {
-  const writerHook = (await readFile(join(import.meta.dirname, "openbot-boat-pre-stop"), "utf8"))
-    .replaceAll("openbot.service", WRITER_UNIT)
-    .replaceAll("/run/openbot-pre-stop", PRE_STOP_FLAG);
+  const writerHook = (await readFile(join(import.meta.dirname, "omnibot-boat-pre-stop"), "utf8"))
+    .replaceAll("omnibot.service", WRITER_UNIT)
+    .replaceAll("/run/omnibot-pre-stop", PRE_STOP_FLAG);
   const hook = [
     "#!/bin/bash",
     "# Test hook of hosted-database-durability-e2e.ts.",

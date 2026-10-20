@@ -17,7 +17,7 @@ import { lstat, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { developmentInstanceIdForWorktree, developmentUserDataName } from "../../src/main/development-profile";
 import { resolveDevelopmentAppDataRoot } from "../development-state-paths";
@@ -46,12 +46,12 @@ import { ResourceSampler } from "./resource-sampler";
 const logger = createOmniBotLogger("dev-bench", (line) => process.stderr.write(`${line}\n`), "info");
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const BENCH_ROOT = join(PROJECT_ROOT, ".openbot-build", "dev-automation", "bench");
+const BENCH_ROOT = join(PROJECT_ROOT, ".omnibot-build", "dev-automation", "bench");
 const READY_TIMEOUT_MS = 90_000;
 // The signed-in session, encrypted with the OS keychain. A reseed keeps it, so
 // each run opens the workspace the way a returning user does, without a new
 // sign-in inside the measured window.
-const CENTRAL_AUTH_FILE = "openbot-central-auth-v1.bin";
+const CENTRAL_AUTH_FILE = "omnibot-central-auth-v1.bin";
 
 // The bench profile. Its own instance id, so a bench never seeds over the
 // isolated dev profile of this worktree.
@@ -121,13 +121,13 @@ async function waitFor<T>(what: string, timeoutMs: number, probe: () => Promise<
 }
 
 function isAppWindowUrl(url: string): boolean {
-  return url.startsWith("openbot-app://app/index.html") && !url.includes("surface=");
+  return url.startsWith("omnibot-app://app/index.html") && !url.includes("surface=");
 }
 
 async function findAppPage(browser: Browser): Promise<Page | null> {
   for (const page of browser.contexts().flatMap((context) => context.pages())) {
     if (!isAppWindowUrl(page.url())) continue;
-    if ((await page.evaluate("typeof window.openbot").catch(() => "")) === "object") return page;
+    if ((await page.evaluate("typeof window.omnibot").catch(() => "")) === "object") return page;
   }
   return null;
 }
@@ -145,7 +145,7 @@ async function connect(app: BenchApp): Promise<{ browser: Browser; page: Page }>
   const page = await waitFor("the app window", READY_TIMEOUT_MS, () => findAppPage(browser));
   // Ready means the backend answers, not only that the window painted.
   const agentCount = await waitFor("the agent list", READY_TIMEOUT_MS, () =>
-    page.evaluate<number>("window.openbot.agent.listAgents().then((agents) => agents.length)"),
+    page.evaluate<number>("window.omnibot.agent.listAgents().then((agents) => agents.length)"),
   );
   await signInBenchAccount(page, logger);
   // The workspace, not the sign-in or connecting screen, is what a run measures.
@@ -227,7 +227,7 @@ async function runOnce(
     projectRoot: PROJECT_ROOT,
     instanceId: INSTANCE_ID,
     logger,
-    environment: { OPENBOT_AUTH_API_URL: authApiUrl },
+    environment: { OMNIBOT_AUTH_API_URL: authApiUrl },
     logPath: join(BENCH_ROOT, "logs", `${label}-${scenario.id}-${index + 1}.log`),
   });
   let browser: Browser | null = null;

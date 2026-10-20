@@ -1,40 +1,40 @@
 .account-update-island {
-  --panel-open-dur: calc(var(--openbot-duration-slow) + var(--openbot-duration-slow));
-  --panel-close-dur: calc(var(--openbot-duration-slow) + var(--openbot-duration-normal));
-  --panel-translate-y: calc(100% - var(--openbot-space-3));
-  --panel-blur: var(--openbot-space-0-5);
-  --panel-ease: var(--openbot-ease-out);
-  --text-swap-dur: var(--openbot-duration-normal);
-  --text-swap-translate-y: var(--openbot-space-1);
-  --text-swap-blur: var(--openbot-space-0-5);
-  --text-swap-ease: var(--openbot-ease-in-out);
-  --digit-dur: var(--openbot-duration-slow);
-  --digit-distance: var(--openbot-space-1);
-  --digit-stagger: calc(var(--openbot-duration-fast) - var(--openbot-duration-dialog));
-  --digit-blur: var(--openbot-space-0-5);
-  --digit-ease: var(--openbot-ease-out);
+  --panel-open-dur: calc(var(--omnibot-duration-slow) + var(--omnibot-duration-slow));
+  --panel-close-dur: calc(var(--omnibot-duration-slow) + var(--omnibot-duration-normal));
+  --panel-translate-y: calc(100% - var(--omnibot-space-3));
+  --panel-blur: var(--omnibot-space-0-5);
+  --panel-ease: var(--omnibot-ease-out);
+  --text-swap-dur: var(--omnibot-duration-normal);
+  --text-swap-translate-y: var(--omnibot-space-1);
+  --text-swap-blur: var(--omnibot-space-0-5);
+  --text-swap-ease: var(--omnibot-ease-in-out);
+  --digit-dur: var(--omnibot-duration-slow);
+  --digit-distance: var(--omnibot-space-1);
+  --digit-stagger: calc(var(--omnibot-duration-fast) - var(--omnibot-duration-dialog));
+  --digit-blur: var(--omnibot-space-0-5);
+  --digit-ease: var(--omnibot-ease-out);
   --digit-dir-x: 0;
   --digit-dir-y: 1;
 
   position: absolute;
   z-index: 0;
-  right: var(--openbot-space-4);
-  bottom: var(--openbot-control-xl);
-  left: var(--openbot-space-4);
+  right: var(--omnibot-space-4);
+  bottom: var(--omnibot-control-xl);
+  left: var(--omnibot-space-4);
   display: grid;
-  min-height: calc(var(--openbot-control-xl) + var(--openbot-radius-card));
+  min-height: calc(var(--omnibot-control-xl) + var(--omnibot-radius-card));
   align-items: center;
   border: 0;
-  border-radius: var(--openbot-radius-lg) var(--openbot-radius-lg) var(--openbot-radius-md) var(--openbot-radius-md);
-  background: var(--openbot-accent-strong);
-  box-shadow: 0 0 0 1px var(--openbot-accent-soft);
-  -webkit-backdrop-filter: blur(var(--openbot-space-3));
-  backdrop-filter: blur(var(--openbot-space-3));
-  padding: calc(var(--openbot-space-1) + 1px) var(--openbot-space-1-5)
-    calc(var(--openbot-space-4) + var(--openbot-space-1) - 1px);
+  border-radius: var(--omnibot-radius-lg) var(--omnibot-radius-lg) var(--omnibot-radius-md) var(--omnibot-radius-md);
+  background: var(--omnibot-accent-strong);
+  box-shadow: 0 0 0 1px var(--omnibot-accent-soft);
+  -webkit-backdrop-filter: blur(var(--omnibot-space-3));
+  backdrop-filter: blur(var(--omnibot-space-3));
+  padding: calc(var(--omnibot-space-1) + 1px) var(--omnibot-space-1-5)
+    calc(var(--omnibot-space-4) + var(--omnibot-space-1) - 1px);
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--openbot-space-2);
-  color: var(--openbot-accent-text);
+  gap: var(--omnibot-space-2);
+  color: var(--omnibot-accent-text);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -80,10 +80,10 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--openbot-accent-text);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-semibold);
-  line-height: var(--openbot-leading-sm);
+  color: var(--omnibot-accent-text);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-semibold);
+  line-height: var(--omnibot-leading-sm);
   white-space: nowrap;
 }
 
@@ -131,35 +131,35 @@
   /* A floor, not a fixed width: translated labels such as "Uruchom ponownie" are wider than the
      English ones, and the button grows to hold them while the status text gives way. */
   min-width: calc(
-    var(--openbot-control-xl) +
-    var(--openbot-control-xl) +
-    var(--openbot-space-6) +
-    var(--openbot-space-1)
+    var(--omnibot-control-xl) +
+    var(--omnibot-control-xl) +
+    var(--omnibot-space-6) +
+    var(--omnibot-space-1)
   );
   flex-shrink: 0;
 }
 
 .account-update-island__action.ui-button {
   width: 100%;
-  height: var(--openbot-control-sm);
-  min-height: var(--openbot-control-sm);
-  border-radius: var(--openbot-radius-sm);
-  background: var(--openbot-surface-light);
-  box-shadow: 0 1px 2px var(--openbot-shadow-popover-ambient);
-  padding: 0 var(--openbot-space-3) 0 var(--openbot-space-2);
-  color: var(--openbot-text-on-light);
+  height: var(--omnibot-control-sm);
+  min-height: var(--omnibot-control-sm);
+  border-radius: var(--omnibot-radius-sm);
+  background: var(--omnibot-surface-light);
+  box-shadow: 0 1px 2px var(--omnibot-shadow-popover-ambient);
+  padding: 0 var(--omnibot-space-3) 0 var(--omnibot-space-2);
+  color: var(--omnibot-text-on-light);
   transition:
-    box-shadow var(--openbot-duration-normal) var(--openbot-ease-out),
-    transform var(--openbot-duration-fast) var(--openbot-ease-out);
+    box-shadow var(--omnibot-duration-normal) var(--omnibot-ease-out),
+    transform var(--omnibot-duration-fast) var(--omnibot-ease-out);
 }
 
 .account-update-island__action.ui-button::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(100% + var(--openbot-space-4));
-  min-width: var(--openbot-control-xl);
-  height: var(--openbot-control-xl);
+  width: calc(100% + var(--omnibot-space-4));
+  min-width: var(--omnibot-control-xl);
+  height: var(--omnibot-control-xl);
   transform: translate(-50%, -50%);
   content: "";
 }
@@ -173,13 +173,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--omnibot-space-1-5);
 }
 
 .account-update-island__action-label {
-  min-width: calc(var(--openbot-control-xl) + var(--openbot-space-3));
-  color: var(--openbot-text-on-light);
-  font-weight: var(--openbot-weight-semibold);
+  min-width: calc(var(--omnibot-control-xl) + var(--omnibot-space-3));
+  color: var(--omnibot-text-on-light);
+  font-weight: var(--omnibot-weight-semibold);
   text-align: left;
 }
 
@@ -187,8 +187,8 @@
   display: inline-grid;
   align-items: baseline;
   grid-template-columns: 3ch max-content;
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-semibold);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-semibold);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -238,24 +238,24 @@
 }
 
 .account-update-island__action-shell[data-downloading="true"] .account-update-island__action-label {
-  min-width: var(--openbot-control-md);
+  min-width: var(--omnibot-control-md);
   text-align: center;
 }
 
 .account-update-island__action-shell[data-downloading="true"] .account-update-island__action.ui-button {
-  padding-inline: var(--openbot-space-2);
+  padding-inline: var(--omnibot-space-2);
 }
 
 .account-update-island__icon.t-icon-swap {
-  --icon-swap-dur: var(--openbot-duration-overlay);
-  --icon-swap-blur: var(--openbot-space-0-5);
+  --icon-swap-dur: var(--omnibot-duration-overlay);
+  --icon-swap-blur: var(--omnibot-space-0-5);
   --icon-swap-start-scale: 0.25;
-  --icon-swap-ease: var(--openbot-ease-in-out);
+  --icon-swap-ease: var(--omnibot-ease-in-out);
 
   position: relative;
   display: inline-grid;
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   flex: 0 0 auto;
   place-items: center;
 }
@@ -274,13 +274,13 @@
 }
 
 .account-update-island__icon.t-icon-swap svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  stroke-width: var(--openbot-icon-stroke);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
+  stroke-width: var(--omnibot-icon-stroke);
 }
 
 .account-update-island__icon.t-icon-swap .ui-spinner {
-  border-color: var(--openbot-text-dim-on-light);
+  border-color: var(--omnibot-text-dim-on-light);
   border-top-color: currentColor;
 }
 
@@ -304,11 +304,11 @@
 
 @media (hover: hover) and (pointer: fine) {
   .account-update-island__action.ui-button:hover:not(:disabled):not([data-disabled]) {
-    background: var(--openbot-surface-light);
+    background: var(--omnibot-surface-light);
     box-shadow:
-      0 0 0 1px var(--openbot-text-dim-on-light),
-      0 1px 2px var(--openbot-shadow-popover-ambient);
-    color: var(--openbot-text-on-light);
+      0 0 0 1px var(--omnibot-text-dim-on-light),
+      0 1px 2px var(--omnibot-shadow-popover-ambient);
+    color: var(--omnibot-text-on-light);
   }
 }
 
@@ -331,7 +331,7 @@
   position: relative;
   inset: auto;
   min-height: 0;
-  margin: var(--openbot-space-2) var(--openbot-space-3) var(--openbot-space-3);
-  border-radius: var(--openbot-radius-lg);
-  padding: var(--openbot-space-1-5) var(--openbot-space-1-5) var(--openbot-space-1-5) var(--openbot-space-3);
+  margin: var(--omnibot-space-2) var(--omnibot-space-3) var(--omnibot-space-3);
+  border-radius: var(--omnibot-radius-lg);
+  padding: var(--omnibot-space-1-5) var(--omnibot-space-1-5) var(--omnibot-space-1-5) var(--omnibot-space-3);
 }

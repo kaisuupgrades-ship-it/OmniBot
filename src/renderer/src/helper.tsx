@@ -1,4 +1,4 @@
-import { installPointerFocusGuard } from "@openbot/ui/pointer-focus";
+import { installPointerFocusGuard } from "@omnibot/ui/pointer-focus";
 import { render } from "@solidjs/web";
 import { BrowserDockSurface } from "./features/browser/BrowserDockSurface";
 import { ComputerUseHighlightSurface } from "./features/computer-use/ComputerUseHighlightSurface";

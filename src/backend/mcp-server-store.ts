@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   createMcpServerId,
   isMcpKeyValue,
@@ -7,12 +7,12 @@ import {
   type McpServerConfig,
   mcpConfigErrors,
   normalizeMcpConfig,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { databaseRow, databaseRows, requiredStringColumn } from "./database/database-rows";
 import { registerMcpSecretValues } from "./mcp-redaction";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 
 /**
  * The MCP server configurations this machine holds.

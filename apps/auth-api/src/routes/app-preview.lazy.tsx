@@ -1,5 +1,5 @@
-import { DEFAULT_APP_LANGUAGE } from "@openbot/contracts/app-language";
-import { loadLocale, resolveLocale } from "@openbot/i18n";
+import { DEFAULT_APP_LANGUAGE } from "@omnibot/contracts/app-language";
+import { loadLocale, resolveLocale } from "@omnibot/i18n";
 import { createLazyFileRoute } from "@tanstack/solid-router";
 import { createSignal, lazy, onSettled, Show } from "solid-js";
 import "../../../../src/renderer/src/preview/preview.css";
@@ -8,7 +8,7 @@ import "../../../../src/renderer/src/preview/preview.css";
 // start in English; if they fail, the demo shows English.
 const OmniBotPlayground = lazy(() =>
   Promise.all([
-    import("@openbot/renderer-preview"),
+    import("@omnibot/renderer-preview"),
     loadLocale(resolveLocale(DEFAULT_APP_LANGUAGE, navigator.language)).catch(() => undefined),
   ]).then(([module]) => ({ default: module.OmniBotPlayground })),
 );
@@ -22,10 +22,10 @@ export function AppPreviewPage() {
   });
 
   return (
-    <div id="root" class="openbot-playground-root" data-preview-variant="landing">
+    <div id="root" class="omnibot-playground-root" data-preview-variant="landing">
       <Show
         when={mounted()}
-        fallback={<div class="openbot-playground-loading" role="status" aria-label="Loading OmniBot preview" />}
+        fallback={<div class="omnibot-playground-loading" role="status" aria-label="Loading OmniBot preview" />}
       >
         <OmniBotPlayground variant="landing" />
       </Show>

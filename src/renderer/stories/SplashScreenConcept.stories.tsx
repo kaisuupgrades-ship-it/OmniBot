@@ -1,5 +1,5 @@
-import { AppLogo, type AppLogoVariant } from "@openbot/brand";
-import { useText } from "@openbot/ui/text";
+import { AppLogo, type AppLogoVariant } from "@omnibot/brand";
+import { useText } from "@omnibot/ui/text";
 import { createSignal } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { SPLASH_EYE_LENGTH_STYLE } from "../src/features/startup/StartupSplash";

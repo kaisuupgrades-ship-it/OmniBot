@@ -19,9 +19,9 @@ import type {
   UpdatePreferenceChange,
   UpdateRestartMode,
   UpdateStatus,
-} from "@openbot/contracts/ipc";
-import type { HostRestartState } from "@openbot/contracts/team-protocol/host-update-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import type { HostRestartState } from "@omnibot/contracts/team-protocol/host-update-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Exit, Schema, Scope } from "effect";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { RemoteWorkflowError, remoteDecode } from "./remote-service-effects";

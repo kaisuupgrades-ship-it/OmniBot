@@ -1,11 +1,11 @@
-import { Button, Lock } from "@openbot/ui";
-import { ProviderModelPicker } from "@openbot/ui/components/ProviderModelPicker";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { agentAccessLockLabel } from "@openbot/ui/features/agents/agent-access";
-import { RemoteDesktopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { SidePanelToggle, type SidePanelToggleProps } from "@openbot/ui/features/conversation/SidePanel";
-import { useText } from "@openbot/ui/text";
+import { Button, Lock } from "@omnibot/ui";
+import { ProviderModelPicker } from "@omnibot/ui/components/ProviderModelPicker";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { agentAccessLockLabel } from "@omnibot/ui/features/agents/agent-access";
+import { RemoteDesktopIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { SidePanelToggle, type SidePanelToggleProps } from "@omnibot/ui/features/conversation/SidePanel";
+import { useText } from "@omnibot/ui/text";
 import type { ComponentProps } from "@solidjs/web";
 import { Show } from "solid-js";
 

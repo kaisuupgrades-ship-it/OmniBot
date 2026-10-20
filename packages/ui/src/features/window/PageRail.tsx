@@ -1,4 +1,4 @@
-import { ProviderLogo } from "@openbot/brand";
+import { ProviderLogo } from "@omnibot/brand";
 import {
   Bot,
   Button,
@@ -9,10 +9,10 @@ import {
   Settings,
   Store,
   Workflow,
-} from "@openbot/ui";
-import { AccountUsageDetails } from "@openbot/ui/features/account/AccountUsageDetails";
-import { type AccountUsageProviderRow, accountUsageRowKey } from "@openbot/ui/features/account/account-usage-view";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { AccountUsageDetails } from "@omnibot/ui/features/account/AccountUsageDetails";
+import { type AccountUsageProviderRow, accountUsageRowKey } from "@omnibot/ui/features/account/account-usage-view";
+import { useText } from "@omnibot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
 

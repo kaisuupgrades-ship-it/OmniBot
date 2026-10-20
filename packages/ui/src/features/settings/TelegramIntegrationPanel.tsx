@@ -1,6 +1,6 @@
-import type { ConnectTelegramChatInput, MessagingConnection } from "@openbot/contracts/ipc";
-import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@openbot/contracts/telegram-app";
-import type { AppTextKey } from "@openbot/i18n";
+import type { ConnectTelegramChatInput, MessagingConnection } from "@omnibot/contracts/ipc";
+import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/telegram-app";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertContent,
@@ -23,7 +23,7 @@ import {
   Text,
   Trash2,
   TriangleAlert,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { createEffect, createSignal, For, Match, Show, Switch } from "solid-js";
 import { ProviderModelPicker } from "../../components/ProviderModelPicker";
 import { useText } from "../../text";

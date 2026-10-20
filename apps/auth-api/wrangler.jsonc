@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "openbot-auth-api",
+  "name": "omnibot-auth-api",
   "compatibility_date": "2026-08-18",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/worker-entry.ts",
@@ -47,7 +47,7 @@
     "EMAIL_SMTP_PORT": "465",
     "EMAIL_SMTP_USERNAME": "hello@omnibot.example.com",
     "EMAIL_FROM": "hello@omnibot.example.com",
-    "REMOTE_TICKET_KEY_ID": "openbot-remote-1",
+    "REMOTE_TICKET_KEY_ID": "omnibot-remote-1",
     "REMOTE_SIGNAL_URL": "wss://signal.omnibot.example.com/v1/signal",
     "REMOTE_AUTH_WEBHOOK_URL": "https://signal.omnibot.example.com/internal/auth-events",
     // Paid hosted servers need boat.dev and Stripe accounts. They stay off in this fork.
@@ -59,8 +59,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "openbot-auth",
-      // The ID that `bunx wrangler d1 create openbot-auth` prints. A deploy fails until you set it.
+      "database_name": "omnibot-auth",
+      // The ID that `bunx wrangler d1 create omnibot-auth` prints. A deploy fails until you set it.
       "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
       "migrations_dir": "migrations"
     }
@@ -68,18 +68,18 @@
   "r2_buckets": [
     {
       "binding": "AVATARS",
-      "bucket_name": "openbot-avatars",
-      "preview_bucket_name": "openbot-avatars-test"
+      "bucket_name": "omnibot-avatars",
+      "preview_bucket_name": "omnibot-avatars-test"
     },
     {
       "binding": "SKILLS",
-      "bucket_name": "openbot-skills",
-      "preview_bucket_name": "openbot-skills-test"
+      "bucket_name": "omnibot-skills",
+      "preview_bucket_name": "omnibot-skills-test"
     },
     {
       "binding": "SITES",
-      "bucket_name": "openbot-sites",
-      "preview_bucket_name": "openbot-sites-test"
+      "bucket_name": "omnibot-sites",
+      "preview_bucket_name": "omnibot-sites-test"
     }
   ],
   "ratelimits": [
@@ -116,7 +116,7 @@
   ],
   "env": {
     "preview": {
-      "name": "openbot-landing-preview",
+      "name": "omnibot-landing-preview",
       "workers_dev": true,
       "preview_urls": true,
       "routes": [],
@@ -134,30 +134,30 @@
         "EMAIL_FROM": "hello@omnibot.example.com",
         "SITE_PUBLISH_ENABLED": "false",
         "SITE_COOKIE_ISOLATION_READY": "false",
-        "REMOTE_TICKET_KEY_ID": "openbot-remote-1",
+        "REMOTE_TICKET_KEY_ID": "omnibot-remote-1",
         "REMOTE_SIGNAL_URL": "ws://127.0.0.1:8081/v1/signal",
         "REMOTE_AUTH_WEBHOOK_URL": "http://127.0.0.1:8081/internal/auth-events"
       },
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "openbot-auth-test",
-          "database_id": "38f1a836-6c70-44bb-bbf3-f0bbc5b766b3",
+          "database_name": "omnibot-auth-test",
+          "database_id": "REPLACE_WITH_YOUR_TEST_D1_DATABASE_ID",
           "migrations_dir": "migrations"
         }
       ],
       "r2_buckets": [
         {
           "binding": "AVATARS",
-          "bucket_name": "openbot-avatars-test"
+          "bucket_name": "omnibot-avatars-test"
         },
         {
           "binding": "SKILLS",
-          "bucket_name": "openbot-skills-test"
+          "bucket_name": "omnibot-skills-test"
         },
         {
           "binding": "SITES",
-          "bucket_name": "openbot-sites-test"
+          "bucket_name": "omnibot-sites-test"
         }
       ],
       "ratelimits": [
@@ -194,7 +194,7 @@
       ]
     },
     "test": {
-      "name": "openbot-auth-api-test",
+      "name": "omnibot-auth-api-test",
       "workers_dev": true,
       "preview_urls": false,
       "routes": [],
@@ -225,34 +225,34 @@
         "EMAIL_FROM": "hello@omnibot.example.com",
         "SITE_PUBLISH_ENABLED": "false",
         "SITE_COOKIE_ISOLATION_READY": "false",
-        "REMOTE_TICKET_KEY_ID": "openbot-remote-1",
+        "REMOTE_TICKET_KEY_ID": "omnibot-remote-1",
         "REMOTE_SIGNAL_URL": "wss://signal.omnibot.example.com/v1/signal",
         "REMOTE_AUTH_WEBHOOK_URL": "https://signal.omnibot.example.com/internal/auth-events",
         "HOSTED_SERVERS_ENABLED": "true",
-        "GITHUB_APP_CLIENT_ID": "Iv23lik5pzHz70cb0RUL",
+        "GITHUB_APP_CLIENT_ID": "",
         "APNS_TEAM_ID": "ZTRDTUL87R",
-        "APNS_TOPIC": "run.openbot.mobile"
+        "APNS_TOPIC": "run.omnibot.mobile"
       },
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "openbot-auth-test",
-          "database_id": "38f1a836-6c70-44bb-bbf3-f0bbc5b766b3",
+          "database_name": "omnibot-auth-test",
+          "database_id": "REPLACE_WITH_YOUR_TEST_D1_DATABASE_ID",
           "migrations_dir": "migrations"
         }
       ],
       "r2_buckets": [
         {
           "binding": "AVATARS",
-          "bucket_name": "openbot-avatars-test"
+          "bucket_name": "omnibot-avatars-test"
         },
         {
           "binding": "SKILLS",
-          "bucket_name": "openbot-skills-test"
+          "bucket_name": "omnibot-skills-test"
         },
         {
           "binding": "SITES",
-          "bucket_name": "openbot-sites-test"
+          "bucket_name": "omnibot-sites-test"
         }
       ],
       "ratelimits": [

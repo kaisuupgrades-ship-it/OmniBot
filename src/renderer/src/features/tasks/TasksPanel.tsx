@@ -1,5 +1,5 @@
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+import type { AttachmentSummary } from "@omnibot/contracts/ipc";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, onCleanup } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { appPort } from "../../app-port";
@@ -29,7 +29,7 @@ export function TasksPanel(props: TasksPanelProps) {
   const { appInfo } = usePlatform();
 
   function openAttachment(attachment: AttachmentSummary, action: "open" | "reveal" | "download"): void {
-    window.openbot.agent.openAttachment({ attachmentId: attachment.id, action }, props.serverId).catch((error) => {
+    window.omnibot.agent.openAttachment({ attachmentId: attachment.id, action }, props.serverId).catch((error) => {
       const { t, errorMessage } = currentText();
       actionToast.error(errorMessage(error, t("attachment.error.open")));
     });

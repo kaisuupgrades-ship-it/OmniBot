@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the storage panels reach in main: the stored files of a server, and the agent names that
@@ -11,7 +11,7 @@ export interface FilesPort {
     Partial<Pick<OmniBotDesktopApi["storage"], "getOldRuntimeVersions" | "removeOldRuntimeVersions">>;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function filesPort(): FilesPort {
-  return window.openbot;
+  return window.omnibot;
 }

@@ -1,5 +1,5 @@
-import type { RoutineSchedule } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { RoutineSchedule } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   addCalendarDays,
   addCalendarMonths,
@@ -11,7 +11,7 @@ import {
   calendarMonthStart,
   calendarWeekStart,
   clockChangeDay,
-} from "@openbot/team-client/routine-calendar-dates";
+} from "@omnibot/team-client/routine-calendar-dates";
 import {
   Alert,
   AlertActions,
@@ -28,7 +28,7 @@ import {
   Skeleton,
   SlidingTabs,
   X,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { createMemo, createStore, For, Match, onSettled, Show, Switch, untrack } from "solid-js";
 import type { AgentProfile } from "../../data";
 import { useText } from "../../text";

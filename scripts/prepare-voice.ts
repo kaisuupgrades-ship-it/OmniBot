@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { copyFileSync, createReadStream, existsSync } from "node:fs";
 import { mkdir, mkdtemp, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { PARAKEET_MODEL_FILES, VOICE_RUNTIME_ADDON } from "../src/main/voice-model-service";
 
 const logger = createOmniBotLogger("prepare-voice");
@@ -38,7 +38,7 @@ const RUNTIME_PACKAGES: Readonly<Record<string, RuntimePackage>> = {
   },
 };
 
-const buildRoot = resolve(".openbot-build/voice");
+const buildRoot = resolve(".omnibot-build/voice");
 const runtimeRoot = join(buildRoot, "runtime");
 const modelRoot = join(buildRoot, "model");
 // Beside the runtime, not in it: electron-builder copies the whole runtime directory.

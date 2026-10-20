@@ -52,13 +52,13 @@ async function build(): Promise<void> {
     ])
   ).trim();
   if (appVersion !== version) throw new Error("OmniBot.app and Host package versions differ.");
-  const temp = await mkdtemp(join(tmpdir(), "openbot-host-build-"));
+  const temp = await mkdtemp(join(tmpdir(), "omnibot-host-build-"));
   const payload = join(temp, "payload");
   const installerScripts = join(temp, "scripts");
   const destination = resolve(`dist/OmniBot-Host-${version}-arm64.pkg`);
   try {
     await mkdir(join(payload, HOST_MANAGER_DIRECTORY), { recursive: true });
-    for (const name of ["host-manager", "openbot-host"]) {
+    for (const name of ["host-manager", "omnibot-host"]) {
       await command("bun", [
         "build",
         `scripts/${name}.ts`,
@@ -92,7 +92,7 @@ async function build(): Promise<void> {
         "--options",
         "runtime",
         "--identifier",
-        `app.openbot.host.${name}`,
+        `app.omnibot.host.${name}`,
         ...(name === "create-tenants" ? [] : ["--entitlements", "build/macos/host-updates/entitlements.plist"]),
         binary,
       ]);
@@ -106,9 +106,9 @@ async function build(): Promise<void> {
       ]);
     }
     for (const [source, target] of [
-      ["openbot-host", "/usr/local/bin/openbot-host"],
-      ["openbot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/openbot-relaunch.sh`],
-      ["app.openbot.host-manager.plist", "/Library/LaunchDaemons/app.openbot.host-manager.plist"],
+      ["omnibot-host", "/usr/local/bin/omnibot-host"],
+      ["omnibot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/omnibot-relaunch.sh`],
+      ["app.omnibot.host-manager.plist", "/Library/LaunchDaemons/app.omnibot.host-manager.plist"],
       ["app.omnibot.desktop.relaunch.plist", "/Library/LaunchAgents/app.omnibot.desktop.relaunch.plist"],
     ] as const) {
       await mkdir(dirname(join(payload, target)), { recursive: true });

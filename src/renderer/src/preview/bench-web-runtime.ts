@@ -1,14 +1,14 @@
-import type { ConversationMessage } from "@openbot/contracts/ipc";
+import type { ConversationMessage } from "@omnibot/contracts/ipc";
 import type { WebRuntimeFactory } from "../features/web-client/web-client-context";
 import type { WebWorkspaceRuntime } from "../features/web-client/web-runtime";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 import { mockWebRuntimeFor } from "./mock-web-runtime";
 
 /**
  * The mock host for `bun run perf:web` (`scripts/web-client-perf-e2e.ts`) and
  * `scripts/web-client-conversation-trim-e2e.ts`. The first agent has a long conversation, and the
  * scripts stream a reply into it and count the host requests that the web client makes. The scripts
- * read the driver from `globalThis.openbotWebBench`.
+ * read the driver from `globalThis.omnibotWebBench`.
  */
 interface WebBench {
   /** Resolves when the host has the long conversation. */
@@ -203,6 +203,6 @@ export const createBenchWebRuntime: WebRuntimeFactory = (_accountId, events) => 
     stream,
     append,
   };
-  Object.assign(globalThis, { openbotWebBench: bench });
+  Object.assign(globalThis, { omnibotWebBench: bench });
   return runtime;
 };

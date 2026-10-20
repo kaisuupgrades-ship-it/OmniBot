@@ -1,4 +1,4 @@
-// The queue key of this host (`@openbot/contracts/signal-protocol/ingress-queue`). Signal seals the
+// The queue key of this host (`@omnibot/contracts/signal-protocol/ingress-queue`). Signal seals the
 // Slack, Discord and Telegram events that arrive while a hosted server sleeps to its public half, so
 // the private half must stay the same across restarts. It is encrypted at rest by the operating
 // system and registered for redaction.
@@ -8,8 +8,8 @@ import {
   createIngressQueueKeyPair,
   importIngressQueuePrivateKey,
   isIngressQueueKey,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
-import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
+} from "@omnibot/contracts/signal-protocol/ingress-queue";
+import { createOmniBotLogger, registerSecretValue } from "@omnibot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import { writeFileAtomically } from "../backend/atomic-json-file";

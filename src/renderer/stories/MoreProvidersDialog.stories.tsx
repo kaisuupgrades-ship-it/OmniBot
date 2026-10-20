@@ -4,11 +4,11 @@
  * OmniBot has no description.
  */
 
-import { agentProviderName, PICKER_PROVIDERS } from "@openbot/contracts/agent-providers";
-import type { AgentProviderId } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { MoreProvidersDialog } from "@openbot/ui/components/MoreProvidersDialog";
-import { useText } from "@openbot/ui/text";
+import { agentProviderName, PICKER_PROVIDERS } from "@omnibot/contracts/agent-providers";
+import type { AgentProviderId } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { MoreProvidersDialog } from "@omnibot/ui/components/MoreProvidersDialog";
+import { useText } from "@omnibot/ui/text";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

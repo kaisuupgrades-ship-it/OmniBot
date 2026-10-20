@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { ProviderLogo } from "@omnibot/brand";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createSignal, For, onSettled } from "solid-js";
 import {
   LANDING_NETWORK_AGENTS,
@@ -184,16 +184,16 @@ export function AgentNetworkSection() {
       marks: [],
       font: style.fontFamily,
       colors: {
-        hub: token("--openbot-logo-production"),
-        hubEye: token("--openbot-logo-production-eye"),
-        dot: token("--openbot-glass-border"),
-        badge: token("--openbot-bg-control-active"),
-        canvas: token("--openbot-bg-canvas"),
-        bubble: token("--openbot-bg-surface"),
-        bubbleBorder: token("--openbot-dialog-ring"),
-        bubbleText: token("--openbot-text-primary"),
-        label: token("--openbot-text-secondary"),
-        hubPulse: token("--openbot-text-primary"),
+        hub: token("--omnibot-logo-production"),
+        hubEye: token("--omnibot-logo-production-eye"),
+        dot: token("--omnibot-glass-border"),
+        badge: token("--omnibot-bg-control-active"),
+        canvas: token("--omnibot-bg-canvas"),
+        bubble: token("--omnibot-bg-surface"),
+        bubbleBorder: token("--omnibot-dialog-ring"),
+        bubbleText: token("--omnibot-text-primary"),
+        label: token("--omnibot-text-secondary"),
+        hubPulse: token("--omnibot-text-primary"),
       },
     };
 
@@ -342,7 +342,7 @@ export function AgentNetworkSection() {
       })
       .catch(() => {});
     // The avatar engine is too large for the first load of the home page, as in the features section.
-    void import("@openbot/ui/bloub-avatar")
+    void import("@omnibot/ui/bloub-avatar")
       .then(({ AVATAR_HUE_CHOICES, avatarHeadColor, createStaticAvatarSvg }) => {
         if (disposed) return;
         const seeds = [

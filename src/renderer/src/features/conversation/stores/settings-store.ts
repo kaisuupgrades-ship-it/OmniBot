@@ -1,9 +1,9 @@
-import type { AgentModelId, AgentProviderId, AgentReasoningEffort, UpdateAgentInput } from "@openbot/contracts/ipc";
+import type { AgentModelId, AgentProviderId, AgentReasoningEffort, UpdateAgentInput } from "@omnibot/contracts/ipc";
 import type {
   AgentRuntimeSettings,
   AgentRuntimeSettingsPatch,
-} from "@openbot/ui/features/conversation/AgentSettingsPanel";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/AgentSettingsPanel";
+import { currentText } from "@omnibot/ui/text";
 import { agentConversationKey } from "../conversation-keys";
 import type { ConversationProps, ConversationTarget } from "../conversation-types";
 

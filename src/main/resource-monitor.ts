@@ -2,7 +2,7 @@ import { execFile } from "node:child_process";
 import { cpus, totalmem } from "node:os";
 import { join } from "node:path";
 import { monitorEventLoopDelay } from "node:perf_hooks";
-import type { AgentEvent } from "@openbot/contracts/ipc";
+import type { AgentEvent } from "@omnibot/contracts/ipc";
 import { Effect, Exit, Option, Scope, Semaphore } from "effect";
 import {
   app,
@@ -45,7 +45,7 @@ import { appendRotatingLines, type TraceFile } from "./trace-file";
 
 const SAMPLE_INTERVAL_MS = 60_000;
 const PERSIST_INTERVAL_MS = 15 * 60_000;
-const RESOURCE_SUMMARY_FILE = "openbot-resource-summary-v1.json";
+const RESOURCE_SUMMARY_FILE = "omnibot-resource-summary-v1.json";
 const SAMPLES_FILE = "resources.ndjson";
 const MAX_SAMPLES_BYTES = 1024 * 1024;
 const PS_TIMEOUT_MS = 5_000;

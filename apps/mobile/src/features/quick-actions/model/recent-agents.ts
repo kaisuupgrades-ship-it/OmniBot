@@ -1,11 +1,11 @@
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { remoteHostFingerprint } from "@openbot/team-client";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { remoteHostFingerprint } from "@omnibot/team-client";
 import { create } from "zustand";
 import type { RecentAgent } from "./quick-action-items";
 
 /** The chats that this phone opened last for one account, which the app icon offers. */
 export function recentAgentsKey(apiUrl: string, userId: string): string {
-  return `openbot.recent-agents.v1.${remoteHostFingerprint(JSON.stringify([new URL(apiUrl).origin, userId]))}`;
+  return `omnibot.recent-agents.v1.${remoteHostFingerprint(JSON.stringify([new URL(apiUrl).origin, userId]))}`;
 }
 
 export function decodeRecentAgents(stored: string | null): RecentAgent[] {

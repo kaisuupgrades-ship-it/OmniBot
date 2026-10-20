@@ -41,7 +41,7 @@ function CompareCardMarks(props: { page: ComparePage }) {
         <CompareMarks
           small
           sides={[
-            { side: "openbot", name: "OmniBot" },
+            { side: "omnibot", name: "OmniBot" },
             { side: "rival", name: page.rival.name, mark: page.rival.mark },
           ]}
         />

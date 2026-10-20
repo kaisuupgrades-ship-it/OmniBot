@@ -1,20 +1,20 @@
 // The embedded browser and its picture-in-picture window.
 
-import { type BrowserDisplayState, type BrowserTab, LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
+import { type BrowserDisplayState, type BrowserTab, LOCAL_SERVER_ID } from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
 import {
   BROWSER_PAGE_STATE_CAPABILITY,
   BROWSER_PAGE_STATE_ROUTES,
   decodeBrowserPageStateSnapshot,
-} from "@openbot/contracts/team-protocol/browser-page-state-v1";
+} from "@omnibot/contracts/team-protocol/browser-page-state-v1";
 import {
   BROWSER_USER_CONTROL_CAPABILITY,
   BROWSER_USER_CONTROL_ROUTES,
   decodeBrowserUserControlSnapshot,
-} from "@openbot/contracts/team-protocol/browser-user-control-v1";
-import { decodeBrowserViewInputValue } from "@openbot/contracts/team-protocol/browser-view-v1";
-import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/browser-user-control-v1";
+import { decodeBrowserViewInputValue } from "@omnibot/contracts/team-protocol/browser-view-v1";
+import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { sourceText } from "@omnibot/i18n/source";
 import type { BrowserHost } from "../../backend/browser-host";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { BrowserPictureInPicture } from "../browser-picture-in-picture";

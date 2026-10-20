@@ -1,9 +1,9 @@
-import { ArrowUp, Button, Plus } from "@openbot/ui";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ChatVisual } from "@openbot/ui/features/conversation/ChatVisual";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
-import { ConversationHeader } from "@openbot/ui/features/conversation/ConversationHeader";
+import { ArrowUp, Button, Plus } from "@omnibot/ui";
+import type { AgentMessage } from "@omnibot/ui/data";
+import { ChatMessageRow } from "@omnibot/ui/features/conversation/ChatMessageRow";
+import { ChatVisual } from "@omnibot/ui/features/conversation/ChatVisual";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { ConversationHeader } from "@omnibot/ui/features/conversation/ConversationHeader";
 import { Portal } from "@solidjs/web";
 import { createEffect, createSignal, For, onSettled, Show } from "solid-js";
 import { fn } from "storybook/test";
@@ -74,7 +74,7 @@ const meta = {
   argTypes: { html: { control: false } },
   parameters: { layout: "fullscreen" },
   render: (args) => (
-    <main style={{ width: "min(656px, 100vw)", padding: "var(--openbot-space-6)" }}>
+    <main style={{ width: "min(656px, 100vw)", padding: "var(--omnibot-space-6)" }}>
       <VisualStage {...args} />
     </main>
   ),
@@ -216,9 +216,9 @@ export const PhoneWidth: Story = {
     <main
       style={{
         width: "360px",
-        padding: "var(--openbot-space-4)",
+        padding: "var(--omnibot-space-4)",
         display: "grid",
-        gap: "var(--openbot-space-6)",
+        gap: "var(--omnibot-space-6)",
       }}
     >
       <For each={EXCHANGES.filter((exchange) => !exchange.state)}>

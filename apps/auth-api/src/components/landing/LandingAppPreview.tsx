@@ -1,8 +1,8 @@
 import {
   LANDING_PREVIEW_READY_MESSAGE,
   LANDING_PREVIEW_START_MESSAGE,
-} from "@openbot/contracts/landing-preview-messages";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@omnibot/contracts/landing-preview-messages";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { onSettled } from "solid-js";
 
 const LANDING_PREVIEW_URL = "/app-preview";
@@ -10,9 +10,9 @@ const LANDING_PREVIEW_LOAD_DELAY_MS = 300;
 const LANDING_PREVIEW_REVEAL_FALLBACK_MS = 240;
 
 const LANDING_PREVIEW_MARKS = {
-  ready: "openbot:landing-preview:ready",
-  shown: "openbot:landing-preview:shown",
-  src: "openbot:landing-preview:src",
+  ready: "omnibot:landing-preview:ready",
+  shown: "omnibot:landing-preview:shown",
+  src: "omnibot:landing-preview:src",
 } as const;
 
 function readDuration(name: string, fallback: number): number {

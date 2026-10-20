@@ -9,40 +9,40 @@ import {
   type ProviderApiKeyStatus,
   type ProviderRuntimeStatus,
   type SaveCustomProviderInput,
-} from "@openbot/contracts/ipc";
-import { Text } from "@openbot/ui";
-import { ProviderPicker } from "@openbot/ui/components/ProviderPicker";
-import type { ProviderAccountActions } from "@openbot/ui/components/provider-accounts";
+} from "@omnibot/contracts/ipc";
+import { Text } from "@omnibot/ui";
+import { ProviderPicker } from "@omnibot/ui/components/ProviderPicker";
+import type { ProviderAccountActions } from "@omnibot/ui/components/provider-accounts";
 import {
   AcpRegistrySettings,
   type AcpRegistrySettingsApi,
-} from "@openbot/ui/features/custom-providers/AcpRegistrySettings";
+} from "@omnibot/ui/features/custom-providers/AcpRegistrySettings";
 import {
   CustomAgentSettings,
   type CustomAgentSettingsApi,
-} from "@openbot/ui/features/custom-providers/CustomAgentSettings";
-import { CustomProviderDialog } from "@openbot/ui/features/custom-providers/CustomProviderDialog";
-import { CustomProviderListDialog } from "@openbot/ui/features/custom-providers/CustomProviderListDialog";
-import { CustomProviderPresetDialog } from "@openbot/ui/features/custom-providers/CustomProviderPresetDialog";
-import { localServerProbes, presetSetupProvider } from "@openbot/ui/features/custom-providers/custom-provider-presets";
-import { DetectedProviderSetup } from "@openbot/ui/features/custom-providers/DetectedProviderSetup";
-import { DetectedProviders } from "@openbot/ui/features/custom-providers/DetectedProviders";
+} from "@omnibot/ui/features/custom-providers/CustomAgentSettings";
+import { CustomProviderDialog } from "@omnibot/ui/features/custom-providers/CustomProviderDialog";
+import { CustomProviderListDialog } from "@omnibot/ui/features/custom-providers/CustomProviderListDialog";
+import { CustomProviderPresetDialog } from "@omnibot/ui/features/custom-providers/CustomProviderPresetDialog";
+import { localServerProbes, presetSetupProvider } from "@omnibot/ui/features/custom-providers/custom-provider-presets";
+import { DetectedProviderSetup } from "@omnibot/ui/features/custom-providers/DetectedProviderSetup";
+import { DetectedProviders } from "@omnibot/ui/features/custom-providers/DetectedProviders";
 import type {
   DetectedProvider,
   DetectedProviderApi,
   ProviderDetection,
-} from "@openbot/ui/features/custom-providers/detected-providers";
+} from "@omnibot/ui/features/custom-providers/detected-providers";
 import {
   ProviderDetectionSettings,
   type ProviderDetectionSettingsValue,
-} from "@openbot/ui/features/custom-providers/ProviderDetectionSettings";
+} from "@omnibot/ui/features/custom-providers/ProviderDetectionSettings";
 import {
   isKeyDialogProvider,
   type KeyDialogProvider,
   OpenCodeKeyDialog,
   type ProviderKeyApi,
-} from "@openbot/ui/features/settings/OpenCodeKeyDialog";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/settings/OpenCodeKeyDialog";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, createStore, Show, untrack } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";
 import type { ProviderConnectionApi } from "../../components/provider-connection-api";

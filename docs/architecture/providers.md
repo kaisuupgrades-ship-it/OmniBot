@@ -106,7 +106,7 @@ Codex and Pi, the manifest `checksum` for Muse, and npm `dist.integrity` for Cla
 so a Grok, Gemini or Cursor release is trusted on TLS alone. A Gemini release must stay on
 `dl.google.com/agy-extensions/releases` and keep the pinned command name. A Cursor release must use
 the pinned `downloads.cursor.com/lab` path for its target, with a build that starts with the
-registry date, and keep the pinned command. An upstream install writes `openbot-install.json` with the SHA-256 of each
+registry date, and keep the pinned command. An upstream install writes `omnibot-install.json` with the SHA-256 of each
 file it installed, and every start verifies that record and the binary's `--version` before the
 install is used. The newest version in the store that verifies is the one that runs.
 
@@ -119,7 +119,7 @@ keeps the previous client until the candidate is ready; activation failure remov
 artifact and preserves the old runtime, so a release that does not start leaves the last working CLI
 in use. Download status stays `finishing` until activation succeeds.
 
-CLI resolution prefers an explicit `OPENBOT_*_PATH`, then the installed managed copy, then an
+CLI resolution prefers an explicit `OMNIBOT_*_PATH`, then the installed managed copy, then an
 automatically discovered system CLI. Updates never run the system CLI's updater. An explicit path
 suppresses managed update offers. Startup uses the same selection and reads the executable's version.
 
@@ -206,14 +206,14 @@ the one Update button, and one entry point in the runtime store, `startProviderU
 runs behind it, whoever owns the CLI: the download installs the managed copy and
 `updateProviderCli` activates it, and CLI resolution then prefers that copy to the system install,
 which is left where it is. OmniBot never runs the CLI's own updater, so no version it offers depends
-on another release channel. An explicit `OPENBOT_*_PATH` suppresses the offer, because that path
+on another release channel. An explicit `OMNIBOT_*_PATH` suppresses the offer, because that path
 names the binary to run and the managed copy is not it. The owner comes from the last resolution of
 the binary, not from the client that runs it, so a provider that is signed out still reports its own
 install rather than reading as the managed copy. A failure keeps the reason the CLI gave, redacted,
 in one error that goes to the provider row and to the caller - and on, through the Team API, to the
 team's connected clients.
 
-Every runtime the store reaches is on this computer: `window.openbot.providerRuntimes` addresses no
+Every runtime the store reaches is on this computer: `window.omnibot.providerRuntimes` addresses no
 other one, while the agent status beside it describes whichever server is open. The store therefore
 takes `isLocalServer`, and a workspace on another computer announces no offer and starts no update -
 the same rule the provider row and the picker already follow. A server switch rebuilds that store,
@@ -346,7 +346,7 @@ confirmed in the ACP Python source; a native harness requirement remains unverif
 An external installation must preserve this layout (1.3.0 is an example):
 
 ```text
-/var/lib/openbot/antigravity-acp-1.3.0/
+/var/lib/omnibot/antigravity-acp-1.3.0/
   antigravity-package.json    {"version":"1.3.0"}
   bin/
     agy_acp_server.par
@@ -354,7 +354,7 @@ An external installation must preserve this layout (1.3.0 is an example):
 ```
 
 Both programs must be executable by the OmniBot host user. Set
-`OPENBOT_ANTIGRAVITY_PATH=/var/lib/openbot/antigravity-acp-1.3.0/bin/agy_acp_server.par`
+`OMNIBOT_ANTIGRAVITY_PATH=/var/lib/omnibot/antigravity-acp-1.3.0/bin/agy_acp_server.par`
 in that process's environment and restart OmniBot. The variable names the executable, not
 the directory. OmniBot requires the version manifest two levels above it; extraction alone
 does not create that manifest. An invalid override remains an error: OmniBot does not replace
@@ -401,7 +401,7 @@ never `cursor`, which starts the Cursor editor.
 
 Sign in is an ACP `authenticate` call with `cursor_login`, in a separate process, as for Gemini.
 `CURSOR_API_KEY` in the environment also signs the CLI in. A confined Cursor process gets
-`CURSOR_CONFIG_DIR=~/.cursor/openbot-confined` (`cursorConfinedEnv`): the CLI writes
+`CURSOR_CONFIG_DIR=~/.cursor/omnibot-confined` (`cursorConfinedEnv`): the CLI writes
 `cli-config.json` when a session starts and fails when it cannot, and that file also holds the
 user's permissions. `cursorStatePaths` lets it write `~/.cursor` and protects the user's settings,
 hooks, rules, MCP and permission files there and in the CLI config folder, and the
@@ -507,7 +507,7 @@ saved, and a joined host gets no detection and no Edit.
 ### Local provider switches
 
 The Providers section can turn each built-in provider off on this computer.
-`ProviderUseSettingsStore` saves the choices in `openbot-provider-use-v1.json`.
+`ProviderUseSettingsStore` saves the choices in `omnibot-provider-use-v1.json`.
 A missing file leaves all providers on. An unreadable or newer file stays unchanged.
 
 `ProviderRuntime` filters off providers before CLI checks and model discovery. It also
@@ -571,7 +571,7 @@ Muse profile generation fails before the CLI starts. The pinned native host stil
 MCP servers with `--disable-shell`, `--disable-write`, empty hooks, and session `mcpServers: {}`.
 It cannot meet the tool-free profile requirement. Generate the profile with another provider,
 then select Muse for the agent. The local echo test and synthetic MCP marker record this limit in
-`.openbot-build/muse-check/profile-mcp.mjs` and `profile-mcp-report.json`; this is not a live model
+`.omnibot-build/muse-check/profile-mcp.mjs` and `profile-mcp-report.json`; this is not a live model
 authentication test.
 
 Managed Muse downloads use the official stable-channel manifest and artifact SHA-256 values.

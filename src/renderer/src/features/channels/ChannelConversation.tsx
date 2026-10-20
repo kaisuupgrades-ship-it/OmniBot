@@ -1,5 +1,5 @@
-import { expandAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { chatTagReferences, expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
+import { expandAttachmentReferences } from "@omnibot/contracts/attachment-references";
+import { chatTagReferences, expandChatTagReferences } from "@omnibot/contracts/chat-tag-references";
 import {
   type AgentApproval,
   type AttachmentSummary,
@@ -7,52 +7,52 @@ import {
   type BrowserTakeoverRequest,
   canPreviewAttachment,
   type FilePreview,
-} from "@openbot/contracts/ipc";
-import { ArrowUp, Button, ErrorReference, Plus, X } from "@openbot/ui";
-import { QuestionPromptBubble } from "@openbot/ui/components/QuestionPromptBubble";
+} from "@omnibot/contracts/ipc";
+import { ArrowUp, Button, ErrorReference, Plus, X } from "@omnibot/ui";
+import { QuestionPromptBubble } from "@omnibot/ui/components/QuestionPromptBubble";
 import {
   SettingsPanel,
   SettingsPanelContent,
   SettingsPanelHeader,
   settingsPanelMaxWidth,
-} from "@openbot/ui/components/SettingsPanel";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChannelActivityIndicator, type ChannelWorker } from "@openbot/ui/features/channels/ChannelActivityIndicator";
-import { ChannelAvatar } from "@openbot/ui/features/channels/ChannelAvatar";
-import { ChannelStoppedTasks } from "@openbot/ui/features/channels/ChannelStoppedTasks";
-import { AwaitingReplies } from "@openbot/ui/features/conversation/AwaitingReplies";
-import { ChatActionMarker } from "@openbot/ui/features/conversation/ChatActionMarker";
-import { ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ChatRowBoundary } from "@openbot/ui/features/conversation/ChatRowBoundary";
+} from "@omnibot/ui/components/SettingsPanel";
+import type { AgentMessage } from "@omnibot/ui/data";
+import { ChannelActivityIndicator, type ChannelWorker } from "@omnibot/ui/features/channels/ChannelActivityIndicator";
+import { ChannelAvatar } from "@omnibot/ui/features/channels/ChannelAvatar";
+import { ChannelStoppedTasks } from "@omnibot/ui/features/channels/ChannelStoppedTasks";
+import { AwaitingReplies } from "@omnibot/ui/features/conversation/AwaitingReplies";
+import { ChatActionMarker } from "@omnibot/ui/features/conversation/ChatActionMarker";
+import { ChatMessageRow } from "@omnibot/ui/features/conversation/ChatMessageRow";
+import { ChatRowBoundary } from "@omnibot/ui/features/conversation/ChatRowBoundary";
 import {
   ChatScrollRail,
   createChatScrollRail,
   unloadedHistory,
-} from "@openbot/ui/features/conversation/ChatScrollRail";
-import { ComposerEditor, expandComposerMentions } from "@openbot/ui/features/conversation/ComposerEditor";
-import { StopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { ApprovalCard, BrowserTakeoverCard } from "@openbot/ui/features/conversation/ConversationPrompts";
+} from "@omnibot/ui/features/conversation/ChatScrollRail";
+import { ComposerEditor, expandComposerMentions } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { StopIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { ApprovalCard, BrowserTakeoverCard } from "@omnibot/ui/features/conversation/ConversationPrompts";
 import {
   calculateChatScrollMargin,
   createChatVirtualizer,
-} from "@openbot/ui/features/conversation/createChatVirtualizer";
-import { ScrollToLatestButton, scrollToLatestMessage } from "@openbot/ui/features/conversation/MessageNavigation";
-import { MessageActions } from "@openbot/ui/features/conversation/MessageRendering";
+} from "@omnibot/ui/features/conversation/createChatVirtualizer";
+import { ScrollToLatestButton, scrollToLatestMessage } from "@omnibot/ui/features/conversation/MessageNavigation";
+import { MessageActions } from "@omnibot/ui/features/conversation/MessageRendering";
 import {
   anchorNewMessages,
   countableTimelineMessage,
   type NewMessageTally,
   tallyNewMessages,
-} from "@openbot/ui/features/conversation/new-message-tally";
-import { TaskList } from "@openbot/ui/features/conversation/TaskList";
+} from "@omnibot/ui/features/conversation/new-message-tally";
+import { TaskList } from "@omnibot/ui/features/conversation/TaskList";
 import {
   scrollToUnreadBoundary,
   UnreadMessagesBanner,
   UnreadMessagesDivider,
   unreadMessagesDividerIsVisible,
-} from "@openbot/ui/features/conversation/UnreadMessages";
-import { useText } from "@openbot/ui/text";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/ui/features/conversation/UnreadMessages";
+import { useText } from "@omnibot/ui/text";
+import { errorReference, type UserErrorDetails } from "@omnibot/user-errors";
 import type { VirtualItem } from "@tanstack/virtual-core";
 import {
   createEffect,

@@ -7,7 +7,7 @@ import type {
   MarketplaceSkillSummary,
   McpServerConfig,
   SkillCategory,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import type { ConnectorDetail } from "../connectors/ConnectorDetailPanel";
 import type { ConnectorId } from "../connectors/connectors";
 import type { MarketplacePluginDetail, MarketplacePluginPrompt } from "../settings/marketplace-plugins";

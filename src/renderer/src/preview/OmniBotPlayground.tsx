@@ -1,14 +1,14 @@
 import {
   LANDING_PREVIEW_READY_MESSAGE,
   LANDING_PREVIEW_START_MESSAGE,
-} from "@openbot/contracts/landing-preview-messages";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@omnibot/contracts/landing-preview-messages";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { onCleanup, onSettled } from "solid-js";
 import { App } from "../App";
 import { syncLogoColor } from "../logo-color";
 import { LANDING_PREVIEW_OPTIONS } from "./landing-fixtures";
-import { createMockOmniBot, type MockOmniBotControls, type MockOmniBotOptions } from "./mock-openbot";
+import { createMockOmniBot, type MockOmniBotControls, type MockOmniBotOptions } from "./mock-omnibot";
 
 const LANDING_PREVIEW_READY_RETRY_MS = 250;
 
@@ -30,9 +30,9 @@ export function OmniBotPlayground(props: OmniBotPlaygroundProps) {
     createMock: createMockOmniBot,
     renderApp: () => <App landingPreview={landingPreview} />,
   };
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = dependencies.createMock(landingPreview ? LANDING_PREVIEW_OPTIONS : props.options);
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   let landingController: { activate: () => void; dispose: () => void } | null = null;
   let controllerLoading: Promise<void> | null = null;
   let disposed = false;
@@ -91,7 +91,7 @@ export function OmniBotPlayground(props: OmniBotPlaygroundProps) {
     disposed = true;
     landingController?.dispose();
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
 
   return dependencies.renderApp();

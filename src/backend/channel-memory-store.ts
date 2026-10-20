@@ -1,8 +1,8 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { ChannelMemory } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { ChannelMemory } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { MemoryStore, type MemoryTables } from "./memory-store";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 
 const CHANNEL_MEMORY_TABLES: MemoryTables = {
   table: "projection_channel_memories",

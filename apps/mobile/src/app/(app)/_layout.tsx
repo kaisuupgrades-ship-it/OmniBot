@@ -34,7 +34,7 @@ function AuthenticatedStack() {
   const pushAnimation = useReducedMotion() ? "fade" : "slide_from_right";
   const { t } = useText();
   const background = useThemeColor("background");
-  const sheetBackground = String(useCSSVariable("--openbot-bg-sheet") ?? background);
+  const sheetBackground = String(useCSSVariable("--omnibot-bg-sheet") ?? background);
   const largeTitlePage = {
     animation: pushAnimation,
     contentStyle: { backgroundColor: sheetBackground },

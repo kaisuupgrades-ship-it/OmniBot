@@ -78,10 +78,10 @@ import { createHmac, randomUUID } from "node:crypto";
 const body = JSON.stringify({ type: "deployment.completed", data: { environment: "production" } });
 const deliveryId = randomUUID(); // Keep this ID and the body for a retry.
 const timestamp = String(Math.floor(Date.now() / 1000));
-const signature = createHmac("sha256", process.env.OPENBOT_WEBHOOK_SECRET)
+const signature = createHmac("sha256", process.env.OMNIBOT_WEBHOOK_SECRET)
   .update(`${timestamp}.${deliveryId}.${body}`)
   .digest("hex");
-const response = await fetch(process.env.OPENBOT_WEBHOOK_URL, {
+const response = await fetch(process.env.OMNIBOT_WEBHOOK_URL, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

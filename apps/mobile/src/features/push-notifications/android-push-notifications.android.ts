@@ -1,4 +1,4 @@
-import { ANDROID_PUSH_TOKEN_PATTERN } from "@openbot/contracts/team-protocol/push-notifications-android-v1";
+import { ANDROID_PUSH_TOKEN_PATTERN } from "@omnibot/contracts/team-protocol/push-notifications-android-v1";
 import { File, Paths } from "expo-file-system";
 import * as Notifications from "expo-notifications";
 import type { NotificationPermission } from "@/features/settings/model/push-notifications";

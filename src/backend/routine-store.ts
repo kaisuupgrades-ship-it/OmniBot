@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   RoutineFields,
   RoutineLimitPolicy,
@@ -8,17 +8,17 @@ import type {
   RoutineRunSource,
   RoutineRunStatus,
   RoutineSchedule,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   isRoutineSchedule,
   ROUTINE_LIMIT_POLICIES,
   ROUTINE_MISSED_COUNT_LIMIT,
   ROUTINE_MISSED_POLICIES,
   ROUTINE_RUN_SOURCES,
-} from "@openbot/contracts/ipc";
-import type { EventFilter, EventJsonValue, EventRoutineOwner } from "@openbot/contracts/ipc-events";
-import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import type { EventFilter, EventJsonValue, EventRoutineOwner } from "@omnibot/contracts/ipc-events";
+import { type DynamicRecord, isDynamicRecord, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import {
   nextRoutineOccurrence,
   nextValidRoutineOccurrence,
@@ -27,14 +27,14 @@ import {
   routineOnceInstant,
   validateRoutineSchedule,
   validateStoredRoutineSchedule,
-} from "@openbot/team-client/routine-schedule";
+} from "@omnibot/team-client/routine-schedule";
 import {
   databaseRows,
   optionalStringColumn,
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 import { hasWebhookReceipt, insertWebhookReceipt, revokeRoutineWebhooks } from "./webhook-route-store";
 import { parseEventFilters, validateWebhookTrigger, webhookMismatch, webhookRunInstruction } from "./webhook-trigger";
 

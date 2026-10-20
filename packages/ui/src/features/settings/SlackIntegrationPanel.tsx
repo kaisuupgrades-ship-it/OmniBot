@@ -1,4 +1,4 @@
-import { DISCORD_ORCHESTRATOR_AVATAR } from "@openbot/contracts/discord-app";
+import { DISCORD_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/discord-app";
 import type {
   AgentModelId,
   AgentModelOption,
@@ -9,10 +9,10 @@ import type {
   MessagingConnection,
   MessagingPlatform,
   MessagingRole,
-} from "@openbot/contracts/ipc";
-import { MESSAGING_LIMITS } from "@openbot/contracts/ipc";
-import { SLACK_ORCHESTRATOR_AVATAR } from "@openbot/contracts/slack-app";
-import type { AppMessages, AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import { MESSAGING_LIMITS } from "@omnibot/contracts/ipc";
+import { SLACK_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/slack-app";
+import type { AppMessages, AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertContent,
@@ -36,7 +36,7 @@ import {
   Text,
   Trash2,
   TriangleAlert,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { createEffect, createSignal, createStore, createUniqueId, For, Match, Show, Switch } from "solid-js";
 import { ProviderModelPicker } from "../../components/ProviderModelPicker";
 import { useText } from "../../text";

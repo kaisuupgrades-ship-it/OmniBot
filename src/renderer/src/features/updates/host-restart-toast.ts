@@ -1,5 +1,5 @@
-import { toast } from "@openbot/ui";
-import { currentText } from "@openbot/ui/text";
+import { toast } from "@omnibot/ui";
+import { currentText } from "@omnibot/ui/text";
 import { type Accessor, createEffect, onCleanup } from "solid-js";
 
 export interface HostRestartView {

@@ -1,10 +1,10 @@
-import { hostedSiteDeploymentPrefix, isHostedSiteStatus } from "@openbot/contracts/hosted-sites";
+import { hostedSiteDeploymentPrefix, isHostedSiteStatus } from "@omnibot/contracts/hosted-sites";
 import type {
   HostedSiteSummary as HostedSiteClientSummary,
   HostedSiteFramework,
   HostedSiteStatus,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
 import { Effect } from "effect";
 import { hmacSha256, sha256 } from "./crypto";
 import {

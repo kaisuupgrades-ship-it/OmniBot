@@ -1,6 +1,6 @@
-import { Button, buttonVariants, ChevronDown, ContextMenu, DropdownMenu, Tabs, X } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
-import { clamp, motionDuration, prefersReducedMotion } from "@openbot/ui/utils";
+import { Button, buttonVariants, ChevronDown, ContextMenu, DropdownMenu, Tabs, X } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
+import { clamp, motionDuration, prefersReducedMotion } from "@omnibot/ui/utils";
 import { createEffect, createSignal, createStore, For, onSettled, Show } from "solid-js";
 import { BrowserTabIcon, useBrowserTabTitle } from "./BrowserTabIcon";
 import { BrowserTabMenu } from "./BrowserTabMenu";
@@ -56,8 +56,8 @@ function createChipMotion(chips: () => HTMLElement[]) {
       places = read();
       if (before.size === 0 || prefersReducedMotion() || elements.some((el) => !el.isConnected)) return;
       const timing = {
-        duration: motionDuration("--openbot-duration-normal", 160),
-        easing: getComputedStyle(document.documentElement).getPropertyValue("--openbot-ease-out").trim() || "ease-out",
+        duration: motionDuration("--omnibot-duration-normal", 160),
+        easing: getComputedStyle(document.documentElement).getPropertyValue("--omnibot-ease-out").trim() || "ease-out",
       };
       for (const el of elements) {
         const id = el.dataset.tabId ?? "";

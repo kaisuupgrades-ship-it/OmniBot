@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 declare global {
   interface HighlightRegistry {
@@ -9,6 +9,6 @@ declare global {
   }
 
   interface Window {
-    openbot: OmniBotDesktopApi;
+    omnibot: OmniBotDesktopApi;
   }
 }

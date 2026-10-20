@@ -6,11 +6,11 @@ import {
   type McpSignInRelayPage,
   type McpTestResult,
   relayableSignInLink,
-} from "@openbot/contracts/ipc";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import type { TeamCurrentCapability } from "@omnibot/contracts/team-protocol/current";
+import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@omnibot/contracts/team-protocol/sign-in-relay-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Cause, Effect, Fiber } from "effect";
 import type { ResponseDecoder } from "./remote-host-decoding";
 import type { RemoteRequestInit } from "./remote-server-client";

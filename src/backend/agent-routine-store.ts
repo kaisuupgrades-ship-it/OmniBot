@@ -4,8 +4,8 @@ import type {
   RoutineRun,
   RoutineRunStatus,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
-import type { OmniBotDatabase } from "./openbot-database";
+} from "@omnibot/contracts/ipc";
+import type { OmniBotDatabase } from "./omnibot-database";
 import {
   type DueRoutine,
   type OwnedRoutine,

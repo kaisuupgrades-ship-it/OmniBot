@@ -1,5 +1,5 @@
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Context, Deferred, Effect, Exit, Fiber, Layer, ManagedRuntime, Scope } from "effect";
 import { RemoteWorkflowError } from "./remote-service-effects";
 import type { TeamWebRtcBridge } from "./team-webrtc-bridge";
@@ -19,7 +19,7 @@ class HostSignal extends Context.Service<
     connect(peerId: string, signalUrl: string, token: string): Effect.Effect<void, RemoteWorkflowError>;
     disconnect(peerId: string): Effect.Effect<void, RemoteWorkflowError>;
   }
->()("openbot/main/HostSignal") {
+>()("omnibot/main/HostSignal") {
   static layer(
     bridge: TeamWebRtcBridge,
     scope: Scope.Scope,

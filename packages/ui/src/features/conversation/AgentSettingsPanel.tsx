@@ -1,5 +1,5 @@
-import { agentProviderDescriptor, agentProviderName } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { agentProviderDescriptor, agentProviderName } from "@omnibot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_TASK_LIMIT_DEFAULT,
   AGENT_TASK_LIMIT_MAX,
@@ -29,8 +29,8 @@ import {
   type UpdateAgentAdminSettingsInput,
   type UpdateAgentInput,
   widensAgentPermission,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   ArrowLeftRight,
   Bell,
@@ -55,10 +55,10 @@ import {
   Switch,
   Text,
   Textarea,
-} from "@openbot/ui";
-import { normalizeAvatarFile } from "@openbot/ui/avatar-image";
-import { AVATAR_HUE_OPTIONS, avatarCandidateSeeds, avatarHueSwatch } from "@openbot/ui/bloub-avatar";
-import { ProviderModelPicker, reasoningLabel } from "@openbot/ui/components/ProviderModelPicker";
+} from "@omnibot/ui";
+import { normalizeAvatarFile } from "@omnibot/ui/avatar-image";
+import { AVATAR_HUE_OPTIONS, avatarCandidateSeeds, avatarHueSwatch } from "@omnibot/ui/bloub-avatar";
+import { ProviderModelPicker, reasoningLabel } from "@omnibot/ui/components/ProviderModelPicker";
 import {
   SettingsField,
   SettingsLinkGroup,
@@ -66,10 +66,10 @@ import {
   SettingsPanel,
   SettingsPanelContent,
   SettingsPanelHeader,
-} from "@openbot/ui/components/SettingsPanel";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { errorReference } from "@openbot/user-errors";
+} from "@omnibot/ui/components/SettingsPanel";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { errorReference } from "@omnibot/user-errors";
 import type { JSX } from "@solidjs/web";
 import {
   createEffect,

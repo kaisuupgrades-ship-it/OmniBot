@@ -36,7 +36,7 @@ export const messages = {
   "settings.externalLinks.description": "Choisir où s’ouvrent les liens provenant des conversations.",
   // The two link targets. The saved value stays in English; only the label is translated.
   "settings.externalLinks.defaultBrowser": "Navigateur par défaut",
-  "settings.externalLinks.openbot": "OmniBot",
+  "settings.externalLinks.omnibot": "OmniBot",
   "settings.sendShortcut.title": "Raccourci d’envoi",
   "settings.sendShortcut.description":
     "Choisissez les touches qui envoient un message sur cet appareil et dans ce navigateur.",
@@ -252,7 +252,7 @@ export const messages = {
   "settings.profile.share.copied": "Image copiée",
   "settings.profile.share.copyFailed": "Impossible de copier l’image.",
   "settings.profile.share.createFailed": "Impossible de créer l’image.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "omnibot-activity.png",
   // The text in the image to share.
   "settings.profile.share.caption": "Mes six derniers mois avec OmniBot",
   "settings.profile.activity.title": "Activité",

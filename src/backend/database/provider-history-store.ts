@@ -1,5 +1,5 @@
 import type { DatabaseSync } from "node:sqlite";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
 import { decodeThreadItem, type ThreadItem } from "../protocol";
 import type { ProviderHistoryFragment } from "../provider-history";
 import type { DatabaseCore } from "./database-core";

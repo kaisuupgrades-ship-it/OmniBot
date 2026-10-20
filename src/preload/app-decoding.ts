@@ -4,8 +4,8 @@
 // Each decoder checks every field the contract type requires and keeps each optional field it
 // carries, so a value the renderer reads always has the shape its type says.
 
-import { isAgentTemplateId } from "@openbot/contracts/agent-template-links";
-import { type BillingState, parseBillingState } from "@openbot/contracts/billing";
+import { isAgentTemplateId } from "@omnibot/contracts/agent-template-links";
+import { type BillingState, parseBillingState } from "@omnibot/contracts/billing";
 import {
   type HostedServerCatalog,
   type HostedServerList,
@@ -13,8 +13,8 @@ import {
   parseHostedServerCatalog,
   parseHostedServerList,
   parseHostedServerSummary,
-} from "@openbot/contracts/hosted-servers";
-import { parseHostedSiteList, parseHostedSiteSummary } from "@openbot/contracts/hosted-sites";
+} from "@omnibot/contracts/hosted-servers";
+import { parseHostedSiteList, parseHostedSiteSummary } from "@omnibot/contracts/hosted-sites";
 import {
   type AccountSession,
   type AgentMemoryLimitPreference,
@@ -92,7 +92,7 @@ import {
   type VoiceStream,
   type VoiceStreamTranscript,
   type VoiceTranscriptionResult,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   decodeList,
   decodeRecord,
@@ -104,9 +104,9 @@ import {
   requiredBoolean,
   requiredNumber,
   requiredString,
-} from "@openbot/contracts/ipc-decoding";
-import { isPluginSlug } from "@openbot/contracts/plugin-links";
-import { isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc-decoding";
+import { isPluginSlug } from "@omnibot/contracts/plugin-links";
+import { isBoolean, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
 
 export function decodeAppInfo(value: unknown): AppInfo {
   const info = decodeRecord(value, "app info");

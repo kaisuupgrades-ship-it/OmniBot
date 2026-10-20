@@ -18,7 +18,7 @@
   min-width: 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -29,19 +29,19 @@
   min-width: 0;
   max-width: 100%;
   align-items: center;
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
 }
 
 .agent-task-chip.ui-button {
   display: inline-flex;
   min-width: 0;
   max-width: min(100%, 560px);
-  height: var(--openbot-control-md);
+  height: var(--omnibot-control-md);
   align-items: center;
-  gap: var(--openbot-space-2);
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  padding: 0 var(--openbot-space-2) 0 var(--openbot-space-3);
+  gap: var(--omnibot-space-2);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-pill);
+  padding: 0 var(--omnibot-space-2) 0 var(--omnibot-space-3);
   font-weight: inherit;
   --task-list-glyph: 14px;
 }
@@ -50,8 +50,8 @@
   flex: 0 1 auto;
   min-width: 0;
   overflow: hidden;
-  color: var(--openbot-text-primary);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--omnibot-text-primary);
+  font-weight: var(--omnibot-weight-medium);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -60,31 +60,31 @@
   flex: 0 1 auto;
   min-width: 0;
   overflow: hidden;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .agent-task-chip-chevron {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   flex: 0 0 auto;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 .agent-task-chip-close.ui-button {
   display: grid;
-  width: var(--openbot-control-sm);
-  height: var(--openbot-control-sm);
+  width: var(--omnibot-control-sm);
+  height: var(--omnibot-control-sm);
   flex: 0 0 auto;
   place-items: center;
   padding: 0;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 .agent-task-chip-close svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 /* The task list of the side panel. */
@@ -92,10 +92,10 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
   min-height: 0;
   overflow-y: auto;
-  padding: var(--openbot-space-2);
+  padding: var(--omnibot-space-2);
 }
 
 .agent-task-list .agent-tasks-mark {
@@ -106,25 +106,25 @@
 .agent-task-list-group {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
-  margin-top: var(--openbot-space-2);
+  gap: var(--omnibot-space-0-5);
+  margin-top: var(--omnibot-space-2);
 }
 
 .agent-task-list-day {
   margin: 0;
-  padding: var(--openbot-space-1) var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  padding: var(--omnibot-space-1) var(--omnibot-space-2);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
   font-weight: 500;
 }
 
 .agent-tasks-disclosure {
-  color: var(--openbot-text-secondary);
+  color: var(--omnibot-text-secondary);
 }
 
 .agent-tasks-disclosure .agent-tasks-icon {
-  color: var(--openbot-text-muted);
-  transition: transform var(--openbot-duration-fast) ease;
+  color: var(--omnibot-text-muted);
+  transition: transform var(--omnibot-duration-fast) ease;
 }
 
 .agent-tasks-disclosure[aria-expanded="true"] .agent-tasks-icon {
@@ -137,8 +137,8 @@
   right: 3px;
   width: 5px;
   height: 5px;
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-accent);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-accent);
 }
 
 /* The task panel, in the place of the other side panels. */
@@ -148,33 +148,33 @@
 
 .agent-tasks-panel-origin {
   margin: 0;
-  padding: var(--openbot-space-3) var(--openbot-space-4) 0;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  padding: var(--omnibot-space-3) var(--omnibot-space-4) 0;
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
 }
 
 .agent-tasks-panel-queued {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-1);
-  padding: 0 var(--openbot-space-4);
+  gap: var(--omnibot-space-1);
+  padding: 0 var(--omnibot-space-4);
 }
 
 .agent-tasks-panel-queued-text {
   margin: 0;
   overflow: hidden;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .agent-tasks-panel-note {
   margin: 0;
-  border-top: 1px solid var(--openbot-border);
-  padding: var(--openbot-space-3) var(--openbot-space-4);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  border-top: 1px solid var(--omnibot-border);
+  padding: var(--omnibot-space-3) var(--omnibot-space-4);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
 }
 
 /*

@@ -1,9 +1,9 @@
-import { attachmentReferenceIds } from "@openbot/contracts/attachment-references";
-import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { DraftAttachment } from "@openbot/contracts/ipc";
-import { Badge, Blocks, Listbox, Puzzle } from "@openbot/ui";
-import { usesTouchLayout } from "@openbot/ui/utils";
+import { attachmentReferenceIds } from "@omnibot/contracts/attachment-references";
+import { serializeChatTagReference } from "@omnibot/contracts/chat-tag-references";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { DraftAttachment } from "@omnibot/contracts/ipc";
+import { Badge, Blocks, Listbox, Puzzle } from "@omnibot/ui";
+import { usesTouchLayout } from "@omnibot/ui/utils";
 import { Dynamic, Portal } from "@solidjs/web";
 import {
   createEffect,

@@ -122,7 +122,7 @@ when the feature needs them, and keep the prompts short.
 - Stop each stack you started with `bun run dev:stop`. Leave a stack that
   was live before you started.
 - Never kill by process pattern. Kill only a PID that you started.
-- Screenshots, if any, stay in `.openbot-build/dev-automation/`. Do not commit
+- Screenshots, if any, stay in `.omnibot-build/dev-automation/`. Do not commit
   them.
 
 ## Step 5 — Report

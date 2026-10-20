@@ -10,10 +10,10 @@ import {
   COMPUTER_USE_MCP_SERVER_ID,
   type McpServerConfig,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect, Result, Schema } from "effect";
 import type { AgentClient, AgentProvider } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -444,7 +444,7 @@ export class ThreadLifecycle {
           ...this.#computerUseParam(agent, client),
           ...this.#instructions(agent, client, section, this.#computerUseInOwnChat(owner, publicThreadId)),
           ephemeral: false,
-          serviceName: "openbot",
+          serviceName: "omnibot",
           dynamicTools: VISIBLE_DYNAMIC_TOOLS,
         },
         decodeThreadResponse,

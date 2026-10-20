@@ -2,7 +2,7 @@ import { randomBytes } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { resolveRemoteDesktopRuntime } from "../src/main/remote-desktop-runtime-artifact";
@@ -25,14 +25,14 @@ const paths = await Effect.runPromise(
   }),
 );
 if (!paths) throw new Error("Build or install the remote desktop runtime before the smoke test.");
-const stateDirectory = await mkdtemp(join(tmpdir(), "openbot-remote-runtime-smoke-"));
+const stateDirectory = await mkdtemp(join(tmpdir(), "omnibot-remote-runtime-smoke-"));
 const runtime = new SunshineMoonlightRuntime({
   paths,
   stateDirectory,
   platform: process.platform,
   credentials: {
-    username: process.env.OPENBOT_SMOKE_USERNAME ?? `openbot-${randomBytes(8).toString("hex")}`,
-    password: process.env.OPENBOT_SMOKE_PASSWORD ?? randomBytes(24).toString("base64url"),
+    username: process.env.OMNIBOT_SMOKE_USERNAME ?? `omnibot-${randomBytes(8).toString("hex")}`,
+    password: process.env.OMNIBOT_SMOKE_PASSWORD ?? randomBytes(24).toString("base64url"),
   },
   // The runtime shows only the Sunshine displays that match a local display, as Electron lists them.
   getDisplays: () => [{ id: "1", label: "Primary display", width: 1920, height: 1080, primary: true }],

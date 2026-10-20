@@ -2,7 +2,7 @@
 import { DatabaseSync, type SQLOutputValue } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
 import { ORDER_KEY_COLUMNS, ORDER_KEY_DESC, ORDERED_THREAD_MESSAGES } from "./database/conversation-queries";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: an upgrade loses or changes a message; a stored key differs from the order that pages
 // computed before, so a page or a cursor that a client holds moves; a turn id that two threads share
@@ -24,8 +24,8 @@ function databaseAt(version: number): DatabaseSync {
   return db;
 }
 
-const THREAD = "openbot-thread-agent-chief";
-const OTHER_THREAD = "openbot-thread-agent-helper";
+const THREAD = "omnibot-thread-agent-chief";
+const OTHER_THREAD = "omnibot-thread-agent-helper";
 
 type Seed = [
   thread: string,

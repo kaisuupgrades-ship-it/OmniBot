@@ -1,5 +1,5 @@
-import { parseHostedServerStatus } from "@openbot/contracts/hosted-servers";
-import { createHostedServerStatusCheck, createHostedServerWake } from "@openbot/team-client/hosted-server-wake";
+import { parseHostedServerStatus } from "@omnibot/contracts/hosted-servers";
+import { createHostedServerStatusCheck, createHostedServerWake } from "@omnibot/team-client/hosted-server-wake";
 import { Effect } from "effect";
 
 /**

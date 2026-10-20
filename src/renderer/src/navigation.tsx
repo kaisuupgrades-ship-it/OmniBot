@@ -1,6 +1,6 @@
-import type { GlobalSearchPage } from "@openbot/ui/components/GlobalSearch";
-import type { AgentMessage } from "@openbot/ui/data";
-import { currentText } from "@openbot/ui/text";
+import type { GlobalSearchPage } from "@omnibot/ui/components/GlobalSearch";
+import type { AgentMessage } from "@omnibot/ui/data";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal } from "solid-js";
 import { desktopAnalytics } from "./analytics";
 import { toAgentMessage } from "./app-message-projection";

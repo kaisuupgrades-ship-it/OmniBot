@@ -5,8 +5,8 @@ import {
   type BillingPortalRequest,
   type BillingServerPlan,
   type BillingSubscriptionStatus,
-} from "@openbot/contracts/billing";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/billing";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertActions,
@@ -33,7 +33,7 @@ import {
   Spinner,
   Text,
   TriangleAlert,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { For, Match, Show, Switch } from "solid-js";
 import { useText } from "../../text";

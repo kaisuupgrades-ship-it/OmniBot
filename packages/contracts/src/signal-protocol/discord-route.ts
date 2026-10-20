@@ -10,7 +10,7 @@
 // token. It names only the guilds that the account service links to that host, and it expires: the
 // host asks for a new one each time its `ingress` socket connects.
 
-export const DISCORD_ROUTE_AUDIENCE = "openbot-discord-route";
+export const DISCORD_ROUTE_AUDIENCE = "omnibot-discord-route";
 
 // The host calls Discord through this Signal path, with the `discord-session` token of its socket.
 export const DISCORD_API_PATH = "/v1/discord/api";

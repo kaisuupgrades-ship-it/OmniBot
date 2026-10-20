@@ -1,0 +1,12 @@
+# Stages the newest release, or stops OmniBot, moves the staged release into place and starts OmniBot
+# again, when an owner, an admin or a permitted member asks for it in Server Settings > Updates.
+[Unit]
+Description=Update OmniBot on request
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/OmniBot/hosted/omnibot-hosted-update request
+# A download and an apply: the limits of omnibot-update.service and omnibot-update-apply.service.
+TimeoutStartSec=45min

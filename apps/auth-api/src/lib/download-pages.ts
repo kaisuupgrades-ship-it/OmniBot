@@ -5,16 +5,16 @@
 
 import { DOWNLOAD_PLATFORM_ORDER, type DownloadPlatform } from "./download-platforms";
 import { LANDING_FAQ, type LandingQuestion } from "./landing-faq";
-import { OPENBOT_ALTERNATE_DOWNLOAD_LINKS, OPENBOT_DOWNLOAD_LINKS, OPENBOT_DOWNLOAD_PAGE_LINKS } from "./landing-links";
+import { OMNIBOT_ALTERNATE_DOWNLOAD_LINKS, OMNIBOT_DOWNLOAD_LINKS, OMNIBOT_DOWNLOAD_PAGE_LINKS } from "./landing-links";
 import { MOBILE_APP_ORDER, MOBILE_APPS, type MobilePlatform } from "./mobile-apps";
 import {
-  OPENBOT_SITE_URL,
-  OPENBOT_SOCIAL_IMAGE_ALT,
-  OPENBOT_SOCIAL_IMAGE_META,
-  OPENBOT_SOCIAL_IMAGE_URL,
-  OPENBOT_X_HANDLE,
+  OMNIBOT_SITE_URL,
+  OMNIBOT_SOCIAL_IMAGE_ALT,
+  OMNIBOT_SOCIAL_IMAGE_META,
+  OMNIBOT_SOCIAL_IMAGE_URL,
+  OMNIBOT_X_HANDLE,
 } from "./site-metadata";
-import { OPENBOT_SOFTWARE_APPLICATION } from "./software-application";
+import { OMNIBOT_SOFTWARE_APPLICATION } from "./software-application";
 
 /** The sitemap date of the pages. Change it when their text changes. */
 export const DOWNLOAD_PAGES_UPDATED_AT = "2026-10-15";
@@ -127,13 +127,13 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         label: "Download for Apple silicon",
         shortLabel: "Apple silicon",
         detail: "For a Mac with M1 or newer",
-        href: OPENBOT_DOWNLOAD_LINKS.macos,
+        href: OMNIBOT_DOWNLOAD_LINKS.macos,
       },
       {
         label: "Download for Intel Mac",
         shortLabel: "Intel",
         detail: "For a Mac with an Intel processor",
-        href: OPENBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
+        href: OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
       },
     ],
     specs: [
@@ -182,7 +182,7 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         label: "Download for Windows",
         shortLabel: "Windows x64",
         detail: "For a PC with a 64-bit Intel or AMD processor",
-        href: OPENBOT_DOWNLOAD_LINKS.windows,
+        href: OMNIBOT_DOWNLOAD_LINKS.windows,
       },
     ],
     specs: [
@@ -231,13 +231,13 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         label: "Download for Linux x64",
         shortLabel: "x64",
         detail: "When uname -m shows x86_64",
-        href: OPENBOT_DOWNLOAD_LINKS.linux,
+        href: OMNIBOT_DOWNLOAD_LINKS.linux,
       },
       {
         label: "Download for Linux arm64",
         shortLabel: "arm64",
         detail: "When uname -m shows aarch64",
-        href: OPENBOT_ALTERNATE_DOWNLOAD_LINKS.linux,
+        href: OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.linux,
       },
     ],
     specs: [
@@ -264,11 +264,11 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         steps: [
           {
             text: "These distributions restrict the user namespaces that the Electron sandbox needs, so OmniBot exits during launch until you install its AppArmor profile. Take the profile out of the AppImage:",
-            code: "./OmniBot-*.AppImage --appimage-extract resources/linux/openbot.apparmor",
+            code: "./OmniBot-*.AppImage --appimage-extract resources/linux/omnibot.apparmor",
           },
           {
             text: "Install the profile, then reload AppArmor:",
-            code: "sudo install -m 0644 squashfs-root/resources/linux/openbot.apparmor /etc/apparmor.d/openbot\nsudo systemctl reload apparmor",
+            code: "sudo install -m 0644 squashfs-root/resources/linux/omnibot.apparmor /etc/apparmor.d/omnibot\nsudo systemctl reload apparmor",
           },
           {
             text: "The profile applies to an AppImage in ~/Applications, ~/Desktop, ~/Downloads, ~/.local/bin or /opt/OmniBot. Keep it in one of these, or edit the path in the profile before you install it. Do not start OmniBot with --no-sandbox: the sandbox is the boundary between a web page and the rest of your computer.",
@@ -280,7 +280,7 @@ export const DOWNLOAD_PAGES: Record<DownloadPagePlatform, DownloadPageContent> =
         steps: [
           {
             text: "On Ubuntu 24.04 with systemd, install OmniBot as an always-on server of your account, then sign in with an email code:",
-            code: "curl -fsSL https://updates.omnibot.example.com/scripts/install-server.sh | sudo bash\nsudo openbot login",
+            code: "curl -fsSL https://updates.omnibot.example.com/scripts/install-server.sh | sudo bash\nsudo omnibot login",
           },
           { text: "Then use it from the desktop app, the mobile app or omnibot.example.com/app." },
         ],
@@ -405,10 +405,10 @@ export const DOWNLOAD_HUB = {
 } as const;
 
 export function downloadPagePath(platform: DownloadPagePlatform | "hub"): string {
-  return OPENBOT_DOWNLOAD_PAGE_LINKS[platform];
+  return OMNIBOT_DOWNLOAD_PAGE_LINKS[platform];
 }
 
-export function downloadPageUrl(platform: DownloadPagePlatform | "hub", siteUrl: string = OPENBOT_SITE_URL): string {
+export function downloadPageUrl(platform: DownloadPagePlatform | "hub", siteUrl: string = OMNIBOT_SITE_URL): string {
   return new URL(downloadPagePath(platform), siteUrl).toString();
 }
 
@@ -449,11 +449,11 @@ export function downloadPageHead(platform: DownloadPagePlatform | "hub", siteUrl
   const url = downloadPageUrl(platform, siteUrl);
   const application = page
     ? {
-        ...OPENBOT_SOFTWARE_APPLICATION,
+        ...OMNIBOT_SOFTWARE_APPLICATION,
         operatingSystem: page.operatingSystem,
         downloadUrl: page.installers.map((installer) => new URL(installer.href, siteUrl).toString()),
       }
-    : OPENBOT_SOFTWARE_APPLICATION;
+    : OMNIBOT_SOFTWARE_APPLICATION;
 
   return {
     meta: [
@@ -465,13 +465,13 @@ export function downloadPageHead(platform: DownloadPagePlatform | "hub", siteUrl
       { property: "og:url", content: url },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
-      ...OPENBOT_SOCIAL_IMAGE_META,
+      ...OMNIBOT_SOCIAL_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: OPENBOT_X_HANDLE },
+      { name: "twitter:site", content: OMNIBOT_X_HANDLE },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
-      { name: "twitter:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-      { name: "twitter:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+      { name: "twitter:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+      { name: "twitter:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
       { "script:ld+json": application },
       { "script:ld+json": breadcrumbData(platform, siteUrl) },
       ...(page ? [{ "script:ld+json": faqData(page.faq) }] : []),

@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the browser domain reaches in main: the tabs, the display and control state, and the
@@ -18,7 +18,7 @@ export interface BrowserPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function browserPort(): BrowserPort {
-  return window.openbot;
+  return window.omnibot;
 }

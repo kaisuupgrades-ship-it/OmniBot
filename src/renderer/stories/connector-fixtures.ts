@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import type { ConnectorDetail } from "@openbot/ui/features/connectors/ConnectorDetailPanel";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import type { ConnectorDetail } from "@omnibot/ui/features/connectors/ConnectorDetailPanel";
 import { fn } from "storybook/test";
 import type { ConnectorController } from "../src/features/connectors/connector-controller";
 import {

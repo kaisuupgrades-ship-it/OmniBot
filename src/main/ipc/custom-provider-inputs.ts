@@ -1,14 +1,14 @@
 // The one renderer-to-main payload that carries a secret. No message here quotes any part of the
 // input, because the field it would name is the API key or a header value.
 
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   CustomProviderHeader,
   CustomProviderModel,
   DeleteCustomProviderInput,
   SaveCustomProviderInput,
   UpdateCustomProviderInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   CUSTOM_PROVIDER_LIMITS,
   composedCustomModelId,
@@ -16,9 +16,9 @@ import {
   isCustomProviderHeaderName,
   isCustomProviderId,
   isNewCustomProviderId,
-} from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { isObject, requireString } from "./validation";
 
 function parseProviderId(value: unknown): string {

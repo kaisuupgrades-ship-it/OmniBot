@@ -167,7 +167,7 @@ async function scanClaudeHistory(
   );
   if (!transcript) return;
   const indexRoot = options.indexDirectory ?? tmpdir();
-  const indexDirectory = join(indexRoot, "openbot-claude-history");
+  const indexDirectory = join(indexRoot, "omnibot-claude-history");
   await mkdir(indexDirectory, { recursive: true });
   const indexPath = join(indexDirectory, `${sanitizeProjectPath(request.threadId)}.sqlite`);
   for (let attempt = 0; attempt < 2; attempt += 1) {

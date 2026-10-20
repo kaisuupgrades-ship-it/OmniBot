@@ -1,16 +1,16 @@
 import { join, resolve } from "node:path";
-import { parseInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+import { parseInviteUrl, selfHostedApiOrigin } from "@omnibot/contracts/invite-links";
 import {
   type AgentEvent,
   type AppLogoColor,
   type CentralAuthState,
   type HostStatus,
   IPC_ENDPOINTS,
-} from "@openbot/contracts/ipc";
-import { createFormat, resolveLocale, translateFor } from "@openbot/i18n";
-import { localizeSourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
-import { createRemoteDirectoryRefresh } from "@openbot/team-client/remote-directory";
+} from "@omnibot/contracts/ipc";
+import { createFormat, resolveLocale, translateFor } from "@omnibot/i18n";
+import { localizeSourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
+import { createRemoteDirectoryRefresh } from "@omnibot/team-client/remote-directory";
 import { Effect, Semaphore } from "effect";
 import {
   app,
@@ -135,25 +135,25 @@ try {
 }
 
 const commandLineUserDataDirectory = app.commandLine.getSwitchValue("user-data-dir").trim();
-const developmentProfile = !app.isPackaged ? readDevelopmentProfile(process.env.OPENBOT_DEV_PROFILE) : null;
+const developmentProfile = !app.isPackaged ? readDevelopmentProfile(process.env.OMNIBOT_DEV_PROFILE) : null;
 const developmentRemoteRole =
   !app.isPackaged &&
-  (process.env.OPENBOT_DEV_REMOTE_ROLE === "host" || process.env.OPENBOT_DEV_REMOTE_ROLE === "client")
-    ? process.env.OPENBOT_DEV_REMOTE_ROLE
+  (process.env.OMNIBOT_DEV_REMOTE_ROLE === "host" || process.env.OMNIBOT_DEV_REMOTE_ROLE === "client")
+    ? process.env.OMNIBOT_DEV_REMOTE_ROLE
     : null;
-const developmentTestClientEnabled = !app.isPackaged && process.env.OPENBOT_DEV_TEST_CLIENT_ENABLED === "1";
+const developmentTestClientEnabled = !app.isPackaged && process.env.OMNIBOT_DEV_TEST_CLIENT_ENABLED === "1";
 // Before any child process starts: this removes the single-use claim from the environment they inherit.
 const hostedServer = takeHostedServerEnvironment(process.env, app.isPackaged, process.platform);
 const hostingDeveloperKey = takeHostingDeveloperKey(process.env, app.isPackaged);
 const serverMode = takeServerModeEnvironment(process.env, app.isPackaged, process.platform);
 const inviteLinkOptions = {
   allowLocalDevelopmentApiUrl: developmentRemoteRole !== null,
-  selfHostedApiOrigin: selfHostedApiOrigin(process.env.OPENBOT_AUTH_API_URL),
+  selfHostedApiOrigin: selfHostedApiOrigin(process.env.OMNIBOT_AUTH_API_URL),
 };
 const developmentRemoteDebuggingPort = !app.isPackaged
-  ? readDevelopmentRemoteDebuggingPort(process.env.OPENBOT_DEV_REMOTE_DEBUGGING_PORT)
+  ? readDevelopmentRemoteDebuggingPort(process.env.OMNIBOT_DEV_REMOTE_DEBUGGING_PORT)
   : null;
-const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.OPENBOT_ANALYTICS_CAPTURE_URL) : null;
+const analyticsCaptureUrl = !app.isPackaged ? readAnalyticsCaptureUrl(process.env.OMNIBOT_ANALYTICS_CAPTURE_URL) : null;
 // Electron exposes FedCM without an account chooser, so every request fails with a NetworkError.
 // Sites such as Google Sign-In use FedCM when it exists and fall back to their popup when it does not.
 app.commandLine.appendSwitch("disable-features", "FedCm");
@@ -170,7 +170,7 @@ if (commandLineUserDataDirectory) {
       app.getPath("appData"),
       developmentUserDataName(
         developmentProfile ?? "app",
-        readDevelopmentInstanceId(process.env.OPENBOT_DEV_INSTANCE_ID),
+        readDevelopmentInstanceId(process.env.OMNIBOT_DEV_INSTANCE_ID),
       ),
     ),
   );
@@ -185,7 +185,7 @@ configureLinuxGpu({
   ownsInstance: hasSingleInstanceLock,
   server: hostedServer !== null || serverMode !== null,
 });
-const appVariant = readAppVariant(process.env.OPENBOT_APP_VARIANT, app.isPackaged);
+const appVariant = readAppVariant(process.env.OMNIBOT_APP_VARIANT, app.isPackaged);
 if (!app.isPackaged) guardDevelopmentOutput([process.stdout, process.stderr], () => app.quit());
 const appIconPath = resolveAppIconPath({
   variant: appVariant,
@@ -196,42 +196,42 @@ const appIconPath = resolveAppIconPath({
 });
 protocol.registerSchemesAsPrivileged([
   {
-    scheme: "openbot-app",
+    scheme: "omnibot-app",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   // `stream` lets an <audio> or <video> element play a file from the scheme: without it the
   // element cannot make the range requests that playback needs.
   {
-    scheme: "openbot-attachment",
+    scheme: "omnibot-attachment",
     privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
   },
   {
-    scheme: "openbot-remote-attachment",
+    scheme: "omnibot-remote-attachment",
     privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true },
   },
   // A visual reply page. It needs no fetch or CORS support: only a frame loads it.
   {
-    scheme: "openbot-visual",
+    scheme: "omnibot-visual",
     privileges: { standard: true, secure: true },
   },
   {
-    scheme: "openbot-remote-visual",
+    scheme: "omnibot-remote-visual",
     privileges: { standard: true, secure: true },
   },
   {
-    scheme: "openbot-avatar",
+    scheme: "omnibot-avatar",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-remote-avatar",
+    scheme: "omnibot-remote-avatar",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-server-logo",
+    scheme: "omnibot-server-logo",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
   {
-    scheme: "openbot-remote-server-logo",
+    scheme: "omnibot-remote-server-logo",
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
 ]);
@@ -268,11 +268,11 @@ type RendererDeepLink = Exclude<DeepLink, { kind: "mcp-auth" | "slack-workspace"
 let pendingDeepLink: RendererDeepLink | null = takeRendererDeepLink(findDeepLink(process.argv, inviteLinkOptions));
 let deepLinkReceiverReady = false;
 
-const MAIN_WINDOW_STATE_FILE = "openbot-main-window-state-v1.json";
+const MAIN_WINDOW_STATE_FILE = "omnibot-main-window-state-v1.json";
 
 // A server is stopped with SIGTERM (systemd, Docker). Without a handler, Electron ends at once and its
 // services do not stop. A hosted server's boat pre-stop hook stops it this way before the disk save
-// (`scripts/hosting/openbot-boat-pre-stop`).
+// (`scripts/hosting/omnibot-boat-pre-stop`).
 if (!app.isPackaged || hostedServer || serverMode) {
   const quitAfterSignal = () => app.quit();
   process.once("SIGINT", quitAfterSignal);
@@ -926,7 +926,7 @@ if (!hasSingleInstanceLock) {
     .whenReady()
     .then(async () => {
       // Startup marks for `dev:bench`, which reads them over the inspector. They change nothing.
-      performance.mark("openbot:when-ready");
+      performance.mark("omnibot:when-ready");
       if (!(await Effect.runPromise(hostAllowsTenantLaunch()))) {
         app.quit();
         return;
@@ -982,7 +982,7 @@ if (!hasSingleInstanceLock) {
         prepareForUpdateInstall,
       });
       services = built;
-      performance.mark("openbot:services-built");
+      performance.mark("omnibot:services-built");
       // `forwardCentralAuth` reaches the host, the remote servers and analytics only through
       // `services`, so every account change announced during construction was dropped.
       // `createApplicationServices` bound the local host to the one state it read and attributed the
@@ -1159,7 +1159,7 @@ if (!hasSingleInstanceLock) {
         logger.error("Unable to initialize Dynamic Island:", toLogValue(error)),
       );
       await windows.loadRenderer(mainWindow);
-      performance.mark("openbot:renderer-loaded");
+      performance.mark("omnibot:renderer-loaded");
       // `sendToRenderer` dropped the server changes made while the window loaded: the host list and
       // the connection of the selected server. The renderer can have read the list before them.
       forwardServers(remoteServers.list());

@@ -5,7 +5,7 @@ import {
   type ConversationSnapshot,
   ROUTINE_QUIET_ANSWER_ITEM_TYPE,
   type RoutineRun,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { bridgedToolName, getString, type ThreadItem } from "../protocol";
 
 /**
@@ -25,12 +25,12 @@ export const ROUTINE_NO_UPDATE_TOOL = "routine_no_update";
 
 /**
  * A call to the no-update tool in provider history: a Codex, Pi or Muse tool item names the tool,
- * and a Claude item names it `mcp__openbot__<tool>`. A call through the `tool_call` bridge names it
+ * and a Claude item names it `mcp__omnibot__<tool>`. A call through the `tool_call` bridge names it
  * in its arguments.
  */
 export function isNoUpdateToolCall(item: ThreadItem): boolean {
-  if (bridgedToolName(item) === `openbot.${ROUTINE_NO_UPDATE_TOOL}`) return true;
-  if (item.type === "toolCall") return getString(item, "name") === `mcp__openbot__${ROUTINE_NO_UPDATE_TOOL}`;
+  if (bridgedToolName(item) === `omnibot.${ROUTINE_NO_UPDATE_TOOL}`) return true;
+  if (item.type === "toolCall") return getString(item, "name") === `mcp__omnibot__${ROUTINE_NO_UPDATE_TOOL}`;
   return (
     (item.type === "dynamicToolCall" || item.type === "mcpToolCall") &&
     getString(item, "tool") === ROUTINE_NO_UPDATE_TOOL

@@ -86,7 +86,7 @@ the marker it skips the turn's thinking too, so a later import does not bring a 
 computer as an iCalendar feed (`src/main/routine-feed-ics.ts`) for Server Settings > Routines. It
 runs only after the user makes a feed URL, and binds `127.0.0.1`. The URL is
 `/routines/<token>.ics`, with an optional `?agent=<id>`: a calendar app cannot send a header, so the
-token is in the path. `<userData>/openbot-routine-feed-v1.json` keeps the token, encrypted with the
+token is in the path. `<userData>/omnibot-routine-feed-v1.json` keeps the token, encrypted with the
 secret storage cipher, and the port, so the URL stays the same after a restart. When the port is not
 free, the listener takes a new one and saves it. **New URL** replaces the token, and **Turn off**
 deletes the file. A wrong token gets 404. A request with an `Origin` header or a foreign `Host`
@@ -132,7 +132,7 @@ on a joined host.
   runs a test through the events API, as the routine settings do. On a joined host only an owner or
   admin has that API (`events-v1`); a member sees no webhook config and cannot change or run a
   webhook routine from the canvas.
-- Agents read and change flows with the `openbot` tools `list_routine_flows`, `connect_routine_agents`
+- Agents read and change flows with the `omnibot` tools `list_routine_flows`, `connect_routine_agents`
   and `disconnect_routine_agents` (`routine-flow-tools.ts`). `RoutineFlows` is built after the agent
   service, so the tool router reads it through a getter. The canvas chat panel sends the user's request
   to the open agent's own conversation and shows the answer of the turn that read it.
@@ -191,7 +191,7 @@ with `error.backend.taskRemoteUnsupported`. Prompts, approvals and warnings of a
 error of a task turn goes to the task: `AgentTasks` stores the redacted text in the task's `error`
 column, and the next turn of the task clears it. The panel shows it after a restart too.
 
-The Tasks page and the phone share the section and title rules in `@openbot/team-client/agent-tasks`.
+The Tasks page and the phone share the section and title rules in `@omnibot/team-client/agent-tasks`.
 On the phone, the server drawer opens the Tasks screen (`apps/mobile/src/app/(app)/server-tasks.tsx`) when
 the host serves the capability. A task opens as a full screen (`apps/mobile/src/app/(app)/task/[taskId].tsx`)
 with the message list and header of the agent's chat, the task actions in place of the browser
@@ -223,12 +223,12 @@ the user can ask for a detailed coordination report.
 
 An agent does not refuse a task, or say that it has no access to a service, before it tries each
 path. When the task is outside its profile, or names a service that a teammate may own, it calls
-`openbot.list_agents` first and delegates to a teammate whose name, title or description covers
+`omnibot.list_agents` first and delegates to a teammate whose name, title or description covers
 the work. In a channel task it delegates only to a channel member. MCP servers are host-global, so
 a specialist teammate differs only by its profile, skills and memories. Otherwise the agent uses its
 connected MCP servers, its skills, the embedded browser and Computer Use.
 
-A sign-in page does not stop it: it calls `openbot_browser.request_takeover`. The request shows in
+A sign-in page does not stop it: it calls `omnibot_browser.request_takeover`. The request shows in
 the agent's conversation, and in the dynamic island when the agent's notifications are on, also for
 delegated work. A routine run reports the sign-in instead, because nobody may answer; a requester in
 a routine run says so in the delegated message. The tool returns only after the user answers, which
@@ -252,12 +252,12 @@ checked unless a tool result or a reply shows it. When nothing works, the agent 
 and the one action that unblocks it; for a service with a plugin, that action is to install or
 enable the plugin. It can offer to create a specialist teammate, but it creates one only after the user agrees.
 
-An agent that delegates work can follow and stop it. `openbot.list_agents` reports each agent's
+An agent that delegates work can follow and stop it. `omnibot.list_agents` reports each agent's
 `status` (a starting delivery and a context compaction count as `working`), `queuedMessages`
 (channel work excluded), `turnStartedAt`, and `lastActivityAt`. The last two come from the provider
 notifications that `TurnLifecycle` sees; they are in memory only, so after a restart
 `lastActivityAt` falls back to the newest message for the agent. OmniBot does not record which
-files a turn changed. `openbot.interrupt_agent` (`src/backend/agent/agent-interrupt-tool.ts`)
+files a turn changed. `omnibot.interrupt_agent` (`src/backend/agent/agent-interrupt-tool.ts`)
 refuses the caller itself, a channel turn, and a turn that any delivery other than the caller's
 started, so an agent cannot stop work from the user, a routine, or another agent. It cancels the
 caller's queued requests to the target before it sends `turn/interrupt`, because the interrupted
@@ -302,22 +302,22 @@ These are manual model evaluations, separate from the fake-provider lifecycle re
 ## Prompt-driven agent profiles
 
 Users create and edit agent profiles by asking an agent in the normal desktop or mobile
-conversation. `openbot.create_agent` creates a persistent teammate with instructions and a first
-task; `openbot.update_profile` changes an existing agent's name, title, instructions, generated
+conversation. `omnibot.create_agent` creates a persistent teammate with instructions and a first
+task; `omnibot.update_profile` changes an existing agent's name, title, instructions, generated
 or custom avatar, provider, model, reasoning effort, access, Computer Use, or notifications. `avatarPath` accepts a local PNG, JPEG, or WebP file up to 512 KB, with relative
 paths resolved from the calling agent’s workspace. The agent uses its available tools to resize or
 compress a copy when needed. OmniBot validates the prepared file before profile changes and copies
 it into managed avatar storage. Generated avatar settings remove the custom image. Both run through
 the existing agent service and validate arguments before changing state.
-`openbot.create_agent` also accepts an optional `provider`, `model` and `reasoningEffort`. The
-read-only `openbot.list_models` returns the models of each provider that the model picker shows, with
+`omnibot.create_agent` also accepts an optional `provider`, `model` and `reasoningEffort`. The
+read-only `omnibot.list_models` returns the models of each provider that the model picker shows, with
 their reasoning efforts and the default model for a request that names only a provider. An unknown
 model or an unsupported effort is an error that names the valid values; OmniBot checks them before
 it creates the agent. Without a provider and a model, the new agent starts on the calling agent's
 provider, model and reasoning effort, so a team that one agent creates runs where that agent runs.
 When the caller's provider no longer lists its model, the new agent starts on the user's default.
 Creation stays this small. The calling agent then configures the new agent, or any other local
-agent, with the same tools that act on itself. `openbot.read_agent` returns one agent's setup:
+agent, with the same tools that act on itself. `omnibot.read_agent` returns one agent's setup:
 profile, runtime, access, Computer Use, notifications, auto-approve, installed skills, routines,
 and the names and transports of the MCP servers it gets. It does not return MCP commands,
 environment values, URLs, or headers, because they can hold secrets. `install_local_skill`,
@@ -330,7 +330,7 @@ the access and Computer Use limits of the agent that creates it, so a Workspace-
 get around its sandbox through a teammate. There is no creation step for skills or routines in
 the UI.
 The other providers receive the dynamic tool definitions; Claude exposes the same operations through
-its SDK MCP bridge. `src/backend/openbot-tools.ts` owns the tool names, descriptions, and Zod
+its SDK MCP bridge. `src/backend/omnibot-tools.ts` owns the tool names, descriptions, and Zod
 argument shapes used by both declarations. It reuses the profile, section, and routine schemas.
 Claude uses the SDK’s `AskUserQuestion` flow instead of the `ask_user` MCP tool.
 There is no separate prompt-generation button or review dialog.
@@ -343,10 +343,10 @@ and change events delivered to desktop and connected clients.
 
 `html_render` publishes a visual reply: an HTML page that shows above the agent's reply. The router
 stores the page as a generated `text/html` attachment and adds an assistant message with the item
-type `visual-reply:<height>` and the page title as its text (`@openbot/contracts/chat-visual`). A
+type `visual-reply:<height>` and the page title as its text (`@omnibot/contracts/chat-visual`). A
 client that does not know the item type shows the title and the file. A visual message is not
 readable: unread counts, latest-message previews and mobile read state skip it. The desktop serves
-the page on `openbot-visual:` (`openbot-remote-visual:` for a remote host) with
+the page on `omnibot-visual:` (`omnibot-remote-visual:` for a remote host) with
 `Content-Security-Policy: sandbox allow-scripts allow-forms` and the frame script, and the frame has
 the same sandbox without `allow-same-origin`. The page runs its scripts and can load files from the
 network, but it has an opaque origin, gets no permission, and talks to the app only with the checked
@@ -356,7 +356,7 @@ bridge to the app. `html_preview` lets the agent look at a page before it publis
 process draws it in a hidden window with its own in-memory session (`ChatVisualPreviewer`)
 and returns a PNG, the content height and the console lines. The file preview shows an HTML file in
 the same frame. On desktop, a shared or workspace HTML file preview gives the client a temporary
-`openbot-visual://preview/<token>` page URL beside its bytes. `FilePreviewPages` keeps only local HTML
+`omnibot-visual://preview/<token>` page URL beside its bytes. `FilePreviewPages` keeps only local HTML
 that already passed the existing file-access checks, in a bounded in-memory registry. The page
 protocol accepts only an opaque token, never a file path, and uses the same sandbox response as
 HTML attachments. The server-owned preview state releases its page on replacement, close or
@@ -418,7 +418,7 @@ agent. This does not introduce a schema migration or alter released protocol cod
 
 Server Settings > Import moves agents from a `.zip` export into the local host, or into a remote host
 that serves `agent-import-v1` (see [Agent import from a joined server](servers.md#agent-import-from-a-joined-server)).
-The format is `openbot-import.json` plus `agents/<key>/`
+The format is `omnibot-import.json` plus `agents/<key>/`
 folders. `resources/agent-import/grok-bot/SKILL.md` writes it and `src/main/agent-import-manifest.ts`
 reads it; both are a product contract, so add only optional fields and raise `version` for a change
 of meaning. The renderer never names a path: `agent-import:choose` opens the dialog in main, and
@@ -444,9 +444,9 @@ joined server with `instance-transfer-v1` when the user is an owner or admin (se
 client and mobile do not show it. App preferences, the default model and the providers that are off
 belong to the app, not to a server, so they are not in the file.
 
-The file has `openbot-transfer.json` at its root, `agents/<key>/` folders (`avatar.<ext>`,
+The file has `omnibot-transfer.json` at its root, `agents/<key>/` folders (`avatar.<ext>`,
 `skills/<slug>/` and `workspace/`), and `shared/` for `~/OmniBot/Shared`. The manifest is
-`{ format: "openbot-instance-transfer", version: 1, source, agents, settings, shared, signedIn }`.
+`{ format: "omnibot-instance-transfer", version: 1, source, agents, settings, shared, signedIn }`.
 `src/main/instance-transfer-manifest.ts` writes and reads it with Effect `Schema`; it is a contract
 between app versions, so add only optional fields and raise `version` for a change of meaning. A file
 with a higher `version` is refused. An invalid agent is left out with a warning and the others are
@@ -457,7 +457,7 @@ and reasoning effort, notifications and busy-message mode, its routines (schedul
 policies; one-time routines are in the optional `oneTimeRoutines` field, so an older app skips them and
 keeps the agent), its memories (with the essential or searchable choice the user made) and the skill folders
 in `.agents/skills` and `.claude/skills` that OmniBot does not manage. Workspace files are optional
-and leave out `.openbot/`, the skill folders, links, and every path `isUnsafeArchivePath` refuses
+and leave out `.omnibot/`, the skill folders, links, and every path `isUnsafeArchivePath` refuses
 (`.git`, `node_modules`, `.env*`, private keys, nested archives). Server settings are optional: MCP servers,
 custom model providers, custom ACP agents (as a warning, see below), sidebar sections and routine flows
 between exported agents.
@@ -481,7 +481,7 @@ and the user adds it again after checking it. The models of an added provider ar
 model discovery, and the provider has no key until the user enters it. So an agent on such a model starts
 on the default model, and a warning asks the user to choose it again when the provider is ready. Then it creates each selected agent through
 `AgentService` and the local skill library. Files go to the workspace root, and a name that is already
-there is saved beside it. Like the export, the import never writes `.openbot/` or the skill folders. An agent whose step fails is deleted with the skill revisions it published,
+there is saved beside it. Like the export, the import never writes `.omnibot/` or the skill folders. An agent whose step fails is deleted with the skill revisions it published,
 and the others continue. A model that this computer does not offer, or whose provider is off, leaves
 the agent on the default model with a warning. Last, it adds MCP servers whose name is new, turned off, because a file can name any command, creates
 missing sidebar sections by name and assigns the new agents, connects routine flows with the new

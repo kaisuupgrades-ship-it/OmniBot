@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { createSlackWorkspaceKeyPair, openSlackWorkspaceGrant } from "@openbot/contracts/slack-workspace-grant";
+import { createSlackWorkspaceKeyPair, openSlackWorkspaceGrant } from "@omnibot/contracts/slack-workspace-grant";
 import { Effect, Schema } from "effect";
 import { causeHelpers } from "../../effect-boundary";
 

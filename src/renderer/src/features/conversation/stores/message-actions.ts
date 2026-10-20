@@ -2,11 +2,11 @@ import {
   attachmentReferenceIds,
   expandAttachmentReferences,
   removeAttachmentReferences,
-} from "@openbot/contracts/attachment-references";
-import { expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
-import type { InstalledSkill, MessageReaction } from "@openbot/contracts/ipc";
-import type { AgentMessage } from "@openbot/ui/data";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/attachment-references";
+import { expandChatTagReferences } from "@omnibot/contracts/chat-tag-references";
+import type { InstalledSkill, MessageReaction } from "@omnibot/contracts/ipc";
+import type { AgentMessage } from "@omnibot/ui/data";
+import { currentText } from "@omnibot/ui/text";
 import { desktopAnalytics } from "../../../analytics";
 import { writeClipboardText } from "../../../clipboard";
 import type { StoredQueueEdit } from "../composer-draft";

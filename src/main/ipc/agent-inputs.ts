@@ -1,4 +1,4 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type AcknowledgeFailedTurnInput,
   type AgentIpcRequest,
@@ -71,10 +71,10 @@ import {
   type UpdateChannelRoutineInput,
   type UpdateQueuedMessageInput,
   type UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { decodeQueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { decodeQueueEditRequest } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import type { PayloadDecoder } from "../trusted-ipc";
 import { parseAvatarImage } from "./avatar-inputs";
 import { isObject, requireString } from "./validation";

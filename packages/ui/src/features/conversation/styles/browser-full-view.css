@@ -16,22 +16,22 @@ body:has(.browser-full-view) .app-frame {
 .browser-expanded-backdrop {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--openbot-layer-dropdown) - 2);
+  z-index: calc(var(--omnibot-layer-dropdown) - 2);
 }
 
 .browser-full-view {
-  --browser-full-edge: var(--openbot-space-1);
+  --browser-full-edge: var(--omnibot-space-1);
   --browser-full-top-height: 38px;
   position: fixed;
-  z-index: calc(var(--openbot-layer-dropdown) - 1);
+  z-index: calc(var(--omnibot-layer-dropdown) - 1);
   inset: 0;
   display: flex;
   min-width: 0;
   min-height: 0;
   flex-direction: column;
   padding: 0 var(--browser-full-edge) var(--browser-full-edge);
-  background: color-mix(in srgb, var(--openbot-bg-canvas) 50%, var(--openbot-bg-notch));
-  color: var(--openbot-text-primary);
+  background: color-mix(in srgb, var(--omnibot-bg-canvas) 50%, var(--omnibot-bg-notch));
+  color: var(--omnibot-text-primary);
 }
 
 .browser-full-view[hidden],
@@ -47,15 +47,15 @@ body:has(.browser-full-view) .app-frame {
   min-width: 0;
   flex: none;
   align-items: center;
-  gap: var(--openbot-space-1);
-  padding-inline: var(--openbot-space-1) 0;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  gap: var(--omnibot-space-1);
+  padding-inline: var(--omnibot-space-1) 0;
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
 }
 
 .browser-full-top svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 .browser-full-top-spacer {
@@ -79,9 +79,9 @@ body:has(.browser-full-view) .app-frame {
   flex: 1;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-card);
-  background: var(--openbot-bg-canvas);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-card);
+  background: var(--omnibot-bg-canvas);
 }
 
 .browser-full-browser {
@@ -93,7 +93,7 @@ body:has(.browser-full-view) .app-frame {
 }
 
 .browser-full-alert {
-  margin: var(--openbot-space-2) var(--openbot-space-2) 0;
+  margin: var(--omnibot-space-2) var(--omnibot-space-2) 0;
 }
 
 /* The dock is placed in the surface, so the surface is its containing block. */
@@ -119,15 +119,15 @@ body:has(.browser-full-view) .app-frame {
   position: relative;
   inset: auto;
   width: min(
-    calc(100cqw - 2 * var(--openbot-space-3)),
-    calc((100cqh - 2 * var(--openbot-space-3)) * var(--browser-frame-width, 16) / var(--browser-frame-height, 10))
+    calc(100cqw - 2 * var(--omnibot-space-3)),
+    calc((100cqh - 2 * var(--omnibot-space-3)) * var(--browser-frame-width, 16) / var(--browser-frame-height, 10))
   );
   height: auto;
   aspect-ratio: var(--browser-frame-width, 16) / var(--browser-frame-height, 10);
   overflow: hidden;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-surface);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-md);
+  background: var(--omnibot-bg-surface);
 }
 
 .browser-full-owner-avatar {
@@ -137,44 +137,44 @@ body:has(.browser-full-view) .app-frame {
 }
 
 .browser-full-owner-acting {
-  border-radius: var(--openbot-radius-pill);
-  box-shadow: 0 0 0 1.5px var(--openbot-accent);
+  border-radius: var(--omnibot-radius-pill);
+  box-shadow: 0 0 0 1.5px var(--omnibot-accent);
 }
 
 .browser-full-owner-globe {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   flex: none;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 /* The chips share the row. Below their minimum width the row scrolls, as other browsers do. The row is
  * the offset parent of the chips, so a drag can measure them in it. */
 .browser-full-chips {
-  --browser-full-fade: calc(var(--openbot-space-8) * 2);
+  --browser-full-fade: calc(var(--omnibot-space-8) * 2);
   position: relative;
   min-width: 0;
   flex: 0 1 auto;
   overflow-x: auto;
-  padding: var(--openbot-space-0-5);
+  padding: var(--omnibot-space-0-5);
   scrollbar-width: none;
 }
 
 /* A row that scrolls fades out at the edge where more chips are. */
 .browser-full-chips[data-fade-start] {
-  mask-image: linear-gradient(to right, transparent, var(--openbot-text-primary) var(--browser-full-fade));
+  mask-image: linear-gradient(to right, transparent, var(--omnibot-text-primary) var(--browser-full-fade));
 }
 
 .browser-full-chips[data-fade-end] {
-  mask-image: linear-gradient(to right, var(--openbot-text-primary) calc(100% - var(--browser-full-fade)), transparent);
+  mask-image: linear-gradient(to right, var(--omnibot-text-primary) calc(100% - var(--browser-full-fade)), transparent);
 }
 
 .browser-full-chips[data-fade-start][data-fade-end] {
   mask-image: linear-gradient(
     to right,
     transparent,
-    var(--openbot-text-primary) var(--browser-full-fade),
-    var(--openbot-text-primary) calc(100% - var(--browser-full-fade)),
+    var(--omnibot-text-primary) var(--browser-full-fade),
+    var(--omnibot-text-primary) calc(100% - var(--browser-full-fade)),
     transparent
   );
 }
@@ -185,7 +185,7 @@ body:has(.browser-full-view) .app-frame {
   max-width: 200px;
   flex: 0 1 200px;
   user-select: none;
-  transition: flex-basis var(--openbot-duration-normal) var(--openbot-ease-out);
+  transition: flex-basis var(--omnibot-duration-normal) var(--omnibot-ease-out);
 }
 
 /* After a close with the pointer, the chips keep their width until the pointer leaves the row. */
@@ -198,16 +198,16 @@ body:has(.browser-full-view) .app-frame {
 }
 
 .browser-full-chips[data-dragging] .browser-full-chip {
-  transition: transform var(--openbot-duration-normal) var(--openbot-ease-out);
+  transition: transform var(--omnibot-duration-normal) var(--omnibot-ease-out);
 }
 
 /* The held chip is lifted above the others and follows the pointer without delay. */
 .browser-full-chips[data-dragging] .browser-full-chip[data-dragging] {
   z-index: 1;
-  background: var(--openbot-bg-surface-raised);
+  background: var(--omnibot-bg-surface-raised);
   box-shadow:
-    inset 0 0 0 1px var(--openbot-border-strong),
-    var(--openbot-shadow-raised);
+    inset 0 0 0 1px var(--omnibot-border-strong),
+    var(--omnibot-shadow-raised);
   transition: none;
 }
 
@@ -227,10 +227,10 @@ body:has(.browser-full-view) .app-frame {
 }
 
 .browser-full-spin {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   flex: none;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
   animation: ui-spin 1s linear infinite;
 }
 
@@ -255,15 +255,15 @@ body:has(.browser-full-view) .app-frame {
   height: 44px;
   flex: none;
   align-items: center;
-  gap: var(--openbot-space-0-5);
-  padding-inline: var(--openbot-space-2);
-  border-bottom: 1px solid var(--openbot-border);
-  color: var(--openbot-text-secondary);
+  gap: var(--omnibot-space-0-5);
+  padding-inline: var(--omnibot-space-2);
+  border-bottom: 1px solid var(--omnibot-border);
+  color: var(--omnibot-text-secondary);
 }
 
 .browser-full-address-row svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 /* Focus is quiet: the capsule lifts and gets a thin edge. The caret and the selected address show where
@@ -272,22 +272,22 @@ body:has(.browser-full-view) .app-frame {
   position: relative;
   display: flex;
   min-width: 0;
-  height: var(--openbot-control-md);
+  height: var(--omnibot-control-md);
   flex: 1;
   align-items: center;
-  gap: var(--openbot-space-2);
-  margin-inline: var(--openbot-space-1);
-  padding-inline: var(--openbot-space-2) var(--openbot-space-1);
-  border-radius: var(--openbot-radius-lg);
-  background: var(--openbot-bg-control);
+  gap: var(--omnibot-space-2);
+  margin-inline: var(--omnibot-space-1);
+  padding-inline: var(--omnibot-space-2) var(--omnibot-space-1);
+  border-radius: var(--omnibot-radius-lg);
+  background: var(--omnibot-bg-control);
   transition:
-    background-color var(--openbot-duration-normal) var(--openbot-ease-out),
-    box-shadow var(--openbot-duration-normal) var(--openbot-ease-out);
+    background-color var(--omnibot-duration-normal) var(--omnibot-ease-out),
+    box-shadow var(--omnibot-duration-normal) var(--omnibot-ease-out);
 }
 
 .browser-full-capsule:focus-within {
-  background: var(--openbot-bg-control-active);
-  box-shadow: inset 0 0 0 1px var(--openbot-border-grouped);
+  background: var(--omnibot-bg-control-active);
+  box-shadow: inset 0 0 0 1px var(--omnibot-border-grouped);
 }
 
 .browser-full-capsule .browser-full-capsule-input {
@@ -298,8 +298,8 @@ body:has(.browser-full-view) .app-frame {
   border: 0;
   background: transparent;
   box-shadow: none;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-sm);
 }
 
 .browser-full-capsule .browser-full-capsule-input:focus-visible {
@@ -307,7 +307,7 @@ body:has(.browser-full-view) .app-frame {
 }
 
 .browser-full-capsule .browser-full-capsule-input::selection {
-  background: var(--openbot-accent-strong);
+  background: var(--omnibot-accent-strong);
 }
 
 .browser-full-capsule-agent {
@@ -319,45 +319,45 @@ body:has(.browser-full-view) .app-frame {
 /* The suggestions under the address field. */
 .browser-full-suggest {
   position: absolute;
-  z-index: var(--openbot-layer-dropdown);
-  top: calc(100% + var(--openbot-space-1));
+  z-index: var(--omnibot-layer-dropdown);
+  top: calc(100% + var(--omnibot-space-1));
   right: 0;
   left: 0;
   display: flex;
   flex-direction: column;
-  padding: var(--openbot-space-1);
-  border-radius: var(--openbot-radius-lg);
+  padding: var(--omnibot-space-1);
+  border-radius: var(--omnibot-radius-lg);
 }
 
 .browser-full-suggest-row {
   display: flex;
   width: 100%;
   min-width: 0;
-  height: var(--openbot-control-md);
+  height: var(--omnibot-control-md);
   align-items: center;
-  gap: var(--openbot-space-2);
-  padding-inline: var(--openbot-space-2);
-  border-radius: var(--openbot-radius-md);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
+  gap: var(--omnibot-space-2);
+  padding-inline: var(--omnibot-space-2);
+  border-radius: var(--omnibot-radius-md);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-sm);
   text-align: start;
   cursor: default;
 }
 
 .browser-full-suggest-row:hover {
-  background: var(--openbot-bg-control-hover);
+  background: var(--omnibot-bg-control-hover);
 }
 
 .browser-full-suggest-row[aria-selected="true"] {
-  background: var(--openbot-bg-control-active);
+  background: var(--omnibot-bg-control-active);
 }
 
 .browser-full-suggest-icon {
   display: grid;
-  width: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
   flex: none;
   place-items: center;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 .browser-full-suggest-title {
@@ -372,7 +372,7 @@ body:has(.browser-full-view) .app-frame {
   min-width: 0;
   flex: 0 100 auto;
   overflow: hidden;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -380,10 +380,10 @@ body:has(.browser-full-view) .app-frame {
 .browser-full-suggest-switch {
   flex: none;
   margin-inline-start: auto;
-  padding: 0 var(--openbot-space-2);
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  color: var(--openbot-text-muted);
+  padding: 0 var(--omnibot-space-2);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-pill);
+  color: var(--omnibot-text-muted);
 }
 
 /* Narrow: one button with the tab count opens the list of tabs. */
@@ -391,7 +391,7 @@ body:has(.browser-full-view) .app-frame {
   min-width: 0;
   max-width: 100%;
   justify-content: flex-start;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
 }
 
 .browser-full-switch-title {
@@ -408,20 +408,20 @@ body:has(.browser-full-view) .app-frame {
   height: 18px;
   flex: none;
   place-items: center;
-  padding-inline: var(--openbot-space-1);
+  padding-inline: var(--omnibot-space-1);
   border: 1.5px solid currentcolor;
-  border-radius: var(--openbot-radius-sm);
-  font-size: var(--openbot-text-sm);
+  border-radius: var(--omnibot-radius-sm);
+  font-size: var(--omnibot-text-sm);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .browser-full-switch-menu {
   display: flex;
-  width: min(360px, calc(100vw - 2 * var(--openbot-space-3)));
+  width: min(360px, calc(100vw - 2 * var(--omnibot-space-3)));
   max-height: min(480px, 70dvh);
   flex-direction: column;
-  padding: var(--openbot-space-1);
+  padding: var(--omnibot-space-1);
 }
 
 .browser-full-switch-list {
@@ -435,24 +435,24 @@ body:has(.browser-full-view) .app-frame {
 .browser-full-switch-row {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
 }
 
 .browser-full-switch-select {
   min-width: 0;
   height: auto;
   flex: 1;
-  padding-block: var(--openbot-space-1-5);
+  padding-block: var(--omnibot-space-1-5);
 }
 
 .browser-full-switch-select[aria-current="true"] {
-  background: var(--openbot-bg-control-active);
+  background: var(--omnibot-bg-control-active);
 }
 
 .browser-full-switch-close svg,
 .browser-full-switch-actions svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 .browser-full-switch-text {
@@ -464,16 +464,16 @@ body:has(.browser-full-view) .app-frame {
 .browser-full-switch-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--openbot-space-1);
-  margin-top: var(--openbot-space-1);
-  padding-top: var(--openbot-space-1);
-  border-top: 1px solid var(--openbot-border);
+  gap: var(--omnibot-space-1);
+  margin-top: var(--omnibot-space-1);
+  padding-top: var(--omnibot-space-1);
+  border-top: 1px solid var(--omnibot-border);
 }
 
 @media (max-width: 720px) {
   /* The page starts under the address row. */
   .browser-full-surface[data-live] {
     place-items: start center;
-    padding-top: var(--openbot-space-3);
+    padding-top: var(--omnibot-space-3);
   }
 }

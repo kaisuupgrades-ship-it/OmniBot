@@ -1,11 +1,11 @@
 import {
   createAgentTemplateShareUrl,
-  OPENBOT_AGENT_TEMPLATE_PATH_PREFIX,
+  OMNIBOT_AGENT_TEMPLATE_PATH_PREFIX,
   parseAgentTemplateUrl,
-} from "@openbot/contracts/agent-template-links";
-import { parseInviteUrl, selfHostedApiOrigin } from "@openbot/contracts/invite-links";
-import { parseMobileConnectUrl } from "@openbot/contracts/mobile-connect";
-import { createPluginShareUrl, parsePluginUrl } from "@openbot/contracts/plugin-links";
+} from "@omnibot/contracts/agent-template-links";
+import { parseInviteUrl, selfHostedApiOrigin } from "@omnibot/contracts/invite-links";
+import { parseMobileConnectUrl } from "@omnibot/contracts/mobile-connect";
+import { createPluginShareUrl, parsePluginUrl } from "@omnibot/contracts/plugin-links";
 
 export type IncomingLink =
   | { kind: "invite"; url: string }
@@ -98,7 +98,7 @@ export function redirectIncomingLink(path: string): string {
     if (
       url.pathname !== "/join" &&
       !url.pathname.startsWith("/plugins/") &&
-      !url.pathname.startsWith(OPENBOT_AGENT_TEMPLATE_PATH_PREFIX)
+      !url.pathname.startsWith(OMNIBOT_AGENT_TEMPLATE_PATH_PREFIX)
     )
       return path;
     path = url.toString();

@@ -1,4 +1,4 @@
-import { JoinServerDialog } from "@openbot/ui/features/servers/JoinServerDialog";
+import { JoinServerDialog } from "@omnibot/ui/features/servers/JoinServerDialog";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

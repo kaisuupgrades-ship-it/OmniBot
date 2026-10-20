@@ -5,7 +5,7 @@
 import { createHostGrantKeyPair, type HostGrantKind, openHostGrant, sealHostGrant } from "./host-grant";
 import { isDynamicRecord, isString } from "./runtime-values";
 
-const KIND: HostGrantKind = { version: 1, info: "openbot-discord-guild-grant-v1" };
+const KIND: HostGrantKind = { version: 1, info: "omnibot-discord-guild-grant-v1" };
 
 /** The guild that installed the OmniBot Discord app, now linked to the host. */
 export interface DiscordGuildGrant {

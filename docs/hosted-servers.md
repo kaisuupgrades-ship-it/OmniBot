@@ -67,21 +67,21 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    `onSubscriptionSynced`. When the plan is open and the row waits for payment, the Worker makes
    the host ID claim (1 hour; it stores only the hash) and creates the sandbox from
    `HOSTED_SERVER_TEMPLATE` with `noEnv: true`, so no operator secret or repository goes into the
-   sandbox. The sandbox env holds only `OPENBOT_HOSTED_HOST_ID` and `OPENBOT_HOSTED_CLAIM`. The cron
+   sandbox. The sandbox env holds only `OMNIBOT_HOSTED_HOST_ID` and `OMNIBOT_HOSTED_CLAIM`. The cron
    provisions a paid row when the webhook call failed, and deletes an unpaid row after 24 hours
    (it has no sandbox, so no data is lost). Before that delete it closes the Checkout; a Checkout
    that is paid keeps the row for the webhook. A row that stays in `creating` with no sandbox for 10
    minutes (the Worker stopped during the create call) goes to `error`, and the setup retry below
    applies. When that create call returns later, the Worker deletes the sandbox that no row owns.
 
-   The Worker then names the sandbox `openbot-<plan>-<owner email>-<first 8 characters of the host
+   The Worker then names the sandbox `omnibot-<plan>-<owner email>-<first 8 characters of the host
    ID>` (`PATCH /sandboxes/:id`), so an operator can find it in the boat dashboard. The email is in
    lowercase, and each group of characters that are not letters or digits becomes one `-`. The name is only a label; a plan change
    renames the sandbox.
 3. **Env handoff.** boat puts the sandbox env in the setup script, not in systemd. The Worker sends
-   `setupScript: exec /opt/OmniBot/hosted/openbot-hosted-env`. That helper writes the two values to
-   `~/.config/openbot-hosted/env` (mode 0600). `openbot.service` waits for this file.
-4. **First boot.** OmniBot starts with `OPENBOT_HOSTED_SERVER=1`. It redeems the claim at
+   `setupScript: exec /opt/OmniBot/hosted/omnibot-hosted-env`. That helper writes the two values to
+   `~/.config/omnibot-hosted/env` (mode 0600). `omnibot.service` waits for this file.
+4. **First boot.** OmniBot starts with `OMNIBOT_HOSTED_SERVER=1`. It redeems the claim at
    `POST /v2/hosting/claims/redeem`, signs in as the owner, keeps the host ID, and publishes the
    host. `registerHost` refuses the host ID for any other account. This claim is not the operator's
    [server claim](self-hosted-server.md#sign-in-with-a-server-claim) of a self-hosted server.
@@ -140,22 +140,22 @@ when a server is idle or boat stops a sandbox; and `error` and `deleted`. The Wo
    gave a damaged database ("OmniBot database failed its integrity check"). Thus a hosted server
    stops OmniBot before the save. boat runs `/home/user/.boat/pre-stop` as `user` when a stop
    starts, waits for it to end (at most 60 seconds), and then saves the disk. boat supports this
-   hook, but its documentation does not show it yet. `openbot-hosted-update` installs `scripts/hosting/openbot-boat-pre-stop` there
+   hook, but its documentation does not show it yet. `omnibot-hosted-update` installs `scripts/hosting/omnibot-boat-pre-stop` there
    (`install_hosting`, and `trigger` at each start, so a server that an older release updated gets
-   it). The hook makes `/run/openbot-pre-stop` and runs `systemctl stop openbot.service`: OmniBot
-   gets `SIGTERM`, stops its services and closes `openbot.db` last. After 40 seconds the hook kills
+   it). The hook makes `/run/omnibot-pre-stop` and runs `systemctl stop omnibot.service`: OmniBot
+   gets `SIGTERM`, stops its services and closes `omnibot.db` last. After 40 seconds the hook kills
    the unit, which leaves a database that SQLite recovers. The file makes the unit condition
-   `ConditionPathExists=!/run/openbot-pre-stop` fail, so `Restart=` and the end of an update request
+   `ConditionPathExists=!/run/omnibot-pre-stop` fail, so `Restart=` and the end of an update request
    do not start OmniBot during the save. `/run` is empty at each boot. boat can also keep a stopped
    machine in memory and continue it at a resume with no boot: the resume answers `"status":
    "running"`, and the file stays. Then the Worker runs a command on the machine that removes the
-   file and starts `openbot.service` (`HELD_RESUME_START_COMMAND`). With no file the command does
+   file and starts `omnibot.service` (`HELD_RESUME_START_COMMAND`). With no file the command does
    nothing. If boat does not complete the stop after the hook, OmniBot stays stopped until the next
    stop and resume. A hook that OmniBot did not write stays, and a self-hosted server gets no hook.
 
-   **Check at a start.** `PRAGMA quick_check` reads every page of `openbot.db`: on a 15.7 GB file
+   **Check at a start.** `PRAGMA quick_check` reads every page of `omnibot.db`: on a 15.7 GB file
    it stopped the main thread for 77 seconds to about 4 minutes. A clean close removes
-   `openbot.db-wal`. Thus OmniBot runs the check at a start only when that file is there (a crash,
+   `omnibot.db-wal`. Thus OmniBot runs the check at a start only when that file is there (a crash,
    a kill, or a save while OmniBot ran) or when a migration ran.
 6. **Start after a failure.** A client that cannot reach the host first calls
    `GET /v2/hosting/servers/:id/status` (owner or member; 404 for a host that is not a hosted
@@ -294,7 +294,7 @@ value that you set by hand for these four is replaced. Set `DOTENV_PRIVATE_KEY_D
 
 | Name | Value |
 | --- | --- |
-| `HOSTED_SERVER_TEMPLATE` | The named snapshot from the template build, such as `openbot-server-0-9-0`. |
+| `HOSTED_SERVER_TEMPLATE` | The named snapshot from the template build, such as `omnibot-server-0-9-0`. |
 | `HOSTED_SERVERS_ALLOWED_USER_IDS` | Comma-separated account IDs or emails that can create servers. `api:deploy:test` sets it from `HOSTED_SERVERS_TEST_ALLOW_LIST` and refuses `*`: the test Worker is public, and it shares its boat account with production. |
 
 The `BOAT_API_KEY` in `.env.dev` is the development key of the boat test account. It also has
@@ -431,20 +431,20 @@ named snapshot access. The script:
 2. uploads `scripts/hosting/` and runs `provision.sh` with `sudo`. It installs the packages in
    `packages.txt` (Xvfb, D-Bus, gnome-keyring, the Electron libraries and the remote desktop runtime
    libraries), checks the AppImage SHA-256, unpacks the AppImage to `/opt/OmniBot/app`, adds an
-   AppArmor profile that lets Chromium make user namespaces, and enables `openbot.service` and the
+   AppArmor profile that lets Chromium make user namespaces, and enables `omnibot.service` and the
    [update](#updates) units;
 3. checks the installed version, that OmniBot did not start, and that no profile or claim exists;
-4. saves the builder as `openbot-server-<version>` (or `--name=<snapshot>`) and deletes the builder.
+4. saves the builder as `omnibot-server-<version>` (or `--name=<snapshot>`) and deletes the builder.
 
 The builder never starts OmniBot, so the template has no host identity and no session. A retry
 reuses a ready snapshot with the same name or waits for a save in progress. It refuses a failed
 snapshot and never replaces an existing name. Automatic production releases reserve the prefix
-`openbot-server-production-` to avoid test snapshots in the same account. Keep each name tied to
+`omnibot-server-production-` to avoid test snapshots in the same account. Keep each name tied to
 one release and account-service origin; do not use that production prefix for manual test builds.
 
 The builder stops before creating an eleventh snapshot. This is our automation limit:
 [boat permits additional paid snapshots](https://docs.boat.dev/api/reference/snapshots/list-named-snapshots).
-Before each production build, the release job removes `openbot-server-production-` snapshots of
+Before each production build, the release job removes `omnibot-server-production-` snapshots of
 older releases and keeps the 3 newest releases, including the new one
 ([details](RELEASING.md#hosted-server-snapshots)). It never removes other names. Before removing a
 test snapshot by hand, check both Workers and pending server creation records
@@ -457,28 +457,28 @@ Server Settings > Updates has the same controls as on a computer that updates it
 **Update when idle**, **Restart now**, automatic updates, and the switch that lets members update.
 OmniBot runs as the service user from a release that root owns, so it asks root to do the work
 (`src/main/hosted-update-adapter.ts`). It makes an empty file in its runtime directory:
-`/run/openbot/update-stage` to download, and `/run/openbot/update-install` to install.
-`openbot-update-request.path` then starts `openbot-update-request.service`, which runs
-`openbot-hosted-update request` as root. That removes the file without reading it and runs `stage`.
+`/run/omnibot/update-stage` to download, and `/run/omnibot/update-install` to install.
+`omnibot-update-request.path` then starts `omnibot-update-request.service`, which runs
+`omnibot-hosted-update request` as root. That removes the file without reading it and runs `stage`.
 For an install, it then stops OmniBot, runs `apply` and starts OmniBot again, also after a failure.
 A request that comes during a timer download waits for it while OmniBot runs. While a request runs,
-root writes the step to `/run/openbot-update.state` and changes its time every 5 seconds. OmniBot
+root writes the step to `/run/omnibot-update.state` and changes its time every 5 seconds. OmniBot
 reads each change as download progress, so the download deadline finds a request that root never
 takes or that stops.
 
 The release that an older script moves into place has these units, but that script installs only
-the units it knows. So `openbot.service` runs `openbot-hosted-update trigger` as root before OmniBot
+the units it knows. So `omnibot.service` runs `omnibot-hosted-update trigger` as root before OmniBot
 starts; it installs and starts the request units when they are missing. OmniBot offers the controls
-only when `/etc/systemd/system/openbot-update-request.path` is there at its start. Otherwise, and on
+only when `/etc/systemd/system/omnibot-update-request.path` is there at its start. Otherwise, and on
 hosts older than this release, the panel checks the release (`host-release-v1`) and shows the
 host-managed update path. A container has no request units. A container of `docker/instances` uses
-the same `HostedUpdateAdapter` with folders that the host mounts in `/var/lib/openbot-update`; see
+the same `HostedUpdateAdapter` with folders that the host mounts in `/var/lib/omnibot-update`; see
 [Updates from the app](docker.md#updates-from-the-app).
 
 The Linux build contains `scripts/hosting/` (without the TypeScript files) in `resources/hosting`.
-On a server, root runs `openbot-hosted-update`:
+On a server, root runs `omnibot-hosted-update`:
 
-1. `openbot-update.timer` runs `stage` 5 to 10 minutes after each start of the timer and then
+1. `omnibot-update.timer` runs `stage` 5 to 10 minutes after each start of the timer and then
    about each 6 hours. It reads the `latest-linux.yml` (`latest-linux-arm64.yml` on arm64) of the
    latest GitHub release, the manifest that the Linux desktop updater reads. When that version is newer than the installed one, it downloads the
    AppImage, checks its SHA-512 against the manifest, unpacks it in `/var/tmp`, checks that it has
@@ -489,8 +489,8 @@ On a server, root runs `openbot-hosted-update`:
 2. `apply` copies `staged` to `app`, and then installs the scripts, AppArmor profile and units of
    the new release. `.applying` and `staged` stay until all of this is complete, so after a stop or
    a failure the next start does it again, and `stage` does nothing until then.
-   `openbot-update-apply.service` runs `boot` before `openbot.service`. `boot` runs `apply` only on
-   a complete disk, or when `.applying` shows an interrupted copy. `openbot.service` does not
+   `omnibot-update-apply.service` runs `boot` before `omnibot.service`. `boot` runs `apply` only on
+   a complete disk, or when `.applying` shows an interrupted copy. `omnibot.service` does not
    require it, so it starts after a failure too: with the old release, or with a partial copy after
    a failed copy, until the next start. On a self-installed server, the new release starts at the
    next boot. A hosted server installs it itself: when the release is staged, OmniBot asks root to
@@ -511,8 +511,8 @@ OmniBot for the restore. `boot` waits only for an interrupted copy, because Omni
 it. During a restore it skips a staged release and recovers an incomplete one.
 
 boat starts the desktop (`lightdm`) about 8 s after the resume, and then the enabled units of
-`multi-user.target` again, about 16 s after it. `openbot.service` is also wanted by
-`lightdm.service`, so it starts with the desktop. The second start of `openbot-update-apply.service`
+`multi-user.target` again, about 16 s after it. `omnibot.service` is also wanted by
+`lightdm.service`, so it starts with the desktop. The second start of `omnibot-update-apply.service`
 does nothing: the unit stays active (`RemainAfterExit`), and `boot` does nothing while OmniBot runs
 (after a failed `boot`). [Observed on a boat VM on 2026-10-11; not in boat
 documentation.]
@@ -528,11 +528,11 @@ it. A release without all of its `resources/hosting` files cannot update a serve
 
 A server that has no updater, such as one made from a template before 0.26.0, needs one upgrade by
 hand. With a boat key that has command and file access: upload `scripts/hosting/` to
-`/tmp/openbot-upgrade`, run `sudo systemctl stop openbot.service`, run `sudo bash /tmp/openbot-upgrade/provision.sh user <AppImage URL> <SHA-256>
+`/tmp/omnibot-upgrade`, run `sudo systemctl stop omnibot.service`, run `sudo bash /tmp/omnibot-upgrade/provision.sh user <AppImage URL> <SHA-256>
 https://api.omnibot.example.com` as a detached command, and start the service again. The data in the home
 folder and in `/srv` stays.
 
-On a server, `openbot-hosted-server` starts a D-Bus session, unlocks a gnome-keyring with a
+On a server, `omnibot-hosted-server` starts a D-Bus session, unlocks a gnome-keyring with a
 random password for each server (so `safeStorage` can keep the account session), and runs OmniBot
 with `--password-store=gnome-libsecret`. The agents use the boat desktop: the lightdm session of the
 sandbox user on `:0`, with openbox. So boat's desktop viewer and OmniBot remote desktop show the same
@@ -540,11 +540,11 @@ screen, and a click moves the keyboard focus to another window. After a resume, 
 to 2 minutes for that session. OmniBot shows its own windows on a 1280x800 Xvfb display that
 `xvfb-run` starts. `xvfb-run` adds the key of that display to `~/.Xauthority`, which has the key of
 `:0`, and lightdm keeps the other keys when it writes the file. The script names `:0` in
-`OPENBOT_AGENT_DISPLAY`, so an agent's screenshot and remote desktop do not show the OmniBot window
+`OMNIBOT_AGENT_DISPLAY`, so an agent's screenshot and remote desktop do not show the OmniBot window
 (see [Computer Use and remote desktop](architecture/computer-use.md#agent-display-on-a-server)). With
 no desktop session, the server starts two Xvfb displays, as a
 [self-hosted server](self-hosted-server.md#how-it-works) does. The keyring files are in
-`/srv/openbot-hosted/keyrings`:
+`/srv/omnibot-hosted/keyrings`:
 
 - not in `~/.local/share/keyrings`: the boat image has a locked `default` keyring there, and a
   snapshot restore resets that folder after the service starts;
@@ -578,7 +578,7 @@ each thread, and one set of MCP servers for each ACP session. A Starter server h
 are on a hosted server, a [self-hosted server](self-hosted-server.md#memory) and a
 [container](docker.md#memory); the desktop app does not change.
 
-The unit (`openbot.service`):
+The unit (`omnibot.service`):
 
 - `MemoryMax=90%`: the unit can use at most 90% of the memory, so 10% stays for the desktop, sshd
   and the boat agent. The limit counts memory only, not swap. The boat image has a 2 GB swap file,
@@ -642,7 +642,7 @@ holds it:
    message or thread reply from a person; a Discord mention or button press; a Telegram message or
    button press.
 3. For such an event and a server that starts, Signal keeps the delivery frame, sealed to the host's
-   queue key (`@openbot/contracts/signal-protocol/ingress-queue`), in memory for at most 10 minutes
+   queue key (`@omnibot/contracts/signal-protocol/ingress-queue`), in memory for at most 10 minutes
    (64 events and 192 KB for each host). Slack gets 200, so it does not send the event again. Because
    the start runs after the answer and can fail, Signal asks for the start again once a minute while
    the host has kept events. Signal
@@ -659,7 +659,7 @@ holds it:
    sends it again on the host's next hello: the first socket can close before the host handled it. The
    transports drop an event that they already handled.
 
-The host makes its queue key once (`src/main/ingress-queue-key.ts`, `openbot-ingress-queue-key-v1.json`
+The host makes its queue key once (`src/main/ingress-queue-key.ts`, `omnibot-ingress-queue-key-v1.json`
 in the user data folder), encrypted by the operating system, and sends the public half in each
 `ingress` hello. An older host sends no key, so Signal keeps nothing for it; a hello with no key
 removes the key that Signal had. A kept delivery that arrives before its connection has started waits
@@ -676,21 +676,21 @@ The `boat` scenario of `scripts/stripe-flows-e2e.ts` (see `apps/auth-api/README.
 
 - the builder user has passwordless `sudo`, and AppArmor is enabled in the boat VM;
 - boat runs `setupScript` for a sandbox created from a named snapshot, and systemd starts
-  `openbot.service` after a create;
+  `omnibot.service` after a create;
 - OmniBot redeems its claim, publishes the host with the server name, and signs in again from the
   stored session after a restart (`safeStorage` with gnome-keyring under Xvfb);
 - a delete through the Worker removes the sandbox.
 
 A resume test on 2026-09-28 (one sandbox with the 0.24.0 AppImage, 6 resumes, each on another
-machine) confirmed that systemd starts `openbot.service` again after a resume, and that a keyring
+machine) confirmed that systemd starts `omnibot.service` again after a resume, and that a keyring
 secret in `/srv` stays. From the resume call to the OmniBot start took 7 to 34 s; the keyring start
 took 40 ms. Most of the time is boat: it restores the disk and then starts the enabled units, 5 to
 20 s after the sandbox is `idle`.
 
 A wake test on 2026-10-11 (one hosted server with 0.37.0) measured, from the resume call: boat
-ready at 4 s, `openbot.service` at 17 s and the host register at 22 s. A wake with a staged release
+ready at 4 s, `omnibot.service` at 17 s and the host register at 22 s. A wake with a staged release
 took 3 min 35 s, because `apply` waited for the restore. With the start at `lightdm`,
-`openbot.service` started at 8 s and the host registered at about 20 s: Electron starts slowly from
+`omnibot.service` started at 8 s and the host registered at about 20 s: Electron starts slowly from
 the lazily restored disk, and the desktop session holds the display until about 12 s.
 
 A resize test on 2026-09-28 (one plain sandbox with `noEnv`, `small → default → small`, each a stop
@@ -700,7 +700,7 @@ and an enabled systemd unit started again after each resume. The stop took 25 to
 sandbox was `idle` 3 to 6 s after the resume call.
 
 A memory test on 2026-09-30 (one `small` sandbox with `noEnv`, the scripts and the Linux AppImage of
-main, and a `ServerMemory` driver in a unit with the same limits as `openbot.service`)
+main, and a `ServerMemory` driver in a unit with the same limits as `omnibot.service`)
 confirmed:
 
 - boat VMs use cgroup v2 with the memory controller, and the unit gets `memory.max` = 90% (3.4 GiB);
@@ -741,7 +741,7 @@ sandbox) stopped the sandbox while a writer used SQLite in WAL mode in the home 
 - with an empty WAL and only small appends at the stop, 9 checks were healthy;
 - with no automatic checkpoint, the main file was not damaged, but in 3 of 6 restores the WAL
   header was torn, and SQLite ignored the full WAL. The rows of that run were lost;
-- with `openbot-boat-pre-stop` for the writer unit (`--mode=pre-stop`), each of 4 stops during
+- with `omnibot-boat-pre-stop` for the writer unit (`--mode=pre-stop`), each of 4 stops during
   writes gave a healthy database with every committed row, and no `/run` flag after the resume.
 
 A stop-order probe on the same day (a unit that records `SIGTERM` and writes each 200 ms) showed
@@ -750,12 +750,12 @@ that boat saves the disk while the processes run, about 3 seconds after the stop
 call, and the last write that the restore kept was from after the hook ended. Thus boat waits for
 the hook before it saves the disk.
 
-An install test on the same sandbox put the new `openbot-hosted-update`, `openbot.service` and hook
+An install test on the same sandbox put the new `omnibot-hosted-update`, `omnibot.service` and hook
 in place, as an older release does when it updates. At the next start, `trigger` installed the hook
 as `user` with mode 0755. It did not change a current hook, kept a hook that OmniBot did not write
 (a file, a link or a FIFO, with no wait), and replaced a changed OmniBot hook. At a stop of the real OmniBot, the hook
-stopped `openbot.service` in 0.3 seconds and ended with 0. After the resume (a new boot ID), the
-flag was gone, OmniBot ran, and `openbot.db` passed `quick_check`.
+stopped `omnibot.service` in 0.3 seconds and ended with 0. After the resume (a new boot ID), the
+flag was gone, OmniBot ran, and `omnibot.db` passed `quick_check`.
 
 ## Not confirmed
 
@@ -785,13 +785,13 @@ These were not tested on boat. Test them before a user gets access:
 - whether boat runs the pre-stop hook for a stop that it starts by itself: maintenance (the
   `updating` state) or the end of `ttlSeconds`. A crash of the machine restores the last periodic
   save, which also copies files while they change;
-- that OmniBot closes `openbot.db` at a `systemctl stop` on a server. The install test used a release
+- that OmniBot closes `omnibot.db` at a `systemctl stop` on a server. The install test used a release
   without the `SIGTERM` handler. The `ExecStop` of the unit stops OmniBot before its Xvfb displays
   (see [Computer Use](architecture/computer-use.md#agent-display-on-a-server)). This was tested in a
   container with a stand-in for OmniBot, not with systemd. When OmniBot does not close the database,
   it is as after a crash, which SQLite recovers, because the save starts after the stop;
 - the agent display on boat with a release build. On 2026-10-16 one boat server ran a 0.42.0 build
-  with this change, from `openbot.service`: OmniBot was on Xvfb `:99` at 1280x800, and `:0` had no
+  with this change, from `omnibot.service`: OmniBot was on Xvfb `:99` at 1280x800, and `:0` had no
   OmniBot window. In an agent turn, the agent shell and `cua-driver` had `DISPLAY=:0`, and Computer
   Use saw a 1920x1080 screen with only the panel and the dock. A local remote desktop session
   captured `:0`. The session reported the size of the OmniBot display, 1280x800. The first start

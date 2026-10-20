@@ -1,7 +1,7 @@
-import type { McpSignInRelayPage, UpdateAgentInput } from "@openbot/contracts/ipc";
-import type { QuoteRequest } from "@openbot/ui/features/conversation/ComposerEditor";
-import { currentText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+import type { McpSignInRelayPage, UpdateAgentInput } from "@omnibot/contracts/ipc";
+import type { QuoteRequest } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { currentText } from "@omnibot/ui/text";
+import { errorReference } from "@omnibot/user-errors";
 import {
   createContext,
   createEffect,

@@ -1,4 +1,4 @@
-import type { AttachmentSupport } from "@openbot/contracts/attachment-files";
+import type { AttachmentSupport } from "@omnibot/contracts/attachment-files";
 import type {
   AddedAgent,
   AgentAdminSettings,
@@ -53,7 +53,7 @@ import type {
   UpdateAgentHostSettingsInput,
   UpdateAgentInput,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import type {
   EventActivity,
   EventRoutine,
@@ -63,10 +63,10 @@ import type {
   SaveEventRoutineInput,
   SaveEventRoutineResult,
   WebhookSecret,
-} from "@openbot/contracts/ipc-events";
-import type { QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import type { RemoteConnectionFailure, RemoteRecoveryStatus, RemoteTeamDirectoryClient } from "@openbot/team-client";
-import type { RemoteFileUpload } from "@openbot/team-client/remote-peer";
+} from "@omnibot/contracts/ipc-events";
+import type { QueueEditRequest } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import type { RemoteConnectionFailure, RemoteRecoveryStatus, RemoteTeamDirectoryClient } from "@omnibot/team-client";
+import type { RemoteFileUpload } from "@omnibot/team-client/remote-peer";
 import type { MobileBrowserTab } from "@/features/browser/model/browser-tabs";
 import type { BrowserViewBridgeEvent, RemoteBrowserViewSession } from "@/features/browser/model/browser-view-bridge";
 import type { MobileConversationStore } from "./conversation-store";

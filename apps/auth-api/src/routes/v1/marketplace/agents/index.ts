@@ -1,5 +1,5 @@
-import { isSkillCategory } from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
+import { isSkillCategory } from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
 import { createFileRoute } from "@tanstack/solid-router";
 import { Effect } from "effect";
 import { runApiResponse } from "../../../../server/effect-runtime";

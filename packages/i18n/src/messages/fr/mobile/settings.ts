@@ -113,7 +113,7 @@ export const messages = {
     "Affiche le début d’une réponse, une question ou l’action à approuver. Google et le service de compte OmniBot ne peuvent pas le lire.",
   "mobile.settings.notifications.sound": "Son",
   "mobile.settings.notifications.playSound": "Jouer un son",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "Chaleureux",
   "mobile.settings.notifications.sound.mech": "Mécanique",
   "mobile.settings.notifications.sound.bubble": "Pétillant",

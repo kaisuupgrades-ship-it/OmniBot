@@ -1,5 +1,5 @@
-import type { AppVariant } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AppVariant } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Item,
   ItemActions,
@@ -14,11 +14,11 @@ import {
   SelectValue,
   SettingsSection,
   SwitchField,
-} from "@openbot/ui";
-import type { GeneralSettingsValue } from "@openbot/ui/features/settings/app-settings";
-import { LanguageSelect } from "@openbot/ui/features/settings/LanguageSelect";
-import { LogoColorPicker } from "@openbot/ui/features/settings/LogoColorPicker";
-import { SendShortcutSelect } from "@openbot/ui/features/settings/SendShortcutSelect";
+} from "@omnibot/ui";
+import type { GeneralSettingsValue } from "@omnibot/ui/features/settings/app-settings";
+import { LanguageSelect } from "@omnibot/ui/features/settings/LanguageSelect";
+import { LogoColorPicker } from "@omnibot/ui/features/settings/LogoColorPicker";
+import { SendShortcutSelect } from "@omnibot/ui/features/settings/SendShortcutSelect";
 import { Show } from "solid-js";
 import { useI18n } from "../../i18n-context";
 import { useLogoColorChoice } from "../../logo-color";
@@ -31,7 +31,7 @@ const linkTargetOptions: GeneralSettingsValue["externalLinkTarget"][] = ["Defaul
  */
 const LINK_TARGET_KEYS = {
   "Default browser": "settings.externalLinks.defaultBrowser",
-  OmniBot: "settings.externalLinks.openbot",
+  OmniBot: "settings.externalLinks.omnibot",
 } as const satisfies Record<GeneralSettingsValue["externalLinkTarget"], AppTextKey>;
 
 interface SettingsGeneralTabProps {

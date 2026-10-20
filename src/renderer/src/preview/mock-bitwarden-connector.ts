@@ -1,4 +1,4 @@
-import type { BitwardenConnectorStatus, OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { BitwardenConnectorStatus, OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 export function createMockBitwardenConnector(): OmniBotDesktopApi["bitwardenConnector"] {
   let connected = false;

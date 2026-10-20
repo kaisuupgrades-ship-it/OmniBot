@@ -18,7 +18,7 @@ export const COMPARE_COLLECTION: ContentCollection<"compare"> = {
   feedTitle: "OmniBot comparisons",
   backLabel: "All comparisons",
   moreTitle: "More comparisons",
-  imageEyebrow: "OPENBOT · COMPARE",
+  imageEyebrow: "OMNIBOT · COMPARE",
   articles: publishedFirst([
     {
       slug: "instinct",
@@ -129,8 +129,8 @@ export const COMPARE_COLLECTION: ContentCollection<"compare"> = {
       author: NEWS_AUTHOR,
     },
     {
-      // Published first in /news, as openbot-vs-grokbot. That URL answers with a
-      // permanent redirect here (routes/news/openbot-vs-grokbot.ts).
+      // Published first in /news, as omnibot-vs-grokbot. That URL answers with a
+      // permanent redirect here (routes/news/omnibot-vs-grokbot.ts).
       slug: "grok-bot",
       title: "OmniBot vs Grok Bot: A Local Grok Bot Alternative",
       description:

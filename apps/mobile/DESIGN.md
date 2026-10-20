@@ -57,10 +57,10 @@ large title does not work under the custom scroll edge effect on iOS 27, and And
   solid under the bar and a 32 dp fade below it, as the top fade of the design,
   a 22 dp regular small title on the 72 dp line, and 48 dp icon buttons with a round ripple: a 40 dp glass circle on full screens, the plain icon in sheets.
 - Android has no Liquid Glass, and its blur does not work over a scroll view. The search field and the
-  bar buttons use `useChromeGlass()`: the solid glass of the design (`--openbot-bg-chrome-glass`, 94-96%
+  bar buttons use `useChromeGlass()`: the solid glass of the design (`--omnibot-bg-chrome-glass`, 94-96%
   opaque), a hairline edge, a soft shadow and the top light of `ChromeGlassSheen`. The home search
   field has a real blur on Android 12 and later: the home content is in a `BlurTargetView`, and the
-  field draws a `BlurView` of it (radius 24) under the lighter `--openbot-bg-chrome-blur` fill. While
+  field draws a `BlurView` of it (radius 24) under the lighter `--omnibot-bg-chrome-blur` fill. While
   the results are open, the field shows the solid glass over the blur, because the results are not in
   the target. iOS without Liquid Glass keeps the solid capsule.
   Stacks set `androidBackOptions` in `screenOptions`, so the back button of every inner page, in
@@ -110,7 +110,7 @@ a standalone sheet with a native title is:
 }
 ```
 
-Resolve `sheetBackground` from `--openbot-bg-sheet`, as in `src/app/(app)/_layout.tsx`.
+Resolve `sheetBackground` from `--omnibot-bg-sheet`, as in `src/app/(app)/_layout.tsx`.
 Keep `headerShadowVisible: false` from the parent stack. A headerless sheet uses
 `headerShown: false`; do not add a fake navigation bar. Full-height detents are appropriate for
 search or similarly large content, not the default for a short form.

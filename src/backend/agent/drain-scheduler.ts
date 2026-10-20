@@ -1,6 +1,6 @@
-import { AGENT_PROVIDERS } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { AGENT_PROVIDERS } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Deferred, Effect, Result, Schema } from "effect";
 import { type AgentProvider, ProviderTurnActiveError } from "../agent-client";
 import type { AgentStore } from "../agent-store";

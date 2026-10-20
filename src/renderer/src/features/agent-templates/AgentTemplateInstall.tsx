@@ -1,7 +1,7 @@
-import type { AddedAgent, AgentTemplateDetail, ServerSummary } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
-import { AgentTemplateInstallDialog } from "@openbot/ui/features/agents/AgentTemplateInstallDialog";
-import { useText } from "@openbot/ui/text";
+import type { AddedAgent, AgentTemplateDetail, ServerSummary } from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
+import { AgentTemplateInstallDialog } from "@omnibot/ui/features/agents/AgentTemplateInstallDialog";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createStore } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { type AgentTemplateInstallCalls, agentTemplatesPort } from "./agent-templates-port";

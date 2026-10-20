@@ -92,12 +92,12 @@ scoped work with `this.#compaction.clientEnded(client)`. This plan makes
   session; `clear()` removes all. Sessions are keyed by public thread and turn,
   not by client.
 - Test exemplar: `scripts/codex-compaction-queue-e2e.ts` (320 lines). It sets
-  `HOME`, `CODEX_HOME`, `OPENBOT_CODEX_PATH`, `OPENBOT_FAKE_CODEX_LOG` and
-  `OPENBOT_FAKE_CODEX_CONTROL` before it imports the service modules, writes a
+  `HOME`, `CODEX_HOME`, `OMNIBOT_CODEX_PATH`, `OMNIBOT_FAKE_CODEX_LOG` and
+  `OMNIBOT_FAKE_CODEX_CONTROL` before it imports the service modules, writes a
   fake Codex app-server script, builds `AgentService` with a stub `browser:
   AgentBrowserHost` (lines 177-190), drives a compaction with
   `control.json`, waits for state with `waitFor`, and writes
-  `.openbot-build/codex-compaction-queue-e2e/report.json`.
+  `.omnibot-build/codex-compaction-queue-e2e/report.json`.
   `agents.getRuntimeSnapshot().contextStates` returns the compaction display
   for each agent (`agent-service.ts:1302-1304`).
 
@@ -161,7 +161,7 @@ and change it:
      `packages/contracts` for the exact field names.
   2. `calls.clearControls === 0` before `agents.stop()` runs.
   3. The second message reaches `completed` after Codex restarts.
-- Write `.openbot-build/provider-loss-scope-e2e/report.json` with
+- Write `.omnibot-build/provider-loss-scope-e2e/report.json` with
   `{ passed, checks: [{ name, passed, detail }] }` and exit non-zero on a failure.
 - Header comment: what the script proves and how to run it
   (`bun scripts/provider-loss-scope-e2e.ts`).

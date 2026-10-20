@@ -1,5 +1,5 @@
-import type { ComputerUseCoveredArea } from "@openbot/contracts/ipc";
-import { useText } from "@openbot/ui/text";
+import type { ComputerUseCoveredArea } from "@omnibot/contracts/ipc";
+import { useText } from "@omnibot/ui/text";
 
 export interface ComputerUseWindowHighlightProps {
   /** Which application window the agent is working in, for the screen reader and the label. */

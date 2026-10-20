@@ -1,4 +1,4 @@
-import { EXTERNAL_LINK_REL, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, OMNIBOT_LINKS } from "../../lib/landing-links";
 
 export function OneAgentManyProviders() {
   return (
@@ -13,11 +13,11 @@ export function OneAgentManyProviders() {
       <p>
         In OmniBot an agent owns three things that outlive any provider it runs on: a workspace on disk, a thread of
         everything it has done, and an identity of its own. Point the same agent at{" "}
-        <a href={OPENBOT_LINKS.codex} target="_blank" rel={EXTERNAL_LINK_REL}>
+        <a href={OMNIBOT_LINKS.codex} target="_blank" rel={EXTERNAL_LINK_REL}>
           Codex
         </a>{" "}
         instead of{" "}
-        <a href={OPENBOT_LINKS.claude} target="_blank" rel={EXTERNAL_LINK_REL}>
+        <a href={OMNIBOT_LINKS.claude} target="_blank" rel={EXTERNAL_LINK_REL}>
           Claude Code
         </a>{" "}
         and it is still the same agent, in the same folder, with the same history behind it.

@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the settings context reaches in main: the app-wide preferences and the switches for
@@ -26,7 +26,7 @@ export interface SettingsPort {
   update: Pick<OmniBotDesktopApi["update"], "getPreference" | "onPreference" | "setPreference">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function settingsPort(): SettingsPort {
-  return window.openbot;
+  return window.omnibot;
 }

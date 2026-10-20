@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { chmod, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { z } from "zod";
 import { type AgentRuntimeLock, loadAgentRuntimeLock } from "./agent-runtime-lock";
 import { sha256 } from "./remote-desktop-runtime-release";
@@ -59,7 +59,7 @@ export async function installGrokRuntime(
   verifyChecksum(license, lock.grok.licenseSha256, "Grok license");
   verifyChecksum(notices, lock.grok.noticesSha256, "Grok third-party notices");
 
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-grok-install-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "omnibot-grok-install-"));
   try {
     const staged = join(temporaryRoot, "runtime");
     await mkdir(join(staged, "bin"), { recursive: true });

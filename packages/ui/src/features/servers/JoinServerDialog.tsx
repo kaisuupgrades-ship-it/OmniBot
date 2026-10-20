@@ -1,8 +1,8 @@
-import { AppLogo } from "@openbot/brand";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { isNeverExpiringInvite } from "@openbot/contracts/invite-links";
-import type { InvitePreview, JoinServerInput } from "@openbot/contracts/ipc";
-import type { AppFormat, AppTranslate } from "@openbot/i18n";
+import { AppLogo } from "@omnibot/brand";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { isNeverExpiringInvite } from "@omnibot/contracts/invite-links";
+import type { InvitePreview, JoinServerInput } from "@omnibot/contracts/ipc";
+import type { AppFormat, AppTranslate } from "@omnibot/i18n";
 import {
   Alert,
   AlertContent,
@@ -19,9 +19,9 @@ import {
   OctagonX,
   Text,
   X,
-} from "@openbot/ui";
-import { motionDuration, prefersReducedMotion } from "@openbot/ui/utils";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/ui";
+import { motionDuration, prefersReducedMotion } from "@omnibot/ui/utils";
+import type { UserErrorDetails } from "@omnibot/user-errors";
 import { createSignal, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 

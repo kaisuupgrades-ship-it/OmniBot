@@ -1,15 +1,15 @@
-import { supportedAttachmentExtensions } from "@openbot/contracts/attachment-files";
+import { supportedAttachmentExtensions } from "@omnibot/contracts/attachment-files";
 import {
   type AgentWait,
   accountUsageCoversModel,
   canPreviewAttachment,
   type QueueSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   TEAM_EML_ATTACHMENTS_CAPABILITY,
   TEAM_MEDIA_ATTACHMENTS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/current";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/current";
+import { sourceText } from "@omnibot/i18n/source";
 import {
   ArrowUp,
   AudioLines,
@@ -24,25 +24,25 @@ import {
   Mic,
   Plus,
   Puzzle,
-} from "@openbot/ui";
-import { fileBadge } from "@openbot/ui/features/conversation/AttachmentCards";
-import { attachmentReferenceTone } from "@openbot/ui/features/conversation/AttachmentReference";
-import { AwaitingReplies } from "@openbot/ui/features/conversation/AwaitingReplies";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
-import { ComposerErrorBanner } from "@openbot/ui/features/conversation/ComposerErrorBanner";
+} from "@omnibot/ui";
+import { fileBadge } from "@omnibot/ui/features/conversation/AttachmentCards";
+import { attachmentReferenceTone } from "@omnibot/ui/features/conversation/AttachmentReference";
+import { AwaitingReplies } from "@omnibot/ui/features/conversation/AwaitingReplies";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { ComposerErrorBanner } from "@omnibot/ui/features/conversation/ComposerErrorBanner";
 import {
   ComposerNotice,
   ComposerSignInNotice,
   ComposerUpdateNotice,
   ComposerUsageLimitNotice,
-} from "@openbot/ui/features/conversation/ComposerNotice";
-import { ComposerCompactionNotice, ContextUsageMeter } from "@openbot/ui/features/conversation/ContextUsage";
-import { CloseIcon, StopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { type OpenWaitItem, OpenWaits } from "@openbot/ui/features/conversation/OpenWaits";
-import { RichMessageText } from "@openbot/ui/features/conversation/RichMessageText";
-import { SpeakingBar } from "@openbot/ui/features/conversation/SpeakingBar";
-import { VoiceRecordingMorph, voiceButtonLabel } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/ComposerNotice";
+import { ComposerCompactionNotice, ContextUsageMeter } from "@omnibot/ui/features/conversation/ContextUsage";
+import { CloseIcon, StopIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { type OpenWaitItem, OpenWaits } from "@omnibot/ui/features/conversation/OpenWaits";
+import { RichMessageText } from "@omnibot/ui/features/conversation/RichMessageText";
+import { SpeakingBar } from "@omnibot/ui/features/conversation/SpeakingBar";
+import { VoiceRecordingMorph, voiceButtonLabel } from "@omnibot/ui/features/conversation/VoiceRecordingMorph";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, createStore, For, Loading, lazy, Show } from "solid-js";
 import { reportErrorBanner, reportNotification } from "../../error-reports";
 import { deviceSendShortcut, sendShortcutAriaKey, sendShortcutHintKey } from "../../send-shortcut-preference";
@@ -626,7 +626,7 @@ export function ConversationComposer() {
             multiple
             hidden
             tabindex={-1}
-            data-openbot-attachment-picker={props.runtime ? undefined : "true"}
+            data-omnibot-attachment-picker={props.runtime ? undefined : "true"}
             onChange={(event) => {
               if (props.runtime?.importFiles)
                 void props.runtime.importFiles(Array.from(event.currentTarget.files ?? []));
@@ -825,5 +825,5 @@ function openWaitItems(waits: readonly AgentWait[], queue: QueueSnapshot | undef
 }
 
 const QueuePanel = lazy(() =>
-  import("@openbot/ui/features/conversation/QueuePanel").then((module) => ({ default: module.QueuePanel })),
+  import("@omnibot/ui/features/conversation/QueuePanel").then((module) => ({ default: module.QueuePanel })),
 );

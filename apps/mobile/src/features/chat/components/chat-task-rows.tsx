@@ -1,5 +1,5 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
-import { isAgentTaskActive, isAgentTaskOpen } from "@openbot/team-client/agent-tasks";
+import type { AgentTask } from "@omnibot/contracts/ipc";
+import { isAgentTaskActive, isAgentTaskOpen } from "@omnibot/team-client/agent-tasks";
 import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Typography } from "heroui-native";

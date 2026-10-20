@@ -1,13 +1,13 @@
 // Run: bun scripts/routine-dst-order-e2e.ts
-// Report: .openbot-build/routine-dst-order-e2e.json
+// Report: .omnibot-build/routine-dst-order-e2e.json
 
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import type { RoutineSchedule } from "@openbot/contracts/ipc";
+import type { RoutineSchedule } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import { AgentRoutineStore } from "../src/backend/agent-routine-store";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 
 interface ScheduleCase {
   name: string;
@@ -162,8 +162,8 @@ const cases: ScheduleCase[] = [
   },
 ];
 
-const artifactDirectory = resolve(dirname(import.meta.filename), "../.openbot-build");
-const temporaryDirectory = await mkdtemp(join(tmpdir(), "openbot-routine-dst-order-"));
+const artifactDirectory = resolve(dirname(import.meta.filename), "../.omnibot-build");
+const temporaryDirectory = await mkdtemp(join(tmpdir(), "omnibot-routine-dst-order-"));
 const database = new OmniBotDatabase(temporaryDirectory);
 const results: {
   name: string;

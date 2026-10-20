@@ -1,4 +1,4 @@
-import type { HostedServerIssue, HostedServerSleep, HostedServerStart } from "@openbot/contracts/ipc";
+import type { HostedServerIssue, HostedServerSleep, HostedServerStart } from "@omnibot/contracts/ipc";
 import { createEffect, createSignal, Show, untrack } from "solid-js";
 import { Button } from "../../button";
 import { ErrorReference } from "../../error-reference";
@@ -109,7 +109,7 @@ export function ServerConnectionNotice(props: ServerConnectionNoticeProps) {
     const step =
       start.step === "provider_limit"
         ? t("server.connection.providerLimit")
-        : t(start.step === "openbot" ? "server.hosted.detail.start.app" : "server.hosted.detail.start.boot");
+        : t(start.step === "omnibot" ? "server.hosted.detail.start.app" : "server.hosted.detail.start.boot");
     const seconds = Math.max(0, Math.floor((now() - start.startedAt) / 1000));
     return t("server.connection.startProgress", { step, time: formatElapsed(seconds) });
   };

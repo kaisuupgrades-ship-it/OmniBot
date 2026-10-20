@@ -1,16 +1,16 @@
-import type { AgentImportPreview, AgentImportResult, OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
+import type { AgentImportPreview, AgentImportResult, OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
 import {
   type AgentImportPhase,
   type AgentImportSetup,
   AgentImportView,
-} from "@openbot/ui/features/import/AgentImportView";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/import/AgentImportView";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, createStore, onSettled } from "solid-js";
 import { actionToast } from "../../action-toast";
 
 /** The way into Grok Bot this viewer chose last, so a user who set up the skill starts there. */
-const SETUP_STORAGE_KEY = "openbot.agent-import.setup";
+const SETUP_STORAGE_KEY = "omnibot.agent-import.setup";
 
 function readSetup(): AgentImportSetup {
   try {
@@ -29,13 +29,13 @@ export interface ServerImportOptions {
   onOpenAgent: (agentId: string) => void;
   /** Closes the settings the panel is in. */
   onClose: () => void;
-  /** The calls of a client with no `window.openbot`, such as the web client. */
+  /** The calls of a client with no `window.omnibot`, such as the web client. */
   calls?: AgentImportCalls;
 }
 
 const desktopCalls = (): AgentImportCalls => ({
-  ...window.openbot.agentImport,
-  openExportAgent: () => void window.openbot.openExternal("grok-bot-export"),
+  ...window.omnibot.agentImport,
+  openExportAgent: () => void window.omnibot.openExternal("grok-bot-export"),
 });
 
 interface ImportState {

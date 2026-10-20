@@ -1,4 +1,4 @@
-import type { AppInfo } from "@openbot/contracts/ipc";
+import type { AppInfo } from "@omnibot/contracts/ipc";
 import { createSignal, flush, onSettled } from "solid-js";
 import { appPort } from "./app-port";
 import type { AppProps } from "./app-providers";

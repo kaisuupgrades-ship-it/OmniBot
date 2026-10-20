@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import type { HostReleaseStatus, UpdateStatus } from "@openbot/contracts/ipc";
+import type { HostReleaseStatus, UpdateStatus } from "@omnibot/contracts/ipc";
 import { Deferred, Effect, Exit, Schema } from "effect";
 import { parse } from "yaml";
 import { isValidSemver } from "./update-service";
@@ -83,11 +83,11 @@ export class HostReleaseService {
     if (!this.#options.packaged) return "unavailable";
     if (this.#options.updateStatus().managedByHost) return "host-manager";
     if (this.#options.platform === "linux") {
-      // A hosted or self-installed server, or a container of openbot-instance, whose host installs
+      // A hosted or self-installed server, or a container of omnibot-instance, whose host installs
       // updates on request.
       if (this.#options.updateStatus().phase !== "unsupported") return "self-update";
       if (this.#options.installationMode === "container") return "container";
-      if (this.#options.environment.OPENBOT_HOSTED_SERVER === "1") return "hosted";
+      if (this.#options.environment.OMNIBOT_HOSTED_SERVER === "1") return "hosted";
       if (this.#options.installationMode === "self") return "system";
     }
     return this.#options.updateStatus().phase === "unsupported" ? "manual" : "self-update";

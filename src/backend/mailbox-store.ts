@@ -1,9 +1,9 @@
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { playableMediaKind } from "@openbot/contracts/attachment-files";
-import { rewriteAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { playableMediaKind } from "@omnibot/contracts/attachment-files";
+import { rewriteAttachmentReferences } from "@omnibot/contracts/attachment-references";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentRuntimeWorkItem,
   AttachmentDataInput,
@@ -20,7 +20,7 @@ import type {
   QueuedMessageReceipt,
   QueueSnapshot,
   QueueSteerFallback,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   AGENT_EXCHANGE_ITEM_TYPE,
   AGENT_RUNTIME_ATTENTION_LIMIT,
@@ -29,11 +29,11 @@ import {
   isConversationMessageSender,
   isMessageReaction,
   QUEUE_STEER_FALLBACKS,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { QueueEditRejectedError } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { QueueEditRejectedError } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { redactText } from "@omnibot/logging";
 import { Effect, Result } from "effect";
 import {
   AttachmentFiles,
@@ -51,7 +51,7 @@ export type { ExportedAttachmentFile, GeneratedAttachmentSource } from "./attach
 import { isEmptyStoredFile, parseStoredJson } from "./atomic-json-file";
 import { mailboxReactionRowKey } from "./database/mailbox-projection";
 import { MailboxDeliveryGate } from "./mailbox-delivery-gate";
-import { OmniBotDatabase } from "./openbot-database";
+import { OmniBotDatabase } from "./omnibot-database";
 import { isRecord } from "./protocol";
 import { recordRestartActivity } from "./restart-activity";
 
@@ -2531,7 +2531,7 @@ function compareQueueOrder(left: StoredDelivery, right: StoredDelivery): number 
  * Mailbox state written before the bot-to-agent rename spells the product agent `bot`. The validators
  * below run *before* normalization and throw "Stored mailbox projection is invalid.", so an old
  * spelling does not degrade -- it blocks startup outright. Migration v13 rewrites the database, but a
- * user who restores `openbot.db` from their own copy of the file never runs it, and `mailbox.json`
+ * user who restores `omnibot.db` from their own copy of the file never runs it, and `mailbox.json`
  * predates the database entirely. So every read tolerates both spellings and every write emits only
  * the new one. This renames keys and the `sender.kind` / `actor.kind` discriminant, never message text.
  */

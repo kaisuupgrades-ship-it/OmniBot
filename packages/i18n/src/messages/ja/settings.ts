@@ -31,7 +31,7 @@ export const messages = {
   "settings.externalLinks.title": "外部リンクの開き方",
   "settings.externalLinks.description": "会話内のリンクをどこで開くかを選びます。",
   "settings.externalLinks.defaultBrowser": "既定のブラウザー",
-  "settings.externalLinks.openbot": "OmniBot",
+  "settings.externalLinks.omnibot": "OmniBot",
   "settings.sendShortcut.title": "送信キー",
   "settings.sendShortcut.description": "このデバイスとこのブラウザーでメッセージを送信するキーを選びます。",
   "settings.sendShortcut.enter": "Enter で送信",
@@ -237,7 +237,7 @@ export const messages = {
   "settings.profile.share.copied": "画像をコピーしました",
   "settings.profile.share.copyFailed": "画像をコピーできませんでした。",
   "settings.profile.share.createFailed": "画像を作成できませんでした。",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "omnibot-activity.png",
   // The text in the image to share.
   "settings.profile.share.caption": "OmniBot と過ごした直近 6 か月",
   "settings.profile.activity.title": "アクティビティ",

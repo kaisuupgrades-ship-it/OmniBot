@@ -76,7 +76,7 @@ Findings that were confirmed but not planned, in rank order:
 Direction options (for the maintainer, not ranked against bugs):
 
 - A restore for the backup export: `maintenance-service.ts:90` writes
-  `openbot-data.json`, and nothing reads it.
+  `omnibot-data.json`, and nothing reads it.
 - A sealed offline queue for incoming chat-app messages while the host is off.
 - Keep the Telegram chat context across restarts. Needs a migration.
 - Link Discord direct messages to an agent.

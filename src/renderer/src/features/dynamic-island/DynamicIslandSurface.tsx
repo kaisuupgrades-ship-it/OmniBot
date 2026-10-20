@@ -3,12 +3,12 @@ import type {
   DynamicIslandAction,
   DynamicIslandPreference,
   DynamicIslandPresentation,
-} from "@openbot/contracts/ipc";
-import { DEFAULT_DYNAMIC_ISLAND_PREFERENCE, IDLE_DYNAMIC_ISLAND_PRESENTATION } from "@openbot/contracts/ipc";
-import type { DynamicIslandNotchSize, DynamicIslandStateChangeReason, DynamicIslandViewState } from "@openbot/ui";
-import { OmniBotDynamicIsland } from "@openbot/ui/features/dynamic-island/OmniBotDynamicIsland";
-import { useText } from "@openbot/ui/text";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/contracts/ipc";
+import { DEFAULT_DYNAMIC_ISLAND_PREFERENCE, IDLE_DYNAMIC_ISLAND_PRESENTATION } from "@omnibot/contracts/ipc";
+import type { DynamicIslandNotchSize, DynamicIslandStateChangeReason, DynamicIslandViewState } from "@omnibot/ui";
+import { OmniBotDynamicIsland } from "@omnibot/ui/features/dynamic-island/OmniBotDynamicIsland";
+import { useText } from "@omnibot/ui/text";
+import { errorReference, type UserErrorDetails } from "@omnibot/user-errors";
 import { createSignal, onSettled, Show } from "solid-js";
 import { dynamicIslandPort } from "./dynamic-island-port";
 

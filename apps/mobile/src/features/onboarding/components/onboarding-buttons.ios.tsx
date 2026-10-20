@@ -105,8 +105,8 @@ export function OnboardingPrimaryButton({
   appearDelay,
 }: OnboardingPrimaryButtonProps) {
   const motion = useOnboardingMotion();
-  const action = String(useCSSVariable("--openbot-action") ?? "#f0f0f0");
-  const actionForeground = String(useCSSVariable("--openbot-action-foreground") ?? "#141414");
+  const action = String(useCSSVariable("--omnibot-action") ?? "#f0f0f0");
+  const actionForeground = String(useCSSVariable("--omnibot-action-foreground") ?? "#141414");
   return (
     <GlassControl
       label={label}

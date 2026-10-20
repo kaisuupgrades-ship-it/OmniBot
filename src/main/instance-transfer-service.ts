@@ -13,8 +13,8 @@
 import { randomUUID } from "node:crypto";
 import { lstat, mkdir, open, readdir, readFile, rename, rm, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import type { AgentProviderId } from "@omnibot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_IMPORT_LIMITS,
   type AgentImportPreviewAgent,
@@ -47,9 +47,9 @@ import {
   type SidebarLayoutAction,
   type SidebarLayoutSnapshot,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { INSTANCE_TRANSFER_REMOTE_BYTES } from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { INSTANCE_TRANSFER_REMOTE_BYTES } from "@omnibot/contracts/team-protocol/instance-transfer-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Deferred, Effect, Exit, Result } from "effect";
 import { Zip, ZipPassThrough, zipSync } from "fflate";
 import { isMissingFileError } from "../backend/file-errors";
@@ -109,9 +109,9 @@ const LOCAL_OWNER = "local";
 /** A file that a member sent and nobody applied is removed after this. */
 const UPLOAD_TTL_MS = 30 * 60_000;
 /** Skill folders are copied here, published to the local library, and removed again. */
-const SKILL_STAGING = ".openbot/import-skills";
+const SKILL_STAGING = ".omnibot/import-skills";
 /** Workspace folders an export leaves out: OmniBot's own state and the installed skills, which travel as skills. */
-const WORKSPACE_SKIPPED = [".openbot", ...MANAGED_SKILL_FOLDERS];
+const WORKSPACE_SKIPPED = [".omnibot", ...MANAGED_SKILL_FOLDERS];
 const AVATAR_EXTENSIONS: Record<AvatarImageInput["mimeType"], string> = {
   "image/png": "png",
   "image/jpeg": "jpg",
@@ -970,7 +970,7 @@ const workspaceFiles = Effect.fn("InstanceTransfer.workspaceFiles")(function* (
 
 /** OmniBot's own workspace folders: an export leaves them out, and an import never writes them. */
 function isWorkspaceSkipped(name: string): boolean {
-  // A disk that ignores case writes `.OmniBot/` into `.openbot/`, so the check ignores case too.
+  // A disk that ignores case writes `.OmniBot/` into `.omnibot/`, so the check ignores case too.
   const lower = name.toLowerCase();
   return WORKSPACE_SKIPPED.some((skipped) => lower === skipped || lower.startsWith(`${skipped}/`));
 }

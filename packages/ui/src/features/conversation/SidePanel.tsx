@@ -1,4 +1,4 @@
-import type { AppTextKey } from "@openbot/i18n";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   AudioLines,
   Button,
@@ -15,9 +15,9 @@ import {
   Tabs,
   Workflow,
   X,
-} from "@openbot/ui";
-import { ComputerIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { ComputerIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { useText } from "@omnibot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { For, flush, onSettled, Show } from "solid-js";
 

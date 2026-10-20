@@ -1,6 +1,6 @@
-import { isAvatarMimeType } from "@openbot/contracts/avatar-images";
-import { AVATAR_IMAGE_LIMITS } from "@openbot/contracts/input-limits";
-import type { AvatarImageInput } from "@openbot/contracts/ipc";
+import { isAvatarMimeType } from "@omnibot/contracts/avatar-images";
+import { AVATAR_IMAGE_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AvatarImageInput } from "@omnibot/contracts/ipc";
 import { currentText } from "./text";
 
 const OUTPUT_SIZES = [512, 448, 384, 320] as const;

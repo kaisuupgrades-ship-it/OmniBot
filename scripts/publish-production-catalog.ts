@@ -3,8 +3,8 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { buildProductionCatalog } from "./build-production-catalog";
 
 const logger = createOmniBotLogger("publish-production-catalog");
@@ -14,11 +14,11 @@ const authApiRoot = join(projectRoot, "apps", "auth-api");
 const executableSuffix = process.platform === "win32" ? ".exe" : "";
 const wrangler = join(projectRoot, "node_modules", ".bin", `wrangler${executableSuffix}`);
 const productionApiUrl = "https://api.omnibot.example.com";
-const productionDatabase = "openbot-auth";
-const productionBucket = "openbot-skills";
+const productionDatabase = "omnibot-auth";
+const productionBucket = "omnibot-skills";
 const owner = {
-  id: "openbot-production-catalog",
-  identityKey: "openbot-production-catalog",
+  id: "omnibot-production-catalog",
+  identityKey: "omnibot-production-catalog",
   email: "catalog@omnibot.example.com",
   name: "OmniBot",
   avatarUrl: "https://omnibot.example.com/icon-192x192.png",
@@ -94,8 +94,8 @@ export async function publishProductionCatalog(
   target: "local" | "production" = "production",
 ): Promise<void> {
   const mode = target === "local" ? "--local" : "--remote";
-  const bucket = target === "local" ? "openbot-skills-test" : productionBucket;
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-production-publish-"));
+  const bucket = target === "local" ? "omnibot-skills-test" : productionBucket;
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "omnibot-production-publish-"));
   try {
     const artifactRoot = join(temporaryRoot, "artifacts");
     await buildProductionCatalog(artifactRoot);

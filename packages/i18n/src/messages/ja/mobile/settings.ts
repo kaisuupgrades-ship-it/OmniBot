@@ -112,7 +112,7 @@ export const messages = {
     "返信の冒頭、質問、または承認が必要な操作を表示します。Google と OmniBot アカウントサービスはこの内容を読めません。",
   "mobile.settings.notifications.sound": "サウンド",
   "mobile.settings.notifications.playSound": "サウンドを再生",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "あたたか",
   "mobile.settings.notifications.sound.mech": "メカニカル",
   "mobile.settings.notifications.sound.bubble": "バブル",

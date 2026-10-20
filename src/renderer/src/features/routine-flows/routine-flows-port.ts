@@ -5,7 +5,7 @@ import type {
   TeamRealtimeEvent,
   TestRoutineInput,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { desktopEventRoutinesApi, type EventRoutinesApi } from "../conversation/routine-webhooks-api";
 
 /**
@@ -38,12 +38,12 @@ export interface RoutineFlowsHost {
 }
 
 /**
- * The desktop adapter for one server. `window.openbot` is read on each call: tests and stories
+ * The desktop adapter for one server. `window.omnibot` is read on each call: tests and stories
  * replace it per case. `webhooks` is read when the canvas asks, so a role change reaches it.
  */
 export function desktopRoutineFlowsHost(serverId: string, webhooks: () => boolean): RoutineFlowsHost {
-  const flows = () => window.openbot.routineFlows;
-  const agent = () => window.openbot.agent;
+  const flows = () => window.omnibot.routineFlows;
+  const agent = () => window.omnibot.agent;
   return {
     flows: {
       canvas: (agentId) => flows().canvas(agentId, serverId),
@@ -75,6 +75,6 @@ export function desktopRoutineFlowsHost(serverId: string, webhooks: () => boolea
       agent().onScopedEvent((scoped) => {
         if (scoped.serverId === serverId) listener(scoped.event);
       }),
-    openUrl: (url) => window.openbot.openUrl(url),
+    openUrl: (url) => window.omnibot.openUrl(url),
   };
 }

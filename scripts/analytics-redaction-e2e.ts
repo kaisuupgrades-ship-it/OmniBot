@@ -7,10 +7,10 @@
 // stops them. The turns run on a fake custom agent on this computer, so no model is used.
 //
 // Start the dev app with the capture server's address first, then run the script:
-//   OPENBOT_ANALYTICS_CAPTURE_URL=http://localhost:47321 bun run dev
+//   OMNIBOT_ANALYTICS_CAPTURE_URL=http://localhost:47321 bun run dev
 //   bun scripts/analytics-redaction-e2e.ts --allow-mutations [--capture-port=47321]
 // The script removes what it added and restores the analytics setting. It writes
-// .openbot-build/analytics-redaction-e2e/report.json and needs internet access for one page.
+// .omnibot-build/analytics-redaction-e2e/report.json and needs internet access for one page.
 import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
 import { chmodSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
@@ -18,8 +18,8 @@ import { createServer, type IncomingMessage, type Server } from "node:http";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
-import { LOCAL_SERVER_ID, type OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { createOmniBotLogger } from "@openbot/logging";
+import { LOCAL_SERVER_ID, type OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { createOmniBotLogger } from "@omnibot/logging";
 import type { Page } from "playwright-core";
 import { z } from "zod";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
@@ -28,11 +28,11 @@ import { readDevInstanceRecords } from "./dev-automation/instance-registry";
 // The page functions below run in the app window, where the preload bridge sets this.
 declare global {
   interface Window {
-    openbot: OmniBotDesktopApi;
+    omnibot: OmniBotDesktopApi;
   }
 }
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/analytics-redaction-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/analytics-redaction-e2e");
 const portFlag = process.argv.find((argument) => argument.startsWith("--capture-port="));
 const CAPTURE_PORT = Number(portFlag?.slice("--capture-port=".length) ?? 47321);
 const CAPTURE_URL = `http://localhost:${CAPTURE_PORT}`;
@@ -196,11 +196,11 @@ const session = await connectToDevApp(instance.remoteDebuggingPort, logger, {
 });
 const page: Page = session.page;
 
-const appInfo = await page.evaluate(() => window.openbot.getAppInfo());
+const appInfo = await page.evaluate(() => window.omnibot.getAppInfo());
 assert.equal(
   appInfo.analyticsCaptureUrl,
   CAPTURE_URL,
-  `Start the dev app with OPENBOT_ANALYTICS_CAPTURE_URL=${CAPTURE_URL}.`,
+  `Start the dev app with OMNIBOT_ANALYTICS_CAPTURE_URL=${CAPTURE_URL}.`,
 );
 
 // The renderer reports `desktop_app_opened` once per load. Load the window again, so that the
@@ -208,7 +208,7 @@ assert.equal(
 await page.reload();
 await page.waitForFunction(() => document.readyState === "complete");
 
-const fakeDirectory = mkdtempSync(join(tmpdir(), "openbot-analytics-e2e-"));
+const fakeDirectory = mkdtempSync(join(tmpdir(), "omnibot-analytics-e2e-"));
 const fakeAgentPath = join(fakeDirectory, "fake-acp-agent");
 writeFileSync(fakeAgentPath, FAKE_AGENT);
 chmodSync(fakeAgentPath, 0o755);
@@ -216,19 +216,19 @@ chmodSync(fakeAgentPath, 0o755);
 const customAgentId = MARKER;
 const results: { name: string; passed: boolean; detail?: unknown }[] = [];
 const cleanup: (() => Promise<unknown>)[] = [];
-const trackingBefore = await page.evaluate(() => window.openbot.getAnalyticsPreference());
+const trackingBefore = await page.evaluate(() => window.omnibot.getAnalyticsPreference());
 
 function check(name: string, passed: boolean, detail?: unknown) {
   results.push({ name, passed, ...(detail === undefined ? {} : { detail }) });
 }
 
 try {
-  if (!trackingBefore.enabled) await page.evaluate(() => window.openbot.setAnalyticsPreference({ enabled: true }));
+  if (!trackingBefore.enabled) await page.evaluate(() => window.omnibot.setAnalyticsPreference({ enabled: true }));
 
   // An MCP server whose address, header, command and environment all carry the marker.
   const mcpServers = await page.evaluate(
     ({ marker, server }) =>
-      window.openbot.agent.saveMcpServer(
+      window.omnibot.agent.saveMcpServer(
         {
           config: {
             id: "",
@@ -251,7 +251,7 @@ try {
   const mcpServerId = mcpServers.find((server) => server.name === `e2e_${MARKER}`)?.id;
   assert.ok(mcpServerId, "The saved MCP server is not in the list.");
   cleanup.push(() =>
-    page.evaluate(({ id, server }) => window.openbot.agent.removeMcpServer({ mcpServerId: id }, server), {
+    page.evaluate(({ id, server }) => window.omnibot.agent.removeMcpServer({ mcpServerId: id }, server), {
       id: mcpServerId,
       server: LOCAL_SERVER_ID,
     }),
@@ -259,7 +259,7 @@ try {
 
   await page.evaluate(
     ({ id, command, marker }) =>
-      window.openbot.customAgents.save({
+      window.omnibot.customAgents.save({
         id,
         name: `Agent ${marker}`,
         command,
@@ -268,7 +268,7 @@ try {
       }),
     { id: customAgentId, command: fakeAgentPath, marker: MARKER },
   );
-  cleanup.push(() => page.evaluate((id) => window.openbot.customAgents.delete({ id }), customAgentId));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.customAgents.delete({ id }), customAgentId));
 
   // A saved custom agent restarts the provider. Until the restarted process has listed its models,
   // the host refuses the model with "listed no models"; that refusal is the state to wait out.
@@ -278,7 +278,7 @@ try {
       try {
         return await page.evaluate(
           ({ customId, marker, label, message }) =>
-            window.openbot.agent.createAgent({
+            window.omnibot.agent.createAgent({
               name: `${label} ${marker}`,
               description: `Description ${marker}`,
               avatarSeed: marker,
@@ -300,7 +300,7 @@ try {
   check("the renderer reports that the app opened", opened.properties.surface === "desktop", opened.properties);
 
   const agent = await createAgent("Answers", "Say hello to");
-  cleanup.push(() => page.evaluate((id) => window.openbot.agent.deleteAgent(id), agent.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.agent.deleteAgent(id), agent.id));
   const completed = await waitForEvent("system_turn_completed", (event) => event.properties.provider === "acp");
   check("a custom agent's turn is reported", true, completed.properties);
   check("a custom agent's model is reported as its kind only", completed.properties.model === "custom", {
@@ -308,7 +308,7 @@ try {
   });
 
   const failing = await createAgent("Fails", "Now please fail, with");
-  cleanup.push(() => page.evaluate((id) => window.openbot.agent.deleteAgent(id), failing.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.agent.deleteAgent(id), failing.id));
   const failure = await waitForEvent(
     "system_turn_completed",
     (event) => event.properties.provider === "acp" && event.properties.status === "failed",
@@ -317,7 +317,7 @@ try {
 
   const routine = await page.evaluate(
     ({ agentId, marker }) =>
-      window.openbot.agent.createRoutine({
+      window.omnibot.agent.createRoutine({
         agentId,
         name: `Routine ${marker}`,
         instruction: `Report on ${marker}`,
@@ -327,18 +327,18 @@ try {
       }),
     { agentId: agent.id, marker: MARKER },
   );
-  await page.evaluate(({ agentId, routineId }) => window.openbot.agent.testRoutine({ agentId, routineId }), {
+  await page.evaluate(({ agentId, routineId }) => window.omnibot.agent.testRoutine({ agentId, routineId }), {
     agentId: agent.id,
     routineId: routine.id,
   });
   const routineRun = await waitForEvent("system_routine_run");
   check("a routine run is reported", true, routineRun.properties);
 
-  const openTab = (url: string) => page.evaluate((address) => window.openbot.browser.open({ url: address }), url);
+  const openTab = (url: string) => page.evaluate((address) => window.omnibot.browser.open({ url: address }), url);
   const localTab = await openTab(`http://localhost:${localPage.port}/?token=${MARKER}local`);
-  cleanup.push(() => page.evaluate((id) => window.openbot.browser.close(id), localTab.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.browser.close(id), localTab.id));
   const publicTab = await openTab(`https://user:${MARKER}pw@example.com/${MARKER}path?token=${MARKER}query`);
-  cleanup.push(() => page.evaluate((id) => window.openbot.browser.close(id), publicTab.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.browser.close(id), publicTab.id));
   const visit = await waitForEvent("system_site_visited", (event) => event.properties.domain === "example.com");
   check("a site visit names the registrable domain only", visit.properties.domain === "example.com", visit.properties);
   check(
@@ -347,17 +347,17 @@ try {
   );
 
   // With analytics off nothing is sent. The visit after analytics is back on proves the queue moved.
-  await page.evaluate(() => window.openbot.setAnalyticsPreference({ enabled: false }));
+  await page.evaluate(() => window.omnibot.setAnalyticsPreference({ enabled: false }));
   const offTab = await openTab("https://example.org/");
-  cleanup.push(() => page.evaluate((id) => window.openbot.browser.close(id), offTab.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.browser.close(id), offTab.id));
   await page.waitForFunction(
-    (id) => window.openbot.browser.listTabs().then((tabs) => tabs.some((tab) => tab.id === id && !tab.loading)),
+    (id) => window.omnibot.browser.listTabs().then((tabs) => tabs.some((tab) => tab.id === id && !tab.loading)),
     offTab.id,
     { timeout: EVENT_TIMEOUT_MS },
   );
-  await page.evaluate(() => window.openbot.setAnalyticsPreference({ enabled: true }));
+  await page.evaluate(() => window.omnibot.setAnalyticsPreference({ enabled: true }));
   const onTab = await openTab("https://example.net/");
-  cleanup.push(() => page.evaluate((id) => window.openbot.browser.close(id), onTab.id));
+  cleanup.push(() => page.evaluate((id) => window.omnibot.browser.close(id), onTab.id));
   await waitForEvent("system_site_visited", (event) => event.properties.domain === "example.net");
   check("nothing is sent while analytics is off", !captured.some((event) => event.properties.domain === "example.org"));
 } catch (error) {
@@ -370,7 +370,7 @@ try {
       logger.warn("A cleanup step failed.", { error: error instanceof Error ? error.message : String(error) });
     }
   }
-  await page.evaluate((enabled) => window.openbot.setAnalyticsPreference({ enabled }), trackingBefore.enabled);
+  await page.evaluate((enabled) => window.omnibot.setAnalyticsPreference({ enabled }), trackingBefore.enabled);
   rmSync(fakeDirectory, { recursive: true, force: true });
 
   const analytics = captured.filter((entry) => entry.method === "POST");

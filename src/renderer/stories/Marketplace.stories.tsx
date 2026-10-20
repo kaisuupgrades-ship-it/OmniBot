@@ -3,15 +3,15 @@ import type {
   MarketplaceAgentSummary,
   MarketplaceSkillQuery,
   MarketplaceSkillSummary,
-} from "@openbot/contracts/ipc";
-import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
-import { Marketplace } from "@openbot/ui/features/marketplace/Marketplace";
-import type { MarketplaceApp, MarketplaceModel } from "@openbot/ui/features/marketplace/marketplace-model";
+} from "@omnibot/contracts/ipc";
+import { CONNECTOR_LISTINGS } from "@omnibot/ui/features/connectors/connector-catalog";
+import { Marketplace } from "@omnibot/ui/features/marketplace/Marketplace";
+import type { MarketplaceApp, MarketplaceModel } from "@omnibot/ui/features/marketplace/marketplace-model";
 import {
   createMarketplaceNavigation,
   type MarketplaceNavigation,
-} from "@openbot/ui/features/marketplace/marketplace-view";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/marketplace/marketplace-view";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, createStore, onSettled, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

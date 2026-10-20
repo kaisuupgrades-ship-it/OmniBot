@@ -6,10 +6,10 @@ import { StreamableHTTPClientTransport, StreamableHTTPError } from "@modelcontex
 import { AccessDeniedError, UnauthorizedClientError } from "@modelcontextprotocol/sdk/server/auth/errors.js";
 import type { FetchLike, Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { McpServerConfig } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { causeHelpers } from "./effect-boundary";
 import {
@@ -230,7 +230,7 @@ const connectAndCountEffect = Effect.fnUntraced(function* (
   return yield* Effect.acquireUseRelease(
     Effect.try({
       try: () => ({
-        client: new Client({ name: "openbot-probe", version: "1" }, { capabilities: {} }),
+        client: new Client({ name: "omnibot-probe", version: "1" }, { capabilities: {} }),
         transport: createTransport(server, authProvider, onChallenge),
       }),
       catch: (cause) => new McpProbeFailure({ cause }),

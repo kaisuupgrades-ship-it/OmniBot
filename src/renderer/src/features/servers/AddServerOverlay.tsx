@@ -1,18 +1,18 @@
-import type { BillingInterval } from "@openbot/contracts/billing";
-import type { HostedServerList, HostedServerSummary } from "@openbot/contracts/hosted-servers";
-import type { HostedServersDesktopApi, ServerSummary } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
+import type { BillingInterval } from "@omnibot/contracts/billing";
+import type { HostedServerList, HostedServerSummary } from "@omnibot/contracts/hosted-servers";
+import type { HostedServersDesktopApi, ServerSummary } from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
 import type {
   CreatedHostedServer,
   CreateHostedServerInput,
   HostedServerSetupStatus,
-} from "@openbot/ui/features/servers/AddServerDialog";
+} from "@omnibot/ui/features/servers/AddServerDialog";
 import {
   HOSTED_BILLING_CURRENCY,
   type HostedServerPlan,
   hostedServerPlansFromCatalog,
-} from "@openbot/ui/features/servers/HostedServerPricing";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/servers/HostedServerPricing";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createStore, Loading, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { AddServerDialog } from "../../lazy-views";

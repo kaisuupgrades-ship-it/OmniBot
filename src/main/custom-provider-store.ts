@@ -8,9 +8,9 @@
 // Electron-free, with the cipher injected, so its tests need neither a keychain nor a display.
 
 import { readFile } from "node:fs/promises";
-import type { CustomProviderSummary, SaveCustomProviderInput, UpdateCustomProviderInput } from "@openbot/contracts/ipc";
-import { sameCustomProviderOrigin } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { CustomProviderSummary, SaveCustomProviderInput, UpdateCustomProviderInput } from "@omnibot/contracts/ipc";
+import { sameCustomProviderOrigin } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Schema, Semaphore } from "effect";
 import { z } from "zod";
 import { writeFileAtomically } from "../backend/atomic-json-file";

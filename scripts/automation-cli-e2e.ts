@@ -1,21 +1,21 @@
-// Runs `resources/cli/openbot-cli.mjs` as a child process against the real `AutomationServer` on a
+// Runs `resources/cli/omnibot-cli.mjs` as a child process against the real `AutomationServer` on a
 // loopback port. The agent service behind the server is a small in-memory stand-in: a message gets a
 // delivery that moves from queued to running to its end each time the CLI reads it. The script checks
 // the CLI's output and exit codes for each outcome and that the token never reaches the output.
-// Writes .openbot-build/automation-cli-e2e/report.json. Run: `bun scripts/automation-cli-e2e.ts`.
+// Writes .omnibot-build/automation-cli-e2e/report.json. Run: `bun scripts/automation-cli-e2e.ts`.
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { AgentModelOption, QueueDelivery, QueuedMessageReceipt, UpdateAgentInput } from "@openbot/contracts/ipc";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
+import type { AgentModelOption, QueueDelivery, QueuedMessageReceipt, UpdateAgentInput } from "@omnibot/contracts/ipc";
+import { ContextResetBusyError } from "@omnibot/contracts/team-protocol/context-reset-v1";
 import { Effect } from "effect";
 import { AgentSettingsRefused } from "../src/backend/agent/agent-settings-refused";
 import { AutomationServer, type UpdatedAgent } from "../src/main/automation-server";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/automation-cli-e2e");
-const CLI = resolve(import.meta.dirname, "../resources/cli/openbot-cli.mjs");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/automation-cli-e2e");
+const CLI = resolve(import.meta.dirname, "../resources/cli/omnibot-cli.mjs");
 
 interface Check {
   name: string;
@@ -83,7 +83,7 @@ function deliveryState(
   return { ...base, status: "completed", error: null };
 }
 
-const root = mkdtempSync(join(tmpdir(), "openbot-cli-e2e-"));
+const root = mkdtempSync(join(tmpdir(), "omnibot-cli-e2e-"));
 const options: ConstructorParameters<typeof AutomationServer>[0] = {
   root,
   listAgents: () => agents,
@@ -166,7 +166,7 @@ function cli(args: string[], stdin?: string): Promise<Run> {
   return new Promise((done, fail) => {
     // The CLI is for Node, which is what users have; Bun runs only this script.
     const child = spawn("node", [CLI, ...args], {
-      env: { ...process.env, OPENBOT_AUTOMATION_DIR: root },
+      env: { ...process.env, OMNIBOT_AUTOMATION_DIR: root },
       stdio: ["pipe", "pipe", "pipe"],
     });
     let stdout = "";

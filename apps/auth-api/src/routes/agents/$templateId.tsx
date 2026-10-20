@@ -1,10 +1,10 @@
-import type { AgentTemplateDetail } from "@openbot/contracts/ipc";
+import type { AgentTemplateDetail } from "@omnibot/contracts/ipc";
 import { createFileRoute, notFound } from "@tanstack/solid-router";
 import { AgentTemplateNotSharedPage } from "../../components/agents/AgentTemplateNotSharedPage";
 import { AgentTemplatePage } from "../../components/agents/AgentTemplatePage";
 import { agentTemplatePath } from "../../lib/agent-template-path";
 import { readAgentTemplate } from "../../lib/agent-templates";
-import { OPENBOT_SOCIAL_IMAGE_ALT, OPENBOT_SOCIAL_IMAGE_URL } from "../../lib/site-metadata";
+import { OMNIBOT_SOCIAL_IMAGE_ALT, OMNIBOT_SOCIAL_IMAGE_URL } from "../../lib/site-metadata";
 
 async function loadAgentTemplate(templateId: string): Promise<AgentTemplateDetail> {
   const template = await readAgentTemplate({ data: templateId });
@@ -18,8 +18,8 @@ async function loadAgentTemplate(templateId: string): Promise<AgentTemplateDetai
  * head runs, because `head` stays in the bundle of every page (see routes/compare/$slug.tsx).
  */
 async function agentTemplateHead(template: AgentTemplateDetail, siteUrl: string) {
-  const { AGENT_TEMPLATE_CARD } = await import("@openbot/contracts/ipc");
-  const { markdownPreviewText } = await import("@openbot/contracts/markdown-preview-text");
+  const { AGENT_TEMPLATE_CARD } = await import("@omnibot/contracts/ipc");
+  const { markdownPreviewText } = await import("@omnibot/contracts/markdown-preview-text");
   const url = new URL(agentTemplatePath(template.id), siteUrl).toString();
   const title = `${template.name} — OmniBot agent`;
   const description = template.title || markdownPreviewText(template.description).slice(0, 200);
@@ -29,7 +29,7 @@ async function agentTemplateHead(template: AgentTemplateDetail, siteUrl: string)
         url: new URL(template.cardUrl, siteUrl).toString(),
         alt: `${template.name}, an OmniBot agent by ${template.creatorName}`,
       }
-    : { url: OPENBOT_SOCIAL_IMAGE_URL, alt: OPENBOT_SOCIAL_IMAGE_ALT };
+    : { url: OMNIBOT_SOCIAL_IMAGE_URL, alt: OMNIBOT_SOCIAL_IMAGE_ALT };
   return {
     meta: [
       { title },

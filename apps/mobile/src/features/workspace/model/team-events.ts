@@ -1,5 +1,5 @@
-import type { AgentEvent, TeamRealtimeEvent } from "@openbot/contracts/ipc";
-import { reconcilePendingRequests } from "@openbot/team-client/runtime-attention";
+import type { AgentEvent, TeamRealtimeEvent } from "@omnibot/contracts/ipc";
+import { reconcilePendingRequests } from "@omnibot/team-client/runtime-attention";
 import { type QueryClient, replaceEqualDeep } from "@tanstack/react-query";
 import { decodeMobileBrowserTabs } from "@/features/browser/model/browser-tabs";
 import type { LiveWorkspaceStore } from "./live-workspace-store";

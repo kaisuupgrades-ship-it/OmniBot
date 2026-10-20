@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const AGENT_SELECTION_STORAGE_KEY = "openbot:selected-agent:v1";
+const AGENT_SELECTION_STORAGE_KEY = "omnibot:selected-agent:v1";
 
 type AgentSelectionStorage = Pick<Storage, "getItem" | "setItem">;
 

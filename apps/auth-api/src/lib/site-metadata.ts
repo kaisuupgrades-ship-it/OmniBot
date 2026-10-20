@@ -4,40 +4,40 @@
 // from the root route instead of as an import here.
 
 import { LANDING_FAQ_STRUCTURED_DATA } from "./landing-faq";
-import { OPENBOT_ALTERNATE_DOWNLOAD_LINKS, OPENBOT_DOWNLOAD_LINKS } from "./landing-links";
+import { OMNIBOT_ALTERNATE_DOWNLOAD_LINKS, OMNIBOT_DOWNLOAD_LINKS } from "./landing-links";
 
-export const OPENBOT_SITE_URL = "https://omnibot.example.com/";
-export const OPENBOT_SITE_TITLE = "OmniBot: Run a team of AI agents on your computer";
-export const OPENBOT_SITE_DESCRIPTION =
+export const OMNIBOT_SITE_URL = "https://omnibot.example.com/";
+export const OMNIBOT_SITE_TITLE = "OmniBot: Run a team of AI agents on your computer";
+export const OMNIBOT_SITE_DESCRIPTION =
   "A free desktop app that runs AI agents as a team on your own computer, with the ChatGPT, Claude, Gemini or Grok plan you already pay for, or your own model.";
-export const OPENBOT_SOCIAL_IMAGE_URL = `${OPENBOT_SITE_URL}openbot-social.png`;
-/** The account `OPENBOT_LINKS.x` opens, which a shared card names. */
-export const OPENBOT_X_HANDLE = "@OmniBot_";
-const OPENBOT_X_URL = "https://x.com/OmniBot_";
-const OPENBOT_REPOSITORY_URL = "https://omnibot.example.com/source";
-const OPENBOT_PRODUCT_HUNT_URL = "https://www.producthunt.com/products/openbot-3";
-const OPENBOT_LICENSE_URL = "https://polyformproject.org/licenses/noncommercial/1.0.0/";
+export const OMNIBOT_SOCIAL_IMAGE_URL = `${OMNIBOT_SITE_URL}omnibot-social.png`;
+/** The account `OMNIBOT_LINKS.x` opens, which a shared card names. */
+// Set this to your X handle, such as "@yourname", once you have one.
+export const OMNIBOT_X_HANDLE = "";
+const OMNIBOT_X_URL = "https://x.omnibot.example.com";
+const OMNIBOT_REPOSITORY_URL = "https://omnibot.example.com/source";
+const OMNIBOT_LICENSE_URL = "https://polyformproject.org/licenses/noncommercial/1.0.0/";
 // One id for each entity, so that every page describes the same organization,
 // site and app, and an assistant can join what the pages say about each.
-const OPENBOT_ORGANIZATION_ID = `${OPENBOT_SITE_URL}#organization`;
-const OPENBOT_WEBSITE_ID = `${OPENBOT_SITE_URL}#website`;
-const OPENBOT_APPLICATION_ID = `${OPENBOT_SITE_URL}#app`;
+const OMNIBOT_ORGANIZATION_ID = `${OMNIBOT_SITE_URL}#organization`;
+const OMNIBOT_WEBSITE_ID = `${OMNIBOT_SITE_URL}#website`;
+const OMNIBOT_APPLICATION_ID = `${OMNIBOT_SITE_URL}#app`;
 /** Square, as schema.org wants for a publisher logo. */
-export const OPENBOT_LOGO_URL = `${OPENBOT_SITE_URL}icon-512x512.png`;
-export const OPENBOT_SOCIAL_IMAGE_ALT = "Meet OmniBot on a dark grid background";
+export const OMNIBOT_LOGO_URL = `${OMNIBOT_SITE_URL}icon-512x512.png`;
+export const OMNIBOT_SOCIAL_IMAGE_ALT = "Meet OmniBot on a dark grid background";
 
 /** The Open Graph tags of the site's own social card, which is 1600x900. */
-export const OPENBOT_SOCIAL_IMAGE_META = [
-  { property: "og:image", content: OPENBOT_SOCIAL_IMAGE_URL },
+export const OMNIBOT_SOCIAL_IMAGE_META = [
+  { property: "og:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
   { property: "og:image:type", content: "image/png" },
   { property: "og:image:width", content: "1600" },
   { property: "og:image:height", content: "900" },
-  { property: "og:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+  { property: "og:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
 ] as const;
 
 // The hosts production answers on. Both serve the same pages, and those pages go by
 // omnibot.example.com.
-const OPENBOT_PRODUCTION_HOSTS = new Set(["omnibot.example.com", "api.omnibot.example.com"]);
+const OMNIBOT_PRODUCTION_HOSTS = new Set(["omnibot.example.com", "api.omnibot.example.com"]);
 
 /**
  * The site that the head tags of a page served at `pageUrl` name. Social sites fetch
@@ -47,7 +47,7 @@ const OPENBOT_PRODUCTION_HOSTS = new Set(["omnibot.example.com", "api.omnibot.ex
  * `noindex`, so a preview canonical does not compete with production.
  */
 export function siteUrlForPage(pageUrl: URL): string {
-  return OPENBOT_PRODUCTION_HOSTS.has(pageUrl.hostname) ? OPENBOT_SITE_URL : `${pageUrl.origin}/`;
+  return OMNIBOT_PRODUCTION_HOSTS.has(pageUrl.hostname) ? OMNIBOT_SITE_URL : `${pageUrl.origin}/`;
 }
 
 /** What the app's structured data names and that this file can not import: see the note at the top. */
@@ -58,15 +58,15 @@ export interface OmniBotApplicationFacts {
   screenshot: string;
 }
 
-export function openBotSoftwareApplication(facts: OmniBotApplicationFacts) {
+export function omniBotSoftwareApplication(facts: OmniBotApplicationFacts) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": OPENBOT_APPLICATION_ID,
+    "@id": OMNIBOT_APPLICATION_ID,
     name: "OmniBot",
-    url: OPENBOT_SITE_URL,
-    image: OPENBOT_SOCIAL_IMAGE_URL,
-    description: OPENBOT_SITE_DESCRIPTION,
+    url: OMNIBOT_SITE_URL,
+    image: OMNIBOT_SOCIAL_IMAGE_URL,
+    description: OMNIBOT_SITE_DESCRIPTION,
     applicationCategory: "DeveloperApplication",
     applicationSubCategory: "AI agent app",
     operatingSystem: [
@@ -76,12 +76,12 @@ export function openBotSoftwareApplication(facts: OmniBotApplicationFacts) {
     ],
     // The installers themselves: schema.org's `downloadUrl` is the file, not a page about it.
     downloadUrl: [
-      OPENBOT_DOWNLOAD_LINKS.macos,
-      OPENBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
-      OPENBOT_DOWNLOAD_LINKS.windows,
-      OPENBOT_DOWNLOAD_LINKS.linux,
-      OPENBOT_ALTERNATE_DOWNLOAD_LINKS.linux,
-    ].map((path) => new URL(path, OPENBOT_SITE_URL).toString()),
+      OMNIBOT_DOWNLOAD_LINKS.macos,
+      OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.macos,
+      OMNIBOT_DOWNLOAD_LINKS.windows,
+      OMNIBOT_DOWNLOAD_LINKS.linux,
+      OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.linux,
+    ].map((path) => new URL(path, OMNIBOT_SITE_URL).toString()),
     // What people ask an assistant for. Keep it to what the released app does.
     featureList: [
       "Runs Codex, Claude Code, Gemini (Antigravity), Grok and OpenCode agents",
@@ -100,35 +100,35 @@ export function openBotSoftwareApplication(facts: OmniBotApplicationFacts) {
     },
     softwareVersion: facts.version,
     screenshot: facts.screenshot,
-    license: OPENBOT_LICENSE_URL,
-    publisher: { "@id": OPENBOT_ORGANIZATION_ID },
-    sameAs: [OPENBOT_REPOSITORY_URL, OPENBOT_PRODUCT_HUNT_URL],
+    license: OMNIBOT_LICENSE_URL,
+    publisher: { "@id": OMNIBOT_ORGANIZATION_ID },
+    sameAs: [OMNIBOT_REPOSITORY_URL],
   } as const;
 }
 
-export type OmniBotSoftwareApplication = ReturnType<typeof openBotSoftwareApplication>;
+export type OmniBotSoftwareApplication = ReturnType<typeof omniBotSoftwareApplication>;
 
 // Search engines read these two for the site name and the logo next to a result.
-const OPENBOT_ORGANIZATION = {
+const OMNIBOT_ORGANIZATION = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "@id": OPENBOT_ORGANIZATION_ID,
+  "@id": OMNIBOT_ORGANIZATION_ID,
   name: "OmniBot",
-  url: OPENBOT_SITE_URL,
-  logo: OPENBOT_LOGO_URL,
-  sameAs: [OPENBOT_REPOSITORY_URL, OPENBOT_X_URL, OPENBOT_PRODUCT_HUNT_URL],
+  url: OMNIBOT_SITE_URL,
+  logo: OMNIBOT_LOGO_URL,
+  sameAs: [OMNIBOT_REPOSITORY_URL, OMNIBOT_X_URL],
 } as const;
 
-const OPENBOT_WEBSITE = {
+const OMNIBOT_WEBSITE = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": OPENBOT_WEBSITE_ID,
+  "@id": OMNIBOT_WEBSITE_ID,
   name: "OmniBot",
-  url: OPENBOT_SITE_URL,
-  publisher: { "@id": OPENBOT_ORGANIZATION_ID },
+  url: OMNIBOT_SITE_URL,
+  publisher: { "@id": OMNIBOT_ORGANIZATION_ID },
 } as const;
 
-export const OPENBOT_SECURITY_HEADERS = {
+export const OMNIBOT_SECURITY_HEADERS = {
   "Permissions-Policy": "camera=(), geolocation=(), microphone=(), payment=(), usb=()",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
@@ -144,13 +144,13 @@ export const OPENBOT_SECURITY_HEADERS = {
  * replaces it. The caller passes the same hashed asset the `@font-face` rule asks
  * for, so the preload below is that request and not a second one.
  */
-export function openBotRootHead(interLatinFont: string) {
+export function omniBotRootHead(interLatinFont: string) {
   return {
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: OPENBOT_SITE_TITLE },
-      { name: "description", content: OPENBOT_SITE_DESCRIPTION },
+      { title: OMNIBOT_SITE_TITLE },
+      { name: "description", content: OMNIBOT_SITE_DESCRIPTION },
       { name: "application-name", content: "OmniBot" },
       { name: "color-scheme", content: "dark" },
       { name: "theme-color", content: "#1a1a1a" },
@@ -171,27 +171,27 @@ export function openBotRootHead(interLatinFont: string) {
   };
 }
 
-export function openBotHomeHead(application: OmniBotSoftwareApplication) {
+export function omniBotHomeHead(application: OmniBotSoftwareApplication) {
   return {
     meta: [
       { "script:ld+json": application },
-      { "script:ld+json": OPENBOT_ORGANIZATION },
-      { "script:ld+json": OPENBOT_WEBSITE },
+      { "script:ld+json": OMNIBOT_ORGANIZATION },
+      { "script:ld+json": OMNIBOT_WEBSITE },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "OmniBot" },
       { property: "og:locale", content: "en_US" },
-      { property: "og:url", content: OPENBOT_SITE_URL },
-      { property: "og:title", content: OPENBOT_SITE_TITLE },
-      { property: "og:description", content: OPENBOT_SITE_DESCRIPTION },
-      ...OPENBOT_SOCIAL_IMAGE_META,
+      { property: "og:url", content: OMNIBOT_SITE_URL },
+      { property: "og:title", content: OMNIBOT_SITE_TITLE },
+      { property: "og:description", content: OMNIBOT_SITE_DESCRIPTION },
+      ...OMNIBOT_SOCIAL_IMAGE_META,
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: OPENBOT_X_HANDLE },
-      { name: "twitter:title", content: OPENBOT_SITE_TITLE },
-      { name: "twitter:description", content: OPENBOT_SITE_DESCRIPTION },
-      { name: "twitter:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-      { name: "twitter:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+      { name: "twitter:site", content: OMNIBOT_X_HANDLE },
+      { name: "twitter:title", content: OMNIBOT_SITE_TITLE },
+      { name: "twitter:description", content: OMNIBOT_SITE_DESCRIPTION },
+      { name: "twitter:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+      { name: "twitter:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
       { "script:ld+json": LANDING_FAQ_STRUCTURED_DATA },
     ],
-    links: [{ rel: "canonical", href: OPENBOT_SITE_URL }],
+    links: [{ rel: "canonical", href: OMNIBOT_SITE_URL }],
   };
 }

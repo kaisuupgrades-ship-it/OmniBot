@@ -13,12 +13,12 @@ On Ubuntu 24.04 (x86_64 or arm64) with systemd:
 
 ```sh
 curl -fsSL https://updates.omnibot.example.com/scripts/install-server.sh | sudo bash
-sudo openbot login
+sudo omnibot login
 ```
 
-`openbot login` asks for your email and the code that OmniBot sends to it. After the sign-in, the
+`omnibot login` asks for your email and the code that OmniBot sends to it. After the sign-in, the
 server shows in the server list of that account. Its name is "OmniBot"; give another one with
-`sudo openbot login --name <name>` or `sudo openbot name <name>`. A name has 6 to 32 characters.
+`sudo omnibot login --name <name>` or `sudo omnibot name <name>`. A name has 6 to 32 characters.
 Then connect a provider from the app, as on a hosted server (see
 [Providers](hosted-servers.md#providers)).
 
@@ -33,11 +33,11 @@ printf '{"email":"%s"}' owner@example.com |
   curl --fail -sS -X POST https://api.omnibot.example.com/v2/admin/server-claims \
     -H @server-claims.header -H 'content-type: application/json' --data-binary @- |
   sed -n 's/.*"claim":"\([A-Za-z0-9_-]*\)".*/\1/p' |
-  sudo openbot login --claim --name <name>
+  sudo omnibot login --claim --name <name>
 ```
 
 `server-claims.header` holds one line, `Authorization: Bearer <token>`, so the token is in no process
-argument. `openbot login --claim` reads the claim from standard input, or asks for it without an echo
+argument. `omnibot login --claim` reads the claim from standard input, or asks for it without an echo
 in a terminal, for the same reason.
 
 - `POST /v2/admin/server-claims` needs the `SERVER_CLAIMS_ADMIN_TOKEN` of the account service. It
@@ -56,7 +56,7 @@ Install options go after `sudo bash -s --`:
 
 | Option | Default | Use |
 | --- | --- | --- |
-| `--user <name>` | the installed user, else `openbot` | The user that runs OmniBot and its agents. The install makes it when it does not exist, with its home folder in `/var/lib/<name>`. |
+| `--user <name>` | the installed user, else `omnibot` | The user that runs OmniBot and its agents. The install makes it when it does not exist, with its home folder in `/var/lib/<name>`. |
 | `--auth-api-url <origin>` | the installed one, else the URL in the build | Another account server, for example the `test` Worker or a [self-hosted account service](self-hosting.md). |
 | `--display-size <W>x<H>` | the installed one, else `1280x800` | The size of the virtual display that computer use reads (see [Display size](#display-size)). |
 
@@ -69,17 +69,17 @@ open a database that a newer one migrated. It also refuses a computer that is a 
 
 | Command | Use |
 | --- | --- |
-| `openbot status` | Show the version, the account, the server state, the memory and a staged update. |
-| `openbot login [<email>] [--name <name>]` | Sign in with an email code. |
-| `openbot login --claim [--name <name>]` | Sign in with an operator's one-time claim (see [Sign in with a server claim](#sign-in-with-a-server-claim)). |
-| `openbot mobile-connect` | Show a Mobile Connect QR code for the phone app (see [Phone app](#phone-app)). |
-| `openbot logout` | Sign out. The server is not available until the next sign-in. |
-| `openbot name <name>` | Change the server name. |
-| `openbot logs [-f]` | Show the journal of `openbot.service`. |
-| `sudo openbot start\|stop\|restart` | Control `openbot.service`. |
-| `sudo openbot update` | Download, check and install the newest release now. |
-| `sudo openbot uninstall` | Sign out and remove OmniBot. The data stays (see [Remove](#remove)). |
-| `openbot version` | Show the installed version. |
+| `omnibot status` | Show the version, the account, the server state, the memory and a staged update. |
+| `omnibot login [<email>] [--name <name>]` | Sign in with an email code. |
+| `omnibot login --claim [--name <name>]` | Sign in with an operator's one-time claim (see [Sign in with a server claim](#sign-in-with-a-server-claim)). |
+| `omnibot mobile-connect` | Show a Mobile Connect QR code for the phone app (see [Phone app](#phone-app)). |
+| `omnibot logout` | Sign out. The server is not available until the next sign-in. |
+| `omnibot name <name>` | Change the server name. |
+| `omnibot logs [-f]` | Show the journal of `omnibot.service`. |
+| `sudo omnibot start\|stop\|restart` | Control `omnibot.service`. |
+| `sudo omnibot update` | Download, check and install the newest release now. |
+| `sudo omnibot uninstall` | Sign out and remove OmniBot. The data stays (see [Remove](#remove)). |
+| `omnibot version` | Show the installed version. |
 
 Run the account commands with `sudo` or as the service user. Other users cannot open the control
 socket.
@@ -92,10 +92,10 @@ again when memory is available. A message from a person starts first. The browse
 and unloads idle pages sooner. A fixed number of turns run at the same time: 4 up to 5 GiB of memory,
 8 up to 10 GiB, and 16 above.
 
-The memory ceiling is the smaller of the machine memory and the limit of `openbot.service`
+The memory ceiling is the smaller of the machine memory and the limit of `omnibot.service`
 (`MemoryMax=90%`). To give OmniBot less memory, lower the limit with
-`sudo systemctl edit openbot.service`, for example `MemoryMax=2G`, and restart the service. The
-turn limit and the low-memory levels then use the new ceiling. `openbot status` shows the ceiling,
+`sudo systemctl edit omnibot.service`, for example `MemoryMax=2G`, and restart the service. The
+turn limit and the low-memory levels then use the new ceiling. `omnibot status` shows the ceiling,
 the free memory, the level (`ok`, `low` or `critical`) and the turn limit:
 
 ```text
@@ -113,22 +113,22 @@ The default size is 1280x800. A [Docker](docker.md#environment) container uses t
 and the same default. A hosted server gives the agents its boat desktop, and this setting does not
 change that desktop.
 
-The display size does not change the OmniBot browser (`openbot_browser`). Its pages have their own
+The display size does not change the OmniBot browser (`omnibot_browser`). Its pages have their own
 size, 1200x800 when no panel shows them, and its clicks go to page elements.
 
 To use another size, give it at the install with `--display-size 1920x1080`, or write this line in
-`/opt/OmniBot/hosted/openbot.env` and run `sudo openbot restart`:
+`/opt/OmniBot/hosted/omnibot.env` and run `sudo omnibot restart`:
 
 ```text
-OPENBOT_DISPLAY_SIZE=1920x1080
+OMNIBOT_DISPLAY_SIZE=1920x1080
 ```
 
 The value is `WIDTHxHEIGHT` in digits, from 640x480 to 2576x2576. The install refuses a value that is
-not valid. At a start, a value that is not valid writes this warning in `openbot logs`, and the
+not valid. At a start, a value that is not valid writes this warning in `omnibot logs`, and the
 server starts with 1280x800:
 
 ```text
-OPENBOT_DISPLAY_SIZE is not WIDTHxHEIGHT from 640x480 to 2576x2576. The display is 1280x800.
+OMNIBOT_DISPLAY_SIZE is not WIDTHxHEIGHT from 640x480 to 2576x2576. The display is 1280x800.
 ```
 
 ### Which size to use
@@ -192,10 +192,10 @@ A 1280x800 screenshot is not made smaller by any Claude or Codex model.
 ## Phone app
 
 The phone app has no email sign-in. It signs in with a Mobile Connect code. A server has no screen
-for the code, so `openbot mobile-connect` shows it in the terminal:
+for the code, so `omnibot mobile-connect` shows it in the terminal:
 
-1. Sign in the server with `openbot login`.
-2. Run `openbot mobile-connect`. In a container, run `docker exec -it <container> openbot mobile-connect`.
+1. Sign in the server with `omnibot login`.
+2. Run `omnibot mobile-connect`. In a container, run `docker exec -it <container> omnibot mobile-connect`.
 3. In the phone app, select **Scan QR code** and scan the code in the terminal.
 
 The code signs the phone in to the account of the server. It works for one sign-in and expires after
@@ -209,14 +209,14 @@ already in its server list. Remove a phone from the account in the desktop app, 
 
 ## Remove
 
-`sudo openbot uninstall` signs out, then removes the service, the units, the AppArmor profile, the
-`openbot` command and the server files in `/opt/OmniBot`. It keeps the home folder of the service user
-and the keyring in `/srv/openbot-hosted`. The keyring has the key of the encrypted data in that home
+`sudo omnibot uninstall` signs out, then removes the service, the units, the AppArmor profile, the
+`omnibot` command and the server files in `/opt/OmniBot`. It keeps the home folder of the service user
+and the keyring in `/srv/omnibot-hosted`. The keyring has the key of the encrypted data in that home
 folder, so keep or delete the two together. An install with the same `--user` uses them again. To
 delete the data too:
 
 ```sh
-sudo userdel --remove openbot && sudo rm -rf /srv/openbot-hosted
+sudo userdel --remove omnibot && sudo rm -rf /srv/omnibot-hosted
 ```
 
 The server stays in the server list of the account, offline. Remove it there.
@@ -225,50 +225,50 @@ The server stays in the server list of the account, offline. Remove it there.
 
 `install-server.sh` only downloads the release. It reads `latest-linux.yml`
 (`latest-linux-arm64.yml` on arm64) of the latest GitHub release, checks the SHA-512 of the
-AppImage, unpacks it and runs `resources/hosting/openbot-server-setup` from that release. So the
+AppImage, unpacks it and runs `resources/hosting/omnibot-server-setup` from that release. So the
 install steps always match the build that they install. A release before this feature has no setup
 file, and the install stops with a message.
 
-`openbot-server-setup` uses the install steps of a hosted server (`openbot-hosted-update`): it
+`omnibot-server-setup` uses the install steps of a hosted server (`omnibot-hosted-update`): it
 installs the packages in `packages.txt`, copies the release to `/opt/OmniBot/app`, and installs the
 scripts, the AppArmor profile and the units. It writes `self` to `/opt/OmniBot/hosted/mode` and
-links `/usr/local/bin/openbot`.
+links `/usr/local/bin/omnibot`.
 
-With `mode` set to `self`, `openbot-hosted-server` does not wait for a claim or for a boat desktop.
+With `mode` set to `self`, `omnibot-hosted-server` does not wait for a claim or for a boat desktop.
 It starts a D-Bus session with an unlocked keyring, as on a hosted server, and runs OmniBot under
-Xvfb with `OPENBOT_SERVER=1`. Main (`src/main/server-mode.ts`) then opens the control socket
-`/run/openbot/control.sock` and publishes the host after each sign-in.
+Xvfb with `OMNIBOT_SERVER=1`. Main (`src/main/server-mode.ts`) then opens the control socket
+`/run/omnibot/control.sock` and publishes the host after each sign-in.
 
 The server has two Xvfb displays, one in each of two nested `xvfb-run` commands that share one
 authority file. The outer one starts the agent display, at the [display size](#display-size), and
-the script names it in `OPENBOT_AGENT_DISPLAY`. The inner one starts the display that OmniBot shows
+the script names it in `OMNIBOT_AGENT_DISPLAY`. The inner one starts the display that OmniBot shows
 its windows on, at 1280x800. Main gives that display to Computer Use, to remote desktop and to the agent
 processes, so an agent's screenshot and remote desktop do not show the OmniBot window. See
 [Computer Use and remote desktop](architecture/computer-use.md#agent-display-on-a-server).
 
 Updates work as on a hosted server (see [Updates](hosted-servers.md#updates)): the timer stages a
 new release, and it starts at the next boot, or when an owner, an admin or a permitted member
-installs it in Server Settings > Updates. `sudo openbot update` stages, stops the service, applies
+installs it in Server Settings > Updates. `sudo omnibot update` stages, stops the service, applies
 and starts the service again. When a step fails or a signal stops it, the command completes an
 interrupted copy, starts the service, and exits with an error.
 
 ## Control socket
 
-The `openbot` command talks to main over HTTP on a Unix socket, with form bodies and `key=value`
+The `omnibot` command talks to main over HTTP on a Unix socket, with form bodies and `key=value`
 text answers, so it needs only `curl`. The routes are `GET /v1/status`, `POST /v1/login/start`,
 `POST /v1/login/verify`, `POST /v1/login/claim`, `POST /v1/name`, `POST /v1/mobile-connect` and
 `POST /v1/logout`.
 
 Threat model:
 
-- systemd makes `/run/openbot` for the service user with mode 0700, and main makes the socket 0600.
+- systemd makes `/run/omnibot` for the service user with mode 0700, and main makes the socket 0600.
   Main refuses to listen when the directory belongs to another user or other users can enter it. It
   never removes a file at the socket path that is not a socket.
 - Only the service user and root can connect. Agents run as the service user and already have full
   access to its files, its keyring and the OmniBot database, so the socket gives them nothing new.
 - The socket answers a closed list of requests. It never sends the session token, the sign-in
   code or the claim back, and a value cannot add a line to an answer. A body is at most 4 KiB.
-- Server mode starts only in a packaged Linux build with `OPENBOT_SERVER=1`, and never on a hosted
+- Server mode starts only in a packaged Linux build with `OMNIBOT_SERVER=1`, and never on a hosted
   server, which signs in with its claim.
 
 ## Not confirmed

@@ -1,10 +1,10 @@
-import type { AgentEvent, AgentRuntimeSnapshot } from "@openbot/contracts/ipc";
-import { cleanAgentMessageText } from "@openbot/team-client/agent-message-text";
-import { reconcileQueuesWithRuntimeWork } from "@openbot/team-client/dynamic-island-coordinator";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import { currentText } from "@openbot/ui/text";
-import { classifyUserError } from "@openbot/user-errors";
+import type { AgentEvent, AgentRuntimeSnapshot } from "@omnibot/contracts/ipc";
+import { cleanAgentMessageText } from "@omnibot/team-client/agent-message-text";
+import { reconcileQueuesWithRuntimeWork } from "@omnibot/team-client/dynamic-island-coordinator";
+import { classifyFailure } from "@omnibot/telemetry";
+import { toast } from "@omnibot/ui";
+import { currentText } from "@omnibot/ui/text";
+import { classifyUserError } from "@omnibot/user-errors";
 import { flush, onSettled } from "solid-js";
 import { withoutAgent } from "../../app-message-projection";
 import { playCompletionSoundForAgentEvent } from "../../completion-sound";

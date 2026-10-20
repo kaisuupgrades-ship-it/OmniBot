@@ -5,12 +5,12 @@ import {
   isEventActivity,
   isEventRoutineOwner,
   type WebhookReceiptReason,
-} from "@openbot/contracts/ipc-events";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@omnibot/contracts/ipc-events";
+import { type DynamicRecord, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { RoutineInputError } from "@omnibot/team-client/routine-schedule";
 import { databaseRows, optionalStringColumn, requiredStringColumn } from "./database/database-rows";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 import { ROUTINE_TABLES } from "./routine-tables";
 
 const RECEIPT_RETENTION_MS = 7 * 24 * 60 * 60 * 1000;

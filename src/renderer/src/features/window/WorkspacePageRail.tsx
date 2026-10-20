@@ -1,8 +1,8 @@
-import { isUpdateActivePhase } from "@openbot/contracts/ipc";
-import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import type { SidebarView } from "@openbot/ui/features/sidebar/sidebar-types";
-import { PageRail, type PageRailPage } from "@openbot/ui/features/window/PageRail";
-import { useText } from "@openbot/ui/text";
+import { isUpdateActivePhase } from "@omnibot/contracts/ipc";
+import { AGENT_TASKS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import type { SidebarView } from "@omnibot/ui/features/sidebar/sidebar-types";
+import { PageRail, type PageRailPage } from "@omnibot/ui/features/window/PageRail";
+import { useText } from "@omnibot/ui/text";
 import { appPort } from "../../app-port";
 import { useLayout } from "../../layout";
 import { useChannels } from "../channels/channels-context";

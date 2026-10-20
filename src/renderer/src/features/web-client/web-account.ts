@@ -1,6 +1,6 @@
-import type { AccountSession, AvatarImageInput } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { currentText } from "@openbot/ui/text";
+import type { AccountSession, AvatarImageInput } from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { currentText } from "@omnibot/ui/text";
 
 /**
  * The desktop Settings > Profile calls for a signed-in browser. They use the

@@ -1,5 +1,5 @@
-import type { BrowserControlSession, BrowserTab } from "@openbot/contracts/ipc";
-import type { AgentProfile } from "@openbot/ui/data";
+import type { BrowserControlSession, BrowserTab } from "@omnibot/contracts/ipc";
+import type { AgentProfile } from "@omnibot/ui/data";
 import type { JSX } from "@solidjs/web";
 import type { BrowserViewRuntime } from "./BrowserLiveView";
 import type { BrowserHistoryEntry } from "./browser-suggestions";

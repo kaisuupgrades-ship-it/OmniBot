@@ -38,7 +38,7 @@ runtime's salted hash file format, so plaintext passwords do not appear in proce
 
 ## Host Manager boundary
 
-A standalone compiled helper runs as the root LaunchDaemon `app.openbot.host-manager`.
+A standalone compiled helper runs as the root LaunchDaemon `app.omnibot.host-manager`.
 Its entry point is `scripts/host-manager.ts`. It owns only these functions:
 
 1. Read the admin configuration and non-sensitive tenant status.
@@ -62,10 +62,10 @@ The helper itself is updated separately by an administrator, not by a tenant or 
   config.json       root:wheel 0644; managed flag and registered numeric UIDs
   state.json        root:wheel 0644; phase, cycle, version, timestamp, error
   host-manager      root:wheel 0755; compiled daemon
-  openbot-host      root:wheel 0755; administrator CLI
+  omnibot-host      root:wheel 0755; administrator CLI
   create-tenants    root:wheel 0755; native account helper
   host-release.json root:wheel 0644; release version, source commit, architecture
-  openbot-relaunch.sh root:wheel 0755
+  omnibot-relaunch.sh root:wheel 0755
   private/          root:wheel 0700; download and read-only DMG mount
   tenants/          root:wheel 0755
     <uid>/          tenant:wheel 0700; parent entry cannot be replaced by tenant
@@ -93,7 +93,7 @@ The host download does not use or change a tenant's `autoDownload` preference.
 Normal desktop users need only `OmniBot-<VERSION>-arm64.dmg`. Managed multi-tenant hosts also
 need `OmniBot-Host-<VERSION>-arm64.pkg` from the same GitHub Release. The Host package contains
 standalone ARM64 executables, the global Aqua LaunchAgent, the root LaunchDaemon, and the
-`/usr/local/bin/openbot-host` administrator command. The target Mac needs no Git checkout, Bun,
+`/usr/local/bin/omnibot-host` administrator command. The target Mac needs no Git checkout, Bun,
 Node, Xcode, or compilation.
 
 1. Download the normal DMG and the Host PKG from the same release.
@@ -106,8 +106,8 @@ Node, Xcode, or compilation.
 
 ```sh
 sudo installer -pkg "$HOME/Downloads/OmniBot-Host-<VERSION>-arm64.pkg" -target /
-sudo /usr/local/bin/openbot-host setup --create-user client-acme --create-user client-bravo
-sudo /usr/local/bin/openbot-host verify
+sudo /usr/local/bin/omnibot-host setup --create-user client-acme --create-user client-bravo
+sudo /usr/local/bin/omnibot-host verify
 ```
 
 Replace `<VERSION>` with the downloaded release version. `/usr/local/bin` is a standard PATH
@@ -116,7 +116,7 @@ location; the absolute command also works when an administrator's PATH omits it.
 For existing Standard accounts with private homes, use:
 
 ```sh
-sudo openbot-host setup --tenant client-acme --tenant client-bravo
+sudo omnibot-host setup --tenant client-acme --tenant client-bravo
 ```
 
 The flags may be mixed. Use distinct lowercase names, starting with a letter, with at most 31
@@ -152,7 +152,7 @@ Every registered tenant must eventually be running and healthy for automatic app
 
 ## Verification
 
-`sudo openbot-host verify` checks the application signature and permissions, all host executable
+`sudo omnibot-host verify` checks the application signature and permissions, all host executable
 signatures, fixed launchd definitions, daemon state, root-owned config/state, and each tenant's
 Standard membership and home metadata. It also creates harmless files in a temporary host
 verification area, tests access as each tenant in both directions, and removes that area.
@@ -181,8 +181,8 @@ Production uses the release PKG and installed CLI. Release CI builds the binarie
 release commit as OmniBot.app. Native tests use a fake account service and temporary files:
 
 ```sh
-xcrun swiftc -parse-as-library -D TENANT_SETUP_TESTS scripts/macos-tenant-setup.swift scripts/macos-tenant-setup-tests.swift -o /tmp/openbot-tenant-setup-tests
-/tmp/openbot-tenant-setup-tests
+xcrun swiftc -parse-as-library -D TENANT_SETUP_TESTS scripts/macos-tenant-setup.swift scripts/macos-tenant-setup-tests.swift -o /tmp/omnibot-tenant-setup-tests
+/tmp/omnibot-tenant-setup-tests
 ```
 
 macOS tests build and expand an unsigned fixture package without installing it. Production package
@@ -191,10 +191,10 @@ manifest, standalone launch checks without Bun/Node in PATH, and the expected so
 
 ## Live status
 
-`sudo openbot-host status` prints one read-only snapshot: management flag, daemon state, phase,
+`sudo omnibot-host status` prints one read-only snapshot: management flag, daemon state, phase,
 staged version, update cycle, recorded error, and one line for each registered tenant with its
 version, health, work state, and the reason it blocks maintenance. `--json` gives the same report
-for scripts. `sudo openbot-host watch [--interval <seconds>]` repeats the snapshot, default every
+for scripts. `sudo omnibot-host watch [--interval <seconds>]` repeats the snapshot, default every
 five seconds. Both commands read `config.json`, `state.json`, each tenant status file, and the same
 executable paths and UIDs from `ps` that the daemon uses. A status file that claims another UID is
 ignored, exactly as the daemon ignores it. The commands never write host state, never read process

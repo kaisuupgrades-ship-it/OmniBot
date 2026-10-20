@@ -1,6 +1,6 @@
-import { playableMediaKind } from "@openbot/contracts/attachment-files";
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import { MOBILE_ATTACHMENT_BYTES } from "@openbot/team-client/remote-peer";
+import { playableMediaKind } from "@omnibot/contracts/attachment-files";
+import type { AttachmentSummary } from "@omnibot/contracts/ipc";
+import { MOBILE_ATTACHMENT_BYTES } from "@omnibot/team-client/remote-peer";
 import { requireOptionalNativeModule } from "expo";
 import { Image } from "expo-image";
 import { Button, Skeleton, Typography } from "heroui-native";

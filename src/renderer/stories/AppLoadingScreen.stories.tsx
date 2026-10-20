@@ -1,5 +1,5 @@
-import { APP_LOADING_FPS, APP_LOADING_LOOP_S, AppLoadingScreen } from "@openbot/ui/features/account/AppLoadingScreen";
-import { ServerConnectionNotice } from "@openbot/ui/features/servers/ServerConnectionNotice";
+import { APP_LOADING_FPS, APP_LOADING_LOOP_S, AppLoadingScreen } from "@omnibot/ui/features/account/AppLoadingScreen";
+import { ServerConnectionNotice } from "@omnibot/ui/features/servers/ServerConnectionNotice";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { SplashPlayground } from "./splash-concept";
 
@@ -57,7 +57,7 @@ export const StartingOmniBot: Story = {
     <ServerConnectionNotice
       name="My server"
       phase="waking"
-      start={{ step: "openbot", startedAt: Date.now() - 4 * 60_000 }}
+      start={{ step: "omnibot", startedAt: Date.now() - 4 * 60_000 }}
       initial
       onRetry={() => {}}
     />

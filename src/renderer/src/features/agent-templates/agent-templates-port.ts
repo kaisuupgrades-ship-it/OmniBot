@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the publish and install dialogs reach in main: the agent templates of this computer, and
@@ -18,7 +18,7 @@ export interface AgentTemplateInstallCalls {
   agentTemplates: Pick<AgentTemplatesPort["agentTemplates"], "get" | "install">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function agentTemplatesPort(): AgentTemplatesPort {
-  return window.openbot;
+  return window.omnibot;
 }

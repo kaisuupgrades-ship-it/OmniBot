@@ -6,23 +6,23 @@ import {
   type FirstTouchSourcePlatform,
   firstTouchDay,
   rememberFirstTouch,
-} from "@openbot/contracts/first-touch";
-import { isBoolean, isOneOf } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/first-touch";
+import { isBoolean, isOneOf } from "@omnibot/contracts/runtime-values";
 import { OpenPanel, OpenPanelBase, type OpenPanelOptions, type TrackProperties } from "@openpanel/web";
 import { CONTENT_COLLECTIONS } from "./content";
 import { type CollectionId, type ContentCollection, findArticle } from "./content-collection";
 import { DOWNLOAD_PLATFORM_ORDER, type DownloadPlatform } from "./download-platforms";
 import {
-  OPENBOT_ALTERNATE_DOWNLOAD_LINKS,
-  OPENBOT_DOWNLOAD_LINKS,
-  OPENBOT_DOWNLOAD_PAGE_LINKS,
-  OPENBOT_LINKS,
+  OMNIBOT_ALTERNATE_DOWNLOAD_LINKS,
+  OMNIBOT_DOWNLOAD_LINKS,
+  OMNIBOT_DOWNLOAD_PAGE_LINKS,
+  OMNIBOT_LINKS,
 } from "./landing-links";
 import { MOBILE_APPS } from "./mobile-apps";
 import { TEAMS_ROUTE } from "./teams-page";
 
 const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
-const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
+const OPENPANEL_CLIENT_ID = "REPLACE_WITH_YOUR_OPENPANEL_CLIENT_ID";
 const ANALYTICS_SCHEMA_VERSION = 9;
 
 type LandingAcquisitionSource = FirstTouchAcquisitionSource;
@@ -99,7 +99,7 @@ type LandingDestination =
   | "claude";
 
 type CollectionIndexRoute = ContentCollection["indexRoute"];
-type DownloadPagePath = (typeof OPENBOT_DOWNLOAD_PAGE_LINKS)[keyof typeof OPENBOT_DOWNLOAD_PAGE_LINKS];
+type DownloadPagePath = (typeof OMNIBOT_DOWNLOAD_PAGE_LINKS)[keyof typeof OMNIBOT_DOWNLOAD_PAGE_LINKS];
 /**
  * The screens a report may name. Article paths carry the slug so one article can be told from
  * another, and `safeScreenPath` keeps the set closed at runtime as well as in the type.
@@ -118,7 +118,7 @@ const FIXED_SCREEN_PATHS = [
   "/join",
   "/contact",
   TEAMS_ROUTE,
-  ...Object.values(OPENBOT_DOWNLOAD_PAGE_LINKS),
+  ...Object.values(OMNIBOT_DOWNLOAD_PAGE_LINKS),
   "/news",
   "/guides",
   "/compare",
@@ -179,36 +179,35 @@ function createOpenPanelClient(options: OpenPanelOptions): OpenPanelClient {
 
 /** The download routes of each platform, reversed so a click can name the platform it asked for. */
 const DOWNLOAD_PLATFORMS_BY_HREF = new Map<string, LandingDownloadPlatform>([
-  [OPENBOT_DOWNLOAD_LINKS.macos, "macos"],
-  [OPENBOT_DOWNLOAD_LINKS.windows, "windows"],
-  [OPENBOT_DOWNLOAD_LINKS.linux, "linux"],
-  [OPENBOT_ALTERNATE_DOWNLOAD_LINKS.macos, "macos"],
-  [OPENBOT_ALTERNATE_DOWNLOAD_LINKS.linux, "linux"],
+  [OMNIBOT_DOWNLOAD_LINKS.macos, "macos"],
+  [OMNIBOT_DOWNLOAD_LINKS.windows, "windows"],
+  [OMNIBOT_DOWNLOAD_LINKS.linux, "linux"],
+  [OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.macos, "macos"],
+  [OMNIBOT_ALTERNATE_DOWNLOAD_LINKS.linux, "linux"],
   [MOBILE_APPS.ios.href, "ios"],
   [MOBILE_APPS.android.href, "android"],
 ]);
 
 const LINK_DESTINATIONS = new Map<string, LandingDestination>([
-  [OPENBOT_LINKS.download, "download_section"],
-  ...Object.values(OPENBOT_DOWNLOAD_PAGE_LINKS).map((path) => [path, "download_page"] as const),
-  [OPENBOT_LINKS.news, "news"],
-  [OPENBOT_LINKS.guides, "guides"],
-  [OPENBOT_LINKS.contact, "contact"],
+  [OMNIBOT_LINKS.download, "download_section"],
+  ...Object.values(OMNIBOT_DOWNLOAD_PAGE_LINKS).map((path) => [path, "download_page"] as const),
+  [OMNIBOT_LINKS.news, "news"],
+  [OMNIBOT_LINKS.guides, "guides"],
+  [OMNIBOT_LINKS.contact, "contact"],
   [TEAMS_ROUTE, "teams"],
-  [OPENBOT_LINKS.x, "x"],
-  [OPENBOT_LINKS.discord, "discord"],
-  [OPENBOT_LINKS.repository, "repository"],
-  [OPENBOT_LINKS.releases, "releases"],
+  [OMNIBOT_LINKS.x, "x"],
+  [OMNIBOT_LINKS.discord, "discord"],
+  [OMNIBOT_LINKS.repository, "repository"],
+  [OMNIBOT_LINKS.releases, "releases"],
   // The same destination on this site: the release notes, reported under the name they had.
-  [OPENBOT_LINKS.changelog, "releases"],
-  [OPENBOT_LINKS.license, "license"],
-  [OPENBOT_LINKS.privacy, "privacy"],
-  [OPENBOT_LINKS.documentation, "documentation"],
-  [OPENBOT_LINKS.troubleshooting, "troubleshooting"],
-  [OPENBOT_LINKS.architecture, "architecture"],
-  [OPENBOT_LINKS.contributing, "contributing"],
-  [OPENBOT_LINKS.codex, "codex"],
-  [OPENBOT_LINKS.claude, "claude"],
+  [OMNIBOT_LINKS.changelog, "releases"],
+  [OMNIBOT_LINKS.license, "license"],
+  [OMNIBOT_LINKS.privacy, "privacy"],
+  [OMNIBOT_LINKS.documentation, "documentation"],
+  [OMNIBOT_LINKS.troubleshooting, "troubleshooting"],
+  [OMNIBOT_LINKS.architecture, "architecture"],
+  [OMNIBOT_LINKS.codex, "codex"],
+  [OMNIBOT_LINKS.claude, "claude"],
 ]);
 
 const EVENT_PROPERTY_ALLOWLIST = {
@@ -309,7 +308,7 @@ class LandingAnalytics {
         return;
       }
       const href = link?.getAttribute("href");
-      const platform = DOWNLOAD_PLATFORM_ORDER.find((id) => OPENBOT_DOWNLOAD_LINKS[id] === href);
+      const platform = DOWNLOAD_PLATFORM_ORDER.find((id) => OMNIBOT_DOWNLOAD_LINKS[id] === href);
       if (platform) this.#track("join_page_action", { action: "download", platform });
     };
     return this.#replaceClickListener(document, handleClick, "/join");

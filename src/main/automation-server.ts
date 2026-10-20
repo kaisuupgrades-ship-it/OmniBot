@@ -2,7 +2,7 @@ import { randomBytes, timingSafeEqual } from "node:crypto";
 import { chmod, mkdir, rm } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type AgentModelOption,
   type AgentSummary,
@@ -15,12 +15,12 @@ import {
   type Routine,
   type RoutineRun,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
-import { RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { ContextResetBusyError } from "@omnibot/contracts/team-protocol/context-reset-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@omnibot/logging";
+import { RoutineInputError } from "@omnibot/team-client/routine-schedule";
 import { Effect, Exit, Schema, Scope, Semaphore } from "effect";
 import { AgentSettingsRefused } from "../backend/agent/agent-settings-refused";
 import { InactiveAttentionRequest } from "../backend/agent/inactive-attention-request";

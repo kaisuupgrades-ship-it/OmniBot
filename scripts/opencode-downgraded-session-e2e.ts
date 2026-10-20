@@ -5,19 +5,19 @@
 // transcript; that a session the list still holds is tried once more and kept; that the OpenCode 2.x
 // answer for a session it does not have is a missing session, but its answer for a session of another
 // directory is not.
-// `bun run test:opencode-downgraded-session`. Writes .openbot-build/opencode-downgraded-session-e2e/report.json.
+// `bun run test:opencode-downgraded-session`. Writes .omnibot-build/opencode-downgraded-session-e2e/report.json.
 import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@omnibot/i18n/source";
 import { isMissingProviderSessionError } from "../src/backend/agent/thread-items";
 import type { AgentClient } from "../src/backend/agent-client";
 import type { AgentCliInfo } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/opencode-downgraded-session-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/opencode-downgraded-session-e2e");
 
 // Sessions named `v2-…` are in the table this version cannot read: not listed, and not resumable.
 // `kept-…` sessions are listed but fail to resume, as an internal fault does. `v1only-…` and
@@ -91,7 +91,7 @@ interface Report {
   newerVersion?: { missing: boolean; otherDirectory: boolean };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-opencode-downgraded-session-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-opencode-downgraded-session-e2e-"));
 const log = join(root, "opencode.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

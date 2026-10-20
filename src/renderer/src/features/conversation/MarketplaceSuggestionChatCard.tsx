@@ -1,11 +1,11 @@
-import { connectorSummary } from "@openbot/ui/features/connectors/ConnectorDetailPanel";
-import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
-import { isConnectorId } from "@openbot/ui/features/connectors/connectors";
+import { connectorSummary } from "@omnibot/ui/features/connectors/ConnectorDetailPanel";
+import { CONNECTOR_LISTINGS } from "@omnibot/ui/features/connectors/connector-catalog";
+import { isConnectorId } from "@omnibot/ui/features/connectors/connectors";
 import {
   MarketplaceSuggestionCard,
   type MarketplaceSuggestionState,
-} from "@openbot/ui/features/conversation/MarketplaceSuggestionCard";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/MarketplaceSuggestionCard";
+import { useText } from "@omnibot/ui/text";
 import { createMemo } from "solid-js";
 import type { ConnectorRegistry } from "../connectors/connector-registry";
 import { MARKETPLACE_PLUGINS } from "../settings/marketplace-plugin-catalog";

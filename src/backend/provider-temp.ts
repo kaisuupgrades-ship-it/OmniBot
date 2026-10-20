@@ -2,8 +2,8 @@ import type { ChildProcess } from "node:child_process";
 import { mkdirSync, mkdtempSync, statfsSync } from "node:fs";
 import { readdir, rm } from "node:fs/promises";
 import { join } from "node:path";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect, Schema } from "effect";
 import { causeHelpers } from "./effect-boundary";
 

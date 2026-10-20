@@ -26,7 +26,7 @@ export const MCP_SERVERS_CAPABILITY = "mcp-servers-v1";
  * configuration may not take either one: on Claude the record key would collide, and on the other
  * providers the agent would be offered two servers with one name.
  */
-export const RESERVED_MCP_SERVER_NAMES = ["openbot", "openbot_browser"] as const;
+export const RESERVED_MCP_SERVER_NAMES = ["omnibot", "omnibot_browser"] as const;
 
 /**
  * The name and id OmniBot gives the Computer Use driver when it hands it to a provider.
@@ -38,14 +38,14 @@ export const RESERVED_MCP_SERVER_NAMES = ["openbot", "openbot_browser"] as const
  * `mcpConfigErrors` enforces on its own below.
  */
 export const COMPUTER_USE_MCP_SERVER_NAME = "computer_use";
-export const COMPUTER_USE_MCP_SERVER_ID = "openbot-computer-use";
+export const COMPUTER_USE_MCP_SERVER_ID = "omnibot-computer-use";
 
 /**
  * The id and address of the GitHub MCP server that the built-in GitHub connection hands to agents.
  * The name is the one the retired GitHub plugin gave its row, so a row the user added keeps its
  * place: when an enabled row has this name, the built-in entry is not added.
  */
-export const GITHUB_CONNECTOR_MCP_SERVER_ID = "openbot-github";
+export const GITHUB_CONNECTOR_MCP_SERVER_ID = "omnibot-github";
 export const GITHUB_CONNECTOR_MCP_SERVER_NAME = "github";
 export const GITHUB_CONNECTOR_MCP_SERVER_URL = "https://api.githubcopilot.com/mcp/";
 

@@ -1,6 +1,6 @@
-import type { AgentModelOption, AgentReasoningEffort, AgentSummary, UpdateAgentInput } from "@openbot/contracts/ipc";
-import { AGENT_PROVIDERS, defaultProviderModel } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { AgentModelOption, AgentReasoningEffort, AgentSummary, UpdateAgentInput } from "@omnibot/contracts/ipc";
+import { AGENT_PROVIDERS, defaultProviderModel } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import type { AgentProvider } from "../agent-client";
 import { AgentSettingsRefused } from "./agent-settings-refused";
 import { providerLabel } from "./thread-items";

@@ -5,7 +5,7 @@
 // The proxy cases run the real `McpGateway` and its `McpOAuthProxy` on a temporary database, with
 // the SDK MCP client as the provider and an SDK Streamable HTTP server as the signed-in MCP server.
 // The provider payload is the one `codexMcpServers` and `claudeMcpServers` build for a spawn.
-// `bun scripts/mcp-oauth-e2e.ts`. Writes .openbot-build/mcp-oauth-e2e/report.json.
+// `bun scripts/mcp-oauth-e2e.ts`. Writes .omnibot-build/mcp-oauth-e2e/report.json.
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
@@ -23,9 +23,9 @@ import {
   McpError,
   ToolListChangedNotificationSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, redactText } from "@openbot/logging";
+import type { McpServerConfig } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, redactText } from "@omnibot/logging";
 import { Effect } from "effect";
 import { McpGateway } from "../src/backend/agent/mcp-gateway";
 import { runCauseEffect } from "../src/backend/effect-boundary";
@@ -41,10 +41,10 @@ import type { McpOAuthProxySettings } from "../src/backend/mcp-oauth-proxy";
 import { claudeMcpServers, codexMcpServers, usableMcpServers } from "../src/backend/mcp-provider-shapes";
 import { McpServerStore } from "../src/backend/mcp-server-store";
 import { AddressLookupError, isPublicAddress } from "../src/backend/network-address";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { NO_PROVIDER_CREDENTIALS } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mcp-oauth-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/mcp-oauth-e2e");
 const REDIRECT_URL = "http://127.0.0.1:28417/mcp-auth";
 const DEADLINE_MS = 10_000;
 
@@ -588,7 +588,7 @@ async function proxyCases(auth: Awaited<ReturnType<typeof startAuthorizationServ
   auth.setTokenMode("rotate");
   auth.setRevokeStatus(200);
   const resource = await startResourceServer(auth.base);
-  const root = await mkdtemp(join(tmpdir(), "openbot-mcp-oauth-proxy-"));
+  const root = await mkdtemp(join(tmpdir(), "omnibot-mcp-oauth-proxy-"));
   const database = new OmniBotDatabase(root);
   const clients: Client[] = [];
   const gateways: McpGateway[] = [];

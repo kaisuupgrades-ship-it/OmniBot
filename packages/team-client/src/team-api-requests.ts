@@ -56,22 +56,22 @@ import {
   type TestRoutineInput,
   type UpdateQueuedMessageInput,
   type UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
-import { guardedDecoder } from "@openbot/contracts/ipc-decoding";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_IMPORT_ROUTES, AGENT_IMPORT_UPLOAD_BYTES } from "@openbot/contracts/team-protocol/agent-import-v1";
+} from "@omnibot/contracts/ipc";
+import { guardedDecoder } from "@omnibot/contracts/ipc-decoding";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { AGENT_IMPORT_ROUTES, AGENT_IMPORT_UPLOAD_BYTES } from "@omnibot/contracts/team-protocol/agent-import-v1";
 import {
   AGENT_MEMORIES_PAGE_ROUTE,
   AGENT_MEMORIES_PAGE_SIZE,
   AGENT_MEMORY_INCLUSION_ROUTE,
   AGENT_MEMORY_SELECTION_PAGE_ROUTE,
-} from "@openbot/contracts/team-protocol/agent-memories-v1";
-import { AGENT_TASKS_ROUTES } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { CONTEXT_RESET_ROUTES } from "@openbot/contracts/team-protocol/context-reset-v1";
-import { ROUTINE_FLOWS_ROUTES } from "@openbot/contracts/team-protocol/routine-flows-v1";
-import { decodeTeamProtocolV2Json, type TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
+} from "@omnibot/contracts/team-protocol/agent-memories-v1";
+import { AGENT_TASKS_ROUTES } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import { CHANNEL_ROUTES } from "@omnibot/contracts/team-protocol/channels-v1";
+import { CONTEXT_RESET_ROUTES } from "@omnibot/contracts/team-protocol/context-reset-v1";
+import { ROUTINE_FLOWS_ROUTES } from "@omnibot/contracts/team-protocol/routine-flows-v1";
+import { decodeTeamProtocolV2Json, type TeamProtocolV2Json } from "@omnibot/contracts/team-protocol/v2";
 import type { RemoteFileUpload } from "./file-upload";
 
 export class TeamRequestError extends Schema.TaggedError<TeamRequestError>()("TeamRequestError", {

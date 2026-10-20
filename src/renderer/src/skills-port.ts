@@ -4,7 +4,7 @@ import type {
   OmniBotDesktopApi,
   SetEnabledSkillInput,
   UninstallSkillInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 
 /**
  * What the skill screens reach in main: the marketplace, the agent skills dialog and the local
@@ -46,9 +46,9 @@ export interface SkillsPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function skillsPort(): SkillsPort {
-  return window.openbot;
+  return window.omnibot;
 }
 
 /** The marketplace reads the agent skills dialog uses for descriptions and details. */

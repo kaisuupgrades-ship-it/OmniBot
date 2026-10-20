@@ -34,7 +34,7 @@ export const messages = defineMessages("settings", {
   "settings.externalLinks.description": "Choose where links from conversations open.",
   // The two link targets. The saved value stays in English; only the label is translated.
   "settings.externalLinks.defaultBrowser": "Default browser",
-  "settings.externalLinks.openbot": "OmniBot",
+  "settings.externalLinks.omnibot": "OmniBot",
   // The message send shortcut. The saved mode stays in English; only the labels are translated.
   "settings.sendShortcut.title": "Send shortcut",
   "settings.sendShortcut.description": "Choose the keys that send a message on this device and browser.",
@@ -247,7 +247,7 @@ export const messages = defineMessages("settings", {
   "settings.profile.share.copied": "Image copied",
   "settings.profile.share.copyFailed": "Could not copy the image.",
   "settings.profile.share.createFailed": "Could not make the image.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "omnibot-activity.png",
   // The text in the image to share.
   "settings.profile.share.caption": "My last six months with OmniBot",
   "settings.profile.activity.title": "Activity",

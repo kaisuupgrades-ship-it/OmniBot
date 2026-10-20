@@ -1,6 +1,6 @@
-import type { AppInfo } from "@openbot/contracts/ipc";
-import type { ServerView } from "@openbot/ui/features/servers/ServerMenu";
-import type { SidebarView } from "@openbot/ui/features/sidebar/sidebar-types";
+import type { AppInfo } from "@omnibot/contracts/ipc";
+import type { ServerView } from "@omnibot/ui/features/servers/ServerMenu";
+import type { SidebarView } from "@omnibot/ui/features/sidebar/sidebar-types";
 import { createEffect, createMemo, createSignal, onSettled } from "solid-js";
 import { readPanelWidth } from "./components/panel-width-storage";
 import {

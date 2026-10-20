@@ -16,10 +16,10 @@ import {
   type OldRuntimeVersions,
   type ProviderRuntimeSnapshot,
   type ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, type LogValue, redactText, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { matchingSourceKeys, sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, type LogValue, redactText, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Fiber, Result, Scope, Stream } from "effect";
 import lockValue from "../../native-runtime.lock.json";
 import { type AgentRuntimeLock, parseAgentRuntimeLock } from "../../scripts/agent-runtime-lock";
@@ -489,7 +489,7 @@ export class ProviderRuntimeManager extends EventEmitter<ProviderRuntimeManagerE
         });
       if (this.#stopping)
         return yield* new ProviderRuntimeFailure({ cause: new Error(sourceText("error.provider.closing")) });
-      // Only a provider CLI has a path override; nothing points `OPENBOT_BUN_PATH` at a tool runtime.
+      // Only a provider CLI has a path override; nothing points `OMNIBOT_BUN_PATH` at a tool runtime.
       if (!isManagedToolRuntime(runtime) && configuredCliPath(runtime))
         return yield* new ProviderRuntimeFailure({ cause: new Error(sourceText("error.provider.cliOverride")) });
       if (this.#tasks.has(runtime)) return this.getStatus();

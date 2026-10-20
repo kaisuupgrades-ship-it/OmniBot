@@ -2,8 +2,8 @@ import {
   UI_BLOCK_LIMITS,
   UI_BLOCK_TEXT_ACTION_ID,
   type UiQuickRepliesBlock as UiQuickRepliesSpec,
-} from "@openbot/contracts/ui-blocks";
-import { Button, Input } from "@openbot/ui";
+} from "@omnibot/contracts/ui-blocks";
+import { Button, Input } from "@omnibot/ui";
 import { createSignal, For, Show } from "solid-js";
 import { useText } from "../../../text";
 import { cx } from "../../../utils";

@@ -1,5 +1,5 @@
 /** The sounds of the app bundle (`NOTIFICATION_SOUND_FILES`), and `default` for the system sound. */
-export const NOTIFICATION_SOUNDS = ["openbot", "warm", "mech", "bubble", "press", "default"] as const;
+export const NOTIFICATION_SOUNDS = ["omnibot", "warm", "mech", "bubble", "press", "default"] as const;
 export type NotificationSound = (typeof NOTIFICATION_SOUNDS)[number];
 
 /**
@@ -56,15 +56,15 @@ export interface AndroidNotificationRelayPush {
 export const NOTIFICATION_SEALED_LIMIT = 3_600;
 export const NOTIFICATION_TOKEN_PATTERN = /^(?:[0-9a-f]{2}){8,256}$/u;
 /**
- * The sound files in the app bundle, at the level of an alert. `openbot` is the sound of the desktop
+ * The sound files in the app bundle, at the level of an alert. `omnibot` is the sound of the desktop
  * app when a task finishes (`completion-sound.ts`), with the same sweep and envelope. The others are
  * the `success` cue of each desktop sound theme (`cuelume`; `warm` is its `default` theme), rendered
  * offline.
  */
 export const NOTIFICATION_SOUND_FILES: Readonly<Record<Exclude<NotificationSound, "default">, string>> = {
-  openbot: "openbot-task.wav",
-  warm: "openbot-warm.wav",
-  mech: "openbot-mech.wav",
-  bubble: "openbot-bubble.wav",
-  press: "openbot-press.wav",
+  omnibot: "omnibot-task.wav",
+  warm: "omnibot-warm.wav",
+  mech: "omnibot-mech.wav",
+  bubble: "omnibot-bubble.wav",
+  press: "omnibot-press.wav",
 };

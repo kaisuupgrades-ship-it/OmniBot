@@ -20,7 +20,7 @@
  * provider writes it.
  */
 export function isMcpSubsystemDiagnostic(message: string, configuredNames: readonly string[] = []): boolean {
-  if (/openbot/i.test(message)) return false;
+  if (/omnibot/i.test(message)) return false;
   if (configuredNames.some((name) => name && message.includes(name))) return false;
   return /\b(mcp|rmcp)\b|\bworker quit with (?:fatal|join error|reason):/i.test(message);
 }
@@ -40,7 +40,7 @@ export function isMcpSubsystemDiagnostic(message: string, configuredNames: reado
  * that does not name telemetry, is the provider's work and stays visible.
  */
 export function isTelemetryExportDiagnostic(message: string): boolean {
-  if (/openbot/i.test(message)) return false;
+  if (/omnibot/i.test(message)) return false;
   return /\b(?:batch(?:span|log|logrecord)processor|(?:span|log|logrecord|metric)exporter|opentelemetry|otlp|otel)\b/i.test(
     message,
   );
@@ -155,7 +155,7 @@ export function isToolCallDiagnostic(message: string): boolean {
  * Only these two refreshes count. Any other failure, a network failure included, stays visible.
  */
 export function isBackgroundRefreshDiagnostic(message: string): boolean {
-  if (/openbot/i.test(message)) return false;
+  if (/omnibot/i.test(message)) return false;
   return /\bcodex_models_manager\b.*\bfailed to refresh available models\b|\bSettings fetch failed\b/.test(message);
 }
 

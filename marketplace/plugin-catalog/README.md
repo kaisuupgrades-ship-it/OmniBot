@@ -28,7 +28,7 @@ Rules for a new entry:
 - A `command` can start with `~/` to name a program that a desktop app installs
   in the home folder, as the Paper listing does. OmniBot expands `~` on the
   computer that runs the server, before any provider starts it.
-- Names must pass `mcpConfigErrors` and must not be reserved (`openbot`).
+- Names must pass `mcpConfigErrors` and must not be reserved (`omnibot`).
 - OAuth-only vendors install as a plain `http` server with a `link` flow, the
   same shape the Canva listing uses. OmniBot signs in itself: the main process
   holds the MCP OAuth client, keeps the tokens in encrypted storage, and adds

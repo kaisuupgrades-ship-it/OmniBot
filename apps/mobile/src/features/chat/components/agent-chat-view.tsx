@@ -1,4 +1,4 @@
-import type { RespondToPromptInput } from "@openbot/contracts/ipc";
+import type { RespondToPromptInput } from "@omnibot/contracts/ipc";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { useMobileSession } from "@/features/auth/context/mobile-session-context";
 import { useAgentActivity } from "@/features/workspace/components/use-agent-activity";

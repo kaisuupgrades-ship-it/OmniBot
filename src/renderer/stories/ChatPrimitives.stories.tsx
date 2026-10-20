@@ -1,4 +1,4 @@
-import type { AttachmentSummary, MessageReaction } from "@openbot/contracts/ipc";
+import type { AttachmentSummary, MessageReaction } from "@omnibot/contracts/ipc";
 import {
   Bubble,
   BubbleContent,
@@ -14,10 +14,10 @@ import {
   MessageGroup,
   MessageHeader,
   Text,
-} from "@openbot/ui";
-import type { AgentMessage } from "@openbot/ui/data";
-import { ChoiceCard } from "@openbot/ui/features/conversation/ConversationPrompts";
-import { MessageActions, MessageBody } from "@openbot/ui/features/conversation/MessageRendering";
+} from "@omnibot/ui";
+import type { AgentMessage } from "@omnibot/ui/data";
+import { ChoiceCard } from "@omnibot/ui/features/conversation/ConversationPrompts";
+import { MessageActions, MessageBody } from "@omnibot/ui/features/conversation/MessageRendering";
 import type { JSX } from "@solidjs/web";
 import { createMemo, createSignal, Show } from "solid-js";
 import { fn } from "storybook/test";
@@ -28,7 +28,7 @@ import { STORY_AGENTS, STORY_ATTACHMENTS } from "./fixtures";
 const [firstStoryAttachment] = STORY_ATTACHMENTS;
 if (!firstStoryAttachment) throw new Error("Story attachment fixtures are empty.");
 
-const previewImage = new URL("../src/assets/openbot-logo-production.png", import.meta.url).href;
+const previewImage = new URL("../src/assets/omnibot-logo-production.png", import.meta.url).href;
 const generatedImage: AttachmentSummary = {
   id: "chat-primitives-generated-image",
   name: "observatory.png",

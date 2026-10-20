@@ -115,7 +115,7 @@ export const messages = {
     "Показывает начало ответа, вопрос или действие, которое нужно подтвердить. Google и служба аккаунтов OmniBot не могут его прочитать.",
   "mobile.settings.notifications.sound": "Звук",
   "mobile.settings.notifications.playSound": "Воспроизводить звук",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "Тёплая",
   "mobile.settings.notifications.sound.mech": "Механическая",
   "mobile.settings.notifications.sound.bubble": "Пузырьковая",

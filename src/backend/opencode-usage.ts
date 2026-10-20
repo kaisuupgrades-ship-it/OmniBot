@@ -5,7 +5,7 @@
 // anomalyco/opencode; it answers `{ usage: { rolling, weekly, monthly } }`, each with an integer
 // `percent` and an ISO `resetsAt`.
 
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
 import { Effect, Option, Schema } from "effect";
 import { type AccountRateLimitsReadResult, type AccountRateLimitWindowResult, getRecord, getString } from "./protocol";
 

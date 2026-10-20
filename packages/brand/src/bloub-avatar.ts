@@ -6,7 +6,7 @@ import {
   SHAPES,
   type ShapeId,
 } from "@norbert_bodziony/bloub";
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import type { AvatarHue } from "@omnibot/contracts/ipc";
 
 export type SupportedAvatarSilhouetteId = Exclude<ShapeId, "goutte">;
 

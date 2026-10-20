@@ -1,72 +1,72 @@
 @import "../styles.css";
 @source "../";
 
-.openbot-playground-root {
+.omnibot-playground-root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--openbot-bg-canvas);
+  background: var(--omnibot-bg-canvas);
 }
 
-.openbot-playground-loading {
+.omnibot-playground-loading {
   width: 100%;
   height: 100%;
-  background: var(--openbot-bg-canvas);
+  background: var(--omnibot-bg-canvas);
 }
 
-.openbot-playground-root .unread-messages-banner {
+.omnibot-playground-root .unread-messages-banner {
   display: none;
 }
 
 @media (max-width: 640px) {
-  .openbot-playground-root .app-frame,
-  .openbot-playground-root .app-frame-with-server-rail {
+  .omnibot-playground-root .app-frame,
+  .omnibot-playground-root .app-frame-with-server-rail {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: 68px minmax(0, 1fr);
   }
 
-  .openbot-playground-root .server-rail,
-  .openbot-playground-root .left-panel-resizer,
-  .openbot-playground-root .sidebar-topbar,
-  .openbot-playground-root .sidebar-search-wrap,
-  .openbot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-people-heading"] {
+  .omnibot-playground-root .server-rail,
+  .omnibot-playground-root .left-panel-resizer,
+  .omnibot-playground-root .sidebar-topbar,
+  .omnibot-playground-root .sidebar-search-wrap,
+  .omnibot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-people-heading"] {
     display: none;
   }
 
-  .openbot-playground-root .sidebar {
+  .omnibot-playground-root .sidebar {
     grid-column: 1;
     grid-row: 1;
     flex-direction: row;
     border-right: 0;
-    border-bottom: 1px solid var(--openbot-border);
+    border-bottom: 1px solid var(--omnibot-border);
   }
 
-  .openbot-playground-root .agent-list,
-  .openbot-playground-root .sidebar-compact .agent-list {
+  .omnibot-playground-root .agent-list,
+  .omnibot-playground-root .sidebar-compact .agent-list {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     align-items: center;
     justify-content: center;
-    gap: var(--openbot-space-1-5);
-    padding: var(--openbot-space-2) var(--openbot-space-3);
+    gap: var(--omnibot-space-1-5);
+    padding: var(--omnibot-space-2) var(--omnibot-space-3);
   }
 
-  .openbot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-agents-heading"],
-  .openbot-playground-root .sidebar-chat-group[aria-label="Agents"] {
+  .omnibot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-agents-heading"],
+  .omnibot-playground-root .sidebar-chat-group[aria-label="Agents"] {
     display: flex;
     align-items: center;
-    gap: var(--openbot-space-1-5);
+    gap: var(--omnibot-space-1-5);
     margin: 0;
   }
 
-  .openbot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-agents-heading"] > header,
-  .openbot-playground-root .sidebar-chat-group[aria-label="Agents"] > header {
+  .omnibot-playground-root .sidebar-chat-group[aria-labelledby="sidebar-agents-heading"] > header,
+  .omnibot-playground-root .sidebar-chat-group[aria-label="Agents"] > header {
     display: none;
   }
 
-  .openbot-playground-root .agent-row,
-  .openbot-playground-root .sidebar-compact .agent-row {
+  .omnibot-playground-root .agent-row,
+  .omnibot-playground-root .sidebar-compact .agent-row {
     width: 48px;
     height: 48px;
     flex: 0 0 48px;
@@ -74,16 +74,16 @@
     padding: 6px;
   }
 
-  .openbot-playground-root .sidebar-compact .agent-row-avatar {
+  .omnibot-playground-root .sidebar-compact .agent-row-avatar {
     transform: none;
   }
 
-  .openbot-playground-root .agent-row-copy {
+  .omnibot-playground-root .agent-row-copy {
     display: none;
   }
 
-  .openbot-playground-root .conversation-panel,
-  .openbot-playground-root .app-frame-with-server-rail .conversation-panel {
+  .omnibot-playground-root .conversation-panel,
+  .omnibot-playground-root .app-frame-with-server-rail .conversation-panel {
     grid-column: 1;
     grid-row: 2;
   }

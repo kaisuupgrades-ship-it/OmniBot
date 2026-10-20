@@ -1,5 +1,5 @@
-import { analyticsRange, canAdministerServer, type InstalledSkill } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { analyticsRange, canAdministerServer, type InstalledSkill } from "@omnibot/contracts/ipc";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
 import { Button, Typography } from "heroui-native";
@@ -501,7 +501,7 @@ function userAssignedSkills(skills: InstalledSkill[]): InstalledSkill[] {
   return skills
     .filter(
       (skill) =>
-        skill.origin !== "managed" && skill.slug !== "openbot-site-hosting" && skill.skillId !== "openbot-site-hosting",
+        skill.origin !== "managed" && skill.slug !== "omnibot-site-hosting" && skill.skillId !== "omnibot-site-hosting",
     )
     .sort((left, right) => left.name.localeCompare(right.name));
 }

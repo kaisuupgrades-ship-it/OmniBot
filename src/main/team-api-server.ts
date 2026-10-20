@@ -1,7 +1,7 @@
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_RUNTIME_SNAPSHOT_BYTES_LIMIT,
   type AgentEvent,
@@ -23,15 +23,15 @@ import {
   type TeamMemberSummary,
   type TeamPresenceSnapshot,
   type TeamRealtimeEvent,
-} from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { ACP_REGISTRY_CAPABILITY } from "@openbot/contracts/team-protocol/acp-registry-v1";
-import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/agent-hidden-v1";
-import { AGENT_SESSION_SETTINGS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-session-settings-v1";
-import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { BROWSER_PAGE_STATE_CAPABILITY } from "@openbot/contracts/team-protocol/browser-page-state-v1";
-import { BROWSER_USER_CONTROL_CAPABILITY } from "@openbot/contracts/team-protocol/browser-user-control-v1";
+} from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { ACP_REGISTRY_CAPABILITY } from "@omnibot/contracts/team-protocol/acp-registry-v1";
+import { AGENT_HIDDEN_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-hidden-v1";
+import { AGENT_SESSION_SETTINGS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-session-settings-v1";
+import { AGENT_TASKS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import { BROWSER_PAGE_STATE_CAPABILITY } from "@omnibot/contracts/team-protocol/browser-page-state-v1";
+import { BROWSER_USER_CONTROL_CAPABILITY } from "@omnibot/contracts/team-protocol/browser-user-control-v1";
 import {
   AGENT_ADMIN_CAPABILITY,
   AGENT_HOST_SETTINGS_CAPABILITY,
@@ -83,16 +83,16 @@ import {
   TEAM_SUBAGENTS_CAPABILITY,
   TEAM_UI_BLOCKS_CAPABILITY,
   type TeamCurrentCapability,
-} from "@openbot/contracts/team-protocol/current";
-import { FOCUS_USE_INTERVAL_MS } from "@openbot/contracts/team-protocol/focus-use-v1";
+} from "@omnibot/contracts/team-protocol/current";
+import { FOCUS_USE_INTERVAL_MS } from "@omnibot/contracts/team-protocol/focus-use-v1";
 import {
   HOST_RESTART_EVENT,
   type HostRestartEvent,
   type HostRestartState,
-} from "@openbot/contracts/team-protocol/host-update-v1";
-import { teamHttpCodec } from "@openbot/contracts/team-protocol/http-codecs";
-import { type OptionalTeamEvent, optionalTeamEvent } from "@openbot/contracts/team-protocol/optional-events";
-import { teamSideRouteCodec } from "@openbot/contracts/team-protocol/side-routes";
+} from "@omnibot/contracts/team-protocol/host-update-v1";
+import { teamHttpCodec } from "@omnibot/contracts/team-protocol/http-codecs";
+import { type OptionalTeamEvent, optionalTeamEvent } from "@omnibot/contracts/team-protocol/optional-events";
+import { teamSideRouteCodec } from "@omnibot/contracts/team-protocol/side-routes";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_PROTOCOL_V1,
@@ -100,20 +100,20 @@ import {
   TEAM_PROTOCOL_V1_WEBSOCKET,
   TEAM_PROTOCOL_VERSION_HEADER,
   type TeamProtocolSupportV1,
-} from "@openbot/contracts/team-protocol/v1";
+} from "@omnibot/contracts/team-protocol/v1";
 import {
   decodeTeamProtocolV1CurrentClientEvent,
   encodeTeamProtocolV1CurrentEvent,
-} from "@openbot/contracts/team-protocol/v1-adapter";
-import { encodeTeamProtocolV4BaseCurrentEvent } from "@openbot/contracts/team-protocol/v4-base-adapter";
-import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@openbot/contracts/team-protocol/v5";
-import { encodeTeamProtocolV5BaseCurrentEvent } from "@openbot/contracts/team-protocol/v5-base-adapter";
-import { TEAM_CURSOR_CLINE_CAPABILITY } from "@openbot/contracts/team-protocol/v6";
-import { encodeTeamProtocolV6BaseCurrentEvent } from "@openbot/contracts/team-protocol/v6-base-adapter";
-import { TEAM_PI_MUSE_CAPABILITY, TEAM_PROTOCOL_V7 } from "@openbot/contracts/team-protocol/v7";
-import { encodeTeamProtocolV7BaseCurrentEvent } from "@openbot/contracts/team-protocol/v7-base-adapter";
-import { isFixedSourceText, sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/team-protocol/v1-adapter";
+import { encodeTeamProtocolV4BaseCurrentEvent } from "@omnibot/contracts/team-protocol/v4-base-adapter";
+import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@omnibot/contracts/team-protocol/v5";
+import { encodeTeamProtocolV5BaseCurrentEvent } from "@omnibot/contracts/team-protocol/v5-base-adapter";
+import { TEAM_CURSOR_CLINE_CAPABILITY } from "@omnibot/contracts/team-protocol/v6";
+import { encodeTeamProtocolV6BaseCurrentEvent } from "@omnibot/contracts/team-protocol/v6-base-adapter";
+import { TEAM_PI_MUSE_CAPABILITY, TEAM_PROTOCOL_V7 } from "@omnibot/contracts/team-protocol/v7";
+import { encodeTeamProtocolV7BaseCurrentEvent } from "@omnibot/contracts/team-protocol/v7-base-adapter";
+import { isFixedSourceText, sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Scope } from "effect";
 import type * as Ws from "ws";
 import { AgentDuplicationFailed, duplicateAgentIntoLayout } from "../backend/agent/duplication-gate";
@@ -207,8 +207,8 @@ const RATE_LIMIT_SWEEP_MS = 60_000;
 const RATE_LIMIT_ATTEMPTS = 5;
 const RATE_LIMIT_CAPACITY = 10_000;
 const RUNTIME_SNAPSHOT_REQUEST_INTERVAL_MS = 1_000;
-const TEST_LEGACY_EVENT_PROTOCOL = "openbot-events";
-const TEST_LEGACY_SNAPSHOT_PROTOCOL = "openbot-events-v2";
+const TEST_LEGACY_EVENT_PROTOCOL = "omnibot-events";
+const TEST_LEGACY_SNAPSHOT_PROTOCOL = "omnibot-events-v2";
 const requireModule = createRequire(import.meta.url);
 const webSockets: typeof Ws = requireModule(join(dirname(requireModule.resolve("ws/package.json")), "index.js"));
 
@@ -346,8 +346,8 @@ export class TeamApiServer {
         socket.destroy();
         return;
       }
-      const encodedToken = protocols.find((value) => value.startsWith("openbot-token."));
-      const token = encodedToken?.slice("openbot-token.".length) ?? "";
+      const encodedToken = protocols.find((value) => value.startsWith("omnibot-token."));
+      const token = encodedToken?.slice("omnibot-token.".length) ?? "";
       const member = token.length <= 512 ? this.#options.store.authenticate(token) : null;
       if (!member) {
         socket.write("HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n");
@@ -970,7 +970,7 @@ export class TeamApiServer {
    */
   #rateLimitSource(request: IncomingMessage): string {
     const address = request.socket.remoteAddress ?? "local";
-    const webRtcSession = request.headers["x-openbot-webrtc-session"];
+    const webRtcSession = request.headers["x-omnibot-webrtc-session"];
     const token = bearerToken(request.headers.authorization);
     if (!isString(webRtcSession) || !token) return address;
     const authenticated = this.#options.store.authenticateSession(token);

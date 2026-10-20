@@ -1,5 +1,5 @@
-import { AppLogo } from "@openbot/brand";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { AppLogo } from "@omnibot/brand";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AppVariant,
   DynamicIslandAction,
@@ -9,14 +9,14 @@ import type {
   DynamicIslandPresentation,
   DynamicIslandPromptItem,
   DynamicIslandTakeoverItem,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   DEFAULT_DYNAMIC_ISLAND_PREFERENCE,
   DYNAMIC_ISLAND_DEFAULT_COMPACT_HEIGHT,
   DYNAMIC_ISLAND_SIZE_LIMITS,
   dynamicIslandCompactHeight,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@omnibot/i18n";
 import {
   ArrowUp,
   Badge,
@@ -37,10 +37,10 @@ import {
   Monitor,
   OctagonX,
   Spinner,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
+import type { UserErrorDetails } from "@omnibot/user-errors";
 import { Dynamic, type JSX } from "@solidjs/web";
 import {
   createEffect,
@@ -71,7 +71,7 @@ import {
   primeCompactModeLayerPositions,
   restoreModeTransitionFocus,
   waitForAnimations,
-} from "./openbot-dynamic-island-motion";
+} from "./omnibot-dynamic-island-motion";
 
 export interface OmniBotDynamicIslandProps {
   presentation: DynamicIslandPresentation;
@@ -123,7 +123,7 @@ const QUESTION_SWAP_EXIT_DURATION = 200;
 const QUESTION_SWAP_ENTER_DURATION = 320;
 const QUESTION_SWAP_BLUR = 6;
 const QUESTION_SWAP_MIDPOINT_OPACITY = 0.55;
-const OPENBOT_COMPACT_HOVER_MOTION = {
+const OMNIBOT_COMPACT_HOVER_MOTION = {
   leadingScale: 1.22,
   trailingScale: 1.08,
   outwardTranslateX: 10,
@@ -204,7 +204,7 @@ const STATUS_SHARED_TRAILING: SharedLeadingMotion = {
   island: { x: 124, y: 51, scale: 1.08 },
 };
 
-const OPENBOT_ISLAND_MODE_CONFIG: Record<DynamicIslandPresentation["mode"], OmniBotIslandModeConfig> = {
+const OMNIBOT_ISLAND_MODE_CONFIG: Record<DynamicIslandPresentation["mode"], OmniBotIslandModeConfig> = {
   idle: {
     label: "island.label.idle",
   },
@@ -302,7 +302,7 @@ function compactStatusGeometry(
     presentation.mode === "working" ? Math.min(COMPACT_INDICES.length, presentation.working.length) : 0;
   if (!agent && workingAvatarCount === 0) return undefined;
 
-  const badge = OPENBOT_ISLAND_MODE_CONFIG[mode].badge;
+  const badge = OMNIBOT_ISLAND_MODE_CONFIG[mode].badge;
   if (!badge) return undefined;
   const badgeWidth = Math.ceil(measureCompactText(t(badge.label), 600) + STATUS_COMPACT_BADGE_CHROME_WIDTH);
   const measuredNameWidth = agent ? measureCompactText(agent.name, 600) : 0;
@@ -371,7 +371,7 @@ function scaleCompactWidth(width: number, floor: number, percent: number, minimu
  * The idle compact width for a width setting, or undefined for the default width. The Settings
  * preview reads it to scale the widest setting into its frame.
  */
-export function openBotIdleCompactWidth(
+export function omniBotIdleCompactWidth(
   displayMode: "notch" | "island" | undefined,
   notchSize: DynamicIslandNotchSize | undefined,
   percent: number,
@@ -443,7 +443,7 @@ export function OmniBotDynamicIsland(props: OmniBotDynamicIslandProps): JSX.Elem
   const { t } = useText();
   const initialPresentation = untrack(() => props.presentation);
   const [visiblePresentation, setVisiblePresentation] = createSignal(initialPresentation);
-  const config = () => OPENBOT_ISLAND_MODE_CONFIG[visiblePresentation().mode];
+  const config = () => OMNIBOT_ISLAND_MODE_CONFIG[visiblePresentation().mode];
   const [compactLayoutPresentation, setCompactLayoutPresentation] = createSignal(initialPresentation);
   const [outgoingPresentation, setOutgoingPresentation] = createSignal<DynamicIslandPresentation>();
   const [modeTransitioning, setModeTransitioning] = createSignal(false);
@@ -488,7 +488,7 @@ export function OmniBotDynamicIsland(props: OmniBotDynamicIslandProps): JSX.Elem
   const compactWidth = () => {
     const geometry = compactGeometry();
     if (geometry) return props.displayMode === "island" ? geometry.island.width : geometry.notch.width;
-    return openBotIdleCompactWidth(props.displayMode, props.notchSize, widthPercent());
+    return omniBotIdleCompactWidth(props.displayMode, props.notchSize, widthPercent());
   };
   const compactHeight = () => {
     const percent = heightPercent();
@@ -620,7 +620,7 @@ export function OmniBotDynamicIsland(props: OmniBotDynamicIslandProps): JSX.Elem
   return (
     <div
       ref={transitionRoot}
-      class="openbot-dynamic-island-transition-root"
+      class="omnibot-dynamic-island-transition-root"
       data-mode-transitioning={modeTransitioning() ? "true" : undefined}
     >
       <DynamicIsland
@@ -645,10 +645,10 @@ export function OmniBotDynamicIsland(props: OmniBotDynamicIslandProps): JSX.Elem
           trailing: sharedTrailing()?.[props.displayMode === "island" ? "island" : "notch"],
         }}
         hoverBehavior={config().badge ? "expand" : "grow"}
-        hoverContentMotion={OPENBOT_COMPACT_HOVER_MOTION}
+        hoverContentMotion={OMNIBOT_COMPACT_HOVER_MOTION}
         pointerToggle={config().badge ? false : undefined}
         class={[
-          "openbot-dynamic-island",
+          "omnibot-dynamic-island",
           `dynamic-island-${visiblePresentation().mode === "message" ? "message-first" : visiblePresentation().mode}`,
           config().badge ? "dynamic-island-status" : undefined,
           visiblePresentation().mode !== "idle" && visiblePresentation().mode !== "working"
@@ -844,7 +844,7 @@ function CompactAgentName(props: { name: string; displayMode?: "notch" | "island
 
 function CompactStatusBadge(props: { mode: StatusMode }): JSX.Element {
   const { t } = useText();
-  const config = () => OPENBOT_ISLAND_MODE_CONFIG[props.mode].badge;
+  const config = () => OMNIBOT_ISLAND_MODE_CONFIG[props.mode].badge;
   return (
     <Show when={config()}>
       {(badge) => (

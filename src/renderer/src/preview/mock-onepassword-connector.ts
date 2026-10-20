@@ -3,7 +3,7 @@ import {
   type OnePasswordConnectorDesktopApi,
   type OnePasswordConnectorStatus,
   type OnePasswordSetup,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 
 /** How long the mock CLI takes to download, and to create the vault and the service account. */
 const MOCK_INSTALL_MS = 1_500;

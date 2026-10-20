@@ -5,7 +5,7 @@
 // run on the same day makes no Stripe call.
 //
 // Run: bun apps/auth-api/scripts/billing-snapshot-e2e.ts
-// It writes .openbot-build/billing-snapshot-e2e/report.json and exits non-zero on a failure.
+// It writes .omnibot-build/billing-snapshot-e2e/report.json and exits non-zero on a failure.
 import { readdirSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
@@ -14,7 +14,7 @@ import { Effect, Exit, Schema } from "effect";
 import { captureBillingSnapshot } from "../src/server/billing-snapshots";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const OUT = join(ROOT, ".openbot-build", "billing-snapshot-e2e");
+const OUT = join(ROOT, ".omnibot-build", "billing-snapshot-e2e");
 const MIGRATIONS = join(ROOT, "apps", "auth-api", "migrations");
 const NOW = Date.UTC(2026, 9, 16, 12);
 const DAY = "2026-10-16";

@@ -32,8 +32,8 @@ import type {
   SidebarLayoutSnapshot,
   TeamPresenceSnapshot,
   UpdateHostIdentityInput,
-} from "@openbot/contracts/ipc";
-import type { Logger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import type { Logger } from "@omnibot/logging";
 import type { AgentService } from "../../backend/agent-service";
 import type { BrowserHost } from "../../backend/browser-host";
 import type { MailboxStore } from "../../backend/mailbox-store";

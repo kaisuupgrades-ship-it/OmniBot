@@ -6,32 +6,32 @@ provider account, and start a new chat with the agent. Enable **Local scripts** 
 for a local Slack bridge, to report a build result, or to give an agent a task from a terminal.
 
 ```sh
-long-job; curl -sS -X POST "$(cat "$OPENBOT_AUTOMATION/url")/v1/agents/<agentId>/routines/<routineId>/run" \
-  -H @"$OPENBOT_AUTOMATION/headers" \
+long-job; curl -sS -X POST "$(cat "$OMNIBOT_AUTOMATION/url")/v1/agents/<agentId>/routines/<routineId>/run" \
+  -H @"$OMNIBOT_AUTOMATION/headers" \
   -H 'Content-Type: application/json' \
   -d '{"payload":"long-job ended with code 0"}'
 ```
 
-`$OPENBOT_AUTOMATION` is not set by OmniBot. It stands for the folder below.
+`$OMNIBOT_AUTOMATION` is not set by OmniBot. It stands for the folder below.
 
 ## Command line
 
-`openbot-cli` uses this API, so you do not write the requests yourself. It needs Node 18 or later.
+`omnibot-cli` uses this API, so you do not write the requests yourself. It needs Node 18 or later.
 OmniBot puts it in its resources folder:
 
-- macOS: `/Applications/OmniBot.app/Contents/Resources/cli/openbot-cli.mjs`
-- Linux: `resources/cli/openbot-cli.mjs` in the install folder (for an AppImage, copy it out of the image)
-- Windows: `%LOCALAPPDATA%\Programs\OmniBot\resources\cli\openbot-cli.mjs`
+- macOS: `/Applications/OmniBot.app/Contents/Resources/cli/omnibot-cli.mjs`
+- Linux: `resources/cli/omnibot-cli.mjs` in the install folder (for an AppImage, copy it out of the image)
+- Windows: `%LOCALAPPDATA%\Programs\OmniBot\resources\cli\omnibot-cli.mjs`
 
 ```sh
-alias openbot-cli='node "/Applications/OmniBot.app/Contents/Resources/cli/openbot-cli.mjs"'
-openbot-cli list                                    # the agents with Local scripts on
-openbot-cli run "Ada" "Run the tests and tell me what failed" --wait
-openbot-cli run "Ada" - --wait --json < task.md     # the task from standard input, one JSON answer
-openbot-cli status "Ada" <deliveryId>               # a delivery that an earlier run left
-openbot-cli agent set-account "Ada" <accountId>     # or "default" for the provider's own sign-in
-openbot-cli agent set-model "Ada" claude-opus-5-5 --effort high
-openbot-cli agent new-chat "Ada"                    # the agent forgets the chat; its setup stays
+alias omnibot-cli='node "/Applications/OmniBot.app/Contents/Resources/cli/omnibot-cli.mjs"'
+omnibot-cli list                                    # the agents with Local scripts on
+omnibot-cli run "Ada" "Run the tests and tell me what failed" --wait
+omnibot-cli run "Ada" - --wait --json < task.md     # the task from standard input, one JSON answer
+omnibot-cli status "Ada" <deliveryId>               # a delivery that an earlier run left
+omnibot-cli agent set-account "Ada" <accountId>     # or "default" for the provider's own sign-in
+omnibot-cli agent set-model "Ada" claude-opus-5-5 --effort high
+omnibot-cli agent new-chat "Ada"                    # the agent forgets the chat; its setup stays
 ```
 
 `<agent>` is an agent ID or a name; case is ignored. Without `--wait`, `run` returns when the
@@ -51,7 +51,7 @@ With `--json`, the output is one JSON object, also for a failure (`{ "ok": false
 
 The command reads the files below each time and sends the token only in a request header. When
 OmniBot restarts during a wait, the command reads the new files and continues the wait.
-Set `OPENBOT_AUTOMATION_DIR` to use another folder, for example the one of a development profile.
+Set `OMNIBOT_AUTOMATION_DIR` to use another folder, for example the one of a development profile.
 
 ## Turn it on
 
@@ -116,7 +116,7 @@ heading `--- event from a local script ---`, with a line that tells the agent to
 not as instructions. The run history keeps it, so a run that a restart
 interrupts sends it again.
 
-An agent can stop a request and wait for an event: it opens a wait with `openbot.await_event` and
+An agent can stop a request and wait for an event: it opens a wait with `omnibot.await_event` and
 gives the user its wait ID. A run without `waitId` wakes every open wait of the agent that has no
 routine or has this routine. A run with `waitId` wakes only that wait. When no such wait is open,
 the run starts without a wait. The run's input repeats the request and the agent's note, so the

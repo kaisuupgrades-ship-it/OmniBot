@@ -1,4 +1,4 @@
-import { sourceText } from "@openbot/i18n/source";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Semaphore } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { CodexMcpServer } from "../mcp-provider-shapes";
@@ -7,7 +7,7 @@ import { ProviderClientOperationError } from "../provider-client-effects";
 
 // Agents share the Codex user file. Serialize registration so their first turns do not race.
 const registrationLock = Semaphore.makeUnsafe(1);
-const placeholderCommand = "openbot-mcp";
+const placeholderCommand = "omnibot-mcp";
 const placeholderUrl = "http://127.0.0.1:1";
 
 /** Codex can save tool approvals only for servers present in a file-backed config layer. */

@@ -7,7 +7,7 @@ import type {
   MobileConnectedDevice,
   NotificationOpenedEvent,
   UpdateStatus,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { describe, expect, it } from "vitest";
 import {
   decodeAccountSessions,

@@ -1,5 +1,5 @@
-import { type InviteLinkPayload, isCanonicalInviteUrl, parseInviteUrl } from "@openbot/contracts/invite-links";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+import { type InviteLinkPayload, isCanonicalInviteUrl, parseInviteUrl } from "@omnibot/contracts/invite-links";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import {
   AuthOperationError,

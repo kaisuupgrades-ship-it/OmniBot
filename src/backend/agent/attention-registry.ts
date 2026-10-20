@@ -13,9 +13,9 @@ import type {
   RespondToBrowserSecretInput,
   RespondToBrowserTakeoverInput,
   RespondToPromptInput,
-} from "@openbot/contracts/ipc";
-import { AGENT_RUNTIME_ATTENTION_LIMIT, COMPUTER_USE_MCP_SERVER_NAME } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { AGENT_RUNTIME_ATTENTION_LIMIT, COMPUTER_USE_MCP_SERVER_NAME } from "@omnibot/contracts/ipc";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
 import {
   type ConversationUiBlock,
   normalizeConversationUiBlock,
@@ -32,9 +32,9 @@ import {
   uiBlockOutcomeText,
   uiBlockResponseFromAnswers,
   validateUiBlockResponse,
-} from "@openbot/contracts/ui-blocks";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, redactText, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ui-blocks";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, redactText, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Result, Schema } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { BrowserOperationError } from "../browser-effects";
@@ -125,7 +125,7 @@ interface PendingApproval {
 
 type ToolApprovalDecision = "accept" | "decline" | "cancel";
 
-const TOOL_APPROVAL_METHOD = "openbot/tool-approval";
+const TOOL_APPROVAL_METHOD = "omnibot/tool-approval";
 /** The agent reads this, not the user: it says how to ask in a Slack, Discord or Telegram turn. */
 const MESSAGING_QUESTION_REFUSED =
   "This conversation is in Slack, Discord or Telegram, where nobody can answer a question card. Ask the question in your answer: the person replies in the conversation.";

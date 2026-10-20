@@ -3,8 +3,8 @@ import {
   type ChannelMessage,
   type ChannelTask,
   channelRoutingConversationEvent,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Context, Effect, Layer } from "effect";
 import { REASONING_ID } from "./agent/handoff-tool-steps";
 import { type ChannelOperationError, channelFailure, channelSync } from "./channel-effects";
@@ -69,7 +69,7 @@ class ChannelHistoryDependencies extends Context.Service<
     generate: ChannelTextModel;
     memories: ChannelMemoryStore;
   }
->()("openbot/ChannelHistory/Dependencies") {}
+>()("omnibot/ChannelHistory/Dependencies") {}
 export class ChannelHistory {
   readonly #layer: Layer.Layer<ChannelHistoryDependencies>;
 

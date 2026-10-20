@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/solid-router";
 import { For } from "solid-js";
-import { type Comparison, comparisonScore, OPENBOT_PLANS } from "../../content/compare/comparison";
+import { type Comparison, comparisonScore, OMNIBOT_PLANS } from "../../content/compare/comparison";
 import { type CollectionArticle, type ContentCollection, formatArticleDate } from "../../lib/content-collection";
 import { ArticleGradient } from "../content/ArticleGradient";
 import { DataArticleFrame } from "../content/DataArticleFrame";
@@ -35,9 +35,9 @@ export interface ComparisonPageProps {
 // in words as well as with a mark, and the summary over the table counts it.
 export function ComparisonPage(props: ComparisonPageProps) {
   const rival = () => props.comparison.rival;
-  const openbot: SideProps = { side: "openbot", name: "OmniBot" };
+  const omnibot: SideProps = { side: "omnibot", name: "OmniBot" };
   const rivalSide = (): SideProps => ({ side: "rival", name: rival().name, mark: rival().mark });
-  const score = () => comparisonScore(props.comparison.rows, ["openbot", "rival"]);
+  const score = () => comparisonScore(props.comparison.rows, ["omnibot", "rival"]);
   const topics = () => props.comparison.rows.length;
 
   return (
@@ -64,14 +64,14 @@ export function ComparisonPage(props: ComparisonPageProps) {
             mode="live"
             class="compare-stage-art"
           />
-          <CompareMarks sides={[openbot, rivalSide()]} />
+          <CompareMarks sides={[omnibot, rivalSide()]} />
         </div>
       </header>
 
       <RevealSection class="compare-answer" titleId="compare-answer-title" title="The short answer">
         <p class="compare-answer-text">{props.comparison.answer}</p>
         <div class="compare-pair">
-          <ChoiceCard {...openbot} points={props.comparison.chooseOmniBot} recommended />
+          <ChoiceCard {...omnibot} points={props.comparison.chooseOmniBot} recommended />
           <ChoiceCard {...rivalSide()} points={props.comparison.chooseRival} />
         </div>
       </RevealSection>
@@ -83,7 +83,7 @@ export function ComparisonPage(props: ComparisonPageProps) {
           agent the one that fits its job.
         </p>
         <ul class="compare-plans-grid">
-          <For each={OPENBOT_PLANS}>{(plan, index) => <PlanCard plan={plan} index={index()} />}</For>
+          <For each={OMNIBOT_PLANS}>{(plan, index) => <PlanCard plan={plan} index={index()} />}</For>
         </ul>
         <p class="compare-plans-rival">
           <RivalMark name={rival().mark} class="compare-plans-rival-logo compare-mark-rival" />
@@ -107,7 +107,7 @@ export function ComparisonPage(props: ComparisonPageProps) {
                 <th scope="col">
                   <span class="landing-visually-hidden">Topic</span>
                 </th>
-                <For each={[openbot, rivalSide()]}>
+                <For each={[omnibot, rivalSide()]}>
                   {(side) => (
                     <th scope="col" data-side={side.side}>
                       <span class="compare-table-brand">
@@ -129,7 +129,7 @@ export function ComparisonPage(props: ComparisonPageProps) {
                         {row.topic}
                       </span>
                     </th>
-                    <ValueCell side="openbot" better={row.better} text={row.openbot} />
+                    <ValueCell side="omnibot" better={row.better} text={row.omnibot} />
                     <ValueCell side="rival" better={row.better} text={row.rival} />
                   </tr>
                 )}
@@ -145,7 +145,7 @@ export function ComparisonPage(props: ComparisonPageProps) {
         {(section, index) => (
           <RevealSection class="compare-depth" titleId={`compare-depth-${index()}`} title={section.title}>
             <div class="compare-pair">
-              <SideCard {...openbot} text={section.openbot} better={section.better} />
+              <SideCard {...omnibot} text={section.omnibot} better={section.better} />
               <SideCard {...rivalSide()} text={section.rival} better={section.better} />
             </div>
           </RevealSection>

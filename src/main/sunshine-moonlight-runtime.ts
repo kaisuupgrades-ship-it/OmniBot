@@ -13,8 +13,8 @@ import type {
   RemoteDesktopIceServer,
   RemoteDesktopSetupStatus,
   RemoteDesktopTestStatus,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect, Result, Schema } from "effect";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { agentDisplayEnvironment } from "./agent-display";
@@ -355,7 +355,7 @@ export class SunshineMoonlightRuntime {
   #moonlight: ChildProcess | null = null;
   #iceServer: Server | null = null;
   #iceToken = "";
-  readonly #pairingName = `openbot-remote-${randomBytes(16).toString("hex")}`;
+  readonly #pairingName = `omnibot-remote-${randomBytes(16).toString("hex")}`;
   #state: SunshineMoonlightRuntimeState | null = null;
   #screenCaptureDenied = false;
   readonly #moonlightHeader = `X-OmniBot-Remote-${randomBytes(32).toString("hex")}`;
@@ -693,7 +693,7 @@ export class SunshineMoonlightRuntime {
         ice_servers: [],
         ice_server_script: join(
           this.#options.stateDirectory,
-          this.#options.platform === "win32" ? "openbot-ice-helper.cmd" : "openbot-ice-helper.sh",
+          this.#options.platform === "win32" ? "omnibot-ice-helper.cmd" : "omnibot-ice-helper.sh",
         ),
         port_range: { min: webRtcRange.min, max: webRtcRange.max },
         nat_1to1: null,
@@ -732,12 +732,12 @@ export class SunshineMoonlightRuntime {
   ): Effect.fn.Return<void, RemoteDesktopOperationError> {
     const path = join(
       this.#options.stateDirectory,
-      this.#options.platform === "win32" ? "openbot-ice-helper.cmd" : "openbot-ice-helper.sh",
+      this.#options.platform === "win32" ? "omnibot-ice-helper.cmd" : "omnibot-ice-helper.sh",
     );
     const contents =
       this.#options.platform === "win32"
-        ? "@powershell.exe -NoProfile -NonInteractive -Command \"Invoke-RestMethod -Headers @{Authorization=('Bearer ' + $env:OPENBOT_ICE_HELPER_TOKEN)} -Uri $env:OPENBOT_ICE_HELPER_URL | ConvertTo-Json -Compress\"\r\n"
-        : `#!/bin/sh\nprintf 'header = "Authorization: Bearer %s"\\nurl = "%s"\\n' "$OPENBOT_ICE_HELPER_TOKEN" "$OPENBOT_ICE_HELPER_URL" | /usr/bin/curl --fail --silent --show-error --config -\n`;
+        ? "@powershell.exe -NoProfile -NonInteractive -Command \"Invoke-RestMethod -Headers @{Authorization=('Bearer ' + $env:OMNIBOT_ICE_HELPER_TOKEN)} -Uri $env:OMNIBOT_ICE_HELPER_URL | ConvertTo-Json -Compress\"\r\n"
+        : `#!/bin/sh\nprintf 'header = "Authorization: Bearer %s"\\nurl = "%s"\\n' "$OMNIBOT_ICE_HELPER_TOKEN" "$OMNIBOT_ICE_HELPER_URL" | /usr/bin/curl --fail --silent --show-error --config -\n`;
     yield* desktopCall(() => writeFile(path, contents, { mode: 0o700 }));
     if (this.#options.platform !== "win32") yield* desktopCall(() => chmod(path, 0o700));
   });
@@ -825,8 +825,8 @@ export class SunshineMoonlightRuntime {
         cwd: dirname(this.#options.paths.moonlightWebServer),
         env: {
           ...process.env,
-          OPENBOT_ICE_HELPER_URL: iceEndpoint,
-          OPENBOT_ICE_HELPER_TOKEN: this.#iceToken,
+          OMNIBOT_ICE_HELPER_URL: iceEndpoint,
+          OMNIBOT_ICE_HELPER_TOKEN: this.#iceToken,
         },
         stdio: ["ignore", "pipe", "pipe"],
         windowsHide: true,
@@ -1435,7 +1435,7 @@ function arrayUrls(urls: string | string[]): string[] {
 }
 
 function moonlightSlotUser(slot: number): string {
-  return `openbot-remote-slot-${slot}`;
+  return `omnibot-remote-slot-${slot}`;
 }
 
 /** Pinned Sunshine http::save_user_creds / util::Hex encoding. */

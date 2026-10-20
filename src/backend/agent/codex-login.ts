@@ -1,6 +1,6 @@
-import type { ProviderCodeLoginStart } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { classifyUserError } from "@openbot/user-errors";
+import type { ProviderCodeLoginStart } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { classifyUserError } from "@omnibot/user-errors";
 import { Deferred, Effect, Result, Schema } from "effect";
 import type { AgentClient } from "./../agent-client";
 import { type CodexCliInfo, resolveCodexCli } from "./../cli";
@@ -264,7 +264,7 @@ export class CodexLoginFlow {
               .request(
                 "initialize",
                 {
-                  clientInfo: { name: "openbot", title: "OmniBot", version: "0.1.0" },
+                  clientInfo: { name: "omnibot", title: "OmniBot", version: "0.1.0" },
                   capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
                 },
                 decodeRecordResponse,

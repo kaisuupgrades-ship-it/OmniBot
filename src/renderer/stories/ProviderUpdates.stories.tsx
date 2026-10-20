@@ -1,10 +1,10 @@
-import { isManagedRuntimeProvider, type ManagedProviderId } from "@openbot/contracts/agent-providers";
-import type { AgentProviderId, ProviderRuntimeStatus } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { Button, Checkbox, Heading, Text, Toaster, toast } from "@openbot/ui";
-import type { ProviderPickerOption } from "@openbot/ui/components/ProviderPicker";
-import { ProviderPicker } from "@openbot/ui/components/ProviderPicker";
-import { type ProviderUpdate, providerUpdatesToAnnounce } from "@openbot/ui/features/provider-updates/provider-update";
+import { isManagedRuntimeProvider, type ManagedProviderId } from "@omnibot/contracts/agent-providers";
+import type { AgentProviderId, ProviderRuntimeStatus } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { Button, Checkbox, Heading, Text, Toaster, toast } from "@omnibot/ui";
+import type { ProviderPickerOption } from "@omnibot/ui/components/ProviderPicker";
+import { ProviderPicker } from "@omnibot/ui/components/ProviderPicker";
+import { type ProviderUpdate, providerUpdatesToAnnounce } from "@omnibot/ui/features/provider-updates/provider-update";
 import { createEffect, createSignal, createUniqueId, onCleanup, onSettled, Show, untrack } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {
@@ -72,7 +72,7 @@ function readyRuntimes(): Record<ManagedProviderId, ProviderRuntimeStatus> {
 /**
  * The update flow with main simulated locally, the same way `onboarding-fixture.tsx`
  * simulates a download: local signals, a `setInterval` progress tick and per-provider timer
- * cleanup. `mock-openbot.ts` still stubs `providerRuntimes` inert, and no contract carries
+ * cleanup. `mock-omnibot.ts` still stubs `providerRuntimes` inert, and no contract carries
  * `availableVersion` yet, so props are the only honest source for these states today.
  */
 function ProviderUpdateFlow(props: {

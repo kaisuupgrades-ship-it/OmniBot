@@ -6,7 +6,7 @@ import { BENCHMARK_SOURCES, type RoundupComparison } from "./comparison";
 // official home or pricing page of each app. The benchmark numbers are read by hand
 // from the Artificial Analysis Coding Agent Index.
 
-const OPENBOT = "https://omnibot.example.com/source";
+const OMNIBOT = "https://omnibot.example.com/source";
 
 export const BEST_AI_AGENT_APPS: RoundupComparison = {
   kind: "roundup",
@@ -17,7 +17,7 @@ export const BEST_AI_AGENT_APPS: RoundupComparison = {
   apps: [
     {
       name: "OmniBot",
-      mark: "openbot",
+      mark: "omnibot",
       comparisons: [],
       bestFor: "A team of agents on your own computer, with the AI plans you already pay for.",
       runsOn: "Your computer. Apps for macOS, Windows, Linux, iPhone and Android.",
@@ -246,8 +246,8 @@ export const BEST_AI_AGENT_APPS: RoundupComparison = {
     { label: "Grok Bot overview", url: "https://docs.x.ai/grok-bot/overview" },
     { label: "Meta: Introducing Muse", url: "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" },
     { label: "Muse subscription plans", url: "https://www.meta.com/help/subscriptions/1021145227643680/" },
-    { label: "OmniBot privacy notes", url: `${OPENBOT}/blob/main/PRIVACY.md` },
-    { label: "OmniBot source code", url: OPENBOT },
+    { label: "OmniBot privacy notes", url: `${OMNIBOT}/blob/main/PRIVACY.md` },
+    { label: "OmniBot source code", url: OMNIBOT },
     ...BENCHMARK_SOURCES,
   ],
   checkedAt: "2026-10-03",

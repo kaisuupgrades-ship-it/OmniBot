@@ -1,13 +1,13 @@
 // Exercises an existing local dev app. Opens and closes the Marketplace page; installs nothing.
-// Writes .openbot-build/marketplace-page-e2e/report.json and marketplace.png.
+// Writes .omnibot-build/marketplace-page-e2e/report.json and marketplace.png.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { readDevInstanceRecords } from "./dev-automation/instance-registry";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/marketplace-page-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/marketplace-page-e2e");
 const instances = readDevInstanceRecords().filter(
   (record) => record.service === "app" && resolve(record.projectRoot) === resolve(process.cwd()),
 );

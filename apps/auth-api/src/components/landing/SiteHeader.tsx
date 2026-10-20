@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
+import { AppLogo } from "@omnibot/brand";
 import { Link } from "@tanstack/solid-router";
-import { EXTERNAL_LINK_REL, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, OMNIBOT_LINKS } from "../../lib/landing-links";
 import { Button, ButtonLink } from "../ui/button";
 import { SiteMobileMenu } from "./SiteMobileMenu";
 import { SiteNavigationMenu } from "./SiteNavigationMenu";
@@ -20,7 +20,7 @@ export function SiteHeader(props: SiteHeaderProps) {
   const actions = () => (
     <>
       <Button
-        href={OPENBOT_LINKS.discord}
+        href={OMNIBOT_LINKS.discord}
         target="_blank"
         rel={EXTERNAL_LINK_REL}
         variant="secondary"
@@ -43,7 +43,7 @@ export function SiteHeader(props: SiteHeaderProps) {
         App
       </ButtonLink>
       {props.page === "landing" ? (
-        <Button href={OPENBOT_LINKS.download} variant="primary" size="sm" icon="download">
+        <Button href={OMNIBOT_LINKS.download} variant="primary" size="sm" icon="download">
           Download
         </Button>
       ) : (

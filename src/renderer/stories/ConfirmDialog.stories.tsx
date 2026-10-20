@@ -1,4 +1,4 @@
-import { Button, ConfirmDialog, type ConfirmDialogProps, Heading, UserAvatar } from "@openbot/ui";
+import { Button, ConfirmDialog, type ConfirmDialogProps, Heading, UserAvatar } from "@omnibot/ui";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

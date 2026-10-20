@@ -1,7 +1,7 @@
-import type { AgentImportResult } from "@openbot/contracts/ipc";
-import { Blocks, Download, HardDrive, Monitor, Settings, Tabs, UsersRound } from "@openbot/ui";
-import { AgentImportView } from "@openbot/ui/features/import/AgentImportView";
-import { SettingsDialogShell } from "@openbot/ui/features/settings/SettingsDialogShell";
+import type { AgentImportResult } from "@omnibot/contracts/ipc";
+import { Blocks, Download, HardDrive, Monitor, Settings, Tabs, UsersRound } from "@omnibot/ui";
+import { AgentImportView } from "@omnibot/ui/features/import/AgentImportView";
+import { SettingsDialogShell } from "@omnibot/ui/features/settings/SettingsDialogShell";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

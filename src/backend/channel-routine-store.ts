@@ -4,8 +4,8 @@ import type {
   ChannelRoutineRunStatus,
   CreateChannelRoutineInput,
   UpdateChannelRoutineInput,
-} from "@openbot/contracts/ipc";
-import type { OmniBotDatabase } from "./openbot-database";
+} from "@omnibot/contracts/ipc";
+import type { OmniBotDatabase } from "./omnibot-database";
 import {
   type DueRoutine,
   type OwnedRoutine,

@@ -1,10 +1,10 @@
-import { isAgentTaskActive } from "@openbot/team-client/agent-tasks";
-import { ConversationHeader as SharedConversationHeader } from "@openbot/ui/features/conversation/ConversationHeader";
+import { isAgentTaskActive } from "@omnibot/team-client/agent-tasks";
+import { ConversationHeader as SharedConversationHeader } from "@omnibot/ui/features/conversation/ConversationHeader";
 import { useConversationViewScope } from "./conversation-scope";
 
 const loadAgentSettingsPanel = () => import("./AgentSettingsPanel");
 
-import { useText } from "@openbot/ui/text";
+import { useText } from "@omnibot/ui/text";
 
 /** @internal Stable HMR boundary for conversation header. */
 export function ConversationHeader() {

@@ -2,14 +2,14 @@ import { randomUUID } from "node:crypto";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { AgentSummary, ConversationMessage } from "@openbot/contracts/ipc";
+import type { AgentSummary, ConversationMessage } from "@omnibot/contracts/ipc";
 import type { AgentClient, AgentProvider } from "../src/backend/agent-client";
 import { CodexAppServerClient } from "../src/backend/app-server-client";
 import { ClaudeAgentClient } from "../src/backend/claude-client";
 import { type GrokCliInfo, resolveClaudeCli, resolveCodexCli, resolveGrokCli } from "../src/backend/cli";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { GrokAgentClient } from "../src/backend/grok-client";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import {
   decodeAccountReadResult,
   decodeModelListResponse,
@@ -20,8 +20,8 @@ import {
   getString,
 } from "../src/backend/protocol";
 
-const EXPECTED = "OPENBOT_SQLITE_SMOKE_OK";
-const root = await mkdtemp(join(tmpdir(), "openbot-provider-storage-smoke-"));
+const EXPECTED = "OMNIBOT_SQLITE_SMOKE_OK";
+const root = await mkdtemp(join(tmpdir(), "omnibot-provider-storage-smoke-"));
 
 try {
   const database = new OmniBotDatabase(join(root, "user-data"));
@@ -82,7 +82,7 @@ async function runProvider(
   model: AgentSummary["model"],
 ): Promise<void> {
   const agentId = `smoke-${provider}`;
-  const threadId = `openbot-thread-${agentId}`;
+  const threadId = `omnibot-thread-${agentId}`;
   const workspace = join(root, "workspace", provider);
   await mkdir(workspace, { recursive: true, mode: 0o700 });
   const agent: AgentSummary = {
@@ -152,7 +152,7 @@ async function runProvider(
       client.request(
         "initialize",
         {
-          clientInfo: { name: "openbot-storage-smoke", version: "1.0.0" },
+          clientInfo: { name: "omnibot-storage-smoke", version: "1.0.0" },
           capabilities: { experimentalApi: true },
         },
         decodeRecordResponse,

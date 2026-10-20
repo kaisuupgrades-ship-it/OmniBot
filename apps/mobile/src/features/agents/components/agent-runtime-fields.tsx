@@ -4,8 +4,8 @@ import {
   agentProviderName,
   type ProviderAccountStatus,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@omnibot/contracts/ipc";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { useQuery } from "@tanstack/react-query";
 import { Button, Typography } from "heroui-native";
 import { useUniwind } from "uniwind";

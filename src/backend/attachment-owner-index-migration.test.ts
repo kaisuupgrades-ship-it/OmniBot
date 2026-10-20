@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: an upgrade loses or changes an attachment; a partial migration survives a failure; a retry
 // fails on the index that the failed run left; a newer or incomplete history is changed.
@@ -26,9 +26,9 @@ function seedAttachments(db: DatabaseSync): void {
   db.exec(`INSERT INTO projection_attachments
       (attachment_id, owner_kind, owner_id, name, path, metadata_json, created_at, last_event_sequence)
     VALUES
-      ('openbot-thread-chief:message-1:file-1', 'thread-message', 'openbot-thread-chief:message-1', 'notes.md', '',
+      ('omnibot-thread-chief:message-1:file-1', 'thread-message', 'omnibot-thread-chief:message-1', 'notes.md', '',
         '{"id":"file-1","name":"notes.md"}', '2026-10-01T10:00:00.000Z', 3),
-      ('openbot-thread-chief:message-2:file-2', 'thread-message', 'openbot-thread-chief:message-2', 'plot.png', '',
+      ('omnibot-thread-chief:message-2:file-2', 'thread-message', 'omnibot-thread-chief:message-2', 'plot.png', '',
         '{"id":"file-2","name":"plot.png"}', '2026-10-01T10:01:00.000Z', 4),
       ('draft-1', 'draft', 'agent-chief', 'draft.txt', '/drafts/draft.txt',
         '{"id":"draft-1"}', '2026-10-01T10:02:00.000Z', 5),

@@ -1,7 +1,7 @@
-import type { ChannelCommand, ChannelPage, ChannelSummary } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import type { AgentProfile } from "@openbot/ui/data";
-import { currentText } from "@openbot/ui/text";
+import type { ChannelCommand, ChannelPage, ChannelSummary } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createStore, flush, onSettled, reconcile, untrack } from "solid-js";
 import { mergeChannelPage } from "./channel-page-merge";
 

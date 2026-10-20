@@ -1,7 +1,7 @@
 // The installation tokens of the OmniBot GitHub App that the OmniBot API gives this computer, so
 // that GitHub shows an agent's work as the app and not as the signed-in user.
 
-import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@omnibot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { GitHubFetch } from "./github-device-flow";

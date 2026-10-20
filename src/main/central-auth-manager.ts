@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
 import { chmod, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
-import { parseHostedServerClaim } from "@openbot/contracts/hosted-servers";
+import { parseHostedServerClaim } from "@omnibot/contracts/hosted-servers";
 import type {
   AvatarImageInput,
   CentralAuthIssue,
@@ -11,30 +11,30 @@ import type {
   MobileConnectedDevice,
   MobileConnectLink,
   MobileConnectTicket,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
-import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
+} from "@omnibot/contracts/ipc";
+import { decodeRecord, requiredString } from "@omnibot/contracts/ipc-decoding";
+import type { LiveActivityRelayPush } from "@omnibot/contracts/live-activity-relay";
 import {
   createMobileConnectUrl,
   isMobileConnectHostBinding,
   type MobileConnectHostBinding,
-} from "@openbot/contracts/mobile-connect";
+} from "@omnibot/contracts/mobile-connect";
 import {
   decodeRemoteSession,
   decodeRemoteSessionTicket,
   type RemoteSession,
   type RemoteSessionTicket,
-} from "@openbot/contracts/remote-control-plane";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { TELEGRAM_LINK_CODE_PATTERN } from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@omnibot/contracts/remote-control-plane";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { TELEGRAM_LINK_CODE_PATTERN } from "@omnibot/contracts/signal-protocol/telegram-route";
 import {
   REMOTE_TICKET_AUDIENCE,
   type RemoteMemberRole,
   type RemoteTicketClaims,
-} from "@openbot/contracts/signal-protocol/ticket";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
-import { referenceFrom, safeReference } from "@openbot/user-errors";
+} from "@omnibot/contracts/signal-protocol/ticket";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
+import { referenceFrom, safeReference } from "@omnibot/user-errors";
 import { Deferred, Effect, type Layer, Result, Schema, Semaphore } from "effect";
 import { createLocalJWKSet, jwtVerify } from "jose";
 import { z } from "zod";
@@ -140,7 +140,7 @@ const remoteTicketJwksSchema = z.object({
 });
 
 // The account API answers the same shape for a host credential and for a member session, so both
-// paths below decode it with the one function in `@openbot/contracts/remote-control-plane`.
+// paths below decode it with the one function in `@omnibot/contracts/remote-control-plane`.
 export type RemoteConnectionBootstrap = RemoteSessionTicket;
 
 // The claims this host reads off a client's ticket, derived from the contract the account API mints
@@ -1890,7 +1890,7 @@ export function readCentralAuthApiUrl(value: string | undefined, fallback = "htt
   const url = new URL(value ?? fallback);
   const loopback = url.hostname === "127.0.0.1" || url.hostname === "localhost";
   if ((url.protocol !== "https:" && !(url.protocol === "http:" && loopback)) || url.pathname !== "/") {
-    throw new Error("OPENBOT_AUTH_API_URL must be HTTPS or an HTTP loopback origin.");
+    throw new Error("OMNIBOT_AUTH_API_URL must be HTTPS or an HTTP loopback origin.");
   }
   return url.origin;
 }

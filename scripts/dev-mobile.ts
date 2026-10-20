@@ -8,14 +8,14 @@ import { connect } from "node:net";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-import { parseMobileConnectUrl } from "@openbot/contracts/mobile-connect";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
+import { parseMobileConnectUrl } from "@omnibot/contracts/mobile-connect";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { connectToDevApp } from "./dev-automation/cdp-client";
 import { type DevInstanceRecord, readDevInstanceRecords, selectDevInstance } from "./dev-automation/instance-registry";
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const MOBILE_BUNDLE_ID = "run.openbot.mobile";
+const MOBILE_BUNDLE_ID = "run.omnibot.mobile";
 const DEFAULT_METRO_PORT = 8081;
 const DESKTOP_TIMEOUT_MS = 5 * 60_000;
 // The first native build takes minutes.
@@ -185,7 +185,7 @@ async function createPairingLink(desktop: DevInstanceRecord): Promise<string> {
   // The desktop publishes its host on the first request, which can fail while
   // the dev account signs in or the Signal service starts.
   return waitFor("a Mobile Connect ticket from the desktop", TICKET_TIMEOUT_MS, async () => {
-    return evaluateInDesktop(desktop, "window.openbot.auth.createMobileConnect()", readPairingLink);
+    return evaluateInDesktop(desktop, "window.omnibot.auth.createMobileConnect()", readPairingLink);
   });
 }
 
@@ -223,7 +223,7 @@ async function pairSimulator(desktop: DevInstanceRecord, simulator: string): Pro
     }
     try {
       await waitFor("the simulator to redeem the ticket", PAIRING_CONFIRM_MS, async () =>
-        (await evaluateInDesktop(desktop, "window.openbot.auth.listMobileConnectedDevices()", (devices) =>
+        (await evaluateInDesktop(desktop, "window.omnibot.auth.listMobileConnectedDevices()", (devices) =>
           hasNewIosDevice(devices, sentAt),
         ))
           ? true

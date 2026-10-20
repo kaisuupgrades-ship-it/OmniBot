@@ -6,9 +6,9 @@
  * the stage behind it reports it - so the story shows the hand-off as well as the dialog.
  */
 
-import type { McpServerConfig, McpTestResult } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { McpSignInDialog } from "@openbot/ui/features/settings/McpSignInDialog";
+import type { McpServerConfig, McpTestResult } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { McpSignInDialog } from "@omnibot/ui/features/settings/McpSignInDialog";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {
   CONNECT_GLOBALS,

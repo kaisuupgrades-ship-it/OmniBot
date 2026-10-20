@@ -1,6 +1,6 @@
-import { Button } from "@openbot/ui";
-import { WhatsNewDialog } from "@openbot/ui/features/updates/WhatsNewDialog";
-import type { WhatsNewNotes, WhatsNewRelease } from "@openbot/ui/features/updates/whats-new";
+import { Button } from "@omnibot/ui";
+import { WhatsNewDialog } from "@omnibot/ui/features/updates/WhatsNewDialog";
+import type { WhatsNewNotes, WhatsNewRelease } from "@omnibot/ui/features/updates/whats-new";
 import { createSignal, Show } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

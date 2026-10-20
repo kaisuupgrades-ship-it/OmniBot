@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { AgentContextCategoryUsage, AgentContextState } from "@openbot/contracts/ipc";
+import type { AgentContextCategoryUsage, AgentContextState } from "@omnibot/contracts/ipc";
 import { Effect, Schema } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";

@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What provider state reaches in main: connecting, signing in and refreshing providers, and the
@@ -22,7 +22,7 @@ export interface ProvidersPort {
   providerAdmin: OmniBotDesktopApi["providerAdmin"];
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function providersPort(): ProvidersPort {
-  return window.openbot;
+  return window.omnibot;
 }

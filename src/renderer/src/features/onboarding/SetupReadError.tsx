@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { Button, ErrorReference } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@omnibot/brand";
+import { Button, ErrorReference } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { usePlatform } from "../../platform";
 import { useSetup } from "./onboarding-context";
 

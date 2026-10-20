@@ -476,7 +476,7 @@ export const messages = defineMessages("server", {
   "server.update.path.hosted":
     "The hosted service downloads updates in the background. A downloaded update starts when the server next starts. Wait for active work to finish before you stop and resume the server. If it stays on an old version, contact the host administrator.",
   "server.update.path.system":
-    "On the host, run sudo openbot update to install the latest release. This command stops OmniBot. Wait for active work to finish first. Automatic downloads install at the next boot.",
+    "On the host, run sudo omnibot update to install the latest release. This command stops OmniBot. Wait for active work to finish first. Automatic downloads install at the next boot.",
   "server.update.path.container":
     "On the Docker host, pull the new OmniBot image and create the container again with the same data volumes. Wait for active work to finish first. Keep the existing volumes to preserve your data.",
   "server.update.path.manual":

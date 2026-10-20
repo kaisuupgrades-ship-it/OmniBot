@@ -1,10 +1,10 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentMemorySelectionState, MemoryEntry, SetAgentMemoryInclusionInput } from "@openbot/contracts/ipc";
-import type { AppFormat, AppMessages, AppTextKey } from "@openbot/i18n";
-import { Button, ConfirmDialog, Dialog, IconButton, Plus, Textarea, Trash2, toast, X } from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { AGENT_DELETE_UNDO_MS } from "@openbot/ui/features/agents/AgentDeleteUndoToast";
-import { useText } from "@openbot/ui/text";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentMemorySelectionState, MemoryEntry, SetAgentMemoryInclusionInput } from "@omnibot/contracts/ipc";
+import type { AppFormat, AppMessages, AppTextKey } from "@omnibot/i18n";
+import { Button, ConfirmDialog, Dialog, IconButton, Plus, Textarea, Trash2, toast, X } from "@omnibot/ui";
+import { createScrollFades } from "@omnibot/ui/components/createScrollFades";
+import { AGENT_DELETE_UNDO_MS } from "@omnibot/ui/features/agents/AgentDeleteUndoToast";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { desktopAnalytics } from "../../analytics";

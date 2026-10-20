@@ -16,7 +16,7 @@ afterEach(async () => {
 
 /** Pipes chunks through one process stream into the log, as the runtimes do, and reads the file. */
 async function logOf(chunks: Array<string | Buffer>): Promise<string> {
-  const root = await mkdtemp(join(tmpdir(), "openbot-remote-diagnostics-"));
+  const root = await mkdtemp(join(tmpdir(), "omnibot-remote-diagnostics-"));
   roots.push(root);
   const stream = new PassThrough();
   const writes: Promise<void>[] = [];

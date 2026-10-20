@@ -1,7 +1,7 @@
 /**
  * The X display the agents work on, when it is not the display OmniBot shows its windows on.
  *
- * The server scripts name it in `OPENBOT_AGENT_DISPLAY`: the boat desktop on a hosted server, else a
+ * The server scripts name it in `OMNIBOT_AGENT_DISPLAY`: the boat desktop on a hosted server, else a
  * second virtual display. OmniBot keeps its own `DISPLAY`, because its built-in browser draws its
  * tabs in the OmniBot window. The Computer Use driver, remote desktop and the agent processes get
  * the agent display, so an agent's screenshot does not show OmniBot, remote desktop shows what the
@@ -13,7 +13,7 @@ export function agentDisplayEnvironment(
   platform: NodeJS.Platform,
   environment: NodeJS.ProcessEnv = process.env,
 ): Readonly<Record<string, string>> {
-  const display = platform === "linux" ? environment.OPENBOT_AGENT_DISPLAY : undefined;
+  const display = platform === "linux" ? environment.OMNIBOT_AGENT_DISPLAY : undefined;
   return display ? { DISPLAY: display } : {};
 }
 

@@ -1,5 +1,5 @@
-import { NOTIFICATION_SOUNDS, type NotificationSound } from "@openbot/contracts/notification-relay";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { NOTIFICATION_SOUNDS, type NotificationSound } from "@omnibot/contracts/notification-relay";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import * as Notifications from "expo-notifications";
 import { currentText } from "@/shared/lib/text";
 
@@ -9,7 +9,7 @@ import { currentText } from "@/shared/lib/text";
  * of the sound that the host sent. Both use these ids.
  */
 export function androidChannelId(sound: NotificationSound | null): string {
-  return `openbot.sound.${sound ?? "none"}`;
+  return `omnibot.sound.${sound ?? "none"}`;
 }
 
 /**
@@ -17,15 +17,15 @@ export function androidChannelId(sound: NotificationSound | null): string {
  * the Android resources, which do not accept `-`.
  */
 const SOUND_FILES: Readonly<Record<Exclude<NotificationSound, "default">, string>> = {
-  openbot: "openbot_task.wav",
-  warm: "openbot_warm.wav",
-  mech: "openbot_mech.wav",
-  bubble: "openbot_bubble.wav",
-  press: "openbot_press.wav",
+  omnibot: "omnibot_task.wav",
+  warm: "omnibot_warm.wav",
+  mech: "omnibot_mech.wav",
+  bubble: "omnibot_bubble.wav",
+  press: "omnibot_press.wav",
 };
 
 const SOUND_LABELS = {
-  openbot: "mobile.settings.notifications.sound.openbot",
+  omnibot: "mobile.settings.notifications.sound.omnibot",
   warm: "mobile.settings.notifications.sound.warm",
   mech: "mobile.settings.notifications.sound.mech",
   bubble: "mobile.settings.notifications.sound.bubble",

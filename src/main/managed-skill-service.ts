@@ -1,25 +1,25 @@
 import { lstat, mkdir, readdir, readFile, realpath, rename, unlink, writeFile } from "node:fs/promises";
 import { dirname, join, relative, resolve, sep } from "node:path";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import type { AgentSummary, InstalledSkill } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { agentProviderDescriptor } from "@omnibot/contracts/agent-providers";
+import type { AgentSummary, InstalledSkill } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect, Result, Schema } from "effect";
 import { parse as parseYaml } from "yaml";
 import { causeHelpers } from "../backend/effect-boundary";
 import { isMissingFileError } from "../backend/file-errors";
 import { isPathInside } from "../backend/path-containment";
 
-const MANAGED_SKILL_SLUG = "openbot-site-hosting";
-export const SKILL_CREATOR_SKILL_SLUG = "openbot-skill-creator";
-export const DATA_SKILL_SLUG = "openbot-data";
+const MANAGED_SKILL_SLUG = "omnibot-site-hosting";
+export const SKILL_CREATOR_SKILL_SLUG = "omnibot-skill-creator";
+export const DATA_SKILL_SLUG = "omnibot-data";
 /** The skills OmniBot writes into every agent workspace. Add a new managed skill here too. */
 export const MANAGED_SKILL_SLUGS: ReadonlySet<string> = new Set([
   MANAGED_SKILL_SLUG,
   SKILL_CREATOR_SKILL_SLUG,
   DATA_SKILL_SLUG,
 ]);
-export const OWNERSHIP_MARKER = ".openbot-managed.json";
+export const OWNERSHIP_MARKER = ".omnibot-managed.json";
 /** The workspace skill folders OmniBot writes. Each provider reads at least one of them. */
 export const MANAGED_SKILL_FOLDERS = [".agents/skills", ".claude/skills"] as const;
 
@@ -121,7 +121,7 @@ const syncTarget = Effect.fn("ManagedSkill.syncTarget")(function* (
   content: string,
   slug: string,
 ): Effect.fn.Return<"synced" | "collision", ManagedSkillFailure> {
-  const ownershipContent = `${JSON.stringify({ managedBy: "openbot", slug, version: 1 })}\n`;
+  const ownershipContent = `${JSON.stringify({ managedBy: "omnibot", slug, version: 1 })}\n`;
   const parent = dirname(target);
   yield* ensureSafeDirectory(workspaceRoot, parent);
   const marker = join(parent, OWNERSHIP_MARKER);
@@ -256,7 +256,7 @@ export const listManagedSkillsForChat = Effect.fn("ManagedSkill.listForChat")(fu
         yield* rejectSymlink(file);
         if (
           (yield* optionalText(marker)) !==
-          `${JSON.stringify({ managedBy: "openbot", slug: entry.name, version: 1 })}\n`
+          `${JSON.stringify({ managedBy: "omnibot", slug: entry.name, version: 1 })}\n`
         )
           return;
         const content = yield* managedIO(() => readFile(file, "utf8"));

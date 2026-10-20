@@ -1,21 +1,21 @@
 import { createHash, randomBytes } from "node:crypto";
-import type { DiscordDelivery } from "@openbot/contracts/signal-protocol/discord-api";
-import { DISCORD_ROUTE_TTL_SECONDS, type DiscordRouteGuild } from "@openbot/contracts/signal-protocol/discord-route";
+import type { DiscordDelivery } from "@omnibot/contracts/signal-protocol/discord-api";
+import { DISCORD_ROUTE_TTL_SECONDS, type DiscordRouteGuild } from "@omnibot/contracts/signal-protocol/discord-route";
 import {
   INGRESS_QUEUE_CAPABILITY,
   type IngressRoute,
   isIngressQueueKey,
   type QueuedSignalMessage,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
-import { SLACK_ROUTE_TTL_SECONDS, type SlackRouteTeam } from "@openbot/contracts/signal-protocol/slack-route";
+} from "@omnibot/contracts/signal-protocol/ingress-queue";
+import { SLACK_ROUTE_TTL_SECONDS, type SlackRouteTeam } from "@omnibot/contracts/signal-protocol/slack-route";
 import {
   TELEGRAM_CAPABILITY,
   TELEGRAM_ROUTE_TTL_SECONDS,
   type TelegramCallResult,
   type TelegramRouteChat,
   telegramRouteChatKey,
-} from "@openbot/contracts/signal-protocol/telegram-route";
-import { WEBHOOK_ROUTE_TTL_SECONDS, type WebhookRoute } from "@openbot/contracts/signal-protocol/webhook-route";
+} from "@omnibot/contracts/signal-protocol/telegram-route";
+import { WEBHOOK_ROUTE_TTL_SECONDS, type WebhookRoute } from "@omnibot/contracts/signal-protocol/webhook-route";
 import { Context, Effect, Fiber, Layer, Result } from "effect";
 import { IngressQueue, queueRouteKey, type RouteWaker } from "./ingress-queue";
 import {
@@ -87,7 +87,7 @@ export interface RemoteTokenProvider {
 }
 
 export class SignalTokens extends Context.Service<SignalTokens, RemoteTokenProvider>()(
-  "@openbot/remote-api/SignalTokens",
+  "@omnibot/remote-api/SignalTokens",
 ) {
   static layer(provider: RemoteTokenProvider) {
     return Layer.succeed(SignalTokens, provider);

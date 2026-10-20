@@ -14,7 +14,7 @@ if [[ ! $RELEASE_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   exit 1
 fi
 version=${RELEASE_TAG#v}
-name="openbot-server-production-${version//./-}"
+name="omnibot-server-production-${version//./-}"
 asset="OmniBot-$version-x86_64.AppImage"
 
 require_latest() {

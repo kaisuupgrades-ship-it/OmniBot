@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { ROUTINE_LIMIT_POLICIES, ROUTINE_MISSED_POLICIES } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { ROUTINE_LIMIT_POLICIES, ROUTINE_MISSED_POLICIES } from "@omnibot/contracts/ipc";
 import { z } from "zod";
 
 const ROUTINE_TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;

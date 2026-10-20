@@ -26,8 +26,8 @@ skill folders: `src/backend/process-confinement.ts` protects them as project set
 
 OmniBot writes each skill that it installs to both `.agents/skills/<slug>` and
 `.claude/skills/<slug>`, because Claude Code does not read `.agents/skills`. It copies the files and
-does not make links. `.openbot/skills-lock.json` in the workspace records the file hashes, and
-`.openbot/skills-disabled/` holds disabled skills. A bundled skill has an `.openbot-managed.json`
+does not make links. `.omnibot/skills-lock.json` in the workspace records the file hashes, and
+`.omnibot/skills-disabled/` holds disabled skills. A bundled skill has an `.omnibot-managed.json`
 marker.
 
 `src/main/skill-folder-discovery.ts` lists all other skills in the seven workspace folders as
@@ -57,11 +57,11 @@ that `checkSetup()` reads: a CLI of 2.18 or later (the user's own on `PATH`, els
 `src/main/onepassword-cli-installer.ts` downloads, with a SHA-256 pinned per target, into
 `<userData>/provider-state/1password-cli`), the 1Password app's CLI integration (`op account list`
 answers at least one account), and Connect. The service keeps only the token in
-`openbot-onepassword-connector-v1.json`, encrypted with `safeStorage`. It reads the vault with
+`omnibot-onepassword-connector-v1.json`, encrypted with `safeStorage`. It reads the vault with
 `@1password/sdk` and implements `PasswordVault` (`src/backend/password-vault.ts`). The developer
 instructions tell agents about the vault only while `PasswordVault.connected()` is true, read at
 each session start and resume, because most users have no vault. The agent service
-uses it in two places: `openbot_browser.list_logins` returns the logins saved for the tab's HTTPS
+uses it in two places: `omnibot_browser.list_logins` returns the logins saved for the tab's HTTPS
 site (id, title, username), and `AttentionRegistry` answers a `submit_secret` password or
 authenticator request for a saved login by filling it through the same `prepareSecret` path as the
 secure card, with no card. On an origin where an agent ran `evaluate` during this app session,
@@ -94,16 +94,16 @@ through the local Bitwarden IPC group. The shared panel is used in desktop Marke
 settings; remote web and mobile clients do not manage this local connection.
 
 The GitHub connector is built in and has no SQLite row. `src/main/github-connector-service.ts` signs
-in to the `openbotgit` GitHub App with the device flow, which needs only the public Client ID, and keeps
-the tokens in `openbot-github-connector-v1.json`, encrypted with `safeStorage`. While it is
-connected, `McpGateway.enabled()` adds the `openbot-github` server (`api.githubcopilot.com/mcp/`),
+in to the `omnibotgit` GitHub App with the device flow, which needs only the public Client ID, and keeps
+the tokens in `omnibot-github-connector-v1.json`, encrypted with `safeStorage`. While it is
+connected, `McpGateway.enabled()` adds the `omnibot-github` server (`api.githubcopilot.com/mcp/`),
 and `mcpAuthorization()` gives it a fresh bearer at each hand-off. An enabled server that the user added
 with the name `github` wins. For `gh` and `git`, the service writes the token to
 `<userData>/provider-state/github` (mode 0600), and each provider gets `GH_CONFIG_DIR` and a
 `GIT_CONFIG_*` credential helper that reads that file. The environment holds only paths, never the
 token. Codex gets these values through `shell_environment_policy.set` in the thread config.
 
-A user token makes GitHub show "user with OmniBotGit". To show `openbotgit[bot]`, the desktop sends
+A user token makes GitHub show "user with OmniBotGit". To show `omnibotgit[bot]`, the desktop sends
 the user token to `POST /v1/github/installation-tokens` on the account Worker
 (`apps/auth-api/src/server/github-installation-tokens.ts`). The Worker holds the app's private key
 (`GITHUB_APP_PRIVATE_KEY`, PKCS #8) and signs an app JWT. It mints one installation token for each
@@ -119,7 +119,7 @@ administer, and stores nothing. With no key it answers 503, and the desktop keep
   URL and header.
 - `gh` has one token for each host, so it acts as the user.
 
-A pull request that an agent opens with a bot token has `openbotgit[bot]` as its author, so the user
+A pull request that an agent opens with a bot token has `omnibotgit[bot]` as its author, so the user
 who asked for it can approve it. A branch rule that needs one approval then passes with no second
 person.
 

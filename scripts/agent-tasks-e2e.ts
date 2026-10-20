@@ -8,25 +8,25 @@
 // refused provider switch while a task runs, and that the task list reports the `error` field. Each
 // task turn is a real provider turn, so keep the prompts short. At the end it stops and closes the
 // tasks it started and gives the agent its task limit back.
-// Writes .openbot-build/agent-tasks-e2e/report.json.
+// Writes .omnibot-build/agent-tasks-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import type { AgentSummary, AgentTask, AgentTasksSnapshot, OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { agentProviderDescriptor } from "@omnibot/contracts/agent-providers";
+import type { AgentSummary, AgentTask, AgentTasksSnapshot, OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { readDevInstanceRecords } from "./dev-automation/instance-registry";
 
 // The page functions below run in the app window, where the preload bridge sets this.
 declare global {
   interface Window {
-    openbot: OmniBotDesktopApi;
+    omnibot: OmniBotDesktopApi;
   }
 }
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/agent-tasks-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/agent-tasks-e2e");
 const argument = (name: string) => process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(`--${name}=`.length);
 const agentArgument = argument("agent");
 assert.ok(agentArgument, "Pass --agent=<agent id> of an agent whose provider is signed in.");
@@ -71,19 +71,19 @@ const session = await connectToDevApp(instance.remoteDebuggingPort, createOmniBo
 const page = session.page;
 
 function listTasks(): Promise<AgentTasksSnapshot> {
-  return page.evaluate((id) => window.openbot.agent.listTasks(id), agentId);
+  return page.evaluate((id) => window.omnibot.agent.listTasks(id), agentId);
 }
 
 function readAgent(): Promise<AgentSummary> {
   return page.evaluate(async (id) => {
-    const agent = (await window.openbot.agent.listAgents()).find((candidate) => candidate.id === id);
+    const agent = (await window.omnibot.agent.listAgents()).find((candidate) => candidate.id === id);
     if (!agent) throw new Error(`Unknown agent: ${id}`);
     return agent;
   }, agentId);
 }
 
 function setTaskLimit(taskLimit: number | null): Promise<AgentSummary> {
-  return page.evaluate(({ id, limit }) => window.openbot.agent.updateAgent({ agentId: id, taskLimit: limit }), {
+  return page.evaluate(({ id, limit }) => window.omnibot.agent.updateAgent({ agentId: id, taskLimit: limit }), {
     id: agentId,
     limit: taskLimit,
   });
@@ -92,7 +92,7 @@ function setTaskLimit(taskLimit: number | null): Promise<AgentSummary> {
 async function startTask(text: string): Promise<AgentTask> {
   const task = await page.evaluate(
     ({ id, prompt }) =>
-      window.openbot.agent.startTask({ agentId: id, text: prompt, clientMessageId: crypto.randomUUID() }),
+      window.omnibot.agent.startTask({ agentId: id, text: prompt, clientMessageId: crypto.randomUUID() }),
     { id: agentId, prompt: text },
   );
   started.push(task.id);
@@ -158,7 +158,7 @@ try {
   // 3. A provider switch waits for the running tasks, and the error says so.
   const target = await page.evaluate(
     async ({ provider }) =>
-      (await window.openbot.agent.listModels()).find((model) => model.provider !== provider) ?? null,
+      (await window.omnibot.agent.listModels()).find((model) => model.provider !== provider) ?? null,
     { provider: before.provider },
   );
   const running = await listTasks();
@@ -166,7 +166,7 @@ try {
     const outcome = await page.evaluate(
       async ({ id, provider, model }) => {
         try {
-          await window.openbot.agent.updateAgent({ agentId: id, provider, model });
+          await window.omnibot.agent.updateAgent({ agentId: id, provider, model });
           return { refused: false, message: null };
         } catch (error) {
           return { refused: true, message: error instanceof Error ? error.message : String(error) };
@@ -178,7 +178,7 @@ try {
     if (!outcome.refused) {
       // Put the agent back before the assertion fails.
       await page.evaluate(
-        ({ id, provider, model }) => window.openbot.agent.updateAgent({ agentId: id, provider, model }),
+        ({ id, provider, model }) => window.omnibot.agent.updateAgent({ agentId: id, provider, model }),
         { id: agentId, provider: before.provider, model: before.model },
       );
     }
@@ -193,7 +193,7 @@ try {
 
   // 4. Stop ends each task's turn as interrupted.
   for (const taskId of [first.id, second.id]) {
-    await page.evaluate(({ id, task }) => window.openbot.agent.stopTask({ agentId: id, taskId: task }), {
+    await page.evaluate(({ id, task }) => window.omnibot.agent.stopTask({ agentId: id, taskId: task }), {
       id: agentId,
       task: taskId,
     });
@@ -215,7 +215,7 @@ try {
 } finally {
   for (const taskId of started) {
     await page
-      .evaluate(({ id, task }) => window.openbot.agent.stopTask({ agentId: id, taskId: task }), {
+      .evaluate(({ id, task }) => window.omnibot.agent.stopTask({ agentId: id, taskId: task }), {
         id: agentId,
         task: taskId,
       })
@@ -228,7 +228,7 @@ try {
   }
   for (const taskId of started) {
     await page
-      .evaluate(({ id, task }) => window.openbot.agent.closeTask({ agentId: id, taskId: task }), {
+      .evaluate(({ id, task }) => window.omnibot.agent.closeTask({ agentId: id, taskId: task }), {
         id: agentId,
         task: taskId,
       })

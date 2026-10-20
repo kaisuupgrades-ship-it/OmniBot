@@ -1,10 +1,10 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, relative, resolve, sep } from "node:path";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import type { Message, PluralMessage } from "@openbot/i18n";
-import { TRANSLATED_LOCALES } from "@openbot/i18n";
-import { matchingSourceKeys } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import type { Message, PluralMessage } from "@omnibot/i18n";
+import { TRANSLATED_LOCALES } from "@omnibot/i18n";
+import { matchingSourceKeys } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 
 // Checks the catalogs in packages/i18n/src/messages. See docs/i18n.md.
 //
@@ -18,7 +18,7 @@ import { createOmniBotLogger } from "@openbot/logging";
 // Reports, and does not fail on, keys that are not translated yet and translated modules whose keys
 // are not in the English order. `--fix` puts those keys in the English order; it moves each
 // key with the comments and blank lines above it and does not change the text. `--json` writes the
-// report to .openbot-build/i18n-report.json.
+// report to .omnibot-build/i18n-report.json.
 
 const ROOT = resolve(import.meta.dirname, "..");
 const MESSAGES = resolve(ROOT, "packages/i18n/src/messages");
@@ -281,7 +281,7 @@ const report = {
 };
 
 if (process.argv.includes("--json")) {
-  const path = resolve(ROOT, ".openbot-build/i18n-report.json");
+  const path = resolve(ROOT, ".omnibot-build/i18n-report.json");
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, `${JSON.stringify(report, null, 2)}\n`);
   logger.info(`Wrote ${relative(ROOT, path)}.`);

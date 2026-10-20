@@ -1,6 +1,6 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentTasksSnapshot } from "@openbot/contracts/ipc";
-import { plainTaskTitle } from "@openbot/team-client/agent-tasks";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentTasksSnapshot } from "@omnibot/contracts/ipc";
+import { plainTaskTitle } from "@omnibot/team-client/agent-tasks";
 import { useQueryClient } from "@tanstack/react-query";
 import * as Crypto from "expo-crypto";
 import { router, Stack, useLocalSearchParams, useNavigation } from "expo-router";
@@ -38,7 +38,7 @@ export function NewTaskScreen() {
   const queryScope = useQueryScope();
   const queryClient = useQueryClient();
   const navigation = useNavigation();
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--omnibot-accent"));
   const { startAgentTask } = useMobileWorkspace();
   const { agents, online, supported } = useServerTasks(serverId, { enabled: false });
   const [draft, setDraft] = useState("");

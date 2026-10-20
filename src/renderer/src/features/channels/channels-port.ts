@@ -1,5 +1,5 @@
-import type { AttachmentSummary, FilePreview, OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import type { AttachmentMediaSource } from "@openbot/ui/features/conversation/AttachmentCards";
+import type { AttachmentSummary, FilePreview, OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import type { AttachmentMediaSource } from "@omnibot/ui/features/conversation/AttachmentCards";
 import type { ChannelMemoriesApi } from "../conversation/memories-port";
 import type { EventRoutinesApi } from "../conversation/routine-webhooks-api";
 import type { ChannelRoutinesApi } from "../conversation/routines-port";
@@ -46,9 +46,9 @@ export interface ChannelsPort {
   onAttachmentImport?: OmniBotDesktopApi["agent"]["onAttachmentImport"];
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function channelsPort(): ChannelsPort {
-  const api = window.openbot;
+  const api = window.omnibot;
   return {
     agent: api.agent,
     browser: api.browser,

@@ -47,7 +47,7 @@ host does not answer in 2.5 seconds. Slack then sends the request again. For a h
 sleeps, Signal answers 200 instead (see [Sleeping hosted servers](#sleeping-hosted-servers)).
 
 An `ingress` socket names its workspaces with a Slack route ticket: an ES256 JWT with the audience
-`openbot-slack-route`, signed by the Worker with `SLACK_ROUTE_PRIVATE_JWK` (key id
+`omnibot-slack-route`, signed by the Worker with `SLACK_ROUTE_PRIVATE_JWK` (key id
 `SLACK_ROUTE_KEY_ID`) for the workspaces, each with its app, that the account service links to that
 host. Its public key
 must be in the ticket JWKS that Signal loads (`REMOTE_TICKET_PUBLIC_JWKS` on the Worker, or
@@ -85,7 +85,7 @@ A direct message to the bot gets one fixed answer, at most once an hour for each
 pass it on.
 
 An `ingress` socket names its guilds with a Discord route ticket: an ES256 JWT with the audience
-`openbot-discord-route`, signed by the Worker for the guilds that the account service links to that
+`omnibot-discord-route`, signed by the Worker for the guilds that the account service links to that
 host. Its public key must be in the ticket JWKS that Signal loads, as for the Slack route ticket. The
 account service revokes a guild link through `/internal/auth-events`. After a start, Signal asks the
 account service which links are current until every older ticket has expired.
@@ -124,7 +124,7 @@ answers 200 to each signed update, also when no host holds the chat: Telegram ho
 other updates while one fails.
 
 An `ingress` socket names its chats with a Telegram route ticket: an ES256 JWT with the audience
-`openbot-telegram-route`, signed with the key of the Slack route ticket. When `ready` names the
+`omnibot-telegram-route`, signed with the key of the Slack route ticket. When `ready` names the
 `telegram` capability, the host calls the Bot API through the socket (`telegram-call`). Signal
 accepts only the methods and parameters of `TelegramCallParams`, only for the chats routed to that
 socket, and returns only the reduced result. A host downloads a file from `/v1/telegram/files/<token>`
@@ -166,13 +166,13 @@ must terminate TLS and forward the WebSocket to `http://127.0.0.1:8081`. Also se
 `REMOTE_TRUST_PROXY=true` so the IP limits use the client address from `X-Forwarded-For`.
 
 The configuration in `nginx/signal.omnibot.example.com.conf` uses the certificate from the ACME volume. Install
-`openbot-remote-nginx-reload.path` and `openbot-remote-nginx-reload.service` into `/etc/systemd/system/` as
+`omnibot-remote-nginx-reload.path` and `omnibot-remote-nginx-reload.service` into `/etc/systemd/system/` as
 well. The unit reloads Nginx after the certificate is renewed:
 
 ```sh
-sudo cp remote/nginx/openbot-remote-nginx-reload.* /etc/systemd/system/
+sudo cp remote/nginx/omnibot-remote-nginx-reload.* /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable --now openbot-remote-nginx-reload.path
+sudo systemctl enable --now omnibot-remote-nginx-reload.path
 ```
 
 Production secrets are stored in the tracked `.env.production` file as encrypted Dotenvx values.
@@ -213,7 +213,7 @@ on the Signal server: a desktop environment does not change it.
 This also applies when the old client socket waits for its host to reconnect. Token signing finishes
 before Signal admits the new socket, so concurrent reconnects do not hold extra account slots.
 
-Production deployments keep `/opt/openbot/remote/.env.production`. A value in that file overrides
+Production deployments keep `/opt/omnibot/remote/.env.production`. A value in that file overrides
 the default, even when a release changes the repository's environment file. Check the running
 container's effective limit after a configuration change and Signal restart.
 

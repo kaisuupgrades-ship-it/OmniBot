@@ -1,26 +1,19 @@
 /**
- * Rebrands this fork. It replaces the upstream product name, link scheme, app id, domains and
- * release addresses with the values in `brand.json`, in file contents and in file names.
+ * Changes the brand values of this app. It replaces the values in `applied.json` (the ones the app
+ * uses now) with the values in `brand.json`, in file contents and in file names, then saves
+ * `brand.json` as the new `applied.json`.
  *
  *   bun scripts/omnibot/rebrand.ts            apply
  *   bun scripts/omnibot/rebrand.ts --dry-run  show what would change
  *
- * Run it again after you merge upstream changes: new upstream text gets the same replacements.
- * To change a value later (for example your real domain), edit `brand.json` and run it again. The
- * script keeps the values it applied last in `applied.json` and replaces those too.
+ * For example, to use your real domain: edit `domain` in `brand.json`, then run this script.
  *
- * It does not change:
- * - LICENSE, NOTICE and the release notes. The license requires the notices to stay.
- * - Internal identifiers that users do not see: the `@openbot/*` packages, `--openbot-*` CSS
- *   tokens, `OPENBOT_*` environment variables, `openbot-app://` and the other private schemes,
- *   and the `openbot` tool server that agents call.
- * - Upstream downloads that the build needs: the pinned remote desktop runtime and the provider
- *   runtime blocklist.
+ * It does not change LICENSE, NOTICE, the release notes or the remote desktop patches.
  */
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 
 interface Brand {
   name: string;
@@ -32,21 +25,11 @@ interface Brand {
   containerImage: string;
 }
 
-const UPSTREAM: Brand = {
-  name: "OpenBot",
-  scheme: "openbot",
-  domain: "openbot.run",
-  sitesDomain: "openbot.site",
-  updatesUrl: "https://github.com/nightly-labs/openbot/releases/latest/download",
-  repositoryUrl: "https://github.com/nightly-labs/openbot",
-  containerImage: "ghcr.io/nightly-labs/openbot",
-};
-
 const ROOT = resolve(import.meta.dirname, "../..");
 const BRAND_FILE = join(import.meta.dirname, "brand.json");
 const APPLIED_FILE = join(import.meta.dirname, "applied.json");
 
-/** Paths that keep their upstream text. */
+/** Paths that keep their text. */
 const EXCLUDED: readonly RegExp[] = [
   /^LICENSE$/u,
   /^NOTICE$/u,
@@ -72,37 +55,18 @@ interface Rule {
   to: string;
 }
 
-function stripScheme(url: string): string {
-  return url.replace(/^https?:\/\//u, "");
-}
-
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 }
 
 /** The replacements from one brand to another. The order matters: longer addresses go first. */
-function rules(from: Brand, to: Brand, upstream: boolean): Rule[] {
+function rules(from: Brand, to: Brand): Rule[] {
   const list: Rule[] = [];
   const add = (id: string, source: string | RegExp, target: string) => {
     if (typeof source === "string" && source === target) return;
     list.push({ id, from: source, to: target });
   };
-  if (upstream) {
-    // Upstream release and install addresses that are not the update feed itself.
-    add("releases", "https://github.com/nightly-labs/openbot/releases", to.updatesUrl);
-    add("releases-bare", "github.com/nightly-labs/openbot/releases", stripScheme(to.updatesUrl));
-    add(
-      "raw-scripts",
-      "https://raw.githubusercontent.com/nightly-labs/openbot/main/scripts/",
-      `${to.updatesUrl}/scripts/`,
-    );
-    add(
-      "raw-docker",
-      "https://raw.githubusercontent.com/nightly-labs/openbot/main/docker/",
-      `${to.updatesUrl}/docker/`,
-    );
-  }
-  // The update feed comes first because the upstream feed starts with the release address.
+  // The update feed comes first because other addresses can start with it.
   list.unshift(
     ...(from.updatesUrl === to.updatesUrl ? [] : [{ id: "updates", from: from.updatesUrl, to: to.updatesUrl }]),
   );
@@ -173,8 +137,6 @@ function readBrand(file: string): Brand {
     if (!brand[key].startsWith("https://") || brand[key].endsWith("/"))
       throw new Error(`${file}: "${key}" must start with https:// and must not end with a slash.`);
   }
-  if (brand.name.includes(UPSTREAM.name) || brand.scheme === UPSTREAM.scheme)
-    throw new Error(`${file}: the new name and scheme must differ from the upstream ones.`);
   return brand;
 }
 
@@ -195,11 +157,9 @@ function isText(buffer: Buffer): boolean {
 function main(): void {
   const dryRun = process.argv.includes("--dry-run");
   const target = readBrand(BRAND_FILE);
-  const applied = existsSync(APPLIED_FILE) ? readBrand(APPLIED_FILE) : null;
-  const passes: Rule[][] = [];
-  // Values from a previous run first, then upstream text from a merge.
-  if (applied) passes.push(rules(applied, target, false));
-  passes.push(rules(UPSTREAM, target, true));
+  if (!existsSync(APPLIED_FILE)) throw new Error(`${APPLIED_FILE} is missing: it records the values the app uses now.`);
+  const applied = readBrand(APPLIED_FILE);
+  const passes: Rule[][] = [rules(applied, target)];
 
   const counts = new Map<string, number>();
   const changed: string[] = [];

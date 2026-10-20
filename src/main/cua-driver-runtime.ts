@@ -15,9 +15,9 @@ import {
   type ComputerUseState,
   type MacPermissionId,
   type McpServerConfig,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Deferred, Effect, Exit, Result } from "effect";
 import { agentDisplayEnvironment } from "./agent-display";
 import { CuaDriverActionTap, type ObservedAction, type ObservedPointer } from "./cua-driver-action-tap";
@@ -201,11 +201,11 @@ export const resolveCuaDriverEndpoint = Effect.fn("CuaDriver.endpoint")(function
       ? runtimeDirectory
       : input.temporaryDirectory;
   const digest = createHash("sha256").update(input.userDataPath).digest("hex").slice(0, 12);
-  return { kind: "unix-socket", directory: join(parent, `openbot-cua-${digest}`) };
+  return { kind: "unix-socket", directory: join(parent, `omnibot-cua-${digest}`) };
 });
 
 /** Only this shape is read back, so a truncated or edited file is replaced rather than served. */
-const WINDOWS_PIPE_NAME = /^\\\\\.\\pipe\\openbot-cua-[0-9a-f-]{36}$/;
+const WINDOWS_PIPE_NAME = /^\\\\\.\\pipe\\omnibot-cua-[0-9a-f-]{36}$/;
 
 const windowsPipeName = Effect.fn("CuaDriver.windowsPipeName")(function* (userDataPath: string) {
   const file = join(userDataPath, ...PIPE_NAME_FILE);
@@ -214,7 +214,7 @@ const windowsPipeName = Effect.fn("CuaDriver.windowsPipeName")(function* (userDa
     Effect.catch(() => Effect.succeed("")),
   );
   if (WINDOWS_PIPE_NAME.test(stored)) return stored;
-  const name = `\\\\.\\pipe\\openbot-cua-${randomUUID()}`;
+  const name = `\\\\.\\pipe\\omnibot-cua-${randomUUID()}`;
   yield* cuaIO(() => mkdir(dirname(file), { recursive: true, mode: 0o700 }));
   yield* cuaIO(() => writeFile(file, name, { mode: 0o600 }));
   return name;
@@ -884,7 +884,7 @@ const readPermissionsOverMcpEffect = Effect.fn("CuaDriver.permissions")(
   (config: McpServerConfig, platform: NodeJS.Platform) =>
     Effect.acquireUseRelease(
       cuaSync(() => ({
-        client: new Client({ name: "openbot-computer-use", version: "1" }, { capabilities: {} }),
+        client: new Client({ name: "omnibot-computer-use", version: "1" }, { capabilities: {} }),
         transport: new StdioClientTransport({
           command: config.command,
           args: config.args,

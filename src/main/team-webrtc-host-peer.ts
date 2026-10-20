@@ -2,9 +2,9 @@ import { createHash, randomBytes, verify } from "node:crypto";
 import { openAsBlob } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { browserViewStreamSessionId } from "@openbot/contracts/team-protocol/browser-view-v1";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { browserViewStreamSessionId } from "@omnibot/contracts/team-protocol/browser-view-v1";
 import {
   supportsTeamSemanticTags,
   TEAM_AGENT_CREATE_MODEL_CAPABILITY,
@@ -12,10 +12,10 @@ import {
   TEAM_HISTORY_EXTENT_CAPABILITY,
   TEAM_SUBAGENTS_CAPABILITY,
   TEAM_UI_BLOCKS_CAPABILITY,
-} from "@openbot/contracts/team-protocol/current";
-import { optionalTeamEvent } from "@openbot/contracts/team-protocol/optional-events";
-import { teamSideRouteCodec } from "@openbot/contracts/team-protocol/side-routes";
-import { encodeTeamProtocolV1ClientEvent } from "@openbot/contracts/team-protocol/v1";
+} from "@omnibot/contracts/team-protocol/current";
+import { optionalTeamEvent } from "@omnibot/contracts/team-protocol/optional-events";
+import { teamSideRouteCodec } from "@omnibot/contracts/team-protocol/side-routes";
+import { encodeTeamProtocolV1ClientEvent } from "@omnibot/contracts/team-protocol/v1";
 import {
   decodeTeamProtocolV2AuthFrame,
   decodeTeamProtocolV2EventFrame,
@@ -25,37 +25,37 @@ import {
   type TeamProtocolV2Json,
   type TeamProtocolV2RpcFrame,
   teamProtocolV2AuthenticationTranscript,
-} from "@openbot/contracts/team-protocol/v2";
-import { createTeamProtocolV2Event } from "@openbot/contracts/team-protocol/v2-adapter";
+} from "@omnibot/contracts/team-protocol/v2";
+import { createTeamProtocolV2Event } from "@omnibot/contracts/team-protocol/v2-adapter";
 import {
   decodeTeamProtocolV3WebRtcHttpRequest,
   encodeTeamProtocolV3WebRtcHttpResponse,
   isTeamProtocolV3OnlyRoute,
-} from "@openbot/contracts/team-protocol/v3-webrtc-adapter";
+} from "@omnibot/contracts/team-protocol/v3-webrtc-adapter";
 import {
   createTeamProtocolV4Event,
   decodeTeamProtocolV4WebRtcHttpRequest,
   encodeTeamProtocolV4WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v4-webrtc-adapter";
-import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@openbot/contracts/team-protocol/v5";
+} from "@omnibot/contracts/team-protocol/v4-webrtc-adapter";
+import { TEAM_LOCAL_PROVIDERS_CAPABILITY } from "@omnibot/contracts/team-protocol/v5";
 import {
   createTeamProtocolV5Event,
   decodeTeamProtocolV5WebRtcHttpRequest,
   encodeTeamProtocolV5WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v5-webrtc-adapter";
-import { TEAM_CURSOR_CLINE_CAPABILITY } from "@openbot/contracts/team-protocol/v6";
+} from "@omnibot/contracts/team-protocol/v5-webrtc-adapter";
+import { TEAM_CURSOR_CLINE_CAPABILITY } from "@omnibot/contracts/team-protocol/v6";
 import {
   createTeamProtocolV6Event,
   decodeTeamProtocolV6WebRtcHttpRequest,
   encodeTeamProtocolV6WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v6-webrtc-adapter";
-import { TEAM_PI_MUSE_CAPABILITY } from "@openbot/contracts/team-protocol/v7";
+} from "@omnibot/contracts/team-protocol/v6-webrtc-adapter";
+import { TEAM_PI_MUSE_CAPABILITY } from "@omnibot/contracts/team-protocol/v7";
 import {
   createTeamProtocolV7Event,
   decodeTeamProtocolV7WebRtcHttpRequest,
   encodeTeamProtocolV7WebRtcHttpResponse,
-} from "@openbot/contracts/team-protocol/v7-webrtc-adapter";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/v7-webrtc-adapter";
+import { sourceText } from "@omnibot/i18n/source";
 import { Context, Deferred, Effect, Exit, Fiber, Layer, ManagedRuntime } from "effect";
 import type * as Ws from "ws";
 import type { VerifiedRemoteSessionTicket } from "./central-auth-manager";
@@ -105,7 +105,7 @@ class HostPeerTransport extends Context.Service<
     send(...args: Parameters<TeamWebRtcBridge["send"]>): Effect.Effect<void, RemoteWorkflowError>;
     fetch(input: URL, init: RequestInit): Effect.Effect<Response, RemoteWorkflowError>;
   }
->()("openbot/main/HostPeerTransport") {}
+>()("omnibot/main/HostPeerTransport") {}
 
 export class TeamWebRtcHostPeer {
   readonly #bridge: TeamWebRtcBridge;
@@ -730,8 +730,8 @@ export class TeamWebRtcHostPeer {
     if (!this.#localApiPort) return;
     this.#eventsSocket?.close();
     const socket = new webSockets.WebSocket(`ws://127.0.0.1:${this.#localApiPort}${TEAM_API_ROUTES.events}`, [
-      "openbot-team-v1",
-      `openbot-token.${token}`,
+      "omnibot-team-v1",
+      `omnibot-token.${token}`,
     ]);
     this.#eventsSocket = socket;
     socket.once("open", () => {

@@ -36,10 +36,10 @@ export const PUSH_NOTIFICATIONS_ROUTES = {
 export type PushNotificationLevel = "all" | "needs-me";
 
 /**
- * "openbot" is the sound that the desktop app plays when a task finishes; "warm", "mech", "bubble" and
+ * "omnibot" is the sound that the desktop app plays when a task finishes; "warm", "mech", "bubble" and
  * "press" are the sounds of the desktop sound themes; "default" is the iOS sound.
  */
-export const PUSH_NOTIFICATION_SOUNDS = ["openbot", "warm", "mech", "bubble", "press", "default", "none"] as const;
+export const PUSH_NOTIFICATION_SOUNDS = ["omnibot", "warm", "mech", "bubble", "press", "default", "none"] as const;
 export type PushNotificationSound = (typeof PUSH_NOTIFICATION_SOUNDS)[number];
 
 export interface PushNotificationRegistration {

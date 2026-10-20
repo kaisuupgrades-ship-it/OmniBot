@@ -3,13 +3,13 @@
 // Everything the modal renders is owner-agnostic; only the five calls, the event filter and three
 // words of copy are not. They live here, so `AgentMemoriesModal` names no owner at all.
 
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentMemorySelectionState,
   MemoryEntry,
   OmniBotDesktopApi,
   SetAgentMemoryInclusionInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 
 export interface MemoriesPort {
   ownerId: string;
@@ -38,21 +38,21 @@ export function agentMemoriesPort(agentId: string, agentName: string, limit: num
     ownerLabel: agentName,
     ownerNoun: "agent",
     limit,
-    list: () => window.openbot.agent.listMemories(agentId),
+    list: () => window.omnibot.agent.listMemories(agentId),
     selection: {
-      read: () => window.openbot.agent.getMemorySelection(agentId),
-      set: (changes) => window.openbot.agent.setMemoryInclusion({ agentId, changes }),
+      read: () => window.omnibot.agent.getMemorySelection(agentId),
+      set: (changes) => window.omnibot.agent.setMemoryInclusion({ agentId, changes }),
     },
     create: async (text) => {
-      await window.openbot.agent.createMemory({ agentId, text });
+      await window.omnibot.agent.createMemory({ agentId, text });
     },
     update: async (memoryId, text) => {
-      await window.openbot.agent.updateMemory({ agentId, memoryId, text });
+      await window.omnibot.agent.updateMemory({ agentId, memoryId, text });
     },
-    remove: (memoryId) => window.openbot.agent.deleteMemory({ agentId, memoryId }),
-    clear: () => window.openbot.agent.clearMemories(agentId),
+    remove: (memoryId) => window.omnibot.agent.deleteMemory({ agentId, memoryId }),
+    clear: () => window.omnibot.agent.clearMemories(agentId),
     subscribe: (reload) =>
-      window.openbot.agent.onEvent((event) => {
+      window.omnibot.agent.onEvent((event) => {
         if (event.type === "memories-changed" && event.agentId === agentId) reload();
       }),
   };
@@ -72,7 +72,7 @@ export type ChannelMemoriesApi = Pick<
 export function channelMemoriesPort(
   channelId: string,
   channelName: string,
-  api: ChannelMemoriesApi = window.openbot.agent,
+  api: ChannelMemoriesApi = window.omnibot.agent,
 ): MemoriesPort {
   return {
     ownerId: channelId,

@@ -136,7 +136,7 @@ used through Bun's native tagged queries and transactions:
 ```ts
 interface HostTicketClaims {
   iss: "https://<production-auth-origin>";
-  aud: `urn:openbot:host:${string}`;
+  aud: `urn:omnibot:host:${string}`;
   sub: string; // immutable central user UUID
   email: string; // normalized and verified
   email_verified: true;
@@ -145,7 +145,7 @@ interface HostTicketClaims {
   iat: number;
   nbf: number;
   exp: number;
-  typ: "openbot-host-access-v1";
+  typ: "omnibot-host-access-v1";
 }
 ```
 

@@ -1,5 +1,5 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { IPC_ENDPOINTS } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { IPC_ENDPOINTS } from "@omnibot/contracts/ipc";
 import { expect, it, vi } from "vitest";
 
 const bridge = vi.hoisted(() => {

@@ -1,7 +1,7 @@
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { set } from "@dotenvx/dotenvx";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("set-auth-smtp-secret");
 

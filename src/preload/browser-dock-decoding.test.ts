@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import type { BrowserDockPresentation } from "@openbot/contracts/ipc";
+import type { BrowserDockPresentation } from "@omnibot/contracts/ipc";
 import { describe, expect, it } from "vitest";
 import {
   decodeBrowserDockAction,

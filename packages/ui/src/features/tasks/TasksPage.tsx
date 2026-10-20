@@ -1,5 +1,5 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
-import { plainTaskTitle, TASKS_CLOSED_SHOWN, taskSections, taskTone } from "@openbot/team-client/agent-tasks";
+import type { AgentTask } from "@omnibot/contracts/ipc";
+import { plainTaskTitle, TASKS_CLOSED_SHOWN, taskSections, taskTone } from "@omnibot/team-client/agent-tasks";
 import {
   ArrowLeft,
   ArrowUp,
@@ -12,20 +12,20 @@ import {
   LoaderCircle,
   Mic,
   X,
-} from "@openbot/ui";
-import { SwapLabel, type SwapMotion } from "@openbot/ui/components/SwapLabel";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { AgentTaskMark, agentTaskStatus } from "@openbot/ui/features/conversation/AgentTasks";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
-import { ComposerNotice } from "@openbot/ui/features/conversation/ComposerNotice";
+} from "@omnibot/ui";
+import { SwapLabel, type SwapMotion } from "@omnibot/ui/components/SwapLabel";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { AgentTaskMark, agentTaskStatus } from "@omnibot/ui/features/conversation/AgentTasks";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { ComposerNotice } from "@omnibot/ui/features/conversation/ComposerNotice";
 import {
   type VoicePhase,
   VoiceRecordingMorph,
   voiceButtonLabel,
-} from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@omnibot/ui/features/conversation/VoiceRecordingMorph";
+import { useText } from "@omnibot/ui/text";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createStore, createUniqueId, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 

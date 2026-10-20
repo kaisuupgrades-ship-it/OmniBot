@@ -111,7 +111,7 @@ export const messages = {
     "Mostra l'inizio di una risposta, una domanda o l'azione da approvare. Google e il servizio account di OmniBot non possono leggerla.",
   "mobile.settings.notifications.sound": "Suono",
   "mobile.settings.notifications.playSound": "Riproduci suono",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "Caldo",
   "mobile.settings.notifications.sound.mech": "Meccanico",
   "mobile.settings.notifications.sound.bubble": "Frizzante",

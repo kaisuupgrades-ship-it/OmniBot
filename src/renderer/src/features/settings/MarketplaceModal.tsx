@@ -1,11 +1,11 @@
-import { Marketplace } from "@openbot/ui/features/marketplace/Marketplace";
-import type { MarketplaceApp } from "@openbot/ui/features/marketplace/marketplace-model";
-import { createMarketplaceNavigation } from "@openbot/ui/features/marketplace/marketplace-view";
-import { McpKeyDialog } from "@openbot/ui/features/settings/McpKeyDialog";
-import { McpLocalDialog } from "@openbot/ui/features/settings/McpLocalDialog";
-import { McpSignInDialog } from "@openbot/ui/features/settings/McpSignInDialog";
-import { McpSignInRelayDialog } from "@openbot/ui/features/settings/McpSignInPage";
-import { PluginUninstallDialog } from "@openbot/ui/features/settings/PluginUninstallDialog";
+import { Marketplace } from "@omnibot/ui/features/marketplace/Marketplace";
+import type { MarketplaceApp } from "@omnibot/ui/features/marketplace/marketplace-model";
+import { createMarketplaceNavigation } from "@omnibot/ui/features/marketplace/marketplace-view";
+import { McpKeyDialog } from "@omnibot/ui/features/settings/McpKeyDialog";
+import { McpLocalDialog } from "@omnibot/ui/features/settings/McpLocalDialog";
+import { McpSignInDialog } from "@omnibot/ui/features/settings/McpSignInDialog";
+import { McpSignInRelayDialog } from "@omnibot/ui/features/settings/McpSignInPage";
+import { PluginUninstallDialog } from "@omnibot/ui/features/settings/PluginUninstallDialog";
 import { createEffect, createSignal, Match, Show, Switch, untrack } from "solid-js";
 import { createMarketplaceController, type MarketplaceControllerProps } from "./marketplace-controller";
 

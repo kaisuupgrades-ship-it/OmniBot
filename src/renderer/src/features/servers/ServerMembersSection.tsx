@@ -1,7 +1,7 @@
-import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { InviteSummary, TeamPresenceMember, TeamRole } from "@openbot/contracts/ipc";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import type { AppTextKey } from "@openbot/i18n";
+import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { InviteSummary, TeamPresenceMember, TeamRole } from "@omnibot/contracts/ipc";
+import { normalizeEmailAddress } from "@omnibot/contracts/validation";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertContent,
@@ -40,10 +40,10 @@ import {
   Text,
   Trash2,
   UserRound,
-} from "@openbot/ui";
-import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@omnibot/ui";
+import { teamMemberName } from "@omnibot/ui/features/team/TeamPersonAvatar";
+import { useText } from "@omnibot/ui/text";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createStore, For, onCleanup, Show, untrack } from "solid-js";
 import { serverRoleCanAdminister } from "./server-capabilities";

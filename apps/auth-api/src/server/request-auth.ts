@@ -1,6 +1,6 @@
 import { env, waitUntil } from "cloudflare:workers";
-import { HOSTING_DEVELOPER_KEY_HEADER } from "@openbot/contracts/hosted-servers";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { HOSTING_DEVELOPER_KEY_HEADER } from "@omnibot/contracts/hosted-servers";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 import { Effect } from "effect";
 import { type AccountAnalytics, createAccountAnalytics } from "./account-analytics";
 import { AccountAttribution } from "./account-attribution";

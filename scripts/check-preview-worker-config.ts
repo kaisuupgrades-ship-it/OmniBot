@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { isDeepStrictEqual } from "node:util";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
 
 // The trusted preview publisher (.github/workflows/cloudflare-preview.yml) uploads a Worker that a
 // pull request built. The pull request also wrote the generated wrangler.json, so its Worker name,

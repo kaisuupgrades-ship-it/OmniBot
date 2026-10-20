@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { SIDE_QUESTION_CAPABILITY } from "@openbot/contracts/team-protocol/side-question-v1";
-import type { SideQuestionExchange } from "@openbot/ui/features/conversation/SideQuestionPanel";
-import { currentText } from "@openbot/ui/text";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { SIDE_QUESTION_CAPABILITY } from "@omnibot/contracts/team-protocol/side-question-v1";
+import type { SideQuestionExchange } from "@omnibot/ui/features/conversation/SideQuestionPanel";
+import { currentText } from "@omnibot/ui/text";
 import type { Store, StoreSetter } from "solid-js";
 import { serverSupportsCapability } from "../../servers/server-capabilities";
 import { conversationPort } from "../conversation-port";

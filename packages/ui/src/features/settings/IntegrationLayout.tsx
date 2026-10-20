@@ -4,8 +4,8 @@
  * GitHub, Slack, Discord and Telegram use them.
  */
 
-import { AppLogo } from "@openbot/brand";
-import type { AppTextKey } from "@openbot/i18n";
+import { AppLogo } from "@omnibot/brand";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertActions,
@@ -30,7 +30,7 @@ import {
   Text,
   TriangleAlert,
   X,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, Show } from "solid-js";
 import { useText } from "../../text";

@@ -20,8 +20,8 @@ import {
   ListToolsRequestSchema,
   ReadResourceRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { runCauseEffect } from "../backend/effect-boundary";
 import { readJsonBody } from "../backend/local-mcp-bridge";
 
@@ -276,7 +276,7 @@ export class GitHubMcpProxy {
   ): Effect.fn.Return<Client, GitHubOperationError> {
     let upstream = this.#upstreams.get(token);
     if (!upstream) {
-      const client = new Client({ name: "openbot-github-proxy", version: "1.0.0" }, { capabilities: {} });
+      const client = new Client({ name: "omnibot-github-proxy", version: "1.0.0" }, { capabilities: {} });
       const transport = new StreamableHTTPClientTransport(new URL(this.#options.upstreamUrl), {
         requestInit: { headers: { Authorization: `Bearer ${token}` } },
       });

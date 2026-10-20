@@ -1,9 +1,9 @@
-import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { PERMANENT_INVITE_EXPIRES_AT_MS } from "@openbot/contracts/invite-links";
-import { canAdministerServer } from "@openbot/contracts/ipc";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import type { RemoteTeamMember } from "@openbot/team-client";
-import { runTeamEffect } from "@openbot/team-client";
+import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { PERMANENT_INVITE_EXPIRES_AT_MS } from "@omnibot/contracts/invite-links";
+import { canAdministerServer } from "@omnibot/contracts/ipc";
+import { normalizeEmailAddress } from "@omnibot/contracts/validation";
+import type { RemoteTeamMember } from "@omnibot/team-client";
+import { runTeamEffect } from "@omnibot/team-client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as Clipboard from "expo-clipboard";
 import { useLocalSearchParams } from "expo-router";

@@ -16,7 +16,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@omnibot/logging";
 import { Schema } from "effect";
 import {
   type CheckDay,
@@ -64,7 +64,7 @@ const NOW = args.now ?? new Date().toISOString();
 if (Number.isNaN(Date.parse(NOW))) throw new Error(`--now: "${NOW}" is not a time.`);
 const RETRY_DELAY_MS = Number(args["retry-delay"] ?? 10_000);
 
-const REPOSITORY = process.env.GITHUB_REPOSITORY ?? "nightly-labs/openbot";
+const REPOSITORY = process.env.GITHUB_REPOSITORY ?? "kaisuupgrades-ship-it/OmniBot";
 const TOKEN = process.env.GITHUB_TOKEN?.trim() || null;
 if (TOKEN) registerSecretValue(TOKEN);
 if (!DRY_RUN && !TOKEN && !args["issues-file"]) throw new Error("GITHUB_TOKEN is necessary to write issues.");
@@ -108,7 +108,7 @@ const jsonBody = (body: string, test: (value: unknown) => boolean) => {
   }
 };
 
-const RELEASE_PATH = "/nightly-labs/openbot/releases/latest/download";
+const RELEASE_PATH = "/kaisuupgrades-ship-it/OmniBot/releases/latest/download";
 const PROBES: Record<ServiceId, Probe> = {
   accounts: { origin: "api", paths: ["/health/ready"], healthy: (b) => jsonBody(b, isReady) },
   connections: {
@@ -146,7 +146,7 @@ async function attempt(probe: Probe): Promise<Attempt> {
     probe.paths.map(async (path): Promise<string | null> => {
       try {
         const response = await fetch(probeUrl(probe, path), {
-          headers: { "User-Agent": "openbot-status-check" },
+          headers: { "User-Agent": "omnibot-status-check" },
           signal: AbortSignal.timeout(TIMEOUT_MS),
         });
         const body = await response.text();
@@ -299,7 +299,7 @@ async function github<A>(method: string, path: string, decode: (value: unknown) 
     method,
     headers: {
       Accept: "application/vnd.github+json",
-      "User-Agent": "openbot-status-check",
+      "User-Agent": "omnibot-status-check",
       "X-GitHub-Api-Version": "2022-11-28",
       ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
       ...(body === undefined ? {} : { "Content-Type": "application/json" }),

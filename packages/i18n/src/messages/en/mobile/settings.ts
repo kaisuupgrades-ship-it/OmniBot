@@ -109,7 +109,7 @@ export const messages = defineMessages("mobile.settings", {
     "Shows the start of a reply, a question, or the action to approve. Google and the OmniBot account service cannot read it.",
   "mobile.settings.notifications.sound": "Sound",
   "mobile.settings.notifications.playSound": "Play sound",
-  "mobile.settings.notifications.sound.openbot": "OmniBot",
+  "mobile.settings.notifications.sound.omnibot": "OmniBot",
   "mobile.settings.notifications.sound.warm": "Warm",
   "mobile.settings.notifications.sound.mech": "Mechanical",
   "mobile.settings.notifications.sound.bubble": "Bubbly",

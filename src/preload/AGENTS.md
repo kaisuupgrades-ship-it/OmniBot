@@ -28,9 +28,9 @@ renderer-to-main trust boundary. [Main-process rules](../main/AGENTS.md#trust-bo
 - Add a method in the same change as its channel, handler, and preview mock. See
   [IPC binding rules](../main/ipc/AGENTS.md#adding-an-endpoint).
 - Keep the sandbox and context isolation. The remote browser session has no preload and no
-  `window.openbot`.
+  `window.omnibot`.
 
-- `scripts/verify-preload-bundle.ts` runs the built bundle and compares `window.openbot` with
+- `scripts/verify-preload-bundle.ts` runs the built bundle and compares `window.omnibot` with
   `IPC_ENDPOINTS` at the places that `IPC_GROUP_PATHS` gives. A method written by hand needs an
   entry in `HAND_WRITTEN_METHODS`. CI runs it after the build in `check:desktop:static`.
 

@@ -1,6 +1,6 @@
-import type { BrowserPreview } from "@openbot/contracts/ipc";
-import { Monitor, Skeleton } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { BrowserPreview } from "@omnibot/contracts/ipc";
+import { Monitor, Skeleton } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { Show } from "solid-js";
 
 export function BrowserTakeoverPreview(props: {

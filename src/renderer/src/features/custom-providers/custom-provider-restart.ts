@@ -1,5 +1,5 @@
-import type { CustomProviderRestart } from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+import type { CustomProviderRestart } from "@omnibot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@omnibot/i18n";
 
 /**
  * One `opencode acp` process serves every OpenCode agent, and it reads its config only at spawn, so a

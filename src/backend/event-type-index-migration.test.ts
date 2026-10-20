@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: an upgrade loses or changes an event or a receipt; a partial migration survives a failure;
 // a retry fails on the index that the failed run left; a newer or incomplete history is changed.
@@ -26,11 +26,11 @@ function seedEvents(db: DatabaseSync): void {
   db.exec(`INSERT INTO orchestration_events
       (event_id, command_id, aggregate_type, aggregate_id, event_type, occurred_at, payload_json)
     VALUES
-      ('event-1', 'command-1', 'thread', 'openbot-thread-chief', 'conversation.snapshot',
+      ('event-1', 'command-1', 'thread', 'omnibot-thread-chief', 'conversation.snapshot',
         '2026-10-01T10:00:00.000Z', '{"snapshot":{"messages":[]}}'),
-      ('event-2', 'command-2', 'thread', 'openbot-thread-chief', 'conversation.message-streamed',
+      ('event-2', 'command-2', 'thread', 'omnibot-thread-chief', 'conversation.message-streamed',
         '2026-10-01T10:00:01.000Z', '{"streamedMessage":{"id":"message-1","text":"Hel"}}'),
-      ('event-3', 'command-3', 'thread', 'openbot-thread-chief', 'conversation.message-streamed',
+      ('event-3', 'command-3', 'thread', 'omnibot-thread-chief', 'conversation.message-streamed',
         '2026-10-01T10:00:02.000Z', '{"streamedMessage":{"id":"message-1","text":"Hello"}}'),
       ('event-4', 'command-4', 'hosted-site-operation', 'site-1', 'hosted-site.active',
         '2026-10-01T10:00:03.000Z', '{"siteId":"site-1"}');

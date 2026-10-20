@@ -1,5 +1,5 @@
-const RESULTS_HIGHLIGHT = "openbot-chat-search-results";
-const CURRENT_HIGHLIGHT = "openbot-chat-search-current";
+const RESULTS_HIGHLIGHT = "omnibot-chat-search-results";
+const CURRENT_HIGHLIGHT = "omnibot-chat-search-current";
 
 export interface ChatSearchMatch {
   range: Range;

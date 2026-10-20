@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /** What the task state reaches in main: the task list, a task's conversation, and the task actions. */
 export interface AgentTasksPort {
@@ -15,7 +15,7 @@ export interface AgentTasksPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function agentTasksPort(): AgentTasksPort {
-  return window.openbot;
+  return window.omnibot;
 }

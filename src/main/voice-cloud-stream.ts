@@ -4,10 +4,10 @@
 // the request header of the socket that `openScribeSocket` opens; nothing here logs it, and the
 // provider's own error text is not logged or shown either, only its category.
 
-import { AUTOMATIC_VOICE_LANGUAGE, type VoiceLanguage } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+import { AUTOMATIC_VOICE_LANGUAGE, type VoiceLanguage } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import WebSocket from "ws";
 import { rawDataText } from "./ws-raw-data";
 

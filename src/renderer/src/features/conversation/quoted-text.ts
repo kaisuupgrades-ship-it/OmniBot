@@ -1,6 +1,6 @@
 import { findChatSearchMatches } from "./chat-search";
 
-const QUOTE_HIGHLIGHT = "openbot-quote-target";
+const QUOTE_HIGHLIGHT = "omnibot-quote-target";
 
 let releaseHighlight: AbortController | undefined;
 

@@ -3,8 +3,8 @@
   display: flex;
   height: 100%;
   min-height: 0;
-  background: var(--openbot-bg-canvas);
-  color: var(--openbot-text-primary);
+  background: var(--omnibot-bg-canvas);
+  color: var(--omnibot-text-primary);
 }
 
 /* One centered column. */
@@ -12,35 +12,35 @@
   min-width: 0;
   flex: 1;
   overflow-y: auto;
-  padding: 0 var(--openbot-space-6) var(--openbot-space-8);
+  padding: 0 var(--omnibot-space-6) var(--omnibot-space-8);
 }
 
 .tasks-page-column {
   display: flex;
   max-width: 36rem;
   flex-direction: column;
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
   margin: 0 auto;
 }
 
 .tasks-page-header {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
-  padding: var(--openbot-space-6) var(--openbot-space-2) var(--openbot-space-3);
+  gap: var(--omnibot-space-2);
+  padding: var(--omnibot-space-6) var(--omnibot-space-2) var(--omnibot-space-3);
 }
 
 /* The arrow lines up with the content edge, not its hit area. */
 .tasks-page-header .ui-icon-button {
-  margin-left: calc(-1 * var(--openbot-space-2));
+  margin-left: calc(-1 * var(--omnibot-space-2));
 }
 
 .tasks-page-header h2 {
   min-width: 0;
   flex: 1;
   margin: 0;
-  font-size: var(--openbot-text-xl);
-  font-weight: var(--openbot-weight-semibold);
+  font-size: var(--omnibot-text-xl);
+  font-weight: var(--omnibot-weight-semibold);
 }
 
 .tasks-page-agent-option > span {
@@ -48,8 +48,8 @@
 }
 
 .tasks-page-header h2 span {
-  color: var(--openbot-text-muted);
-  font-weight: var(--openbot-weight-regular);
+  color: var(--omnibot-text-muted);
+  font-weight: var(--omnibot-weight-regular);
 }
 
 .tasks-page-avatar.agent-avatar {
@@ -65,13 +65,13 @@
   position: sticky;
   z-index: 3;
   top: 0;
-  margin-bottom: var(--openbot-space-2);
-  background: var(--openbot-bg-canvas);
-  padding: var(--openbot-space-1) 0 0;
+  margin-bottom: var(--omnibot-space-2);
+  background: var(--omnibot-bg-canvas);
+  padding: var(--omnibot-space-1) 0 0;
 }
 
 .tasks-page-composer .composer-notice {
-  margin-bottom: var(--openbot-space-2);
+  margin-bottom: var(--omnibot-space-2);
 }
 
 .tasks-page-composer-agent {
@@ -81,13 +81,13 @@
 }
 
 .tasks-page-agent.ui-button {
-  gap: var(--openbot-space-1-5);
-  font-size: var(--openbot-text-sm);
-  color: var(--openbot-text-secondary);
+  gap: var(--omnibot-space-1-5);
+  font-size: var(--omnibot-text-sm);
+  color: var(--omnibot-text-secondary);
 }
 
 .tasks-page-composer-agent .tasks-page-agent.ui-button {
-  margin-left: calc(-1 * var(--openbot-space-1));
+  margin-left: calc(-1 * var(--omnibot-space-1));
 }
 
 /* As the header model switcher: the face of a newly chosen agent springs in, and the chevron turns. */
@@ -109,10 +109,10 @@
 }
 
 .tasks-page-agent-chevron {
-  width: var(--openbot-icon-xs);
-  height: var(--openbot-icon-xs);
-  color: var(--openbot-text-muted);
-  transition: transform var(--openbot-duration-normal) ease;
+  width: var(--omnibot-icon-xs);
+  height: var(--omnibot-icon-xs);
+  color: var(--omnibot-text-muted);
+  transition: transform var(--omnibot-duration-normal) ease;
 }
 
 .tasks-page-agent[aria-expanded="true"] .tasks-page-agent-chevron {
@@ -120,30 +120,30 @@
 }
 
 .tasks-page-agent-check {
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 .tasks-page-took {
   display: flex;
-  min-height: var(--openbot-control-sm);
+  min-height: var(--omnibot-control-sm);
   align-items: center;
-  gap: var(--openbot-space-1-5);
-  margin-bottom: var(--openbot-space-2);
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
-  animation: tasks-page-rise var(--openbot-duration-overlay) var(--openbot-ease-out);
+  gap: var(--omnibot-space-1-5);
+  margin-bottom: var(--omnibot-space-2);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
+  animation: tasks-page-rise var(--omnibot-duration-overlay) var(--omnibot-ease-out);
 }
 
 .tasks-page-took .ui-button-size-sm {
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
 }
 
 .tasks-page-took-agent {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1-5);
-  padding: 0 var(--openbot-space-1);
+  gap: var(--omnibot-space-1-5);
+  padding: 0 var(--omnibot-space-1);
 }
 
 .tasks-page-took-text {
@@ -158,35 +158,35 @@
 .tasks-page-section {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
 }
 
 .tasks-page-section + .tasks-page-section {
-  margin-top: var(--openbot-space-4);
+  margin-top: var(--omnibot-space-4);
 }
 
 .tasks-page-section-heading {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--omnibot-space-1-5);
   margin: 0;
-  padding: var(--openbot-space-1) var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  padding: var(--omnibot-space-1) var(--omnibot-space-2);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-medium);
 }
 
 .tasks-page-count {
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-regular);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-regular);
   font-variant-numeric: tabular-nums;
 }
 
 .tasks-page-list {
   display: flex;
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -195,21 +195,21 @@
 .tasks-page-row.ui-button {
   display: grid;
   width: 100%;
-  height: var(--openbot-control-lg);
+  height: var(--omnibot-control-lg);
   align-items: center;
   justify-content: stretch;
   grid-template-columns: 16px minmax(0, 1fr) auto auto;
-  gap: var(--openbot-space-3);
-  border-radius: var(--openbot-radius-md);
-  padding: 0 var(--openbot-space-2);
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-regular);
+  gap: var(--omnibot-space-3);
+  border-radius: var(--omnibot-radius-md);
+  padding: 0 var(--omnibot-space-2);
+  font-size: var(--omnibot-text-md);
+  font-weight: var(--omnibot-weight-regular);
   text-align: left;
   --task-list-glyph: 14px;
 }
 
 .tasks-page-row[data-selected] {
-  background: var(--openbot-bg-control-active);
+  background: var(--omnibot-bg-control-active);
 }
 
 .tasks-page-section[data-closed] .tasks-page-row:not([data-selected]) {
@@ -226,31 +226,31 @@
 .tasks-page-status {
   min-width: 0;
   overflow: hidden;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .tasks-page-status[data-tone="working"] {
-  color: var(--openbot-text-secondary);
+  color: var(--omnibot-text-secondary);
 }
 
 .tasks-page-status[data-tone="attention"] {
-  color: var(--openbot-accent);
+  color: var(--omnibot-accent);
 }
 
 .tasks-page-status[data-tone="danger"] {
-  color: var(--openbot-danger-text);
+  color: var(--omnibot-danger-text);
 }
 
 .tasks-page-show-all.ui-button {
   align-self: flex-start;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 li[data-arrived] > .tasks-page-row {
-  animation: tasks-page-arrive 1600ms var(--openbot-ease-out);
+  animation: tasks-page-arrive 1600ms var(--omnibot-ease-out);
 }
 
 /*
@@ -263,8 +263,8 @@ li[data-arrived] > .tasks-page-row {
   flex: 0 0 380px;
   overflow: hidden;
   transition:
-    flex-basis var(--openbot-duration-overlay) var(--openbot-ease-out),
-    opacity var(--openbot-duration-overlay) var(--openbot-ease-out);
+    flex-basis var(--omnibot-duration-overlay) var(--omnibot-ease-out),
+    opacity var(--omnibot-duration-overlay) var(--omnibot-ease-out);
 }
 
 @starting-style {
@@ -277,7 +277,7 @@ li[data-arrived] > .tasks-page-row {
 .tasks-page-side[data-closing] {
   flex-basis: 0;
   opacity: 0.6;
-  transition-duration: var(--openbot-duration-slow);
+  transition-duration: var(--omnibot-duration-slow);
   transition-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
 }
 
@@ -296,7 +296,7 @@ li[data-arrived] > .tasks-page-row {
 
 /* A change to a different task: the new task fades in at its place. */
 .tasks-page-side-content[data-entering] {
-  animation: tasks-page-side-swap var(--openbot-duration-normal) var(--openbot-ease-out);
+  animation: tasks-page-side-swap var(--omnibot-duration-normal) var(--omnibot-ease-out);
 }
 
 @keyframes tasks-page-side-swap {
@@ -315,7 +315,7 @@ li[data-arrived] > .tasks-page-row {
 
 @keyframes tasks-page-arrive {
   from {
-    background: var(--openbot-bg-control-active);
+    background: var(--omnibot-bg-control-active);
   }
 }
 

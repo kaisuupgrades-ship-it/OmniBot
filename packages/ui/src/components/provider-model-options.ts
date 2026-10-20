@@ -1,12 +1,12 @@
-import type { AgentModelOption, AgentProviderId, CustomProviderSummary } from "@openbot/contracts/ipc";
+import type { AgentModelOption, AgentProviderId, CustomProviderSummary } from "@omnibot/contracts/ipc";
 import {
   agentProviderName,
   CUSTOM_AGENT_DEFAULT_MODEL,
   isAgentProvider,
   isCustomProviderModelId,
   isFreeOpencodeModel,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import { currentText } from "../text";
 
 /** The efforts that have a name in the catalog. The other efforts show their id. */

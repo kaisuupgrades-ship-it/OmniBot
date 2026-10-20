@@ -9,11 +9,11 @@ import {
   decodeChannelRoutines,
   decodeChannelSummaries,
   type RoutineCalendarOwner,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { buildRoutineCalendar, type RoutineCalendarSource } from "@openbot/team-client/routine-calendar";
+} from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { CHANNEL_ROUTES } from "@omnibot/contracts/team-protocol/channels-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { buildRoutineCalendar, type RoutineCalendarSource } from "@omnibot/team-client/routine-calendar";
 import type { AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { localRoutineCalendarSource } from "../local-routine-calendar";

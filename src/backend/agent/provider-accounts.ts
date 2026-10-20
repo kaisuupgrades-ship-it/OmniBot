@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import type { AgentProviderId } from "@openbot/contracts/agent-providers";
+import type { AgentProviderId } from "@omnibot/contracts/agent-providers";
 import {
   type AccountUsage,
   type AccountUsageLimit,
@@ -8,9 +8,9 @@ import {
   MAX_PROVIDER_ACCOUNTS,
   type ProviderAccountState,
   type ProviderAccountStatus,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Cause, Effect, Fiber, Schema, type Scope } from "effect";
 import type { AgentClient } from "./../agent-client";
 import type { AgentCliInfo } from "./../cli";

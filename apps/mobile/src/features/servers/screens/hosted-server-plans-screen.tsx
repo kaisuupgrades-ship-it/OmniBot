@@ -1,6 +1,6 @@
-import type { BillingPlanId } from "@openbot/contracts/billing";
-import type { HostedServerCatalogPlan, HostedServerList, HostedServerSummary } from "@openbot/contracts/hosted-servers";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { BillingPlanId } from "@omnibot/contracts/billing";
+import type { HostedServerCatalogPlan, HostedServerList, HostedServerSummary } from "@omnibot/contracts/hosted-servers";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { Button, Chip, Skeleton, Typography } from "heroui-native";

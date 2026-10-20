@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { dirname, join } from "node:path";
-import type { AgentEvent, BrowserTab } from "@openbot/contracts/ipc";
-import { redactText } from "@openbot/logging";
+import type { AgentEvent, BrowserTab } from "@omnibot/contracts/ipc";
+import { redactText } from "@omnibot/logging";
 import { Effect, Exit } from "effect";
 import { app, BrowserWindow, type WebContents, webContents } from "electron";
 import { z } from "zod";
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
     browser = new BrowserHost(window, join(fixtureRoot, "downloads"), join(fixtureRoot, "tabs.json"));
     const host = browser;
     const params = (tool: string, args: DynamicToolCallParams["arguments"]): DynamicToolCallParams => ({
-      namespace: "openbot_browser",
+      namespace: "omnibot_browser",
       tool,
       arguments: args,
       ownerAgentId: "fixture-agent",

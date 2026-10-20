@@ -10,7 +10,7 @@ export const unstable_settings = { initialRouteName: "index" };
 
 export default function AgentInfoLayout() {
   const { t } = useText();
-  const background = String(useCSSVariable("--openbot-bg-sheet"));
+  const background = String(useCSSVariable("--omnibot-bg-sheet"));
   return (
     <Stack
       screenListeners={sheetBackHaptics}

@@ -2,7 +2,7 @@ import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import type { ConversationSnapshot } from "@openbot/contracts/ipc";
+import type { ConversationSnapshot } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import {
   CONVERSATION_CACHE_BYTES_LIMIT,
@@ -12,7 +12,7 @@ import {
 } from "../src/backend/agent/conversation-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { isRecord, type ThreadItem } from "../src/backend/protocol";
 import {
   PROVIDER_HISTORY_PAGE_SIZE,
@@ -93,8 +93,8 @@ interface Options {
  * 32 KiB items, so the benchmark never builds the complete transcript in a JavaScript array.
  */
 export async function runProviderHistoryReport(options: Options): Promise<Report> {
-  const databaseRoot = await mkdtemp(join(tmpdir(), "openbot-provider-history-report-"));
-  const homeRoot = await mkdtemp(join(tmpdir(), "openbot-provider-history-report-home-"));
+  const databaseRoot = await mkdtemp(join(tmpdir(), "omnibot-provider-history-report-"));
+  const homeRoot = await mkdtemp(join(tmpdir(), "omnibot-provider-history-report-home-"));
   const database = new OmniBotDatabase(databaseRoot);
   const agentStore = new AgentStore(databaseRoot, homeRoot, database);
   const sessionId = "provider-history-report-session";
@@ -378,7 +378,7 @@ function byteLength(value: string): number {
 
 function parseOptions(argv: readonly string[]): Options {
   let totalBytes = DEFAULT_TOTAL_BYTES;
-  let outputPath = resolve(process.cwd(), ".openbot-build", REPORT_NAME);
+  let outputPath = resolve(process.cwd(), ".omnibot-build", REPORT_NAME);
   for (let index = 0; index < argv.length; index += 1) {
     const argument = argv[index];
     if (argument === "--total-bytes") {

@@ -1,4 +1,4 @@
-import type { HostAdminDesktopApi, HostTimezoneSettings } from "@openbot/contracts/ipc";
+import type { HostAdminDesktopApi, HostTimezoneSettings } from "@omnibot/contracts/ipc";
 
 /** Preview has one host, so every server shares this timezone. */
 export function createMockHostTimezone(): Pick<HostAdminDesktopApi, "getTimezone" | "setTimezone"> {

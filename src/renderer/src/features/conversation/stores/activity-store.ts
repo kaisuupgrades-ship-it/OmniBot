@@ -1,11 +1,11 @@
-import type { AgentProfile } from "@openbot/ui/data";
-import { type AgentActivityLabel, nextAgentActivityLabel } from "@openbot/ui/features/conversation/AgentActivity";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { type AgentActivityLabel, nextAgentActivityLabel } from "@omnibot/ui/features/conversation/AgentActivity";
 import {
   agentActivityExitDelay,
   agentActivityExitDuration,
   agentActivityShowDelay,
-} from "@openbot/ui/features/conversation/activity-timing";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/activity-timing";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, onCleanup, untrack } from "solid-js";
 import type { ConversationProps } from "../conversation-types";
 

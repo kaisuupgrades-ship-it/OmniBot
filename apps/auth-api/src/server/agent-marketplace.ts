@@ -1,5 +1,5 @@
-import { isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { isValidAvatarImage } from "@omnibot/contracts/avatar-images";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type AgentPublicationPreview,
   type AgentSubmission,
@@ -13,8 +13,8 @@ import {
   type MarketplaceAgentSkill,
   type MarketplaceAgentSummary,
   type SkillCategory,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
 import { Effect, Result, Schema } from "effect";
 import {
   decodeMarketplaceCursor,

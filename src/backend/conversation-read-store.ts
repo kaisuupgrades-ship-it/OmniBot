@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@openbot/contracts/chat-visual";
+import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@omnibot/contracts/chat-visual";
 import {
   AGENT_EXCHANGE_ITEM_TYPE,
   type AgentSummary,
@@ -15,16 +15,16 @@ import {
   ROUTINE_QUIET_ANSWER_ITEM_TYPE,
   ROUTINE_RUN_EVENT_ITEM_TYPE_PREFIX,
   SKILL_EVENT_ITEM_TYPE_PREFIX,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import {
   type ConversationMarkerExclusions,
   ORDER_KEY_COLUMNS,
   ORDER_KEY_DESC,
   ORDERED_THREAD_MESSAGES,
 } from "./database/conversation-queries";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 
 export type { ConversationMarkerExclusions } from "./database/conversation-queries";
 

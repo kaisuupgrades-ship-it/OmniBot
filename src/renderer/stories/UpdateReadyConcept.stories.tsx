@@ -1,8 +1,8 @@
-import { AppLogo, type AppLogoAnimation } from "@openbot/brand";
-import { ArrowRight, Button, CircleCheck, HardDrive, Progress, Spinner, TriangleAlert } from "@openbot/ui";
-import { AppLoadingScreen } from "@openbot/ui/features/account/AppLoadingScreen";
-import { WhatsNewBody } from "@openbot/ui/features/updates/WhatsNewDialog";
-import type { WhatsNewRelease } from "@openbot/ui/features/updates/whats-new";
+import { AppLogo, type AppLogoAnimation } from "@omnibot/brand";
+import { ArrowRight, Button, CircleCheck, HardDrive, Progress, Spinner, TriangleAlert } from "@omnibot/ui";
+import { AppLoadingScreen } from "@omnibot/ui/features/account/AppLoadingScreen";
+import { WhatsNewBody } from "@omnibot/ui/features/updates/WhatsNewDialog";
+import type { WhatsNewRelease } from "@omnibot/ui/features/updates/whats-new";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, For, Match, onCleanup, onSettled, Show, Switch, untrack } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -12,7 +12,7 @@ import "./UpdateReadyConcept.css";
 // restart flow (ready -> restarting -> success, failure or slow) so the fallback states can be
 // compared between layouts. The launch flow puts the version handoff between the loading screen and
 // the app, with the download before the restart. Copy is concept text; a shipped screen takes it
-// from `@openbot/i18n`.
+// from `@omnibot/i18n`.
 
 const CURRENT_VERSION = "0.25.3";
 const NEXT_VERSION = "0.26.0";

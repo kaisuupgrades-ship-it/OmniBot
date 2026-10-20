@@ -1,6 +1,6 @@
-import type { AvatarImageInput, CentralAuthUser, MobileConnectedDevice, UpdateStatus } from "@openbot/contracts/ipc";
-import { Button, Toaster, toast } from "@openbot/ui";
-import { DEFAULT_GENERAL_SETTINGS, type GeneralSettingsValue } from "@openbot/ui/features/settings/app-settings";
+import type { AvatarImageInput, CentralAuthUser, MobileConnectedDevice, UpdateStatus } from "@omnibot/contracts/ipc";
+import { Button, Toaster, toast } from "@omnibot/ui";
+import { DEFAULT_GENERAL_SETTINGS, type GeneralSettingsValue } from "@omnibot/ui/features/settings/app-settings";
 import { createSignal, onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -9,7 +9,7 @@ import type { SettingsTab } from "../src/features/settings/settings-tabs";
 import { STORY_SERVERS } from "../src/preview/fixtures";
 import { createMockBilling } from "../src/preview/mock-billing";
 import type { MockVoiceOptions } from "../src/preview/mock-voice";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 import { SettingsPageStory } from "./settings-page-story";
 import { previewStorySoundSettings } from "./sound-feedback-fixture";
 
@@ -50,14 +50,14 @@ function SettingsModalStory(props: {
   /** The downloaded dictation models and the saved voice setting. */
   voice?: MockVoiceOptions;
 }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const billingApi = createMockBilling();
   const mock = createMockOmniBot(props.voice);
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onCleanup(() => {
     mock.dispose();
     toast.dismiss();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   const hostedServersApi = {
     ...mock.api.hostedServers,

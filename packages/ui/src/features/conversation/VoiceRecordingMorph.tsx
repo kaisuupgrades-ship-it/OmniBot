@@ -1,5 +1,5 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, Check, X } from "@openbot/ui";
+import type { AppTextKey } from "@omnibot/i18n";
+import { Button, Check, X } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createUniqueId, For, Show } from "solid-js";
 import { useText } from "../../text";

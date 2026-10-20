@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the browser dock overlay reaches in main: the presentation, the actions, the frame, and the code
@@ -12,7 +12,7 @@ export interface BrowserDockPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function browserDockPort(): BrowserDockPort {
-  return window.openbot;
+  return window.omnibot;
 }

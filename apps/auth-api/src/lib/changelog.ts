@@ -9,12 +9,12 @@
 // `### Added` style groups, `-` bullets with indented continuation lines, plain paragraphs
 // under a heading, and inline `**bold**`, `code` and [links](url).
 
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
 import {
-  OPENBOT_SITE_URL,
-  OPENBOT_SOCIAL_IMAGE_ALT,
-  OPENBOT_SOCIAL_IMAGE_URL,
-  OPENBOT_X_HANDLE,
+  OMNIBOT_SITE_URL,
+  OMNIBOT_SOCIAL_IMAGE_ALT,
+  OMNIBOT_SOCIAL_IMAGE_URL,
+  OMNIBOT_X_HANDLE,
 } from "./site-metadata";
 
 export const CHANGELOG_ROUTE = "/changelog";
@@ -242,7 +242,7 @@ export function parseInline(text: string): InlineSegment[] {
   return segments;
 }
 
-export function changelogUrl(siteUrl: string = OPENBOT_SITE_URL, platform: ChangelogPlatform = "desktop"): string {
+export function changelogUrl(siteUrl: string = OMNIBOT_SITE_URL, platform: ChangelogPlatform = "desktop"): string {
   const url = new URL(CHANGELOG_ROUTE, siteUrl);
   if (platform === "mobile") url.searchParams.set("platform", platform);
   return url.toString();
@@ -261,14 +261,14 @@ export function changelogHead(siteUrl: string, platform: ChangelogPlatform = "de
       { property: "og:url", content: url },
       { property: "og:title", content: CHANGELOG_TITLE },
       { property: "og:description", content: CHANGELOG_DESCRIPTION },
-      { property: "og:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-      { property: "og:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+      { property: "og:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+      { property: "og:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: OPENBOT_X_HANDLE },
+      { name: "twitter:site", content: OMNIBOT_X_HANDLE },
       { name: "twitter:title", content: CHANGELOG_TITLE },
       { name: "twitter:description", content: CHANGELOG_DESCRIPTION },
-      { name: "twitter:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-      { name: "twitter:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+      { name: "twitter:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+      { name: "twitter:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
     ],
     links: [{ rel: "canonical", href: url }],
   };

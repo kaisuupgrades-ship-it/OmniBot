@@ -1,6 +1,6 @@
 import { cp, mkdir, rename, rm } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("runtime-install");
 

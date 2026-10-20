@@ -1,32 +1,16 @@
-# OmniBot fork
+# OmniBot
 
-OmniBot is a personal, noncommercial rebrand of [OpenBot](https://github.com/nightly-labs/openbot)
-by Synthetify Labs. It is used under the PolyForm Noncommercial License 1.0.0 (see `LICENSE`).
+OmniBot is a local-first desktop workspace for persistent AI agents. This file is the setup guide
+for this copy: brand values, building the app, and the accounts you need of your own.
 
-**License rules that still apply:**
-
-- Use it only for noncommercial purposes. For commercial use, get a license from
-  licenses@openbot.run first.
-- When you give a copy to someone, include `LICENSE` and the `Required Notice:` lines. `NOTICE`
-  keeps the third-party credits. The rebrand script never changes these files.
-- The license gives no right to the OpenBot name or logo. Do not present OmniBot as OpenBot.
-
-## What is different from OpenBot
-
-| Area | Change |
-| --- | --- |
-| Name, scheme, app id | `OmniBot`, `omnibot://` links, `app.omnibot.desktop`. It installs next to OpenBot and keeps its own data in `%APPDATA%\OmniBot` and `~/OmniBot`. |
-| Servers | The defaults point at your own servers (see `scripts/omnibot/brand.json`). |
-| Paid license | The commercial license, its seat limits and its purchase screens are removed. A server with no paid plan has no small member or site limit. |
-| Analytics | Off. The app sends no product analytics or error reports. |
-| Updates | The feed is `updatesUrl` in `brand.json`, a generic electron-updater feed. |
-| Logo | A placeholder mark (blue, two ring eyes). |
+License: PolyForm Noncommercial 1.0.0. `LICENSE` and `NOTICE` keep their text, and every copy you
+hand out must include them.
 
 ## Brand settings
 
 `scripts/omnibot/brand.json` holds every brand value:
 
-| Key | Default | Use |
+| Key | Now | Use |
 | --- | --- | --- |
 | `name` | `OmniBot` | The product name in the app, the installer and the web pages. |
 | `scheme` | `omnibot` | The `omnibot://` link scheme. |
@@ -36,16 +20,31 @@ by Synthetify Labs. It is used under the PolyForm Noncommercial License 1.0.0 (s
 | `repositoryUrl` | `https://omnibot.example.com/source` | Links to the source code. |
 | `containerImage` | `registry.omnibot.example.com/omnibot` | The Docker image for headless hosts. |
 
-The defaults are under `example.com`, which nobody can own, so the app cannot reach a stranger's
-server by mistake. Change them to your own values, then run:
+The values are under `example.com`, which nobody can own, so the app cannot reach a stranger's
+server by mistake. To use your own domain, change the values in `brand.json`, then run:
 
 ```sh
 bun scripts/omnibot/rebrand.ts --dry-run   # see what changes
 bun scripts/omnibot/rebrand.ts             # apply
 ```
 
-The script also replaces the values it applied last (`applied.json`), so you can run it again
-after each change and after each upstream merge.
+The script replaces the values in `applied.json` (what the app uses now) and then saves
+`brand.json` as the new `applied.json`. Changing `domain`, `updatesUrl` and the other addresses is
+safe. Changing `name` also renames code names that contain `OmniBot`, so run `bun run check`
+afterwards.
+
+## Placeholders to fill in
+
+Search for `REPLACE_WITH_YOUR_` to find each one.
+
+| Where | What |
+| --- | --- |
+| `apps/auth-api/wrangler.jsonc` | Your D1 database IDs (`wrangler d1 create`) and, for the GitHub connector, your GitHub App's Client ID. |
+| `src/main/github-connector-config.ts` | Your GitHub App's Client ID. Empty means the GitHub connection is not offered. |
+| `apps/mobile/app.json` | Your Expo account and EAS project ID. |
+| `apps/auth-api/src/lib/analytics.ts` | An OpenPanel client ID, only if you turn analytics on. |
+| `apps/slack-app/`, `docs/messaging.md`, `remote/.env.example`, `scripts/dev-slack-tunnels.ts` | Your Slack app and workspace IDs. |
+| `apps/auth-api/src/lib/site-metadata.ts`, `apps/mobile/.../support-settings-screen.tsx` | Your X account. The links go to `x.omnibot.example.com` until then. |
 
 ## Logo and icons
 
@@ -55,18 +54,19 @@ To use your own artwork, replace these files:
 - `build/icon-{production,dev,preview}.png` and `-macos-safe-area.png` (1600 × 1600)
 - `build/icon-*.ico`, `build/icon.ico`, `build/icon-production.icns`, `build/icon.svg`
 - `build/logo-colors/*` (one icon for each logo color the user can pick)
-- `src/renderer/src/assets/openbot-logo-*.png`
+- `src/renderer/src/assets/omnibot-logo-*.png`
 - `apps/auth-api/public/` icons
 
 The logo that the app draws comes from `packages/brand/src/app-logo-shape.ts` and `logo.css`.
-The brand colors are `--openbot-logo-*` and `--openbot-accent*` in `packages/brand/src/tokens.css`.
-These are not replaced yet: `apps/auth-api/public/openbot-social.png`, `build/dmg-background*.png`
-(macOS only) and the iPhone and Android app icons in `apps/mobile/assets`.
+The brand colors are `--omnibot-logo-*` and `--omnibot-accent*` in `packages/brand/src/tokens.css`.
+These still show the old artwork: `apps/auth-api/public/omnibot-social.png`,
+`build/dmg-background*.png` (macOS only), the iPhone and Android app icons in `apps/mobile/assets`,
+and the screenshots in the website's news and guide articles.
 
 ## Build the Windows app
 
 ```sh
-bun install --frozen-lockfile
+OMNIBOT_SKIP_SKIA=1 bun install --frozen-lockfile
 bun run dist:win
 ```
 
@@ -87,23 +87,32 @@ Do the steps in [docs/self-hosting.md](docs/self-hosting.md), with your own doma
    fill it in, and start it with Docker Compose.
 
 After `brand.json` has your domain, the app uses your servers by default. You do not have to set
-`OPENBOT_AUTH_API_URL` or `OPENBOT_REMOTE_SIGNAL_URL`.
+`OMNIBOT_AUTH_API_URL` or `OMNIBOT_REMOTE_SIGNAL_URL`.
 
 Features that need accounts of your own before they work:
 
 - **Slack, Discord and Telegram:** make your own bot apps and give their secrets to Signal and the
   Worker (see `docs/messaging.md` and `remote/README.md`).
-- **GitHub connector:** register your own GitHub App (`scripts/github-app/manifest.json`), then set
-  `GITHUB_APP_CLIENT_ID` in `wrangler.jsonc` and `OPENBOT_GITHUB_CLIENT_ID` /
-  `OPENBOT_GITHUB_APP_SLUG` for the app.
+- **GitHub connector:** register your own GitHub App (`bun scripts/create-github-app.ts`), then set
+  its Client ID in `src/main/github-connector-config.ts` and `GITHUB_APP_CLIENT_ID` in
+  `wrangler.jsonc`.
 - **Paid hosted servers:** off (`HOSTED_SERVERS_ENABLED` is `"false"`). They need a boat.dev and
   Stripe account.
-- **iPhone app:** needs your own Apple developer account, bundle id and push keys.
+- **iPhone and Android apps:** need your own Apple developer account, Expo project, Firebase
+  project (`apps/mobile/google-services.json`) and push keys.
 
-## Things that still use upstream addresses
+## Remote desktop helper
 
-- The provider runtime blocklist (`raw.githubusercontent.com/nightly-labs/openbot/...`). It only
-  blocks broken agent runtime versions.
-- The pinned remote desktop runtime download in `native-runtime.lock.json`.
-- The GitHub workflows in `.github/`. They are OpenBot's release and review pipelines. Delete or
-  change them before you push this fork to GitHub.
+Remote desktop uses a prebuilt helper (Sunshine and Moonlight Web, built from the patches in
+`vendor/remote-desktop/patches/`). The helper was compiled with its own names built in, so these
+keep their original spelling: the `/api/openbot/*` routes, the `openbot-moonlight` message source,
+the `OPENBOT_REMOTE_SETUP` environment variable, the `OPENBOT_SECURITY_TESTS` build flag and the
+patch file names. `native-runtime.lock.json` pins the helper download, by SHA-256, to the GitHub
+release of the original project, so `bun run dist:win` downloads it from there when
+`build/remote-desktop-runtime/` does not have it yet. Renaming them means rebuilding the helper with the "Remote desktop runtime" workflow
+and publishing it from your own repository.
+
+## GitHub Actions
+
+The workflows in `.github/workflows/` (CI, Computer Use driver, remote desktop runtime) run only
+when started by hand, so pushes to a private repository spend no Actions minutes.

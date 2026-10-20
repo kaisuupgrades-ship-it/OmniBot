@@ -7,7 +7,7 @@
 import { isBoundedString } from "./ipc-bounded-values";
 import { isDynamicRecord, isNumber, isOneOf } from "./runtime-values";
 
-export const WEB_MESSAGING_INSTALL_CHANNEL = "openbot:messaging-install";
+export const WEB_MESSAGING_INSTALL_CHANNEL = "omnibot:messaging-install";
 
 /** The same as the host's connect link: the host forgets the install's key after this time. */
 export const WEB_MESSAGING_INSTALL_TTL_MS = 15 * 60_000;
@@ -15,7 +15,7 @@ export const WEB_MESSAGING_INSTALL_TTL_MS = 15 * 60_000;
 export const WEB_MESSAGING_INSTALL_PLATFORMS = ["slack", "discord"] as const;
 export type WebMessagingInstallPlatform = (typeof WEB_MESSAGING_INSTALL_PLATFORMS)[number];
 
-export const WEB_MESSAGING_INSTALL_KEY_PREFIX = "openbot:messaging-install:";
+export const WEB_MESSAGING_INSTALL_KEY_PREFIX = "omnibot:messaging-install:";
 
 /** The local storage key that marks an install the client started. */
 export function webMessagingInstallKey(nonce: string): string {

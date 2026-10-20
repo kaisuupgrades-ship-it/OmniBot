@@ -20,9 +20,9 @@
  * rule becomes weaker.
  */
 
-export const OPENBOT_PLUGIN_ORIGIN = "https://omnibot.example.com";
-export const OPENBOT_PLUGIN_PATH_PREFIX = "/plugins/";
-export const OPENBOT_PLUGIN_HOST = "plugins";
+export const OMNIBOT_PLUGIN_ORIGIN = "https://omnibot.example.com";
+export const OMNIBOT_PLUGIN_PATH_PREFIX = "/plugins/";
+export const OMNIBOT_PLUGIN_HOST = "plugins";
 export const WEB_APP_PLUGIN_PARAM = "plugin";
 
 /**
@@ -38,7 +38,7 @@ export function isPluginSlug(value: string): boolean {
 /** Where a shared plugin link points. */
 export function createPluginShareUrl(slug: string): string {
   assertPluginSlug(slug);
-  return `${OPENBOT_PLUGIN_ORIGIN}${OPENBOT_PLUGIN_PATH_PREFIX}${slug}`;
+  return `${OMNIBOT_PLUGIN_ORIGIN}${OMNIBOT_PLUGIN_PATH_PREFIX}${slug}`;
 }
 
 /**
@@ -59,7 +59,7 @@ export function pluginSlugFromWebAppSearch(search: string): string | null {
 /** The link the page's button opens, which raises the app on this listing. */
 export function createOmniBotPluginUrl(slug: string): string {
   assertPluginSlug(slug);
-  return `omnibot://${OPENBOT_PLUGIN_HOST}/${slug}`;
+  return `omnibot://${OMNIBOT_PLUGIN_HOST}/${slug}`;
 }
 
 /**
@@ -92,9 +92,9 @@ export function parsePluginUrl(value: string): string {
      `omnibot.example.com.example.com` through. */
   const canonical =
     url.protocol === "https:" &&
-    url.origin === OPENBOT_PLUGIN_ORIGIN &&
-    url.pathname.startsWith(OPENBOT_PLUGIN_PATH_PREFIX);
-  const customScheme = url.protocol === "omnibot:" && url.hostname === OPENBOT_PLUGIN_HOST;
+    url.origin === OMNIBOT_PLUGIN_ORIGIN &&
+    url.pathname.startsWith(OMNIBOT_PLUGIN_PATH_PREFIX);
+  const customScheme = url.protocol === "omnibot:" && url.hostname === OMNIBOT_PLUGIN_HOST;
   if (
     (!canonical && !customScheme) ||
     url.username !== "" ||
@@ -108,7 +108,7 @@ export function parsePluginUrl(value: string): string {
 
   /* One segment after the prefix, and no empty one. `..` and a trailing slash both fail here before
      the pattern ever sees them. */
-  const rest = canonical ? url.pathname.slice(OPENBOT_PLUGIN_PATH_PREFIX.length) : url.pathname.replace(/^\//u, "");
+  const rest = canonical ? url.pathname.slice(OMNIBOT_PLUGIN_PATH_PREFIX.length) : url.pathname.replace(/^\//u, "");
   const segments = rest.split("/");
   if (segments.length !== 1) {
     throw new Error("The OmniBot plugin link is invalid.");

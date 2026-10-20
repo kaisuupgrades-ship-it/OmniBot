@@ -1,6 +1,6 @@
-import type { AttachmentSummary } from "@openbot/contracts/ipc";
-import { Button, ChevronLeft, ChevronRight, Dialog, X } from "@openbot/ui";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import type { AttachmentSummary } from "@omnibot/contracts/ipc";
+import { Button, ChevronLeft, ChevronRight, Dialog, X } from "@omnibot/ui";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createMemo, createSignal, createStore, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { CloseIcon, DownloadIcon } from "./ConversationIcons";

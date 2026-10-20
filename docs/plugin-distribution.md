@@ -23,7 +23,7 @@ Two things are not decided:
 - where the list of available plugins comes from;
 - what a shared plugin link opens.
 
-`Copy link` also copies `https://openbot.app/plugins/<slug>`. That host does not exist. The
+`Copy link` also copies `https://omnibot.app/plugins/<slug>`. That host does not exist. The
 canonical site is `https://omnibot.example.com` (`packages/contracts/src/invite-links.ts`).
 
 This document answers three questions:
@@ -54,7 +54,7 @@ A plugin is one developer's bundle. It contains:
   developer's website, privacy policy and terms links.
 
 The types in `packages/ui/src/features/settings/marketplace-plugins.ts` are the start shape.
-`@openbot/ui` owns them today, and the renderer imports them from there. They are not in
+`@omnibot/ui` owns them today, and the renderer imports them from there. They are not in
 `packages/contracts`.
 
 ## 2. Catalog delivery
@@ -219,7 +219,7 @@ does over `packages/contracts/src/ipc-mcp-servers.ts`.
 
 New channels: `plugins:list`, `plugins:get`, `plugins:install-state`, `plugins:install`,
 `plugins:uninstall`. Each one gets a decoder in `src/preload/index.ts` and a mirror in
-`src/renderer/src/preview/mock-openbot.ts`. `src/main/ipc-channel-coverage.test.ts` enforces the
+`src/renderer/src/preview/mock-omnibot.ts`. `src/main/ipc-channel-coverage.test.ts` enforces the
 mirror.
 
 ## 3. What "Install plugin" does
@@ -254,7 +254,7 @@ again from the store.
 `plugins:install-state` does not trust the receipt. For each plugin it tests:
 
 - the app is installed when the MCP record still exists. The user can delete it in settings;
-- a skill is installed when the agent's `<workspace>/.openbot/skills-lock.json` still lists it.
+- a skill is installed when the agent's `<workspace>/.omnibot/skills-lock.json` still lists it.
 
 A newer version in the index makes the button show "Update". If the receipt is lost, the app can
 find a probable install, but it then offers "Reinstall" and not a version.
@@ -336,7 +336,7 @@ identifier, so a path segment is sufficient. A query form would invite growth, s
 
 The parser accepts a URL only when:
 
-- the protocol is `openbot:` with the host `plugins`, or the origin is exactly
+- the protocol is `omnibot:` with the host `plugins`, or the origin is exactly
   `https://omnibot.example.com` with the path prefix `/plugins/`;
 - there is exactly one path segment after the prefix;
 - the search, the hash, the port, the user name and the password are empty;
@@ -406,7 +406,7 @@ never opens a window. This design adds nothing to the navigation policy.
 | A link installs a plugin without agreement | The link opens the listing only. The install is a separate press with an agent choice. A test enforces this. |
 | A path attack, such as `omnibot://plugins/../join?…` | One path segment, and the slug pattern. The invite parser owns `join`. |
 | Extra fields in the link, such as `?install=1` | The search and the hash must be empty. |
-| A similar host, such as `openbot.app` or `omnibot.example.com.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
+| A similar host, such as `omnibot.app` or `omnibot.example.com.example.com` | The origin is compared as a whole string. No `endsWith` and no expression on the host name. |
 | A `javascript:` or `file:` URL in catalog data | `safeBrowserUrl` accepts `http:` and `https:` only, and the share URL is built and not read. |
 | The slug used as a file path | The slug is checked at the IPC boundary, and it never builds a path. |
 | Many links raise the window | One pending link is kept. A second link replaces the first. |

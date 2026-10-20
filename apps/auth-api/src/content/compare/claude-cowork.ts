@@ -1,4 +1,4 @@
-import { OPENBOT_LINKS } from "../../lib/landing-links";
+import { OMNIBOT_LINKS } from "../../lib/landing-links";
 import type { Comparison } from "./comparison";
 
 // Every statement about Claude Cowork here is taken from claude.com, the Claude help
@@ -30,31 +30,31 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
     {
       icon: "cpu",
       topic: "Models and plans",
-      openbot:
+      omnibot:
         "Use the plans you already have: ChatGPT, Claude, Gemini, Grok or Cursor. Or run free models and your own model through OpenCode. Choose one for each agent, and change it later.",
       rival:
         "Claude models only, with your paid Claude plan. Companies can also use Claude through Amazon Bedrock, Google Cloud or Microsoft Foundry.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "laptop",
       topic: "Where agents work",
-      openbot: "On the computer that runs OmniBot.",
+      omnibot: "On the computer that runs OmniBot.",
       rival:
         "In Anthropic's cloud. From 6 October 2026, new tasks on Pro and Max run only in the cloud; tasks already started on your computer stay there.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "cloud",
       topic: "When your computer is off",
-      openbot:
+      omnibot:
         "Agents keep working on the computer or server that runs OmniBot, and routines start them on a schedule. If you do not want to keep a computer on, use a hosted OmniBot server in the EU, from €20 or $25 a month.",
       rival: "Cloud sessions keep working when you close your laptop, and scheduled tasks run with no device online.",
     },
     {
       icon: "phone",
       topic: "Remote access",
-      openbot:
+      omnibot:
         "Apps for iPhone and Android connect from anywhere. Chats and files go over an encrypted connection between your devices, with no VPN, and no cloud stores them.",
       rival:
         "Start, steer and review tasks from the Claude apps for iPhone and Android or the web, in beta. Sessions and files are saved to your Claude account.",
@@ -62,7 +62,7 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
     {
       icon: "users",
       topic: "Teams",
-      openbot:
+      omnibot:
         "Each agent is a full coding agent with its own job. They give work to each other in shared channels, and coworkers can join one team host.",
       rival:
         "Claude can split a task across sub-agents that work in parallel. You cannot share a session, but you can share what it makes, and Team and Enterprise plans can share projects.",
@@ -70,25 +70,25 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
     {
       icon: "lock",
       topic: "Your data",
-      openbot:
+      omnibot:
         "Workspaces, chats and files stay in a database on your computer. The provider you choose gets the requests you send. Product analytics, with no chat content, are on by default and linked to your account when you sign in; you can turn them off.",
       rival:
         "Cloud sessions and their files are saved to your Claude account; local files that a cloud session opens are processed on Anthropic's servers. On Pro and Max, you can opt out of model training.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "tag",
       topic: "Price and account",
-      openbot:
+      omnibot:
         "Free for noncommercial use; commercial use needs a license. Your agents use the plans you already pay for.",
       rival:
         "Needs a paid Claude plan: Pro from $17 a month, Max from $100, Team from $20 a seat, or Enterprise. Cowork uses your limits faster than chat.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "globe",
       topic: "Where you can use it",
-      openbot:
+      omnibot:
         "In any country: OmniBot has no region lock. The desktop app is in English, French, Japanese and Turkish, and hosted servers run in the EU. Each AI provider sets the countries for its own plan.",
       rival:
         "In the countries where Anthropic offers Claude, which include the US, the EU, the UK and Switzerland, but not China or Russia. The app is in 11 languages.",
@@ -96,17 +96,17 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
     {
       icon: "devices",
       topic: "Apps",
-      openbot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
+      omnibot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
       rival:
         "The Claude desktop app for macOS and Windows, and Linux in beta. The Claude apps for iPhone and Android and the web, in beta.",
     },
     {
       icon: "code",
       topic: "Source code",
-      openbot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
+      omnibot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
       rival:
         "Closed source; the terms prohibit reverse engineering. Its plugins are on GitHub under the Apache License 2.0.",
-      better: "openbot",
+      better: "omnibot",
     },
   ],
   intro:
@@ -114,41 +114,41 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
   sections: [
     {
       title: "Models and the plans you pay for",
-      openbot:
+      omnibot:
         "OmniBot runs the provider tools you already use, with the plans you already pay for: Codex with your ChatGPT plan, Claude Code with your Claude plan, Gemini with your Google AI Pro or Ultra plan, Grok CLI with your Grok account or an xAI API key, and Cursor CLI with your Cursor plan or a Cursor API key. OpenCode runs free models, or your own model on any OpenAI-compatible server, also one on your computer. You choose the provider, the model and the reasoning effort for each agent. When you move an agent to a different provider, it keeps its role, workspace and conversation.",
       rival:
         "Claude Cowork runs on Claude models, and it is available on the paid Claude plans: Pro, Max, Team and Enterprise. Companies can also use it through Amazon Bedrock, Google Cloud or Microsoft Foundry. Anthropic describes no way to use models from other companies. Cowork uses your plan's limits faster than chat.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "Where the work happens",
-      openbot:
+      omnibot:
         "OmniBot runs on the computer that hosts it. Agent workspaces, conversations and app data stay on that computer, so it must stay on while its agents work. Run it on a desktop or a server that stays on, and your agents keep working while your laptop is closed. If you do not want to keep a computer on, use a hosted OmniBot server. It is a Linux server in the EU (Germany, Finland or France), from €20 or $25 a month, and it keeps the workspaces and chats of its agents. Local-first is not offline: an agent that uses a hosted provider still sends its requests to that provider.",
       rival:
         "Claude Cowork sessions run in the cloud by default: the agent loop and the code run on Anthropic's servers, and sessions and files are saved to your Claude account. They keep working when you close your laptop, and scheduled tasks run with no device online. Existing desktop setups can still run sessions locally, in a Linux virtual machine on your computer, but from 6 October 2026, new tasks on Pro and Max run only in the cloud. On Team plans, cloud sessions are on by default; on Enterprise, an owner turns them on.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "Phones and remote access",
-      openbot:
+      omnibot:
         "The OmniBot apps for iPhone and Android connect to the computer that runs your agents. From anywhere, you chat with them, follow their progress and send files. The connection goes directly between your devices when it can, it is encrypted, and no cloud stores your chats or files. You set up no VPN or tunnel. Remote access needs an OmniBot account.",
       rival:
         "Claude Cowork runs on the web and in the Claude apps for iPhone and Android, in beta, on Pro, Max and Team plans, and on Enterprise plans where an admin turns it on. You start a task on one device, steer it from another, and pick up the result anywhere, because the session runs in Anthropic's cloud.",
     },
     {
       title: "How agents work as a team",
-      openbot:
+      omnibot:
         "In OmniBot, each agent is a full coding agent: Codex, Claude Code, Gemini, Grok CLI, Cursor CLI or OpenCode, each with its own job and workspace. A lead agent can give parts of a task to other agents in a shared channel. You follow their work and step in when a decision needs you. For a team of people, one computer runs the host and the others join it; the chats and files stay on the host.",
       rival:
         "Claude Cowork is one agent that can break a complex task into smaller parts and give them to sub-agents that work at the same time. You cannot share a session with other people, but you can share the artifacts it makes. On Team and Enterprise plans, members can share projects, and owners can turn Cowork off for the organisation.",
     },
     {
       title: "Data and privacy",
-      openbot:
+      omnibot:
         "OmniBot keeps workspaces, conversations, attachments and browser data in a SQLite database on the computer that runs it. OmniBot keeps no other copy. On a hosted OmniBot server, the database is on that server in the EU. An account holds your profile, team memberships, invitations, sign-in sessions, the settings that let devices find each other, and any agent templates that you publish. Product analytics, which never include chat content, are on by default and linked to your account when you sign in; you can turn them off in Settings.",
       rival:
         "Cloud sessions and their files are saved to your Claude account. Local files that a cloud session opens through the desktop app are processed on Anthropic's servers, not only on your computer. On Pro and Max, you can opt out of model training; if you allow it, Anthropic can keep your data for up to 5 years. A deleted conversation leaves Anthropic's storage within 30 days.",
-      better: "openbot",
+      better: "omnibot",
     },
   ],
   faq: [
@@ -236,8 +236,8 @@ export const CLAUDE_COWORK_COMPARISON: Comparison = {
     },
     { label: "Anthropic consumer terms", url: "https://www.anthropic.com/legal/consumer-terms" },
     { label: "Claude knowledge work plugins", url: "https://github.com/anthropics/knowledge-work-plugins" },
-    { label: "OmniBot privacy notes", url: OPENBOT_LINKS.privacy },
-    { label: "OmniBot source code", url: OPENBOT_LINKS.repository },
+    { label: "OmniBot privacy notes", url: OMNIBOT_LINKS.privacy },
+    { label: "OmniBot source code", url: OMNIBOT_LINKS.repository },
   ],
   checkedAt: "2026-10-02",
 };

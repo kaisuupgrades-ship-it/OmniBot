@@ -1,5 +1,5 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { ConversationQuestionPrompt } from "@openbot/contracts/ipc";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { ConversationQuestionPrompt } from "@omnibot/contracts/ipc";
 import { Button, Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import Check from "lucide-react-native/icons/check";

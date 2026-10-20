@@ -1,6 +1,6 @@
-import { CONNECTORS_CAPABILITY } from "@openbot/contracts/team-protocol/connectors-v1";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@openbot/contracts/team-protocol/onepassword-connector-v1";
+import { CONNECTORS_CAPABILITY } from "@omnibot/contracts/team-protocol/connectors-v1";
+import type { TeamCurrentCapability } from "@omnibot/contracts/team-protocol/current";
+import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@omnibot/contracts/team-protocol/onepassword-connector-v1";
 
 /**
  * Every connector, in the order that Settings › Connectors and Marketplace › Apps show them. A

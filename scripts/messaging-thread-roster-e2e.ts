@@ -1,7 +1,7 @@
 // Checks that a restart never makes the thread of a Discord or Slack conversation an agent's own chat,
 // and that an agent which an earlier build gave one keeps it with one conversation snapshot. Boots the
 // real agent store on a temporary profile three times: `bun scripts/messaging-thread-roster-e2e.ts`.
-// Writes .openbot-build/messaging-thread-roster-e2e/report.json.
+// Writes .omnibot-build/messaging-thread-roster-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
@@ -11,10 +11,10 @@ import { ConversationRuntime } from "../src/backend/agent/conversation-runtime";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import { MessagingStore } from "../src/backend/messaging/messaging-store";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-thread-roster-e2e");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-thread-roster-"));
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/messaging-thread-roster-e2e");
+const root = await mkdtemp(join(tmpdir(), "omnibot-messaging-thread-roster-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 

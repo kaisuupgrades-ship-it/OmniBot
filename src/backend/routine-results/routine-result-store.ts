@@ -12,10 +12,10 @@ import {
   type RoutineResultDelivery,
   type RoutineResultDeliveryReason,
   type RoutineResultDestination,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@omnibot/contracts/runtime-values";
 import { databaseRow, databaseRows } from "../database/database-rows";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 
 /** A delivery the runtime can send: its place and the text, which a quiet run never has. */
 export interface RoutineResultOutgoing {

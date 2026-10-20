@@ -5,7 +5,7 @@
 // the free models with a "(free)" name, that a listed and a free model each reach the session through
 // the `model` option, that a free model moves the session to the `cline` provider, that a list that
 // cannot be read gives the last good one, then the bundled one, and that an empty free tier is kept.
-// `bun scripts/cline-free-models-e2e.ts`. Writes .openbot-build/cline-free-models-e2e/report.json.
+// `bun scripts/cline-free-models-e2e.ts`. Writes .omnibot-build/cline-free-models-e2e/report.json.
 import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -22,7 +22,7 @@ import {
 } from "../src/backend/protocol";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/cline-free-models-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/cline-free-models-e2e");
 
 const FAKE_CLINE = `#!/usr/bin/env node
 const fs = require("node:fs");
@@ -129,7 +129,7 @@ interface Report {
   ended?: string[];
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-cline-free-models-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-cline-free-models-e2e-"));
 const log = join(root, "cline.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

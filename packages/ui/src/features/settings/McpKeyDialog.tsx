@@ -3,7 +3,7 @@
  * before it is saved anywhere.
  */
 
-import { Button, ExternalLink, Field, Input, ShieldCheck, Text } from "@openbot/ui";
+import { Button, ExternalLink, Field, Input, ShieldCheck, Text } from "@omnibot/ui";
 import { createMemo, createStore, For, Show } from "solid-js";
 import { useText } from "../../text";
 import { createConnectRun, type McpConnectBaseProps, McpConnectShell } from "./McpConnectShell";

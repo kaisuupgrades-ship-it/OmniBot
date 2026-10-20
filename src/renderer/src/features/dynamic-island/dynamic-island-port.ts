@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the dynamic island reaches in main: its presentation, preference, geometry and actions, and
@@ -21,7 +21,7 @@ export interface DynamicIslandPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function dynamicIslandPort(): DynamicIslandPort {
-  return window.openbot;
+  return window.omnibot;
 }

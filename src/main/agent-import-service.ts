@@ -13,7 +13,7 @@ import { type ArchiveOperationError, archiveCall, archiveFailure, archiveSync } 
 import { randomUUID } from "node:crypto";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_IMPORT_LIMITS,
   type AgentImportChannel,
@@ -29,8 +29,8 @@ import {
   type CreateChannelRoutineInput,
   type CreateRoutineInput,
   isChannelDraft,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { zipSync } from "fflate";
 import type { AgentService } from "../backend/agent-service";
 import type { ChannelService } from "../backend/channel-service";
@@ -58,7 +58,7 @@ import type { SkillMarketplaceFailure } from "./skill-marketplace-service";
 import { inspectArchive } from "./skill-package";
 
 /** Skill folders are copied here, published to the local library, and removed again. */
-const SKILL_STAGING = ".openbot/import-skills";
+const SKILL_STAGING = ".omnibot/import-skills";
 /** Workspace files of an imported agent go under this folder, so they never replace OmniBot's own. */
 const IMPORTED_FILES = "imported";
 /** Archive limits and the errors that name them. */

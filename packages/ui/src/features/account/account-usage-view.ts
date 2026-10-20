@@ -8,7 +8,7 @@ import {
   DEFAULT_PROVIDER_ACCOUNT_ID,
   isAgentProvider,
   type ProviderAccountStatus,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { providerAccountName } from "../../components/provider-accounts";
 import { currentText, type TextValue } from "../../text";
 

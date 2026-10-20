@@ -1,7 +1,7 @@
-import { type AgentSummary, analyticsRange, type HostAnalytics, LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
-import type { ProfileActivityPhase } from "@openbot/ui/features/settings/ProfileActivity";
-import type { ProfileActivityState } from "@openbot/ui/features/settings/SettingsProfileTab";
-import { errorReference } from "@openbot/user-errors";
+import { type AgentSummary, analyticsRange, type HostAnalytics, LOCAL_SERVER_ID } from "@omnibot/contracts/ipc";
+import type { ProfileActivityPhase } from "@omnibot/ui/features/settings/ProfileActivity";
+import type { ProfileActivityState } from "@omnibot/ui/features/settings/SettingsProfileTab";
+import { errorReference } from "@omnibot/user-errors";
 import { createEffect, createStore, untrack } from "solid-js";
 import { usagePort } from "../usage/usage-port";
 

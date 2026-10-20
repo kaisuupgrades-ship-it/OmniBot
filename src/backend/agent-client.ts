@@ -1,4 +1,4 @@
-import type { AgentProviderId, AgentSessionSettingsSnapshot, AgentSessionSettingValue } from "@openbot/contracts/ipc";
+import type { AgentProviderId, AgentSessionSettingsSnapshot, AgentSessionSettingValue } from "@omnibot/contracts/ipc";
 import type { Effect } from "effect";
 import type { AppServerNotification, AppServerRequest, RequestId, ResponseDecoder, RpcError } from "./protocol";
 import type { ProviderClientOperationError } from "./provider-client-effects";

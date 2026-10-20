@@ -1,4 +1,4 @@
-import type { AgentTemplateDetail } from "@openbot/contracts/ipc";
+import type { AgentTemplateDetail } from "@omnibot/contracts/ipc";
 import type { JSX } from "@solidjs/web";
 import { createRootRoute, createRoute, createRouter, RouterContextProvider } from "@tanstack/solid-router";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

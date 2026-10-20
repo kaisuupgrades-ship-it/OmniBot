@@ -1,6 +1,6 @@
-import type { AgentApproval, AgentEvent, AgentRuntimeSnapshot } from "@openbot/contracts/ipc";
-import { cleanAgentMessageText } from "@openbot/team-client/agent-message-text";
-import type { AgentMessage } from "@openbot/ui/data";
+import type { AgentApproval, AgentEvent, AgentRuntimeSnapshot } from "@omnibot/contracts/ipc";
+import { cleanAgentMessageText } from "@omnibot/team-client/agent-message-text";
+import type { AgentMessage } from "@omnibot/ui/data";
 import { createStoredMessage } from "../../app-stored-values";
 import { promptRequestKey } from "../conversation/conversation-keys";
 

@@ -9,18 +9,18 @@ import {
   type McpSignInRelayPage,
   type ProviderAdminDesktopApi,
   relayCallbackQuery,
-} from "@openbot/contracts/ipc";
-import { SIGN_IN_RELAY_PROVIDERS } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@omnibot/contracts/ipc";
+import { SIGN_IN_RELAY_PROVIDERS } from "@omnibot/contracts/team-protocol/sign-in-relay-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   cancelProviderSignInRelay,
   completeSignInRelay,
   signInRelayStatus,
   startProviderSignInRelay,
   type TeamAdminRequestError,
-} from "@openbot/team-client/team-admin-requests";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
+} from "@omnibot/team-client/team-admin-requests";
+import type { TeamApiRequest } from "@omnibot/team-client/team-api-requests";
 import { Effect } from "effect";
 
 /** How often the host is asked how the sign-in is. */

@@ -1,4 +1,4 @@
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { Typography } from "heroui-native";
 import { useThemeColor } from "heroui-native/hooks";
 import type { LucideIcon } from "lucide-react-native";
@@ -38,7 +38,7 @@ export const AGENT_WAIT_STATE = {
 export function AgentWaitBadge({ reason, size = 20 }: { reason: MobileAgentWaitReason; size?: number }) {
   const [background] = useThemeColor(["background"]);
   // HeroUI keeps its own dark warning, a yellow. The OmniBot token is the amber of the chip and the desktop.
-  const [warning] = useCSSVariable(["--openbot-warning"]);
+  const [warning] = useCSSVariable(["--omnibot-warning"]);
   const Icon = WAIT_ICON[reason];
   return (
     <View
@@ -62,7 +62,7 @@ export function AgentWaitBadge({ reason, size = 20 }: { reason: MobileAgentWaitR
 export function AgentWaitChip({ reason }: { reason: MobileAgentWaitReason }) {
   const { t } = useText();
   // The label has the amber of the mark and the group count, so the three read as one state.
-  const [warningSoft, warning] = useCSSVariable(["--openbot-warning-soft", "--openbot-warning"]);
+  const [warningSoft, warning] = useCSSVariable(["--omnibot-warning-soft", "--omnibot-warning"]);
   const Icon = WAIT_ICON[reason];
   return (
     <View
@@ -90,7 +90,7 @@ export function AgentWaitingGroupHeader({ count }: { count: number }) {
   const { t, format } = useText();
   const [background] = useThemeColor(["background"]);
   // HeroUI keeps its own dark warning, a yellow. The OmniBot token is the amber of the chip and the desktop.
-  const [warning] = useCSSVariable(["--openbot-warning"]);
+  const [warning] = useCSSVariable(["--omnibot-warning"]);
   return (
     <View
       accessible

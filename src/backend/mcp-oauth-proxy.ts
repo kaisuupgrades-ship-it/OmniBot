@@ -5,9 +5,9 @@
 import { createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import { once } from "node:events";
 import { createServer, type Server as HttpServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, registerSecretValue, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, registerSecretValue, toLogValue } from "@omnibot/logging";
 import { Effect, Semaphore } from "effect";
 import { runCauseEffect } from "./effect-boundary";
 import { McpOperationError, mcpCall, mcpSync } from "./mcp-effects";

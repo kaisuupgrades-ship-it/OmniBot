@@ -9,13 +9,13 @@ export function rendererDuration(property: string, fallback: number): number {
 }
 
 export function agentActivityExitDuration(): number {
-  return rendererDuration("--openbot-duration-overlay", 240);
+  return rendererDuration("--omnibot-duration-overlay", 240);
 }
 
 export function agentActivityShowDelay(): number {
-  return rendererDuration("--openbot-duration-fast", 120);
+  return rendererDuration("--omnibot-duration-fast", 120);
 }
 
 export function agentActivityExitDelay(): number {
-  return rendererDuration("--openbot-agent-activity-exit-delay", 500);
+  return rendererDuration("--omnibot-agent-activity-exit-delay", 500);
 }

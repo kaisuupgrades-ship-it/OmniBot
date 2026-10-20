@@ -1,4 +1,4 @@
-import type { AgentSummary, HostAnalytics } from "@openbot/contracts/ipc";
+import type { AgentSummary, HostAnalytics } from "@omnibot/contracts/ipc";
 import { usageProviders } from "../usage/usage-format";
 
 const DAY_MS = 86_400_000;

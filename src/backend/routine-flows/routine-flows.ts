@@ -31,10 +31,10 @@ import type {
   RoutineRun,
   SaveRoutineFlowPositionInput,
   UpdateRoutineFlowLinkInput,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
-import { nextValidRoutineOccurrence, routineOnceInstant } from "@openbot/team-client/routine-schedule";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
+import { nextValidRoutineOccurrence, routineOnceInstant } from "@omnibot/team-client/routine-schedule";
 import { Context, Effect, Exit, Layer, ManagedRuntime, Schema, Scope, Semaphore } from "effect";
 import { routineFlowDepths } from "./routine-flow-graph";
 import { RoutineFlowError, type RoutineFlowRun, type RoutineFlowStore } from "./routine-flow-store";
@@ -101,7 +101,7 @@ export interface RoutineFlowsShape {
   notice(event: AgentEvent): Effect.Effect<void>;
 }
 
-class RoutineFlows extends Context.Service<RoutineFlows, RoutineFlowsShape>()("openbot/backend/RoutineFlows") {
+class RoutineFlows extends Context.Service<RoutineFlows, RoutineFlowsShape>()("omnibot/backend/RoutineFlows") {
   static layer(dependencies: RoutineFlowsDependencies) {
     return Layer.effect(
       RoutineFlows,

@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentEvent,
   AgentSummary,
@@ -17,11 +17,11 @@ import type {
   RoutineRunConversationEventStatus,
   TestRoutineInput,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
-import { routineConversationEventItemType, routineRunConversationEventItemType } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { collapseMissedOccurrences, RoutineInputError } from "@openbot/team-client/routine-schedule";
+} from "@omnibot/contracts/ipc";
+import { routineConversationEventItemType, routineRunConversationEventItemType } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isBoolean } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { collapseMissedOccurrences, RoutineInputError } from "@omnibot/team-client/routine-schedule";
 import { Effect, Schema } from "effect";
 import { AgentRoutineStore } from "../agent-routine-store";
 import { AGENT_PREVIEW_MAX_LENGTH, type AgentStore } from "../agent-store";
@@ -38,8 +38,8 @@ import { quietRoutineRun } from "./routine-quiet-runs";
 import {
   localTimezone,
   type OmniBotToolResponse,
-  openBotToolFailure,
-  openBotToolResult,
+  omniBotToolFailure,
+  omniBotToolResult,
   routineToolAgentId,
   routineToolArguments,
   routineToolPolicies,
@@ -507,7 +507,7 @@ export class RoutineScheduler implements RoutineDueSource {
   }
 
   /**
-   * The six `openbot` routine tools. Returns null when `tool` is not one of them.
+   * The six `omnibot` routine tools. Returns null when `tool` is not one of them.
    *
    * A request the model can correct is a tool failure, not a throw: a throw becomes a provider error
    * toast, although the model's corrected retry then creates the routine. Other errors are faults
@@ -521,7 +521,7 @@ export class RoutineScheduler implements RoutineDueSource {
       Effect.catchDefect((cause) => Effect.fail(new RoutineOperationFailed({ cause }))),
       Effect.catch((failure) =>
         failure.cause instanceof RoutineInputError
-          ? Effect.succeed(openBotToolFailure(failure.cause.message))
+          ? Effect.succeed(omniBotToolFailure(failure.cause.message))
           : Effect.fail(failure),
       ),
     );
@@ -546,7 +546,7 @@ export class RoutineScheduler implements RoutineDueSource {
     if (params.tool === "list_routines") {
       const args = routineToolArguments(params.arguments, ["agentId"]);
       const agentId = this.#toolAgentId(args, senderAgentId);
-      return openBotToolResult({ routines: this.list(agentId) });
+      return omniBotToolResult({ routines: this.list(agentId) });
     }
 
     if (params.tool === "create_routine") {
@@ -592,7 +592,7 @@ export class RoutineScheduler implements RoutineDueSource {
         },
         agentId === senderAgentId ? { turnId: params.turnId } : {},
       );
-      return openBotToolResult(routine);
+      return omniBotToolResult(routine);
     }
 
     if (params.tool === "update_routine") {
@@ -636,7 +636,7 @@ export class RoutineScheduler implements RoutineDueSource {
         hasUpdate = true;
       }
       if (!hasUpdate) throw new RoutineInputError("At least one routine update is required.");
-      return openBotToolResult(this.update(input, input.agentId === senderAgentId ? { turnId: params.turnId } : {}));
+      return omniBotToolResult(this.update(input, input.agentId === senderAgentId ? { turnId: params.turnId } : {}));
     }
 
     if (params.tool === "delete_routine") {
@@ -649,7 +649,7 @@ export class RoutineScheduler implements RoutineDueSource {
         "routineId is required.",
       );
       yield* this.delete({ agentId, routineId }, agentId === senderAgentId ? { turnId: params.turnId } : {});
-      return openBotToolResult({ deleted: true, agentId, routineId });
+      return omniBotToolResult({ deleted: true, agentId, routineId });
     }
 
     if (params.tool === "test_routine") {
@@ -661,7 +661,7 @@ export class RoutineScheduler implements RoutineDueSource {
         INPUT_LIMITS.identifier,
         "routineId is required.",
       );
-      return openBotToolResult(yield* this.test({ agentId, routineId }));
+      return omniBotToolResult(yield* this.test({ agentId, routineId }));
     }
 
     return null;

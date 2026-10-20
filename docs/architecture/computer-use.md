@@ -63,7 +63,7 @@ needs. A packaged build reads the copy under `resources/cua-driver` and nothing 
 is pinned and signed against that build and an environment variable must not decide which program
 drives the user's desktop; a release without the binary reports no driver. In a checkout
 `resolveCuaDriver` also reads an override, an install directory and `PATH`, so a developer can point
-`OPENBOT_CUA_DRIVER_PATH` at another build.
+`OMNIBOT_CUA_DRIVER_PATH` at another build.
 
 OmniBot draws the agent cursor in its own per-display overlays for every display layout. The
 runtime starts `serve` with `--no-overlay`. The driver's overlay covers only the main display and
@@ -74,7 +74,7 @@ changing provider sessions.
 ### Agent display on a server
 
 A self-hosted server and the container start two Xvfb displays, and name the agent display in
-`OPENBOT_AGENT_DISPLAY`. A boat hosted server names its desktop `:0`, and OmniBot runs on an Xvfb
+`OMNIBOT_AGENT_DISPLAY`. A boat hosted server names its desktop `:0`, and OmniBot runs on an Xvfb
 display. Electron keeps its own `DISPLAY`: the built-in browser draws its tabs in
 the OmniBot window, and under Xvfb a hidden view gives no capture and no clicks, so OmniBot cannot
 only hide its window. On Linux, `agent-display.ts` sets `DISPLAY` to the agent display for the
@@ -86,10 +86,10 @@ draws the agent cursor or the rim there. `capture_screen` and `list_capture_sour
 `desktopCapturer`, which sees only the OmniBot display, so with an agent display they are not
 available, and agents take screenshots with the driver.
 
-`openbot.service` holds the Xvfb displays too, and a stop signals each process of the unit at the
+`omnibot.service` holds the Xvfb displays too, and a stop signals each process of the unit at the
 same time. An Xvfb that stops first ends OmniBot before it closes its database. So the unit's
-`ExecStop` runs `openbot-hosted-server --stop`: it sends `SIGTERM` to OmniBot only, whose PID the
-script writes to `$XDG_RUNTIME_DIR/openbot.pid`, and waits for it. The container does not need this:
+`ExecStop` runs `omnibot-hosted-server --stop`: it sends `SIGTERM` to OmniBot only, whose PID the
+script writes to `$XDG_RUNTIME_DIR/omnibot.pid`, and waits for it. The container does not need this:
 tini signals only OmniBot.
 
 Because the driver draws no cursor, its motion styles do not apply. The renderer plays the driver's
@@ -122,9 +122,9 @@ A local video-only test can run without native diagnostics. Its viewer iframe is
 
 A paste in the viewer puts the member's text on the host's clipboard, and then presses the host's
 paste keys. Moonlight sends Cmd+V or Ctrl+V as keys and cancels them, so the browser fires no paste
-event and the host pastes its own clipboard. The gateway adds `openbot-paste.js` to Moonlight's
+event and the host pastes its own clipboard. The gateway adds `omnibot-paste.js` to Moonlight's
 `stream.html`. The script keeps the member's paste key from Moonlight, reads the paste event, and
-posts the text to `moonlight/openbot-clipboard`. Both routes are under `moonlight/` because the
+posts the text to `moonlight/omnibot-clipboard`. Both routes are under `moonlight/` because the
 released Team API adapters forward only that family of viewer routes. The same viewer cookie or
 WebRTC session check protects them, and the clipboard route refuses a request from another site.
 At the paste event, the script presses the host's paste modifier, Cmd for a macOS host or Ctrl for
@@ -146,7 +146,7 @@ Codex saves an “Always allow” tool decision only when the MCP server is in a
 configuration layer. A thread configuration alone does not satisfy this check. Before starting or
 resuming a thread with Computer Use, OmniBot registers `computer_use` in the Codex user
 configuration through `config/batchWrite`. The new entry contains only a placeholder command
-(`openbot-mcp`) and `enabled = false`. The write uses the user layer's version, and an existing entry is left unchanged.
+(`omnibot-mcp`) and `enabled = false`. The write uses the user layer's version, and an existing entry is left unchanged.
 OmniBot does not save the driver socket, environment, or credentials in that entry.
 
 The thread configuration enables the running driver and supplies its current command, arguments,

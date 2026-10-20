@@ -14,10 +14,10 @@ import {
   conversationSubagentsText,
   isAgentContextCategories,
   latestTurnAnswer,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
+import { classifyFailure } from "@omnibot/telemetry";
 import { Cause, Deferred, Effect, Exit, Schema, Scope } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
@@ -368,7 +368,7 @@ export class TurnLifecycle {
     if (
       threadId &&
       agentId &&
-      ["turn/started", "thread/tokenUsage/updated", "openbot/usage", "model/rerouted"].includes(notification.method)
+      ["turn/started", "thread/tokenUsage/updated", "omnibot/usage", "model/rerouted"].includes(notification.method)
     ) {
       const agent = this.#store.list().find((entry) => entry.id === agentId);
       const session = agent?.threadId
@@ -583,7 +583,7 @@ export class TurnLifecycle {
           );
         return;
       }
-      case "openbot/context-compaction": {
+      case "omnibot/context-compaction": {
         if (!threadId || !agentId || this.#conversation.loadedClientFor(threadId) !== source) return;
         const status = getString(params, "status");
         if (status !== "running" && status !== "completed" && status !== "failed") return;

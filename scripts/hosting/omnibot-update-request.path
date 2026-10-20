@@ -1,0 +1,11 @@
+# OmniBot asks for an update now with an empty file in its runtime directory. This starts
+# omnibot-update-request.service as root, which removes the file and never reads it.
+[Unit]
+Description=Watch for an OmniBot update request
+
+[Path]
+PathExists=/run/omnibot/update-stage
+PathExists=/run/omnibot/update-install
+
+[Install]
+WantedBy=paths.target

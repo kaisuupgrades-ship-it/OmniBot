@@ -1,4 +1,4 @@
-import type { AgentTask } from "@openbot/contracts/ipc";
+import type { AgentTask } from "@omnibot/contracts/ipc";
 import { useQueries } from "@tanstack/react-query";
 import { useQueryScope } from "@/features/auth/context/mobile-session-context";
 import { useMobileWorkspace } from "@/features/workspace/context/mobile-workspace-context";

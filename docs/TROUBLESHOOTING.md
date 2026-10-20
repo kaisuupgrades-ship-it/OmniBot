@@ -24,10 +24,10 @@ curl -fsSL https://claude.ai/install.sh | bash
 claude auth login
 ```
 
-If Codex is installed in a non-standard location, launch OmniBot with `OPENBOT_CODEX_PATH` set to the
+If Codex is installed in a non-standard location, launch OmniBot with `OMNIBOT_CODEX_PATH` set to the
 absolute Codex executable path.
 
-For a non-standard Claude location, set `OPENBOT_CLAUDE_PATH` to the absolute Claude executable path.
+For a non-standard Claude location, set `OMNIBOT_CLAUDE_PATH` to the absolute Claude executable path.
 
 ## The Linux AppImage exits immediately
 
@@ -38,11 +38,11 @@ SUID sandbox or a user namespace to the terminal.
 Install the AppArmor profile that ships with OmniBot, then reload AppArmor:
 
 ```bash
-sudo install -m 0644 build/linux/openbot.apparmor /etc/apparmor.d/openbot
+sudo install -m 0644 build/linux/omnibot.apparmor /etc/apparmor.d/omnibot
 sudo systemctl reload apparmor
 ```
 
-The same file is inside the AppImage at `resources/linux/openbot.apparmor`. The profile attaches to
+The same file is inside the AppImage at `resources/linux/omnibot.apparmor`. The profile attaches to
 the usual places to keep an AppImage; if yours is somewhere else, edit the path in the profile before
 you install it.
 
@@ -66,11 +66,11 @@ start stops in its first 30 seconds, OmniBot writes `gpu-crash.json` or `gpu-sta
 `~/.config/OmniBot`. While one of these files is there, OmniBot renders on the CPU. Dialogs and
 panels with a blurred background are then slower. An update with a new Chromium version tries the
 GPU again. A GPU process restart after a lost GPU context, for example after suspend, does not
-count. A server (`OPENBOT_SERVER=1` or a hosted server) always renders on the CPU.
+count. A server (`OMNIBOT_SERVER=1` or a hosted server) always renders on the CPU.
 
 - To try the GPU again, for example after a driver update, remove the file. The log names it.
-- To always use the GPU, start OmniBot with `OPENBOT_DISABLE_GPU=0`.
-- If OmniBot stops at each start, start it with `OPENBOT_DISABLE_GPU=1` to always render on the CPU.
+- To always use the GPU, start OmniBot with `OMNIBOT_DISABLE_GPU=0`.
+- If OmniBot stops at each start, start it with `OMNIBOT_DISABLE_GPU=1` to always render on the CPU.
 
 ## Computer Use is unavailable
 
@@ -85,7 +85,7 @@ repair an installed release, because the application uses only its bundled drive
 
 In a development checkout, run `bun run prepare:cua-driver`, then press **Try again** in the panel.
 This command writes the same pinned build the release ships.
-`bun run cua-driver:doctor` reports which binary OmniBot would use, and `OPENBOT_CUA_DRIVER_PATH`
+`bun run cua-driver:doctor` reports which binary OmniBot would use, and `OMNIBOT_CUA_DRIVER_PATH`
 selects a different one. The installed application ignores that variable: it runs only the driver it
 was released with.
 
@@ -115,7 +115,7 @@ A driver call usually takes a few seconds or less. To see the time of each call,
 a terminal. Each driver call that takes 5 seconds or more shows in its output as `Computer Use
 driver answered`, with the tool name and the milliseconds. A call that gets no answer before the
 agent closes the connection shows as `Computer Use driver did not answer`. Set
-`OPENBOT_LOG_LEVEL=debug` to show every call. The log does not contain what the agent typed.
+`OMNIBOT_LOG_LEVEL=debug` to show every call. The log does not contain what the agent typed.
 
 Most of the time in a slow step is the model. Its time depends on the model and on the reasoning
 effort in the agent settings: a high effort can use tens of seconds before each action. For
@@ -143,7 +143,7 @@ If the chat is still missing, quit OmniBot and read the file directly. This repo
 agent currently claims, and the number of messages waiting in each:
 
 ```sh
-sqlite3 "$HOME/Library/Application Support/OmniBot/openbot.db" \
+sqlite3 "$HOME/Library/Application Support/OmniBot/omnibot.db" \
   "SELECT t.thread_id, t.agent_id, (SELECT count(*) FROM projection_thread_messages m
      WHERE m.thread_id = t.thread_id) AS messages
    FROM projection_threads t
@@ -166,11 +166,11 @@ workspace, while a release from before that repair refuses to start over the sam
 If the current version still stops, quit OmniBot and read the profile it names. On macOS:
 
 ```sh
-sqlite3 "$HOME/Library/Application Support/OmniBot/openbot.db" \
+sqlite3 "$HOME/Library/Application Support/OmniBot/omnibot.db" \
   "SELECT agent_json FROM projection_agents WHERE agent_id = '<id>';"
 ```
 
-On Windows, the same file is at `%APPDATA%\OmniBot\openbot.db`.
+On Windows, the same file is at `%APPDATA%\OmniBot\omnibot.db`.
 
 Report the field the message names, together with the details below. The output holds your own file
 paths, so review it before you publish it.
@@ -227,7 +227,7 @@ remove `~/.codex` or `~/.claude` unless you intentionally want to manage CLI log
 
 Quit OmniBot. On macOS remove `OmniBot.app` from Applications; on Windows use the installer's
 uninstaller; on Linux delete the AppImage, `~/.local/share/applications/omnibot.desktop`,
-`~/.local/share/icons/openbot.png`, and `/etc/apparmor.d/openbot` if you installed the profile. If
+`~/.local/share/icons/omnibot.png`, and `/etc/apparmor.d/omnibot` if you installed the profile. If
 you also want to remove local OmniBot data, follow the reset steps above. Agent CLIs and their data
 are independent and are not removed with OmniBot.
 

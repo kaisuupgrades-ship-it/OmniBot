@@ -1,17 +1,17 @@
-import type { AgentProviderStatus, AgentStatus } from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { PROVIDERS_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/providers-v1";
-import { PROVIDERS_RUNTIMES_V2_ROUTES } from "@openbot/contracts/team-protocol/providers-v2";
-import { PROVIDERS_SIGN_IN_V3_ROUTES } from "@openbot/contracts/team-protocol/providers-v3";
-import type { TeamApiRequest } from "@openbot/team-client/team-api-requests";
-import { Toaster } from "@openbot/ui";
+import type { AgentProviderStatus, AgentStatus } from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { PROVIDERS_ADMIN_ROUTES } from "@omnibot/contracts/team-protocol/providers-v1";
+import { PROVIDERS_RUNTIMES_V2_ROUTES } from "@omnibot/contracts/team-protocol/providers-v2";
+import { PROVIDERS_SIGN_IN_V3_ROUTES } from "@omnibot/contracts/team-protocol/providers-v3";
+import type { TeamApiRequest } from "@omnibot/team-client/team-api-requests";
+import { Toaster } from "@omnibot/ui";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { WebWorkspace } from "../src/features/web-client/WebWorkspace";
 import type { WebRuntimeFactory } from "../src/features/web-client/web-client-context";
 import { WebHostIncompatibleError } from "../src/features/web-client/web-runtime";
 import { createBenchWebRuntime } from "../src/preview/bench-web-runtime";
 import { MOCK_HOSTED_SERVER_CATALOG } from "../src/preview/mock-hosted-servers";
-import { createMockOmniBot } from "../src/preview/mock-openbot";
+import { createMockOmniBot } from "../src/preview/mock-omnibot";
 import { createMockWebRuntime } from "../src/preview/mock-web-runtime";
 import "../src/features/web-client/web-client.css";
 

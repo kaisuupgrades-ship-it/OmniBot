@@ -1,8 +1,8 @@
-import type { MarketplaceAgentSummary } from "@openbot/contracts/ipc";
-import { Button, CalendarClock, Plus, Text } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { routineScheduleSummary } from "@openbot/ui/features/conversation/routine-schedule-ui";
-import { useText } from "@openbot/ui/text";
+import type { MarketplaceAgentSummary } from "@omnibot/contracts/ipc";
+import { Button, CalendarClock, Plus, Text } from "@omnibot/ui";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { routineScheduleSummary } from "@omnibot/ui/features/conversation/routine-schedule-ui";
+import { useText } from "@omnibot/ui/text";
 import { For, Show } from "solid-js";
 import { LogoTile } from "../settings/IntegrationLayout";
 import { useInstalls } from "./MarketplaceCards";

@@ -2,7 +2,7 @@ import { lstat, rm } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, parse, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 import { type DevelopmentProfile, developmentUserDataName } from "../src/main/development-profile";
 import { resolveDevelopmentAppDataRoot } from "./development-state-paths";

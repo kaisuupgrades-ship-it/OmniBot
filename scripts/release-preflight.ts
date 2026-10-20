@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { ANNOUNCEMENT_FILE, announcementProblems } from "./discord-release-announcement";
 import { releaseNotesProblems } from "./release-notes";
 

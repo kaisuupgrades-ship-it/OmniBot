@@ -5,13 +5,13 @@ import {
   canAdministerServer,
   pasteCodeSignInSupported,
   type ServerSummary,
-} from "@openbot/contracts/ipc";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
-import { PROVIDER_HOST_SIGN_IN_PROVIDERS } from "@openbot/contracts/team-protocol/provider-host-sign-in-v1";
-import { PROVIDERS_ADMIN_CODE_SIGN_IN_PROVIDERS } from "@openbot/contracts/team-protocol/providers-v1";
-import { PROVIDERS_SIGN_IN_V3_PROVIDERS } from "@openbot/contracts/team-protocol/providers-v3";
-import { PROVIDERS_V4_SIGN_IN_PROVIDERS } from "@openbot/contracts/team-protocol/providers-v4";
-import { SIGN_IN_RELAY_PROVIDERS } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
+} from "@omnibot/contracts/ipc";
+import type { TeamCurrentCapability } from "@omnibot/contracts/team-protocol/current";
+import { PROVIDER_HOST_SIGN_IN_PROVIDERS } from "@omnibot/contracts/team-protocol/provider-host-sign-in-v1";
+import { PROVIDERS_ADMIN_CODE_SIGN_IN_PROVIDERS } from "@omnibot/contracts/team-protocol/providers-v1";
+import { PROVIDERS_SIGN_IN_V3_PROVIDERS } from "@omnibot/contracts/team-protocol/providers-v3";
+import { PROVIDERS_V4_SIGN_IN_PROVIDERS } from "@omnibot/contracts/team-protocol/providers-v4";
+import { SIGN_IN_RELAY_PROVIDERS } from "@omnibot/contracts/team-protocol/sign-in-relay-v1";
 
 /**
  * Whether a server can be asked for a capability-gated feature. A local server

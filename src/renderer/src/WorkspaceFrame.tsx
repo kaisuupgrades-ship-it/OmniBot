@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { RemoteCompatibilityScreen } from "@openbot/ui/features/remote-desktop/RemoteCompatibilityScreen";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import { RemoteCompatibilityScreen } from "@omnibot/ui/features/remote-desktop/RemoteCompatibilityScreen";
 import type { JSX } from "@solidjs/web";
 import { omit, type ParentProps, Show } from "solid-js";
 import { type WindowPage, windowPageKind } from "./features/window/window-page-context";

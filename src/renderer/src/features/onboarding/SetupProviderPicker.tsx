@@ -8,26 +8,26 @@ import {
   isLocalOnlyProvider,
   type ProviderRuntimeStatus,
   type SaveCustomProviderInput,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   freeModelsReady,
   type ProviderConnection,
   ProviderPicker,
   type ProviderPickerOption,
-} from "@openbot/ui/components/ProviderPicker";
-import { CustomProviderDialog } from "@openbot/ui/features/custom-providers/CustomProviderDialog";
-import { CustomProviderListDialog } from "@openbot/ui/features/custom-providers/CustomProviderListDialog";
-import { DetectedProviders } from "@openbot/ui/features/custom-providers/DetectedProviders";
-import type { DetectedProviderApi, ProviderDetection } from "@openbot/ui/features/custom-providers/detected-providers";
+} from "@omnibot/ui/components/ProviderPicker";
+import { CustomProviderDialog } from "@omnibot/ui/features/custom-providers/CustomProviderDialog";
+import { CustomProviderListDialog } from "@omnibot/ui/features/custom-providers/CustomProviderListDialog";
+import { DetectedProviders } from "@omnibot/ui/features/custom-providers/DetectedProviders";
+import type { DetectedProviderApi, ProviderDetection } from "@omnibot/ui/features/custom-providers/detected-providers";
 import {
   isKeyDialogProvider,
   type KeyDialogProvider,
   OpenCodeKeyDialog,
   type ProviderKeyApi,
-} from "@openbot/ui/features/settings/OpenCodeKeyDialog";
-import { useText } from "@openbot/ui/text";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/ui/features/settings/OpenCodeKeyDialog";
+import { useText } from "@omnibot/ui/text";
+import { errorReference, type UserErrorDetails } from "@omnibot/user-errors";
 import { createEffect, createMemo, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { ProviderSignInDialogs } from "../../components/ProviderSignInDialogs";
 import type { ProviderConnectionApi } from "../../components/provider-connection-api";

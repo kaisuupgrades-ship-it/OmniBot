@@ -1,5 +1,5 @@
-import type { OnePasswordConnectorStatus, OnePasswordSetup } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { OnePasswordConnectorStatus, OnePasswordSetup } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertContent,
@@ -24,7 +24,7 @@ import {
   SettingsSection,
   Spinner,
   Text,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, onSettled, Show } from "solid-js";
 import { useText } from "../../text";

@@ -3,9 +3,9 @@ import type {
   DynamicIslandAgentIdentity,
   DynamicIslandPresentation,
   DynamicIslandPromptItem,
-} from "@openbot/contracts/ipc";
-import type { DynamicIslandViewState } from "@openbot/ui";
-import { OmniBotDynamicIsland } from "@openbot/ui/features/dynamic-island/OmniBotDynamicIsland";
+} from "@omnibot/contracts/ipc";
+import type { DynamicIslandViewState } from "@omnibot/ui";
+import { OmniBotDynamicIsland } from "@omnibot/ui/features/dynamic-island/OmniBotDynamicIsland";
 import type { JSX } from "@solidjs/web";
 import { createMemo, createSignal } from "solid-js";
 import { fn } from "storybook/test";
@@ -99,7 +99,7 @@ function presentationFor(
         approval: {
           kind: "command",
           command: "bun install --frozen-lockfile",
-          cwd: "~/Projects/openbot",
+          cwd: "~/Projects/omnibot",
           reason: "Install the locked dependencies before running the test suite.",
           grantRoot: null,
           permissions: null,

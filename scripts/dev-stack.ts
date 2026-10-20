@@ -7,7 +7,7 @@
 
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createOmniBotLogger, redactText, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, redactText, toLogValue } from "@omnibot/logging";
 import {
   type DevInstanceRecord,
   describeDevInstance,
@@ -236,7 +236,7 @@ async function main(): Promise<void> {
   if (invocation.command === "status") {
     const document = {
       // The directory this command read, so a stack that is missing from the output can be traced to
-      // an `OPENBOT_DEV_REGISTRY_DIR` that differs between shells.
+      // an `OMNIBOT_DEV_REGISTRY_DIR` that differs between shells.
       registryDirectory: redactText(devInstanceRegistryDirectory()),
       stacks: selectDevStacks(records, devStackScope(invocation, projectRoot)).map((record) =>
         reportableStack(record, projectRoot),

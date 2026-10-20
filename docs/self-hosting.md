@@ -57,10 +57,10 @@ Keep the private JWK secret. With it, a person can open each host that uses your
    bun install --frozen-lockfile
    cd apps/auth-api
    bunx wrangler login
-   bunx wrangler d1 create openbot-auth
-   bunx wrangler r2 bucket create openbot-avatars
-   bunx wrangler r2 bucket create openbot-skills
-   bunx wrangler r2 bucket create openbot-sites
+   bunx wrangler d1 create omnibot-auth
+   bunx wrangler r2 bucket create omnibot-avatars
+   bunx wrangler r2 bucket create omnibot-skills
+   bunx wrangler r2 bucket create omnibot-sites
    ```
 
 2. Edit the top level of `apps/auth-api/wrangler.jsonc`. Do not change the `env` section.
@@ -124,30 +124,30 @@ Do these steps on each computer that hosts or connects.
 
 1. If you signed in to `omnibot.example.com` before, sign out in the app. Otherwise the app sends the old
    session token to your service.
-2. Quit the app. Then start it with the two variables. `OPENBOT_REMOTE_SIGNAL_URL` must be equal to
+2. Quit the app. Then start it with the two variables. `OMNIBOT_REMOTE_SIGNAL_URL` must be equal to
    the `REMOTE_SIGNAL_URL` of your Worker.
 
    macOS:
 
    ```sh
-   OPENBOT_AUTH_API_URL=https://api.example.com \
-   OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
+   OMNIBOT_AUTH_API_URL=https://api.example.com \
+   OMNIBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
    /Applications/OmniBot.app/Contents/MacOS/OmniBot
    ```
 
    Linux:
 
    ```sh
-   OPENBOT_AUTH_API_URL=https://api.example.com \
-   OPENBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
+   OMNIBOT_AUTH_API_URL=https://api.example.com \
+   OMNIBOT_REMOTE_SIGNAL_URL=wss://signal.example.com/v1/signal \
    ./OmniBot-<version>-x86_64.AppImage
    ```
 
    Windows (PowerShell):
 
    ```powershell
-   $env:OPENBOT_AUTH_API_URL = "https://api.example.com"
-   $env:OPENBOT_REMOTE_SIGNAL_URL = "wss://signal.example.com/v1/signal"
+   $env:OMNIBOT_AUTH_API_URL = "https://api.example.com"
+   $env:OMNIBOT_REMOTE_SIGNAL_URL = "wss://signal.example.com/v1/signal"
    & "$env:LOCALAPPDATA\Programs\OmniBot\OmniBot.exe"
    ```
 
@@ -159,8 +159,8 @@ Do these steps on each computer that hosts or connects.
 Set the variables each time that you start the app. Without them, the app uses `omnibot.example.com` and
 sends your session token there. To go back to `omnibot.example.com`, sign out first.
 
-The app does not start, and shows an error, if `OPENBOT_REMOTE_SIGNAL_URL` is not a `wss:` URL, has
-a user name or password, or is set without `OPENBOT_AUTH_API_URL`.
+The app does not start, and shows an error, if `OMNIBOT_REMOTE_SIGNAL_URL` is not a `wss:` URL, has
+a user name or password, or is set without `OMNIBOT_AUTH_API_URL`.
 
 ## Updates
 

@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { readFirstTouch } from "@openbot/contracts/first-touch";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
+import { AppLogo } from "@omnibot/brand";
+import { readFirstTouch } from "@omnibot/contracts/first-touch";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
 import { createFileRoute } from "@tanstack/solid-router";
 import { onSettled, Show } from "solid-js";
 import { billingReturnText } from "../../components/transactional/page-text";

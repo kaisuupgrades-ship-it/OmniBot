@@ -5,10 +5,10 @@ import {
   parseHostedServerCheckout,
   parseHostedServerList,
   parseHostedServerSummary,
-} from "@openbot/contracts/hosted-servers";
-import type { HostedServersDesktopApi } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/hosted-servers";
+import type { HostedServersDesktopApi } from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { currentText } from "@omnibot/ui/text";
 import type { AddServerResume } from "../servers/AddServerOverlay";
 
 const REQUEST_TIMEOUT_MS = 15_000;

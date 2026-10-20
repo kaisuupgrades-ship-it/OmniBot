@@ -1,8 +1,8 @@
-import { isAvatarMimeType } from "@openbot/contracts/avatar-images";
-import { parseBillingPortalRequest } from "@openbot/contracts/billing";
-import { parseHostedServerLifecycleInput } from "@openbot/contracts/hosted-servers";
-import { type DynamicRecord, isBoolean, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { isAvatarMimeType } from "@omnibot/contracts/avatar-images";
+import { parseBillingPortalRequest } from "@omnibot/contracts/billing";
+import { parseHostedServerLifecycleInput } from "@omnibot/contracts/hosted-servers";
+import { type DynamicRecord, isBoolean, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Cause, Effect } from "effect";
 import { type AccountAttribution, requestFirstTouch } from "./account-attribution";
 import { type AuthService, AuthServiceError } from "./auth-service";
@@ -19,7 +19,7 @@ import { type RemoteControlPlane, RemoteControlPlaneError } from "./remote-contr
 import { sendTeamInviteEmail } from "./team-invite-email";
 import type { AuthUser, TeamInviteEmailDelivery } from "./types";
 
-const COOKIE = "__Host-openbot-web";
+const COOKIE = "__Host-omnibot-web";
 const PREFIX = "/api/browser/";
 const COOKIE_ATTRIBUTES = "Path=/; Secure; HttpOnly; SameSite=Lax";
 

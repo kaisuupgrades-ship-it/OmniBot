@@ -1,6 +1,6 @@
-import type { AgentModelOption } from "@openbot/contracts/ipc";
-import { isAgentModel, isReasoningEffort } from "@openbot/contracts/ipc";
-import { createOmniBotLogger } from "@openbot/logging";
+import type { AgentModelOption } from "@omnibot/contracts/ipc";
+import { isAgentModel, isReasoningEffort } from "@omnibot/contracts/ipc";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect } from "effect";
 import type { AgentClient, AgentProvider } from "./../agent-client";
 import { decodeModelListResponse, type ModelListResponse } from "./../protocol";

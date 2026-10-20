@@ -12,9 +12,9 @@ import type {
   CustomAgentResult,
   CustomAgentSummary,
   SaveCustomAgentInput,
-} from "@openbot/contracts/ipc";
-import { isNewCustomAgentId } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isNewCustomAgentId } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { checkAcpAgent } from "../backend/acp-agent-check";
 import {
   agentLaunchPath,

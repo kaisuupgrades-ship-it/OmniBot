@@ -1,6 +1,6 @@
-import { Button, ChevronRight, Dialog, ErrorReference, IconButton, X } from "@openbot/ui";
-import { createScrollFades } from "@openbot/ui/components/createScrollFades";
-import { useText } from "@openbot/ui/text";
+import { Button, ChevronRight, Dialog, ErrorReference, IconButton, X } from "@omnibot/ui";
+import { createScrollFades } from "@omnibot/ui/components/createScrollFades";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, For, Match, onCleanup, onSettled, Show, Switch } from "solid-js";
 import { MarketplaceAgentPage } from "./MarketplaceAgentPage";
 import { MarketplaceAppPage } from "./MarketplaceAppPage";

@@ -1,13 +1,13 @@
-import type { QueueDelivery, QueueHold, RespondToBrowserSecretInput } from "@openbot/contracts/ipc";
-import { ArrowUp, Button } from "@openbot/ui";
-import type { ComposerAgent, ComposerMcpServer, ComposerSkill } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
-import { StopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { QueuePanel } from "@openbot/ui/features/conversation/QueuePanel";
-import type { SendShortcut } from "@openbot/ui/features/conversation/send-shortcut";
-import { useText } from "@openbot/ui/text";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import type { QueueDelivery, QueueHold, RespondToBrowserSecretInput } from "@omnibot/contracts/ipc";
+import { ArrowUp, Button } from "@omnibot/ui";
+import type { ComposerAgent, ComposerMcpServer, ComposerSkill } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { StopIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { QueuePanel } from "@omnibot/ui/features/conversation/QueuePanel";
+import type { SendShortcut } from "@omnibot/ui/features/conversation/send-shortcut";
+import { useText } from "@omnibot/ui/text";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createEffect, createSignal, flush, onSettled, Show, untrack } from "solid-js";
 import { type BrowserIslandContent, BrowserIslandFace, browserIslandKey } from "./BrowserIsland";
 import {

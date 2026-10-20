@@ -10,10 +10,10 @@ import {
   isAgentModel,
   parseRoutineRunConversationEventItemType,
   type RoutineRunConversationEventStatus,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import { classifyFailure, operationForCode, type ReportQueue, safeProperties } from "@openbot/telemetry";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isFunction, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@omnibot/contracts/validation";
+import { classifyFailure, operationForCode, type ReportQueue, safeProperties } from "@omnibot/telemetry";
 import { OpenPanelBase, type OpenPanelOptions } from "@openpanel/web";
 import { Effect, Exit, Scope } from "effect";
 import { parse as parseDomain } from "tldts";
@@ -27,7 +27,7 @@ const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
 // Node fetch sends no Origin, and OpenPanel answers 401 to a client with no allowed origin or
 // secret. The SDK drops a 401 in silence. Send the renderer's origin, which the project allows.
-const OPENPANEL_ORIGIN = "openbot-app://app";
+const OPENPANEL_ORIGIN = "omnibot-app://app";
 // Provider CLI events are named `<provider>_diagnostic`, `_exited` and `_start_failed`. The list
 // comes from the registry so a new provider's events keep their own name instead of collapsing to
 // `unknown` the moment it ships.
@@ -42,7 +42,7 @@ const MAX_SITE_TABS = 1_000;
 const MAX_ROUTINE_RUNS = 10_000;
 const MAX_INVENTORY_ITEMS = 32;
 const ANALYTICS_SCHEMA_VERSION = 8;
-const CURATED_AGENT_PREFIX = "openbot-curated-agent-";
+const CURATED_AGENT_PREFIX = "omnibot-curated-agent-";
 const LISTING_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,63}$/u;
 const TOOL_NAME_PATTERN = /^[A-Za-z0-9_.-]{1,64}$/u;
 const TOOL_KINDS = [
@@ -52,7 +52,7 @@ const TOOL_KINDS = [
   "web_search",
   "web_fetch",
   "mcp",
-  "openbot",
+  "omnibot",
   "browser",
   "computer_use",
   "image_generation",
@@ -62,8 +62,8 @@ const TOOL_KINDS = [
 // OmniBot's own tool servers. Every other server name is the user's, so only these and catalog
 // plugins keep their tool names.
 const BUILTIN_TOOL_SERVERS = new Map<string, (typeof TOOL_KINDS)[number]>([
-  ["openbot", "openbot"],
-  ["openbot_browser", "browser"],
+  ["omnibot", "omnibot"],
+  ["omnibot_browser", "browser"],
   [COMPUTER_USE_MCP_SERVER_NAME, "computer_use"],
 ]);
 const ROUTINE_TERMINAL_STATUSES = ["succeeded", "failed", "interrupted", "cancelled"] as const;
@@ -595,8 +595,8 @@ export class HostAnalytics {
   #toolUseRow(usage: ToolUsageSignal): ToolUseRow {
     const server = usage.server;
     if (usage.kind !== "mcp" || !server) return { kind: usage.kind, calls: 0, failed: 0 };
-    // A user's server can report under a built-in name, such as `openbot browser` shown as
-    // `openbot_browser`. It then stays custom, and a resolver that fails also gives custom.
+    // A user's server can report under a built-in name, such as `omnibot browser` shown as
+    // `omnibot_browser`. It then stays custom, and a resolver that fails also gives custom.
     let configured: { slug: string | null } | null;
     try {
       configured = this.#resolveMcpServer(server);

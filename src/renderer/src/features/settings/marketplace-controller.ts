@@ -8,32 +8,32 @@ import type {
   MarketplaceSkillSummary,
   McpServerConfig,
   McpSignInRelayPage,
-} from "@openbot/contracts/ipc";
-import { mcpConfigErrors } from "@openbot/contracts/ipc";
-import { createPluginShareUrl } from "@openbot/contracts/plugin-links";
-import { connectorSummary } from "@openbot/ui/features/connectors/ConnectorDetailPanel";
-import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
-import { isConnectorId } from "@openbot/ui/features/connectors/connectors";
-import { safeBrowserUrl } from "@openbot/ui/features/conversation/RichMessageText";
+} from "@omnibot/contracts/ipc";
+import { mcpConfigErrors } from "@omnibot/contracts/ipc";
+import { createPluginShareUrl } from "@omnibot/contracts/plugin-links";
+import { connectorSummary } from "@omnibot/ui/features/connectors/ConnectorDetailPanel";
+import { CONNECTOR_LISTINGS } from "@omnibot/ui/features/connectors/connector-catalog";
+import { isConnectorId } from "@omnibot/ui/features/connectors/connectors";
+import { safeBrowserUrl } from "@omnibot/ui/features/conversation/RichMessageText";
 import type {
   AgentListingState,
   MarketplaceApp,
   MarketplaceAppStatus,
   MarketplaceModel,
   SkillRead,
-} from "@openbot/ui/features/marketplace/marketplace-model";
-import { serverAddress } from "@openbot/ui/features/marketplace/marketplace-view";
-import type { McpConnectSubject } from "@openbot/ui/features/settings/McpConnectShell";
+} from "@omnibot/ui/features/marketplace/marketplace-model";
+import { serverAddress } from "@omnibot/ui/features/marketplace/marketplace-view";
+import type { McpConnectSubject } from "@omnibot/ui/features/settings/McpConnectShell";
 import {
   isPluginAppConfig,
   type MarketplacePluginApp,
   type MarketplacePluginDetail,
   type MarketplacePluginPrompt,
-} from "@openbot/ui/features/settings/marketplace-plugins";
-import type { McpConnectFlow } from "@openbot/ui/features/settings/mcp-connect-auth";
-import type { PluginUninstallPlan } from "@openbot/ui/features/settings/PluginUninstallDialog";
-import { useText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+} from "@omnibot/ui/features/settings/marketplace-plugins";
+import type { McpConnectFlow } from "@omnibot/ui/features/settings/mcp-connect-auth";
+import type { PluginUninstallPlan } from "@omnibot/ui/features/settings/PluginUninstallDialog";
+import { useText } from "@omnibot/ui/text";
+import { errorReference } from "@omnibot/user-errors";
 import { createEffect, createMemo, createSignal, createStore, onCleanup, untrack } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { writeClipboardText } from "../../clipboard";

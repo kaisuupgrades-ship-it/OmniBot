@@ -71,10 +71,10 @@ export function ServerAvatar({
   const logo = logoUri === undefined ? (saved.data ?? null) : logoUri;
   const [failedUri, setFailedUri] = useState<string | null>(null);
   const logoFailed = logo === failedUri;
-  const success = String(useCSSVariable("--openbot-success"));
-  const warning = String(useCSSVariable("--openbot-warning"));
-  const danger = String(useCSSVariable("--openbot-danger"));
-  const offline = String(useCSSVariable("--openbot-text-dim"));
+  const success = String(useCSSVariable("--omnibot-success"));
+  const warning = String(useCSSVariable("--omnibot-warning"));
+  const danger = String(useCSSVariable("--omnibot-danger"));
+  const offline = String(useCSSVariable("--omnibot-text-dim"));
   const online = showsOnline(server);
   const dot = online
     ? success

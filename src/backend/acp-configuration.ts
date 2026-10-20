@@ -3,10 +3,10 @@ import type {
   AgentSessionSettingOption,
   AgentSessionSettingsSnapshot,
   AgentSessionSettingValue,
-} from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect, Fiber, type Scope } from "effect";
 import type { AgentProvider } from "./agent-client";
 import { isRecord } from "./protocol";

@@ -7,10 +7,10 @@ import type {
   UpdateBusyPhase,
   UpdateFailureCode,
   UpdateStatus,
-} from "@openbot/contracts/ipc";
-import { isUpdateBusyPhase } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { isUpdateBusyPhase } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Cause, Deferred, Effect, Result, Schema, Scope, Semaphore } from "effect";
 import type { ProgressInfo, UpdateInfo } from "electron-updater";
 import type { HostUpdateState } from "../../packages/contracts/src/host-manager";

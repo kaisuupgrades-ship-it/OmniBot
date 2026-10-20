@@ -12,7 +12,7 @@ export { isRawP256PublicKey } from "./host-grant";
 
 export const SLACK_WORKSPACE_GRANT_VERSION = 2;
 
-const KIND: HostGrantKind = { version: SLACK_WORKSPACE_GRANT_VERSION, info: "openbot-slack-workspace-grant-v2" };
+const KIND: HostGrantKind = { version: SLACK_WORKSPACE_GRANT_VERSION, info: "omnibot-slack-workspace-grant-v2" };
 
 /** What the OmniBot app's OAuth install gives the host: the bot token for one workspace. */
 export interface SlackWorkspaceGrant {

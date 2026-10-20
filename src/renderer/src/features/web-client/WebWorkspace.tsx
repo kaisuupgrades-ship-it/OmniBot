@@ -1,5 +1,5 @@
-import type { AppLanguage } from "@openbot/contracts/app-language";
-import { HOSTED_SERVER_CONTACT_URL } from "@openbot/contracts/hosted-servers";
+import type { AppLanguage } from "@omnibot/contracts/app-language";
+import { HOSTED_SERVER_CONTACT_URL } from "@omnibot/contracts/hosted-servers";
 import {
   type AddedAgent,
   type AgentApproval,
@@ -13,23 +13,23 @@ import {
   decodeAgentHostSettings,
   type ServerConnectionState,
   type ServerSummary,
-} from "@openbot/contracts/ipc";
-import { AGENT_HOST_SETTINGS_ROUTES } from "@openbot/contracts/team-protocol/agent-host-settings-v1";
-import { AGENT_IMPORT_CAPABILITY } from "@openbot/contracts/team-protocol/agent-import-v1";
-import { AGENT_TASKS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { CONNECTORS_CAPABILITY } from "@openbot/contracts/team-protocol/connectors-v1";
-import { CONTEXT_RESET_CAPABILITY } from "@openbot/contracts/team-protocol/context-reset-v1";
-import { AGENT_HIDDEN_CAPABILITY, TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { DISCORD_ACCESS_CAPABILITY } from "@openbot/contracts/team-protocol/discord-access-v1";
-import { EVENTS_CAPABILITY } from "@openbot/contracts/team-protocol/events-v1";
-import { HOST_RELEASE_CAPABILITY } from "@openbot/contracts/team-protocol/host-release-v1";
-import { HOSTED_SITES_CAPABILITY } from "@openbot/contracts/team-protocol/hosted-sites-v1";
-import { MCP_SIGN_IN_CAPABILITY } from "@openbot/contracts/team-protocol/mcp-sign-in-v1";
-import { ROUTINE_FLOWS_CAPABILITY } from "@openbot/contracts/team-protocol/routine-flows-v1";
-import { ROUTINE_RECOVERY_CAPABILITY } from "@openbot/contracts/team-protocol/routine-recovery-v1";
-import { SIDE_QUESTION_CAPABILITY } from "@openbot/contracts/team-protocol/side-question-v1";
-import { SIGN_IN_RELAY_CAPABILITY } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@omnibot/contracts/ipc";
+import { AGENT_HOST_SETTINGS_ROUTES } from "@omnibot/contracts/team-protocol/agent-host-settings-v1";
+import { AGENT_IMPORT_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-import-v1";
+import { AGENT_TASKS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import { CONNECTORS_CAPABILITY } from "@omnibot/contracts/team-protocol/connectors-v1";
+import { CONTEXT_RESET_CAPABILITY } from "@omnibot/contracts/team-protocol/context-reset-v1";
+import { AGENT_HIDDEN_CAPABILITY, TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { DISCORD_ACCESS_CAPABILITY } from "@omnibot/contracts/team-protocol/discord-access-v1";
+import { EVENTS_CAPABILITY } from "@omnibot/contracts/team-protocol/events-v1";
+import { HOST_RELEASE_CAPABILITY } from "@omnibot/contracts/team-protocol/host-release-v1";
+import { HOSTED_SITES_CAPABILITY } from "@omnibot/contracts/team-protocol/hosted-sites-v1";
+import { MCP_SIGN_IN_CAPABILITY } from "@omnibot/contracts/team-protocol/mcp-sign-in-v1";
+import { ROUTINE_FLOWS_CAPABILITY } from "@omnibot/contracts/team-protocol/routine-flows-v1";
+import { ROUTINE_RECOVERY_CAPABILITY } from "@omnibot/contracts/team-protocol/routine-recovery-v1";
+import { SIDE_QUESTION_CAPABILITY } from "@omnibot/contracts/team-protocol/side-question-v1";
+import { SIGN_IN_RELAY_CAPABILITY } from "@omnibot/contracts/team-protocol/sign-in-relay-v1";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   cancelHostUpdate,
   checkHostForUpdate,
@@ -49,34 +49,34 @@ import {
   setHostUpdateSettings,
   startHostUpdate,
   updateAgentAdminSettings,
-} from "@openbot/team-client/team-admin-requests";
-import { clearAgentContext, type TeamApiRequest } from "@openbot/team-client/team-api-requests";
-import { classifyFailure } from "@openbot/telemetry";
-import { hasVisibleToasts, toast } from "@openbot/ui";
-import { accountUsageProviderRows } from "@openbot/ui/features/account/account-usage-view";
-import { computeAgentAvatarMoods } from "@openbot/ui/features/agents/agent-avatar-mood";
-import { createFirstAgentDraft, type FirstAgentDraft } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { BillingDialog } from "@openbot/ui/features/billing/BillingDialog";
-import { createBillingStore } from "@openbot/ui/features/billing/billing-store";
-import { unloadedHistory } from "@openbot/ui/features/conversation/ChatScrollRail";
-import type { DiagramModelChoice } from "@openbot/ui/features/diagrams/DiagramNewAgentCard";
-import { LeaveServerDialog } from "@openbot/ui/features/servers/LeaveServerDialog";
-import { RestartServerDialog } from "@openbot/ui/features/servers/RestartServerDialog";
-import type { ServerActionCallbacks } from "@openbot/ui/features/servers/ServerActionItems";
+} from "@omnibot/team-client/team-admin-requests";
+import { clearAgentContext, type TeamApiRequest } from "@omnibot/team-client/team-api-requests";
+import { classifyFailure } from "@omnibot/telemetry";
+import { hasVisibleToasts, toast } from "@omnibot/ui";
+import { accountUsageProviderRows } from "@omnibot/ui/features/account/account-usage-view";
+import { computeAgentAvatarMoods } from "@omnibot/ui/features/agents/agent-avatar-mood";
+import { createFirstAgentDraft, type FirstAgentDraft } from "@omnibot/ui/features/agents/FirstAgentSetup";
+import { BillingDialog } from "@omnibot/ui/features/billing/BillingDialog";
+import { createBillingStore } from "@omnibot/ui/features/billing/billing-store";
+import { unloadedHistory } from "@omnibot/ui/features/conversation/ChatScrollRail";
+import type { DiagramModelChoice } from "@omnibot/ui/features/diagrams/DiagramNewAgentCard";
+import { LeaveServerDialog } from "@omnibot/ui/features/servers/LeaveServerDialog";
+import { RestartServerDialog } from "@omnibot/ui/features/servers/RestartServerDialog";
+import type { ServerActionCallbacks } from "@omnibot/ui/features/servers/ServerActionItems";
 import {
   ConversationLoadNotice,
   ServerConnectionNotice,
   ServerPanelLoadNotice,
   serverWorkspacePhase,
-} from "@openbot/ui/features/servers/ServerConnectionNotice";
-import { ServerRail } from "@openbot/ui/features/servers/ServerRail";
-import type { SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
-import { createSettingsHostedServersStore } from "@openbot/ui/features/settings/stores/hosted-servers-store";
-import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
-import { computeSidebarAgentStates } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import type { SidebarView } from "@openbot/ui/features/sidebar/sidebar-types";
-import { PageRail, type PageRailPage } from "@openbot/ui/features/window/PageRail";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/servers/ServerConnectionNotice";
+import { ServerRail } from "@omnibot/ui/features/servers/ServerRail";
+import type { SettingsPagePlacement } from "@omnibot/ui/features/settings/SettingsDialogShell";
+import { createSettingsHostedServersStore } from "@omnibot/ui/features/settings/stores/hosted-servers-store";
+import { Sidebar } from "@omnibot/ui/features/sidebar/Sidebar";
+import { computeSidebarAgentStates } from "@omnibot/ui/features/sidebar/sidebar-agent-states";
+import type { SidebarView } from "@omnibot/ui/features/sidebar/sidebar-types";
+import { PageRail, type PageRailPage } from "@omnibot/ui/features/window/PageRail";
+import { useText } from "@omnibot/ui/text";
 import { Effect } from "effect";
 import {
   createEffect,
@@ -198,7 +198,7 @@ const WEB_APP_INFO: AppInfo = { name: "OmniBot", version: "web", platform: "darw
 /** Below this width the web shows one pane at a time; see `web-client.css`. */
 const PHONE_QUERY = "(max-width: 720px)";
 /** The account whose queue edit the browser may hold under `QUEUE_EDIT_STORAGE_KEY`. */
-const QUEUE_EDIT_ACCOUNT_KEY = "openbot.web.queue-edit-account";
+const QUEUE_EDIT_ACCOUNT_KEY = "omnibot.web.queue-edit-account";
 
 function newAgentAvatar(): Pick<FirstAgentDraft, "avatarSeed" | "avatarHue"> {
   const { avatarSeed, avatarHue } = createFirstAgentDraft();
@@ -788,7 +788,7 @@ function WebWorkspaceFrame(props: WebWorkspaceProps) {
   const storageCalls: FilesPort = {
     agent: { listAgents: () => workspace.runtime.listAgents() },
     storage: {
-      // The host names previews with the desktop `openbot-attachment:` scheme, as it does in chat.
+      // The host names previews with the desktop `omnibot-attachment:` scheme, as it does in chat.
       getUsage: async (input, serverId) => {
         const usage = await runTeamEffect(
           getStorageUsage(hostRequest(serverId), input).pipe(Effect.mapError((error) => error.cause)),

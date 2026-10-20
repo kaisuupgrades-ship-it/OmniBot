@@ -1,10 +1,10 @@
-import { canAdministerServer, parseApplyAgentImportInput } from "@openbot/contracts/ipc";
+import { canAdministerServer, parseApplyAgentImportInput } from "@omnibot/contracts/ipc";
 import {
   AGENT_IMPORT_CAPABILITY,
   AGENT_IMPORT_ROUTES,
   AGENT_IMPORT_UPLOAD_BYTES,
-} from "@openbot/contracts/team-protocol/agent-import-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/agent-import-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiAgentImport } from "./dependencies";

@@ -1,14 +1,14 @@
-import { type AgentEvent, type AgentSummary, isAgentSummary } from "@openbot/contracts/ipc";
-import { guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { teamProtocolUpdateDirection } from "@openbot/contracts/team-protocol/v1";
-import { TEAM_PROTOCOL_V3 } from "@openbot/contracts/team-protocol/v3";
-import { decodeTeamProtocolSupportV7Base } from "@openbot/contracts/team-protocol/v7-base";
-import type { RemoteTeamHost } from "@openbot/team-client/remote-directory";
-import type { createRemoteTeamPeer, RemoteTeamPeerActions } from "@openbot/team-client/remote-peer";
-import { createRemoteConnectionRecovery } from "@openbot/team-client/remote-recovery";
-import { currentText } from "@openbot/ui/text";
-import { referenceFrom } from "@openbot/user-errors";
+import { type AgentEvent, type AgentSummary, isAgentSummary } from "@omnibot/contracts/ipc";
+import { guardedListDecoder } from "@omnibot/contracts/ipc-decoding";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { teamProtocolUpdateDirection } from "@omnibot/contracts/team-protocol/v1";
+import { TEAM_PROTOCOL_V3 } from "@omnibot/contracts/team-protocol/v3";
+import { decodeTeamProtocolSupportV7Base } from "@omnibot/contracts/team-protocol/v7-base";
+import type { RemoteTeamHost } from "@omnibot/team-client/remote-directory";
+import type { createRemoteTeamPeer, RemoteTeamPeerActions } from "@omnibot/team-client/remote-peer";
+import { createRemoteConnectionRecovery } from "@omnibot/team-client/remote-recovery";
+import { currentText } from "@omnibot/ui/text";
+import { referenceFrom } from "@omnibot/user-errors";
 import {
   type acquireWebHostLock,
   decodeWebHostTabMessage,

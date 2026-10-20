@@ -1,8 +1,8 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentEvent, AgentWait, AgentWaitsSnapshot } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentEvent, AgentWait, AgentWaitsSnapshot } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { z } from "zod";
-import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type OmniBotToolResponse, omniBotToolFailure, omniBotToolResult } from "../agent/routine-tools";
 import type { MailboxStore } from "../mailbox-store";
 import type { DynamicToolCallParams } from "../protocol";
 import { AgentWaitError, type AgentWaitStore } from "./agent-wait-store";
@@ -96,32 +96,32 @@ export class AgentWaits {
     try {
       return params.tool === AWAIT_EVENT_TOOL ? this.#awaitEvent(params, caller) : this.#closeWait(params, caller);
     } catch (error) {
-      if (error instanceof AgentWaitError) return openBotToolFailure(error.message);
+      if (error instanceof AgentWaitError) return omniBotToolFailure(error.message);
       throw error;
     }
   }
 
   #awaitEvent(params: DynamicToolCallParams, caller: AgentWaitCaller): OmniBotToolResponse {
     const parsed = awaitEventToolSchema.safeParse(params.arguments);
-    if (!parsed.success) return openBotToolFailure(sourceText("error.backend.agentWaitNoteRequired"));
+    if (!parsed.success) return omniBotToolFailure(sourceText("error.backend.agentWaitNoteRequired"));
     const { note, routineId } = parsed.data;
-    if (caller.inExecutionThread) return openBotToolFailure(sourceText("error.backend.agentWaitOwnChatOnly"));
+    if (caller.inExecutionThread) return omniBotToolFailure(sourceText("error.backend.agentWaitOwnChatOnly"));
     const deliveries = this.#mailbox.findDeliveriesByTurn(caller.agentId, params.turnId);
     // A run that continues waits keeps them: leaving a wait open waits for the next run again.
     const continued = deliveries.flatMap((context) => this.#store.wokenBy(context.delivery.id));
     if (continued.length > 0)
-      return openBotToolResult({
+      return omniBotToolResult({
         waitIds: continued.map((wait) => wait.id),
         note: "This run continues these open waits. To wait again, leave them open and end your turn. Open a new wait only for a different request.",
       });
     // The user's message comes first; a routine run that waits serves its own instruction.
     const request =
       deliveries.findLast((context) => context.delivery.sender.kind === "user") ?? deliveries.at(0) ?? null;
-    if (!request) return openBotToolFailure(sourceText("error.backend.agentWaitNoRequest"));
+    if (!request) return omniBotToolFailure(sourceText("error.backend.agentWaitNoRequest"));
     if (routineId && !this.#hooks.ownsRoutine(caller.agentId, routineId))
-      return openBotToolFailure(sourceText("error.backend.agentWaitRoutineGone"));
+      return omniBotToolFailure(sourceText("error.backend.agentWaitRoutineGone"));
     if (!this.#hooks.hasRoutine(caller.agentId))
-      return openBotToolFailure(sourceText("error.backend.agentWaitNoRoutine"));
+      return omniBotToolFailure(sourceText("error.backend.agentWaitNoRoutine"));
     const wait = this.#store.open({
       agentId: caller.agentId,
       requestMessageId: request.delivery.id,
@@ -130,22 +130,22 @@ export class AgentWaits {
       routineId: routineId ?? null,
     });
     this.#changed(caller.agentId);
-    return openBotToolResult({
+    return omniBotToolResult({
       waitId: wait.id,
       wakes: wait.routineId
         ? `The next run of routine ${wait.routineId} wakes this wait, or a script event that names it.`
         : "The next run of any of your routines wakes this wait, or a script event that names it.",
       scriptEvent: `A local script names the wait with "waitId": "${wait.id}" next to "payload" in the body of its routine run request.`,
-      next: "End your turn now. The run that wakes the wait repeats the request and your note. Close the wait with openbot.close_wait when the request is done.",
+      next: "End your turn now. The run that wakes the wait repeats the request and your note. Close the wait with omnibot.close_wait when the request is done.",
     });
   }
 
   #closeWait(params: DynamicToolCallParams, caller: AgentWaitCaller): OmniBotToolResponse {
     const parsed = closeWaitToolSchema.safeParse(params.arguments);
     if (!parsed.success || !this.#store.delete(caller.agentId, parsed.data.waitId))
-      return openBotToolFailure(sourceText("error.backend.agentWaitGone"));
+      return omniBotToolFailure(sourceText("error.backend.agentWaitGone"));
     this.#changed(caller.agentId);
-    return openBotToolResult({ closed: parsed.data.waitId });
+    return omniBotToolResult({ closed: parsed.data.waitId });
   }
 
   #isPending(deliveryId: string): boolean {
@@ -163,7 +163,7 @@ export function wokenWaitsPromptText(waits: readonly AgentWait[]): string | null
   if (waits.length === 0) return null;
   return [
     "--- open waits that this run wakes ---",
-    `You opened these waits with openbot.${AWAIT_EVENT_TOOL}. Continue each request with what this run brings. When a request is done, or can no longer be done, tell the user and call openbot.${CLOSE_WAIT_TOOL} with its wait id. To wait for the next run again, leave the wait open.`,
+    `You opened these waits with omnibot.${AWAIT_EVENT_TOOL}. Continue each request with what this run brings. When a request is done, or can no longer be done, tell the user and call omnibot.${CLOSE_WAIT_TOOL} with its wait id. To wait for the next run again, leave the wait open.`,
     ...waits.flatMap((wait) => [
       "",
       `Wait ID: ${wait.id}`,

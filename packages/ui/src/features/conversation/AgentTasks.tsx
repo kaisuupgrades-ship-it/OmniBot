@@ -1,14 +1,14 @@
-import type { AgentTask, AgentTaskHold, AgentTaskOutcome, AttachmentSummary } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { isAgentTaskActive, isAgentTaskOpen } from "@openbot/team-client/agent-tasks";
-import { ArrowUp, Button, ChevronLeft, ChevronRight, Plus, X } from "@openbot/ui";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import { AgentActivityIndicator, nextAgentActivityLabel } from "@openbot/ui/features/conversation/AgentActivity";
-import { ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
-import { ComposerNotice } from "@openbot/ui/features/conversation/ComposerNotice";
-import { TaskMark, type TaskMarkState } from "@openbot/ui/features/conversation/TaskList";
-import { type TextValue, useText } from "@openbot/ui/text";
+import type { AgentTask, AgentTaskHold, AgentTaskOutcome, AttachmentSummary } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { isAgentTaskActive, isAgentTaskOpen } from "@omnibot/team-client/agent-tasks";
+import { ArrowUp, Button, ChevronLeft, ChevronRight, Plus, X } from "@omnibot/ui";
+import type { AgentMessage, AgentProfile } from "@omnibot/ui/data";
+import { AgentActivityIndicator, nextAgentActivityLabel } from "@omnibot/ui/features/conversation/AgentActivity";
+import { ChatMessageRow } from "@omnibot/ui/features/conversation/ChatMessageRow";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
+import { ComposerNotice } from "@omnibot/ui/features/conversation/ComposerNotice";
+import { TaskMark, type TaskMarkState } from "@omnibot/ui/features/conversation/TaskList";
+import { type TextValue, useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, For, onSettled, Show } from "solid-js";
 import { createScrollFades } from "../../components/createScrollFades";
 

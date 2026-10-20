@@ -1,5 +1,5 @@
-import type { UpdateRestartMode } from "@openbot/contracts/ipc";
-import { Button, ConfirmDialog, Progress, Spinner, SwitchField } from "@openbot/ui";
+import type { UpdateRestartMode } from "@omnibot/contracts/ipc";
+import { Button, ConfirmDialog, Progress, Spinner, SwitchField } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import { CircleCheck, CircleDot, RotateCcw, TriangleAlert } from "../../icons";

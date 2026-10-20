@@ -1,15 +1,15 @@
-import { Bubble, BubbleContent, Message, MessageContent } from "@openbot/ui";
+import { Bubble, BubbleContent, Message, MessageContent } from "@omnibot/ui";
 import {
   ChatScrollRail,
   createChatScrollRail,
   type UnloadedHistory,
-} from "@openbot/ui/features/conversation/ChatScrollRail";
-import { dayMarkerLabel } from "@openbot/ui/features/conversation/chat-day-markers";
+} from "@omnibot/ui/features/conversation/ChatScrollRail";
+import { dayMarkerLabel } from "@omnibot/ui/features/conversation/chat-day-markers";
 import {
   calculateChatScrollMargin,
   createChatVirtualizer,
-} from "@openbot/ui/features/conversation/createChatVirtualizer";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/createChatVirtualizer";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, For, Show } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

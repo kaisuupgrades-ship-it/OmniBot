@@ -7,7 +7,7 @@
 // app, provider, account or network is started.
 //
 // Run: bun scripts/routine-flow-sweep-e2e.ts
-// Writes .openbot-build/routine-flow-sweep-e2e/report.json and exits non-zero on a failure.
+// Writes .omnibot-build/routine-flow-sweep-e2e/report.json and exits non-zero on a failure.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
@@ -15,11 +15,11 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { Effect } from "effect";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { RoutineFlowStore } from "../src/backend/routine-flows/routine-flow-store";
 import { createRoutineFlows } from "../src/backend/routine-flows/routine-flows";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/routine-flow-sweep-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/routine-flow-sweep-e2e");
 const QUARTER_HOUR_MS = 15 * 60 * 1000;
 /** A 15-minute routine runs 672 times in the 7 days a sweep looks back. */
 const SOLO_RUNS = 672;
@@ -132,7 +132,7 @@ function count(database: OmniBotDatabase, sql: string): number {
   return Number(database.connection.prepare(sql).get()?.count);
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-routine-flow-sweep-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-routine-flow-sweep-"));
 const database = new OmniBotDatabase(join(root, "profile"));
 try {
   await runCauseEffect(database.initialize());

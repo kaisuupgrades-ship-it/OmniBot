@@ -1,5 +1,5 @@
-import type { GitHubConnectorStatus, OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import type { GitHubConnectorStatus, OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 
 /** What the Connectors section reaches: one GitHub connection, of this computer or of a joined server. */
 export type GitHubConnectorPort = Pick<
@@ -7,9 +7,9 @@ export type GitHubConnectorPort = Pick<
   "status" | "connect" | "cancel" | "disconnect" | "repositories" | "openVerification" | "openInstall" | "onChanged"
 >;
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function githubConnectorPort(): GitHubConnectorPort {
-  return window.openbot.githubConnector;
+  return window.omnibot.githubConnector;
 }
 
 /** How often a joined server's connection is read while its sign-in waits for the user on GitHub. */
@@ -60,7 +60,7 @@ export function hostGitHubConnectorPort(serverId: () => string | undefined): Git
     () => {
       const id = serverId();
       if (!id) return Promise.reject(new Error(sourceText("error.team.connectorsUnsupported")));
-      return method(window.openbot.githubConnector, id);
+      return method(window.omnibot.githubConnector, id);
     };
   return polledGitHubConnectorPort({
     status: call((api, id) => api.hostStatus(id)),

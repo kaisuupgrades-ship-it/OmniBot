@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the usage panel reaches in main: the analytics of a server, its agents, and the events that
@@ -9,7 +9,7 @@ export interface UsagePort {
   servers: Pick<OmniBotDesktopApi["servers"], "onEvent">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function usagePort(): UsagePort {
-  return window.openbot;
+  return window.omnibot;
 }

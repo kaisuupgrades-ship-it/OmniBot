@@ -1,5 +1,5 @@
-import type { CentralAuthState } from "@openbot/contracts/ipc";
-import { AccountLogin } from "@openbot/ui/features/account/AccountLogin";
+import type { CentralAuthState } from "@omnibot/contracts/ipc";
+import { AccountLogin } from "@omnibot/ui/features/account/AccountLogin";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

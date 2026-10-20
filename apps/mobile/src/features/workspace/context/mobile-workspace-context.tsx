@@ -7,25 +7,25 @@ import {
   type SidebarLayoutSnapshot,
   type TeamRealtimeEvent,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/agent-admin-v1";
-import { AGENT_HOST_SETTINGS_CAPABILITY } from "@openbot/contracts/team-protocol/agent-host-settings-v1";
-import { AGENT_PUBLISH_CAPABILITY } from "@openbot/contracts/team-protocol/agent-publish-v1";
-import { TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { EVENTS_CAPABILITY } from "@openbot/contracts/team-protocol/events-v1";
-import { FOCUS_USE_CAPABILITY, FOCUS_USE_ROUTES } from "@openbot/contracts/team-protocol/focus-use-v1";
-import { HOST_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/host-admin-v1";
-import { LIVE_ACTIVITY_PUSH_CAPABILITY } from "@openbot/contracts/team-protocol/live-activity-push-v1";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { ANDROID_PUSH_NOTIFICATIONS_CAPABILITY } from "@openbot/contracts/team-protocol/push-notifications-android-v1";
-import { PUSH_NOTIFICATIONS_CAPABILITY } from "@openbot/contracts/team-protocol/push-notifications-v1";
-import { SHARED_TABLES_CAPABILITY } from "@openbot/contracts/team-protocol/shared-tables-v1";
-import { SKILLS_ADMIN_CAPABILITY } from "@openbot/contracts/team-protocol/skills-admin-v1";
-import type { TeamProtocolV2Json } from "@openbot/contracts/team-protocol/v2";
-import { TEAM_PROTOCOL_V3 } from "@openbot/contracts/team-protocol/v3";
-import { decodeTeamProtocolSupportV7Base } from "@openbot/contracts/team-protocol/v7-base";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { AGENT_ADMIN_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-admin-v1";
+import { AGENT_HOST_SETTINGS_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-host-settings-v1";
+import { AGENT_PUBLISH_CAPABILITY } from "@omnibot/contracts/team-protocol/agent-publish-v1";
+import { TEAM_AGENT_CREATE_MODEL_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { EVENTS_CAPABILITY } from "@omnibot/contracts/team-protocol/events-v1";
+import { FOCUS_USE_CAPABILITY, FOCUS_USE_ROUTES } from "@omnibot/contracts/team-protocol/focus-use-v1";
+import { HOST_ADMIN_CAPABILITY } from "@omnibot/contracts/team-protocol/host-admin-v1";
+import { LIVE_ACTIVITY_PUSH_CAPABILITY } from "@omnibot/contracts/team-protocol/live-activity-push-v1";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import { ANDROID_PUSH_NOTIFICATIONS_CAPABILITY } from "@omnibot/contracts/team-protocol/push-notifications-android-v1";
+import { PUSH_NOTIFICATIONS_CAPABILITY } from "@omnibot/contracts/team-protocol/push-notifications-v1";
+import { SHARED_TABLES_CAPABILITY } from "@omnibot/contracts/team-protocol/shared-tables-v1";
+import { SKILLS_ADMIN_CAPABILITY } from "@omnibot/contracts/team-protocol/skills-admin-v1";
+import type { TeamProtocolV2Json } from "@omnibot/contracts/team-protocol/v2";
+import { TEAM_PROTOCOL_V3 } from "@omnibot/contracts/team-protocol/v3";
+import { decodeTeamProtocolSupportV7Base } from "@omnibot/contracts/team-protocol/v7-base";
+import { sourceText } from "@omnibot/i18n/source";
 import {
   createRemoteAccountRefresh,
   createRemoteReadRefresh,
@@ -39,11 +39,11 @@ import {
   readAgentAnalytics,
   remoteRecoveryMessage,
   runTeamEffect,
-} from "@openbot/team-client";
-import { createFocusUsePing } from "@openbot/team-client/focus-use";
-import { createHostedServerWake, WAKE_RECONNECT_DELAY_MS } from "@openbot/team-client/hosted-server-wake";
-import type { RemoteFileUpload } from "@openbot/team-client/remote-peer";
-import { updateHostIdentity } from "@openbot/team-client/team-admin-requests";
+} from "@omnibot/team-client";
+import { createFocusUsePing } from "@omnibot/team-client/focus-use";
+import { createHostedServerWake, WAKE_RECONNECT_DELAY_MS } from "@omnibot/team-client/hosted-server-wake";
+import type { RemoteFileUpload } from "@omnibot/team-client/remote-peer";
+import { updateHostIdentity } from "@omnibot/team-client/team-admin-requests";
 import {
   deleteAgent,
   discardAttachmentDraft,
@@ -53,7 +53,7 @@ import {
   respondToBrowserTakeover,
   type TeamApiRequest,
   uploadAttachmentDraft,
-} from "@openbot/team-client/team-api-requests";
+} from "@omnibot/team-client/team-api-requests";
 import { replaceEqualDeep, useQueryClient } from "@tanstack/react-query";
 import { Effect } from "effect";
 import { type PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from "react";

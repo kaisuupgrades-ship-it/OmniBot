@@ -1,5 +1,5 @@
-import { Button } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { Button } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import type { JSX } from "@solidjs/web";
 import { Show } from "solid-js";
 

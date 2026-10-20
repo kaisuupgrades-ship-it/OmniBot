@@ -1,4 +1,4 @@
-import { AppLogo } from "@openbot/brand";
+import { AppLogo } from "@omnibot/brand";
 import ChevronDown from "lucide-solid/icons/chevron-down";
 import Rss from "lucide-solid/icons/rss";
 import { createMemo, createSignal, createUniqueId, For, Show } from "solid-js";

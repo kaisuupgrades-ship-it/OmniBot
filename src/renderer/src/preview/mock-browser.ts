@@ -7,7 +7,7 @@ import type {
   BrowserPreview,
   BrowserTab,
   OmniBotDesktopApi,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import browserTakeoverPreviewUrl from "../../stories/assets/browser-takeover-preview.svg";
 import { STORY_BROWSER_CONTROL, STORY_BROWSER_TABS } from "./fixtures";
 import { clone, type Listener, type MockRuntime } from "./mock-support";

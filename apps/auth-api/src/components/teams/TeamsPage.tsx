@@ -22,7 +22,7 @@ import { ButtonLink } from "../ui/button";
 
 // Loaded after the page is in the browser, as in `FeaturesSection`: the avatar engine is large.
 const AgentAvatar = lazy(() =>
-  import("@openbot/ui/features/agents/AgentAvatar").then((module) => ({ default: module.AgentAvatar })),
+  import("@omnibot/ui/features/agents/AgentAvatar").then((module) => ({ default: module.AgentAvatar })),
 );
 
 const SETUP_ICONS: Record<TeamsSetupId, LandingIconName> = {

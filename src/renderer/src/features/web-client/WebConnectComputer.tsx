@@ -1,6 +1,6 @@
-import { AppLogo } from "@openbot/brand";
-import { Button, buttonVariants, Download, ErrorReference, Heading, Link2, RefreshCw, Server, Text } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import { AppLogo } from "@omnibot/brand";
+import { Button, buttonVariants, Download, ErrorReference, Heading, Link2, RefreshCw, Server, Text } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { Show } from "solid-js";
 
 /** The first screen of the web client when the account has no computer to connect to. */

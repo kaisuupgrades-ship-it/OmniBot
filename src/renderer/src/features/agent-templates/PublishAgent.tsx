@@ -1,8 +1,8 @@
-import { type AgentTemplatePreview, isAgentTemplateCardPng } from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import { PublishAgentDialog } from "@openbot/ui/features/agents/PublishAgentDialog";
-import { currentText } from "@openbot/ui/text";
+import { type AgentTemplatePreview, isAgentTemplateCardPng } from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
+import { toast } from "@omnibot/ui";
+import { PublishAgentDialog } from "@omnibot/ui/features/agents/PublishAgentDialog";
+import { currentText } from "@omnibot/ui/text";
 import { createStore } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { writeClipboardText } from "../../clipboard";

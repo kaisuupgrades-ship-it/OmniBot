@@ -1,7 +1,7 @@
 // The custom agent payloads. `save` and `check` carry environment values, often an API key, so no
 // message here quotes a value.
 
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type CheckCustomAgentInput,
   CUSTOM_AGENT_LIMITS,
@@ -10,9 +10,9 @@ import {
   isCustomAgentEnvName,
   isCustomAgentId,
   type SaveCustomAgentInput,
-} from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { agentCommandForm } from "../../backend/acp-agent-command";
 import { isObject, requireString } from "./validation";
 

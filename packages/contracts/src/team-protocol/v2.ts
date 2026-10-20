@@ -2,9 +2,9 @@ import { type DynamicRecord, isBoolean, isDynamicRecord, isNumber, isString } fr
 
 export const TEAM_PROTOCOL_V2 = 2 as const;
 export const TEAM_PROTOCOL_V2_CHANNELS = {
-  rpc: "openbot-team-v2-rpc",
-  events: "openbot-team-v2-events",
-  files: "openbot-team-v2-files",
+  rpc: "omnibot-team-v2-rpc",
+  events: "omnibot-team-v2-events",
+  files: "omnibot-team-v2-files",
 } as const;
 export const TEAM_PROTOCOL_V2_MAX_FILE_BYTES = 100 * 1024 * 1024;
 export const TEAM_PROTOCOL_V2_MAX_FILE_SET_BYTES = 250 * 1024 * 1024;
@@ -271,7 +271,7 @@ export function teamProtocolV2AuthenticationTranscript(input: {
   hostFingerprint: string;
 }): string {
   return JSON.stringify([
-    "openbot-team-v2-auth",
+    "omnibot-team-v2-auth",
     input.hostId,
     input.sessionId,
     input.ticket,

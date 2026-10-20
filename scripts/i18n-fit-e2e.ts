@@ -3,13 +3,13 @@
 // runs past its box, or wraps to a second line. Opens each menu and list trigger once, so the items
 // of a closed menu are measured too. Pass the URL that `bun run storybook` reports:
 // `bun scripts/i18n-fit-e2e.ts --storybook=http://localhost:6006 [--locales=de,pl] [--stories=sidebar,dialog]`.
-// Writes .openbot-build/i18n-fit/report.json and one screenshot per failure that English does not have.
-// `--out=<name>` writes to .openbot-build/<name> instead, so a second run keeps the first report.
+// Writes .omnibot-build/i18n-fit/report.json and one screenshot per failure that English does not have.
+// `--out=<name>` writes to .omnibot-build/<name> instead, so a second run keeps the first report.
 import assert from "node:assert/strict";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { type AppTextKey, en, TRANSLATED_LOCALES, type TranslatedLocale, translateFor } from "@openbot/i18n";
-import { createOmniBotLogger } from "@openbot/logging";
+import { type AppTextKey, en, TRANSLATED_LOCALES, type TranslatedLocale, translateFor } from "@omnibot/i18n";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { type Browser, chromium, type Page } from "playwright-core";
 import { type FitProblem, measureFit } from "./i18n-fit-probe";
 
@@ -32,7 +32,7 @@ function option(name: string): string | undefined {
 
 const outName = option("out") ?? "i18n-fit";
 assert.match(outName, /^\w[\w.-]*$/, "--out takes a folder name, not a path.");
-const OUT = resolve(import.meta.dirname, "../.openbot-build", outName);
+const OUT = resolve(import.meta.dirname, "../.omnibot-build", outName);
 const SHOTS = resolve(OUT, "screenshots");
 
 const storybook = option("storybook")?.replace(/\/$/, "");

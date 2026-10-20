@@ -1,26 +1,26 @@
-import { type AgentEvent, type AgentSummary, latestTurnAnswer } from "@openbot/contracts/ipc";
-import type { LiveActivityRelayPush } from "@openbot/contracts/live-activity-relay";
+import { type AgentEvent, type AgentSummary, latestTurnAnswer } from "@omnibot/contracts/ipc";
+import type { LiveActivityRelayPush } from "@omnibot/contracts/live-activity-relay";
 import {
   type AndroidNotificationRelayPush,
   NOTIFICATION_SEALED_LIMIT,
   type NotificationRelayPush,
   type NotificationSound,
-} from "@openbot/contracts/notification-relay";
-import { type AppTranslate, resolveLocale, translateFor } from "@openbot/i18n";
-import { redactText, toLogValue } from "@openbot/logging";
-import { type AgentNotificationContent, notificationForAgentEvent } from "@openbot/team-client/agent-notifications";
+} from "@omnibot/contracts/notification-relay";
+import { type AppTranslate, resolveLocale, translateFor } from "@omnibot/i18n";
+import { redactText, toLogValue } from "@omnibot/logging";
+import { type AgentNotificationContent, notificationForAgentEvent } from "@omnibot/team-client/agent-notifications";
 import {
   decodeLiveActivityBytes,
   LIVE_ACTIVITY_NONCE_BYTES,
   LIVE_ACTIVITY_SECRET_BYTES,
-} from "@openbot/team-client/live-activity-seal";
+} from "@omnibot/team-client/live-activity-seal";
 import {
   type PushNotificationContent,
   type PushNotificationKeys,
   type PushNotificationKind,
   pushNotificationKeys,
   sealPushNotification,
-} from "@openbot/team-client/push-notification-seal";
+} from "@omnibot/team-client/push-notification-seal";
 import { Effect, Exit, Fiber, Schema, Scope } from "effect";
 import { isNoUpdateAnswer } from "../backend/agent/routine-quiet-runs";
 import type { PushNotificationStore, PushTarget, StoredPushRegistration } from "./push-notification-store";

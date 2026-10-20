@@ -1,4 +1,4 @@
-import type { AppTextKey } from "@openbot/i18n";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertActions,
@@ -16,9 +16,9 @@ import {
   Text,
   TriangleAlert,
   X,
-} from "@openbot/ui";
-import { motionDuration, prefersReducedMotion } from "@openbot/ui/utils";
-import type { UserErrorDetails } from "@openbot/user-errors";
+} from "@omnibot/ui";
+import { motionDuration, prefersReducedMotion } from "@omnibot/ui/utils";
+import type { UserErrorDetails } from "@omnibot/user-errors";
 import { createEffect, createSignal, For, Match, onCleanup, onSettled, Show, Switch, untrack } from "solid-js";
 import { useText } from "../../text";
 import {

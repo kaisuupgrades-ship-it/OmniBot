@@ -2,8 +2,8 @@ import type {
   ComputerUseCoveredArea,
   ComputerUseCursorPoint,
   ComputerUseHighlightPlacement,
-} from "@openbot/contracts/ipc";
-import { createOmniBotLogger, type Logger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { createOmniBotLogger, type Logger, toLogValue } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Schema } from "effect";
 import type { BrowserWindow, Rectangle } from "electron";
 import type { ComputerUseHighlightTarget } from "./computer-use-target-window";

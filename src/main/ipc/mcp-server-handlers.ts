@@ -16,16 +16,16 @@ import {
   MCP_SERVERS_CAPABILITY,
   type McpServerConfig,
   type TestMcpServerInput,
-} from "@openbot/contracts/ipc";
-import type { TeamCurrentCapability } from "@openbot/contracts/team-protocol/current";
+} from "@omnibot/contracts/ipc";
+import type { TeamCurrentCapability } from "@omnibot/contracts/team-protocol/current";
 import {
   MCP_SIGN_IN_APP_CAPABILITY,
   MCP_SIGN_IN_APP_ROUTES,
-} from "@openbot/contracts/team-protocol/mcp-sign-in-app-v1";
-import { MCP_SIGN_IN_CAPABILITY, MCP_SIGN_IN_ROUTES } from "@openbot/contracts/team-protocol/mcp-sign-in-v1";
-import { MCP_ROUTES } from "@openbot/contracts/team-protocol/mcp-v1";
-import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@openbot/contracts/team-protocol/sign-in-relay-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/mcp-sign-in-app-v1";
+import { MCP_SIGN_IN_CAPABILITY, MCP_SIGN_IN_ROUTES } from "@omnibot/contracts/team-protocol/mcp-sign-in-v1";
+import { MCP_ROUTES } from "@omnibot/contracts/team-protocol/mcp-v1";
+import { SIGN_IN_RELAY_CAPABILITY, SIGN_IN_RELAY_ROUTES } from "@omnibot/contracts/team-protocol/sign-in-relay-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import type { AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { MCP_PROBE_TIMEOUT_MS } from "../../backend/mcp-probe";

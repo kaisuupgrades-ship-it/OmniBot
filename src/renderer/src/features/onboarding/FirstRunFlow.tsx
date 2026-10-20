@@ -1,7 +1,7 @@
-import type { AppLogoVariant } from "@openbot/brand";
-import type { AgentModelId, AgentProviderId, AppSetupState, DesktopPlatform } from "@openbot/contracts/ipc";
-import { Button, ErrorReference } from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+import type { AppLogoVariant } from "@omnibot/brand";
+import type { AgentModelId, AgentProviderId, AppSetupState, DesktopPlatform } from "@omnibot/contracts/ipc";
+import { Button, ErrorReference } from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, createStore, createUniqueId, For, Match, Show, Switch, untrack } from "solid-js";
 import { ComputerUseSetup } from "../computer-use/ComputerUseSetup";
 import { FirstRunChoice } from "./FirstRunChoice";

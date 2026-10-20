@@ -1,4 +1,4 @@
-import { ProviderLogo } from "@openbot/brand";
+import { ProviderLogo } from "@omnibot/brand";
 import type {
   AgentModelId,
   AgentModelOption,
@@ -10,7 +10,7 @@ import type {
   CustomProviderSummary,
   ProviderAccountStatus,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   agentProviderCliName,
   agentProviderName,
@@ -19,8 +19,8 @@ import {
   defaultProviderModel,
   isCustomProviderModelId,
   PICKER_PROVIDERS,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey, AppTranslate } from "@omnibot/i18n";
 import {
   Button,
   Input,
@@ -37,9 +37,9 @@ import {
   SlidersHorizontal,
   Tabs,
   Tooltip,
-} from "@openbot/ui";
-import { ContentExitMotion } from "@openbot/ui/menu-motion";
-import { cx } from "@openbot/ui/utils";
+} from "@omnibot/ui";
+import { ContentExitMotion } from "@omnibot/ui/menu-motion";
+import { cx } from "@omnibot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, For, onCleanup, onSettled, Show, untrack } from "solid-js";
 import { currentText, type TextValue, useText } from "../text";

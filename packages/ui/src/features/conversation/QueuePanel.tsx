@@ -1,8 +1,8 @@
-import { expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
-import type { QueueDelivery, QueueHold, QueueSteerFallback } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, ConfirmDialog, LabelTooltip, LabelTooltipTrigger, Plus } from "@openbot/ui";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { expandChatTagReferences } from "@omnibot/contracts/chat-tag-references";
+import type { QueueDelivery, QueueHold, QueueSteerFallback } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { Button, ConfirmDialog, LabelTooltip, LabelTooltipTrigger, Plus } from "@omnibot/ui";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createEffect, createMemo, createSignal, For, onCleanup, Show, untrack } from "solid-js";
 import { createVerticalDragPreview } from "../../components/createVerticalDragPreview";
 import type { ComposerAgent, ComposerSkill } from "../../data";

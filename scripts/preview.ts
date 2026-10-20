@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { cliSpawnTarget } from "../src/backend/cli";
 import { withoutElectronRuntimeFlags } from "./electron-spawn-env";
 import { resolvePackageBin } from "./package-bin";
@@ -16,7 +16,7 @@ const child = spawn(target.command, target.args, {
   // The parent shell may run inside an Electron harness with
   // ELECTRON_RUN_AS_NODE=1, which would make the spawned Electron run as
   // plain Node instead of opening the preview app.
-  env: { ...withoutElectronRuntimeFlags(process.env), OPENBOT_APP_VARIANT: "preview" },
+  env: { ...withoutElectronRuntimeFlags(process.env), OMNIBOT_APP_VARIANT: "preview" },
   stdio: "inherit",
   shell: false,
   windowsVerbatimArguments: target.windowsVerbatimArguments,

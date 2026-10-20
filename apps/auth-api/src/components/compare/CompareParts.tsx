@@ -1,4 +1,4 @@
-import { AppLogo, ProviderLogo } from "@openbot/brand";
+import { AppLogo, ProviderLogo } from "@omnibot/brand";
 import type { JSX } from "@solidjs/web";
 import { For, Show } from "solid-js";
 import type { ComparePage, OmniBotPlan, RoundupApp } from "../../content/compare/comparison";
@@ -78,7 +78,7 @@ export function CompareMarkRow(props: { apps: readonly Pick<RoundupApp, "mark">[
       <For each={props.apps}>
         {(app) => (
           <span class="compare-mark">
-            <SideMark mark={app.mark === "openbot" ? undefined : app.mark} class="compare-mark-logo" />
+            <SideMark mark={app.mark === "omnibot" ? undefined : app.mark} class="compare-mark-logo" />
           </span>
         )}
       </For>

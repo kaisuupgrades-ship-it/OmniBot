@@ -2,7 +2,7 @@ import {
   DISCORD_CUSTOM_ID_PREFIX,
   type DiscordInboundInteraction,
   type DiscordInboundMessage,
-} from "@openbot/contracts/signal-protocol/discord-api";
+} from "@omnibot/contracts/signal-protocol/discord-api";
 import type { InboundAction, InboundMessage } from "../messaging-types";
 
 /** The actions of the buttons OmniBot posts, as the middle part of their custom id. */

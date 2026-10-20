@@ -1,16 +1,16 @@
-import { agentAutomationAllowed, type MarketplaceSkillDetail } from "@openbot/contracts/ipc";
-import { BookMarked, CalendarClock, Folder, Gauge, Puzzle, Table2, Upload } from "@openbot/ui";
-import { SettingsLinkGroup, SettingsLinkRow } from "@openbot/ui/components/SettingsPanel";
-import type { AgentProfile } from "@openbot/ui/data";
+import { agentAutomationAllowed, type MarketplaceSkillDetail } from "@omnibot/contracts/ipc";
+import { BookMarked, CalendarClock, Folder, Gauge, Puzzle, Table2, Upload } from "@omnibot/ui";
+import { SettingsLinkGroup, SettingsLinkRow } from "@omnibot/ui/components/SettingsPanel";
+import type { AgentProfile } from "@omnibot/ui/data";
 import {
   AgentSessionSettings,
   type AgentSessionSettingsApi,
-} from "@openbot/ui/features/conversation/AgentSessionSettings";
+} from "@omnibot/ui/features/conversation/AgentSessionSettings";
 import SharedAgentSettingsPanel, {
   type AgentSettingsPanelProps as SharedAgentSettingsPanelProps,
-} from "@openbot/ui/features/conversation/AgentSettingsPanel";
-import { agentFilesLinkValue } from "@openbot/ui/features/files/AgentFilesView";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/conversation/AgentSettingsPanel";
+import { agentFilesLinkValue } from "@omnibot/ui/features/files/AgentFilesView";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createStore, Show, untrack } from "solid-js";
 import { createSettingsPanelWidth, saveSettingsPanelWidth } from "../../components/settings-panel-width";
 import { agentSkillCalls, skillsPort } from "../../skills-port";

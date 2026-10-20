@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the updates context reaches in main: the app update status, its check, download and
@@ -18,7 +18,7 @@ export interface UpdatesPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function updatesPort(): UpdatesPort {
-  return window.openbot;
+  return window.omnibot;
 }

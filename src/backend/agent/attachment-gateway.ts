@@ -1,8 +1,8 @@
 import { constants } from "node:fs";
 import { lstat, open, realpath } from "node:fs/promises";
 import { isAbsolute } from "node:path";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import type { AgentEvent, ConversationSnapshot } from "@openbot/contracts/ipc";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import type { AgentEvent, ConversationSnapshot } from "@omnibot/contracts/ipc";
 import { Deferred, Effect, Result } from "effect";
 import {
   type AttachmentOperationError,
@@ -14,7 +14,7 @@ import {
 import type { GeneratedAttachmentSource, MailboxStore } from "../mailbox-store";
 import { isWithin, rebaseLegacyWorkspacePath, sharedPathFromInput, workspacePathFromInput } from "../workspace-paths";
 import type { ConversationRuntime } from "./conversation-runtime";
-import { type OmniBotToolResponse, openBotToolResult } from "./routine-tools";
+import { type OmniBotToolResponse, omniBotToolResult } from "./routine-tools";
 
 export interface AttachmentGatewayHooks {
   emit(event: AgentEvent): void;
@@ -27,7 +27,7 @@ export interface AttachmentGatewayHooks {
  * The default is the attachment policy: the file must resolve inside this agent's own workspace or the
  * OmniBot shared directory, and a symlink anywhere on the way is refused outright.
  *
- * `allowAnyReadablePath` is the browser-upload policy. `openbot_browser.upload_files` hands a local
+ * `allowAnyReadablePath` is the browser-upload policy. `omnibot_browser.upload_files` hands a local
  * file to a page, and the file the user names is almost never one the agent already copied into its
  * workspace, so containment would make the tool unusable. It grants no capability an agent does not
  * already have -- every agent can read any file its user can, and Workspace only limits writes, not
@@ -127,7 +127,7 @@ export class AttachmentGateway {
     const existing = snapshot.messages.find((message) => message.id === messageId);
     if (existing) {
       return yield* attachmentCall(() =>
-        openBotToolResult({
+        omniBotToolResult({
           status: "attached",
           messageId,
           attachments: (existing.attachments ?? []).map((attachment) => ({
@@ -193,7 +193,7 @@ export class AttachmentGateway {
             }
           }
           return yield* attachmentCall(() =>
-            openBotToolResult({
+            omniBotToolResult({
               status: "attached",
               messageId,
               attachments: attachments.map((attachment) => ({ id: attachment.id, name: attachment.name })),

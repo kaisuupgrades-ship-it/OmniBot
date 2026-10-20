@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/solid-router";
-import { EXTERNAL_LINK_REL, OPENBOT_LINKS } from "../../lib/landing-links";
+import { EXTERNAL_LINK_REL, OMNIBOT_LINKS } from "../../lib/landing-links";
 
 export function WhatAreAIAgents() {
   return (
@@ -46,7 +46,7 @@ export function WhatAreAIAgents() {
       </p>
       <p>
         The terminology varies, but{" "}
-        <a href={OPENBOT_LINKS.anthropicAgents} target="_blank" rel={EXTERNAL_LINK_REL}>
+        <a href={OMNIBOT_LINKS.anthropicAgents} target="_blank" rel={EXTERNAL_LINK_REL}>
           Anthropic describes agents
         </a>{" "}
         as systems that “dynamically direct their own processes and tool usage,” in contrast to workflows that follow
@@ -81,7 +81,7 @@ export function WhatAreAIAgents() {
         An agent can misunderstand a request, use incomplete or outdated information, or make a poor choice about what
         to do next. Errors can also build up over a longer task, so check important facts, sources, and changes before
         relying on the result.{" "}
-        <a href={OPENBOT_LINKS.anthropicAgents} target="_blank" rel={EXTERNAL_LINK_REL}>
+        <a href={OMNIBOT_LINKS.anthropicAgents} target="_blank" rel={EXTERNAL_LINK_REL}>
           Anthropic also notes
         </a>{" "}
         that greater autonomy can bring higher costs and compounding errors in some systems.
@@ -113,7 +113,7 @@ export function WhatAreAIAgents() {
       <p>
         OmniBot is local-first, but that does not necessarily mean the model runs on your computer. The workspace can be
         local while a connected provider handles the requests. For a closer look, see{" "}
-        <Link to="/guides/$slug" params={{ slug: "openbot-101" }}>
+        <Link to="/guides/$slug" params={{ slug: "omnibot-101" }}>
           OmniBot 101
         </Link>
         . To see how this differs from an agent app that runs in the cloud, read{" "}

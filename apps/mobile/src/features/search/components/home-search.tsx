@@ -1,4 +1,4 @@
-import { isAgentTaskOpen, taskNeedsYou } from "@openbot/team-client/agent-tasks";
+import { isAgentTaskOpen, taskNeedsYou } from "@omnibot/team-client/agent-tasks";
 import { BlurView } from "expo-blur";
 import * as Crypto from "expo-crypto";
 import { GlassView } from "expo-glass-effect";
@@ -572,7 +572,7 @@ export function HomeSearchBar({
     "default",
     "background",
   ]);
-  const danger = String(useCSSVariable("--openbot-danger-text"));
+  const danger = String(useCSSVariable("--omnibot-danger-text"));
   const resultColor = search.result
     ? search.result.ok
       ? getBloubAvatarColor(search.result.agent.avatarSeed, search.result.agent.avatarHue)
@@ -874,7 +874,7 @@ function GlassCapsule({
   // design over the blur. iOS without Liquid Glass, or with Reduce Transparency, keeps the solid capsule.
   const milky = useChromeGlass();
   const { theme } = useUniwind();
-  const blurFill = String(useCSSVariable("--openbot-bg-chrome-blur"));
+  const blurFill = String(useCSSVariable("--omnibot-bg-chrome-blur"));
   const blurs = ANDROID_BLUR && !liquidGlass && blurTarget !== undefined && !blurPaused;
   const fallback = isAndroid ? milky : { backgroundColor: String(fallbackBackground), boxShadow: CAPSULE_SHADOW };
   return (

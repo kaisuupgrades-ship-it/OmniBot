@@ -1,6 +1,6 @@
-import { LOCAL_SERVER_ID, VOICE_AUDIO_LIMITS, VOICE_MODELS, VOICE_STREAM_LIMITS } from "@openbot/contracts/ipc";
-import type { VoicePanelPhase } from "@openbot/ui/features/conversation/VoicePanel";
-import { currentText } from "@openbot/ui/text";
+import { LOCAL_SERVER_ID, VOICE_AUDIO_LIMITS, VOICE_MODELS, VOICE_STREAM_LIMITS } from "@omnibot/contracts/ipc";
+import type { VoicePanelPhase } from "@omnibot/ui/features/conversation/VoicePanel";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createStore, onCleanup } from "solid-js";
 import { desktopAnalytics } from "../../../analytics";
 import { encodePcm16, recordingToSamples, recordingToWav } from "../../../voice-recording";

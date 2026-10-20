@@ -1,10 +1,10 @@
-import { AppLoadingShell } from "@openbot/ui/features/account/AppLoadingShell";
+import { AppLoadingShell } from "@omnibot/ui/features/account/AppLoadingShell";
 import { Dynamic } from "@solidjs/web";
 import { createLazyFileRoute } from "@tanstack/solid-router";
 import { type Component, createSignal, flush, lazy, onSettled, Show } from "solid-js";
 import "../../../../src/renderer/src/features/web-client/web-client.css";
 
-const loadWebApp = () => import("@openbot/renderer-web");
+const loadWebApp = () => import("@omnibot/renderer-web");
 // The saved language loads with the code, so the first screen is not English for a moment. If it
 // fails, the web client starts in English and tries again when it shows the language.
 const WebApp = lazy(() =>
@@ -25,7 +25,7 @@ function BrowserAppPage() {
   const [crew, setCrew] = createSignal<Component>();
   onSettled(() => {
     void loadWebApp();
-    void import("@openbot/ui/features/account/AppLoadingScreen")
+    void import("@omnibot/ui/features/account/AppLoadingScreen")
       .then((module) => {
         setCrew(() => module.AppLoadingScreen);
         // Show the crew before the web client starts: the page keeps this fallback while the web

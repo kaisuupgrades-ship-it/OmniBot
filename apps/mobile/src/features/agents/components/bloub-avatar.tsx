@@ -1,5 +1,5 @@
-import { type AvatarMood, avatarMoodPresentation } from "@openbot/brand/bloub-avatar-motion";
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import { type AvatarMood, avatarMoodPresentation } from "@omnibot/brand/bloub-avatar-motion";
+import type { AvatarHue } from "@omnibot/contracts/ipc";
 import { memo, useMemo } from "react";
 import Animated, {
   convertToRGBA,

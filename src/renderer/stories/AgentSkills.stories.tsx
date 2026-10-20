@@ -1,10 +1,10 @@
-import type { InstalledSkill } from "@openbot/contracts/ipc";
+import type { InstalledSkill } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_INSTALLED_SKILLS, STORY_MODELS } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 const storyAgent = STORY_AGENT;
 
@@ -13,13 +13,13 @@ function AgentSkillsStory(props: {
   skillsMode?: "mutable" | "readonly" | "hidden";
   onAddFromMarketplace?: (agentId: string) => void;
 }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot({ installedSkills: { chief: props.skills } });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
 
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
 
   return (

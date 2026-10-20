@@ -11,7 +11,7 @@ import {
   isAgentTasksSnapshot,
   isConversationSnapshot,
   isHiddenAgentsSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 // Agent-shaped wire payloads: summaries, status, models, skills, memories, routines, queue.
 // See `remote-host-decoding.ts` for why the `FromHost` suffix exists and must not be merged away.
 
@@ -27,7 +27,7 @@ import type {
   QueuedMessageReceipt,
   QueueSnapshot,
   SidebarLayoutSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   isAccountUsage,
   isAgentMemory,
@@ -42,9 +42,9 @@ import {
   isRoutineFlowLink,
   isRoutineRun,
   isSidebarLayoutSnapshot,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, guardedDecoder, guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import { isNumber, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { decodeRecord, guardedDecoder, guardedListDecoder } from "@omnibot/contracts/ipc-decoding";
+import { isNumber, isString } from "@omnibot/contracts/runtime-values";
 
 export const decodeAgentHostSettingsFromHost = guardedDecoder(isAgentHostSettings, "agent host settings response");
 export const decodeHiddenAgentsFromHost = guardedDecoder(isHiddenAgentsSnapshot, "hidden agents response");

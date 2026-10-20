@@ -2,12 +2,12 @@ import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
-import { type AgentProviderId, type QueueDelivery, ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@openbot/contracts/ipc";
+import { type AgentProviderId, type QueueDelivery, ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import { AgentStore } from "../src/backend/agent-store";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import type { DeliveryContext } from "../src/backend/mailbox-store";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { isRecord } from "../src/backend/protocol";
 import type { ProviderHistoryFragment, ReadProviderHistory } from "../src/backend/provider-history";
 import { importProviderHistory, type ProviderHistoryImportResult } from "../src/backend/provider-history-import";
@@ -53,8 +53,8 @@ interface Report {
  * records that only new or changed turns are written again.
  */
 async function runProviderHistoryReimportCheck(outputPath: string): Promise<Report> {
-  const databaseRoot = await mkdtemp(join(tmpdir(), "openbot-provider-history-reimport-"));
-  const homeRoot = await mkdtemp(join(tmpdir(), "openbot-provider-history-reimport-home-"));
+  const databaseRoot = await mkdtemp(join(tmpdir(), "omnibot-provider-history-reimport-"));
+  const homeRoot = await mkdtemp(join(tmpdir(), "omnibot-provider-history-reimport-home-"));
   const database = new OmniBotDatabase(databaseRoot);
   const agentStore = new AgentStore(databaseRoot, homeRoot, database);
   const agentId = "provider-history-reimport-agent";
@@ -246,7 +246,7 @@ function quietRoutineTurn(turnId: string, startedAt: number): ProviderHistoryFra
     complete: true,
     items: [
       { type: "userMessage", id: `${turnId}-prompt`, clientId: QUIET_DELIVERY_ID, content: [] },
-      { type: "toolCall", id: `${turnId}-tool`, name: "mcp__openbot__routine_no_update", status: "completed" },
+      { type: "toolCall", id: `${turnId}-tool`, name: "mcp__omnibot__routine_no_update", status: "completed" },
       { type: "agentMessage", id: `${turnId}-answer`, text: QUIET_ANSWER, status: "completed" },
     ],
   };
@@ -281,7 +281,7 @@ function count(database: OmniBotDatabase, sql: string, ...parameters: string[]):
 }
 
 if (import.meta.main) {
-  const outputPath = resolve(process.cwd(), ".openbot-build", REPORT_NAME);
+  const outputPath = resolve(process.cwd(), ".omnibot-build", REPORT_NAME);
   const report = await runProviderHistoryReimportCheck(outputPath);
   const failed = Object.entries(report.acceptance).flatMap(([name, passed]) => (passed ? [] : [name]));
   if (failed.length > 0) throw new Error(`Provider history reimport check failed: ${failed.join(", ")}. ${outputPath}`);

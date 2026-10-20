@@ -1,26 +1,26 @@
 .conversation-title {
   display: flex;
-  height: var(--openbot-control-sm);
+  height: var(--omnibot-control-sm);
   align-items: center;
   gap: 6px;
-  border-radius: var(--openbot-radius-sm);
+  border-radius: var(--omnibot-radius-sm);
   border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
   padding: 2px 4px;
   text-align: left;
-  transition: background var(--openbot-duration-hover) ease;
+  transition: background var(--omnibot-duration-hover) ease;
 }
 
 .conversation-title:hover {
-  background: var(--openbot-hover);
+  background: var(--omnibot-hover);
 }
 
 .conversation-title h1 {
   margin: 0;
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-md);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-md);
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0;
@@ -29,7 +29,7 @@
 .conversation-access-lock {
   display: inline-flex;
   flex: none;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 .conversation-access-lock svg {
@@ -57,23 +57,23 @@
   height: 28px;
   align-items: center;
   gap: 6px;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-overlay);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-bg-overlay);
   padding: 0 9px 0 8px;
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
   cursor: pointer;
-  box-shadow: inset 0 1px var(--openbot-hover);
+  box-shadow: inset 0 1px var(--omnibot-hover);
   transition:
-    border-color var(--openbot-duration-hover) ease,
-    background-color var(--openbot-duration-hover) ease,
-    transform var(--openbot-duration-fast) cubic-bezier(0.23, 1, 0.32, 1);
+    border-color var(--omnibot-duration-hover) ease,
+    background-color var(--omnibot-duration-hover) ease,
+    transform var(--omnibot-duration-fast) cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .provider-model-trigger:hover:not(:disabled),
 .provider-model-trigger[aria-expanded="true"] {
-  border-color: var(--openbot-border-strong);
-  background: var(--openbot-bg-surface);
+  border-color: var(--omnibot-border-strong);
+  background: var(--omnibot-bg-surface);
 }
 
 .provider-model-trigger:active:not(:disabled) {
@@ -83,7 +83,7 @@
 .provider-model-trigger:focus-visible,
 .provider-model-rail-button:focus-visible,
 .provider-model-option:focus-visible {
-  outline: 1px solid var(--openbot-accent);
+  outline: 1px solid var(--omnibot-accent);
   outline-offset: 1px;
 }
 
@@ -103,7 +103,7 @@
   flex: 0 1 auto;
   min-width: 0;
   white-space: nowrap;
-  font-size: var(--openbot-text-md);
+  font-size: var(--omnibot-text-md);
   font-weight: 470;
   line-height: 18px;
 }
@@ -112,14 +112,14 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-md);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-md);
   line-height: 18px;
   white-space: nowrap;
 }
 
 .provider-model-trigger-effort::before {
-  margin-right: var(--openbot-space-1-5);
+  margin-right: var(--omnibot-space-1-5);
   content: "·";
 }
 
@@ -203,7 +203,7 @@
   gap: 8px;
   border: 0;
   border-radius: 0;
-  background: var(--openbot-hover);
+  background: var(--omnibot-hover);
   padding: 0 11px 0 12px;
   box-shadow: none;
 }
@@ -211,13 +211,13 @@
 .provider-model-trigger-field:hover:not(:disabled),
 .provider-model-trigger-field[aria-expanded="true"] {
   border-color: transparent;
-  background: var(--openbot-border);
+  background: var(--omnibot-border);
 }
 
 .provider-model-trigger-field .provider-model-field-label {
   flex: 0 0 auto;
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
   font-weight: 400;
   line-height: 17px;
 }
@@ -233,7 +233,7 @@
   height: 15px;
   flex: 0 0 15px;
   overflow: visible;
-  fill: var(--openbot-provider-current);
+  fill: var(--omnibot-provider-current);
 }
 
 .provider-model-mark-large {
@@ -247,10 +247,10 @@
   height: 13px;
   flex: 0 0 13px;
   fill: none;
-  stroke: var(--openbot-text-muted);
+  stroke: var(--omnibot-text-muted);
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform var(--openbot-duration-normal) ease;
+  transition: transform var(--omnibot-duration-normal) ease;
 }
 
 .provider-model-trigger[aria-expanded="true"] .provider-model-chevron {
@@ -258,17 +258,17 @@
 }
 
 .provider-model-popover {
-  --provider-model-rail-bg: color-mix(in srgb, var(--openbot-bg-notch) 22%, var(--ui-menu-bg));
-  --provider-model-segment-radius: calc(var(--ui-menu-item-radius) - var(--openbot-space-0-5));
+  --provider-model-rail-bg: color-mix(in srgb, var(--omnibot-bg-notch) 22%, var(--ui-menu-bg));
+  --provider-model-segment-radius: calc(var(--ui-menu-item-radius) - var(--omnibot-space-0-5));
   position: relative;
-  z-index: var(--openbot-layer-dropdown);
+  z-index: var(--omnibot-layer-dropdown);
   width: min(360px, calc(100vw - 24px));
   min-height: 226px;
   overflow: hidden;
   border: 0;
   border-radius: var(--ui-menu-radius);
   background: var(--ui-menu-bg);
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
   box-shadow: var(--ui-menu-panel-shadow);
   transform-origin: var(--kb-popover-content-transform-origin);
   animation: ui-menu-in var(--ui-menu-duration) var(--ui-menu-ease) both;
@@ -292,8 +292,8 @@
   flex: 0 0 52px;
   flex-direction: column;
   align-items: center;
-  gap: var(--openbot-space-1);
-  border-right: 1px solid var(--openbot-border);
+  gap: var(--omnibot-space-1);
+  border-right: 1px solid var(--omnibot-border);
   background: var(--provider-model-rail-bg);
   padding: 9px 7px;
 }
@@ -302,16 +302,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
 }
 
 /* Opens the provider settings, to connect a provider that the rail leaves out. */
 .provider-model-rail-add {
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
 }
 
 .provider-model-rail-add:hover {
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 .provider-model-rail-tooltip-trigger {
@@ -319,28 +319,28 @@
 }
 
 .provider-model-rail-tooltip {
-  z-index: var(--openbot-layer-tooltip);
+  z-index: var(--omnibot-layer-tooltip);
   display: flex;
   max-width: min(240px, calc(100vw - 16px));
   flex-direction: column;
-  gap: var(--openbot-space-0-5);
-  border: 1px solid var(--openbot-border-strong);
-  border-radius: var(--openbot-radius-sm);
-  background: var(--openbot-bg-surface-raised);
-  box-shadow: var(--openbot-shadow-raised);
-  padding: var(--openbot-space-1-5) var(--openbot-space-2);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-md);
-  font-weight: var(--openbot-weight-semibold);
-  line-height: var(--openbot-leading-md);
+  gap: var(--omnibot-space-0-5);
+  border: 1px solid var(--omnibot-border-strong);
+  border-radius: var(--omnibot-radius-sm);
+  background: var(--omnibot-bg-surface-raised);
+  box-shadow: var(--omnibot-shadow-raised);
+  padding: var(--omnibot-space-1-5) var(--omnibot-space-2);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-md);
+  font-weight: var(--omnibot-weight-semibold);
+  line-height: var(--omnibot-leading-md);
   overflow-wrap: anywhere;
   pointer-events: none;
 }
 
 .provider-model-rail-tooltip small {
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-regular);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-regular);
 }
 
 .provider-model-rail-button {
@@ -356,8 +356,8 @@
   padding: 0;
   cursor: pointer;
   transition:
-    background-color var(--openbot-duration-hover) ease,
-    opacity var(--openbot-duration-hover) ease;
+    background-color var(--omnibot-duration-hover) ease,
+    opacity var(--omnibot-duration-hover) ease;
 }
 
 .provider-model-rail-button:hover {
@@ -365,7 +365,7 @@
 }
 
 .provider-model-rail-button-selected {
-  background: color-mix(in srgb, var(--openbot-text-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--omnibot-text-primary) 8%, transparent);
   box-shadow: inset 0 0 0 1px var(--ui-menu-edge);
 }
 
@@ -379,7 +379,7 @@
 }
 
 .provider-model-rail-button-selected .provider-model-mark {
-  fill: var(--openbot-text-primary);
+  fill: var(--omnibot-text-primary);
   opacity: 1;
 }
 
@@ -400,18 +400,18 @@
   [data-state="error"]
 )::after {
   position: absolute;
-  top: var(--openbot-space-1-5);
-  right: var(--openbot-space-1-5);
+  top: var(--omnibot-space-1-5);
+  right: var(--omnibot-space-1-5);
   width: 6px;
   height: 6px;
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-text-muted);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-text-muted);
   box-shadow: 0 0 0 2px var(--provider-model-rail-bg);
   content: "";
 }
 
 .provider-model-rail-button:is([data-state="sign-in-required"], [data-state="outdated"])::after {
-  background: var(--openbot-warning);
+  background: var(--omnibot-warning);
 }
 
 /* The place of an account in its provider's list, when the provider has more than one. */
@@ -425,12 +425,12 @@
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-control);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-bg-control);
   box-shadow: 0 0 0 2px var(--provider-model-rail-bg);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-medium);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -452,10 +452,10 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   /* The right inset lives on the text, not the row, so the action button can line its right edge up
    * with the search field and the model rows below it. */
-  padding: var(--openbot-space-1-5) 0 var(--openbot-space-2) var(--ui-menu-inset);
+  padding: var(--omnibot-space-1-5) 0 var(--omnibot-space-2) var(--ui-menu-inset);
 }
 
 .provider-model-heading-text {
@@ -472,18 +472,18 @@
   border-radius: var(--ui-menu-item-radius);
   background: var(--ui-menu-item-hover);
   box-shadow: none;
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 .provider-model-heading .ui-button:hover,
 .provider-model-empty .ui-button-variant-outline:hover {
-  background: color-mix(in srgb, var(--openbot-text-primary) 10%, transparent);
+  background: color-mix(in srgb, var(--omnibot-text-primary) 10%, transparent);
 }
 
 .provider-model-heading .ui-button svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  stroke-width: var(--openbot-icon-stroke);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
+  stroke-width: var(--omnibot-icon-stroke);
 }
 
 .provider-model-heading strong,
@@ -498,28 +498,28 @@
 .provider-model-empty {
   display: grid;
   justify-items: start;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   margin-bottom: var(--ui-menu-padding);
   border: 0;
   border-radius: var(--ui-menu-item-radius);
   background: var(--ui-menu-item-hover);
-  padding: var(--openbot-space-2) var(--ui-menu-inset);
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  padding: var(--omnibot-space-2) var(--ui-menu-inset);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
   line-height: 18px;
 }
 
 .provider-model-heading strong {
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-lg);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-lg);
   font-weight: 620;
   line-height: 20px;
 }
 
 .provider-model-heading span {
   margin-top: 1px;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
   line-height: 16px;
 }
 
@@ -539,13 +539,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--openbot-space-1) 12px;
+  gap: var(--omnibot-space-1) 12px;
   /* The separator runs to both edges of the panel, as in the menus. */
   margin: var(--ui-menu-padding) calc(var(--ui-menu-padding) * -1) 0;
-  border-top: 1px solid var(--openbot-border);
+  border-top: 1px solid var(--omnibot-border);
   padding: var(--ui-menu-padding) var(--ui-menu-padding) 0 calc(var(--ui-menu-padding) + var(--ui-menu-inset));
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
   line-height: 17px;
 }
 
@@ -553,13 +553,13 @@
 .provider-model-effort + .provider-model-effort {
   margin-top: 0;
   border-top: 0;
-  padding-top: var(--openbot-space-1);
+  padding-top: var(--omnibot-space-1);
 }
 
 /* Each row is as high as the effort control, so the switch and the segments have room. */
 .provider-model-effort > :first-child {
   display: flex;
-  min-height: var(--openbot-control-md);
+  min-height: var(--omnibot-control-md);
   align-items: center;
 }
 
@@ -576,10 +576,10 @@
   /* On a line of their own, the segments can shrink. A long label then ends in an ellipsis. */
   flex: 1 1 auto;
   min-width: 0;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
   border-radius: var(--ui-menu-item-radius);
   background: var(--ui-menu-item-hover);
-  padding: var(--openbot-space-0-5);
+  padding: var(--omnibot-space-0-5);
 }
 
 .provider-model-effort-segment {
@@ -594,14 +594,14 @@
   display: flex;
   flex: 1;
   min-width: 0;
-  height: calc(var(--openbot-control-md) - 2 * var(--openbot-space-0-5));
+  height: calc(var(--omnibot-control-md) - 2 * var(--omnibot-space-0-5));
   align-items: center;
   justify-content: center;
   border-radius: var(--provider-model-segment-radius);
-  padding-inline: var(--openbot-space-2);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
-  font-weight: var(--openbot-weight-medium);
+  padding-inline: var(--omnibot-space-2);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
+  font-weight: var(--omnibot-weight-medium);
   white-space: nowrap;
   cursor: pointer;
   transition: color var(--provider-model-effort-duration) var(--provider-model-effort-ease);
@@ -615,11 +615,11 @@
 
 .provider-model-effort-segment-control:hover:not([data-disabled]),
 .provider-model-effort-segment-control[data-checked] {
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 .provider-model-effort-segment:has(:focus-visible) .provider-model-effort-segment-control {
-  box-shadow: 0 0 0 1px var(--openbot-text-muted);
+  box-shadow: 0 0 0 1px var(--omnibot-text-muted);
 }
 
 .provider-model-effort-segment-control[data-disabled] {
@@ -630,13 +630,13 @@
 /* The chosen segment's background. EffortSegments places it, and it slides to a new choice. */
 .provider-model-effort-pill {
   position: absolute;
-  top: var(--openbot-space-0-5);
+  top: var(--omnibot-space-0-5);
   left: 0;
   z-index: 0;
   width: 0;
-  height: calc(var(--openbot-control-md) - 2 * var(--openbot-space-0-5));
+  height: calc(var(--omnibot-control-md) - 2 * var(--omnibot-space-0-5));
   border-radius: var(--provider-model-segment-radius);
-  background: color-mix(in srgb, var(--openbot-text-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--omnibot-text-primary) 12%, transparent);
   box-shadow: inset 0 1px 0 var(--ui-menu-highlight);
   pointer-events: none;
   transition:
@@ -660,7 +660,7 @@
 }
 
 .provider-model-effort-select .ui-select-trigger:is(:hover, [data-expanded]) {
-  background: color-mix(in srgb, var(--openbot-text-primary) 10%, transparent);
+  background: color-mix(in srgb, var(--omnibot-text-primary) 10%, transparent);
 }
 
 .provider-model-effort-content {
@@ -676,9 +676,9 @@
 
 .provider-model-effort-content .ui-select-item {
   border-radius: var(--ui-menu-item-radius);
-  padding-block: var(--openbot-space-1-5);
+  padding-block: var(--omnibot-space-1-5);
   padding-left: var(--ui-menu-inset);
-  font-size: var(--openbot-text-md);
+  font-size: var(--omnibot-text-md);
 }
 
 .provider-model-effort-content .ui-select-item[data-highlighted] {
@@ -696,25 +696,25 @@
   border: 0;
   border-radius: var(--ui-menu-item-radius);
   background: transparent;
-  padding: var(--openbot-space-1-5) var(--ui-menu-inset) var(--openbot-space-1-5)
-    calc(var(--ui-menu-inset) + var(--openbot-icon-md) + var(--openbot-space-2));
-  color: var(--openbot-text-primary);
+  padding: var(--omnibot-space-1-5) var(--ui-menu-inset) var(--omnibot-space-1-5)
+    calc(var(--ui-menu-inset) + var(--omnibot-icon-md) + var(--omnibot-space-2));
+  color: var(--omnibot-text-primary);
   cursor: pointer;
   text-align: left;
   transition:
-    background-color var(--openbot-duration-hover) ease,
-    color var(--openbot-duration-hover) ease;
+    background-color var(--omnibot-duration-hover) ease,
+    color var(--omnibot-duration-hover) ease;
 }
 
 .provider-model-option::before {
   position: absolute;
   top: 50%;
   left: var(--ui-menu-inset);
-  width: var(--openbot-icon-md);
-  height: var(--openbot-icon-md);
+  width: var(--omnibot-icon-md);
+  height: var(--omnibot-icon-md);
   box-sizing: border-box;
-  border: 1px solid color-mix(in srgb, var(--openbot-text-primary) 22%, transparent);
-  border-radius: var(--openbot-radius-pill);
+  border: 1px solid color-mix(in srgb, var(--omnibot-text-primary) 22%, transparent);
+  border-radius: var(--omnibot-radius-pill);
   content: "";
   translate: 0 -50%;
   transition:
@@ -724,7 +724,7 @@
 
 .provider-model-option-selected::before {
   border-color: transparent;
-  background: var(--openbot-text-primary);
+  background: var(--omnibot-text-primary);
 }
 
 .provider-model-option:hover:not(:disabled),
@@ -733,7 +733,7 @@
 }
 
 .provider-model-option:disabled {
-  color: var(--openbot-text-dim);
+  color: var(--omnibot-text-dim);
   cursor: not-allowed;
 }
 
@@ -748,17 +748,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: var(--openbot-text-md);
+  font-size: var(--omnibot-text-md);
   line-height: 18px;
 }
 
 .provider-model-option-name small {
   flex: 0 0 auto;
-  border-radius: var(--openbot-radius-pill);
-  background: color-mix(in srgb, var(--openbot-text-primary) 7%, transparent);
-  padding: 1px var(--openbot-space-1-5);
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  border-radius: var(--omnibot-radius-pill);
+  background: color-mix(in srgb, var(--omnibot-text-primary) 7%, transparent);
+  padding: 1px var(--omnibot-space-1-5);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
   font-weight: 500;
   line-height: 15px;
 }
@@ -767,9 +767,9 @@
 .provider-model-check {
   position: absolute;
   top: 50%;
-  left: calc(var(--ui-menu-inset) + (var(--openbot-icon-md) - var(--openbot-icon-sm)) / 2);
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  left: calc(var(--ui-menu-inset) + (var(--omnibot-icon-md) - var(--omnibot-icon-sm)) / 2);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   fill: none;
   stroke: var(--ui-menu-bg);
   stroke-linecap: round;
@@ -813,10 +813,10 @@
 }
 
 .computer-button-agent-active {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent-soft);
-  box-shadow: 0 0 10px var(--openbot-accent-strong);
-  color: var(--openbot-accent);
+  border-color: var(--omnibot-accent);
+  background: var(--omnibot-accent-soft);
+  box-shadow: 0 0 10px var(--omnibot-accent-strong);
+  color: var(--omnibot-accent);
 }
 
 .computer-control-dot {
@@ -825,13 +825,13 @@
   right: 1px;
   width: 5px;
   height: 5px;
-  border: 1px solid var(--openbot-bg-canvas);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-accent);
+  border: 1px solid var(--omnibot-bg-canvas);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-accent);
   animation: browser-control-pulse 1.25s ease-in-out infinite;
 }
 
 .browser-toolbar-button:active:not(:disabled) {
   transform: scale(0.92);
-  transition-duration: var(--openbot-duration-fast);
+  transition-duration: var(--omnibot-duration-fast);
 }

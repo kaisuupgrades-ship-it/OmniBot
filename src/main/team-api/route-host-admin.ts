@@ -1,8 +1,8 @@
-import type { UpdateHostIdentityInput } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { HOST_ADMIN_CAPABILITY, HOST_ADMIN_ROUTES } from "@openbot/contracts/team-protocol/host-admin-v1";
-import { sourceText } from "@openbot/i18n/source";
+import type { UpdateHostIdentityInput } from "@omnibot/contracts/ipc";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { HOST_ADMIN_CAPABILITY, HOST_ADMIN_ROUTES } from "@omnibot/contracts/team-protocol/host-admin-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import { parseHostIdentity } from "../ipc/server-inputs";
 import type { TeamApiAdmin } from "./dependencies";

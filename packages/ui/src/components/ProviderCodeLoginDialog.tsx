@@ -34,7 +34,7 @@ import {
   Spinner,
   Text,
   X,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import { createEffect, createMemo, createSignal, Show } from "solid-js";
 import {
   McpSignInPage,

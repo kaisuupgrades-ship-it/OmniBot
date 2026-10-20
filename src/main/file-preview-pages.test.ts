@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { CHAT_VISUAL_PAGE_LIMIT } from "@openbot/contracts/chat-visual";
+import { CHAT_VISUAL_PAGE_LIMIT } from "@omnibot/contracts/chat-visual";
 import { describe, expect, it } from "vitest";
 import { FilePreviewPages } from "./file-preview-pages";
 
@@ -19,10 +19,10 @@ describe("workspace HTML preview pages", () => {
     expect(await response.text()).toContain("drawChart()");
 
     for (const value of [
-      "openbot-visual://preview/unknown",
-      "openbot-visual://preview/etc/passwd",
-      "openbot-visual://preview/%2e%2e%2fprivate.html",
-      `openbot-visual://file/${new URL(address ?? "").pathname.slice(1)}`,
+      "omnibot-visual://preview/unknown",
+      "omnibot-visual://preview/etc/passwd",
+      "omnibot-visual://preview/%2e%2e%2fprivate.html",
+      `omnibot-visual://file/${new URL(address ?? "").pathname.slice(1)}`,
       `${address ?? ""}?path=/private.html`,
     ]) {
       expect(pages.get(new URL(value))).toBeUndefined();

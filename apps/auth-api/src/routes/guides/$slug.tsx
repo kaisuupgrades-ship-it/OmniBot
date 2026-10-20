@@ -14,9 +14,9 @@ function loadGuide(slug: string): CollectionArticle {
 
 export const Route = createFileRoute("/guides/$slug")({
   loader: ({ params }) => {
-    if (params.slug === "write-a-guide-for-openbot") {
+    if (params.slug === "write-a-guide-for-omnibot") {
       throw redirect({
-        href: "https://omnibot.example.com/source/blob/main/CONTRIBUTING.md",
+        href: "https://omnibot.example.com/source",
         statusCode: 308,
       });
     }

@@ -1,4 +1,4 @@
-import type { RemoteConnectionStage } from "@openbot/team-client";
+import type { RemoteConnectionStage } from "@omnibot/team-client";
 import type { MobileAnalytics } from "./analytics-core";
 
 export class MobileConnectionAnalytics {

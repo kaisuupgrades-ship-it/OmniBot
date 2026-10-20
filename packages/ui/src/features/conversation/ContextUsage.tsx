@@ -1,5 +1,5 @@
-import { AGENT_CONTEXT_CATEGORIES, type AgentContextCategory } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import { AGENT_CONTEXT_CATEGORIES, type AgentContextCategory } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Button,
   CircleCheck,
@@ -11,8 +11,8 @@ import {
   RadialProgress,
   type RadialProgressTone,
   TriangleAlert,
-} from "@openbot/ui";
-import { ContentExitMotion } from "@openbot/ui/menu-motion";
+} from "@omnibot/ui";
+import { ContentExitMotion } from "@omnibot/ui/menu-motion";
 import { createEffect, createSignal, For, Match, Show, Switch } from "solid-js";
 import type { AgentProfile } from "../../data";
 import { useText } from "../../text";

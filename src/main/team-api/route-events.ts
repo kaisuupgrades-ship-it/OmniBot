@@ -1,10 +1,10 @@
-import { isReleasedRoutineSchedule } from "@openbot/contracts/ipc";
-import { EVENTS_CAPABILITY, EVENTS_ROUTES } from "@openbot/contracts/team-protocol/events-v1";
+import { isReleasedRoutineSchedule } from "@omnibot/contracts/ipc";
+import { EVENTS_CAPABILITY, EVENTS_ROUTES } from "@omnibot/contracts/team-protocol/events-v1";
 import {
   ROUTINE_RECOVERY_CAPABILITY,
   ROUTINE_RECOVERY_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-recovery-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/routine-recovery-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { type HostEventsApi, HostEventsFailure, hostEventsFailureMessage } from "../host-events-api";
 import {

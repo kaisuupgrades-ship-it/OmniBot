@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { z } from "zod";
 import { createRemoteDesktopInputDigest, loadNativeRuntimeLock, type NativeRuntimeLock } from "./native-runtime-lock";
 import {
@@ -77,7 +77,7 @@ export async function installRemoteDesktopRuntime(
   const archiveBytes = await download(fetchImpl, archiveAsset.browser_download_url, "Runtime asset");
   if (sha256(archiveBytes) !== artifact.sha256) throw new Error(`The ${target} runtime archive checksum is invalid.`);
 
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-runtime-install-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "omnibot-runtime-install-"));
   try {
     const archive = join(temporaryRoot, artifact.asset);
     const extracted = join(temporaryRoot, "extracted");

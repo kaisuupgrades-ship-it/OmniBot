@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import type { AgentEvent, AgentSummary, ConversationMessage, ConversationSnapshot } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import type { AgentEvent, AgentSummary, ConversationMessage, ConversationSnapshot } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 import { conversationContentSignature } from "./delivery-content";
 
 interface TransactionScope {

@@ -1,7 +1,7 @@
-import { serializeAttachmentReference } from "@openbot/contracts/attachment-references";
-import { serializeChatTagReference } from "@openbot/contracts/chat-tag-references";
-import type { DraftAttachment, InstalledSkill } from "@openbot/contracts/ipc";
-import { ComposerEditor } from "@openbot/ui/features/conversation/ComposerEditor";
+import { serializeAttachmentReference } from "@omnibot/contracts/attachment-references";
+import { serializeChatTagReference } from "@omnibot/contracts/chat-tag-references";
+import type { DraftAttachment, InstalledSkill } from "@omnibot/contracts/ipc";
+import { ComposerEditor } from "@omnibot/ui/features/conversation/ComposerEditor";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
@@ -73,7 +73,7 @@ const installedSkills: InstalledSkill[] = [
   },
   {
     skillId: "skill-site-hosting",
-    slug: "openbot-site-hosting",
+    slug: "omnibot-site-hosting",
     name: "Site Hosting",
     installedVersion: 1,
     availableVersion: 1,

@@ -1,5 +1,5 @@
-import type { BitwardenConnectorStatus } from "@openbot/contracts/ipc";
-import { currentText } from "@openbot/ui/text";
+import type { BitwardenConnectorStatus } from "@omnibot/contracts/ipc";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, onCleanup, onSettled } from "solid-js";
 import { type BitwardenConnectorPort, bitwardenConnectorPort } from "./bitwarden-connector-port";
 import { type ConnectorController, createConnectorActions, NO_WATCH } from "./connector-controller";

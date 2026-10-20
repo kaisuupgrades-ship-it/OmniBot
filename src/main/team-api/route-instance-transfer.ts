@@ -1,11 +1,11 @@
 import { rm } from "node:fs/promises";
-import { parseApplyInstanceTransferInput, parseExportInstanceInput } from "@openbot/contracts/ipc";
+import { parseApplyInstanceTransferInput, parseExportInstanceInput } from "@omnibot/contracts/ipc";
 import {
   INSTANCE_TRANSFER_CAPABILITY,
   INSTANCE_TRANSFER_REMOTE_BYTES,
   INSTANCE_TRANSFER_ROUTES,
-} from "@openbot/contracts/team-protocol/instance-transfer-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/instance-transfer-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { TeamApiInstanceTransfer } from "./dependencies";
@@ -48,7 +48,7 @@ export async function routeInstanceTransfer(
         return await sendFile(response, path, null, (size) => ({
           "Content-Type": "application/zip",
           "Content-Length": String(size),
-          "Content-Disposition": "attachment; filename*=UTF-8''openbot-transfer.zip",
+          "Content-Disposition": "attachment; filename*=UTF-8''omnibot-transfer.zip",
           "X-Content-Type-Options": "nosniff",
         }));
       } finally {

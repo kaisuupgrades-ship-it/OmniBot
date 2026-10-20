@@ -1,4 +1,4 @@
-import type { ChatPreviewKind } from "@openbot/contracts/chat-preview";
+import type { ChatPreviewKind } from "@omnibot/contracts/chat-preview";
 
 export interface CodePreviewEntry {
   kind: ChatPreviewKind;

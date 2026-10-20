@@ -6,7 +6,7 @@
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import type { Locator, Page } from "playwright-core";
 import { assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { readDevInstanceRecords } from "./dev-automation/instance-registry";
@@ -27,7 +27,7 @@ const session = await connectToDevApp(instance.remoteDebuggingPort, createOmniBo
   expectedRendererPort: instance.rendererPort,
   ownerPid: instance.pid,
 });
-const out = resolve(".openbot-build/browser-menu-cover-e2e");
+const out = resolve(".omnibot-build/browser-menu-cover-e2e");
 mkdirSync(out, { recursive: true });
 const results: string[] = [];
 

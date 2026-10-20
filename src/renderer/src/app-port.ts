@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the app shell and the cross-domain root modules reach in main, plus the shell actions
@@ -29,7 +29,7 @@ export interface AppPort {
   servers: Pick<OmniBotDesktopApi["servers"], "onInvite" | "takePendingInvite">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function appPort(): AppPort {
-  return window.openbot;
+  return window.omnibot;
 }

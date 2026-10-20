@@ -17,7 +17,7 @@ publishes.
 - OmniBot downloads `claude` from Anthropic's npm package for your platform
   (`@anthropic-ai/claude-agent-sdk-<platform>`), checks the npm `dist.integrity` hash, and does not
   change the executable. It turns off the CLI's own updater for that copy only. With
-  `OPENBOT_CLAUDE_PATH`, OmniBot runs that executable instead. With no downloaded copy, it runs a
+  `OMNIBOT_CLAUDE_PATH`, OmniBot runs that executable instead. With no downloaded copy, it runs a
   `claude` that you installed.
 - Connect on the Claude row runs `claude auth login --claudeai`, which opens Anthropic's sign-in
   page in your browser. You can also run `claude auth login` in a terminal. The CLI stores the

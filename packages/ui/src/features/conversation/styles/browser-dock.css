@@ -13,8 +13,8 @@ body:has(.browser-dock-surface),
   width: 100%;
   height: 100%;
   background: transparent;
-  color: var(--openbot-text-primary);
-  font-family: var(--openbot-font-sans);
+  color: var(--omnibot-text-primary);
+  font-family: var(--omnibot-font-sans);
 }
 
 /*
@@ -24,13 +24,13 @@ body:has(.browser-dock-surface),
  */
 .browser-dock {
   position: absolute;
-  bottom: var(--openbot-space-4);
+  bottom: var(--omnibot-space-4);
   left: 50%;
   display: flex;
-  width: min(640px, calc(100% - 2 * var(--openbot-space-6)));
+  width: min(640px, calc(100% - 2 * var(--omnibot-space-6)));
   flex-direction: column;
   align-items: center;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   isolation: isolate;
   translate: -50% 0;
 }
@@ -38,19 +38,19 @@ body:has(.browser-dock-surface),
 .browser-dock-glass {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-0-5);
-  border: 1px solid var(--openbot-glass-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-glass);
-  box-shadow: var(--openbot-shadow-raised);
+  gap: var(--omnibot-space-0-5);
+  border: 1px solid var(--omnibot-glass-border);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-bg-glass);
+  box-shadow: var(--omnibot-shadow-raised);
   backdrop-filter: blur(16px);
-  color: var(--openbot-text-secondary);
+  color: var(--omnibot-text-secondary);
 }
 
 .browser-dock-composer svg,
 .browser-dock-island-activity svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 /* The island: one glass capsule over the composer for the step, the code and the reply. A spring sets its
@@ -69,15 +69,15 @@ body:has(.browser-dock-surface),
 
 .browser-dock-island:is([data-mode="reply"], [data-mode="secret"]) {
   width: 100%;
-  border-radius: var(--openbot-radius-lg);
+  border-radius: var(--omnibot-radius-lg);
 }
 
 /* The code card is narrower than the reply, and its glass is denser, so that the page under it does not show
    through as dark shapes behind the code. */
 .browser-dock-island[data-mode="secret"] {
   width: min(100%, 420px);
-  border-radius: var(--openbot-radius-xl);
-  background: color-mix(in srgb, var(--openbot-bg-glass), var(--openbot-bg-control) 60%);
+  border-radius: var(--omnibot-radius-xl);
+  background: color-mix(in srgb, var(--omnibot-bg-glass), var(--omnibot-bg-control) 60%);
   backdrop-filter: blur(32px) saturate(1.4);
 }
 
@@ -101,9 +101,9 @@ body:has(.browser-dock-surface),
 .browser-dock-island-activity {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-1-5);
-  padding: var(--openbot-space-1) var(--openbot-space-1) var(--openbot-space-1) var(--openbot-space-2);
-  font-size: var(--openbot-text-sm);
+  gap: var(--omnibot-space-1-5);
+  padding: var(--omnibot-space-1) var(--omnibot-space-1) var(--omnibot-space-1) var(--omnibot-space-2);
+  font-size: var(--omnibot-text-sm);
   white-space: nowrap;
 }
 
@@ -120,10 +120,10 @@ body:has(.browser-dock-surface),
 }
 
 .browser-dock-spin {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
   flex: none;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
   animation: ui-spin 1s linear infinite;
 }
 
@@ -133,7 +133,7 @@ body:has(.browser-dock-surface),
   min-width: 0;
   overflow: hidden;
   align-items: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--omnibot-space-1-5);
 }
 
 .browser-dock-status > span {
@@ -144,27 +144,27 @@ body:has(.browser-dock-surface),
 .browser-dock-handoff {
   flex: none;
   margin-left: auto;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--omnibot-radius-pill);
 }
 
 .browser-dock-island-reply {
   display: grid;
-  gap: var(--openbot-space-1-5);
-  padding: var(--openbot-space-2) var(--openbot-space-2) var(--openbot-space-3) var(--openbot-space-3);
-  color: var(--openbot-text-primary);
-  font-size: var(--openbot-text-md);
+  gap: var(--omnibot-space-1-5);
+  padding: var(--omnibot-space-2) var(--omnibot-space-2) var(--omnibot-space-3) var(--omnibot-space-3);
+  color: var(--omnibot-text-primary);
+  font-size: var(--omnibot-text-md);
 }
 
 .browser-dock-reply-header {
   display: flex;
   align-items: center;
-  gap: var(--openbot-space-2);
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  gap: var(--omnibot-space-2);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
 }
 
 .browser-dock-reply-header > strong {
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--omnibot-weight-medium);
 }
 
 .browser-dock-reply-close {
@@ -173,9 +173,9 @@ body:has(.browser-dock-surface),
 
 .browser-dock-reply-body {
   max-height: 160px;
-  padding-right: var(--openbot-space-1);
+  padding-right: var(--omnibot-space-1);
   overflow: auto;
-  line-height: var(--openbot-leading-lg);
+  line-height: var(--omnibot-leading-lg);
 }
 
 .browser-dock-reply-actions {
@@ -194,9 +194,9 @@ body:has(.browser-dock-surface),
 
 /* The queue keeps clear of the round ends of the field, and has the glass of the field. */
 .agent-queue-panel[data-variant="floating"] {
-  margin-inline: var(--openbot-space-6);
-  border-color: var(--openbot-glass-border);
-  background: var(--openbot-bg-glass);
+  margin-inline: var(--omnibot-space-6);
+  border-color: var(--omnibot-glass-border);
+  background: var(--omnibot-bg-glass);
   backdrop-filter: blur(16px);
   /* A sent message opens the queue with a clip that rises out of the field. */
   animation: none;
@@ -213,8 +213,8 @@ body:has(.browser-dock-surface),
   z-index: 2;
   box-sizing: border-box;
   width: 100%;
-  gap: var(--openbot-space-2);
-  padding: var(--openbot-space-1) var(--openbot-space-1) var(--openbot-space-1) var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
+  padding: var(--omnibot-space-1) var(--omnibot-space-1) var(--omnibot-space-1) var(--omnibot-space-2);
 }
 
 .browser-dock-avatar {
@@ -226,7 +226,7 @@ body:has(.browser-dock-surface),
 .browser-dock-editor {
   min-width: 0;
   flex: 1;
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 /* The text of a new queue row waits until the sent text arrives from the field. */
@@ -240,9 +240,9 @@ body:has(.browser-dock-surface),
   z-index: 1;
   box-sizing: border-box;
   overflow: hidden;
-  border: 1px solid var(--openbot-glass-border);
-  background: var(--openbot-bg-glass);
-  box-shadow: var(--openbot-shadow-raised);
+  border: 1px solid var(--omnibot-glass-border);
+  background: var(--omnibot-bg-glass);
+  box-shadow: var(--omnibot-shadow-raised);
   backdrop-filter: blur(16px);
   pointer-events: none;
 }
@@ -267,7 +267,7 @@ body:has(.browser-dock-surface),
   top: 0;
   left: 0;
   overflow: hidden;
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
   pointer-events: none;
   text-overflow: ellipsis;
   transform-origin: left center;
@@ -277,29 +277,29 @@ body:has(.browser-dock-surface),
 
 /* The row actions are small glass chips, as the field and the step are. */
 .agent-queue-panel[data-variant="floating"] .agent-queue-actions {
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
 }
 
 .agent-queue-panel[data-variant="floating"] :is(.agent-queue-steer, .agent-queue-icon-button) {
   box-sizing: border-box;
   height: 24px;
-  border: 1px solid var(--openbot-glass-border);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-glass-surface);
-  box-shadow: inset 0 1px 0 var(--openbot-glass-highlight);
+  border: 1px solid var(--omnibot-glass-border);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-glass-surface);
+  box-shadow: inset 0 1px 0 var(--omnibot-glass-highlight);
   backdrop-filter: blur(8px);
-  color: var(--openbot-text-secondary);
+  color: var(--omnibot-text-secondary);
   transition:
-    background var(--openbot-duration-hover) ease,
-    border-color var(--openbot-duration-hover) ease,
-    box-shadow var(--openbot-duration-hover) ease,
-    color var(--openbot-duration-hover) ease,
-    opacity var(--openbot-duration-hover) ease;
+    background var(--omnibot-duration-hover) ease,
+    border-color var(--omnibot-duration-hover) ease,
+    box-shadow var(--omnibot-duration-hover) ease,
+    color var(--omnibot-duration-hover) ease,
+    opacity var(--omnibot-duration-hover) ease;
 }
 
 .agent-queue-panel[data-variant="floating"] .agent-queue-steer {
-  padding: 0 var(--openbot-space-2) 0 var(--openbot-space-1-5);
-  font-size: var(--openbot-text-sm);
+  padding: 0 var(--omnibot-space-2) 0 var(--omnibot-space-1-5);
+  font-size: var(--omnibot-text-sm);
 }
 
 .agent-queue-panel[data-variant="floating"] .agent-queue-icon-button {
@@ -313,20 +313,20 @@ body:has(.browser-dock-surface),
 
 .agent-queue-panel[data-variant="floating"]
   :is(.agent-queue-steer, .agent-queue-icon-button):is(:hover:not(:disabled), :focus-visible) {
-  background: var(--openbot-glass-surface-hover);
-  color: var(--openbot-text-primary);
+  background: var(--omnibot-glass-surface-hover);
+  color: var(--omnibot-text-primary);
 }
 
 .agent-queue-panel[data-variant="floating"]
   .agent-queue-icon-button.agent-queue-delete:is(:hover:not(:disabled), :focus-visible) {
-  background: var(--openbot-danger-soft);
-  color: var(--openbot-danger);
+  background: var(--omnibot-danger-soft);
+  color: var(--omnibot-danger);
 }
 
 .agent-queue-panel[data-variant="floating"] :is(.agent-queue-steer, .agent-queue-icon-button):focus-visible {
   box-shadow:
-    inset 0 1px 0 var(--openbot-glass-highlight),
-    0 0 0 2px var(--openbot-border-focus);
+    inset 0 1px 0 var(--omnibot-glass-highlight),
+    0 0 0 2px var(--omnibot-border-focus);
 }
 
 /* With a pointer, the row actions are quiet. They get their glass on the row under the pointer or with
@@ -339,7 +339,7 @@ body:has(.browser-dock-surface),
     background: transparent;
     box-shadow: none;
     backdrop-filter: none;
-    color: var(--openbot-text-muted);
+    color: var(--omnibot-text-muted);
   }
 }
 

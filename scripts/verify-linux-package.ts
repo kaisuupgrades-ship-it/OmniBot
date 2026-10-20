@@ -5,8 +5,8 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import { FuseV1Options, getCurrentFuseWire } from "@electron/fuses";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { isMissingFileError } from "../src/backend/file-errors";
 
 const logger = createOmniBotLogger("verify-linux-package");
@@ -15,23 +15,23 @@ const logger = createOmniBotLogger("verify-linux-package");
 // a slow release runner can need much more time than usual to start the first instance.
 const launchStepLimitMs = 5 * 60_000;
 
-/** The scripts that a server installs from a release (`RELEASE_FILES` in scripts/hosting/openbot-hosted-update). */
+/** The scripts that a server installs from a release (`RELEASE_FILES` in scripts/hosting/omnibot-hosted-update). */
 const HOSTED_SCRIPTS = [
-  "openbot-hosted-server",
-  "openbot-hosted-env",
-  "openbot-hosted-update",
-  "openbot",
-  "openbot-boat-pre-stop",
+  "omnibot-hosted-server",
+  "omnibot-hosted-env",
+  "omnibot-hosted-update",
+  "omnibot",
+  "omnibot-boat-pre-stop",
   // Not installed on a server: `install-server.sh` runs it from the unpacked release.
-  "openbot-server-setup",
+  "omnibot-server-setup",
 ];
 const HOSTED_UNITS = [
-  "openbot.service",
-  "openbot-update.service",
-  "openbot-update.timer",
-  "openbot-update-apply.service",
-  "openbot-update-request.path",
-  "openbot-update-request.service",
+  "omnibot.service",
+  "omnibot-update.service",
+  "omnibot-update.timer",
+  "omnibot-update-apply.service",
+  "omnibot-update-request.path",
+  "omnibot-update-request.service",
 ];
 
 const FUSE_DISABLED = 48;
@@ -58,7 +58,7 @@ const appPath = resolve(
   appPathArgument ?? (architecture === "x64" ? "dist/linux-unpacked" : "dist/linux-arm64-unpacked"),
 );
 // electron-builder names the Linux binary after `name` in package.json, not `productName`.
-const executablePath = resolve(appPath, "openbot");
+const executablePath = resolve(appPath, "omnibot");
 const resourcesPath = resolve(appPath, "resources");
 const asarPath = resolve(resourcesPath, "app.asar");
 
@@ -71,7 +71,7 @@ await Promise.all([
   access(resolve(resourcesPath, "licenses/Electron-LICENSE")),
   access(resolve(resourcesPath, "licenses/LICENSES.chromium.html")),
   // A hosted server refuses an update to a release without all of its hosting files.
-  ...["packages.txt", "openbot-hosted.apparmor", ...HOSTED_UNITS].map((file) =>
+  ...["packages.txt", "omnibot-hosted.apparmor", ...HOSTED_UNITS].map((file) =>
     access(resolve(resourcesPath, "hosting", file)),
   ),
   ...HOSTED_SCRIPTS.map((file) => access(resolve(resourcesPath, "hosting", file), constants.X_OK)),
@@ -128,7 +128,7 @@ if (!isString(packageJson.version)) throw new Error("package.json version is mis
 // was built. It is the same file the running app reports through `app.getVersion()`.
 const packagedManifest = JSON.parse(await readAsarFile(asarPath, "package.json"));
 if (!isDynamicRecord(packagedManifest)) throw new Error("The packaged package.json is not a JSON object.");
-expectEqual(packagedManifest.name, "openbot", "packaged name");
+expectEqual(packagedManifest.name, "omnibot", "packaged name");
 expectEqual(packagedManifest.productName, "OmniBot", "packaged product name");
 expectEqual(packagedManifest.version, packageJson.version, "packaged version");
 
@@ -244,7 +244,7 @@ async function verifyLaunch(executable: string): Promise<void> {
   if (!process.env.DISPLAY && !process.env.WAYLAND_DISPLAY) {
     throw new Error("The launch check needs a display. Run it under `xvfb-run -a`.");
   }
-  const userDataPath = await mkdtemp(join(tmpdir(), "openbot-package-smoke-"));
+  const userDataPath = await mkdtemp(join(tmpdir(), "omnibot-package-smoke-"));
   const child = spawn(executable, [`--user-data-dir=${userDataPath}`], {
     env: launchEnvironment(userDataPath),
     stdio: ["ignore", "ignore", "pipe"],
@@ -308,9 +308,9 @@ function launchEnvironment(userDataPath: string): NodeJS.ProcessEnv {
     ...process.env,
     CODEX_HOME: join(userDataPath, "codex-home"),
     CLAUDE_CONFIG_DIR: join(userDataPath, "claude-home"),
-    OPENBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
-    OPENBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
-    OPENBOT_GROK_PATH: join(userDataPath, "missing-grok"),
+    OMNIBOT_CODEX_PATH: join(userDataPath, "missing-codex"),
+    OMNIBOT_CLAUDE_PATH: join(userDataPath, "missing-claude"),
+    OMNIBOT_GROK_PATH: join(userDataPath, "missing-grok"),
   };
 }
 

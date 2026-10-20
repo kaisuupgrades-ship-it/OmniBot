@@ -16,9 +16,9 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, resolve } from "node:path";
-import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentProfileDraft } from "@openbot/contracts/ipc";
+import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@omnibot/contracts/avatar-images";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentProfileDraft } from "@omnibot/contracts/ipc";
 import {
   AGENT_PROVIDERS,
   type AgentAccess,
@@ -56,17 +56,17 @@ import {
   type SaveAgentProfileResult,
   type SidebarLayoutSnapshot,
   type UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { isGeneratedAgentId, isUuidV4, legacyAgentId } from "@openbot/contracts/validation";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { isGeneratedAgentId, isUuidV4, legacyAgentId } from "@omnibot/contracts/validation";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect, Result, Semaphore, Stream } from "effect";
 import { ProfileCreationRecovery } from "./agent/profile-creation-recovery";
 import { isEmptyStoredFile, parseStoredJson, writeFileAtomically } from "./atomic-json-file";
 import { automationRoot } from "./automation-command";
 import type { AgentModelChange } from "./database/agent-roster";
-import { OmniBotDatabase, type ProviderSession, stableThreadId } from "./openbot-database";
+import { OmniBotDatabase, type ProviderSession, stableThreadId } from "./omnibot-database";
 import { isPathInside } from "./path-containment";
 import { isRecord } from "./protocol";
 import { StoredStateFailure, storedIO, storedSync } from "./stored-state-effects";
@@ -175,12 +175,12 @@ export class AgentStore {
   readonly #creationQueue = Semaphore.makeUnsafe(1);
 
   constructor(userDataPath: string, homePath: string, database = new OmniBotDatabase(userDataPath)) {
-    const openbotRoot = join(homePath, "OmniBot");
+    const omnibotRoot = join(homePath, "OmniBot");
     this.#statePath = join(userDataPath, LEGACY_AGENTS_STATE_FILE);
-    this.#agentsRoot = join(openbotRoot, "Agents");
-    this.#legacyAgentsRoot = join(openbotRoot, "Bots");
-    this.#sharedRoot = join(openbotRoot, "Shared");
-    this.#downloadsRoot = join(openbotRoot, "Downloads");
+    this.#agentsRoot = join(omnibotRoot, "Agents");
+    this.#legacyAgentsRoot = join(omnibotRoot, "Bots");
+    this.#sharedRoot = join(omnibotRoot, "Shared");
+    this.#downloadsRoot = join(omnibotRoot, "Downloads");
     this.#avatarsRoot = join(userDataPath, "avatars", "agents");
     this.#duplicationsRoot = join(userDataPath, "agent-duplications");
     this.#automationRoot = automationRoot(userDataPath);
@@ -381,9 +381,9 @@ export class AgentStore {
       record.avatarSeed = source.avatarSeed;
       record.avatarHue = source.avatarHue;
 
-      const stagedWorkspace = `${record.workspacePath}.openbot-stage`;
+      const stagedWorkspace = `${record.workspacePath}.omnibot-stage`;
       const avatarDirectory = join(this.#avatarsRoot, record.id);
-      const stagedAvatarDirectory = `${avatarDirectory}.openbot-stage`;
+      const stagedAvatarDirectory = `${avatarDirectory}.omnibot-stage`;
       const duplicationMarker = this.#duplicationMarkerPath(record.id);
       let stagedAvatarPath: string | null = null;
       {
@@ -889,9 +889,9 @@ export class AgentStore {
       const agent = this.#state.agents.find((candidate) => candidate.id === id);
       for (const path of [
         join(this.#avatarsRoot, id),
-        `${join(this.#avatarsRoot, id)}.openbot-stage`,
+        `${join(this.#avatarsRoot, id)}.omnibot-stage`,
         join(this.#agentsRoot, id),
-        `${join(this.#agentsRoot, id)}.openbot-stage`,
+        `${join(this.#agentsRoot, id)}.omnibot-stage`,
       ]) {
         yield* storedIO(() => rm(path, AGENT_FILES_REMOVAL));
       }
@@ -1189,7 +1189,7 @@ export class AgentStore {
     }
     const entries = listing.success;
     yield* Effect.forEach(
-      entries.filter((entry) => entry.endsWith(".openbot-stage")),
+      entries.filter((entry) => entry.endsWith(".omnibot-stage")),
       (entry) =>
         storedIO(() => rm(join(this.#legacyAgentsRoot, entry), { recursive: true, force: true })).pipe(
           Effect.catch(({ cause }) =>
@@ -1200,7 +1200,7 @@ export class AgentStore {
         ),
       { concurrency: "unbounded", discard: true },
     );
-    if (!entries.every((entry) => entry.endsWith(".openbot-stage"))) return;
+    if (!entries.every((entry) => entry.endsWith(".omnibot-stage"))) return;
     yield* storedIO(() => rmdir(this.#legacyAgentsRoot)).pipe(
       Effect.catch(({ cause }) =>
         Effect.sync(() => logger.warn("Could not remove the legacy workspace root.", toLogValue(cause))),
@@ -1249,7 +1249,7 @@ export class AgentStore {
             ...roots.flatMap((root) =>
               names.flatMap((name) => [
                 storedIO(() => rm(join(root, name), { recursive: true, force: true })),
-                storedIO(() => rm(`${join(root, name)}.openbot-stage`, { recursive: true, force: true })),
+                storedIO(() => rm(`${join(root, name)}.omnibot-stage`, { recursive: true, force: true })),
               ]),
             ),
             storedIO(() => rm(join(this.#duplicationsRoot, entry.name), { force: true })),
@@ -2030,7 +2030,7 @@ function stringList(value: unknown): string[] {
 }
 
 function agentAvatarUrl(agentId: string, version: string, mimeType: string): string {
-  const url = new URL(`openbot-avatar://agent/${encodeURIComponent(agentId)}`);
+  const url = new URL(`omnibot-avatar://agent/${encodeURIComponent(agentId)}`);
   url.searchParams.set("v", version);
   url.searchParams.set("type", mimeType);
   return url.toString();
@@ -2046,7 +2046,7 @@ function parseAgentAvatarUrl(
     const version = url.searchParams.get("v") ?? "";
     const mimeType = url.searchParams.get("type") ?? "";
     if (
-      url.protocol !== "openbot-avatar:" ||
+      url.protocol !== "omnibot-avatar:" ||
       url.hostname !== "agent" ||
       agentId !== expectedAgentId ||
       !isUuidV4(version) ||

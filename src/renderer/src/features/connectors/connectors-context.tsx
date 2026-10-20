@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@openbot/contracts/team-protocol/onepassword-connector-v1";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import { ONEPASSWORD_CONNECTOR_CAPABILITY } from "@omnibot/contracts/team-protocol/onepassword-connector-v1";
 import { createMemo } from "solid-js";
 import { createSimpleContext } from "../../simple-context";
 import { resolveCreationModel } from "../agents/agent-creation-model";

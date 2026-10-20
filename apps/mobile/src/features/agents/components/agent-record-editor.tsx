@@ -1,6 +1,6 @@
 import { Host, Switch } from "@expo/ui";
-import { eventFilterDraftsValid, eventFiltersFromDrafts } from "@openbot/contracts/event-filter-value";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { eventFilterDraftsValid, eventFiltersFromDrafts } from "@omnibot/contracts/event-filter-value";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type AgentMemorySelectionState,
   type EventRoutine,
@@ -11,15 +11,15 @@ import {
   type RoutineSchedule,
   type SaveEventRoutineInput,
   type RoutineWebhookTrigger as WebhookTriggerFields,
-} from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@omnibot/contracts/ipc";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import {
   type RoutineScheduleDraft,
   routineDraftProblemCode,
   routineScheduleFromDraft,
   routineScheduleToDraft,
   switchDraftKind,
-} from "@openbot/team-client/routine-schedule-draft";
+} from "@omnibot/team-client/routine-schedule-draft";
 import { useQueryClient } from "@tanstack/react-query";
 import { router, useNavigation } from "expo-router";
 import { usePreventRemove } from "expo-router/react-navigation";
@@ -114,7 +114,7 @@ export function MemoryEditor({
   const action = useRecordAction();
   const inclusion = useRecordAction();
   const selected = selection?.selections.find((entry) => entry.memoryId === memory?.id);
-  const accent = String(useCSSVariable("--openbot-accent"));
+  const accent = String(useCSSVariable("--omnibot-accent"));
   const [editedText, setEditedText] = useState<string | undefined>();
   const text = editedText ?? memory?.text ?? "";
   const [savedText, setSavedText] = useState<string | null>(null);

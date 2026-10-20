@@ -9,9 +9,9 @@ import type {
   BrowserDockFrame,
   BrowserDockGlass,
   BrowserDockPresentation,
-} from "@openbot/contracts/ipc";
-import { BROWSER_DOCK_LIMITS, IPC_ENDPOINTS } from "@openbot/contracts/ipc";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { BROWSER_DOCK_LIMITS, IPC_ENDPOINTS } from "@omnibot/contracts/ipc";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect, Schema, Semaphore } from "effect";
 import { type BrowserWindow, type Input, type Rectangle, View, type WebContents, WebContentsView } from "electron";
 import type { BrowserMainPage } from "../backend/browser-host";

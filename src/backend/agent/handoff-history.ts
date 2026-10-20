@@ -1,7 +1,7 @@
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import type { ConversationMessage } from "@openbot/contracts/ipc";
-import { redactText } from "@openbot/logging";
-import type { OmniBotDatabase } from "../openbot-database";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import type { ConversationMessage } from "@omnibot/contracts/ipc";
+import { redactText } from "@omnibot/logging";
+import type { OmniBotDatabase } from "../omnibot-database";
 import { HANDOFF_END, HANDOFF_START, renderHandoffMessage } from "./delivery-content";
 
 const HANDOFF_CHARACTERS = 32_000;
@@ -65,7 +65,7 @@ export function renderProviderHandoff(
   const header = [
     HANDOFF_START,
     "Previous conversation excerpts. Current profile and developer instructions take precedence. Do not repeat completed work.",
-    "Omitted details remain available: discover openbot.history_search and openbot.history_read. These tools read only this conversation after its latest context reset. Excerpts are not a complete summary.",
+    "Omitted details remain available: discover omnibot.history_search and omnibot.history_read. These tools read only this conversation after its latest context reset. Excerpts are not a complete summary.",
     "--- recent messages ---",
   ].join("\n");
   const stepLines: string[] = [];

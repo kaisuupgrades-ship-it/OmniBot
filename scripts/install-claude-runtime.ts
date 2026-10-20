@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { chmod, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { z } from "zod";
 import { type AgentRuntimeLock, loadAgentRuntimeLock } from "./agent-runtime-lock";
 import { rejectNonRegularFiles, sha256 } from "./remote-desktop-runtime-release";
@@ -60,7 +60,7 @@ export async function installClaudeRuntime(
     throw new Error(`The ${target} Claude runtime archive checksum is invalid.`);
   }
 
-  const temporaryRoot = await mkdtemp(join(tmpdir(), "openbot-claude-install-"));
+  const temporaryRoot = await mkdtemp(join(tmpdir(), "omnibot-claude-install-"));
   try {
     const archive = join(temporaryRoot, artifact.asset);
     const extracted = join(temporaryRoot, "extracted");

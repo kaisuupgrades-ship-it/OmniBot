@@ -21,7 +21,7 @@ import type {
   TeamPresenceSnapshot,
   TeamSessionSummary,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   STORY_DIRECT_SNAPSHOTS,
   STORY_DIRECT_THREADS,
@@ -417,7 +417,7 @@ export function createMockTeam(
     checkSetup: async () => ({
       platform: "darwin",
       hostName: "Mac mini",
-      username: "openbot",
+      username: "omnibot",
       checkedAt: new Date().toISOString(),
       screenRecording: hostStatus.remoteDesktopScreenRecordingDenied ? "blocked" : "allowed",
       accessibility: "blocked",

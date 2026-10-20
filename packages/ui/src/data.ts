@@ -23,8 +23,8 @@ import type {
   RoutineConversationEvent,
   RoutineRunConversationEvent,
   SkillConversationEvent,
-} from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
+} from "@omnibot/contracts/ipc";
+import type { ConversationUiBlock } from "@omnibot/contracts/ui-blocks";
 
 /**
  * `error` is a message the renderer wrote itself, not one the provider sent: an action of the

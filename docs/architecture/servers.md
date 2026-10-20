@@ -320,7 +320,7 @@ then opens with that provider. The choice stays in memory for the server; it is 
 setup file of this computer. A member, the local server, and a host without `providers-v1` open the
 form directly.
 
-`host-timezone-v1` reads and sets the server timezone (`openbot-server-timezone-v1.json`; `null` is
+`host-timezone-v1` reads and sets the server timezone (`omnibot-server-timezone-v1.json`; `null` is
 automatic, the system zone of the host). When an agent creates a routine, the zone comes from the tool
 call first, then from the sender's last message in that turn, then from this setting. The sender's
 zone stays in memory only, so after a restart a queued message uses the server timezone. Agent import
@@ -338,7 +338,7 @@ joined server. App Settings does not show it, so that one name does not have two
 `host-update-v1` runs the same update as the host's own Settings. `src/main/requested-update.ts`
 keeps the schedule in memory: who asked, and whether the restart waits until
 `describeRestartReadiness` reports no running work or happens as soon as the update is ready. The
-host user can turn the routes off with "Allow updates from server members" (`openbot-update-preference-v1.json`,
+host user can turn the routes off with "Allow updates from server members" (`omnibot-update-preference-v1.json`,
 default on) and can cancel a restart that waits. The host still advertises the capability when the
 setting is off, so the client can show why. A Host Manager tenant refuses the routes. The client
 reads the status again every second while a check, a download or a restart runs. An admin can also
@@ -384,19 +384,19 @@ Billing is per server. One account can pay for several servers; each server has 
 subscription. The Account Worker (`apps/auth-api/src/server/billing-service.ts`) talks to the Stripe
 REST API with `fetch`; there is no Stripe SDK. The plan catalog in `packages/contracts/src/billing.ts`
 holds the plan IDs, storage, member and site limits, relative speed and lookup keys, and no amounts. The amounts are six Stripe Prices with the lookup
-keys `openbot_{plan}_{interval}`. `bun run api:stripe:bootstrap` (`scripts/stripe-bootstrap.ts`)
+keys `omnibot_{plan}_{interval}`. `bun run api:stripe:bootstrap` (`scripts/stripe-bootstrap.ts`)
 creates them and the Customer Portal settings.
 
 - The add server dialog starts a plan. The hosting service
   (`apps/auth-api/src/server/hosted-billing.ts`) makes the Stripe customer before the Checkout, so
   two open Checkouts use one customer. The Checkout sets the subscription metadata
-  `openbot_user_id` and `openbot_server_id` (`BILLING_METADATA`). The billing service calls the
+  `omnibot_user_id` and `omnibot_server_id` (`BILLING_METADATA`). The billing service calls the
   `onSubscriptionSynced` hook after each subscription sync; the hosting side uses it to provision,
   stop and resume servers, so billing does not know about boat. See
   [hosted servers](../hosted-servers.md#lifecycle). The webhook links a new Stripe customer to the
-  account from `openbot_user_id`. It never moves a known
+  account from `omnibot_user_id`. It never moves a known
   customer to another account, and it skips a subscription that names no account.
-- Desktop Settings → Billing and the web Billing dialog render `@openbot/ui/features/billing`: one
+- Desktop Settings → Billing and the web Billing dialog render `@omnibot/ui/features/billing`: one
   row for each open plan, with the server name, the plan, its price, and its renewal controls.
   Hosted plans support cancellation that keeps data, Keep server, and explicit deletion now or
   after the paid period. A stored deletion date and subscription ID drive the cron; a fresh
@@ -429,8 +429,8 @@ another place.
 `scripts/macos-tenant-setup.swift` is a separate administrator command for new Standard accounts.
 It uses OpenDirectory directly, creates only new empty homes, and stores generated credentials
 in a new root-only file before account creation. It is not installed or called by the daemon.
-The Host PKG installs this as `create-tenants`, alongside the standalone `openbot-host` CLI.
-`openbot-host-service.ts` owns setup/verification sequencing; `openbot-host-macos.ts` owns OS
+The Host PKG installs this as `create-tenants`, alongside the standalone `omnibot-host` CLI.
+`omnibot-host-service.ts` owns setup/verification sequencing; `omnibot-host-macos.ts` owns OS
 operations. Passwords cross only the native helper's captured pipe and the administrator's tty,
 not the host protocol. The root-only recovery file is removed after successful presentation.
 `build-host-installer.ts` and `verify-host-installer.ts` own release packaging and the exact
@@ -465,7 +465,7 @@ turns while it is low and limits the turns that run at the same time. See
 
 A self-hosted server uses the same Linux build, scripts and units on the owner's own computer, with
 `/opt/OmniBot/hosted/mode` set to `self`. It has no claim: main starts in server mode
-(`src/main/server-mode.ts`, `OPENBOT_SERVER=1`), and the `openbot` terminal command signs it in over
+(`src/main/server-mode.ts`, `OMNIBOT_SERVER=1`), and the `omnibot` terminal command signs it in over
 a Unix socket in the 0700 runtime directory of the service user. Main publishes the host after each
 sign-in. See [self-hosted servers](../self-hosted-server.md).
 

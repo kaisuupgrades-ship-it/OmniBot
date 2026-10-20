@@ -1,19 +1,19 @@
-import { emptyAnalyticsTotals, type HostAnalytics } from "@openbot/contracts/ipc";
+import { emptyAnalyticsTotals, type HostAnalytics } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { AgentUsagePanel } from "../src/features/usage/AgentUsagePanel";
 import { mockHostAnalytics } from "../src/preview/mock-agent-analytics";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 function UsageStory(props: {
   state: "ready" | "empty" | "partial" | "loading" | "error" | "unsupported" | "large" | "small" | "long";
   narrow?: boolean;
   agentId?: string;
 }) {
-  const previous = window.openbot;
+  const previous = window.omnibot;
   const mock = createMockOmniBot();
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   mock.api.agent.getHostAnalytics = async (input) => {
     if (props.state === "error") throw new Error("Host is offline.");
     if (props.state === "unsupported") return null;
@@ -50,7 +50,7 @@ function UsageStory(props: {
   };
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previous;
+    window.omnibot = previous;
   });
   return (
     <main
@@ -58,7 +58,7 @@ function UsageStory(props: {
         width: props.narrow ? "390px" : "100%",
         height: "900px",
         overflow: "hidden",
-        background: "var(--openbot-bg-canvas)",
+        background: "var(--omnibot-bg-canvas)",
       }}
     >
       <AgentUsagePanel hostName="Local host" serverId="local" agentId={props.agentId} onBack={fn()} />

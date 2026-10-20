@@ -1,5 +1,5 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
-import { IPC_ENDPOINTS, LOCAL_SERVER_ID } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
+import { IPC_ENDPOINTS, LOCAL_SERVER_ID } from "@omnibot/contracts/ipc";
 import { beforeEach, expect, it, vi } from "vitest";
 
 // `bridgeGroup` builds these methods from `IPC_ENDPOINTS`, so no line of the preload names them.

@@ -10,7 +10,7 @@ import {
   APP_LOGO_EYE_POINTS,
   APP_LOGO_EYE_STROKE,
   APP_LOGO_SIZE,
-} from "@openbot/brand/app-logo-shape";
+} from "@omnibot/brand/app-logo-shape";
 import { getShaderColorFromString, meshGradientFragmentShader, ShaderMount } from "@paper-design/shaders";
 import type { ContentImageJob, ContentImageLockup, ContentImageMark } from "./content-images";
 import { RIVAL_MARK_SHAPES, type RivalMarkName } from "./src/components/compare/rival-mark-shapes";
@@ -18,21 +18,21 @@ import { articleGradient, articleGradientUniforms } from "./src/lib/article-grad
 
 declare global {
   interface Window {
-    openBotContentImage?: { render: (job: ContentImageJob) => Promise<string> };
+    omniBotContentImage?: { render: (job: ContentImageJob) => Promise<string> };
   }
 }
 
-/** `--openbot-bg-canvas`, as the RGB channels of the scrim. */
+/** `--omnibot-bg-canvas`, as the RGB channels of the scrim. */
 const SCRIM_COLOR = "26, 26, 26";
 const TITLE_MAX_LINES = 3;
 /** Under a lockup or a row of marks there is room for two lines. */
 const TITLE_MAX_LINES_WITH_LOCKUP = 2;
-/** `--openbot-logo-production` and `--openbot-logo-eye`. */
+/** `--omnibot-logo-production` and `--omnibot-logo-eye`. */
 const LOGO_BACKGROUND = "#84adde";
 const LOGO_EYE = "#040007";
 const FONT_FAMILY = '"Inter Variable", Inter, system-ui, sans-serif';
 
-window.openBotContentImage = { render: renderContentImage };
+window.omniBotContentImage = { render: renderContentImage };
 
 /**
  * Lossy, for the artwork only: a smooth gradient loses nothing a reader can see,
@@ -166,7 +166,7 @@ function drawLockup(context: CanvasRenderingContext2D, job: ContentImageJob, loc
   const logoTop = y + padY;
   const left = x + padX + (column - logoSize) / 2;
   const right = x + padX + column + vsMargin * 2 + vsWidth + (column - logoSize) / 2;
-  drawMark(context, lockup.left?.mark ?? "openbot", left, logoTop, logoSize);
+  drawMark(context, lockup.left?.mark ?? "omnibot", left, logoTop, logoSize);
   drawMark(context, lockup.rivalMark, right, logoTop, logoSize);
 
   context.font = `500 ${nameSize}px ${FONT_FAMILY}`;
@@ -254,7 +254,7 @@ function drawPlate(
 }
 
 function drawMark(context: CanvasRenderingContext2D, mark: ContentImageMark, x: number, y: number, size: number): void {
-  if (mark === "openbot") drawOmniBotMark(context, x, y, size);
+  if (mark === "omnibot") drawOmniBotMark(context, x, y, size);
   else drawRivalMark(context, mark, x, y, size);
 }
 

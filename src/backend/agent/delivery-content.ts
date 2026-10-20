@@ -1,13 +1,13 @@
 import { createHash } from "node:crypto";
-import { expandAttachmentReferences } from "@openbot/contracts/attachment-references";
-import { expandChatTagReferences } from "@openbot/contracts/chat-tag-references";
+import { expandAttachmentReferences } from "@omnibot/contracts/attachment-references";
+import { expandChatTagReferences } from "@omnibot/contracts/chat-tag-references";
 import type {
   AgentSummary,
   AgentWait,
   ConversationSnapshot,
   QueueDeliveryStatus,
   RoutineRun,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { wokenWaitsPromptText } from "../agent-waits/agent-waits";
 import type { DeliveryContext } from "../mailbox-store";
 import { quietRoutineRun, ROUTINE_NO_UPDATE_TOOL } from "./routine-quiet-runs";
@@ -186,8 +186,8 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
   // Only `start_task` sends an agent's message to itself: it is the brief of a task.
   if (delivery.sender.kind === "agent" && delivery.sender.agentId === delivery.recipientAgentId) {
     text = [
-      "You started this task with openbot.start_task from your own chat. It is a separate conversation beside that chat, with this brief as its first message.",
-      "Do the work in the brief here, and end with the result for the user: the user reads it in this task. Do not send it with openbot.send_message.",
+      "You started this task with omnibot.start_task from your own chat. It is a separate conversation beside that chat, with this brief as its first message.",
+      "Do the work in the brief here, and end with the result for the user: the user reads it in this task. Do not send it with omnibot.send_message.",
       COLLABORATOR_SEPARATOR,
       displayText,
     ].join("\n");
@@ -208,7 +208,7 @@ export function deliveryPromptInput(context: DeliveryContext, sources: DeliveryP
             "Do not send a reply, an acknowledgement, or a result for it. OmniBot sends the sender nothing back.",
           ]
         : [
-            `After completing the request, send a concise result back to ${senderName} with openbot.send_message.`,
+            `After completing the request, send a concise result back to ${senderName} with omnibot.send_message.`,
             `Use recipientAgentIds ["${senderAgentId}"], replyToMessageId "${delivery.messageId}", and expectsReply false.`,
             "Format the reply as three lines: Status: done | partial | blocked, Result: <concrete outcome>, Evidence: <file, test, command, or none>. When Status is blocked, add a fourth line, Unblock: <the one action that unblocks the task>. When OmniBot has a plugin for the service and that plugin is not in your tools, that action is the plugin sentence from your instructions.",
             "Do not acknowledge without a Status line. Do not leave the sender waiting for a result.",

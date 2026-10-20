@@ -1,7 +1,7 @@
-import type { RemoteDesktopErrorCode, RemoteDesktopSession, ServerSummary } from "@openbot/contracts/ipc";
-import { ArrowLeft, Button, Monitor, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { useText } from "@openbot/ui/text";
+import type { RemoteDesktopErrorCode, RemoteDesktopSession, ServerSummary } from "@omnibot/contracts/ipc";
+import { ArrowLeft, Button, Monitor, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@omnibot/ui";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { useText } from "@omnibot/ui/text";
 import { type JSX, Portal } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, onSettled, Show } from "solid-js";
 import { z } from "zod";

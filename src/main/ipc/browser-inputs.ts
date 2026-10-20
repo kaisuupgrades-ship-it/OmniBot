@@ -1,12 +1,12 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   BrowserBounds,
   BrowserNavigateInput,
   BrowserOpenInput,
   BrowserVisibilityInput,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isNumber } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isNumber } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { isObject, requireString } from "./validation";
 
 export function parseBrowserOpen(value: unknown): BrowserOpenInput {

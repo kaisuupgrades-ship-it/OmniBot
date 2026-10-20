@@ -14,8 +14,9 @@ import { clearSupportLog, supportLogFileText } from "@/features/support/model/su
 import { useText } from "@/shared/lib/text";
 
 /** The OmniBot account, the same contact as the website. */
-const SUPPORT_X_HANDLE = "@OmniBot_";
-const SUPPORT_X_URL = "https://x.com/OmniBot_";
+// Set this to your X handle once you have one.
+const SUPPORT_X_HANDLE = "x.omnibot.example.com";
+const SUPPORT_X_URL = "https://x.omnibot.example.com";
 const ISSUES_URL = "https://omnibot.example.com/source/issues/new";
 /** The screen shows the newest events. The saved file has all of them. */
 const SHOWN_ENTRIES = 100;
@@ -44,7 +45,7 @@ export function SupportSettingsScreen() {
       return;
     }
     setSaving(true);
-    const file = new File(Paths.cache, `openbot-support-log-${new Date().toISOString().replace(/[:.]/gu, "-")}.txt`);
+    const file = new File(Paths.cache, `omnibot-support-log-${new Date().toISOString().replace(/[:.]/gu, "-")}.txt`);
     try {
       file.write(supportLogFileText());
       await Sharing.shareAsync(file.uri, {

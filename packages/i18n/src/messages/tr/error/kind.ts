@@ -1,7 +1,7 @@
 import type { PartialTranslation } from "../../../message";
 import type { messages as source } from "../../en/error/kind";
 
-/** classifyUserError'ın belirlediği her tür için cümle. Eşleme @openbot/user-errors paketine aittir. */
+/** classifyUserError'ın belirlediği her tür için cümle. Eşleme @omnibot/user-errors paketine aittir. */
 export const messages = {
   "error.kind.network": "Bağlanılamadı. Bağlantınızı kontrol edin ve tekrar deneyin.",
   "error.kind.timeout": "İstek çok uzun sürdü. Tekrar denemeden önce eylemin tamamlanıp tamamlanmadığını kontrol edin.",

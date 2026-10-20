@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@omnibot/contracts/validation";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 
 const logger = createOmniBotLogger("backfill-openpanel-identities");
 
@@ -143,7 +143,7 @@ async function identifyProfile(
           "content-type": "application/json",
           "openpanel-client-id": clientId,
           "openpanel-client-secret": clientSecret,
-          "openpanel-sdk-name": "openbot-backfill",
+          "openpanel-sdk-name": "omnibot-backfill",
         },
         body: JSON.stringify({ type: "identify", payload: identity }),
         redirect: "error",

@@ -1,4 +1,4 @@
-import { PlatformLogo } from "@openbot/brand";
+import { PlatformLogo } from "@omnibot/brand";
 import { Link } from "@tanstack/solid-router";
 import { createTrackedEffect, For, Show } from "solid-js";
 import { landingAnalytics } from "../../lib/analytics";

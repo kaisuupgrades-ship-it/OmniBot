@@ -8,7 +8,7 @@
  * and shows when the user hid it in place of the last message.
  */
 
-import { Badge, buttonVariants, Clock3, ContextMenu, Lock, Tooltip } from "@openbot/ui";
+import { Badge, buttonVariants, Clock3, ContextMenu, Lock, Tooltip } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createStore, Show } from "solid-js";
 import type { AgentProfile } from "../../data";

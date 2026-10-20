@@ -1,5 +1,5 @@
 import type { ChildProcess } from "node:child_process";
-import { type AgentProviderId, isAgentProvider } from "@openbot/contracts/agent-providers";
+import { type AgentProviderId, isAgentProvider } from "@omnibot/contracts/agent-providers";
 
 /**
  * The provider CLI processes that OmniBot started, by PID. The resource monitor reads it to attribute

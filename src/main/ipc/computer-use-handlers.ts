@@ -1,6 +1,6 @@
 // The Computer Use driver's readiness, and the macOS permission panes it may need.
 
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { ComputerUsePermissionHelpWindowController } from "../computer-use-permission-help-window";
 import type { CuaDriverRuntime } from "../cua-driver-runtime";

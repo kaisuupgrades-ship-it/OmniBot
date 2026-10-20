@@ -1,7 +1,7 @@
 // The routine flow group of the preview: links and positions in memory, over the mock's routines.
 // It runs no flow, so a step only exists when a story seeds one.
 
-import type { OmniBotDesktopApi, Routine, RoutineFlowLink, RoutineFlowStep, RoutineRun } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi, Routine, RoutineFlowLink, RoutineFlowStep, RoutineRun } from "@omnibot/contracts/ipc";
 
 interface MockRoutineFlowsSource {
   routines: Map<string, Routine[]>;

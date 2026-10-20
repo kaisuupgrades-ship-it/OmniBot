@@ -56,7 +56,7 @@ The architecture notes are in one file for each topic:
   - [Local skill library](architecture/skills-and-plugins.md#local-skill-library)
   - [Plugin distribution](architecture/skills-and-plugins.md#plugin-distribution)
 - [Integrations and sign-in](architecture/integrations.md)
-  - [How a sign-in reaches OmniBot](architecture/integrations.md#how-a-sign-in-reaches-openbot)
+  - [How a sign-in reaches OmniBot](architecture/integrations.md#how-a-sign-in-reaches-omnibot)
   - [Remote sign-in: the callback relay](architecture/integrations.md#remote-sign-in-the-callback-relay)
   - [Add a provider](architecture/integrations.md#add-a-provider)
   - [Add an application](architecture/integrations.md#add-an-application)

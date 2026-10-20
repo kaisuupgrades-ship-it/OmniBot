@@ -3,7 +3,7 @@
 // `simctl openurl` opens `omnibot://expo-sharing`. The last case stops the app first (cold start).
 // Each case waits until the app has taken the share: the payload key is gone and the file is in the
 // share folder in the app cache, as a JPEG for the HEIC photo. Writes
-// .openbot-build/mobile-share-e2e/report.json and one screenshot per case.
+// .omnibot-build/mobile-share-e2e/report.json and one screenshot per case.
 //
 // Needs a booted simulator with a development build of this branch, signed in (`bun run dev:mobile`),
 // and `--allow-mutations`: it writes into the app's storage and opens the share sheet. It sends nothing.
@@ -12,15 +12,15 @@ import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writ
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { bootedSimulatorIds, hasMobileRuntime } from "./dev-mobile";
 
-const BUNDLE_ID = "run.openbot.mobile";
-const APP_GROUP = "group.run.openbot.mobile";
+const BUNDLE_ID = "run.omnibot.mobile";
+const APP_GROUP = "group.run.omnibot.mobile";
 // The key and the payload shape of expo-sharing (`ios/shared/Constants.swift`, `ShareProtocol.swift`).
 const PAYLOAD_KEY = "expo-sharing";
 const SHARE_LINK = "omnibot://expo-sharing";
-const OUT = resolve(import.meta.dirname, "../.openbot-build/mobile-share-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/mobile-share-e2e");
 const RUNTIME_TIMEOUT_MS = 5 * 60_000;
 // A cold start loads the bundle from Metro and the session before the share sheet reads the share.
 const TAKE_TIMEOUT_MS = 2 * 60_000;
@@ -125,7 +125,7 @@ function findReceived(cacheRoot: string, name: string): string | null {
 }
 
 async function makeFixtures(): Promise<{ png: string; heic: string; pdf: string; folder: string }> {
-  const folder = mkdtempSync(join(tmpdir(), "openbot-share-e2e-"));
+  const folder = mkdtempSync(join(tmpdir(), "omnibot-share-e2e-"));
   const tiny = join(folder, "tiny.png");
   writeFileSync(tiny, Buffer.from(PNG_1PX, "base64"));
   const png = join(folder, "share-e2e.png");

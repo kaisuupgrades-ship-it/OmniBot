@@ -3,7 +3,7 @@ import type { AcpHistoryPersistence } from "./acp-client";
 import type { AgentProvider } from "./agent-client";
 import { databaseRow, optionalStringColumn, requiredStringColumn } from "./database/database-rows";
 import type { ProviderHistoryTurnCursor } from "./database/provider-history-store";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 import { providerSync } from "./provider-client-effects";
 import type { ProviderHistoryConsumer, ProviderHistoryRequest } from "./provider-history";
 

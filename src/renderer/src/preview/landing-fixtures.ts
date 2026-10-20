@@ -11,13 +11,13 @@ import type {
   RoutineRun,
   RoutineSchedule,
   ServerSummary,
-} from "@openbot/contracts/ipc";
-import { TEAM_CURRENT_CAPABILITIES } from "@openbot/contracts/team-protocol/current";
-import { TEAM_PROTOCOL_V6 } from "@openbot/contracts/team-protocol/v6";
-import developmentLogoUrl from "../assets/openbot-logo-dev.png";
-import productionLogoUrl from "../assets/openbot-logo-production.png";
+} from "@omnibot/contracts/ipc";
+import { TEAM_CURRENT_CAPABILITIES } from "@omnibot/contracts/team-protocol/current";
+import { TEAM_PROTOCOL_V6 } from "@omnibot/contracts/team-protocol/v6";
+import developmentLogoUrl from "../assets/omnibot-logo-dev.png";
+import productionLogoUrl from "../assets/omnibot-logo-production.png";
 import { STORY_PRESENCE } from "./fixtures";
-import type { MockOmniBotOptions } from "./mock-openbot";
+import type { MockOmniBotOptions } from "./mock-omnibot";
 
 const LANDING_PREVIEW_NOW = "2026-08-21T10:00:00.000Z";
 

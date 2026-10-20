@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   DirectConversationPage,
   DirectConversationPageAnchor,
@@ -7,9 +7,9 @@ import type {
   DirectConversationSnapshot,
   DirectMessage,
   DirectThreadSummary,
-} from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import {
   databaseRow,
   databaseRows,
@@ -18,7 +18,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 
 export class TeamChatStore {
   constructor(readonly database: OmniBotDatabase) {}

@@ -5,7 +5,7 @@ import { importPKCS8, SignJWT } from "jose";
  * Installation tokens of the OmniBot GitHub App for one signed-in GitHub user.
  *
  * A user token (`ghu_`) makes GitHub show "user with OmniBotGit". An installation token (`ghs_`)
- * makes GitHub show `openbotgit[bot]`, but it needs the app's private key, which only this Worker
+ * makes GitHub show `omnibotgit[bot]`, but it needs the app's private key, which only this Worker
  * holds. An installation token can do everything that the installation allows, so this service
  * gives one only for the repositories where the user of the token can push. The desktop keeps the
  * user token for every other repository.

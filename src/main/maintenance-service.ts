@@ -4,8 +4,8 @@ import { copyFile, mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promise
 import { arch, release as osRelease, tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { promisify } from "node:util";
-import type { AgentSummary, ExportResult } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+import type { AgentSummary, ExportResult } from "@omnibot/contracts/ipc";
+import type { AppTranslate } from "@omnibot/i18n";
 import { Effect } from "effect";
 import { app, type BrowserWindow, dialog } from "electron";
 import type { AgentService } from "../backend/agent-service";
@@ -40,7 +40,7 @@ export const exportOmniBotData = Effect.fn("Archive.exportOmniBotData")(function
 
   const archiveCandidate = `${destination}.${randomUUID()}.tmp.zip`;
   return yield* Effect.acquireUseRelease(
-    archiveCall(() => mkdtemp(join(tmpdir(), "openbot-export-"))),
+    archiveCall(() => mkdtemp(join(tmpdir(), "omnibot-export-"))),
     (temporaryRoot) =>
       Effect.gen(function* () {
         const exportRoot = join(temporaryRoot, "OmniBot Backup");
@@ -87,7 +87,7 @@ export const exportOmniBotData = Effect.fn("Archive.exportOmniBotData")(function
           queues,
         };
         yield* archiveCall(() =>
-          writeFile(join(exportRoot, "openbot-data.json"), `${JSON.stringify(manifest, null, 2)}\n`, {
+          writeFile(join(exportRoot, "omnibot-data.json"), `${JSON.stringify(manifest, null, 2)}\n`, {
             encoding: "utf8",
             mode: 0o600,
           }),

@@ -3,19 +3,19 @@
 // `bun scripts/create-github-app.ts` creates the app and prints its Client ID. A Client ID is
 // public: device flow and refresh need nothing else, and the client secret never ships.
 
-/** The GitHub App "OmniBotGit" of `nightly-labs`. With no Client ID, the connection is not offered. */
-const GITHUB_APP_CLIENT_ID = "Iv23lik5pzHz70cb0RUL";
-const GITHUB_APP_SLUG = "openbotgit";
+/** Your GitHub App. Put its Client ID here once you create it. With no Client ID, the connection is not offered. */
+const GITHUB_APP_CLIENT_ID = "";
+const GITHUB_APP_SLUG = "omnibotgit";
 
 export interface GitHubAppConfig {
   clientId: string;
   slug: string;
 }
 
-/** The configured app, or null. `OPENBOT_GITHUB_CLIENT_ID` and `OPENBOT_GITHUB_APP_SLUG` override it. */
+/** The configured app, or null. `OMNIBOT_GITHUB_CLIENT_ID` and `OMNIBOT_GITHUB_APP_SLUG` override it. */
 export function githubAppConfig(env: NodeJS.ProcessEnv = process.env): GitHubAppConfig | null {
-  const clientId = env.OPENBOT_GITHUB_CLIENT_ID?.trim() || GITHUB_APP_CLIENT_ID;
-  const slug = env.OPENBOT_GITHUB_APP_SLUG?.trim() || GITHUB_APP_SLUG;
+  const clientId = env.OMNIBOT_GITHUB_CLIENT_ID?.trim() || GITHUB_APP_CLIENT_ID;
+  const slug = env.OMNIBOT_GITHUB_APP_SLUG?.trim() || GITHUB_APP_SLUG;
   if (!/^[A-Za-z0-9.]+$/u.test(clientId) || !/^[a-z0-9-]+$/u.test(slug)) return null;
   return { clientId, slug };
 }

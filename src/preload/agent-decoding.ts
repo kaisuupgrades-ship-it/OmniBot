@@ -3,7 +3,7 @@ import {
   type HiddenAgentsSnapshot,
   isAgentSessionSettings,
   isHiddenAgentsSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 // What main answers for agents: provider status, models, the agents themselves, memories, routines,
 // shared tables and the sidebar layout.
 //
@@ -42,9 +42,9 @@ import {
   type ProviderCodeLoginStart,
   type SharedTable,
   type SidebarLayoutSnapshot,
-} from "@openbot/contracts/ipc";
-import { decodeRecord, guardedDecoder, guardedListDecoder } from "@openbot/contracts/ipc-decoding";
-import { isDynamicRecord, isHttpsUrl, isNumber, isOneOf, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { decodeRecord, guardedDecoder, guardedListDecoder } from "@omnibot/contracts/ipc-decoding";
+import { isDynamicRecord, isHttpsUrl, isNumber, isOneOf, isString } from "@omnibot/contracts/runtime-values";
 
 export const decodeRoutine = guardedDecoder(isRoutine, "routine response");
 export const decodeAgentHostSettingsFromMain = guardedDecoder(isAgentHostSettings, "agent host settings response");

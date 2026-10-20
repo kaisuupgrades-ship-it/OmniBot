@@ -1,6 +1,6 @@
-import { isManagedRuntimeProvider } from "@openbot/contracts/agent-providers";
-import { openPanelTransport, ReportQueue } from "@openbot/telemetry";
-import { fileReportStorage } from "@openbot/telemetry/node";
+import { isManagedRuntimeProvider } from "@omnibot/contracts/agent-providers";
+import { openPanelTransport, ReportQueue } from "@omnibot/telemetry";
+import { fileReportStorage } from "@omnibot/telemetry/node";
 import { Effect, Fiber } from "effect";
 import { toAgentRemovalFailed } from "../backend/agent/agent-removal";
 import { toHostedSiteOperationFailed } from "../backend/agent/hosted-site-coordinator";
@@ -57,7 +57,7 @@ import { existsSync } from "node:fs";
 import { readdir, rm } from "node:fs/promises";
 import { homedir, hostname, tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { selfHostedApiOrigin } from "@openbot/contracts/invite-links";
+import { selfHostedApiOrigin } from "@omnibot/contracts/invite-links";
 import type {
   AgentStatus,
   AppVariant,
@@ -69,12 +69,12 @@ import type {
   SpeechModelStatus,
   VoiceModelStatus,
   VoiceStreamTranscript,
-} from "@openbot/contracts/ipc";
-import { IPC_ENDPOINTS, isManagedToolRuntime, isUpdateBusyPhase, latestTurnAnswer } from "@openbot/contracts/ipc";
-import { decodeRecord, requiredString } from "@openbot/contracts/ipc-decoding";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
-import { REMOTE_ACCOUNT_CHECK_INTERVAL_MS } from "@openbot/team-client";
+} from "@omnibot/contracts/ipc";
+import { IPC_ENDPOINTS, isManagedToolRuntime, isUpdateBusyPhase, latestTurnAnswer } from "@omnibot/contracts/ipc";
+import { decodeRecord, requiredString } from "@omnibot/contracts/ipc-decoding";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
+import { REMOTE_ACCOUNT_CHECK_INTERVAL_MS } from "@omnibot/team-client";
 import {
   app,
   type BrowserWindow,
@@ -275,45 +275,45 @@ import { VoiceTranscriptionService } from "./voice-transcription-service";
 import { WebhookRelay } from "./webhook-relay";
 
 const logger = createOmniBotLogger("application-services");
-const SETUP_FILE = "openbot-setup-v2.json";
-const ANALYTICS_PREFERENCE_FILE = "openbot-analytics-preference-v1.json";
-const ANALYTICS_INVENTORY_FILE = "openbot-analytics-inventory-v1.json";
-const APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v3.json";
-const V2_APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v2.json";
-const ROUTINE_FEED_FILE = "openbot-routine-feed-v1.json";
-const LEGACY_APPROVAL_AUTOMATION_FILE = "openbot-approval-automation-v1.json";
-const LANGUAGE_PREFERENCE_FILE = "openbot-language-preference-v1.json";
-const LOGO_COLOR_PREFERENCE_FILE = "openbot-logo-color-preference-v1.json";
-const UPDATE_PREFERENCE_FILE = "openbot-update-preference-v1.json";
-const NOTIFICATION_PREFERENCE_FILE = "openbot-notification-preference-v1.json";
-const PUSH_NOTIFICATION_FILE = "openbot-push-notifications-v1.json";
-const BUSY_MESSAGE_MODE_PREFERENCE_FILE = "openbot-busy-message-mode-v1.json";
-const AGENT_MEMORY_LIMIT_PREFERENCE_FILE = "openbot-agent-memory-limit-v1.json";
-const SERVER_TIMEZONE_PREFERENCE_FILE = "openbot-server-timezone-v1.json";
-const REMOTE_SESSION_REUSE_PREFERENCE_FILE = "openbot-remote-session-reuse-preference-v1.json";
-const APP_BEHAVIOR_PREFERENCE_FILE = "openbot-app-behavior-preference-v1.json";
-const DYNAMIC_ISLAND_PREFERENCE_FILE = "openbot-dynamic-island-preference-v1.json";
-const BROWSER_STATE_FILE = "openbot-browser-state-v1.json";
-const SIDEBAR_LAYOUT_FILE = "openbot-sidebar-layout-v1.json";
-const TEAM_FILE = "openbot-team-server-v1.json";
+const SETUP_FILE = "omnibot-setup-v2.json";
+const ANALYTICS_PREFERENCE_FILE = "omnibot-analytics-preference-v1.json";
+const ANALYTICS_INVENTORY_FILE = "omnibot-analytics-inventory-v1.json";
+const APPROVAL_AUTOMATION_FILE = "omnibot-approval-automation-v3.json";
+const V2_APPROVAL_AUTOMATION_FILE = "omnibot-approval-automation-v2.json";
+const ROUTINE_FEED_FILE = "omnibot-routine-feed-v1.json";
+const LEGACY_APPROVAL_AUTOMATION_FILE = "omnibot-approval-automation-v1.json";
+const LANGUAGE_PREFERENCE_FILE = "omnibot-language-preference-v1.json";
+const LOGO_COLOR_PREFERENCE_FILE = "omnibot-logo-color-preference-v1.json";
+const UPDATE_PREFERENCE_FILE = "omnibot-update-preference-v1.json";
+const NOTIFICATION_PREFERENCE_FILE = "omnibot-notification-preference-v1.json";
+const PUSH_NOTIFICATION_FILE = "omnibot-push-notifications-v1.json";
+const BUSY_MESSAGE_MODE_PREFERENCE_FILE = "omnibot-busy-message-mode-v1.json";
+const AGENT_MEMORY_LIMIT_PREFERENCE_FILE = "omnibot-agent-memory-limit-v1.json";
+const SERVER_TIMEZONE_PREFERENCE_FILE = "omnibot-server-timezone-v1.json";
+const REMOTE_SESSION_REUSE_PREFERENCE_FILE = "omnibot-remote-session-reuse-preference-v1.json";
+const APP_BEHAVIOR_PREFERENCE_FILE = "omnibot-app-behavior-preference-v1.json";
+const DYNAMIC_ISLAND_PREFERENCE_FILE = "omnibot-dynamic-island-preference-v1.json";
+const BROWSER_STATE_FILE = "omnibot-browser-state-v1.json";
+const SIDEBAR_LAYOUT_FILE = "omnibot-sidebar-layout-v1.json";
+const TEAM_FILE = "omnibot-team-server-v1.json";
 /** One host per account. The v1 file above stays as the last build without accounts left it. */
-const TEAM_FILE_V2 = "openbot-team-server-v2.json";
-const REMOTE_SERVERS_FILE = "openbot-remote-servers-v1.json";
-const CENTRAL_AUTH_FILE = "openbot-central-auth-v1.bin";
-const REMOTE_SESSIONS_FILE = "openbot-remote-sessions-v1.bin";
-const LEGACY_REMOTE_DESKTOP_CREDENTIAL_FILE = "openbot-remote-desktop-credential-v1.json";
-const REMOTE_DESKTOP_RUNTIME_SECRET_FILE = "openbot-remote-desktop-runtime-v1.json";
-const CUSTOM_PROVIDERS_FILE = "openbot-custom-providers-v1.json";
-const PROVIDER_CREDENTIAL_FILE = "openbot-provider-credentials-v1.json";
-const MESSAGING_CREDENTIAL_FILE = "openbot-messaging-credentials-v1.json";
-const INGRESS_QUEUE_KEY_FILE = "openbot-ingress-queue-key-v1.json";
+const TEAM_FILE_V2 = "omnibot-team-server-v2.json";
+const REMOTE_SERVERS_FILE = "omnibot-remote-servers-v1.json";
+const CENTRAL_AUTH_FILE = "omnibot-central-auth-v1.bin";
+const REMOTE_SESSIONS_FILE = "omnibot-remote-sessions-v1.bin";
+const LEGACY_REMOTE_DESKTOP_CREDENTIAL_FILE = "omnibot-remote-desktop-credential-v1.json";
+const REMOTE_DESKTOP_RUNTIME_SECRET_FILE = "omnibot-remote-desktop-runtime-v1.json";
+const CUSTOM_PROVIDERS_FILE = "omnibot-custom-providers-v1.json";
+const PROVIDER_CREDENTIAL_FILE = "omnibot-provider-credentials-v1.json";
+const MESSAGING_CREDENTIAL_FILE = "omnibot-messaging-credentials-v1.json";
+const INGRESS_QUEUE_KEY_FILE = "omnibot-ingress-queue-key-v1.json";
 /** The MCP sign-ins. Separate from the keys above: a key is typed by the user, a token is not. */
-const MCP_OAUTH_FILE = "openbot-mcp-oauth-v1.json";
-const MCP_OAUTH_PROXY_FILE = "openbot-mcp-oauth-proxy-v1.json";
+const MCP_OAUTH_FILE = "omnibot-mcp-oauth-v1.json";
+const MCP_OAUTH_PROXY_FILE = "omnibot-mcp-oauth-proxy-v1.json";
 /** The one GitHub sign-in of this computer, with the same cipher as the MCP sign-ins. */
-const GITHUB_CONNECTOR_FILE = "openbot-github-connector-v1.json";
+const GITHUB_CONNECTOR_FILE = "omnibot-github-connector-v1.json";
 /** The 1Password service account token of this computer, with the same cipher. */
-const ONEPASSWORD_CONNECTOR_FILE = "openbot-onepassword-connector-v1.json";
+const ONEPASSWORD_CONNECTOR_FILE = "omnibot-onepassword-connector-v1.json";
 
 /**
  * Where each service stops, as a position in the shutdown sequence rather than a position in the
@@ -601,7 +601,7 @@ async function createMessagingServices({
   );
   // Development only: `bun run dev:slack` names this loopback port, so a Slack install returns to this
   // dev app and not to an installed OmniBot that owns `omnibot://`.
-  const developmentSlackCallbackPort = app.isPackaged ? 0 : Number(process.env.OPENBOT_DEV_SLACK_CALLBACK_PORT ?? 0);
+  const developmentSlackCallbackPort = app.isPackaged ? 0 : Number(process.env.OMNIBOT_DEV_SLACK_CALLBACK_PORT ?? 0);
   const messaging = new MessagingService({
     threads: service.messaging,
     agents: {
@@ -624,7 +624,7 @@ async function createMessagingServices({
       telegramDriver({ ingress: signalIngress }),
     ],
     downloadsRoot: join(app.getPath("userData"), "messaging-downloads"),
-    statusPath: join(app.getPath("userData"), "openbot-messaging-status-v1.json"),
+    statusPath: join(app.getPath("userData"), "omnibot-messaging-status-v1.json"),
     ingress: signalIngress,
     sidebar: sidebarLayout,
     slackApp: {
@@ -802,12 +802,12 @@ export async function createApplicationServices({
   });
   teardown.push(TEARDOWN_ORDER.dynamicIsland, "the Dynamic Island", () => dynamicIsland.destroy());
   const centralAuthApiUrl = readCentralAuthApiUrl(
-    process.env.OPENBOT_AUTH_API_URL,
+    process.env.OMNIBOT_AUTH_API_URL,
     app.isPackaged ? "https://api.omnibot.example.com" : "http://127.0.0.1:3100",
   );
   const centralAuth = new CentralAuthManager({
     apiUrl: centralAuthApiUrl,
-    mobileConnectApiUrl: readMobileConnectApiUrl(process.env.OPENBOT_MOBILE_AUTH_API_URL, centralAuthApiUrl),
+    mobileConnectApiUrl: readMobileConnectApiUrl(process.env.OMNIBOT_MOBILE_AUTH_API_URL, centralAuthApiUrl),
     storagePath: join(app.getPath("userData"), CENTRAL_AUTH_FILE),
     ...safeStorageCipher("error.app.macSecureStorageUnavailable"),
   });
@@ -862,28 +862,28 @@ export async function createApplicationServices({
   const store = new AgentStore(app.getPath("userData"), homedir());
   // Phase marks for `dev:bench`, so a slow start shows which group of awaits it waited on. They
   // change nothing.
-  performance.mark("openbot:services.pre-store");
+  performance.mark("omnibot:services.pre-store");
   await runCauseEffect(store.initialize());
-  performance.mark("openbot:services.store");
+  performance.mark("omnibot:services.store");
   // Closing copies the write-ahead log into the database file and removes it.
   teardown.push(TEARDOWN_ORDER.database, "the database", () => store.database.close());
   const managedSkills = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-site-hosting", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-site-hosting/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "omnibot-site-hosting", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/omnibot-site-hosting/SKILL.md"),
   );
   const skillCreator = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-skill-creator", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-skill-creator/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "omnibot-skill-creator", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/omnibot-skill-creator/SKILL.md"),
     undefined,
     undefined,
     SKILL_CREATOR_SKILL_SLUG,
   );
   const dataSkill = new ManagedSkillService(
     app.isPackaged
-      ? join(process.resourcesPath, "managed-skills", "openbot-data", "SKILL.md")
-      : resolve(__dirname, "../../resources/managed-skills/openbot-data/SKILL.md"),
+      ? join(process.resourcesPath, "managed-skills", "omnibot-data", "SKILL.md")
+      : resolve(__dirname, "../../resources/managed-skills/omnibot-data/SKILL.md"),
     undefined,
     undefined,
     DATA_SKILL_SLUG,
@@ -891,7 +891,7 @@ export async function createApplicationServices({
   await Effect.runPromise(managedSkills.syncAll(store.list()));
   await Effect.runPromise(skillCreator.syncAll(store.list()));
   await Effect.runPromise(dataSkill.syncAll(store.list()));
-  performance.mark("openbot:services.skills");
+  performance.mark("omnibot:services.skills");
   const hostedSites = new HostedSiteDesktopService(centralAuth, () => {
     // Read at request time: the team store is created later, and the server can register after launch.
     const hostId = teamStore.getIdentity()?.serverId;
@@ -917,7 +917,7 @@ export async function createApplicationServices({
   const developmentUrl = process.env.ELECTRON_RENDERER_URL;
   const teamWebRtcBridge = new TeamWebRtcBridge({
     developmentUrl: developmentUrl ?? null,
-    iceTransportPolicy: developmentUrl && process.env.OPENBOT_DEV_ICE_TRANSPORT_POLICY === "relay" ? "relay" : "all",
+    iceTransportPolicy: developmentUrl && process.env.OMNIBOT_DEV_ICE_TRANSPORT_POLICY === "relay" ? "relay" : "all",
   });
   teamWebRtcBridge.on("accountProfileChanged", refreshAccountProfile);
   teardown.push(TEARDOWN_ORDER.teamWebRtcBridge, "the team WebRTC bridge", () =>
@@ -941,7 +941,7 @@ export async function createApplicationServices({
   });
   teardown.push(TEARDOWN_ORDER.browser, "the browser", () => runCauseEffect(browser.destroy()));
   await runCauseEffect(browser.restore(store.list().map((agent) => ({ id: agent.id, threadId: agent.threadId }))));
-  performance.mark("openbot:services.browser");
+  performance.mark("omnibot:services.browser");
   const browserPictureInPicture = new BrowserPictureInPicture({
     // A value, deliberately: the window this is docked to is the one that exists now. The event
     // callback below is the opposite case and re-reads, because it fires long after a macOS window
@@ -1052,10 +1052,10 @@ export async function createApplicationServices({
    * store is the path it always used. The switch is read here rather than imported from the entry
    * point, which this file may not reach into; both readers read the same immutable value.
    */
-  const providerUse = new ProviderUseSettingsStore(join(app.getPath("userData"), "openbot-provider-use-v1.json"));
+  const providerUse = new ProviderUseSettingsStore(join(app.getPath("userData"), "omnibot-provider-use-v1.json"));
   await runCauseEffect(providerUse.load());
   const providerAccounts = new ProviderAccountStore(
-    join(app.getPath("userData"), "openbot-provider-accounts-v1.json"),
+    join(app.getPath("userData"), "omnibot-provider-accounts-v1.json"),
     join(app.getPath("userData"), "provider-accounts"),
   );
   await runCauseEffect(providerAccounts.load());
@@ -1106,7 +1106,7 @@ export async function createApplicationServices({
   const providerDetectionSettings = new ProviderDetectionSettingsStore(
     join(app.getPath("userData"), PROVIDER_DETECTION_SETTINGS_FILE),
   );
-  performance.mark("openbot:services.preferences");
+  performance.mark("omnibot:services.preferences");
   await runCauseEffect(providerDetectionSettings.load());
   const providerDetection = await Effect.runPromise(
     createProviderDetection({
@@ -1130,7 +1130,7 @@ export async function createApplicationServices({
   // An unreadable key file is reported, not fatal: the app starts, OpenCode runs on the free models,
   // and Settings tells the user to save the key again. Only the error's class is logged, because a
   // parse message quotes the file.
-  performance.mark("openbot:services.provider-detection");
+  performance.mark("omnibot:services.provider-detection");
   const credentialLoadError = await Effect.runPromise(providerCredentials.load());
   if (credentialLoadError) {
     logger.warn(`OmniBot could not read the provider key file (${credentialLoadError.name}). It was left unchanged.`);
@@ -1182,7 +1182,7 @@ export async function createApplicationServices({
         ? { port: Number(new URL(mcpOAuthRedirect.redirectUrl).port), path: MCP_OAUTH_REDIRECT_PATH }
         : null,
   });
-  performance.mark("openbot:services.mcp-sign-in-file");
+  performance.mark("omnibot:services.mcp-sign-in-file");
   const mcpOAuthRedirect = await startMcpOAuthRedirectServer({
     language,
     preferredPort: MCP_OAUTH_REDIRECT_PORT,
@@ -1253,7 +1253,7 @@ export async function createApplicationServices({
     openExternal: (url) => shell.openExternal(url),
   });
   await runCauseEffect(onePasswordConnector.load());
-  performance.mark("openbot:services.connectors");
+  performance.mark("omnibot:services.connectors");
   teardown.push(TEARDOWN_ORDER.onePasswordConnector, "the 1Password connection", () =>
     runCauseEffect(onePasswordConnector.dispose()),
   );
@@ -1279,7 +1279,7 @@ export async function createApplicationServices({
       architecture: process.arch,
       homeDirectory: homedir(),
       pathVariable: process.env.PATH ?? null,
-      overrides: [process.env.OPENBOT_CUA_DRIVER_PATH, process.env.CUA_DRIVER_PATH],
+      overrides: [process.env.OMNIBOT_CUA_DRIVER_PATH, process.env.CUA_DRIVER_PATH],
       ...(installDirectory === undefined ? {} : { installDirectory }),
       ...(localAppDataDirectory === undefined ? {} : { localAppDataDirectory }),
       applicationsDirectory: "/Applications",
@@ -1400,7 +1400,7 @@ export async function createApplicationServices({
   // tree stop ends every command it started, so none outlives its folder. Elsewhere the system
   // folder stays: a macOS path in userData has a space and is too long for a Unix socket.
   const providerTempDirectory = join(app.getPath("userData"), "provider-temp");
-  performance.mark("openbot:services.computer-use");
+  performance.mark("omnibot:services.computer-use");
   if (process.platform === "win32") await Effect.runPromise(sweepProviderTemp(providerTempDirectory));
   const service: AgentService = new AgentService({
     store,
@@ -1579,7 +1579,7 @@ export async function createApplicationServices({
   // The host id is read when the Signal socket opens, and the team store is built further down, so
   // it starts as "no name yet".
   let ingressHostId: () => string | null = () => null;
-  performance.mark("openbot:services.routines");
+  performance.mark("omnibot:services.routines");
   const { messaging, signalIngress } = await createMessagingServices({
     teardown,
     secretCipher,
@@ -1652,7 +1652,7 @@ export async function createApplicationServices({
     Effect.runFork(providerRuntimes.ensureToolRuntimes());
   // After `new AgentService`, which owns the channels: the layout files channels beside agents, and
   // reconciling against the agents alone would read every channel as gone and drop where it sits.
-  performance.mark("openbot:services.messaging");
+  performance.mark("omnibot:services.messaging");
   await runCauseEffect(sidebarLayout.reconcileAgents(service.sidebarChatIds()));
 
   /*
@@ -1736,7 +1736,7 @@ export async function createApplicationServices({
     join(app.getPath("userData"), TEAM_FILE),
   );
   await runCauseEffect(teamStore.initialize());
-  performance.mark("openbot:services.team");
+  performance.mark("omnibot:services.team");
   ingressHostId = () => teamStore.getIdentity()?.serverId ?? null;
   signalIngress.reconnect();
   const webhookRelay = new WebhookRelay({
@@ -1793,7 +1793,7 @@ export async function createApplicationServices({
   }
 
   const teamChatStore = new TeamChatStore(store.database);
-  performance.mark("openbot:services.hosted");
+  performance.mark("omnibot:services.hosted");
   const remoteDesktopRuntime = await Effect.runPromise(
     resolveRemoteDesktopRuntime({
       isPackaged: app.isPackaged,
@@ -1801,9 +1801,9 @@ export async function createApplicationServices({
       sourceRoot: resolve(__dirname, "../.."),
       platform: process.platform === "darwin" || process.platform === "win32" ? process.platform : "linux",
       architecture: process.arch,
-      ...(process.env.OPENBOT_REMOTE_DESKTOP_RUNTIME_PATH === undefined
+      ...(process.env.OMNIBOT_REMOTE_DESKTOP_RUNTIME_PATH === undefined
         ? {}
-        : { overrideRoot: process.env.OPENBOT_REMOTE_DESKTOP_RUNTIME_PATH }),
+        : { overrideRoot: process.env.OMNIBOT_REMOTE_DESKTOP_RUNTIME_PATH }),
     }),
   );
   const agentAdminSettings = createAgentAdminSettings({ agents: service, approvalAutomation });
@@ -2111,7 +2111,7 @@ export async function createApplicationServices({
     throw new Error(`Unsupported analytics platform: ${analyticsPlatform}`);
   }
   // Load the local catalog before telemetry starts so tool steps and inventory use the same names.
-  performance.mark("openbot:services.remote-desktop");
+  performance.mark("omnibot:services.remote-desktop");
   const catalogPluginServers = await Effect.runPromise(
     loadCatalogPluginServers(
       app.isPackaged
@@ -2123,10 +2123,10 @@ export async function createApplicationServices({
   const analyticsEnabled = analyticsCaptureUrl !== null;
   const failureReports = analyticsEnabled
     ? new ReportQueue(
-        fileReportStorage(join(app.getPath("userData"), "openbot-error-reports-v1.json")),
+        fileReportStorage(join(app.getPath("userData"), "omnibot-error-reports-v1.json")),
         openPanelTransport({
           clientId: "6c989975-87ef-4f0c-857e-ab449a65b5c2",
-          origin: "openbot-app://app",
+          origin: "omnibot-app://app",
           ...(analyticsCaptureUrl ? { endpoint: `${analyticsCaptureUrl}/track` } : {}),
         }),
         {
@@ -2253,9 +2253,9 @@ export async function createApplicationServices({
   // account check and its coalescing; this only forwards the notice to it.
   teamWebRtcBridge.on("accountServersChanged", () => void Effect.runPromise(remoteServers.invalidateDirectory()));
   teardown.push(TEARDOWN_ORDER.remoteServers, "the remote servers", () => runCauseEffect(remoteServers.stop()));
-  performance.mark("openbot:services.plugin-catalog");
+  performance.mark("omnibot:services.plugin-catalog");
   await runCauseEffect(remoteServers.initialize());
-  performance.mark("openbot:services.remote-servers");
+  performance.mark("omnibot:services.remote-servers");
   criticalActionTargets = { agents: service, host, remoteServers };
   // After `remoteServers.initialize()`. The client half polls for the host's connection file and
   // throws when it never appears, before any window is shown - see the module it lives in. It reads
@@ -2307,15 +2307,15 @@ export async function createApplicationServices({
   });
   await runCauseEffect(voiceApiKeys.load());
   const voice = new VoiceTranscriptionService({
-    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".openbot-build/voice"),
-    // `voice:prepare` puts Parakeet in `.openbot-build/voice/model` for development.
+    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".omnibot-build/voice"),
+    // `voice:prepare` puts Parakeet in `.omnibot-build/voice/model` for development.
     modelDirectories: {
       "parakeet-tdt-0.6b-v3": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", PARAKEET_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice/model"),
+        : resolve(".omnibot-build/voice/model"),
       "whisper-turbo": app.isPackaged
         ? join(app.getPath("userData"), "runtimes", WHISPER_TURBO_MODEL_DIRECTORY)
-        : resolve(".openbot-build/voice", WHISPER_TURBO_MODEL_DIRECTORY),
+        : resolve(".omnibot-build/voice", WHISPER_TURBO_MODEL_DIRECTORY),
     },
     preferences: voicePreferences,
     apiKeys: voiceApiKeys,
@@ -2334,10 +2334,10 @@ export async function createApplicationServices({
   const speechPreferences = new SpeechPreferenceStore(join(app.getPath("userData"), "speech-preference.json"));
   await runCauseEffect(speechPreferences.load());
   const speech = new VoiceSpeechService({
-    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".openbot-build/voice"),
+    resourcesRoot: app.isPackaged ? join(process.resourcesPath, "voice") : resolve(".omnibot-build/voice"),
     modelDirectory: app.isPackaged
       ? join(app.getPath("userData"), "runtimes", SUPERTONIC_MODEL_DIRECTORY)
-      : resolve(".openbot-build/voice", SUPERTONIC_MODEL_DIRECTORY),
+      : resolve(".omnibot-build/voice", SUPERTONIC_MODEL_DIRECTORY),
     preferences: speechPreferences,
     spawnHost: spawnVoiceSpeechHost,
   });
@@ -2347,7 +2347,7 @@ export async function createApplicationServices({
   // Skip the file check in dev: unpacked runs never enable updates, so avoid touching resourcesPath.
   const updateMetadataAvailable = app.isPackaged && existsSync(join(process.resourcesPath, "app-update.yml"));
   // A hosted or self-installed server runs a release that root owns. Root installs updates for it
-  // when openbot-hosted-update has installed its request units. A container of openbot-instance asks
+  // when omnibot-hosted-update has installed its request units. A container of omnibot-instance asks
   // the host instead, which pulls the image. Other containers have neither.
   const containerInstaller =
     app.isPackaged &&
@@ -2358,7 +2358,7 @@ export async function createApplicationServices({
     containerInstaller ||
     (app.isPackaged &&
       process.platform === "linux" &&
-      (process.env.OPENBOT_HOSTED_SERVER === "1" || installationMode === "self") &&
+      (process.env.OMNIBOT_HOSTED_SERVER === "1" || installationMode === "self") &&
       existsSync(HOSTED_UPDATE_TRIGGER));
   const updatesEnabled =
     app.isPackaged &&
@@ -2591,9 +2591,9 @@ export async function createApplicationServices({
       await Effect.runPromise(serverMode.close());
     });
   }
-  performance.mark("openbot:services.updates");
+  performance.mark("omnibot:services.updates");
   await runCauseEffect(hostUpdateCoordinator.tick());
-  performance.mark("openbot:services.host-update");
+  performance.mark("omnibot:services.host-update");
   hostUpdateCoordinator.start();
   teardown.push(TEARDOWN_ORDER.hostUpdateCoordinator, "the host update coordinator", () =>
     Effect.runPromise(hostUpdateCoordinator.stop()),

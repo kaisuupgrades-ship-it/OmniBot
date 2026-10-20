@@ -1,18 +1,18 @@
 // bun scripts/spreadsheet-preview-e2e.ts --phase=before|after --allow-mutations --instance=<id>
 // The coordinator owns the isolated seeded dev app and selects Chief before this script runs.
 // Precondition: the coordinator selects English through the app UI in each fresh profile.
-// Reports and panel screenshots go to .openbot-build/spreadsheet-preview-e2e/<phase>.
+// Reports and panel screenshots go to .omnibot-build/spreadsheet-preview-e2e/<phase>.
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { developmentUserDataName, readDevelopmentInstanceId } from "../src/main/development-profile";
 import { type AutomationSession, assertMutationAllowed, connectToDevApp } from "./dev-automation/cdp-client";
 import { type DevInstanceRecord, readDevInstanceRecords } from "./dev-automation/instance-registry";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const OUT = resolve(ROOT, ".openbot-build/spreadsheet-preview-e2e");
+const OUT = resolve(ROOT, ".omnibot-build/spreadsheet-preview-e2e");
 const SOURCE = resolve(ROOT, "packages/ui/src/features/conversation/SpreadsheetFilePreview.tsx");
 const phase = process.argv.find((arg) => arg.startsWith("--phase="))?.slice("--phase=".length);
 if (phase !== "before" && phase !== "after") throw new Error("Pass --phase=before or --phase=after.");

@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What spoken replies reach in main: the speech model and settings, the synthesis, the finished
@@ -18,7 +18,7 @@ export interface SpeechPort {
   agent: Pick<OmniBotDesktopApi["agent"], "readConversationPage" | "discardDraftAttachment">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function speechPort(): SpeechPort {
-  return window.openbot;
+  return window.omnibot;
 }

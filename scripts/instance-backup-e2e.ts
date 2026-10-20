@@ -1,26 +1,26 @@
-// End-to-end check of `openbot-instance backup`, `verify`, `restore` and `backups`
+// End-to-end check of `omnibot-instance backup`, `verify`, `restore` and `backups`
 // (docs/docker.md#backups). It runs the real script as root in a privileged Docker-in-Docker
 // container, with a loop-mounted ext4 data disk, as on a host of `docker/instances`. The instance is
 // a small stand-in container with the release label of an OmniBot image, not the OmniBot image: the
-// check is of the script, its archive and its failure paths. The data has an `openbot.db` of the
+// check is of the script, its archive and its failure paths. The data has an `omnibot.db` of the
 // latest schema and a shared tables database, which the verification opens with sqlite3.
 //
 //   bun scripts/instance-backup-e2e.ts
 //
 // It needs Docker and network access for the images and the Alpine packages. The report is
-// `.openbot-build/instance-backup-e2e/report.json`.
+// `.omnibot-build/instance-backup-e2e/report.json`.
 
 import { spawnSync } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { migrateOmniBotDatabase } from "../src/backend/openbot-database-schema";
+import { migrateOmniBotDatabase } from "../src/backend/omnibot-database-schema";
 
-const reportRoot = resolve(".openbot-build/instance-backup-e2e");
-const dind = `openbot-backup-e2e-${randomBytes(4).toString("hex")}`;
-const script = "/opt/openbot-docker/instances/openbot-instance";
-const data = "/srv/openbot/main/data";
+const reportRoot = resolve(".omnibot-build/instance-backup-e2e");
+const dind = `omnibot-backup-e2e-${randomBytes(4).toString("hex")}`;
+const script = "/opt/omnibot-docker/instances/omnibot-instance";
+const data = "/srv/omnibot/main/data";
 const agentId = "agent-e2e-1";
 const results: Array<{ name: string; ok: boolean; detail: string }> = [];
 
@@ -57,7 +57,7 @@ function check(name: string, ok: boolean, detail: string): void {
 }
 
 function running(): boolean {
-  return shell("docker inspect --format '{{.State.Running}}' openbot-main").stdout.trim() === "true";
+  return shell("docker inspect --format '{{.State.Running}}' omnibot-main").stdout.trim() === "true";
 }
 
 function completeBackups(): string[] {
@@ -76,11 +76,11 @@ async function writeFixture(root: string): Promise<void> {
   await mkdir(config, { recursive: true });
   await mkdir(shared, { recursive: true });
   await mkdir(join(root, ".local/share/keyrings"), { recursive: true });
-  await mkdir(join(root, ".config/openbot-container"), { recursive: true });
+  await mkdir(join(root, ".config/omnibot-container"), { recursive: true });
   await mkdir(join(root, "OmniBot/Agents/E2E"), { recursive: true });
 
   const now = new Date().toISOString();
-  const db = new DatabaseSync(join(config, "openbot.db"));
+  const db = new DatabaseSync(join(config, "omnibot.db"));
   try {
     migrateOmniBotDatabase(db);
     db.prepare(
@@ -102,20 +102,20 @@ async function writeFixture(root: string): Promise<void> {
   const tables = new DatabaseSync(join(shared, "agent-data.db"));
   try {
     tables.exec(
-      "CREATE TABLE openbot_metadata (table_name TEXT PRIMARY KEY, owner_agent_id TEXT NOT NULL, created_at TEXT NOT NULL)",
+      "CREATE TABLE omnibot_metadata (table_name TEXT PRIMARY KEY, owner_agent_id TEXT NOT NULL, created_at TEXT NOT NULL)",
     );
     tables.exec("CREATE TABLE contacts (name TEXT, email TEXT)");
     tables.exec("INSERT INTO contacts VALUES ('Ada', 'ada@example.com')");
     tables.exec("CREATE TABLE tasks (title TEXT)");
-    tables.prepare("INSERT INTO openbot_metadata VALUES ('contacts', ?, ?)").run(agentId, now);
+    tables.prepare("INSERT INTO omnibot_metadata VALUES ('contacts', ?, ?)").run(agentId, now);
     // An owner that is not an agent: verification reports it as a warning.
-    tables.prepare("INSERT INTO openbot_metadata VALUES ('tasks', 'agent-removed', ?)").run(now);
+    tables.prepare("INSERT INTO omnibot_metadata VALUES ('tasks', 'agent-removed', ?)").run(now);
   } finally {
     tables.close();
   }
 
   await writeFile(join(root, ".local/share/keyrings/login.keyring"), randomBytes(512));
-  await writeFile(join(root, ".config/openbot-container/keyring-password"), randomBytes(32).toString("hex"), {
+  await writeFile(join(root, ".config/omnibot-container/keyring-password"), randomBytes(32).toString("hex"), {
     mode: 0o600,
   });
   await writeFile(join(root, "OmniBot/Agents/E2E/notes.md"), "Saved before the backup.\n");
@@ -165,22 +165,22 @@ async function main(): Promise<void> {
       "gzip",
     ]);
     if (packages.status !== 0) throw new Error(`The packages did not install: ${packages.stderr}`);
-    const scriptsCopied = run("docker", ["cp", resolve("docker"), `${dind}:/opt/openbot-docker`]);
+    const scriptsCopied = run("docker", ["cp", resolve("docker"), `${dind}:/opt/omnibot-docker`]);
     if (scriptsCopied.status !== 0) throw new Error(`The instance scripts did not copy: ${scriptsCopied.stderr}`);
     const fixtureCopied = run("docker", ["cp", `${fixture}/.`, `${dind}:/fixture`]);
     if (fixtureCopied.status !== 0) throw new Error(`The instance fixture did not copy: ${fixtureCopied.stderr}`);
     must(`mkdir -p /stand-in && cat >/stand-in/Dockerfile <<'EOF'\n${standIn}EOF`);
     must("docker build --quiet --tag registry.omnibot.example.com/omnibot:latest /stand-in >/dev/null");
 
-    // The layout of `openbot-instance create`, without systemd: an ext4 image mounted as /data.
-    must(`mkdir -p /srv/openbot/main/data /backups
-      fallocate --length 256M /srv/openbot/main/data.img
-      mkfs.ext4 -q -m 0 /srv/openbot/main/data.img
-      mount -o loop /srv/openbot/main/data.img ${data}
+    // The layout of `omnibot-instance create`, without systemd: an ext4 image mounted as /data.
+    must(`mkdir -p /srv/omnibot/main/data /backups
+      fallocate --length 256M /srv/omnibot/main/data.img
+      mkfs.ext4 -q -m 0 /srv/omnibot/main/data.img
+      mount -o loop /srv/omnibot/main/data.img ${data}
       cp -a /fixture/. ${data}/ && chown -R 1000:1000 ${data} && chmod 0700 ${data}
-      printf 'OPENBOT_NAME=main\\nOPENBOT_CPUS=1\\nOPENBOT_MEM=1g\\nOPENBOT_DISK=256M\\nOPENBOT_BACKUP_DIR=/backups\\nOPENBOT_BACKUP_KEEP=2\\nOPENBOT_BACKUP_MAX_AGE=24\\n' >/opt/openbot-docker/instances/main.env
-      docker run --detach --name openbot-main --stop-timeout 20 -v ${data}:/data registry.omnibot.example.com/omnibot:latest >/dev/null`);
-    const dataHash = must(`sha256sum ${data}/.config/OmniBot/openbot.db | cut -d ' ' -f 1`);
+      printf 'OMNIBOT_NAME=main\\nOMNIBOT_CPUS=1\\nOMNIBOT_MEM=1g\\nOMNIBOT_DISK=256M\\nOMNIBOT_BACKUP_DIR=/backups\\nOMNIBOT_BACKUP_KEEP=2\\nOMNIBOT_BACKUP_MAX_AGE=24\\n' >/opt/omnibot-docker/instances/main.env
+      docker run --detach --name omnibot-main --stop-timeout 20 -v ${data}:/data registry.omnibot.example.com/omnibot:latest >/dev/null`);
+    const dataHash = must(`sha256sum ${data}/.config/OmniBot/omnibot.db | cut -d ' ' -f 1`);
 
     let result = instance("backups", "main");
     check(
@@ -197,11 +197,11 @@ async function main(): Promise<void> {
     const manifest = JSON.parse(must(`cat /backups/main/${first}/manifest.json`));
     check(
       "manifest has the version, checksum and downtime",
-      manifest.openbotVersion === "0.40.0" &&
+      manifest.omnibotVersion === "0.40.0" &&
         /^[0-9a-f]{64}$/.test(manifest.archiveSha256) &&
         manifest.wasRunning === true,
       JSON.stringify({
-        version: manifest.openbotVersion,
+        version: manifest.omnibotVersion,
         archive: manifest.archive,
         downtime: manifest.downtimeSeconds,
       }),
@@ -243,8 +243,8 @@ async function main(): Promise<void> {
     const invalidSources = [
       {
         name: "main database",
-        path: ".config/OmniBot/openbot.db",
-        error: /OmniBot cannot open openbot\.db|openbot\.db is damaged/,
+        path: ".config/OmniBot/omnibot.db",
+        error: /OmniBot cannot open omnibot\.db|omnibot\.db is damaged/,
       },
       {
         name: "shared database",
@@ -254,7 +254,7 @@ async function main(): Promise<void> {
     ];
     for (const source of invalidSources) {
       const beforeInvalid = completeBackups();
-      const successHash = must("sha256sum /srv/openbot/main/backup-status/verify-success.json | cut -d ' ' -f 1");
+      const successHash = must("sha256sum /srv/omnibot/main/backup-status/verify-success.json | cut -d ' ' -f 1");
       must(
         `cp -a ${data}/${source.path} /root/e2e-healthy-database && printf 'not a SQLite database\n' > ${data}/${source.path}`,
       );
@@ -272,18 +272,18 @@ async function main(): Promise<void> {
         summary(invalidResult),
       );
       const targetHashes = must(
-        `cd ${data} && sha256sum .config/OmniBot/openbot.db OmniBot/Shared/Data/agent-data.db OmniBot/Agents/E2E/notes.md OmniBot/Agents/E2E/attachment.bin .local/share/keyrings/login.keyring .config/openbot-container/keyring-password .e2e-starts .e2e-clean-stop`,
+        `cd ${data} && sha256sum .config/OmniBot/omnibot.db OmniBot/Shared/Data/agent-data.db OmniBot/Agents/E2E/notes.md OmniBot/Agents/E2E/attachment.bin .local/share/keyrings/login.keyring .config/omnibot-container/keyring-password .e2e-starts .e2e-clean-stop`,
       );
       const targetRunningBefore = running();
       const refused = instance("restore", "main", invalidBackup, "--replace");
       check(
         `restore refuses an invalid ${source.name} before it stops the target`,
-        refused.status > 0 && source.error.test(refused.stderr) && !/Stopping openbot-main/.test(refused.stdout),
+        refused.status > 0 && source.error.test(refused.stderr) && !/Stopping omnibot-main/.test(refused.stdout),
         summary(refused),
       );
       const targetRunningAfter = running();
       const afterHashes = must(
-        `cd ${data} && sha256sum .config/OmniBot/openbot.db OmniBot/Shared/Data/agent-data.db OmniBot/Agents/E2E/notes.md OmniBot/Agents/E2E/attachment.bin .local/share/keyrings/login.keyring .config/openbot-container/keyring-password .e2e-starts .e2e-clean-stop`,
+        `cd ${data} && sha256sum .config/OmniBot/omnibot.db OmniBot/Shared/Data/agent-data.db OmniBot/Agents/E2E/notes.md OmniBot/Agents/E2E/attachment.bin .local/share/keyrings/login.keyring .config/omnibot-container/keyring-password .e2e-starts .e2e-clean-stop`,
       );
       check(
         `a refused ${source.name} restore keeps target bytes and running state`,
@@ -297,9 +297,9 @@ async function main(): Promise<void> {
       );
       check(
         `a refused ${source.name} restore removes verification work without staging or replacement`,
-        must(`find ${data} -maxdepth 1 \\( -name '.openbot-restore*' -o -name '.openbot-replaced*' \\) | wc -l`) ===
+        must(`find ${data} -maxdepth 1 \\( -name '.omnibot-restore*' -o -name '.omnibot-replaced*' \\) | wc -l`) ===
           "0" &&
-          must("find /var/tmp -maxdepth 1 -name 'openbot-verify.*' | wc -l") === "0" &&
+          must("find /var/tmp -maxdepth 1 -name 'omnibot-verify.*' | wc -l") === "0" &&
           completeBackups().length === beforeInvalid.length + 1,
         "no restore, replacement or verification folder stays; the source backup stays",
       );
@@ -312,16 +312,16 @@ async function main(): Promise<void> {
           failedVerify["verify-attempt"]?.result === "failed" &&
           source.error.test(failedVerify["verify-attempt"]?.error ?? "") &&
           failedVerify["verify-success"]?.result === "ok" &&
-          successHash === must("sha256sum /srv/openbot/main/backup-status/verify-success.json | cut -d ' ' -f 1"),
+          successHash === must("sha256sum /srv/omnibot/main/backup-status/verify-success.json | cut -d ' ' -f 1"),
         `lastVerify=${failedVerify.lastVerify}; prior success hash matches`,
       );
       must(`rm -rf /backups/main/${invalidBackup}`);
     }
 
     // Missing key material: the backup fails, the instance runs again, the earlier backup stays.
-    must(`mv ${data}/.config/openbot-container/keyring-password /root/keyring-password`);
+    must(`mv ${data}/.config/omnibot-container/keyring-password /root/keyring-password`);
     result = instance("backup", "main");
-    must(`mv /root/keyring-password ${data}/.config/openbot-container/keyring-password`);
+    must(`mv /root/keyring-password ${data}/.config/omnibot-container/keyring-password`);
     check(
       "a backup without the keyring password fails",
       result.status !== 0 && /keyring-password is missing/.test(result.stderr) && completeBackups().length === 1,
@@ -337,10 +337,10 @@ async function main(): Promise<void> {
 
     // A full destination: the backup fails before it stops the instance.
     must("mkdir -p /small && mount -t tmpfs -o size=64k tmpfs /small");
-    must("sed -i 's#^OPENBOT_BACKUP_DIR=.*#OPENBOT_BACKUP_DIR=/small#' /opt/openbot-docker/instances/main.env");
+    must("sed -i 's#^OMNIBOT_BACKUP_DIR=.*#OMNIBOT_BACKUP_DIR=/small#' /opt/omnibot-docker/instances/main.env");
     const startsBefore = must(`wc -l < ${data}/.e2e-starts`);
     result = instance("backup", "main");
-    must("sed -i 's#^OPENBOT_BACKUP_DIR=.*#OPENBOT_BACKUP_DIR=/backups#' /opt/openbot-docker/instances/main.env");
+    must("sed -i 's#^OMNIBOT_BACKUP_DIR=.*#OMNIBOT_BACKUP_DIR=/backups#' /opt/omnibot-docker/instances/main.env");
     check(
       "a backup to a full disk fails without a stop",
       result.status !== 0 &&
@@ -368,18 +368,18 @@ async function main(): Promise<void> {
     );
     check(
       "verification removes its temporary folder",
-      must("find /var/tmp -maxdepth 1 -name 'openbot-verify.*' | wc -l") === "0",
-      "no openbot-verify folder in /var/tmp",
+      must("find /var/tmp -maxdepth 1 -name 'omnibot-verify.*' | wc -l") === "0",
+      "no omnibot-verify folder in /var/tmp",
     );
 
-    // A verification that fails keeps the older backups, also with OPENBOT_BACKUP_KEEP=1.
+    // A verification that fails keeps the older backups, also with OMNIBOT_BACKUP_KEEP=1.
     const beforeFailedVerify = completeBackups();
     must(
-      "sed -i 's/^OPENBOT_BACKUP_KEEP=.*/OPENBOT_BACKUP_KEEP=1/' /opt/openbot-docker/instances/main.env && mv /usr/bin/sqlite3 /usr/bin/sqlite3.off",
+      "sed -i 's/^OMNIBOT_BACKUP_KEEP=.*/OMNIBOT_BACKUP_KEEP=1/' /opt/omnibot-docker/instances/main.env && mv /usr/bin/sqlite3 /usr/bin/sqlite3.off",
     );
     result = instance("backup", "main", "--verify");
     must(
-      "mv /usr/bin/sqlite3.off /usr/bin/sqlite3 && sed -i 's/^OPENBOT_BACKUP_KEEP=.*/OPENBOT_BACKUP_KEEP=2/' /opt/openbot-docker/instances/main.env",
+      "mv /usr/bin/sqlite3.off /usr/bin/sqlite3 && sed -i 's/^OMNIBOT_BACKUP_KEEP=.*/OMNIBOT_BACKUP_KEEP=2/' /opt/omnibot-docker/instances/main.env",
     );
     const afterFailedVerify = completeBackups();
     check(
@@ -392,7 +392,7 @@ async function main(): Promise<void> {
     );
     must(`rm -rf /backups/main/${afterFailedVerify.find((name) => !beforeFailedVerify.includes(name))}`);
 
-    // Retention: with OPENBOT_BACKUP_KEEP=2, the third backup removes the first.
+    // Retention: with OMNIBOT_BACKUP_KEEP=2, the third backup removes the first.
     instance("backup", "main");
     result = instance("backup", "main");
     const kept = completeBackups();
@@ -404,7 +404,7 @@ async function main(): Promise<void> {
 
     // A backup that a kill stopped has no result. The status shows it as a failure.
     must(
-      `printf '{\\n  "step": "backup",\\n  "result": "running",\\n  "startedAt": "2026-01-01T00:00:00Z"\\n}\\n' >/srv/openbot/main/backup-status/backup-attempt.json`,
+      `printf '{\\n  "step": "backup",\\n  "result": "running",\\n  "startedAt": "2026-01-01T00:00:00Z"\\n}\\n' >/srv/omnibot/main/backup-status/backup-attempt.json`,
     );
     result = instance("backups", "main");
     check(
@@ -432,24 +432,24 @@ async function main(): Promise<void> {
     );
 
     // `down` removes the container. The backup takes the version from the image of the instance.
-    must("docker rm --force openbot-main >/dev/null");
+    must("docker rm --force omnibot-main >/dev/null");
     result = instance("backup", "main");
     const removedBackup = completeBackups().at(-1) ?? "";
     const removedVersion = must(
-      `sed -n 's/^  "openbotVersion": "\\(.*\\)",$/\\1/p' /backups/main/${removedBackup}/manifest.json`,
+      `sed -n 's/^  "omnibotVersion": "\\(.*\\)",$/\\1/p' /backups/main/${removedBackup}/manifest.json`,
     );
     must(
-      `docker run --detach --name openbot-main --stop-timeout 20 -v ${data}:/data registry.omnibot.example.com/omnibot:latest >/dev/null`,
+      `docker run --detach --name omnibot-main --stop-timeout 20 -v ${data}:/data registry.omnibot.example.com/omnibot:latest >/dev/null`,
     );
     check(
       "a backup without a container has the version of the image",
       result.status === 0 && removedVersion === "0.40.0",
-      `openbotVersion ${removedVersion}`,
+      `omnibotVersion ${removedVersion}`,
     );
     const latest = completeBackups().at(-1) ?? "";
 
     // While a backup holds the lock of the instance, `down` waits and does not stop the container.
-    const lock = "/run/openbot-instance-update-main.lock";
+    const lock = "/run/omnibot-instance-update-main.lock";
     const waited = must(
       `flock ${lock} sleep 30 & holder=$!; until ! flock --nonblock ${lock} true; do sleep 0.1; done; set +e; timeout 3 ${script} down main >/dev/null 2>&1; code=$?; set -e; kill $holder; wait $holder 2>/dev/null || true; echo $code`,
     );
@@ -459,7 +459,7 @@ async function main(): Promise<void> {
     must(`echo changed > ${data}/OmniBot/Agents/E2E/after-backup.md && rm ${data}/OmniBot/Agents/E2E/notes.md`);
     // An agent can leave links with the names of the restore folders. Root must not follow them.
     must(
-      `mkdir -p /trap && ln -s /trap ${data}/.openbot-replaced && ln -s /trap ${data}/.openbot-restore && ln -s /trap ${data}/.openbot-replaced.x && chown -h 1000:1000 ${data}/.openbot-*`,
+      `mkdir -p /trap && ln -s /trap ${data}/.omnibot-replaced && ln -s /trap ${data}/.omnibot-restore && ln -s /trap ${data}/.omnibot-replaced.x && chown -h 1000:1000 ${data}/.omnibot-*`,
     );
     result = instance("restore", "main", latest);
     check(
@@ -469,7 +469,7 @@ async function main(): Promise<void> {
     );
 
     must(
-      `cp -a /backups/main/${latest} /backups/main/newer && sed -i 's/"openbotVersion": "0.40.0"/"openbotVersion": "99.0.0"/' /backups/main/newer/manifest.json`,
+      `cp -a /backups/main/${latest} /backups/main/newer && sed -i 's/"omnibotVersion": "0.40.0"/"omnibotVersion": "99.0.0"/' /backups/main/newer/manifest.json`,
     );
     result = instance("restore", "main", "newer", "--replace");
     must("rm -rf /backups/main/newer");
@@ -485,14 +485,14 @@ async function main(): Promise<void> {
       result.status !== 0 && /did not end/.test(result.stderr) && running(),
       summary(result),
     );
-    must(`rm ${data}/.openbot-replaced.x`);
+    must(`rm ${data}/.omnibot-replaced.x`);
     result = instance("restore", "main", latest, "--replace");
     check("restore with --replace", result.status === 0, summary(result));
     check("instance stays stopped after a restore", !running(), `running=${running()}`);
     const restored = must(
-      `cd ${data} && test -f OmniBot/Agents/E2E/notes.md && test ! -e OmniBot/Agents/E2E/after-backup.md && test -z "$(find . -maxdepth 1 -name '.openbot-*')" && sha256sum .config/OmniBot/openbot.db | cut -d ' ' -f 1`,
+      `cd ${data} && test -f OmniBot/Agents/E2E/notes.md && test ! -e OmniBot/Agents/E2E/after-backup.md && test -z "$(find . -maxdepth 1 -name '.omnibot-*')" && sha256sum .config/OmniBot/omnibot.db | cut -d ' ' -f 1`,
     );
-    check("restored data is the backup", restored === dataHash, `openbot.db ${restored.slice(0, 12)}`);
+    check("restored data is the backup", restored === dataHash, `omnibot.db ${restored.slice(0, 12)}`);
     check(
       "restore does not follow links that an agent made",
       must("ls -A /trap | wc -l") === "0",
@@ -503,7 +503,7 @@ async function main(): Promise<void> {
       must(`find ${data} -mindepth 1 ! -user 1000 ! -path '${data}/lost+found*' | wc -l`) === "0",
       "owner 1000",
     );
-    must("docker start openbot-main >/dev/null");
+    must("docker start omnibot-main >/dev/null");
     check("instance starts on the restored data", running(), `running=${running()}`);
   } finally {
     run("docker", ["rm", "--force", "--volumes", dind]);

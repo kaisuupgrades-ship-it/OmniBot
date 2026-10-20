@@ -5,13 +5,13 @@ import {
   MANAGED_RUNTIME_PROVIDERS,
   type ProviderRuntimeSnapshot,
   type ProviderRuntimesDesktopApi,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   type ProviderUpdate,
   providerUpdateAvailable,
   providerUpdatesToAnnounce,
-} from "@openbot/ui/features/provider-updates/provider-update";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/provider-updates/provider-update";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createSignal, flush, onSettled } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { FALLBACK_PROVIDER_RUNTIMES } from "../../app-defaults";
@@ -39,7 +39,7 @@ export interface ProviderCliOwners {
    * Whether the runtimes `api` reaches belong to the workspace on screen. Left out, it is
    * `isLocalServer`.
    *
-   * `window.openbot.providerRuntimes` addresses only this computer, while the agent status beside it
+   * `window.omnibot.providerRuntimes` addresses only this computer, while the agent status beside it
    * describes whichever server is open. An Update button raised for a joined server would then
    * change a runtime the user is not looking at, unless `api` reaches that server's host.
    */

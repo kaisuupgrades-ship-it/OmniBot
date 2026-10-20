@@ -7,23 +7,23 @@
 // not find those faults. A Bun parent and an Electron child share only JSON messages, so the PCM
 // bytes arrive as an object of numbers and are decoded here.
 //
-// Writes one WAV per sample and `report.json` to `.openbot-build/voice-speech-smoke/`.
+// Writes one WAV per sample and `report.json` to `.omnibot-build/voice-speech-smoke/`.
 // Run `bun run voice:prepare-runtime` first. macOS only: it starts the Electron binary of the package.
 
 import { fork } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { SpeechAudio, SpeechLanguage, SpeechVoice } from "@openbot/contracts/ipc";
-import { createOmniBotLogger } from "@openbot/logging";
+import type { SpeechAudio, SpeechLanguage, SpeechVoice } from "@omnibot/contracts/ipc";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect } from "effect";
 import { SpeechPreferenceStore } from "../src/main/speech-preference-store";
 import { SUPERTONIC_MODEL_DIRECTORY } from "../src/main/voice-model-service";
 import type { VoiceSpeechHostProcess, VoiceSpeechResponse } from "../src/main/voice-speech-protocol";
 import { VoiceSpeechService } from "../src/main/voice-speech-service";
 
-const RESOURCES_ROOT = resolve(".openbot-build/voice");
-const OUTPUT = resolve(".openbot-build/voice-speech-smoke");
+const RESOURCES_ROOT = resolve(".omnibot-build/voice");
+const OUTPUT = resolve(".omnibot-build/voice-speech-smoke");
 const HOST = resolve("src/main/voice-speech-host.ts");
 const ELECTRON = resolve("node_modules/electron/dist/Electron.app/Contents/MacOS/Electron");
 
@@ -118,7 +118,7 @@ function peak({ pcm }: SpeechAudio): number {
 
 async function main(): Promise<void> {
   await mkdir(OUTPUT, { recursive: true });
-  const preferencesDirectory = await mkdtemp(join(tmpdir(), "openbot-speech-smoke-"));
+  const preferencesDirectory = await mkdtemp(join(tmpdir(), "omnibot-speech-smoke-"));
   const preferences = new SpeechPreferenceStore(join(preferencesDirectory, "speech-preference.json"));
   const speech = new VoiceSpeechService({
     resourcesRoot: RESOURCES_ROOT,

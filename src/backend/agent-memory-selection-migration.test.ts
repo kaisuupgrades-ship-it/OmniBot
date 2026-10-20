@@ -1,9 +1,9 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
-import { AGENT_MEMORY_CONTEXT_BUDGET_BYTES, essentialMemoryBytes } from "@openbot/contracts/agent-memory-context";
+import { AGENT_MEMORY_CONTEXT_BUDGET_BYTES, essentialMemoryBytes } from "@omnibot/contracts/agent-memory-context";
 import { afterEach, describe, expect, it } from "vitest";
 import { databaseRows, requiredStringColumn } from "./database/database-rows";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: upgrade loses text; selection exceeds budget; a partial migration survives failure;
 // invalid history is accepted; selection/index outlive a deleted memory. These fixtures cover each.

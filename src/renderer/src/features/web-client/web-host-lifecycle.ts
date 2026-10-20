@@ -3,14 +3,14 @@ import type {
   HostedServerSleep,
   HostedServerStart,
   HostedServerStartStep,
-} from "@openbot/contracts/ipc";
-import { runTeamEffect } from "@openbot/team-client";
+} from "@omnibot/contracts/ipc";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   HOSTED_HOST_READY_LIMIT_MS,
   HOSTED_START_FAILED_READS,
   HOSTED_START_POLL_MS,
   hostedStartStep,
-} from "@openbot/team-client/hosted-server-wake";
+} from "@omnibot/team-client/hosted-server-wake";
 import { createWebHostedServerWake } from "./web-hosted-server-wake";
 
 /** A sleeping server is asked again after this long, also with no input. */
@@ -74,7 +74,7 @@ export function createWebHostLifecycle(options: {
   }
   /** The client waits while the server starts. Only OmniBot on a running machine has a time limit. */
   function setStep(startedAt: number, step: HostedServerStartStep): boolean {
-    if (step !== "openbot") runningSince = null;
+    if (step !== "omnibot") runningSince = null;
     else runningSince ??= Date.now();
     if (runningSince !== null && Date.now() - runningSince >= HOSTED_HOST_READY_LIMIT_MS) {
       expire();

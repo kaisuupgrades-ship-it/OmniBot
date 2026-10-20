@@ -1,10 +1,10 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { Button, Mic, MicOff, X } from "@openbot/ui";
-import type { AgentProfile } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { StopIcon } from "@openbot/ui/features/conversation/ConversationIcons";
-import { VoiceWaveform } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { useText } from "@openbot/ui/text";
+import type { AppTextKey } from "@omnibot/i18n";
+import { Button, Mic, MicOff, X } from "@omnibot/ui";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { StopIcon } from "@omnibot/ui/features/conversation/ConversationIcons";
+import { VoiceWaveform } from "@omnibot/ui/features/conversation/VoiceRecordingMorph";
+import { useText } from "@omnibot/ui/text";
 import { Show } from "solid-js";
 
 /** What a voice conversation does now. */

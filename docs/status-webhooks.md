@@ -30,7 +30,7 @@ The subscriptions are in the `STATUS_WEBHOOKS` repository secret, as one JSON li
 | `paused` | No | `true` stops the deliveries. The waiting deliveries are removed. |
 
 To change the list, replace the whole secret:
-`gh secret set STATUS_WEBHOOKS -R nightly-labs/openbot < webhooks.json`. Then delete `webhooks.json`.
+`gh secret set STATUS_WEBHOOKS -R kaisuupgrades-ship-it/OmniBot < webhooks.json`. Then delete `webhooks.json`.
 The secret is not in the log: the job masks each URL and secret before it does anything else. An
 error in the list names only the entry number, the field or the `id`. A list that is not valid stops
 the job, and the job sends nothing.
@@ -109,10 +109,10 @@ nobody, even if the incident text contains `@everyone`.
 
 | Header | Value |
 | --- | --- |
-| `x-openbot-event` | The event type. |
-| `x-openbot-delivery-id` | 32 hexadecimal characters. The same for each try of one event to one subscription. |
-| `x-openbot-timestamp` | The send time, in Unix seconds. |
-| `x-openbot-signature` | `sha256=<hex>`, when the subscription has a secret. |
+| `x-omnibot-event` | The event type. |
+| `x-omnibot-delivery-id` | 32 hexadecimal characters. The same for each try of one event to one subscription. |
+| `x-omnibot-timestamp` | The send time, in Unix seconds. |
+| `x-omnibot-signature` | `sha256=<hex>`, when the subscription has a secret. |
 
 The signature is the HMAC-SHA256, with the secret as key, of `<timestamp>.<delivery>.<body>`. This
 is the same format as [OmniBot webhook routines](webhooks.md#headers-and-signature). A receiver must:
@@ -126,10 +126,10 @@ is the same format as [OmniBot webhook routines](webhooks.md#headers-and-signatu
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 function verify(headers: Headers, body: string, secret: string) {
-  const timestamp = headers.get("x-openbot-timestamp") ?? "";
-  const delivery = headers.get("x-openbot-delivery-id") ?? "";
+  const timestamp = headers.get("x-omnibot-timestamp") ?? "";
+  const delivery = headers.get("x-omnibot-delivery-id") ?? "";
   const expected = `sha256=${createHmac("sha256", secret).update(`${timestamp}.${delivery}.${body}`).digest("hex")}`;
-  const actual = headers.get("x-openbot-signature") ?? "";
+  const actual = headers.get("x-omnibot-signature") ?? "";
   const fresh = Math.abs(Date.now() / 1000 - Number(timestamp)) <= 300;
   return fresh && actual.length === expected.length && timingSafeEqual(Buffer.from(actual), Buffer.from(expected));
 }

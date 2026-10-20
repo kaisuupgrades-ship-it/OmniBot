@@ -18,8 +18,8 @@ import {
   IPC_ENDPOINTS,
   LOCAL_SERVER_ID,
   type MacPermissionId,
-} from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppTranslate } from "@omnibot/i18n";
 import {
   app,
   BrowserWindow,
@@ -177,7 +177,7 @@ export function createMainWindowController({
     });
 
     window.once("ready-to-show", () => {
-      performance.mark("openbot:window-ready");
+      performance.mark("omnibot:window-ready");
       if (
         shouldShowDevelopmentWindow({
           remoteRole: developmentRemoteRole,
@@ -314,7 +314,7 @@ export function createMainWindowController({
   function loadRenderer(window: BrowserWindow): Promise<void> {
     onRendererLoadStarted();
     const developmentUrl = process.env.ELECTRON_RENDERER_URL;
-    return developmentUrl ? window.loadURL(developmentUrl) : window.loadURL("openbot-app://app/index.html");
+    return developmentUrl ? window.loadURL(developmentUrl) : window.loadURL("omnibot-app://app/index.html");
   }
 
   async function ensureMainWindow(): Promise<BrowserWindow> {
@@ -503,7 +503,7 @@ export function createComputerUsePermissionHelpWindow(translate: AppTranslate): 
 
 /** The entry for the helper windows. It does not load `App`, so each window uses less memory. */
 function helperRendererUrl(developmentUrl: string | undefined): URL {
-  return developmentUrl ? new URL("helper.html", `${developmentUrl}/`) : new URL("openbot-app://app/helper.html");
+  return developmentUrl ? new URL("helper.html", `${developmentUrl}/`) : new URL("omnibot-app://app/helper.html");
 }
 
 export function loadComputerUsePermissionHelpRenderer(

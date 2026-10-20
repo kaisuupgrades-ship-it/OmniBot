@@ -7,8 +7,8 @@ asks the right agent and answers. No code runs here: each directory holds only t
 
 | Directory | App | App ID | Home team | Redirect URL |
 | --- | --- | --- | --- | --- |
-| `production` | `OmniBot` | `A0C5H5C95NH` | `openbotdev` (`T0C5B1XG542`) | `https://api.omnibot.example.com/v2/slack/callback` |
-| `development` | `OmniBot (dev)` | `A0C5G5XGS83` | `openbotdev` (`T0C5B1XG542`) | Test Worker (`bun run deploy:test`) |
+| `production` | `OmniBot` | `REPLACE_WITH_YOUR_SLACK_APP_ID` | `your-workspace` (`REPLACE_WITH_YOUR_SLACK_TEAM_ID`) | `https://api.omnibot.example.com/v2/slack/callback` |
+| `development` | `OmniBot (dev)` | `REPLACE_WITH_YOUR_DEV_SLACK_APP_ID` | `your-workspace` (`REPLACE_WITH_YOUR_SLACK_TEAM_ID`) | Test Worker (`bun run deploy:test`) |
 
 `.slack/apps.json` links each directory to its app. Run the Slack CLI from inside a directory.
 
@@ -23,11 +23,11 @@ serve `/v1/slack/events` first: Slack checks the request URL.
 
 ```sh
 cd apps/slack-app/production
-slack manifest validate --app A0C5H5C95NH
-slack manifest sync --app A0C5H5C95NH
+slack manifest validate --app REPLACE_WITH_YOUR_SLACK_APP_ID
+slack manifest sync --app REPLACE_WITH_YOUR_SLACK_APP_ID
 ```
 
-Do the same in `development` with `--app A0C5G5XGS83`. Keep the bot scopes the same as
+Do the same in `development` with `--app REPLACE_WITH_YOUR_DEV_SLACK_APP_ID`. Keep the bot scopes the same as
 `SLACK_BOT_SCOPES` in `packages/contracts/src/slack-app.ts`.
 
 ## Manual settings

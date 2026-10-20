@@ -3,12 +3,12 @@ import {
   type AgentStatus,
   agentProviderDescriptor,
   LOCAL_SERVER_ID,
-} from "@openbot/contracts/ipc";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { classifyFailure } from "@openbot/telemetry";
-import { toast } from "@openbot/ui";
-import type { ProviderAccountActions } from "@openbot/ui/components/provider-accounts";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import { classifyFailure } from "@omnibot/telemetry";
+import { toast } from "@omnibot/ui";
+import type { ProviderAccountActions } from "@omnibot/ui/components/provider-accounts";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, flush, onSettled } from "solid-js";
 import { desktopAnalytics } from "./analytics";
 import { appPort } from "./app-port";

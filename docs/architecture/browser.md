@@ -19,7 +19,7 @@ Small screens switch between the same conversation and workspace components. The
 panel receives the web live-view runtime and hides unsupported native controls. `BrowserLiveView`
 accepts an explicit runtime; desktop and the existing preview still default to the preload-compatible
 API. The web Storybook runtime uses
-`preview/mock-openbot.ts` through `preview/mock-web-runtime.ts`.
+`preview/mock-omnibot.ts` through `preview/mock-web-runtime.ts`.
 
 The browser runtime uses `packages/team-client` for the directory, authenticated WebRTC peer,
 Signal recovery, file transfers, and browser-view streams. The stream codec lives in contracts;
@@ -36,14 +36,14 @@ checks still apply. `web-account.ts` makes these calls, and the Profile tab of t
 An owner or admin gets the host controls of a desktop remote admin. Shared components keep their
 desktop port as the default and take injected calls: `web-server-settings.ts` gives
 `ServerSettingsModal` the host identity, MCP, and storage routes through
-`@openbot/team-client/team-admin-requests`, and member and invitation calls through the closed
+`@omnibot/team-client/team-admin-requests`, and member and invitation calls through the closed
 `/api/browser/*` list. The Worker applies the same `RemoteControlPlane` role checks as the bearer
 routes. A member or role change revokes every session on the host; the browser reconnects once when
 the directory still lists the host. `ConversationRuntime.admin` carries the skills and shared-table
 calls to the agent settings panel, which shows only Skills and Tables in the browser. Memories,
 routines, and files stay on the desktop. The Permissions select writes access and auto-approve through
 the agent-admin route. `web-marketplace.ts` gives `MarketplaceModal` its calls: the public catalog routes of
-the account service that serves `/app` (`@openbot/team-client/marketplace-catalog`), and installs on
+the account service that serves `/app` (`@omnibot/team-client/marketplace-catalog`), and installs on
 the host over `skills-admin-v1`, `agent-install-v1`, `agent-update-v1`, and `mcp-servers-v1`. Try skill and a plugin
 prompt add a line to the agent's draft, as on desktop. A shared agent page also links
 `/app?agent=<id>`: `WebApp` reads the id once, removes the query, and keeps it through sign-in;
@@ -94,7 +94,7 @@ Electron provides native `navigator.userAgentData` but no client-hint request he
 loopback HTTP, the host supplies the basic Chromium brand/version, desktop flag, and platform hints.
 It preserves hints supplied by Chromium and does not add high-entropy hints. The focused check is
 `bun run test:browser --scenario=identity`; add `--google-live` for the Google identifier check.
-The local identity report is `.openbot-build/browser-identity.json`.
+The local identity report is `.omnibot-build/browser-identity.json`.
 Website popups are adopted into managed `WebContentsView` tabs through Electron's window creation
 hook. Native guests retain their opener, request body, and shared browser session. Local tab and
 agent tool results expose `openerTabId` while that relationship is live. Independent `noopener`
@@ -121,7 +121,7 @@ it checks local file access.
 
 ### Fill inspected ordinary fields
 
-`openbot_browser.fill_fields` is a deferred tool in the original browser catalog. It replaces
+`omnibot_browser.fill_fields` is a deferred tool in the original browser catalog. It replaces
 1 to 16 main-frame native text inputs or textareas from one fresh snapshot revision. The combined
 literal text has a 16 KiB UTF-8 limit. The total operation deadline, including its final capture,
 is at most 30 seconds. It performs no submit, Enter, click, navigation, target search, or caller
@@ -160,7 +160,7 @@ codes; page exceptions do not enter the new progress result or diagnostic action
 `bun scripts/browser-fill-fields-e2e.ts` compiles only its native fixture and uses an owned hidden
 Electron process with a temporary profile and synthetic loopback forms. It must not make a window
 visible or request native focus to obtain a passing result. It is a local check, not a CI step; on
-Linux, run it under `xvfb-run -a`. The report is `.openbot-build/browser-fill-fields-e2e/report.json`.
+Linux, run it under `xvfb-run -a`. The report is `.omnibot-build/browser-fill-fields-e2e/report.json`.
 It includes actual runtime versions, completed cases, three warm-up pairs and twenty measured pairs,
 serialized result bytes, and observed snapshot counts. Measurements include tool execution and loopback fixture
 confirmation. They do not measure provider tokens, model speed, or billable cost.
@@ -225,7 +225,7 @@ version (`apps/auth-api/src/server/mobile-features-config.ts`).
 
 ## Secure browser authentication
 
-`openbot_browser.submit_secret` uses the existing attention/takeover lifecycle with optional public
+`omnibot_browser.submit_secret` uses the existing attention/takeover lifecycle with optional public
 secret-request metadata. The attention registry creates a fresh request ID and owns the pending
 response. The secret travels through a dedicated typed IPC endpoint or the optional
 `browser-secret-handoff` Team API capability, never a prompt answer or provider tool argument.

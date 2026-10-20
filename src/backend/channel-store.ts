@@ -13,10 +13,10 @@ import {
   isChannelMessage,
   isChannelTask,
   SIGNED_OUT_CHANNEL_MEMBER_ID,
-} from "@openbot/contracts/ipc";
-import { markdownPreviewText } from "@openbot/contracts/markdown-preview-text";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { markdownPreviewText } from "@omnibot/contracts/markdown-preview-text";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { deleteAggregateHistory, deleteThreadAttachments } from "./database/database-core";
 import {
   databaseRow,
@@ -25,7 +25,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "./database/database-rows";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 import { revokeRoutineWebhooks } from "./webhook-route-store";
 
 export interface ChannelAssignment {
@@ -417,7 +417,7 @@ export class ChannelStore {
         throughSequence: requiredNumberColumn(row, "through_sequence"),
         summaryVersion: requiredNumberColumn(row, "summary_version"),
       };
-    const threadId = `openbot-thread-${randomUUID()}`;
+    const threadId = `omnibot-thread-${randomUUID()}`;
     return this.database.dispatch(
       `channel-context:${channelId}:${agentId}`,
       [

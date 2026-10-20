@@ -1,5 +1,5 @@
-import { ATTACHMENT_FILE_EXTENSIONS } from "@openbot/contracts/attachment-files";
-import { MOBILE_ATTACHMENT_BYTES } from "@openbot/team-client/remote-peer";
+import { ATTACHMENT_FILE_EXTENSIONS } from "@omnibot/contracts/attachment-files";
+import { MOBILE_ATTACHMENT_BYTES } from "@omnibot/team-client/remote-peer";
 import { requireNativeView, requireOptionalNativeModule } from "expo";
 import type { ReactNode } from "react";
 import type { NativeSyntheticEvent, ViewProps } from "react-native";

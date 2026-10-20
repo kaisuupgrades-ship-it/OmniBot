@@ -37,7 +37,7 @@ import { Route as HealthLiveRouteImport } from './routes/health/live'
 import { Route as HealthReadyRouteImport } from './routes/health/ready'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as NewsSlugRouteImport } from './routes/news/$slug'
-import { Route as NewsOpenbotVsGrokbotRouteImport } from './routes/news/openbot-vs-grokbot'
+import { Route as NewsOmnibotVsGrokbotRouteImport } from './routes/news/omnibot-vs-grokbot'
 import { Route as NewsRssDotxmlRouteImport } from './routes/news/rss[.]xml'
 import { Route as PluginsIndexRouteImport } from './routes/plugins/index'
 import { Route as PluginsSlugRouteImport } from './routes/plugins/$slug'
@@ -49,7 +49,7 @@ import { Route as V1ContactRouteImport } from './routes/v1/contact'
 import { Route as V1MeRouteImport } from './routes/v1/me'
 import { Route as ApiBrowserSplatRouteImport } from './routes/api/browser/$'
 import { Route as DownloadPlatformLatestRouteImport } from './routes/download/$platform_/latest'
-import { Route as NewsOgOpenbotVsGrokbotDotpngRouteImport } from './routes/news/og/openbot-vs-grokbot[.]png'
+import { Route as NewsOgOmnibotVsGrokbotDotpngRouteImport } from './routes/news/og/omnibot-vs-grokbot[.]png'
 import { Route as PluginsIconSlugRouteImport } from './routes/plugins/icon/$slug'
 import { Route as V1AgentTemplatesIndexRouteImport } from './routes/v1/agent-templates/index'
 import { Route as V1AgentTemplatesTemplateIdRouteImport } from './routes/v1/agent-templates/$templateId'
@@ -298,9 +298,9 @@ const NewsSlugRoute = NewsSlugRouteImport.update({
   path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsOpenbotVsGrokbotRoute = NewsOpenbotVsGrokbotRouteImport.update({
-  id: '/news/openbot-vs-grokbot',
-  path: '/news/openbot-vs-grokbot',
+const NewsOmnibotVsGrokbotRoute = NewsOmnibotVsGrokbotRouteImport.update({
+  id: '/news/omnibot-vs-grokbot',
+  path: '/news/omnibot-vs-grokbot',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRssDotxmlRoute = NewsRssDotxmlRouteImport.update({
@@ -358,10 +358,10 @@ const DownloadPlatformLatestRoute = DownloadPlatformLatestRouteImport.update({
   path: '/download/$platform/latest',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsOgOpenbotVsGrokbotDotpngRoute =
-  NewsOgOpenbotVsGrokbotDotpngRouteImport.update({
-    id: '/news/og/openbot-vs-grokbot.png',
-    path: '/news/og/openbot-vs-grokbot.png',
+const NewsOgOmnibotVsGrokbotDotpngRoute =
+  NewsOgOmnibotVsGrokbotDotpngRouteImport.update({
+    id: '/news/og/omnibot-vs-grokbot.png',
+    path: '/news/og/omnibot-vs-grokbot.png',
     getParentRoute: () => rootRouteImport,
   } as any)
 const PluginsIconSlugRoute = PluginsIconSlugRouteImport.update({
@@ -972,7 +972,7 @@ export interface FileRoutesByFullPath {
   '/health/live': typeof HealthLiveRoute
   '/health/ready': typeof HealthReadyRoute
   '/news/$slug': typeof NewsSlugRoute
-  '/news/openbot-vs-grokbot': typeof NewsOpenbotVsGrokbotRoute
+  '/news/omnibot-vs-grokbot': typeof NewsOmnibotVsGrokbotRoute
   '/news/rss.xml': typeof NewsRssDotxmlRoute
   '/plugins/$slug': typeof PluginsSlugRoute
   '/providers/$slug': typeof ProvidersSlugRoute
@@ -988,7 +988,7 @@ export interface FileRoutesByFullPath {
   '/providers/': typeof ProvidersIndexRoute
   '/api/browser/$': typeof ApiBrowserSplatRoute
   '/download/$platform/latest': typeof DownloadPlatformLatestRoute
-  '/news/og/openbot-vs-grokbot.png': typeof NewsOgOpenbotVsGrokbotDotpngRoute
+  '/news/og/omnibot-vs-grokbot.png': typeof NewsOgOmnibotVsGrokbotDotpngRoute
   '/plugins/icon/$slug': typeof PluginsIconSlugRoute
   '/v1/agent-templates/$templateId': typeof V1AgentTemplatesTemplateIdRouteWithChildren
   '/v1/agent-templates/mine': typeof V1AgentTemplatesMineRoute
@@ -1121,7 +1121,7 @@ export interface FileRoutesByTo {
   '/health/live': typeof HealthLiveRoute
   '/health/ready': typeof HealthReadyRoute
   '/news/$slug': typeof NewsSlugRoute
-  '/news/openbot-vs-grokbot': typeof NewsOpenbotVsGrokbotRoute
+  '/news/omnibot-vs-grokbot': typeof NewsOmnibotVsGrokbotRoute
   '/news/rss.xml': typeof NewsRssDotxmlRoute
   '/plugins/$slug': typeof PluginsSlugRoute
   '/providers/$slug': typeof ProvidersSlugRoute
@@ -1137,7 +1137,7 @@ export interface FileRoutesByTo {
   '/providers': typeof ProvidersIndexRoute
   '/api/browser/$': typeof ApiBrowserSplatRoute
   '/download/$platform/latest': typeof DownloadPlatformLatestRoute
-  '/news/og/openbot-vs-grokbot.png': typeof NewsOgOpenbotVsGrokbotDotpngRoute
+  '/news/og/omnibot-vs-grokbot.png': typeof NewsOgOmnibotVsGrokbotDotpngRoute
   '/plugins/icon/$slug': typeof PluginsIconSlugRoute
   '/v1/agent-templates/$templateId': typeof V1AgentTemplatesTemplateIdRouteWithChildren
   '/v1/agent-templates/mine': typeof V1AgentTemplatesMineRoute
@@ -1271,7 +1271,7 @@ export interface FileRoutesById {
   '/health/live': typeof HealthLiveRoute
   '/health/ready': typeof HealthReadyRoute
   '/news/$slug': typeof NewsSlugRoute
-  '/news/openbot-vs-grokbot': typeof NewsOpenbotVsGrokbotRoute
+  '/news/omnibot-vs-grokbot': typeof NewsOmnibotVsGrokbotRoute
   '/news/rss.xml': typeof NewsRssDotxmlRoute
   '/plugins/$slug': typeof PluginsSlugRoute
   '/providers/$slug': typeof ProvidersSlugRoute
@@ -1287,7 +1287,7 @@ export interface FileRoutesById {
   '/providers/': typeof ProvidersIndexRoute
   '/api/browser/$': typeof ApiBrowserSplatRoute
   '/download/$platform_/latest': typeof DownloadPlatformLatestRoute
-  '/news/og/openbot-vs-grokbot.png': typeof NewsOgOpenbotVsGrokbotDotpngRoute
+  '/news/og/omnibot-vs-grokbot.png': typeof NewsOgOmnibotVsGrokbotDotpngRoute
   '/plugins/icon/$slug': typeof PluginsIconSlugRoute
   '/v1/agent-templates/$templateId': typeof V1AgentTemplatesTemplateIdRouteWithChildren
   '/v1/agent-templates/mine': typeof V1AgentTemplatesMineRoute
@@ -1422,7 +1422,7 @@ export interface FileRouteTypes {
     | '/health/live'
     | '/health/ready'
     | '/news/$slug'
-    | '/news/openbot-vs-grokbot'
+    | '/news/omnibot-vs-grokbot'
     | '/news/rss.xml'
     | '/plugins/$slug'
     | '/providers/$slug'
@@ -1438,7 +1438,7 @@ export interface FileRouteTypes {
     | '/providers/'
     | '/api/browser/$'
     | '/download/$platform/latest'
-    | '/news/og/openbot-vs-grokbot.png'
+    | '/news/og/omnibot-vs-grokbot.png'
     | '/plugins/icon/$slug'
     | '/v1/agent-templates/$templateId'
     | '/v1/agent-templates/mine'
@@ -1571,7 +1571,7 @@ export interface FileRouteTypes {
     | '/health/live'
     | '/health/ready'
     | '/news/$slug'
-    | '/news/openbot-vs-grokbot'
+    | '/news/omnibot-vs-grokbot'
     | '/news/rss.xml'
     | '/plugins/$slug'
     | '/providers/$slug'
@@ -1587,7 +1587,7 @@ export interface FileRouteTypes {
     | '/providers'
     | '/api/browser/$'
     | '/download/$platform/latest'
-    | '/news/og/openbot-vs-grokbot.png'
+    | '/news/og/omnibot-vs-grokbot.png'
     | '/plugins/icon/$slug'
     | '/v1/agent-templates/$templateId'
     | '/v1/agent-templates/mine'
@@ -1720,7 +1720,7 @@ export interface FileRouteTypes {
     | '/health/live'
     | '/health/ready'
     | '/news/$slug'
-    | '/news/openbot-vs-grokbot'
+    | '/news/omnibot-vs-grokbot'
     | '/news/rss.xml'
     | '/plugins/$slug'
     | '/providers/$slug'
@@ -1736,7 +1736,7 @@ export interface FileRouteTypes {
     | '/providers/'
     | '/api/browser/$'
     | '/download/$platform_/latest'
-    | '/news/og/openbot-vs-grokbot.png'
+    | '/news/og/omnibot-vs-grokbot.png'
     | '/plugins/icon/$slug'
     | '/v1/agent-templates/$templateId'
     | '/v1/agent-templates/mine'
@@ -1870,7 +1870,7 @@ export interface RootRouteChildren {
   HealthLiveRoute: typeof HealthLiveRoute
   HealthReadyRoute: typeof HealthReadyRoute
   NewsSlugRoute: typeof NewsSlugRoute
-  NewsOpenbotVsGrokbotRoute: typeof NewsOpenbotVsGrokbotRoute
+  NewsOmnibotVsGrokbotRoute: typeof NewsOmnibotVsGrokbotRoute
   NewsRssDotxmlRoute: typeof NewsRssDotxmlRoute
   PluginsSlugRoute: typeof PluginsSlugRoute
   ProvidersSlugRoute: typeof ProvidersSlugRoute
@@ -1886,7 +1886,7 @@ export interface RootRouteChildren {
   ProvidersIndexRoute: typeof ProvidersIndexRoute
   ApiBrowserSplatRoute: typeof ApiBrowserSplatRoute
   DownloadPlatformLatestRoute: typeof DownloadPlatformLatestRoute
-  NewsOgOpenbotVsGrokbotDotpngRoute: typeof NewsOgOpenbotVsGrokbotDotpngRoute
+  NewsOgOmnibotVsGrokbotDotpngRoute: typeof NewsOgOmnibotVsGrokbotDotpngRoute
   PluginsIconSlugRoute: typeof PluginsIconSlugRoute
   V1AgentTemplatesTemplateIdRoute: typeof V1AgentTemplatesTemplateIdRouteWithChildren
   V1AgentTemplatesMineRoute: typeof V1AgentTemplatesMineRoute
@@ -2177,11 +2177,11 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/openbot-vs-grokbot': {
-      id: '/news/openbot-vs-grokbot'
-      path: '/news/openbot-vs-grokbot'
-      fullPath: '/news/openbot-vs-grokbot'
-      preLoaderRoute: typeof NewsOpenbotVsGrokbotRouteImport
+    '/news/omnibot-vs-grokbot': {
+      id: '/news/omnibot-vs-grokbot'
+      path: '/news/omnibot-vs-grokbot'
+      fullPath: '/news/omnibot-vs-grokbot'
+      preLoaderRoute: typeof NewsOmnibotVsGrokbotRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/rss.xml': {
@@ -2261,11 +2261,11 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof DownloadPlatformLatestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/og/openbot-vs-grokbot.png': {
-      id: '/news/og/openbot-vs-grokbot.png'
-      path: '/news/og/openbot-vs-grokbot.png'
-      fullPath: '/news/og/openbot-vs-grokbot.png'
-      preLoaderRoute: typeof NewsOgOpenbotVsGrokbotDotpngRouteImport
+    '/news/og/omnibot-vs-grokbot.png': {
+      id: '/news/og/omnibot-vs-grokbot.png'
+      path: '/news/og/omnibot-vs-grokbot.png'
+      fullPath: '/news/og/omnibot-vs-grokbot.png'
+      preLoaderRoute: typeof NewsOgOmnibotVsGrokbotDotpngRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plugins/icon/$slug': {
@@ -3165,7 +3165,7 @@ const rootRouteChildren: RootRouteChildren = {
   HealthLiveRoute: HealthLiveRoute,
   HealthReadyRoute: HealthReadyRoute,
   NewsSlugRoute: NewsSlugRoute,
-  NewsOpenbotVsGrokbotRoute: NewsOpenbotVsGrokbotRoute,
+  NewsOmnibotVsGrokbotRoute: NewsOmnibotVsGrokbotRoute,
   NewsRssDotxmlRoute: NewsRssDotxmlRoute,
   PluginsSlugRoute: PluginsSlugRoute,
   ProvidersSlugRoute: ProvidersSlugRoute,
@@ -3181,7 +3181,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProvidersIndexRoute: ProvidersIndexRoute,
   ApiBrowserSplatRoute: ApiBrowserSplatRoute,
   DownloadPlatformLatestRoute: DownloadPlatformLatestRoute,
-  NewsOgOpenbotVsGrokbotDotpngRoute: NewsOgOpenbotVsGrokbotDotpngRoute,
+  NewsOgOmnibotVsGrokbotDotpngRoute: NewsOgOmnibotVsGrokbotDotpngRoute,
   PluginsIconSlugRoute: PluginsIconSlugRoute,
   V1AgentTemplatesTemplateIdRoute: V1AgentTemplatesTemplateIdRouteWithChildren,
   V1AgentTemplatesMineRoute: V1AgentTemplatesMineRoute,

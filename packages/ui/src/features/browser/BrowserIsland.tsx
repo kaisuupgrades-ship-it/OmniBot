@@ -1,10 +1,10 @@
-import type { BrowserDockIsland, RespondToBrowserSecretInput } from "@openbot/contracts/ipc";
-import { Button, LoaderCircle, MousePointer2, X } from "@openbot/ui";
-import type { ComposerAgent } from "@openbot/ui/data";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { BrowserSecretCard } from "@openbot/ui/features/conversation/BrowserSecretCard";
-import { RichMessageText } from "@openbot/ui/features/conversation/RichMessageText";
-import { useText } from "@openbot/ui/text";
+import type { BrowserDockIsland, RespondToBrowserSecretInput } from "@omnibot/contracts/ipc";
+import { Button, LoaderCircle, MousePointer2, X } from "@omnibot/ui";
+import type { ComposerAgent } from "@omnibot/ui/data";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { BrowserSecretCard } from "@omnibot/ui/features/conversation/BrowserSecretCard";
+import { RichMessageText } from "@omnibot/ui/features/conversation/RichMessageText";
+import { useText } from "@omnibot/ui/text";
 import { Match, Show, Switch } from "solid-js";
 
 /**

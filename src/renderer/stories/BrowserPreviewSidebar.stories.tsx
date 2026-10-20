@@ -3,7 +3,7 @@ import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import BrowserPreviewSidebar from "../src/features/conversation/BrowserPreviewSidebar";
 import browserPreviewUrl from "./assets/browser-takeover-preview.svg";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 const tabs = [
   {
@@ -42,15 +42,15 @@ const meta = {
   },
   decorators: [
     (Story) => {
-      const previous = window.openbot;
-      window.openbot = createMockOmniBot({
+      const previous = window.omnibot;
+      window.omnibot = createMockOmniBot({
         browserPreviews: {
           docs: { dataUrl: browserPreviewUrl, width: 960, height: 600 },
           settings: null,
         },
       }).api;
       onSettled(() => () => {
-        window.openbot = previous;
+        window.omnibot = previous;
       });
       return (
         <div style="--browser-panel-width: 320px">

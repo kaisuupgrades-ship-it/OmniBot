@@ -17,7 +17,7 @@ import { createHash, createHmac } from "node:crypto";
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
+import { createOmniBotLogger, registerSecretValue } from "@omnibot/logging";
 import { Schema } from "effect";
 import {
   CheckResult,
@@ -131,7 +131,7 @@ const WebhookEvent = Schema.Struct({
 type WebhookEvent = typeof WebhookEvent.Type;
 
 const Delivery = Schema.Struct({
-  /** The `x-openbot-delivery-id` header. The same for each try, so a receiver can drop a repeat. */
+  /** The `x-omnibot-delivery-id` header. The same for each try, so a receiver can drop a repeat. */
   id: Schema.String,
   subscription: Schema.String,
   event: WebhookEvent,
@@ -431,16 +431,16 @@ async function send(subscription: Subscription, delivery: Delivery): Promise<Out
   const timestamp = String(Math.floor(Date.now() / 1000));
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    "User-Agent": "openbot-status-webhook",
-    "x-openbot-event": delivery.event.type,
-    "x-openbot-delivery-id": delivery.id,
-    "x-openbot-timestamp": timestamp,
+    "User-Agent": "omnibot-status-webhook",
+    "x-omnibot-event": delivery.event.type,
+    "x-omnibot-delivery-id": delivery.id,
+    "x-omnibot-timestamp": timestamp,
   };
   if (subscription.secret) {
     const signature = createHmac("sha256", subscription.secret)
       .update(`${timestamp}.${delivery.id}.${body}`)
       .digest("hex");
-    headers["x-openbot-signature"] = `sha256=${signature}`;
+    headers["x-omnibot-signature"] = `sha256=${signature}`;
   }
   try {
     // A redirect is a failure: the request must not go to an address that is not in the secret.

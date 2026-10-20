@@ -13,9 +13,9 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { join } from "node:path";
-import type { ManagedRuntimeId } from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import type { ManagedRuntimeId } from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import type { AgentRuntimeLock } from "../../scripts/agent-runtime-lock";
 import {
@@ -83,7 +83,7 @@ export interface RuntimeSpec {
  * against a damaged or replaced install, not against a writer who can change the record as well:
  * the store is the user's, and anything that can write to it can already run as the user.
  */
-export const INSTALL_RECORD = "openbot-install.json";
+export const INSTALL_RECORD = "omnibot-install.json";
 
 /** Everything a staging step may use. `downloadSmallFile` is passed in so fetching stays private
  *  to the manager: a descriptor can ask for a checksummed LICENSE, and nothing else. */

@@ -1,4 +1,4 @@
-import type { AppLanguage } from "@openbot/i18n/languages";
+import type { AppLanguage } from "@omnibot/i18n/languages";
 import {
   Heading,
   Item,
@@ -8,8 +8,8 @@ import {
   ItemGroup,
   ItemTitle,
   SettingsSection,
-} from "@openbot/ui";
-import { LanguageSelect } from "@openbot/ui/features/settings/LanguageSelect";
+} from "@omnibot/ui";
+import { LanguageSelect } from "@omnibot/ui/features/settings/LanguageSelect";
 import { createSignal } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

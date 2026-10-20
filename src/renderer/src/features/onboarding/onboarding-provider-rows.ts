@@ -1,5 +1,5 @@
-import type { AgentProviderId } from "@openbot/contracts/ipc";
-import type { ProviderPickerOption } from "@openbot/ui/components/ProviderPicker";
+import type { AgentProviderId } from "@omnibot/contracts/ipc";
+import type { ProviderPickerOption } from "@omnibot/ui/components/ProviderPicker";
 
 /** The plan providers that most users have. They fill the plan rows that owned providers leave. */
 const POPULAR_PROVIDERS: readonly AgentProviderId[] = ["codex", "claude", "grok"];

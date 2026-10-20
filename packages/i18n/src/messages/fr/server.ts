@@ -459,7 +459,7 @@ export const messages = {
   "server.update.path.hosted":
     "Le service hébergé télécharge les mises à jour en arrière-plan. Une mise à jour téléchargée s’applique au prochain démarrage du serveur. Attendez la fin du travail en cours avant d’arrêter puis de reprendre le serveur. S’il reste sur une ancienne version, contactez l’administrateur de l’hôte.",
   "server.update.path.system":
-    "Sur l’hôte, exécutez sudo openbot update pour installer la dernière version. Cette commande arrête OmniBot. Attendez d’abord la fin du travail en cours. Les téléchargements automatiques s’installent au prochain démarrage.",
+    "Sur l’hôte, exécutez sudo omnibot update pour installer la dernière version. Cette commande arrête OmniBot. Attendez d’abord la fin du travail en cours. Les téléchargements automatiques s’installent au prochain démarrage.",
   "server.update.path.container":
     "Sur l’hôte Docker, récupérez la nouvelle image OmniBot et recréez le conteneur avec les mêmes volumes de données. Attendez d’abord la fin du travail en cours. Conservez les volumes existants pour préserver vos données.",
   "server.update.path.manual":

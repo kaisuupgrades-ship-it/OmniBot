@@ -1,8 +1,8 @@
-import { CHANNEL_CHATS_CAPABILITY } from "@openbot/contracts/ipc";
-import { ROUTINE_FLOWS_CAPABILITY } from "@openbot/contracts/team-protocol/routine-flows-v1";
+import { CHANNEL_CHATS_CAPABILITY } from "@omnibot/contracts/ipc";
+import { ROUTINE_FLOWS_CAPABILITY } from "@omnibot/contracts/team-protocol/routine-flows-v1";
 import type { WebRuntimeFactory } from "../features/web-client/web-client-context";
 import type { WebRuntimeEvents, WebWorkspaceRuntime } from "../features/web-client/web-runtime";
-import { createMockOmniBot, type MockOmniBotControls } from "./mock-openbot";
+import { createMockOmniBot, type MockOmniBotControls } from "./mock-omnibot";
 
 /** Use the desktop preview's data and actions for the browser composition too. */
 export const createMockWebRuntime: WebRuntimeFactory = (_accountId, events) =>

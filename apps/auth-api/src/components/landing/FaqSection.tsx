@@ -1,4 +1,4 @@
-import { AppLogo } from "@openbot/brand";
+import { AppLogo } from "@omnibot/brand";
 import { Link } from "@tanstack/solid-router";
 import { For } from "solid-js";
 import { COMPARE_COLLECTION } from "../../lib/compare";

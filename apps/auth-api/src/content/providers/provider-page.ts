@@ -29,7 +29,7 @@ export interface ProviderPage {
   answer: string;
   /** How OmniBot connects to the provider: the second setup step. */
   connect: string;
-  /** What OmniBot adds for this provider in particular, shown before `OPENBOT_ADDS`. */
+  /** What OmniBot adds for this provider in particular, shown before `OMNIBOT_ADDS`. */
   adds: readonly ProviderAdd[];
   /** The company that makes the provider, as in "{vendor}'s own apps". */
   vendor: string;
@@ -46,7 +46,7 @@ export interface ProviderPage {
  * What OmniBot adds to every provider. The claims are the same as on the compare
  * pages (`content/compare/claude-cowork.ts`), and come from the repository.
  */
-export const OPENBOT_ADDS: readonly ProviderAdd[] = [
+export const OMNIBOT_ADDS: readonly ProviderAdd[] = [
   {
     icon: "users",
     title: "A team, not one chat",

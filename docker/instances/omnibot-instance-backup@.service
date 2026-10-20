@@ -1,0 +1,10 @@
+# Backs up instance %i and verifies the backup. omnibot-instance-backup@%i.timer starts it. `setup`
+# replaces /opt/omnibot-docker/instances/ with the folder of omnibot-instance.
+[Unit]
+Description=Back up OmniBot instance %i
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/omnibot-docker/instances/omnibot-instance backup %i --verify
+TimeoutStartSec=6h

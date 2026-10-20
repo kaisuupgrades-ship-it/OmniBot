@@ -13,9 +13,9 @@ import {
   avatarMoodIsBusy,
   avatarMoodPresentation,
   type ShapeSafeStateId,
-} from "@openbot/brand/bloub-avatar-motion";
-import type { AvatarHue } from "@openbot/contracts/ipc";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+} from "@omnibot/brand/bloub-avatar-motion";
+import type { AvatarHue } from "@omnibot/contracts/ipc";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createMemo, createSignal, createUniqueId, For, onSettled, Show } from "solid-js";
 import { type AvatarMotion, bloubAvatarProfile, type SupportedAvatarSilhouetteId } from "../../bloub-avatar";

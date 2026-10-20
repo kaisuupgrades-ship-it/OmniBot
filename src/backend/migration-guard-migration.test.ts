@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: a migration commits a database with a broken foreign key; a failed migration leaves foreign-key
 // enforcement off; a history with a gap at any version runs the migrations after the gap.
@@ -35,14 +35,14 @@ function seedOrphans(db: DatabaseSync): void {
   db.exec(`
     INSERT INTO projection_thread_messages (thread_id, message_id, turn_id, author, status, item_type, created_at,
       ordinal, message_json, last_event_sequence)
-    VALUES ('openbot-thread-gone', 'message-1', NULL, 'user', 'completed', NULL, '2026-10-01T10:00:00.000Z', 0,
+    VALUES ('omnibot-thread-gone', 'message-1', NULL, 'user', 'completed', NULL, '2026-10-01T10:00:00.000Z', 0,
       '{"id":"message-1","text":"Still here."}', 1);
     INSERT INTO projection_threads
       (thread_id, agent_id, title, active_turn_id, created_at, updated_at, last_event_sequence)
-    VALUES ('openbot-thread-chief', 'chief', 'Chief', NULL, '2026-10-01T09:00:00.000Z', '2026-10-01T09:00:00.000Z', 1);
+    VALUES ('omnibot-thread-chief', 'chief', 'Chief', NULL, '2026-10-01T09:00:00.000Z', '2026-10-01T09:00:00.000Z', 1);
     INSERT INTO projection_turns
       (turn_id, thread_id, provider_session_id, status, started_at, completed_at, last_event_sequence)
-    VALUES ('turn-1', 'openbot-thread-chief', 'session-gone', 'completed', '2026-10-01T09:00:00.000Z', NULL, 1);`);
+    VALUES ('turn-1', 'omnibot-thread-chief', 'session-gone', 'completed', '2026-10-01T09:00:00.000Z', NULL, 1);`);
   db.exec("PRAGMA foreign_keys = ON");
 }
 

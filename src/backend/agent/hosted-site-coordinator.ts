@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentApproval,
   AgentApprovalPermissions,
@@ -11,14 +11,14 @@ import type {
   HostedSiteList,
   HostedSiteSummary,
   PublishHostedSiteInput,
-} from "@openbot/contracts/ipc";
-import { hostedSiteConversationEventItemType, hostedSiteConversationEventText } from "@openbot/contracts/ipc";
-import { isBoolean } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc";
+import { hostedSiteConversationEventItemType, hostedSiteConversationEventText } from "@omnibot/contracts/ipc";
+import { isBoolean } from "@omnibot/contracts/runtime-values";
 import { Effect, Result, Schema } from "effect";
 import type { AgentClient } from "../agent-client";
 import type { AgentStore } from "../agent-store";
 import { causeHelpers } from "../effect-boundary";
-import type { PendingHostedSiteTerminalEvent } from "../openbot-database";
+import type { PendingHostedSiteTerminalEvent } from "../omnibot-database";
 import { type AppServerRequest, type DynamicToolCallParams, isRecord, type RequestId } from "../protocol";
 import type { ConversationRuntime } from "./conversation-runtime";
 import {
@@ -29,7 +29,7 @@ import {
   hostedSiteEventMessageId,
   hostedSiteTool,
 } from "./hosted-site-events";
-import { type OmniBotToolResponse, openBotToolResult, siteToolString } from "./routine-tools";
+import { type OmniBotToolResponse, omniBotToolResult, siteToolString } from "./routine-tools";
 
 /** The omnibot-sites.example.com host, injected so the backend never depends on the account Worker directly. */
 export interface AgentHostedSites {
@@ -84,7 +84,7 @@ interface HostedSiteMutationResult {
   eventDetails: HostedSiteConversationEventDetails;
 }
 
-export const HOSTED_SITE_APPROVAL_METHOD = "openbot/hosted-site-mutation";
+export const HOSTED_SITE_APPROVAL_METHOD = "omnibot/hosted-site-mutation";
 
 /**
  * Owns publishing to omnibot-sites.example.com: the approval a mutation needs, the mutation itself, and the
@@ -304,7 +304,7 @@ export class HostedSiteCoordinator {
       const siteId = yield* siteStep(() => siteToolString(args.siteId, "siteId", INPUT_LIMITS.identifier));
       const host = yield* siteStep(() => this.#requireHostedSites());
       yield* host.delete(siteId);
-      return { response: openBotToolResult({ deleted: true, siteId }), eventDetails: context.eventDetails };
+      return { response: omniBotToolResult({ deleted: true, siteId }), eventDetails: context.eventDetails };
     }
 
     const sourcePath = yield* siteStep(() => siteToolString(args.sourcePath, "sourcePath", INPUT_LIMITS.path));
@@ -327,7 +327,7 @@ export class HostedSiteCoordinator {
         : yield* siteStep(() => siteToolString(args.siteId, "siteId", INPUT_LIMITS.identifier));
     const host = yield* siteStep(() => this.#requireHostedSites());
     const site = siteId ? yield* host.replace({ ...input, siteId }, roots) : yield* host.publish(input, roots);
-    return { response: openBotToolResult(site), eventDetails: hostedSiteEventDetails(site, siteId) };
+    return { response: omniBotToolResult(site), eventDetails: hostedSiteEventDetails(site, siteId) };
   });
 
   #recordEvent(
@@ -411,7 +411,7 @@ export class HostedSiteCoordinator {
           threadId: event.threadId,
           turnId: event.turnId,
           callId: event.operationId,
-          namespace: "openbot",
+          namespace: "omnibot",
           tool: hostedSiteTool(event.action),
           arguments: {},
         },
@@ -511,7 +511,7 @@ export class HostedSiteCoordinator {
           threadId,
           turnId: turnId ?? `hosted-site-${event.operationId}`,
           callId: event.operationId,
-          namespace: "openbot",
+          namespace: "omnibot",
           tool: hostedSiteTool(event.action),
           arguments: {},
         },

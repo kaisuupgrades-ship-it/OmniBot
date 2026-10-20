@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { agentProviderDescriptor } from "@omnibot/contracts/agent-providers";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_TASK_QUEUED_PREVIEW,
   type AgentEvent,
@@ -10,14 +10,14 @@ import {
   type AgentTasksSnapshot,
   agentTaskLimit,
   type ConversationSnapshot,
-} from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect } from "effect";
 import { z } from "zod";
 import type { ConversationRuntime } from "../agent/conversation-runtime";
 import type { TaskLanes } from "../agent/drain-scheduler";
-import { type OmniBotToolResponse, openBotToolFailure, openBotToolResult } from "../agent/routine-tools";
+import { type OmniBotToolResponse, omniBotToolFailure, omniBotToolResult } from "../agent/routine-tools";
 import type { MailboxStore } from "../mailbox-store";
 import type { DynamicToolCallParams } from "../protocol";
 import type { AgentTaskOrigin, AgentTaskRecord, AgentTaskStore } from "./agent-task-store";
@@ -232,8 +232,8 @@ export class AgentTasks implements TaskLanes {
   ): Effect.fn.Return<OmniBotToolResponse | null> {
     if (params.tool !== START_TASK_TOOL) return null;
     const parsed = startTaskToolSchema.safeParse(params.arguments);
-    if (!parsed.success) return openBotToolFailure(sourceText("error.backend.taskToolInvalid"));
-    if (caller.inExecutionThread) return openBotToolFailure(sourceText("error.backend.taskOwnChatOnly"));
+    if (!parsed.success) return omniBotToolFailure(sourceText("error.backend.taskToolInvalid"));
+    if (caller.inExecutionThread) return omniBotToolFailure(sourceText("error.backend.taskOwnChatOnly"));
     const idempotencyKey = `start-task:${createHash("sha256")
       .update(JSON.stringify([caller.agentId, params.turnId, params.callId]))
       .digest("hex")}`;
@@ -243,7 +243,7 @@ export class AgentTasks implements TaskLanes {
     if (startedTask) return startedTaskResult(startedTask);
     const open = this.#store.openTaskIds(caller.agentId).length;
     if (open >= AGENT_STARTED_OPEN_TASKS)
-      return openBotToolFailure(sourceText("error.backend.taskOpenLimit", { count: AGENT_STARTED_OPEN_TASKS }));
+      return omniBotToolFailure(sourceText("error.backend.taskOpenLimit", { count: AGENT_STARTED_OPEN_TASKS }));
     const task = this.create(caller.agentId, parsed.data.title, "agent");
     const queued = yield* this.#mailbox
       .enqueue({
@@ -265,7 +265,7 @@ export class AgentTasks implements TaskLanes {
       );
     if (!queued) {
       this.discard(task);
-      return openBotToolFailure(sourceText("error.backend.taskStartFailed"));
+      return omniBotToolFailure(sourceText("error.backend.taskStartFailed"));
     }
     this.changed(caller.agentId);
     this.#hooks.queued(caller.agentId);
@@ -372,7 +372,7 @@ export class AgentTasks implements TaskLanes {
 }
 
 function startedTaskResult(task: AgentTaskRecord): OmniBotToolResponse {
-  return openBotToolResult({
+  return omniBotToolResult({
     taskId: task.taskId,
     title: task.title,
     note: "The task runs in its own conversation beside this chat, and the user follows it in the task list. Its result stays in the task: you do not receive it here. Tell the user in one sentence that the task started, and continue with other work or end your turn.",

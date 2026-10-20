@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: calc(var(--left-header-height, 38px) + var(--openbot-space-1)) 0 var(--openbot-space-3);
+  padding: calc(var(--left-header-height, 38px) + var(--omnibot-space-1)) 0 var(--omnibot-space-3);
   -webkit-app-region: drag;
 }
 
@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--openbot-space-1-5);
+  gap: var(--omnibot-space-1-5);
   /* The window swallows mouse events over a drag area. With the gaps between the buttons in the
    * drag area, the pointer left the group between two buttons, and the tooltip closed instead of
    * moving to the next button. */
@@ -25,15 +25,15 @@
 .window-rail-button {
   position: relative;
   display: flex;
-  width: var(--openbot-control-lg);
-  height: var(--openbot-control-lg);
+  width: var(--omnibot-control-lg);
+  height: var(--omnibot-control-lg);
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: var(--openbot-radius-lg);
+  border-radius: var(--omnibot-radius-lg);
   background: transparent;
   padding: 0;
-  color: var(--openbot-text-muted);
+  color: var(--omnibot-text-muted);
   font: inherit;
   cursor: pointer;
   -webkit-app-region: no-drag;
@@ -41,36 +41,36 @@
 
 @media (hover: hover) and (pointer: fine) {
   .window-rail-button:hover {
-    background: var(--openbot-bg-control-hover);
-    color: var(--openbot-text-primary);
+    background: var(--omnibot-bg-control-hover);
+    color: var(--omnibot-text-primary);
   }
 }
 
 .window-rail-button[aria-current="page"],
 .window-rail-button[aria-current="page"]:hover:not(:disabled):not([data-disabled]) {
-  background: var(--openbot-bg-control-active);
-  color: var(--openbot-text-primary);
+  background: var(--omnibot-bg-control-active);
+  color: var(--omnibot-text-primary);
 }
 
 .window-rail-button:focus-visible {
   outline: 0;
-  box-shadow: var(--openbot-focus-ring);
+  box-shadow: var(--omnibot-focus-ring);
 }
 
 .window-rail-button svg {
-  width: var(--openbot-icon-lg);
-  height: var(--openbot-icon-lg);
+  width: var(--omnibot-icon-lg);
+  height: var(--omnibot-icon-lg);
 }
 
 /* The dot of a rail button that has a notice, such as an update. */
 .window-rail-notice {
   position: absolute;
-  top: var(--openbot-space-1-5);
-  right: var(--openbot-space-1-5);
-  width: var(--openbot-space-2);
-  height: var(--openbot-space-2);
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-badge-new);
+  top: var(--omnibot-space-1-5);
+  right: var(--omnibot-space-1-5);
+  width: var(--omnibot-space-2);
+  height: var(--omnibot-space-2);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-badge-new);
 }
 
 /* The hover card of a usage ring shows the limits only. The usage page has the refresh. */
@@ -88,7 +88,7 @@
 /* Usage rings: the provider logo inside one ring per limit window. The hover fill is a circle around
  * the rings. */
 .window-rail-button.window-rail-usage {
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--omnibot-radius-pill);
 }
 
 .window-rail-button .window-rail-usage-ring {
@@ -100,10 +100,10 @@
 }
 
 .window-rail-button .window-rail-usage-logo {
-  width: var(--openbot-icon-xs);
-  height: var(--openbot-icon-xs);
+  width: var(--omnibot-icon-xs);
+  height: var(--omnibot-icon-xs);
   overflow: visible;
-  fill: var(--openbot-provider-current);
+  fill: var(--omnibot-provider-current);
 }
 
 .window-rail-usage-track {
@@ -112,13 +112,13 @@
 }
 
 .window-rail-usage-arc {
-  stroke: var(--openbot-success);
+  stroke: var(--omnibot-success);
 }
 
 .window-rail-usage-arc[data-usage-tone="warning"] {
-  stroke: var(--openbot-warning);
+  stroke: var(--omnibot-warning);
 }
 
 .window-rail-usage-arc[data-usage-tone="critical"] {
-  stroke: var(--openbot-danger);
+  stroke: var(--omnibot-danger);
 }

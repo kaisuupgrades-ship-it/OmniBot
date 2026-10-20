@@ -1,5 +1,5 @@
-import type { ConversationSnapshot } from "@openbot/contracts/ipc";
-import { runTeamEffect } from "@openbot/team-client";
+import type { ConversationSnapshot } from "@omnibot/contracts/ipc";
+import { runTeamEffect } from "@omnibot/team-client";
 import {
   agentTaskControl,
   listAgentTasks,
@@ -8,12 +8,12 @@ import {
   startAgentTask,
   type TeamApiRequest,
   type TeamRequestError,
-} from "@openbot/team-client/team-api-requests";
+} from "@omnibot/team-client/team-api-requests";
 import { Effect } from "effect";
 import { isTaskEvent, type TasksSource } from "../tasks/tasks-port";
 import type { WebWorkspace } from "./web-client-context";
 
-/** The host names attachment previews with the desktop `openbot-attachment:` scheme, which a browser cannot load. */
+/** The host names attachment previews with the desktop `omnibot-attachment:` scheme, which a browser cannot load. */
 function withoutPreviewUrls(snapshot: ConversationSnapshot): ConversationSnapshot {
   return {
     ...snapshot,

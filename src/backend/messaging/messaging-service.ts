@@ -1,8 +1,8 @@
 import { randomBytes, randomUUID } from "node:crypto";
 import { mkdir, rm } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { DISCORD_ORCHESTRATOR_AVATAR } from "@openbot/contracts/discord-app";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { DISCORD_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/discord-app";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AddMessagingOrchestratorInput,
   AddTelegramOrchestratorInput,
@@ -22,14 +22,14 @@ import type {
   SetDiscordAccessInput,
   SidebarLayoutSnapshot,
   SidebarSection,
-} from "@openbot/contracts/ipc";
-import { MESSAGING_CONNECTION_STATES, MESSAGING_LIMITS } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isOneOf, isString } from "@openbot/contracts/runtime-values";
-import { TELEGRAM_LINK_CODE_TTL_SECONDS } from "@openbot/contracts/signal-protocol/telegram-route";
-import { SLACK_ORCHESTRATOR_AVATAR } from "@openbot/contracts/slack-app";
-import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@openbot/contracts/telegram-app";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, redactText } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { MESSAGING_CONNECTION_STATES, MESSAGING_LIMITS } from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isOneOf, isString } from "@omnibot/contracts/runtime-values";
+import { TELEGRAM_LINK_CODE_TTL_SECONDS } from "@omnibot/contracts/signal-protocol/telegram-route";
+import { SLACK_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/slack-app";
+import { TELEGRAM_ORCHESTRATOR_AVATAR } from "@omnibot/contracts/telegram-app";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, redactText } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Result, Schema, Scope } from "effect";
 import type { AgentLifecycleFailed } from "../agent-service";
 import { causeHelpers } from "../effect-boundary";
@@ -1874,7 +1874,7 @@ function refusal(failure: MessagingAdapterError): string {
     cause instanceof SlackApiError || cause instanceof DiscordApiError || cause instanceof TelegramCallError
       ? cause.code
       : "no_answer";
-  return `The platform refused the call: ${code}. Check the connection and place ids with openbot.messaging_list_places.`;
+  return `The platform refused the call: ${code}. Check the connection and place ids with omnibot.messaging_list_places.`;
 }
 
 /**

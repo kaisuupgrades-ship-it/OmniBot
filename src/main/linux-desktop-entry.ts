@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect, Schema } from "effect";
 import { causeHelpers } from "../backend/effect-boundary";
 
@@ -13,8 +13,8 @@ const logger = createOmniBotLogger("linux-desktop-entry");
  * into `StartupWMClass` so a window groups with this entry.
  */
 const DESKTOP_FILE_NAME = "omnibot.desktop";
-const ICON_FILE_NAME = "openbot.png";
-const WM_CLASS = "openbot";
+const ICON_FILE_NAME = "omnibot.png";
+const WM_CLASS = "omnibot";
 
 /**
  * The desktop entry that makes an `omnibot://` link reach the app.

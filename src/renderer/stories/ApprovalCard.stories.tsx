@@ -1,5 +1,5 @@
-import type { AgentApproval } from "@openbot/contracts/ipc";
-import { ApprovalCard } from "@openbot/ui/features/conversation/ConversationPrompts";
+import type { AgentApproval } from "@omnibot/contracts/ipc";
+import { ApprovalCard } from "@omnibot/ui/features/conversation/ConversationPrompts";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 

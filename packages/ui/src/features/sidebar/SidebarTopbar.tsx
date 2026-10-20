@@ -1,6 +1,6 @@
 /** The server name, its update, the marketplace or expand toggle, and new agent - plus the window drag region. */
 
-import { Bot, Button, CircleFadingArrowUp, DropdownMenu, FolderPlus, Hash, Puzzle } from "@openbot/ui";
+import { Bot, Button, CircleFadingArrowUp, DropdownMenu, FolderPlus, Hash, Puzzle } from "@omnibot/ui";
 import { Show } from "solid-js";
 import { useText } from "../../text";
 import { ServerMenu } from "../servers/ServerMenu";

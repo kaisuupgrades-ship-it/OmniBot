@@ -1,6 +1,6 @@
-import type { FirstTouch } from "@openbot/contracts/first-touch";
-import type { MobileConnectHostBinding } from "@openbot/contracts/mobile-connect";
-import { isString } from "@openbot/contracts/runtime-values";
+import type { FirstTouch } from "@omnibot/contracts/first-touch";
+import type { MobileConnectHostBinding } from "@omnibot/contracts/mobile-connect";
+import { isString } from "@omnibot/contracts/runtime-values";
 import {
   isUuidV4,
   normalizeEmailAddress,
@@ -8,7 +8,7 @@ import {
   ONE_TIME_CODE_ALPHABET,
   ONE_TIME_CODE_LENGTH,
   validateProfileName,
-} from "@openbot/contracts/validation";
+} from "@omnibot/contracts/validation";
 import { Context, Effect, Layer, Result, Schema } from "effect";
 import { type AccountAnalytics, type AccountSurface, NO_ACCOUNT_ANALYTICS } from "./account-analytics";
 import type { AccountAttribution } from "./account-attribution";
@@ -80,7 +80,7 @@ class AuthDependencies extends Context.Service<
     analytics: AccountAnalytics;
     attribution: AccountAttribution | null;
   }
->()("@openbot/auth-api/AuthDependencies") {}
+>()("@omnibot/auth-api/AuthDependencies") {}
 
 export class AuthService {
   readonly #layer: Layer.Layer<AuthDependencies>;

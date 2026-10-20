@@ -1,4 +1,4 @@
-import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@openbot/contracts/chat-visual";
+import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@omnibot/contracts/chat-visual";
 import {
   AGENT_RUNTIME_PERMISSION_PATHS_LIMIT,
   AGENT_RUNTIME_QUESTION_DESCRIPTION_LIMIT,
@@ -12,9 +12,9 @@ import {
   CONVERSATION_PLAN_ITEM_TYPE,
   CONVERSATION_SUBAGENTS_ITEM_TYPE,
   ROUTINE_QUIET_ANSWER_ITEM_TYPE,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import type { MailboxStore } from "../mailbox-store";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 import type { AttentionRegistry } from "./attention-registry";
 import type { ConversationRuntime } from "./conversation-runtime";
 import type { TurnLifecycle } from "./turn-lifecycle";

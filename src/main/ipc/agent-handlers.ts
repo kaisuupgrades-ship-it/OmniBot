@@ -1,8 +1,8 @@
-import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@openbot/contracts/team-protocol/agent-hidden-v1";
+import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@omnibot/contracts/team-protocol/agent-hidden-v1";
 import {
   AGENT_SESSION_SETTINGS_CAPABILITY,
   AGENT_SESSION_SETTINGS_ROUTES,
-} from "@openbot/contracts/team-protocol/agent-session-settings-v1";
+} from "@omnibot/contracts/team-protocol/agent-session-settings-v1";
 // An agent's core surface: status, agents, conversations, the queue and the prompts
 // a turn can raise. Memories, routines and attachments are their own registrars.
 // Every one of these routes to the local service or to a remote server by the
@@ -34,23 +34,23 @@ import {
   parseSaveAgentProfile,
   parseSetAgentHiddenInput,
   parseSetAgentSessionSetting,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@openbot/contracts/team-protocol/agent-tasks-v1";
-import { CHANNEL_ROUTES } from "@openbot/contracts/team-protocol/channels-v1";
-import { CONTEXT_RESET_CAPABILITY, CONTEXT_RESET_ROUTES } from "@openbot/contracts/team-protocol/context-reset-v1";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { AGENT_TASKS_CAPABILITY, AGENT_TASKS_ROUTES } from "@omnibot/contracts/team-protocol/agent-tasks-v1";
+import { CHANNEL_ROUTES } from "@omnibot/contracts/team-protocol/channels-v1";
+import { CONTEXT_RESET_CAPABILITY, CONTEXT_RESET_ROUTES } from "@omnibot/contracts/team-protocol/context-reset-v1";
 import {
   PROVIDER_ACCOUNTS_CAPABILITY,
   PROVIDER_ACCOUNTS_ROUTES,
-} from "@openbot/contracts/team-protocol/provider-accounts-v1";
+} from "@omnibot/contracts/team-protocol/provider-accounts-v1";
 import {
   decodeSideQuestionResponse,
   SIDE_QUESTION_CAPABILITY,
   SIDE_QUESTION_ROUTES,
-} from "@openbot/contracts/team-protocol/side-question-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/team-protocol/side-question-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { duplicateAgentIntoLayout } from "../../backend/agent/duplication-gate";
 import type { AgentService } from "../../backend/agent-service";
 import { runCauseEffect } from "../../backend/effect-boundary";

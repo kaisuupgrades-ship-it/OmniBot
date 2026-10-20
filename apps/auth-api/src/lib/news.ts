@@ -8,7 +8,7 @@
 
 import { type ContentCollection, publishedFirst } from "./content-collection";
 
-export const NEWS_AUTHOR = "Norbert Bodziony";
+export const NEWS_AUTHOR = "OmniBot";
 
 export const NEWS_COLLECTION: ContentCollection<"news"> = {
   id: "news",
@@ -21,10 +21,10 @@ export const NEWS_COLLECTION: ContentCollection<"news"> = {
   feedTitle: "OmniBot news",
   backLabel: "All news",
   moreTitle: "More from OmniBot",
-  imageEyebrow: "OPENBOT · NEWS",
+  imageEyebrow: "OMNIBOT · NEWS",
   articles: publishedFirst([
     {
-      slug: "introducing-openbot",
+      slug: "introducing-omnibot",
       title: "Introducing OmniBot: A Shared Workspace for AI Agents",
       description:
         "Meet OmniBot, a local-first workspace where the AI models you already use can work as a team of agents, alongside you and your coworkers.",

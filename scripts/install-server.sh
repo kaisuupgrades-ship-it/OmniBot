@@ -5,7 +5,7 @@
 #
 # Options (after `sudo bash -s --`):
 #   --user <name>             The user that runs OmniBot and its agents. Default: the user of the
-#                             installed server, else openbot, which the install makes when it does
+#                             installed server, else omnibot, which the install makes when it does
 #                             not exist.
 #   --auth-api-url <origin>   Another account server, for development. Default: the one of the
 #                             installed server, else the one in the build.
@@ -14,7 +14,7 @@
 #
 # This file only downloads the latest release and checks it against the release manifest, the
 # manifest that the Linux desktop updater reads. The install steps come from that release
-# (resources/hosting/openbot-server-setup), so they always match the build that they install.
+# (resources/hosting/omnibot-server-setup), so they always match the build that they install.
 # See docs/self-hosted-server.md.
 set -euo pipefail
 export LC_ALL=C DEBIAN_FRONTEND=noninteractive
@@ -80,7 +80,7 @@ if [ "${#missing[@]}" -gt 0 ]; then
   apt-get -o DPkg::Lock::Timeout=600 install -y --no-install-recommends ca-certificates "${missing[@]}"
 fi
 
-work=$(mktemp -d /var/tmp/openbot-install.XXXXXX)
+work=$(mktemp -d /var/tmp/omnibot-install.XXXXXX)
 trap 'rm -rf "$work"' EXIT
 manifest=$(fetch "$RELEASES/latest/download/$manifest")
 version=$(sed -n 's/^version: *//p' <<<"$manifest" | head -n 1)
@@ -97,10 +97,10 @@ fetch --output "$work/OmniBot.AppImage" "$RELEASES/download/v$version/$path"
 chmod 0700 "$work/OmniBot.AppImage"
 (cd "$work" && ./OmniBot.AppImage --appimage-extract >/dev/null)
 
-setup="$work/squashfs-root/resources/hosting/openbot-server-setup"
+setup="$work/squashfs-root/resources/hosting/omnibot-server-setup"
 [ -f "$setup" ] || fail "OmniBot $version cannot install as a server. Try again after the next release."
 # A release before --display-size refuses a fourth argument.
-if [ -n "$display_size" ] && ! grep -q OPENBOT_DISPLAY_SIZE "$setup"; then
+if [ -n "$display_size" ] && ! grep -q OMNIBOT_DISPLAY_SIZE "$setup"; then
   fail "OmniBot $version has no --display-size. Install without it, or try again after the next release."
 fi
 bash "$setup" "$service_user" "$work/squashfs-root" "$auth_api_url" ${display_size:+"$display_size"}
@@ -109,7 +109,7 @@ cat <<'EOF'
 
 Next, sign in with your OmniBot account:
 
-  sudo openbot login
+  sudo omnibot login
 
-Other commands: openbot status, openbot logs, sudo openbot update. Run "openbot help" for all.
+Other commands: omnibot status, omnibot logs, sudo omnibot update. Run "omnibot help" for all.
 EOF

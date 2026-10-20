@@ -3,7 +3,7 @@
  * the dirty check, and the badge text and variant.
  *
  * The types and the rules the main process also applies - validation, normalization, the id - live
- * in `@openbot/contracts/ipc` so that a saved row can never hold something the form never previewed.
+ * in `@omnibot/contracts/ipc` so that a saved row can never hold something the form never previewed.
  */
 
 import {
@@ -12,16 +12,16 @@ import {
   type McpSignInState,
   normalizeMcpConfig,
   type ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import { type AppTextKey, type AppTranslate, matchingSourceKeys } from "@openbot/i18n";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { type AppTextKey, type AppTranslate, matchingSourceKeys } from "@omnibot/i18n";
+import { currentText } from "@omnibot/ui/text";
 
 export type {
   McpServerConfig,
   McpSignInState,
   McpTestResult,
-} from "@openbot/contracts/ipc";
-export { mcpConfigErrors, mcpConfigIsValid, normalizeMcpConfig } from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
+export { mcpConfigErrors, mcpConfigIsValid, normalizeMcpConfig } from "@omnibot/contracts/ipc";
 
 /** The badge variants this panel uses, narrowed from the shared `Badge` set. */
 export type McpStatusVariant = "success-light" | "destructive-light" | "warning-light" | "secondary";

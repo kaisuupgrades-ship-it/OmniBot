@@ -9,9 +9,9 @@ import {
   eventFilterDraft,
   eventFilterDraftsValid,
   eventFiltersFromDrafts,
-} from "@openbot/contracts/event-filter-value";
-import type { EventFilter } from "@openbot/contracts/ipc-events";
-import { Button } from "@openbot/ui";
+} from "@omnibot/contracts/event-filter-value";
+import type { EventFilter } from "@omnibot/contracts/ipc-events";
+import { Button } from "@omnibot/ui";
 import { createSignal, Show } from "solid-js";
 import { useText } from "../../text";
 import { RoutineWebhookTrigger } from "../conversation/RoutineWebhookTrigger";

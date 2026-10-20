@@ -105,10 +105,10 @@ export interface ServerSummary {
 export type HostedServerIssue = "plan_ended" | "wake_failed" | "start_timeout";
 
 /**
- * `machine`: the provider starts the machine. `openbot`: the machine runs and OmniBot on it starts.
+ * `machine`: the provider starts the machine. `omnibot`: the machine runs and OmniBot on it starts.
  * `provider_limit`: the provider refused the start for a short time, and the account server tries again.
  */
-export type HostedServerStartStep = "machine" | "openbot" | "provider_limit";
+export type HostedServerStartStep = "machine" | "omnibot" | "provider_limit";
 
 export interface HostedServerStart {
   step: HostedServerStartStep;

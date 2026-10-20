@@ -5,11 +5,11 @@ import type {
   AvatarImageInput,
   HiddenAgent,
   UpdateAgentInput,
-} from "@openbot/contracts/ipc";
-import { PROVIDER_ACCOUNTS_CAPABILITY } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import type { AgentProfile } from "@openbot/ui/data";
-import { createFirstAgentDraft, type FirstAgentDraft } from "@openbot/ui/features/agents/FirstAgentSetup";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { PROVIDER_ACCOUNTS_CAPABILITY } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { createFirstAgentDraft, type FirstAgentDraft } from "@omnibot/ui/features/agents/FirstAgentSetup";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 import { desktopAnalytics } from "../../analytics";
 import { FALLBACK_STATUS } from "../../app-defaults";

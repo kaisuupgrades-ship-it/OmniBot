@@ -1,4 +1,4 @@
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
 import type {
   AgentEvent,
   AgentSummary,
@@ -6,11 +6,11 @@ import type {
   ConversationSnapshot,
   QueueHold,
   QueueSnapshot,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { Effect, type Scope } from "effect";
 import { isMailboxMessageCopy } from "../conversation-snapshots";
 import type { MailboxStore } from "../mailbox-store";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 import type { ConversationRuntime } from "./conversation-runtime";
 import { conversationContentSignature } from "./delivery-content";
 import type { RoutineScheduler } from "./routine-scheduler";

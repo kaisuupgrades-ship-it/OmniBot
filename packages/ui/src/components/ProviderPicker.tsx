@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
+import { ProviderLogo } from "@omnibot/brand";
+import { agentProviderDescriptor } from "@omnibot/contracts/agent-providers";
 import type {
   AgentProviderId,
   AgentProviderState,
@@ -7,8 +7,8 @@ import type {
   ProviderApiKeyStatus,
   ProviderRuntimePhase,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
-import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@openbot/i18n";
+} from "@omnibot/contracts/ipc";
+import type { AppFormat, AppMessages, AppTextKey, AppTranslate } from "@omnibot/i18n";
 import {
   Badge,
   Button,
@@ -26,7 +26,7 @@ import {
   Switch,
   UserRoundPlus,
   X,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createEffect, createSignal, createStore, createUniqueId, For, Show } from "solid-js";
 import { providerUpdateAvailable, providerVersionLabel } from "../features/provider-updates/provider-update";

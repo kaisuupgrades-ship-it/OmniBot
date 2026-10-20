@@ -19,7 +19,7 @@ WORKDIR /tmp
 RUN chmod 0700 OmniBot.AppImage \
   && ./OmniBot.AppImage --appimage-extract >/dev/null \
   && chmod -R u+rwX,go=rX squashfs-root \
-  && test -x squashfs-root/resources/hosting/openbot-container
+  && test -x squashfs-root/resources/hosting/omnibot-container
 
 FROM ${BASE}
 ARG DEBIAN_FRONTEND=noninteractive
@@ -35,17 +35,17 @@ RUN apt-get update \
 # Not root. The image of Ubuntu has the user ubuntu with the UID 1000, which OmniBot takes. The home
 # folder is the data volume.
 RUN userdel --remove ubuntu \
-  && useradd --uid 1000 --user-group --home-dir /data --create-home --shell /bin/bash openbot \
-  && install -d -o openbot -g openbot -m 0700 /run/openbot
+  && useradd --uid 1000 --user-group --home-dir /data --create-home --shell /bin/bash omnibot \
+  && install -d -o omnibot -g omnibot -m 0700 /run/omnibot
 # Mount points of the update folders that docker/instances/compose.yaml gives an instance. Its root
 # file system is read-only. With no folders mounted, OmniBot offers no update.
-RUN install -d -m 0755 /var/lib/openbot-update/requests /var/lib/openbot-update/status
+RUN install -d -m 0755 /var/lib/omnibot-update/requests /var/lib/omnibot-update/status
 # Root owns the release, so the user and its agents cannot change it. chrome-sandbox has no SUID bit:
 # the sandbox uses user namespaces, which the seccomp profile in docker/ permits.
 COPY --from=release /tmp/squashfs-root /opt/OmniBot/app
 RUN install -d -m 0755 /opt/OmniBot/hosted \
   && printf 'container\n' >/opt/OmniBot/hosted/mode \
-  && ln -s /opt/OmniBot/app/resources/hosting/openbot /usr/local/bin/openbot
+  && ln -s /opt/OmniBot/app/resources/hosting/omnibot /usr/local/bin/omnibot
 
 ARG VERSION=unknown
 ARG REVISION=unknown
@@ -55,9 +55,9 @@ LABEL org.opencontainers.image.title=OmniBot \
   org.opencontainers.image.licenses=PolyForm-Noncommercial-1.0.0 \
   org.opencontainers.image.version=${VERSION} \
   org.opencontainers.image.revision=${REVISION}
-ENV LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/openbot
-USER openbot
+ENV LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/omnibot
+USER omnibot
 WORKDIR /data
 VOLUME /data
 STOPSIGNAL SIGTERM
-ENTRYPOINT ["/usr/bin/tini", "--", "/opt/OmniBot/app/resources/hosting/openbot-container"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/opt/OmniBot/app/resources/hosting/omnibot-container"]

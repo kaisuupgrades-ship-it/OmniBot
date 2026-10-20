@@ -1,9 +1,9 @@
-import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { computeAgentAvatarMoods } from "@openbot/ui/features/agents/agent-avatar-mood";
-import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
-import { SidebarMobileAppCard } from "@openbot/ui/features/sidebar/SidebarMobileAppCard";
-import { computeSidebarAgentStates } from "@openbot/ui/features/sidebar/sidebar-agent-states";
-import { useText } from "@openbot/ui/text";
+import { AGENT_HIDDEN_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { computeAgentAvatarMoods } from "@omnibot/ui/features/agents/agent-avatar-mood";
+import { Sidebar } from "@omnibot/ui/features/sidebar/Sidebar";
+import { SidebarMobileAppCard } from "@omnibot/ui/features/sidebar/SidebarMobileAppCard";
+import { computeSidebarAgentStates } from "@omnibot/ui/features/sidebar/sidebar-agent-states";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, Show } from "solid-js";
 import { useLayout } from "../../layout";
 import { DirectConversation } from "../../lazy-views";
@@ -27,7 +27,7 @@ import { useSidebar } from "./sidebar-context";
 
 /** Dismissing the mobile app card is a choice of this computer, like the sidebar width. The key is
  * new with the Android release, so a computer that dismissed the iPhone-only card sees it once more. */
-const MOBILE_APP_DISMISSED_STORAGE_KEY = "openbot:mobile-app-card-dismissed";
+const MOBILE_APP_DISMISSED_STORAGE_KEY = "omnibot:mobile-app-card-dismissed";
 
 /**
  * The list of Agents and people. It reads the most domains of any pane, and every

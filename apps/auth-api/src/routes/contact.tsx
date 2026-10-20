@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/solid-router";
 import { ContactPage } from "../components/contact/ContactPage";
 import { CONTACT_ROUTE } from "../lib/contact";
-import { OPENBOT_SOCIAL_IMAGE_ALT, OPENBOT_SOCIAL_IMAGE_URL, OPENBOT_X_HANDLE } from "../lib/site-metadata";
+import { OMNIBOT_SOCIAL_IMAGE_ALT, OMNIBOT_SOCIAL_IMAGE_URL, OMNIBOT_X_HANDLE } from "../lib/site-metadata";
 
 const CONTACT_TITLE = "Contact the OmniBot team";
 const CONTACT_DESCRIPTION =
@@ -20,14 +20,14 @@ export const Route = createFileRoute("/contact")({
         { property: "og:url", content: url },
         { property: "og:title", content: CONTACT_TITLE },
         { property: "og:description", content: CONTACT_DESCRIPTION },
-        { property: "og:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-        { property: "og:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+        { property: "og:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+        { property: "og:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: OPENBOT_X_HANDLE },
+        { name: "twitter:site", content: OMNIBOT_X_HANDLE },
         { name: "twitter:title", content: CONTACT_TITLE },
         { name: "twitter:description", content: CONTACT_DESCRIPTION },
-        { name: "twitter:image", content: OPENBOT_SOCIAL_IMAGE_URL },
-        { name: "twitter:image:alt", content: OPENBOT_SOCIAL_IMAGE_ALT },
+        { name: "twitter:image", content: OMNIBOT_SOCIAL_IMAGE_URL },
+        { name: "twitter:image:alt", content: OMNIBOT_SOCIAL_IMAGE_ALT },
       ],
       links: [{ rel: "canonical", href: url }],
     };

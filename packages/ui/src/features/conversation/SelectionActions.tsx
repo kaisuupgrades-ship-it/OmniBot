@@ -1,7 +1,7 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { SELECTION_ACTION_INSTRUCTIONS, serializeSelectionInstruction } from "@openbot/contracts/selection-instruction";
-import { Button, Input, Kbd, TextQuote } from "@openbot/ui";
-import { clamp } from "@openbot/ui/utils";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { SELECTION_ACTION_INSTRUCTIONS, serializeSelectionInstruction } from "@omnibot/contracts/selection-instruction";
+import { Button, Input, Kbd, TextQuote } from "@omnibot/ui";
+import { clamp } from "@omnibot/ui/utils";
 import { Portal } from "@solidjs/web";
 import type { Element as SolidElement } from "solid-js";
 import { createEffect, createMemo, createSignal, For, onSettled, Show } from "solid-js";
@@ -10,7 +10,7 @@ import { useText } from "../../text";
 const MESSAGE_TEXT_SELECTOR = ".message-copy[data-selection-message-id]";
 const INTERACTIVE_SELECTOR =
   'a, button, input, textarea, select, [contenteditable="true"], [role="button"], .message-citation';
-const HIGHLIGHT_NAME = "openbot-message-selection";
+const HIGHLIGHT_NAME = "omnibot-message-selection";
 const VIEWPORT_MARGIN = 12;
 const TOOLBAR_GAP = 8;
 

@@ -1,5 +1,5 @@
-import type { McpServerConfig } from "@openbot/contracts/ipc";
-import { isSecretName, redactText, registerSecretValue } from "@openbot/logging";
+import type { McpServerConfig } from "@omnibot/contracts/ipc";
+import { isSecretName, redactText, registerSecretValue } from "@omnibot/logging";
 import { mcpEnvironment } from "./mcp-provider-shapes";
 
 const MASK = "•••";

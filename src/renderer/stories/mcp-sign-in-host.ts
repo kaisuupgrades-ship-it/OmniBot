@@ -3,8 +3,8 @@
  * sign-in the host opened, and a click on Allow stands in for the sign-in that the host took.
  */
 
-import type { BrowserLiveViewEvent } from "@openbot/contracts/ipc";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
+import type { BrowserLiveViewEvent } from "@omnibot/contracts/ipc";
+import type { BrowserViewRuntime } from "@omnibot/ui/features/browser/BrowserLiveView";
 import { createStore } from "solid-js";
 
 const WIDTH = 1024;

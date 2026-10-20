@@ -1,26 +1,26 @@
-import type { MessagingPlatform } from "@openbot/contracts/ipc";
-import { decodeSignalServerMessage } from "@openbot/contracts/signal-protocol/decode";
-import { type DiscordApiRequest, decodeDiscordApiError } from "@openbot/contracts/signal-protocol/discord-api";
-import { DISCORD_API_PATH } from "@openbot/contracts/signal-protocol/discord-route";
+import type { MessagingPlatform } from "@omnibot/contracts/ipc";
+import { decodeSignalServerMessage } from "@omnibot/contracts/signal-protocol/decode";
+import { type DiscordApiRequest, decodeDiscordApiError } from "@omnibot/contracts/signal-protocol/discord-api";
+import { DISCORD_API_PATH } from "@omnibot/contracts/signal-protocol/discord-route";
 import {
   INGRESS_QUEUE_CAPABILITY,
   openQueuedDelivery,
   type QueuedSignalMessage,
-} from "@openbot/contracts/signal-protocol/ingress-queue";
+} from "@omnibot/contracts/signal-protocol/ingress-queue";
 import {
   SIGNAL_PROTOCOL_VERSION,
   type SignalClientMessage,
   type SignalServerMessage,
   SLACK_DELIVERY_RESPONSE_BYTES_LIMIT,
   type WebhookDeliveryStatus,
-} from "@openbot/contracts/signal-protocol/messages";
+} from "@omnibot/contracts/signal-protocol/messages";
 import {
   TELEGRAM_CAPABILITY,
   type TelegramCallMethod,
   type TelegramCallParams,
   type TelegramCallResult,
-} from "@openbot/contracts/signal-protocol/telegram-route";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/signal-protocol/telegram-route";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Context, Deferred, Effect, Exit, Layer, ManagedRuntime, Option, Result, Scope, Semaphore } from "effect";
 import WebSocket from "ws";
 import {
@@ -94,7 +94,7 @@ class SignalIngressAccount extends Context.Service<
     webhookRoute(hostId: string): Effect.Effect<string, RemoteWorkflowError>;
     telegramRoute(hostId: string): Effect.Effect<string | null>;
   }
->()("openbot/main/SignalIngressAccount") {
+>()("omnibot/main/SignalIngressAccount") {
   static layer(options: SignalIngressOptions) {
     return Layer.succeed(
       SignalIngressAccount,

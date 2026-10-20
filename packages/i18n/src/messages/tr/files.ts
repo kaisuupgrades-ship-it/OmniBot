@@ -57,7 +57,7 @@ export const messages = {
   "files.storage.allFiles": "Tüm dosyalar",
   "files.storage.allFilesOn": "{host} üzerindeki tüm dosyalar",
   "files.storage.allFilesDescription": "Tüm ajanların ve sohbetlerin dosyaları",
-  "files.storage.openBotOn": "{host} üzerinde OmniBot",
+  "files.storage.omniBotOn": "{host} üzerinde OmniBot",
   "files.storage.measuring": "Ölçülüyor…",
   "files.storage.measureAgain": "Tekrar ölç",
   "files.storage.measuringStorage": "Depolama alanı ölçülüyor",

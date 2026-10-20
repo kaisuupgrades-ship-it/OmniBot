@@ -3,11 +3,11 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { DatabaseSync, type StatementSync } from "node:sqlite";
-import type { AgentSummary, ConversationMessage } from "@openbot/contracts/ipc";
+import type { AgentSummary, ConversationMessage } from "@omnibot/contracts/ipc";
 import { afterEach, describe, expect, it } from "vitest";
 import { runCauseEffect } from "./effect-boundary";
-import { OmniBotDatabase } from "./openbot-database";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { OmniBotDatabase } from "./omnibot-database";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: the upgrade deletes a reconcile event that is not a repeat, or the last event of a run,
 // or an event of another type or thread; it leaves the activity or receipt of a deleted event; it changes
@@ -44,20 +44,20 @@ function migrateUpTo(db: DatabaseSync, version: number): void {
  */
 function seed(db: DatabaseSync): void {
   const thread = db.prepare("INSERT INTO projection_threads VALUES (?, ?, ?, NULL, ?, ?, 1)");
-  thread.run("openbot-thread-chief", "chief", 'Chief 界"\\', "2026-10-01T07:00:00.000Z", "2026-10-01T07:00:00.000Z");
-  thread.run("openbot-thread-other", "other", "Other", "2026-10-01T07:00:00.000Z", "2026-10-01T07:00:00.000Z");
+  thread.run("omnibot-thread-chief", "chief", 'Chief 界"\\', "2026-10-01T07:00:00.000Z", "2026-10-01T07:00:00.000Z");
+  thread.run("omnibot-thread-other", "other", "Other", "2026-10-01T07:00:00.000Z", "2026-10-01T07:00:00.000Z");
   const first = JSON.stringify({ detail: { messageCount: 1 }, changedMessages: [{ id: "a", text: "界" }] });
   const second = JSON.stringify({ detail: { messageCount: 1 }, changedMessages: [{ id: "a", text: "b" }] });
   const events: Array<[string, string, string]> = [
-    ["openbot-thread-chief", RECONCILED, first],
-    ["openbot-thread-chief", RECONCILED, first],
-    ["openbot-thread-other", RECONCILED, first],
-    ["openbot-thread-chief", RECONCILED, first],
-    ["openbot-thread-chief", "conversation.updated", first],
-    ["openbot-thread-chief", RECONCILED, first],
-    ["openbot-thread-other", RECONCILED, second],
-    ["openbot-thread-chief", RECONCILED, second],
-    ["openbot-thread-chief", RECONCILED, second],
+    ["omnibot-thread-chief", RECONCILED, first],
+    ["omnibot-thread-chief", RECONCILED, first],
+    ["omnibot-thread-other", RECONCILED, first],
+    ["omnibot-thread-chief", RECONCILED, first],
+    ["omnibot-thread-chief", "conversation.updated", first],
+    ["omnibot-thread-chief", RECONCILED, first],
+    ["omnibot-thread-other", RECONCILED, second],
+    ["omnibot-thread-chief", RECONCILED, second],
+    ["omnibot-thread-chief", RECONCILED, second],
   ];
   const event = db.prepare(`INSERT INTO orchestration_events
     (event_id, command_id, aggregate_type, aggregate_id, event_type, occurred_at, payload_json)
@@ -149,7 +149,7 @@ describe("mailbox reconcile cleanup migration", () => {
   });
 
   it("keeps the messages and what a replay rebuilds from the writes of a page read", async () => {
-    const root = await mkdtemp(join(tmpdir(), "openbot-db-mailbox-reconcile-"));
+    const root = await mkdtemp(join(tmpdir(), "omnibot-db-mailbox-reconcile-"));
     roots.push(root);
     const database = new OmniBotDatabase(root);
     await runCauseEffect(database.initialize());
@@ -158,7 +158,7 @@ describe("mailbox reconcile cleanup migration", () => {
     const write = (eventType: string, messages: ConversationMessage[]) =>
       database.persistConversationChanges({
         agentId: agent.id,
-        threadId: "openbot-thread-chief",
+        threadId: "omnibot-thread-chief",
         activeTurnId: null,
         changedMessages: messages,
         eventType,
@@ -170,7 +170,7 @@ describe("mailbox reconcile cleanup migration", () => {
     for (let index = 0; index < 3; index++) write(RECONCILED, [question]);
     write("conversation.updated", [message("answer", "assistant", "Final")]);
     write(RECONCILED, [question]);
-    const replayed = database.rebuildThreadProjection("openbot-thread-chief");
+    const replayed = database.rebuildThreadProjection("omnibot-thread-chief");
     const rows = database.connection.prepare("SELECT * FROM projection_thread_messages ORDER BY ordinal").all();
     const events = database.connection
       .prepare(
@@ -195,7 +195,7 @@ describe("mailbox reconcile cleanup migration", () => {
       .all();
     const reconciled = events.filter((event) => event.event_type === RECONCILED);
     expect(kept).toEqual(events.filter((event) => !reconciled.slice(0, 2).includes(event)));
-    expect(migrated.rebuildThreadProjection("openbot-thread-chief")).toEqual(replayed);
+    expect(migrated.rebuildThreadProjection("omnibot-thread-chief")).toEqual(replayed);
     expect(migrated.connection.prepare("SELECT MAX(version) AS version FROM schema_migrations").get()).toEqual({
       version: 44,
     });
@@ -217,8 +217,8 @@ function testAgent(): AgentSummary {
     notifications: true,
     model: "gpt-5.6-luna",
     reasoningEffort: "medium",
-    threadId: "openbot-thread-chief",
-    workspacePath: "/tmp/openbot-chief",
+    threadId: "omnibot-thread-chief",
+    workspacePath: "/tmp/omnibot-chief",
     preview: "42",
     updatedAt: "2026-08-18T10:00:01.000Z",
     avatarSeed: "chief",

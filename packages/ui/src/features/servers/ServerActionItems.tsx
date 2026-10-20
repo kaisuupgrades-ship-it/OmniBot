@@ -1,6 +1,6 @@
-import { canAdministerServer, type ServerNotificationLevel, type ServerSummary } from "@openbot/contracts/ipc";
-import type { AppFormat, AppTextKey, AppTranslate } from "@openbot/i18n";
-import { Bell, BellOff, Check, ChevronRight, type ContextMenu, LogOut, RotateCcw, Trash2 } from "@openbot/ui";
+import { canAdministerServer, type ServerNotificationLevel, type ServerSummary } from "@omnibot/contracts/ipc";
+import type { AppFormat, AppTextKey, AppTranslate } from "@omnibot/i18n";
+import { Bell, BellOff, Check, ChevronRight, type ContextMenu, LogOut, RotateCcw, Trash2 } from "@omnibot/ui";
 import { For, Show } from "solid-js";
 import { useText } from "../../text";
 
@@ -94,7 +94,7 @@ export function ServerActionItems(
     Boolean(props.onRestart) &&
     props.server.kind === "remote" &&
     canAdministerServer(props.server.role) &&
-    !(props.server.hostedSleep === "waking" && props.server.hostedStart?.step !== "openbot") &&
+    !(props.server.hostedSleep === "waking" && props.server.hostedStart?.step !== "omnibot") &&
     (props.server.hosted === true || Boolean(props.canRestart?.(props.server.id)));
   // A component, so the JSX below can use it as a tag. The menu does not change after render.
   const Menu = props.menu;

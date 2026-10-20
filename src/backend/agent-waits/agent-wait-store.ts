@@ -4,12 +4,12 @@
  * wait is deleted. It owns no events: the runtime says when something changed.
  */
 
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentWait } from "@openbot/contracts/ipc";
-import type { DynamicRecord } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentWait } from "@omnibot/contracts/ipc";
+import type { DynamicRecord } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { databaseRow, databaseRows, optionalStringColumn, requiredStringColumn } from "../database/database-rows";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 
 /** A refusal the agent reads: the text is already a sentence for it. */
 export class AgentWaitError extends Error {}

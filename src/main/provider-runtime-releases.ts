@@ -1,6 +1,6 @@
-import { MANAGED_RUNTIME_PROVIDERS, type ManagedProviderId } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { MANAGED_RUNTIME_PROVIDERS, type ManagedProviderId } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import type { AgentRuntimeLock } from "../../scripts/agent-runtime-lock";
 import {
@@ -41,8 +41,7 @@ export interface LatestReleaseContext {
  * block list, not an allow list: a new release is offered at once, and only a version named here is
  * held back. A list that cannot be read blocks nothing.
  */
-const BLOCKED_VERSIONS_URL =
-  "https://raw.githubusercontent.com/nightly-labs/openbot/main/provider-runtime-blocklist.json";
+const BLOCKED_VERSIONS_URL = "https://updates.omnibot.example.com/provider-runtime-blocklist.json";
 
 const REQUEST_TIMEOUT_MS = 30_000;
 const MAX_METADATA_BYTES = 4 * 1024 * 1024;

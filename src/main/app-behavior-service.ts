@@ -1,6 +1,6 @@
-import type { AppBehaviorPreference, AppBehaviorPreferenceChange } from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import type { AppBehaviorPreference, AppBehaviorPreferenceChange } from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { Effect, Result, Semaphore } from "effect";
 import { isMissingFileError } from "../backend/file-errors";
 import type { LoginItem, LoginItemFailure } from "./login-item";

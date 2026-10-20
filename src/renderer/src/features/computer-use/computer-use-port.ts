@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What Computer Use reaches in main: the driver state, the macOS permission panes and helper, and
@@ -10,7 +10,7 @@ export interface ComputerUsePort {
   remoteDesktop: Pick<OmniBotDesktopApi["remoteDesktop"], "checkSetup">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function computerUsePort(): ComputerUsePort {
-  return window.openbot;
+  return window.omnibot;
 }

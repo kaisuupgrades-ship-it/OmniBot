@@ -6,7 +6,7 @@ import type {
   SidebarLayoutAction,
   SidebarLayoutSnapshot,
   TeamPresenceMember,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import type { JSX } from "@solidjs/web";
 import type { AvatarMood } from "../../bloub-avatar";
 import type { AgentProfile } from "../../data";

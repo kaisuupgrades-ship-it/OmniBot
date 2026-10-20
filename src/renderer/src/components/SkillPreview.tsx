@@ -1,4 +1,4 @@
-import { SkillPreview as SharedSkillPreview } from "@openbot/ui/components/SkillPreview";
+import { SkillPreview as SharedSkillPreview } from "@omnibot/ui/components/SkillPreview";
 import type { ComponentProps } from "@solidjs/web";
 import { appPort } from "../app-port";
 

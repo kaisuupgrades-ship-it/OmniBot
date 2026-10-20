@@ -4,7 +4,7 @@
 // that a refused request did not reach them. The checks cover the protocol and auth gates, sign-in
 // and account tickets, the admin-only routes, direct-message isolation, agents hidden from an older
 // protocol, the queue routes, the attachment and file routes with their size limits, and the error
-// codes. Writes .openbot-build/team-api-routes-e2e/report.json.
+// codes. Writes .omnibot-build/team-api-routes-e2e/report.json.
 // Run: `bun run test:team-api-routes` (the preload gives the server's import graph an `electron`).
 import assert from "node:assert/strict";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -12,7 +12,7 @@ import { request as httpRequest } from "node:http";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { ATTACHMENT_LIMITS, INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentProviderId,
   AgentSummary,
@@ -20,29 +20,29 @@ import type {
   CentralAuthUser,
   HiddenAgentsSnapshot,
   QueueSnapshot,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@openbot/contracts/team-protocol/agent-hidden-v1";
-import { QueueEditRejectedError, TEAM_QUEUE_EDIT_CAPABILITY } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { SIDE_QUESTION_CAPABILITY, SIDE_QUESTION_ROUTES } from "@openbot/contracts/team-protocol/side-question-v1";
+} from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { AGENT_HIDDEN_CAPABILITY, AGENT_HIDDEN_ROUTES } from "@omnibot/contracts/team-protocol/agent-hidden-v1";
+import { QueueEditRejectedError, TEAM_QUEUE_EDIT_CAPABILITY } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import { SIDE_QUESTION_CAPABILITY, SIDE_QUESTION_ROUTES } from "@omnibot/contracts/team-protocol/side-question-v1";
 import {
   TEAM_APP_VERSION_HEADER,
   TEAM_CAPABILITIES_HEADER,
   TEAM_PROTOCOL_VERSION_HEADER,
-} from "@openbot/contracts/team-protocol/v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/team-protocol/v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect } from "effect";
 import { SteerUnsupportedError } from "../src/backend/agent/queue-controls";
 import { AgentLifecycleFailed } from "../src/backend/agent-service";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { TeamChatStore } from "../src/backend/team-chat-store";
 import type { TeamApiAgents, TeamApiBrowser, TeamApiMailbox } from "../src/main/team-api/dependencies";
 import { TeamApiServer } from "../src/main/team-api-server";
 import { TeamStore } from "../src/main/team-store";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/team-api-routes-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/team-api-routes-e2e");
 const APP_VERSION = "0.43.0";
 const MIB = 1024 * 1024;
 
@@ -82,7 +82,7 @@ interface RecordedCall {
 }
 
 mkdirSync(OUT, { recursive: true });
-const root = mkdtempSync(join(tmpdir(), "openbot-team-api-routes-"));
+const root = mkdtempSync(join(tmpdir(), "omnibot-team-api-routes-"));
 const checks: Check[] = [];
 const calls: RecordedCall[] = [];
 const logged: string[] = [];

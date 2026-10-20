@@ -1,7 +1,7 @@
-import type { AppVariant } from "@openbot/contracts/ipc";
-import { type AppLanguage, formatLocale, type TranslatedLocale } from "@openbot/i18n";
-import { LanguageWheel } from "@openbot/ui/features/account/LanguageWheel";
-import { TextProvider } from "@openbot/ui/text";
+import type { AppVariant } from "@omnibot/contracts/ipc";
+import { type AppLanguage, formatLocale, type TranslatedLocale } from "@omnibot/i18n";
+import { LanguageWheel } from "@omnibot/ui/features/account/LanguageWheel";
+import { TextProvider } from "@omnibot/ui/text";
 import { createSignal } from "solid-js";
 import { useI18n } from "../../i18n-context";
 

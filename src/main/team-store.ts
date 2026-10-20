@@ -11,9 +11,9 @@ import { constants } from "node:fs";
 import { copyFile, mkdir, readFile, rm } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { promisify } from "node:util";
-import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@openbot/contracts/avatar-images";
-import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import { permanentInviteExpiresAt } from "@openbot/contracts/invite-links";
+import { avatarFileExtension, isAvatarMimeType, isValidAvatarImage } from "@omnibot/contracts/avatar-images";
+import { DEFAULT_TEAM_MEMBER_LIMIT, INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import { permanentInviteExpiresAt } from "@omnibot/contracts/invite-links";
 import type {
   AvatarImageInput,
   CentralAuthUser,
@@ -21,10 +21,10 @@ import type {
   TeamMemberSummary,
   TeamRole,
   TeamSessionSummary,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress, slugifyTeamServerName } from "@openbot/contracts/validation";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { normalizeEmailAddress, slugifyTeamServerName } from "@omnibot/contracts/validation";
+import { sourceText } from "@omnibot/i18n/source";
 import { Context, Deferred, Effect, Layer, Result, Schema } from "effect";
 import {
   isEmptyStoredFile,
@@ -49,7 +49,7 @@ class TeamStoreFiles extends Context.Service<
       options?: WriteJsonFileOptions,
     ): Effect.Effect<void, RemoteWorkflowError>;
   }
->()("openbot/main/TeamStoreFiles") {
+>()("omnibot/main/TeamStoreFiles") {
   static readonly layer = Layer.succeed(
     TeamStoreFiles,
     TeamStoreFiles.of({

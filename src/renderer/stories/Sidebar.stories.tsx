@@ -1,9 +1,9 @@
-import type { ChannelSummary, HiddenAgent, SidebarLayoutAction, SidebarLayoutSnapshot } from "@openbot/contracts/ipc";
-import type { AvatarMood } from "@openbot/ui/bloub-avatar";
-import { Sidebar } from "@openbot/ui/features/sidebar/Sidebar";
-import { SidebarMobileAppCard } from "@openbot/ui/features/sidebar/SidebarMobileAppCard";
-import { normalizeSidebarPinnedItems, type SidebarPinnedItem } from "@openbot/ui/features/sidebar/sidebar-pins";
-import { SIDEBAR_HIDDEN_GROUP_OPEN_ID, type SidebarAgentState } from "@openbot/ui/features/sidebar/sidebar-types";
+import type { ChannelSummary, HiddenAgent, SidebarLayoutAction, SidebarLayoutSnapshot } from "@omnibot/contracts/ipc";
+import type { AvatarMood } from "@omnibot/ui/bloub-avatar";
+import { Sidebar } from "@omnibot/ui/features/sidebar/Sidebar";
+import { SidebarMobileAppCard } from "@omnibot/ui/features/sidebar/SidebarMobileAppCard";
+import { normalizeSidebarPinnedItems, type SidebarPinnedItem } from "@omnibot/ui/features/sidebar/sidebar-pins";
+import { SIDEBAR_HIDDEN_GROUP_OPEN_ID, type SidebarAgentState } from "@omnibot/ui/features/sidebar/sidebar-types";
 import { createSignal, untrack } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

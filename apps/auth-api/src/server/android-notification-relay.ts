@@ -3,9 +3,9 @@ import {
   NOTIFICATION_SEALED_LIMIT,
   NOTIFICATION_SOUNDS,
   type NotificationSound,
-} from "@openbot/contracts/notification-relay";
-import { type DynamicRecord, isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { ANDROID_PUSH_TOKEN_PATTERN } from "@openbot/contracts/team-protocol/push-notifications-android-v1";
+} from "@omnibot/contracts/notification-relay";
+import { type DynamicRecord, isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { ANDROID_PUSH_TOKEN_PATTERN } from "@omnibot/contracts/team-protocol/push-notifications-android-v1";
 import { Effect, Schema } from "effect";
 import { importPKCS8, SignJWT } from "jose";
 

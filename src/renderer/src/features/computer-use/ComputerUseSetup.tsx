@@ -1,5 +1,5 @@
-import type { ComputerUseState, MacPermissionId } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { ComputerUseState, MacPermissionId } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Alert,
   AlertActions,
@@ -24,8 +24,8 @@ import {
   SettingsSection,
   Skeleton,
   TriangleAlert,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, For, onCleanup, onSettled, Show } from "solid-js";
 import { computerUsePort } from "./computer-use-port";
 

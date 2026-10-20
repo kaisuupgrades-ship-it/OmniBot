@@ -3,14 +3,14 @@
 // that `bun run storybook` reports: `bun scripts/task-plan-e2e.ts --storybook=http://localhost:6006`.
 // It also checks the stack of panels above the input: each panel goes under the next one, the lower
 // panel paints over the shared edge, and the top of each panel stays visible.
-// Writes .openbot-build/task-plan-e2e/report.json and one screenshot per story.
+// Writes .omnibot-build/task-plan-e2e/report.json and one screenshot per story.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { translateFor } from "@openbot/i18n";
+import { translateFor } from "@omnibot/i18n";
 import { chromium, type Page } from "playwright-core";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/task-plan-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/task-plan-e2e");
 const t = translateFor("en");
 const storybook = process.argv.find((arg) => arg.startsWith("--storybook="))?.slice("--storybook=".length);
 assert.ok(storybook, "Pass --storybook=<url> with the URL that `bun run storybook` reports.");

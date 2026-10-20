@@ -9,9 +9,9 @@ import {
   isAgentModel,
   SPEECH_VOICES,
   type SpeechVoice,
-} from "@openbot/contracts/ipc";
-import { isBoolean, isDynamicRecord, isFunction, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { normalizeEmailAddress } from "@openbot/contracts/validation";
+} from "@omnibot/contracts/ipc";
+import { isBoolean, isDynamicRecord, isFunction, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { normalizeEmailAddress } from "@omnibot/contracts/validation";
 import { OpenPanelBase, type OpenPanelOptions } from "@openpanel/web";
 import {
   ANALYTICS_SCHEMA_VERSION,
@@ -24,7 +24,7 @@ import { MARKETPLACE_PLUGINS } from "./features/settings/marketplace-plugin-cata
 const OPENPANEL_API_URL = "https://analytics.omnibot.example.com/api";
 const OPENPANEL_CLIENT_ID = "6c989975-87ef-4f0c-857e-ab449a65b5c2";
 const MAX_PENDING_EVENTS = 100;
-const CURATED_LISTING_PATTERN = /^openbot-curated-(?:skill|agent)-([a-z0-9][a-z0-9-]{0,63})$/u;
+const CURATED_LISTING_PATTERN = /^omnibot-curated-(?:skill|agent)-([a-z0-9][a-z0-9-]{0,63})$/u;
 const PLUGIN_SLUGS = new Set(MARKETPLACE_PLUGINS.map((plugin) => plugin.slug));
 
 type ServerKind = "local" | "remote" | "unknown";

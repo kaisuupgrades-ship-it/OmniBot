@@ -32,7 +32,7 @@ export const messages = {
   "settings.externalLinks.title": "Externe Links öffnen in",
   "settings.externalLinks.description": "Wähle, wo Links aus Unterhaltungen geöffnet werden.",
   "settings.externalLinks.defaultBrowser": "Standardbrowser",
-  "settings.externalLinks.openbot": "OmniBot",
+  "settings.externalLinks.omnibot": "OmniBot",
   "settings.sendShortcut.title": "Tastenkürzel zum Senden",
   "settings.sendShortcut.description": "Wähle die Tasten zum Senden auf diesem Gerät und in diesem Browser.",
   "settings.sendShortcut.enter": "Mit Enter senden",
@@ -243,7 +243,7 @@ export const messages = {
   "settings.profile.share.copied": "Bild kopiert",
   "settings.profile.share.copyFailed": "Das Bild konnte nicht kopiert werden.",
   "settings.profile.share.createFailed": "Das Bild konnte nicht erstellt werden.",
-  "settings.profile.share.fileName": "openbot-activity.png",
+  "settings.profile.share.fileName": "omnibot-activity.png",
   // The text in the image to share.
   "settings.profile.share.caption": "Meine letzten sechs Monate mit OmniBot",
   "settings.profile.activity.title": "Aktivität",

@@ -1,6 +1,6 @@
-import { TEAM_BROWSER_VIEW_CAPABILITY } from "@openbot/contracts/team-protocol/browser-view-v1";
-import type { TeamProtocolV1Capability } from "@openbot/contracts/team-protocol/v1";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import { TEAM_BROWSER_VIEW_CAPABILITY } from "@omnibot/contracts/team-protocol/browser-view-v1";
+import type { TeamProtocolV1Capability } from "@omnibot/contracts/team-protocol/v1";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { currentText } from "@/shared/lib/text";
 
 /** The capabilities that each connected server advertised in its compatibility answer. */

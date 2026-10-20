@@ -1,9 +1,9 @@
-import { chatPreviewKind } from "@openbot/contracts/chat-preview";
-import type { AttachmentSummary, InstalledSkill, MessageReaction } from "@openbot/contracts/ipc";
-import { canPreviewAttachment, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@openbot/contracts/ipc";
-import { parseSelectionInstruction } from "@openbot/contracts/selection-instruction";
-import { AudioLines, type BubbleVariant, Button, DropdownMenu, Info, LoaderCircle } from "@openbot/ui";
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { chatPreviewKind } from "@omnibot/contracts/chat-preview";
+import type { AttachmentSummary, InstalledSkill, MessageReaction } from "@omnibot/contracts/ipc";
+import { canPreviewAttachment, MESSAGE_REACTIONS, MORE_MESSAGE_REACTIONS } from "@omnibot/contracts/ipc";
+import { parseSelectionInstruction } from "@omnibot/contracts/selection-instruction";
+import { AudioLines, type BubbleVariant, Button, DropdownMenu, Info, LoaderCircle } from "@omnibot/ui";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import {
   createEffect,
   createMemo,

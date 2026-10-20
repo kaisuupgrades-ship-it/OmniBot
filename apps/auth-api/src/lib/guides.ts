@@ -1,8 +1,7 @@
 // The one list of published guides. Same shape as the news registry, and read by
 // the same pages, feed, sitemap and image generator.
 //
-// The public guides explain how OmniBot works and how to use it. Contributor
-// instructions for adding a guide live in CONTRIBUTING.md instead.
+// The public guides explain how OmniBot works and how to use it.
 
 import { type ContentCollection, publishedFirst } from "./content-collection";
 import { NEWS_AUTHOR } from "./news";
@@ -18,7 +17,7 @@ export const GUIDES_COLLECTION: ContentCollection<"guides"> = {
   feedTitle: "OmniBot guides",
   backLabel: "All guides",
   moreTitle: "More guides",
-  imageEyebrow: "OPENBOT · GUIDES",
+  imageEyebrow: "OMNIBOT · GUIDES",
   articles: publishedFirst([
     {
       slug: "agentic-ai-definition",
@@ -29,7 +28,7 @@ export const GUIDES_COLLECTION: ContentCollection<"guides"> = {
       author: NEWS_AUTHOR,
     },
     {
-      slug: "openbot-hosted-servers",
+      slug: "omnibot-hosted-servers",
       title: "OmniBot Hosted Servers: Plans, Pricing, and How They Work",
       description:
         "Compare OmniBot hosted server plans, pricing, storage, and team limits. Learn how to set one up and when self-hosting may suit you better.",
@@ -37,7 +36,7 @@ export const GUIDES_COLLECTION: ContentCollection<"guides"> = {
       author: NEWS_AUTHOR,
     },
     {
-      slug: "openbot-marketplace",
+      slug: "omnibot-marketplace",
       title: "How to Use the OmniBot Marketplace: Agents, Skills, and Plugins",
       description:
         "Browse the OmniBot Marketplace, install agents, plugins, and skills, and submit your own agent for review.",
@@ -53,7 +52,7 @@ export const GUIDES_COLLECTION: ContentCollection<"guides"> = {
       author: NEWS_AUTHOR,
     },
     {
-      slug: "openbot-101",
+      slug: "omnibot-101",
       title: "OmniBot 101",
       description:
         "What OmniBot is, what an agent keeps between runs, and how to get one doing real work on your computer. Start here if you have not opened the app yet.",
@@ -61,7 +60,7 @@ export const GUIDES_COLLECTION: ContentCollection<"guides"> = {
       author: NEWS_AUTHOR,
     },
     {
-      slug: "wtf-is-openbot",
+      slug: "wtf-is-omnibot",
       title: "WTF Is OmniBot?",
       description:
         "A practical explanation of models, providers, agents, and the local-first workspace that brings them together.",

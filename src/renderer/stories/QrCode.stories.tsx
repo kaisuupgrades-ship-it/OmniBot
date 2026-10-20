@@ -1,4 +1,4 @@
-import { QrCode } from "@openbot/ui";
+import { QrCode } from "@omnibot/ui";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 
 const meta = {

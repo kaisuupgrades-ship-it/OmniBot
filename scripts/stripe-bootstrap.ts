@@ -4,13 +4,13 @@ import {
   type BillingInterval,
   type BillingPlanId,
   billingLookupKey,
-} from "@openbot/contracts/billing";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+} from "@omnibot/contracts/billing";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { z } from "zod";
 
 /**
  * Creates the Stripe catalog that the account server reads: one Product for each plan, and one Price
- * for each plan and interval with the lookup key `openbot_{plan}_{interval}`. It also sets the Customer
+ * for each plan and interval with the lookup key `omnibot_{plan}_{interval}`. It also sets the Customer
  * Portal features. Run it again at any time: it changes only what differs.
  *
  *   STRIPE_SECRET_KEY=sk_test_... bun scripts/stripe-bootstrap.ts [--live] [--webhook-url <url>]
@@ -125,7 +125,7 @@ class StripeAdmin {
 }
 
 function productId(plan: BillingPlanId): string {
-  return `openbot_${plan}`;
+  return `omnibot_${plan}`;
 }
 
 async function ensureProduct(stripe: StripeAdmin, plan: BillingPlanId): Promise<void> {
@@ -133,7 +133,7 @@ async function ensureProduct(stripe: StripeAdmin, plan: BillingPlanId): Promise<
   const body = new URLSearchParams({
     name: `OmniBot ${PLAN_NAME[plan]}`,
     active: "true",
-    "metadata[openbot_plan]": plan,
+    "metadata[omnibot_plan]": plan,
   });
   const existing = await stripe.findProduct(id);
   if (existing) {
@@ -183,8 +183,8 @@ async function ensurePrice(
     transfer_lookup_key: "true",
     "currency_options[usd][unit_amount]": String(amounts.usd),
     "currency_options[pln][unit_amount]": String(amounts.pln),
-    "metadata[openbot_plan]": plan,
-    "metadata[openbot_interval]": interval,
+    "metadata[omnibot_plan]": plan,
+    "metadata[omnibot_interval]": interval,
   });
   const created = await stripe.request("POST", "/v1/prices", body, priceSchema);
   logger.info(`${current ? "Replaced" : "Created"} price ${lookupKey}.`);

@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What the account context reaches in main: the OmniBot account session, its devices, and the
@@ -28,7 +28,7 @@ export interface AccountPort {
   >;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function accountPort(): AccountPort {
-  return window.openbot;
+  return window.omnibot;
 }

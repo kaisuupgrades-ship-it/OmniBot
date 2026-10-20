@@ -3,8 +3,8 @@ import { For, Show } from "solid-js";
 import {
   comparisonScore,
   type MatchupComparison,
+  OMNIBOT_PLANS,
   type OmniBotPlan,
-  OPENBOT_PLANS,
 } from "../../content/compare/comparison";
 import { PROVIDER_PAGES, providerPageSlug } from "../../content/providers";
 import { type CollectionArticle, type ContentCollection, formatArticleDate } from "../../lib/content-collection";
@@ -46,7 +46,7 @@ export function MatchupPage(props: MatchupPageProps) {
   const isCompared = (plan: OmniBotPlan) =>
     props.matchup.products.some((product) => product.provider === plan.provider);
   // The plans of the two products first, then the rest in their usual order.
-  const plans = () => [...OPENBOT_PLANS.filter(isCompared), ...OPENBOT_PLANS.filter((plan) => !isCompared(plan))];
+  const plans = () => [...OMNIBOT_PLANS.filter(isCompared), ...OMNIBOT_PLANS.filter((plan) => !isCompared(plan))];
   // The provider page of each product, which says how to set it up in OmniBot. The link uses the
   // page's name, which is the provider's name in OmniBot: Antigravity runs as Gemini.
   const setups = () =>

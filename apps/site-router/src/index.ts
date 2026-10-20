@@ -4,7 +4,7 @@ import {
   type HostedSiteRouteManifest,
   hostedSiteBlockKey,
   hostedSiteRouteKey,
-} from "@openbot/contracts/hosted-sites";
+} from "@omnibot/contracts/hosted-sites";
 import { Context, Effect, Layer, Schema } from "effect";
 
 interface SiteBucket {
@@ -59,7 +59,7 @@ class SiteStorage extends Context.Service<
   {
     get(key: string, options?: R2GetOptions): Effect.Effect<R2ObjectBody | R2Object | null, SiteStorageError>;
   }
->()("@openbot/site-router/SiteStorage") {
+>()("@omnibot/site-router/SiteStorage") {
   static layer(bucket: SiteBucket) {
     return Layer.succeed(
       SiteStorage,
@@ -73,7 +73,7 @@ class SiteStorage extends Context.Service<
 }
 
 const openAssetCache = Effect.fn("SiteRouter.openAssetCache")(() =>
-  storageCall(() => caches.open("openbot-site-assets-v1")).pipe(
+  storageCall(() => caches.open("omnibot-site-assets-v1")).pipe(
     Effect.catch((error) => {
       console.error(JSON.stringify({ event: "site_asset_cache_open_error", message: error.message }));
       return Effect.succeed(undefined);
@@ -94,7 +94,7 @@ export const routeRequest = Effect.fn("SiteRouter.routeRequest")(
     const url = new URL(request.url);
     const hostname = url.hostname.toLowerCase();
     if (!isHostedSiteHostname(hostname)) return errorResponse(request, env, "siteNotFound");
-    if (url.pathname === "/_openbot/report" || url.pathname === "/_openbot/report/") {
+    if (url.pathname === "/_omnibot/report" || url.pathname === "/_omnibot/report/") {
       const report = accountUrl(env, "/report-site");
       if (!report) return errorResponse(request, env, "reportUnavailable");
       report.searchParams.set("hostname", hostname);
@@ -187,7 +187,7 @@ const readCachedAsset = Effect.fn("SiteRouter.readCachedAsset")(
 
 function assetCacheRequest(request: Request, file: HostedSiteRouteFile): Request {
   const url = new URL(request.url);
-  url.pathname = `/_openbot/asset-cache/${encodeURIComponent(file.key)}`;
+  url.pathname = `/_omnibot/asset-cache/${encodeURIComponent(file.key)}`;
   url.search = "";
   return new Request(url, { method: "GET" });
 }
@@ -233,7 +233,7 @@ function hasBody(object: R2Object | R2ObjectBody): object is R2ObjectBody {
 }
 
 function isHostedSiteHostname(hostname: string): boolean {
-  return /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.openbot\.site$/u.test(hostname);
+  return /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.omnibot\.site$/u.test(hostname);
 }
 
 function requestPath(pathname: string): string | null {

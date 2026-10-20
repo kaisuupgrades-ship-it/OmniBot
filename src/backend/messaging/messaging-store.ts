@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { MESSAGING_PLATFORMS, type MessagingPlatform } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { MESSAGING_PLATFORMS, type MessagingPlatform } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isOneOf } from "@omnibot/contracts/runtime-values";
 import { deleteAggregateHistory, deleteThreadAttachments } from "../database/database-core";
 import {
   databaseRow,
@@ -9,7 +9,7 @@ import {
   requiredNumberColumn,
   requiredStringColumn,
 } from "../database/database-rows";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 
 /** One workspace of a platform, where every agent of this computer can answer. */
 export interface MessagingConnectionRecord {
@@ -232,7 +232,7 @@ export class MessagingStore {
     const existing = this.linkByKey(input.connectionId, input.platformChannelId, input.threadKey);
     if (existing) return existing;
     const linkId = `messaging-link-${randomUUID()}`;
-    const threadId = `openbot-thread-${randomUUID()}`;
+    const threadId = `omnibot-thread-${randomUUID()}`;
     this.#database.dispatch(
       `messaging-thread:${linkId}`,
       [

@@ -26,8 +26,8 @@
 import { chmod } from "node:fs/promises";
 import { connect, createServer, type Server, type Socket } from "node:net";
 import { Transform, type TransformCallback } from "node:stream";
-import { type DynamicRecord, isDynamicRecord } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, type Logger } from "@openbot/logging";
+import { type DynamicRecord, isDynamicRecord } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, type Logger } from "@omnibot/logging";
 import { Effect, Result } from "effect";
 import { CuaDriverFailure, cuaIO } from "./cua-driver-effects";
 import { rewriteCallAnswer } from "./cua-driver-structured-text";

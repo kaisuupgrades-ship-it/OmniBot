@@ -1,10 +1,10 @@
-import type { AgentEvent } from "@openbot/contracts/ipc";
-import type { ServerView } from "@openbot/ui/features/servers/ServerMenu";
+import type { AgentEvent } from "@omnibot/contracts/ipc";
+import type { ServerView } from "@omnibot/ui/features/servers/ServerMenu";
 import { onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { App } from "../src/App";
 import { LEFT_PANEL_COLLAPSED_STORAGE_KEY, SERVER_VIEW_STORAGE_KEY } from "../src/layout-constants";
-import { createMockOmniBot, type MockOmniBotOptions } from "../src/preview/mock-openbot";
+import { createMockOmniBot, type MockOmniBotOptions } from "../src/preview/mock-omnibot";
 import { OmniBotPlayground } from "../src/preview/OmniBotPlayground";
 import { STORY_AGENT_STATUS, STORY_AGENT_SUMMARIES, STORY_APP_INFO, STORY_SERVERS } from "./fixtures";
 

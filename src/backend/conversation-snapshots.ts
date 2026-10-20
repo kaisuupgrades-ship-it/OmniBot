@@ -1,7 +1,7 @@
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import type { AgentProviderId, ConversationMessage, ConversationSnapshot } from "@openbot/contracts/ipc";
-import { isImageGenerationAspectRatio, ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@openbot/contracts/ipc";
-import { isString } from "@openbot/contracts/runtime-values";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import type { AgentProviderId, ConversationMessage, ConversationSnapshot } from "@omnibot/contracts/ipc";
+import { isImageGenerationAspectRatio, ROUTINE_QUIET_ANSWER_ITEM_TYPE } from "@omnibot/contracts/ipc";
+import { isString } from "@omnibot/contracts/runtime-values";
 import { displayMessageReferences, type TeammatePrompt, teammatePrompts } from "./agent/delivery-content";
 import { imageGenerationFailure, isImageGenerationItem } from "./agent/image-generation";
 import type { DeliveryContext } from "./mailbox-store";

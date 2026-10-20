@@ -1,5 +1,5 @@
-import type { AgentTask, RespondToPromptInput } from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { AgentTask, RespondToPromptInput } from "@omnibot/contracts/ipc";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { useQuery } from "@tanstack/react-query";
 import * as Crypto from "expo-crypto";
 import { GlassView, isLiquidGlassAvailable } from "expo-glass-effect";

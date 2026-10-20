@@ -13,7 +13,7 @@ import { requestSourceIp } from "../../../server/source-ip";
 
 /**
  * Installation tokens of the OmniBot GitHub App, so that GitHub shows an agent's work as
- * `openbotgit[bot]`. The bearer is the GitHub user token of the OmniBot computer, not an OmniBot
+ * `omnibotgit[bot]`. The bearer is the GitHub user token of the OmniBot computer, not an OmniBot
  * session: the app works without an OmniBot account. GitHub checks the token, and the answer holds
  * only the repositories where that user can push.
  */

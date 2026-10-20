@@ -1,5 +1,5 @@
-import type { ServerSummary } from "@openbot/contracts/ipc";
-import { ConfirmDialog, toast } from "@openbot/ui";
+import type { ServerSummary } from "@omnibot/contracts/ipc";
+import { ConfirmDialog, toast } from "@omnibot/ui";
 import { createEffect, createSignal } from "solid-js";
 import { useText } from "../../text";
 

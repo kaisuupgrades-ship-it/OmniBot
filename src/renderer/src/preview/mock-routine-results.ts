@@ -7,7 +7,7 @@ import type {
   RoutineResultConnectionOption,
   RoutineResultDelivery,
   RoutineResultDestination,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 
 export interface MockRoutineResultsOptions {
   routineResultOptions?: RoutineResultConnectionOption[];

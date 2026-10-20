@@ -16,7 +16,7 @@ env:
   GIT_CONFIG_VALUE_0: main
   # No job here builds the native mobile app, so the postinstall skips the React Native Skia
   # library copy. The jobs that install with `--ignore-scripts` skip it already.
-  OPENBOT_SKIP_SKIA: "1"
+  OMNIBOT_SKIP_SKIA: "1"
 
 jobs:
   detect:
@@ -226,11 +226,11 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: signal-security-e2e
-          path: .openbot-build/signal-security-e2e/
+          path: .omnibot-build/signal-security-e2e/
           if-no-files-found: ignore
 
   automation-cli-e2e:
-    # Runs `openbot-cli` with Node against the real Local scripts server on a loopback port, with
+    # Runs `omnibot-cli` with Node against the real Local scripts server on a loopback port, with
     # an in-memory agent service. It needs no Electron, display or external service.
     name: Local scripts CLI E2E
     needs: detect
@@ -254,7 +254,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: automation-cli-e2e
-          path: .openbot-build/automation-cli-e2e/
+          path: .omnibot-build/automation-cli-e2e/
           if-no-files-found: ignore
 
   team-api-routes-e2e:
@@ -283,7 +283,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: team-api-routes-e2e
-          path: .openbot-build/team-api-routes-e2e/
+          path: .omnibot-build/team-api-routes-e2e/
           if-no-files-found: ignore
 
   reverse-actions-e2e:
@@ -347,15 +347,15 @@ jobs:
         with:
           name: reverse-actions-e2e
           path: |
-            .openbot-build/team-api-legacy-clients-e2e/
-            .openbot-build/team-session-revoke-e2e/
-            .openbot-build/server-mute-e2e/
-            .openbot-build/routine-pause-resume-e2e/
-            .openbot-build/agent-hide-restore-e2e/
-            .openbot-build/messaging-pause-resume-e2e/
-            .openbot-build/messaging-discord-access-e2e/
-            .openbot-build/zero-filled-settings-e2e/
-            .openbot-build/provider-update-busy-e2e/
+            .omnibot-build/team-api-legacy-clients-e2e/
+            .omnibot-build/team-session-revoke-e2e/
+            .omnibot-build/server-mute-e2e/
+            .omnibot-build/routine-pause-resume-e2e/
+            .omnibot-build/agent-hide-restore-e2e/
+            .omnibot-build/messaging-pause-resume-e2e/
+            .omnibot-build/messaging-discord-access-e2e/
+            .omnibot-build/zero-filled-settings-e2e/
+            .omnibot-build/provider-update-busy-e2e/
           if-no-files-found: ignore
 
   surfaces:
@@ -475,7 +475,7 @@ jobs:
         run: bun run build-storybook
         env:
           # This output is not published. Skip Solid's per-component docgen analysis.
-          OPENBOT_STORYBOOK_CHECK: "true"
+          OMNIBOT_STORYBOOK_CHECK: "true"
 
   all-checks-pass:
     # A summary of every job. Branch protection requires `Check`, not this job. A lane that
@@ -550,12 +550,12 @@ jobs:
           BOAT_API_KEY: ${{ secrets.BOAT_API_KEY }}
           BOAT_WEBHOOK_SECRET: ${{ secrets.BOAT_WEBHOOK_SECRET }}
           # GitHub refuses an Actions secret name that starts with GITHUB_. The Worker name is GITHUB_APP_PRIVATE_KEY.
-          OPENBOT_GITHUB_APP_PRIVATE_KEY: ${{ secrets.OPENBOT_GITHUB_APP_PRIVATE_KEY }}
+          OMNIBOT_GITHUB_APP_PRIVATE_KEY: ${{ secrets.OMNIBOT_GITHUB_APP_PRIVATE_KEY }}
           APNS_PRIVATE_KEY: ${{ secrets.APNS_PRIVATE_KEY }}
           APNS_KEY_ID: ${{ secrets.APNS_KEY_ID }}
           FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
         run: |
-          secrets_path="$RUNNER_TEMP/openbot-worker-secrets.json"
+          secrets_path="$RUNNER_TEMP/omnibot-worker-secrets.json"
           umask 077
           SECRETS_PATH="$secrets_path" bun -e '
             const smtp = process.env.EMAIL_SMTP_PASSWORD;
@@ -597,7 +597,7 @@ jobs:
               if (present.length !== names.length) throw new Error(`Set ${names.join(" and ")} together.`);
               for (const name of names) optional[name] = process.env[name].trim();
             }
-            const githubAppKey = process.env.OPENBOT_GITHUB_APP_PRIVATE_KEY?.trim();
+            const githubAppKey = process.env.OMNIBOT_GITHUB_APP_PRIVATE_KEY?.trim();
             if (githubAppKey) optional.GITHUB_APP_PRIVATE_KEY = githubAppKey;
             // The Android notification relay stays off until the Firebase service account key is set.
             const fcmServiceAccount = process.env.FCM_SERVICE_ACCOUNT?.trim();
@@ -697,7 +697,7 @@ jobs:
             "$association_url")"
           require_status "$association_status" 200 "$association_url"
           require_header "$verification_dir/association.headers" '^content-type: application/json' "$association_url"
-          if ! jq -e '.applinks.details == [{"appID":"ZTRDTUL87R.app.omnibot.desktop","paths":["/join"]},{"appID":"ZTRDTUL87R.run.openbot.mobile","paths":["/join","/agents/*"]}]' \
+          if ! jq -e '.applinks.details == [{"appID":"ZTRDTUL87R.app.omnibot.desktop","paths":["/join"]},{"appID":"ZTRDTUL87R.run.omnibot.mobile","paths":["/join","/agents/*"]}]' \
             "$verification_dir/association.json" >/dev/null; then
             echo "Response headers of $association_url:"
             tr -d '\r' < "$verification_dir/association.headers"

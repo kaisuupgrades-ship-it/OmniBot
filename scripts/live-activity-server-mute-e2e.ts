@@ -7,19 +7,19 @@
 // Dynamic Island coordinator, the Live Activity view, and `LiveActivitySync`. Only the boundaries
 // that need a phone are replaced: the ActivityKit module that `agentLiveActivity()` returns, the
 // keychain, and the host requests. It sends nothing. Run it with
-// `bun scripts/live-activity-server-mute-e2e.ts`. Writes .openbot-build/live-activity-server-mute-e2e/report.json.
+// `bun scripts/live-activity-server-mute-e2e.ts`. Writes .omnibot-build/live-activity-server-mute-e2e/report.json.
 import assert from "node:assert/strict";
 import { webcrypto } from "node:crypto";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { AgentEvent, AgentSummary } from "@openbot/contracts/ipc";
-import { LIVE_ACTIVITY_PUSH_ROUTES } from "@openbot/contracts/team-protocol/live-activity-push-v1";
-import { createOmniBotLogger } from "@openbot/logging";
+import type { AgentEvent, AgentSummary } from "@omnibot/contracts/ipc";
+import { LIVE_ACTIVITY_PUSH_ROUTES } from "@omnibot/contracts/team-protocol/live-activity-push-v1";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { plugin } from "bun";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/live-activity-server-mute-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/live-activity-server-mute-e2e");
 const MOBILE_SRC = resolve(import.meta.dirname, "../apps/mobile/src");
 const WAIT_TIMEOUT_MS = 10_000;
 /** Long enough for the hook to apply the mute before it ends. */

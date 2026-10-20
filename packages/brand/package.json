@@ -1,5 +1,5 @@
 {
-  "name": "@openbot/brand",
+  "name": "@omnibot/brand",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@norbert_bodziony/bloub": "catalog:",
-    "@openbot/contracts": "workspace:*"
+    "@omnibot/contracts": "workspace:*"
   },
   "peerDependencies": {
     "@solidjs/web": "catalog:",

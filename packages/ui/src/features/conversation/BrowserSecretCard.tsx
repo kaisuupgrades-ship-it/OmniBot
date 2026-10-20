@@ -1,9 +1,9 @@
-import type { BrowserPreview, BrowserTakeoverRequest, RespondToBrowserSecretInput } from "@openbot/contracts/ipc";
-import { Button, ErrorReference, Input, Lock, Maximize2, Monitor, ShieldCheck, X } from "@openbot/ui";
-import { OtpInput } from "@openbot/ui/features/account/OtpInput";
-import { BrowserTakeoverPreview } from "@openbot/ui/features/conversation/BrowserTakeoverPreview";
-import { useText } from "@openbot/ui/text";
-import { errorReference } from "@openbot/user-errors";
+import type { BrowserPreview, BrowserTakeoverRequest, RespondToBrowserSecretInput } from "@omnibot/contracts/ipc";
+import { Button, ErrorReference, Input, Lock, Maximize2, Monitor, ShieldCheck, X } from "@omnibot/ui";
+import { OtpInput } from "@omnibot/ui/features/account/OtpInput";
+import { BrowserTakeoverPreview } from "@omnibot/ui/features/conversation/BrowserTakeoverPreview";
+import { useText } from "@omnibot/ui/text";
+import { errorReference } from "@omnibot/user-errors";
 import { createEffect, createSignal, onCleanup, Show } from "solid-js";
 
 /**

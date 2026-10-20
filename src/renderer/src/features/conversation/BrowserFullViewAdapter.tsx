@@ -1,6 +1,6 @@
-import type { BrowserTab } from "@openbot/contracts/ipc";
-import BrowserFullView from "@openbot/ui/features/browser/BrowserFullView";
-import { BROWSER_NEW_TAB_URL } from "@openbot/ui/features/browser/browser-suggestions";
+import type { BrowserTab } from "@omnibot/contracts/ipc";
+import BrowserFullView from "@omnibot/ui/features/browser/BrowserFullView";
+import { BROWSER_NEW_TAB_URL } from "@omnibot/ui/features/browser/browser-suggestions";
 import { createEffect, createMemo, untrack } from "solid-js";
 import {
   browserSessionHistory,

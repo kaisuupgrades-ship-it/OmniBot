@@ -1,15 +1,15 @@
-import { serializeAttachmentReference } from "@openbot/contracts/attachment-references";
-import type { AgentEvent, AttachmentSummary, DraftAttachment, QueueSnapshot } from "@openbot/contracts/ipc";
+import { serializeAttachmentReference } from "@omnibot/contracts/attachment-references";
+import type { AgentEvent, AttachmentSummary, DraftAttachment, QueueSnapshot } from "@omnibot/contracts/ipc";
 import {
   type ConversationUiBlock,
   type UiChoiceBlock,
   type UiConfirmBlock,
   uiBlockFallbackQuestions,
-} from "@openbot/contracts/ui-blocks";
-import type { AgentMessage as RendererAgentMessage, RoutineRunMarkerModel } from "@openbot/ui/data";
-import { BrowserTakeoverCard } from "@openbot/ui/features/conversation/ConversationPrompts";
-import type { VoicePhase } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ui-blocks";
+import type { AgentMessage as RendererAgentMessage, RoutineRunMarkerModel } from "@omnibot/ui/data";
+import { BrowserTakeoverCard } from "@omnibot/ui/features/conversation/ConversationPrompts";
+import type { VoicePhase } from "@omnibot/ui/features/conversation/VoiceRecordingMorph";
+import { currentText } from "@omnibot/ui/text";
 import { Portal } from "@solidjs/web";
 import { createEffect, createSignal, onCleanup, onSettled, Show } from "solid-js";
 import { fn } from "storybook/test";
@@ -34,7 +34,7 @@ import {
   STORY_PRESENCE,
   STORY_QUEUES,
 } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 const storyAttachment = CONVERSATION_STORY_ATTACHMENT;
 const messages = CONVERSATION_STORY_MESSAGES;
@@ -93,8 +93,8 @@ const imageGenerationMessages: RendererAgentMessage[] = [
   },
 ];
 
-const generatedImagePreview = new URL("../src/assets/openbot-logo-production.png", import.meta.url).href;
-const generatedImagePreviewAlternate = new URL("../src/assets/openbot-logo-dev.png", import.meta.url).href;
+const generatedImagePreview = new URL("../src/assets/omnibot-logo-production.png", import.meta.url).href;
+const generatedImagePreviewAlternate = new URL("../src/assets/omnibot-logo-dev.png", import.meta.url).href;
 const generatedImageAttachment: AttachmentSummary = {
   id: "generated-image-in-chat",
   name: "generated-image.png",
@@ -497,7 +497,7 @@ const markdownImageMessages: RendererAgentMessage[] = [
       "",
       `![Development logo](${generatedImagePreviewAlternate})`,
       "",
-      `![](${new URL("../src/assets/openbot-logo-preview.png", import.meta.url).href})`,
+      `![](${new URL("../src/assets/omnibot-logo-preview.png", import.meta.url).href})`,
     ].join("\n"),
     time: "10:03",
     kind: "text",
@@ -1068,7 +1068,7 @@ function MockedConversation(props: {
   takeoverStateGallery?: boolean;
   conversationError?: string;
 }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot();
   const controller = createConversationController({ onTypingChange: props.args.onTypingChange });
   const previewUrls = new Set<string>();
@@ -1120,7 +1120,7 @@ function MockedConversation(props: {
       setFirstUnreadMessageId(messageId);
     },
   );
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   if (props.takeoverStateGallery) {
     onSettled(() => {
       const mount = storyFrameElement?.querySelector<HTMLElement>(".conversation-scroll") ?? null;
@@ -1168,7 +1168,7 @@ function MockedConversation(props: {
     if (takeoverGalleryScrollTimer !== undefined) window.clearTimeout(takeoverGalleryScrollTimer);
     for (const previewUrl of previewUrls) URL.revokeObjectURL(previewUrl);
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
     <div ref={setStoryFrameElement} class="conversation-story-frame">

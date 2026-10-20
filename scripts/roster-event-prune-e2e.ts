@@ -4,23 +4,23 @@
 // No app, provider, account or network is started.
 //
 // Run: bun scripts/roster-event-prune-e2e.ts
-// Writes .openbot-build/roster-event-prune-e2e/report.json and exits non-zero on a failure.
+// Writes .omnibot-build/roster-event-prune-e2e/report.json and exits non-zero on a failure.
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { AGENT_REASONING_EFFORTS, type AgentSummary } from "@openbot/contracts/ipc";
+import { AGENT_REASONING_EFFORTS, type AgentSummary } from "@omnibot/contracts/ipc";
 import { AgentStore } from "../src/backend/agent-store";
 import type { AgentModelChange } from "../src/backend/database/agent-roster";
 import { databaseRows, requiredStringColumn } from "../src/backend/database/database-rows";
 import { runCauseEffect } from "../src/backend/effect-boundary";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/roster-event-prune-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/roster-event-prune-e2e");
 const LEGACY_WRITES = 50;
-const root = await mkdtemp(join(tmpdir(), "openbot-roster-event-prune-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-roster-event-prune-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 

@@ -6,24 +6,24 @@
 // fail the wake. The command runs after the wake reply.
 //
 // Run: bun run test:hosted-held-resume
-// It writes .openbot-build/hosted-held-resume-e2e/report.json and exits non-zero on a failure.
+// It writes .omnibot-build/hosted-held-resume-e2e/report.json and exits non-zero on a failure.
 import { readdirSync, readFileSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { setTimeout as delay } from "node:timers/promises";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 import { Effect } from "effect";
 import { HostedServerService } from "../src/server/hosted-server-service";
 import { sqliteD1 } from "./sqlite-d1";
 
 const ROOT = resolve(import.meta.dirname, "../../..");
-const OUT = join(ROOT, ".openbot-build", "hosted-held-resume-e2e");
+const OUT = join(ROOT, ".omnibot-build", "hosted-held-resume-e2e");
 const MIGRATIONS = join(ROOT, "apps", "auth-api", "migrations");
 const SERVER_ID = "server-1";
 const SANDBOX_ID = "bx_1";
 const OWNER = { id: "owner", email: "owner@example.test", name: null, avatarUrl: null };
-const FLAG = "/run/openbot-pre-stop";
+const FLAG = "/run/omnibot-pre-stop";
 
 type ResumeAnswer = "running" | "resuming" | "conflict";
 type CommandAnswer = "started" | "nothing" | "unavailable" | "failed";
@@ -117,7 +117,7 @@ function commandClearsOnlyTheFlag(commands: { path: string; body: unknown }[]) {
     commands[0]?.path === `/sandboxes/${SANDBOX_ID}/commands` &&
     text.startsWith(`if [ -e ${FLAG} ]; then `) &&
     text.includes(`sudo -n rm -f ${FLAG}`) &&
-    text.includes("sudo -n systemctl start --no-block openbot.service") &&
+    text.includes("sudo -n systemctl start --no-block omnibot.service") &&
     typeof body.timeoutSeconds === "number" &&
     body.timeoutSeconds <= 15
   );

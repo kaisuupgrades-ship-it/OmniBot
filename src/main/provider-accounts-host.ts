@@ -1,8 +1,8 @@
 // The provider accounts of this host for an administrator of a joined server (`provider-accounts-v1`).
 
-import { type AgentProviderId, DEFAULT_PROVIDER_ACCOUNT_ID } from "@openbot/contracts/ipc";
-import { PROVIDER_ACCOUNTS_MESSAGE_LIMIT } from "@openbot/contracts/team-protocol/provider-accounts-v1";
-import { sourceText } from "@openbot/i18n/source";
+import { type AgentProviderId, DEFAULT_PROVIDER_ACCOUNT_ID } from "@omnibot/contracts/ipc";
+import { PROVIDER_ACCOUNTS_MESSAGE_LIMIT } from "@omnibot/contracts/team-protocol/provider-accounts-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import { Cause, Effect, Exit, Option, Semaphore } from "effect";
 import { providerLabel } from "../backend/agent/thread-items";
 import type { AgentService } from "../backend/agent-service";

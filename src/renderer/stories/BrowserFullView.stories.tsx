@@ -1,7 +1,7 @@
-import type { BrowserControlSession, BrowserLiveViewEvent, BrowserTab } from "@openbot/contracts/ipc";
-import { BrowserDock } from "@openbot/ui/features/browser/BrowserDock";
-import BrowserFullView from "@openbot/ui/features/browser/BrowserFullView";
-import type { BrowserViewRuntime } from "@openbot/ui/features/browser/BrowserLiveView";
+import type { BrowserControlSession, BrowserLiveViewEvent, BrowserTab } from "@omnibot/contracts/ipc";
+import { BrowserDock } from "@omnibot/ui/features/browser/BrowserDock";
+import BrowserFullView from "@omnibot/ui/features/browser/BrowserFullView";
+import type { BrowserViewRuntime } from "@omnibot/ui/features/browser/BrowserLiveView";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { requireFixture, STORY_AGENTS } from "./fixtures";
@@ -160,9 +160,9 @@ function remoteLiveViewRuntime(): BrowserViewRuntime {
       const context = canvas.getContext("2d");
       const theme = getComputedStyle(document.documentElement);
       if (context) {
-        context.fillStyle = theme.getPropertyValue("--openbot-bg-surface");
+        context.fillStyle = theme.getPropertyValue("--omnibot-bg-surface");
         context.fillRect(0, 0, width, height);
-        context.fillStyle = theme.getPropertyValue("--openbot-text-primary");
+        context.fillStyle = theme.getPropertyValue("--omnibot-text-primary");
         context.font = "48px sans-serif";
         context.fillText("Page on the host", 64, 128);
       }

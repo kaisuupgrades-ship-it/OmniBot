@@ -12,7 +12,7 @@ const TURN_RESERVE_MS = 60_000;
 /** A low level goes back to "ok" only this far above the low threshold, so it does not flap. */
 const RECOVER_MARGIN_BYTES = 256 * MIB;
 /**
- * `openbot.service` starts main at -500, and a container starts it at 0. Each process that main starts
+ * `omnibot.service` starts main at -500, and a container starts it at 0. Each process that main starts
  * gets this value, so the OOM killer picks a provider CLI, an MCP server or an agent tool before main.
  */
 const CHILD_OOM_SCORE_ADJ = 500;

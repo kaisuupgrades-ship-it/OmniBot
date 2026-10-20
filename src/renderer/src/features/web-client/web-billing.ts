@@ -1,7 +1,7 @@
-import { parseBillingSessionUrl, parseBillingState } from "@openbot/contracts/billing";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import type { BillingCalls } from "@openbot/ui/features/billing/billing-store";
-import { currentText } from "@openbot/ui/text";
+import { parseBillingSessionUrl, parseBillingState } from "@omnibot/contracts/billing";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import type { BillingCalls } from "@omnibot/ui/features/billing/billing-store";
+import { currentText } from "@omnibot/ui/text";
 
 const REQUEST_TIMEOUT_MS = 15_000;
 

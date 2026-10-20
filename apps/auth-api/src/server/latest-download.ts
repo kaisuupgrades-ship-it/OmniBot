@@ -1,5 +1,5 @@
 import { Effect, Schema } from "effect";
-import { OPENBOT_LINKS } from "../lib/landing-links";
+import { OMNIBOT_LINKS } from "../lib/landing-links";
 
 export type AvailableDownloadPlatform = "linux" | "macos" | "windows";
 
@@ -83,7 +83,7 @@ function findInstaller(
  */
 function fallbackToReleases(platform: AvailableDownloadPlatform, reason: string): Response {
   console.warn(`latest-download: serving the releases page for ${platform} (${reason})`);
-  return redirect(OPENBOT_LINKS.releases);
+  return redirect(OMNIBOT_LINKS.releases);
 }
 
 class DownloadManifestError extends Schema.TaggedError<DownloadManifestError>()("DownloadManifestError", {}) {}

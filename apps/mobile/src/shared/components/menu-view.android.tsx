@@ -176,11 +176,11 @@ export function MenuView({
   testID,
 }: MenuComponentProps & { ref?: Ref<MenuComponentRef> }) {
   const tokens = useCSSVariable([
-    "--openbot-text-primary",
-    "--openbot-text-muted",
-    "--openbot-danger-text",
-    "--openbot-border-grouped",
-    "--openbot-bg-control-active",
+    "--omnibot-text-primary",
+    "--omnibot-text-muted",
+    "--omnibot-danger-text",
+    "--omnibot-border-grouped",
+    "--omnibot-bg-control-active",
   ]);
   const colors: MenuColors = {
     text: String(tokens[0]),

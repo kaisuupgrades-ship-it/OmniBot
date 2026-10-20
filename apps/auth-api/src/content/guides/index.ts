@@ -3,17 +3,17 @@
 
 import type { ArticleBody } from "../body";
 import { AgenticAIDefinition } from "./agentic-ai-definition";
-import { OmniBot101 } from "./openbot-101";
-import { OmniBotHostedServers } from "./openbot-hosted-servers";
-import { OmniBotMarketplace } from "./openbot-marketplace";
+import { OmniBot101 } from "./omnibot-101";
+import { OmniBotHostedServers } from "./omnibot-hosted-servers";
+import { OmniBotMarketplace } from "./omnibot-marketplace";
 import { WhatAreAIAgents } from "./what-are-ai-agents";
-import { WtfIsOmniBot } from "./wtf-is-openbot";
+import { WtfIsOmniBot } from "./wtf-is-omnibot";
 
 export const GUIDE_BODIES: Readonly<Record<string, ArticleBody>> = {
   "agentic-ai-definition": AgenticAIDefinition,
   "what-are-ai-agents": WhatAreAIAgents,
-  "openbot-101": OmniBot101,
-  "openbot-hosted-servers": OmniBotHostedServers,
-  "openbot-marketplace": OmniBotMarketplace,
-  "wtf-is-openbot": WtfIsOmniBot,
+  "omnibot-101": OmniBot101,
+  "omnibot-hosted-servers": OmniBotHostedServers,
+  "omnibot-marketplace": OmniBotMarketplace,
+  "wtf-is-omnibot": WtfIsOmniBot,
 };

@@ -1,8 +1,8 @@
-import type { AppTextKey } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
-import type { ConnectorDetail } from "@openbot/ui/features/connectors/ConnectorDetailPanel";
-import type { ConnectorId } from "@openbot/ui/features/connectors/connectors";
-import { currentText } from "@openbot/ui/text";
+import type { AppTextKey } from "@omnibot/i18n";
+import { classifyFailure } from "@omnibot/telemetry";
+import type { ConnectorDetail } from "@omnibot/ui/features/connectors/ConnectorDetailPanel";
+import type { ConnectorId } from "@omnibot/ui/features/connectors/connectors";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, onCleanup } from "solid-js";
 import { actionToast } from "../../action-toast";
 

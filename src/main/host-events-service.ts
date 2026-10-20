@@ -8,16 +8,16 @@ import type {
   ListEventRoutineRunsInput,
   ListEventRoutinesInput,
   SaveEventRoutineInput,
-} from "@openbot/contracts/ipc-events";
-import { isEventJsonValue } from "@openbot/contracts/ipc-events";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/ipc-events";
+import { isEventJsonValue } from "@omnibot/contracts/ipc-events";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
 import {
   WEBHOOK_DELIVERY_BODY_BYTES_LIMIT,
   type WebhookDeliveryStatus,
-} from "@openbot/contracts/signal-protocol/messages";
-import { WEBHOOK_ROUTES_LIMIT } from "@openbot/contracts/signal-protocol/webhook-route";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, registerSecretValue } from "@openbot/logging";
+} from "@omnibot/contracts/signal-protocol/messages";
+import { WEBHOOK_ROUTES_LIMIT } from "@omnibot/contracts/signal-protocol/webhook-route";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, registerSecretValue } from "@omnibot/logging";
 import { Effect, Semaphore } from "effect";
 import { causeHelpers } from "../backend/effect-boundary";
 import type { RoutineRecords } from "../backend/routine-records";

@@ -1,4 +1,4 @@
-import type { FilePreview } from "@openbot/contracts/ipc";
+import type { FilePreview } from "@omnibot/contracts/ipc";
 import { strToU8, zipSync } from "fflate";
 import { INLINE_SVG_CHART } from "./chat-visual-fixtures";
 
@@ -40,7 +40,7 @@ Set the provider in \`~/OmniBot/config.json\`:
 }
 \`\`\`
 
-> Migrations are irreversible. No backup of \`openbot.db\` is made before an upgrade.
+> Migrations are irreversible. No backup of \`omnibot.db\` is made before an upgrade.
 
 | Kind | Rendered as |
 | --- | --- |

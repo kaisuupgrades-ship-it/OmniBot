@@ -1,6 +1,6 @@
-import type { AppLanguage } from "@openbot/contracts/app-language";
-import type { CentralAuthUser } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AppLanguage } from "@omnibot/contracts/app-language";
+import type { CentralAuthUser } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Button,
   CreditCard,
@@ -15,14 +15,14 @@ import {
   SwitchField,
   Tabs,
   UserRound,
-} from "@openbot/ui";
-import { LanguageSelect } from "@openbot/ui/features/settings/LanguageSelect";
-import { SendShortcutSelect } from "@openbot/ui/features/settings/SendShortcutSelect";
-import { SettingsDialogShell, type SettingsPagePlacement } from "@openbot/ui/features/settings/SettingsDialogShell";
-import { SettingsProfileTab } from "@openbot/ui/features/settings/SettingsProfileTab";
-import { SoundThemePicker } from "@openbot/ui/features/settings/SoundThemePicker";
-import { createSettingsProfileStore } from "@openbot/ui/features/settings/stores/profile-store";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { LanguageSelect } from "@omnibot/ui/features/settings/LanguageSelect";
+import { SendShortcutSelect } from "@omnibot/ui/features/settings/SendShortcutSelect";
+import { SettingsDialogShell, type SettingsPagePlacement } from "@omnibot/ui/features/settings/SettingsDialogShell";
+import { SettingsProfileTab } from "@omnibot/ui/features/settings/SettingsProfileTab";
+import { SoundThemePicker } from "@omnibot/ui/features/settings/SoundThemePicker";
+import { createSettingsProfileStore } from "@omnibot/ui/features/settings/stores/profile-store";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, onCleanup } from "solid-js";
 import { readActionSoundChoice, replayActionSoundChoice, setActionSoundChoice } from "../../action-sounds";
 import { isCompletionSoundEnabled, setCompletionSoundEnabled } from "../../completion-sound";

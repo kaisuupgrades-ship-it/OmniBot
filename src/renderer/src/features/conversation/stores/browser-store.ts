@@ -1,8 +1,8 @@
-import type { BrowserControlSession, BrowserPreview, BrowserTab } from "@openbot/contracts/ipc";
-import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import type { AgentProfile } from "@openbot/ui/data";
-import { browserAddressUrl } from "@openbot/ui/features/browser/browser-suggestions";
-import { currentText } from "@openbot/ui/text";
+import type { BrowserControlSession, BrowserPreview, BrowserTab } from "@omnibot/contracts/ipc";
+import { TEAM_BROWSER_NAVIGATION_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import type { AgentProfile } from "@omnibot/ui/data";
+import { browserAddressUrl } from "@omnibot/ui/features/browser/browser-suggestions";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createSignal, untrack } from "solid-js";
 import { desktopAnalytics } from "../../../analytics";
 import { serverSupportsCapability } from "../../servers/server-capabilities";

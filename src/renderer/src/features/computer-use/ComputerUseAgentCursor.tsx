@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from "@openbot/ui/utils";
+import { prefersReducedMotion } from "@omnibot/ui/utils";
 import { createEffect } from "solid-js";
 import { agentCursorPointAt, type CursorMove, type CursorPoint, planAgentCursorMove } from "./agent-cursor-motion";
 

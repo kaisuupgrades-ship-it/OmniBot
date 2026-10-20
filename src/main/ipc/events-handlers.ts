@@ -5,13 +5,13 @@ import {
   decodeEventStatus,
   decodeSaveEventRoutineResult,
   decodeWebhookSecret,
-} from "@openbot/contracts/ipc-events";
-import { EVENTS_CAPABILITY, EVENTS_ROUTES } from "@openbot/contracts/team-protocol/events-v1";
+} from "@omnibot/contracts/ipc-events";
+import { EVENTS_CAPABILITY, EVENTS_ROUTES } from "@omnibot/contracts/team-protocol/events-v1";
 import {
   ROUTINE_RECOVERY_CAPABILITY,
   ROUTINE_RECOVERY_ROUTES,
-} from "@openbot/contracts/team-protocol/routine-recovery-v1";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/team-protocol/routine-recovery-v1";
+import { sourceText } from "@omnibot/i18n/source";
 import type { Effect } from "effect";
 import { runCauseEffect } from "../../backend/effect-boundary";
 import type { HostEventsApi } from "../host-events-api";

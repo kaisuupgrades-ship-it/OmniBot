@@ -14,8 +14,8 @@ import {
   agentTemplateShareOrigin,
   createAgentTemplateShareUrl,
   isAgentTemplateId,
-} from "@openbot/contracts/agent-template-links";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+} from "@omnibot/contracts/agent-template-links";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   AGENT_TEMPLATE_LIMITS,
   type AgentSummary,
@@ -36,10 +36,10 @@ import {
   type PublishAgentTemplateInput,
   type RoutineSchedule,
   toAgentTemplateSnapshot,
-} from "@openbot/contracts/ipc";
-import { isDynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+} from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { redactText } from "@omnibot/logging";
 import { Effect, Result, Schema } from "effect";
 import { causeHelpers } from "../backend/effect-boundary";
 import { imageMimeType, localSchedule, toArrayBuffer, validTimezone } from "./agent-marketplace-service";
@@ -79,7 +79,7 @@ function snapshotProblemText(problem: AgentTemplateSnapshotProblem): string {
 }
 
 /** Embedded skills are written here in the new agent's workspace, added to the library, and removed. */
-const SKILL_STAGING = ".openbot/template-skills";
+const SKILL_STAGING = ".omnibot/template-skills";
 
 interface AgentTemplateAuth {
   requestAuthorized<T>(

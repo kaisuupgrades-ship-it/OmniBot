@@ -1,7 +1,7 @@
-import { OPENBOT_SITE_URL } from "../lib/site-metadata";
+import { OMNIBOT_SITE_URL } from "../lib/site-metadata";
 
-const SITE_ORIGIN = new URL(OPENBOT_SITE_URL).origin;
-const SITE_HOST = new URL(OPENBOT_SITE_URL).hostname;
+const SITE_ORIGIN = new URL(OMNIBOT_SITE_URL).origin;
+const SITE_HOST = new URL(OMNIBOT_SITE_URL).hostname;
 
 /**
  * Sends `http://omnibot.example.com` and `www.omnibot.example.com` to `https://omnibot.example.com`, so

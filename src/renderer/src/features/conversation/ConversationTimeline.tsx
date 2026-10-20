@@ -1,30 +1,30 @@
-import { chatVisualReply } from "@openbot/contracts/chat-visual";
-import type { ConversationMessageSender } from "@openbot/contracts/ipc";
-import type { ConversationUiBlock } from "@openbot/contracts/ui-blocks";
-import { Button } from "@openbot/ui";
-import type { AgentMessage, ChatActionMarkerModel } from "@openbot/ui/data";
-import { AgentActivityIndicator } from "@openbot/ui/features/conversation/AgentActivity";
-import { AgentTaskChips } from "@openbot/ui/features/conversation/AgentTasks";
-import { AttachmentCards } from "@openbot/ui/features/conversation/AttachmentCards";
-import { UsageLimitAskCard } from "@openbot/ui/features/conversation/BackupModels";
-import { ChatActionMarker } from "@openbot/ui/features/conversation/ChatActionMarker";
-import { type ChatMessageAuthor, ChatMessageRow } from "@openbot/ui/features/conversation/ChatMessageRow";
-import { ChatRowBoundary } from "@openbot/ui/features/conversation/ChatRowBoundary";
-import { ChatScrollRail, createChatScrollRail } from "@openbot/ui/features/conversation/ChatScrollRail";
-import { ChatSearch } from "@openbot/ui/features/conversation/ChatSearch";
-import { ChatVisual } from "@openbot/ui/features/conversation/ChatVisual";
-import { ContextCompactionMarker, type ContextCompactionView } from "@openbot/ui/features/conversation/ContextUsage";
-import { BrowserTakeoverCard } from "@openbot/ui/features/conversation/ConversationPrompts";
-import { dayMarkerLabel } from "@openbot/ui/features/conversation/chat-day-markers";
-import { ReplyReturnButton, ScrollToLatestButton } from "@openbot/ui/features/conversation/MessageNavigation";
-import { MessageActions } from "@openbot/ui/features/conversation/MessageRendering";
-import { PendingSendStatus } from "@openbot/ui/features/conversation/PendingSendStatus";
-import { SubagentGroup } from "@openbot/ui/features/conversation/Subagents";
-import { TaskList } from "@openbot/ui/features/conversation/TaskList";
-import { UnreadMessagesBanner, UnreadMessagesDivider } from "@openbot/ui/features/conversation/UnreadMessages";
-import { VoicePlayer } from "@openbot/ui/features/conversation/VoicePlayer";
-import { teamMemberName } from "@openbot/ui/features/team/TeamPersonAvatar";
-import { useText } from "@openbot/ui/text";
+import { chatVisualReply } from "@omnibot/contracts/chat-visual";
+import type { ConversationMessageSender } from "@omnibot/contracts/ipc";
+import type { ConversationUiBlock } from "@omnibot/contracts/ui-blocks";
+import { Button } from "@omnibot/ui";
+import type { AgentMessage, ChatActionMarkerModel } from "@omnibot/ui/data";
+import { AgentActivityIndicator } from "@omnibot/ui/features/conversation/AgentActivity";
+import { AgentTaskChips } from "@omnibot/ui/features/conversation/AgentTasks";
+import { AttachmentCards } from "@omnibot/ui/features/conversation/AttachmentCards";
+import { UsageLimitAskCard } from "@omnibot/ui/features/conversation/BackupModels";
+import { ChatActionMarker } from "@omnibot/ui/features/conversation/ChatActionMarker";
+import { type ChatMessageAuthor, ChatMessageRow } from "@omnibot/ui/features/conversation/ChatMessageRow";
+import { ChatRowBoundary } from "@omnibot/ui/features/conversation/ChatRowBoundary";
+import { ChatScrollRail, createChatScrollRail } from "@omnibot/ui/features/conversation/ChatScrollRail";
+import { ChatSearch } from "@omnibot/ui/features/conversation/ChatSearch";
+import { ChatVisual } from "@omnibot/ui/features/conversation/ChatVisual";
+import { ContextCompactionMarker, type ContextCompactionView } from "@omnibot/ui/features/conversation/ContextUsage";
+import { BrowserTakeoverCard } from "@omnibot/ui/features/conversation/ConversationPrompts";
+import { dayMarkerLabel } from "@omnibot/ui/features/conversation/chat-day-markers";
+import { ReplyReturnButton, ScrollToLatestButton } from "@omnibot/ui/features/conversation/MessageNavigation";
+import { MessageActions } from "@omnibot/ui/features/conversation/MessageRendering";
+import { PendingSendStatus } from "@omnibot/ui/features/conversation/PendingSendStatus";
+import { SubagentGroup } from "@omnibot/ui/features/conversation/Subagents";
+import { TaskList } from "@omnibot/ui/features/conversation/TaskList";
+import { UnreadMessagesBanner, UnreadMessagesDivider } from "@omnibot/ui/features/conversation/UnreadMessages";
+import { VoicePlayer } from "@omnibot/ui/features/conversation/VoicePlayer";
+import { teamMemberName } from "@omnibot/ui/features/team/TeamPersonAvatar";
+import { useText } from "@omnibot/ui/text";
 import { createMemo, createSignal, For, Loading, lazy, onCleanup, Show, untrack } from "solid-js";
 import { planItems, planTitle } from "../../app-message-projection";
 import { deviceSendShortcut } from "../../send-shortcut-preference";
@@ -1115,9 +1115,9 @@ export function ConversationTimeline() {
 }
 
 const ApprovalCard = lazy(() =>
-  import("@openbot/ui/features/conversation/ConversationPrompts").then((module) => ({ default: module.ApprovalCard })),
+  import("@omnibot/ui/features/conversation/ConversationPrompts").then((module) => ({ default: module.ApprovalCard })),
 );
 const QuestionPromptBubble = lazy(() =>
-  import("@openbot/ui/components/QuestionPromptBubble").then((module) => ({ default: module.QuestionPromptBubble })),
+  import("@omnibot/ui/components/QuestionPromptBubble").then((module) => ({ default: module.QuestionPromptBubble })),
 );
 const UiBlockPrompt = lazy(() => import("./UiBlockPrompt").then((module) => ({ default: module.UiBlockPrompt })));

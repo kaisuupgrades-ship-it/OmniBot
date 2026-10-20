@@ -12,9 +12,9 @@ import type {
   RemoteDesktopSession,
   RemoteDesktopSetupStatus,
   RemoteDesktopTestStatus,
-} from "@openbot/contracts/ipc";
-import { TEAM_API_ROUTES } from "@openbot/contracts/team-api-routes";
-import { sourceText } from "@openbot/i18n/source";
+} from "@omnibot/contracts/ipc";
+import { TEAM_API_ROUTES } from "@omnibot/contracts/team-api-routes";
+import { sourceText } from "@omnibot/i18n/source";
 import { Context, Deferred, Effect, Exit, Fiber, Layer, Result, Schema, Scope } from "effect";
 import type * as Ws from "ws";
 import { z } from "zod";
@@ -37,15 +37,15 @@ import { rawDataSize, rawDataText } from "./ws-raw-data";
 
 const GRANT_TTL_MS = 60_000;
 const REMOTE_DESKTOP_MAX_SESSIONS = 4;
-const VIEWER_COOKIE = "openbotRemoteViewer";
+const VIEWER_COOKIE = "omnibotRemoteViewer";
 const MAX_PENDING_STREAM_FRAMES = 32;
 const MAX_PENDING_STREAM_BYTES = 1_048_576;
 const MAX_TIMER_DELAY_MS = 2_147_000_000;
 const MAX_CLIPBOARD_BYTES = 1_048_576;
 // Served here, not by Moonlight. They sit under `moonlight/` because the released Team API adapters
 // forward only the viewer routes of that family.
-const PASTE_SCRIPT_PATH = "/openbot-paste.js";
-const CLIPBOARD_PATH = "/openbot-clipboard";
+const PASTE_SCRIPT_PATH = "/omnibot-paste.js";
+const CLIPBOARD_PATH = "/omnibot-clipboard";
 const RUNTIME_START_FAILURE = {
   sunshine: "error.remote.sunshineStartFailed",
   moonlight: "error.remote.moonlightStartFailed",
@@ -133,7 +133,7 @@ class ScreenDependencies extends Context.Service<
     credentials(): Effect.Effect<{ username: string; password: string }, RemoteWorkflowError>;
     iceServers(): Effect.Effect<RemoteDesktopIceServer[], RemoteWorkflowError>;
   }
->()("openbot/main/ScreenDependencies") {
+>()("omnibot/main/ScreenDependencies") {
   static layer(options: RemoteScreenGatewayOptions) {
     return Layer.succeed(
       ScreenDependencies,
@@ -1222,7 +1222,7 @@ export class RemoteScreenGateway {
   }
 
   #viewerAuthorized(request: IncomingMessage, session: ManagedRemoteScreenSession): boolean {
-    const remoteSession = request.headers["x-openbot-webrtc-session"];
+    const remoteSession = request.headers["x-omnibot-webrtc-session"];
     if (remoteSession === session.teamSessionId) return true;
     const cookie = parseCookie(request.headers.cookie, VIEWER_COOKIE);
     return Boolean(cookie && session.viewerCookieHash && safeHashEqual(secretHash(cookie), session.viewerCookieHash));
@@ -1314,7 +1314,7 @@ function allowedMoonlightPath(path: string): boolean {
 }
 
 function moonlightRuntimeUser(session: ManagedRemoteScreenSession): string {
-  return `openbot-remote-slot-${session.streamerSlot}`;
+  return `omnibot-remote-slot-${session.streamerSlot}`;
 }
 
 async function readSmallJson<T>(request: IncomingMessage, schema: z.ZodType<T>): Promise<T | null> {

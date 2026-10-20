@@ -1,5 +1,5 @@
-import { ProviderLogo } from "@openbot/brand";
-import { Button, Gauge, RefreshCw } from "@openbot/ui";
+import { ProviderLogo } from "@omnibot/brand";
+import { Button, Gauge, RefreshCw } from "@omnibot/ui";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, onCleanup, Show } from "solid-js";
 import { useText } from "../../text";

@@ -1,5 +1,5 @@
-import type { HostStatus, ServerConnectionIssueCode, ServerSummary } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { HostStatus, ServerConnectionIssueCode, ServerSummary } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import {
   Badge,
   Item,
@@ -12,8 +12,8 @@ import {
   Monitor,
   SettingsSection,
   Text,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { Show } from "solid-js";
 import { RemoteDesktopSetup } from "./RemoteDesktopSetup";
 import { serverSupportsCapability } from "./server-capabilities";

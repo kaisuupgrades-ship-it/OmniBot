@@ -1,4 +1,4 @@
-import type { BrowserBounds, BrowserPictureInPictureEvent } from "@openbot/contracts/ipc";
+import type { BrowserBounds, BrowserPictureInPictureEvent } from "@omnibot/contracts/ipc";
 import { Effect, Schema } from "effect";
 import { BrowserWindow, screen, WebContentsView } from "electron";
 import type { BrowserHost } from "../backend/browser-host";
@@ -130,14 +130,14 @@ export class BrowserPictureInPicture {
     yield* pipCall(() =>
       developmentUrl
         ? window.loadURL(new URL("browser-pip.html", `${developmentUrl}/`).toString())
-        : window.loadURL("openbot-app://app/browser-pip.html"),
+        : window.loadURL("omnibot-app://app/browser-pip.html"),
     );
     // The system can close the window during the load, and the `closed` handler closes the controls.
     if (controlsView.webContents.isDestroyed()) return bounds;
     yield* pipCall(() =>
       developmentUrl
         ? controlsView.webContents.loadURL(new URL("browser-pip-controls.html", `${developmentUrl}/`).toString())
-        : controlsView.webContents.loadURL("openbot-app://app/browser-pip-controls.html"),
+        : controlsView.webContents.loadURL("omnibot-app://app/browser-pip-controls.html"),
     );
     if (!window.isDestroyed()) {
       this.#startHoverTracking(window, controlsView);

@@ -1,4 +1,4 @@
-import { OPENBOT_LINKS } from "../../lib/landing-links";
+import { OMNIBOT_LINKS } from "../../lib/landing-links";
 import type { Comparison } from "./comparison";
 
 // Every statement about Devin here is taken from devin.ai, the Devin documentation,
@@ -29,23 +29,23 @@ export const DEVIN_COMPARISON: Comparison = {
     {
       icon: "cpu",
       topic: "Models and plans",
-      openbot:
+      omnibot:
         "Use the plans you already have: ChatGPT, Claude, Gemini, Grok or Cursor. Or run free models and your own model through OpenCode. Choose one for each agent, and change it later.",
       rival:
         "Models from Anthropic, OpenAI, Google, Cognition and open-source labs, paid through your Devin plan. No own API keys. On paid plans, Devin Desktop can also run agents such as Codex CLI or Gemini CLI, billed by their provider.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "laptop",
       topic: "Where agents work",
-      openbot: "On the computer that runs OmniBot.",
+      omnibot: "On the computer that runs OmniBot.",
       rival:
         "In virtual machines in Cognition's cloud, or on your computer with Devin Desktop or the Devin CLI. The agent's planning always runs in Cognition's cloud.",
     },
     {
       icon: "cloud",
       topic: "When your computer is off",
-      openbot:
+      omnibot:
         "Agents keep working on the computer or server that runs OmniBot, and routines start them on a schedule. If you do not want to keep a computer on, use a hosted OmniBot server in the EU, from €20 or $25 a month.",
       rival:
         "Devin Cloud keeps working when you close your laptop. Automations start sessions on a schedule or from events.",
@@ -53,7 +53,7 @@ export const DEVIN_COMPARISON: Comparison = {
     {
       icon: "phone",
       topic: "Remote access",
-      openbot:
+      omnibot:
         "Apps for iPhone and Android connect from anywhere. Chats and files go over an encrypted connection between your devices, with no VPN, and no cloud stores them.",
       rival:
         "A web app that you can install on your phone from the browser. Start sessions from Slack, Microsoft Teams, Linear, Jira or a GitHub comment. No iPhone or Android app is listed.",
@@ -61,7 +61,7 @@ export const DEVIN_COMPARISON: Comparison = {
     {
       icon: "users",
       topic: "Teams",
-      openbot:
+      omnibot:
         "Each agent is a full coding agent with its own job. They give work to each other in shared channels, and coworkers can join one team host.",
       rival:
         "Devin can hand parts of a task to managed Devins, each in its own virtual machine. The Teams plan takes up to 200 users, with no limit on parallel sessions.",
@@ -69,25 +69,25 @@ export const DEVIN_COMPARISON: Comparison = {
     {
       icon: "lock",
       topic: "Your data",
-      openbot:
+      omnibot:
         "Workspaces, chats and files stay in a database on your computer. The provider you choose gets the requests you send. Product analytics, with no chat content, are on by default and linked to your account when you sign in; you can turn them off.",
       rival:
         "Code and sessions are processed in Cognition's cloud. By default, Cognition can use your data for model training; only paid plans can opt out.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "tag",
       topic: "Price and account",
-      openbot:
+      omnibot:
         "Free for noncommercial use; commercial use needs a license. Your agents use the plans you already pay for.",
       rival:
         "Free with a light quota. Pro $20 a month, Max $200 a month, and Teams $80 a month plus $40 for each full seat. Every app needs a Devin account.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "globe",
       topic: "Where you can use it",
-      openbot:
+      omnibot:
         "In any country: OmniBot has no region lock. The desktop app is in English, French, Japanese and Turkish, and hosted servers run in the EU. Each AI provider sets the countries for its own plan.",
       rival:
         "Cognition lists no countries; its terms exclude countries under a US embargo. Devin works in Cognition's cloud, and Cognition names no EU data region.",
@@ -95,16 +95,16 @@ export const DEVIN_COMPARISON: Comparison = {
     {
       icon: "devices",
       topic: "Apps",
-      openbot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
+      omnibot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
       rival:
         "Devin Desktop and the Devin CLI for macOS, Windows and Linux, a web app, and plugins for JetBrains IDEs. No native mobile app is listed.",
     },
     {
       icon: "code",
       topic: "Source code",
-      openbot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
+      omnibot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
       rival: "Proprietary. Cognition's terms prohibit reverse engineering.",
-      better: "openbot",
+      better: "omnibot",
     },
   ],
   intro:
@@ -112,40 +112,40 @@ export const DEVIN_COMPARISON: Comparison = {
   sections: [
     {
       title: "Models and the plans you pay for",
-      openbot:
+      omnibot:
         "OmniBot runs the provider tools you already use, with the plans you already pay for: Codex with your ChatGPT plan, Claude Code with your Claude plan, Gemini with your Google AI Pro or Ultra plan, Grok CLI with your Grok account or an xAI API key, and Cursor CLI with your Cursor plan or a Cursor API key. OpenCode runs free models, or your own model on any OpenAI-compatible server, also one on your computer. You choose the provider, the model and the reasoning effort for each agent. When you move an agent to a different provider, it keeps its role, workspace and conversation.",
       rival:
         "Devin supports the latest models from Anthropic, OpenAI, Google and Cognition, and open-source models such as DeepSeek, Kimi and GLM. You choose a model in Devin Desktop and the CLI, and a mode in Devin Cloud. Cognition's own SWE-2 model is post-trained from Kimi K3. Devin does not take your own API keys: you pay through your Devin plan, and extra use is billed at API prices. On Pro, Max and Teams, Devin Desktop can also run third-party agents such as Codex CLI, Claude Agent, OpenCode and Gemini CLI; their provider bills you directly.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "Where the work happens",
-      openbot:
+      omnibot:
         "OmniBot runs on the computer that hosts it. Agent workspaces, conversations and app data stay on that computer, so it must stay on while its agents work. Run it on a desktop or a server that stays on, and your agents keep working while your laptop is closed. If you do not want to keep a computer on, use a hosted OmniBot server. It is a Linux server in the EU (Germany, Finland or France), from €20 or $25 a month, and it keeps the workspaces and chats of its agents. Local-first is not offline: an agent that uses a hosted provider still sends its requests to that provider.",
       rival:
         "Devin Cloud works in virtual machines in Cognition's cloud, and it keeps working when you close your laptop. Automations start sessions from a schedule, Slack, GitHub, Linear or a webhook. Devin Desktop and the Devin CLI run on your own computer. With Outposts, commands can run on machines that you operate. In every case, the agent's planning and inference run in Cognition's cloud; Enterprise can have a dedicated deployment.",
     },
     {
       title: "Phones and remote access",
-      openbot:
+      omnibot:
         "The OmniBot apps for iPhone and Android connect to the computer that runs your agents. From anywhere, you chat with them, follow their progress and send files. The connection goes directly between your devices when it can, it is encrypted, and no cloud stores your chats or files. You set up no VPN or tunnel. Remote access needs an OmniBot account.",
       rival:
         "Devin's web app can be installed on a phone from the browser, as a Progressive Web App. You can also start sessions from Slack, Microsoft Teams, Linear or Jira, from a GitHub pull request with a /devin comment, or through the Devin API. The sessions themselves run in Cognition's cloud. We found no Devin app in the App Store or Google Play.",
     },
     {
       title: "How agents work as a team",
-      openbot:
+      omnibot:
         "In OmniBot, each agent is a full coding agent: Codex, Claude Code, Gemini, Grok CLI, Cursor CLI or OpenCode, each with its own job and workspace. A lead agent can give parts of a task to other agents in a shared channel. You follow their work and step in when a decision needs you. For a team of people, one computer runs the host and the others join it; the chats and files stay on the host.",
       rival:
         "Devin can give parts of a large task to a team of managed Devins that work in parallel, each in its own virtual machine, and the Devin CLI has subagents. Pro and Max run up to 10 sessions at the same time; Teams and Enterprise have no limit. The Teams plan takes up to 200 users, with shared work and an admin dashboard; Enterprise adds single sign-on and a dedicated deployment.",
     },
     {
       title: "Data and privacy",
-      openbot:
+      omnibot:
         "OmniBot keeps workspaces, conversations, attachments and browser data in a SQLite database on the computer that runs it. OmniBot keeps no other copy. On a hosted OmniBot server, the database is on that server in the EU. An account holds your profile, team memberships, invitations, sign-in sessions, the settings that let devices find each other, and any agent templates that you publish. Product analytics, which never include chat content, are on by default and linked to your account when you sign in; you can turn them off in Settings.",
       rival:
         "Devin processes your code and sessions in Cognition's cloud on AWS, and keeps the data for as long as you are a customer. By default, Cognition can use your data for model training; on a paid plan you can opt out, and on Enterprise it trains only with your written consent. Cognition is SOC 2 Type II certified. A deployment in your own cloud is only for Enterprise.",
-      better: "openbot",
+      better: "omnibot",
     },
   ],
   faq: [
@@ -219,8 +219,8 @@ export const DEVIN_COMPARISON: Comparison = {
     { label: "Devin self-serve plans", url: `${DEVIN_DOCS}/admin/billing/self-serve` },
     { label: "Cognition platform terms", url: "https://cognition.com/legal/platform-terms-of-service" },
     { label: "Cognition Trust Center", url: "https://trust.cognition.ai" },
-    { label: "OmniBot privacy notes", url: OPENBOT_LINKS.privacy },
-    { label: "OmniBot source code", url: OPENBOT_LINKS.repository },
+    { label: "OmniBot privacy notes", url: OMNIBOT_LINKS.privacy },
+    { label: "OmniBot source code", url: OMNIBOT_LINKS.repository },
   ],
   checkedAt: "2026-10-02",
 };

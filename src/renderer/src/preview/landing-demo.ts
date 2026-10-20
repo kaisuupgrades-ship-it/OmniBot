@@ -1,4 +1,4 @@
-import type { ConversationMessage, DirectMessage, QueueDelivery } from "@openbot/contracts/ipc";
+import type { ConversationMessage, DirectMessage, QueueDelivery } from "@omnibot/contracts/ipc";
 import {
   LANDING_DEMO_SCRIPTS,
   LANDING_DIRECT_DEMO_SCRIPTS,
@@ -7,7 +7,7 @@ import {
   type LandingDemoScript,
   type LandingDirectDemoScript,
 } from "./landing-demo-scripts";
-import type { MockOmniBotControls } from "./mock-openbot";
+import type { MockOmniBotControls } from "./mock-omnibot";
 
 interface LandingDemoControllerOptions {
   reducedMotion?: boolean;

@@ -1,10 +1,10 @@
-import { isManagedRuntimeProvider, type ManagedProviderId } from "@openbot/contracts/agent-providers";
+import { isManagedRuntimeProvider, type ManagedProviderId } from "@omnibot/contracts/agent-providers";
 import type {
   AgentProviderId,
   OmniBotDesktopApi,
   ProviderRuntimeSnapshot,
   ProviderRuntimeStatus,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { clone, type Listener, type MockRuntime } from "./mock-support";
 
 export interface MockProviderRuntimeOptions {

@@ -1,5 +1,5 @@
-import type { AgentEvent, AgentSummary, ServerNotificationLevel } from "@openbot/contracts/ipc";
-import type { TextValue } from "@openbot/ui/text";
+import type { AgentEvent, AgentSummary, ServerNotificationLevel } from "@omnibot/contracts/ipc";
+import type { TextValue } from "@omnibot/ui/text";
 import { onCleanup, untrack } from "solid-js";
 import { startActionSounds } from "../../action-sounds";
 import { playCompletionSoundForAgentEvent, unlockCompletionSound } from "../../completion-sound";

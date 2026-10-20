@@ -1,21 +1,21 @@
-import type { SharedTable } from "@openbot/contracts/ipc";
+import type { SharedTable } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import AgentSettingsPanel from "../src/features/conversation/AgentSettingsPanel";
 import { STORY_AGENT, STORY_AGENT_STATUS, STORY_AGENTS, STORY_MODELS, STORY_SHARED_TABLES } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 const storyAgent = STORY_AGENT;
 
 function SharedTablesStory(props: { tables: SharedTable[] }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot({ tables: props.tables });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
 
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
 
   return (

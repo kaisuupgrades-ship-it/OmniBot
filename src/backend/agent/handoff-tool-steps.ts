@@ -1,5 +1,5 @@
-import { type DynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { redactText } from "@openbot/logging";
+import { type DynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { redactText } from "@omnibot/logging";
 import { Effect } from "effect";
 import type { AgentClient } from "../agent-client";
 import { getArray, getRecord, getString, isRecord } from "../protocol";

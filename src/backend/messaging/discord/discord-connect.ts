@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { createDiscordGuildKeyPair, openDiscordGuildGrant } from "@openbot/contracts/discord-guild-grant";
+import { createDiscordGuildKeyPair, openDiscordGuildGrant } from "@omnibot/contracts/discord-guild-grant";
 import { Effect, Schema } from "effect";
 import { causeHelpers } from "../../effect-boundary";
 

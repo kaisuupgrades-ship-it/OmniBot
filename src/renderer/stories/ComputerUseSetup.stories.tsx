@@ -1,8 +1,8 @@
-import type { ComputerUseState, MacPermissionId } from "@openbot/contracts/ipc";
+import type { ComputerUseState, MacPermissionId } from "@omnibot/contracts/ipc";
 import { onCleanup } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { ComputerUseSetup } from "../src/features/computer-use/ComputerUseSetup";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 function permissions(granted: readonly MacPermissionId[]): ComputerUseState["permissions"] {
   return (["screen-recording", "accessibility"] as const).map((id) => ({ id, granted: granted.includes(id) }));
@@ -15,7 +15,7 @@ const permissionsRequired: ComputerUseState = {
 };
 
 function MockedSetup(props: { state?: ComputerUseState; error?: Error; loading?: boolean }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot();
   mock.api.computerUse.getState = props.loading
     ? () => new Promise(() => undefined)
@@ -24,10 +24,10 @@ function MockedSetup(props: { state?: ComputerUseState; error?: Error; loading?:
           throw props.error;
         }
       : async () => props.state ?? permissionsRequired;
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
     <main class="foundation-story foundation-interaction-stage">

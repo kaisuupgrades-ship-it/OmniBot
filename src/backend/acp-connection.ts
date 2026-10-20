@@ -2,7 +2,7 @@ import { type ChildProcessWithoutNullStreams, spawn } from "node:child_process";
 import { basename } from "node:path";
 import { Readable, Writable } from "node:stream";
 import { type Client, ClientSideConnection, ndJsonStream } from "@agentclientprotocol/sdk";
-import { createOmniBotLogger } from "@openbot/logging";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Deferred, Effect } from "effect";
 import { AgentProcessExitError, type DiagnosticOrigin } from "./agent-client";
 import { type AgentCliInfo, cliSpawnTarget } from "./cli";

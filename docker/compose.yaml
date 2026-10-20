@@ -3,9 +3,9 @@
 #   curl -fsSLO https://updates.omnibot.example.com/docker/compose.yaml
 #   curl -fsSLO https://updates.omnibot.example.com/docker/seccomp.json
 #   docker compose up -d
-#   docker compose exec openbot openbot login
+#   docker compose exec omnibot omnibot login
 services:
-  openbot:
+  omnibot:
     # Use a version tag to choose when to upgrade. OmniBot never goes back to an older version.
     image: registry.omnibot.example.com/omnibot:latest
     restart: unless-stopped
@@ -18,10 +18,10 @@ services:
     # OmniBot stops its agents and closes the database before it exits.
     stop_grace_period: 60s
     volumes:
-      - openbot-data:/data
+      - omnibot-data:/data
     # OmniBot only connects out. It needs no published port.
     # environment:
     #   XAI_API_KEY: ${XAI_API_KEY}
 
 volumes:
-  openbot-data:
+  omnibot-data:

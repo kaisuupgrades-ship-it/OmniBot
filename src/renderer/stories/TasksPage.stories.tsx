@@ -1,12 +1,12 @@
-import type { AgentTask, ConversationSnapshot } from "@openbot/contracts/ipc";
-import type { AgentProfile } from "@openbot/ui/data";
+import type { AgentTask, ConversationSnapshot } from "@omnibot/contracts/ipc";
+import type { AgentProfile } from "@omnibot/ui/data";
 import { onCleanup } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { TasksView } from "../src/features/tasks/TasksView";
 import { desktopTasksSource } from "../src/features/tasks/tasks-port";
 import { requireFixture, STORY_AGENTS } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 /*
  * The Tasks page of a server: a composer that starts a task for one agent, and the tasks of all agents
@@ -179,17 +179,17 @@ function conversationOf(task: AgentTask): ConversationSnapshot {
 }
 
 function TasksPageStory(props: { tasks: readonly AgentTask[] }) {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const tasks: Record<string, AgentTask[]> = {};
   for (const task of props.tasks) tasks[task.agentId] = [...(tasks[task.agentId] ?? []), task];
   const mock = createMockOmniBot({
     tasks,
     taskConversations: Object.fromEntries(props.tasks.map((task) => [task.id, conversationOf(task)])),
   });
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
   return (
     <div style={{ height: "100vh" }}>

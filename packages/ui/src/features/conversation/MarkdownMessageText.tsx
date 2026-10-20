@@ -1,7 +1,7 @@
-import { fileReferenceName, isFileReference } from "@openbot/brand/file-reference";
-import { blockChatMath, chatMathBlockStart, chatMathStart, inlineChatMath } from "@openbot/contracts/chat-math";
-import { chatPreviewKind } from "@openbot/contracts/chat-preview";
-import { Button, Checkbox } from "@openbot/ui";
+import { fileReferenceName, isFileReference } from "@omnibot/brand/file-reference";
+import { blockChatMath, chatMathBlockStart, chatMathStart, inlineChatMath } from "@omnibot/contracts/chat-math";
+import { chatPreviewKind } from "@omnibot/contracts/chat-preview";
+import { Button, Checkbox } from "@omnibot/ui";
 import { Dynamic } from "@solidjs/web";
 import { Marked, type Token, type Tokens, type TokensList } from "marked";
 import { createMemo, For, Show } from "solid-js";

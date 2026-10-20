@@ -16,15 +16,15 @@
   place-items: center;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--omnibot-radius-md);
   background: transparent;
   transition-property: scale, background-color, box-shadow;
-  transition-duration: var(--openbot-duration-normal), var(--openbot-duration-hover), var(--openbot-duration-hover);
+  transition-duration: var(--omnibot-duration-normal), var(--omnibot-duration-hover), var(--omnibot-duration-hover);
   transition-timing-function: ease-out;
 }
 
 .logo-color-choice:hover {
-  background: var(--openbot-hover);
+  background: var(--omnibot-hover);
 }
 
 .logo-color-choice:active {
@@ -32,16 +32,16 @@
 }
 
 .logo-color-choice-selected {
-  background: var(--openbot-border);
+  background: var(--omnibot-border);
   box-shadow:
-    inset 0 0 0 1px var(--openbot-text-muted),
-    0 1px 3px var(--openbot-shadow-popover-ambient);
+    inset 0 0 0 1px var(--omnibot-text-muted),
+    0 1px 3px var(--omnibot-shadow-popover-ambient);
 }
 
 .logo-color-swatch {
   display: block;
   width: 18px;
   height: 18px;
-  border-radius: var(--openbot-radius-pill);
-  box-shadow: inset 0 0 0 1px var(--openbot-border-strong);
+  border-radius: var(--omnibot-radius-pill);
+  box-shadow: inset 0 0 0 1px var(--omnibot-border-strong);
 }

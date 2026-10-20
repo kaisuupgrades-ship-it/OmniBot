@@ -1,7 +1,7 @@
 // Runs `ask_ui` blocks end to end on the real modules: the real `AttentionRegistry` answers each block as
 // the desktop, a team member and a released client do, and the real Team API codecs carry the stored
 // conversation as a host sends it to each kind of client. No provider or account is used.
-// `bun scripts/ui-blocks-e2e.ts`. Writes .openbot-build/ui-blocks-e2e/report.json.
+// `bun scripts/ui-blocks-e2e.ts`. Writes .omnibot-build/ui-blocks-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -11,25 +11,25 @@ import {
   type ConversationPage,
   type ConversationSnapshot,
   isConversationMessage,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   TEAM_BOOTSTRAP_CAPABILITIES,
   TEAM_CURRENT_CAPABILITIES,
   TEAM_UI_BLOCKS_CAPABILITY,
   teamCapabilitiesForProtocol,
-} from "@openbot/contracts/team-protocol/current";
+} from "@omnibot/contracts/team-protocol/current";
 import {
   decodeTeamProtocolV6CurrentHttpResponse,
   encodeTeamProtocolV6CurrentHttpResponse,
-} from "@openbot/contracts/team-protocol/v6-adapter";
+} from "@omnibot/contracts/team-protocol/v6-adapter";
 import {
   decodeTeamProtocolV7CurrentHttpResponse,
   encodeTeamProtocolV7CurrentHttpResponse,
-} from "@openbot/contracts/team-protocol/v7-adapter";
+} from "@omnibot/contracts/team-protocol/v7-adapter";
 import {
   decodeTeamProtocolV7BaseCurrentEvent,
   encodeTeamProtocolV7BaseCurrentEvent,
-} from "@openbot/contracts/team-protocol/v7-base-adapter";
+} from "@omnibot/contracts/team-protocol/v7-base-adapter";
 import {
   type ConversationUiBlock,
   normalizeUiBlockSpec,
@@ -37,7 +37,7 @@ import {
   type UiBlockSpec,
   type UiBlockValue,
   uiBlockAnswersFromResponse,
-} from "@openbot/contracts/ui-blocks";
+} from "@omnibot/contracts/ui-blocks";
 import { Effect } from "effect";
 import { AttentionRegistry, type PromptResponder } from "../src/backend/agent/attention-registry";
 import { ForbiddenAttentionAnswer } from "../src/backend/agent/inactive-attention-request";
@@ -45,7 +45,7 @@ import { CodexAppServerClient } from "../src/backend/app-server-client";
 import { runCauseEffect } from "../src/backend/effect-boundary";
 import type { RequestId } from "../src/backend/protocol";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/ui-blocks-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/ui-blocks-e2e");
 const PAGE_PATH = "/v1/agents/agent-1/conversation-page";
 const THREAD = "thread-1";
 const SECRET = "e2e-secret-4be1c0";

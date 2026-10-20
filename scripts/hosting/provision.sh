@@ -4,10 +4,10 @@
 #
 #   sudo bash provision.sh <service-user> <appimage-url> <appimage-sha256> <auth-api-url>
 #
-# It enables openbot.service and the update units and never starts them. The builder then has no
+# It enables omnibot.service and the update units and never starts them. The builder then has no
 # host identity and no account session, so every server made from the template starts empty and
-# redeems its own claim. To upgrade a server in place, stop openbot.service, run the same command,
-# and start the service again. After that, openbot-hosted-update keeps the server on the newest release.
+# redeems its own claim. To upgrade a server in place, stop omnibot.service, run the same command,
+# and start the service again. After that, omnibot-hosted-update keeps the server on the newest release.
 set -euo pipefail
 
 if [ "$(id -u)" -ne 0 ] || [ "$#" -ne 4 ]; then
@@ -19,8 +19,8 @@ APPIMAGE_URL=$2
 APPIMAGE_SHA256=$3
 AUTH_API_URL=$4
 SOURCE=$(cd "$(dirname "$0")" && pwd)
-# shellcheck source=openbot-hosted-update
-source "$SOURCE/openbot-hosted-update"
+# shellcheck source=omnibot-hosted-update
+source "$SOURCE/omnibot-hosted-update"
 
 [[ $SERVICE_USER =~ ^[a-z_][a-z0-9_-]*$ ]] && id "$SERVICE_USER" >/dev/null || fail "Unknown service user."
 [[ $APPIMAGE_URL == https://* ]] || fail "The AppImage URL must use HTTPS."
@@ -44,7 +44,7 @@ fi
 apt-get clean
 install -d -m 0755 "$INSTALL" "$INSTALL/hosted"
 recover
-work=$(mktemp -d "$SCRATCH/openbot-update.XXXXXX")
+work=$(mktemp -d "$SCRATCH/omnibot-update.XXXXXX")
 trap 'rm -rf "$work"' EXIT
 fetch --output "$work/OmniBot.AppImage" "$APPIMAGE_URL"
 echo "$APPIMAGE_SHA256  $work/OmniBot.AppImage" | sha256sum --check --quiet
@@ -63,8 +63,8 @@ install_hosting "$SOURCE"
 finish_swap
 
 # The server keyring. boat keeps changes in /srv, and /srv is on the disk while /home is still on
-# the restore mount after a resume. openbot-hosted-server explains why that matters.
-install -d -o "$SERVICE_USER" -g "$(id -gn "$SERVICE_USER")" -m 0700 /srv/openbot-hosted
+# the restore mount after a resume. omnibot-hosted-server explains why that matters.
+install -d -o "$SERVICE_USER" -g "$(id -gn "$SERVICE_USER")" -m 0700 /srv/omnibot-hosted
 # Not a secret: the account server that this template's servers sign in to.
-printf 'OPENBOT_AUTH_API_URL=%s\n' "${AUTH_API_URL%/}" >"$INSTALL/hosted/openbot.env"
-chmod 0644 "$INSTALL/hosted/openbot.env"
+printf 'OMNIBOT_AUTH_API_URL=%s\n' "${AUTH_API_URL%/}" >"$INSTALL/hosted/omnibot.env"
+chmod 0644 "$INSTALL/hosted/omnibot.env"

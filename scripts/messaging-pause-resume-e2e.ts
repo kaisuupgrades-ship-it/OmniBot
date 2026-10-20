@@ -3,13 +3,13 @@
 // the pause stays after a restart, and resume identifies again and starts a new transport. Runs the
 // real agent and messaging services on a temporary profile with fake platform drivers:
 // `bun scripts/messaging-pause-resume-e2e.ts`.
-// Writes .openbot-build/messaging-pause-resume-e2e/report.json.
+// Writes .omnibot-build/messaging-pause-resume-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import type { MessagingConnection, MessagingPlatform, SetMessagingEnabledInput } from "@openbot/contracts/ipc";
+import type { MessagingConnection, MessagingPlatform, SetMessagingEnabledInput } from "@omnibot/contracts/ipc";
 import { Effect } from "effect";
 import type { AgentBrowserHost } from "../src/backend/agent/turn-lifecycle";
 import { AgentService } from "../src/backend/agent-service";
@@ -24,13 +24,13 @@ import type {
   MessagingDriver,
   MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseSetMessagingEnabledInput } from "../src/main/ipc/messaging-inputs";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-pause-resume-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/messaging-pause-resume-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-pause-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-messaging-pause-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const SLACK = "T-pause-e2e";

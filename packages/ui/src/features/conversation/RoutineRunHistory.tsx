@@ -6,10 +6,10 @@ import {
   type RoutineResultDeliveryReason,
   type RoutineResultDeliveryStatus,
   type RoutineRunFields,
-} from "@openbot/contracts/ipc";
-import type { EventActivity, EventRoutineRef, ListEventActivityInput } from "@openbot/contracts/ipc-events";
-import type { AppMessages, AppTextKey } from "@openbot/i18n";
-import { Button, Check, CirclePause, Clock3, Minus, Text, TriangleAlert, X } from "@openbot/ui";
+} from "@omnibot/contracts/ipc";
+import type { EventActivity, EventRoutineRef, ListEventActivityInput } from "@omnibot/contracts/ipc-events";
+import type { AppMessages, AppTextKey } from "@omnibot/i18n";
+import { Button, Check, CirclePause, Clock3, Minus, Text, TriangleAlert, X } from "@omnibot/ui";
 import { createEffect, createSignal, For, Match, Show, Switch, untrack } from "solid-js";
 import { type TextValue, useText } from "../../text";
 

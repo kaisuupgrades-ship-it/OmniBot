@@ -1,4 +1,4 @@
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 import { Spinner, Typography } from "heroui-native";
 import { View } from "react-native";
 import { useCSSVariable } from "uniwind";
@@ -35,7 +35,7 @@ export function AwaitingRepliesSection({
   onHide: () => void;
 }) {
   const { t } = useText();
-  const [secondaryColor, primaryColor] = useCSSVariable(["--openbot-text-grouped-secondary", "--openbot-text-primary"]);
+  const [secondaryColor, primaryColor] = useCSSVariable(["--omnibot-text-grouped-secondary", "--omnibot-text-primary"]);
   const secondary = String(secondaryColor);
   if (rows.length === 0) return null;
   // The host holds the answers until every teammate of the request is done.

@@ -8,44 +8,44 @@
 // not a var(), and this module is read by the build-time generator where no
 // document exists to resolve one. The same test pins them to tokens.css.
 
-/** `--openbot-logo-production` */
+/** `--omnibot-logo-production` */
 const LOGO_PRODUCTION = "#84adde";
-/** `--openbot-warning` */
+/** `--omnibot-warning` */
 const LOGO_DEV = "#ff9412";
-/** `--openbot-success` */
+/** `--omnibot-success` */
 const LOGO_PREVIEW = "#31cf76";
-/** `--openbot-accent` */
+/** `--omnibot-accent` */
 const ACCENT = "#007cf7";
-/** `--openbot-unread-surface` */
+/** `--omnibot-unread-surface` */
 const UNREAD = "#74b9ff";
-/** `--openbot-onboarding-desktop-indigo` */
+/** `--omnibot-onboarding-desktop-indigo` */
 const INDIGO = "#6f7de8";
-/** `--openbot-chart-series-grok` */
+/** `--omnibot-chart-series-grok` */
 const CYAN = "#6bc7d9";
-/** `--openbot-provider-claude` */
+/** `--omnibot-provider-claude` */
 const TERRACOTTA = "#d97757";
-/** `--openbot-danger-text` */
+/** `--omnibot-danger-text` */
 const CORAL = "#ff6069";
-/** `--openbot-badge-new` */
+/** `--omnibot-badge-new` */
 const MAGENTA = "#ff1e5e";
-/** `--openbot-text-dim` */
+/** `--omnibot-text-dim` */
 const DIM = "#6a6a6a";
-/** `--openbot-bg-canvas`, the page behind the card */
+/** `--omnibot-bg-canvas`, the page behind the card */
 const CANVAS = "#1a1a1a";
 
 export const ARTICLE_GRADIENT_BRAND_HEXES = {
-  "--openbot-logo-production": LOGO_PRODUCTION,
-  "--openbot-warning": LOGO_DEV,
-  "--openbot-success": LOGO_PREVIEW,
-  "--openbot-accent": ACCENT,
-  "--openbot-unread-surface": UNREAD,
-  "--openbot-onboarding-desktop-indigo": INDIGO,
-  "--openbot-chart-series-grok": CYAN,
-  "--openbot-provider-claude": TERRACOTTA,
-  "--openbot-danger-text": CORAL,
-  "--openbot-badge-new": MAGENTA,
-  "--openbot-text-dim": DIM,
-  "--openbot-bg-canvas": CANVAS,
+  "--omnibot-logo-production": LOGO_PRODUCTION,
+  "--omnibot-warning": LOGO_DEV,
+  "--omnibot-success": LOGO_PREVIEW,
+  "--omnibot-accent": ACCENT,
+  "--omnibot-unread-surface": UNREAD,
+  "--omnibot-onboarding-desktop-indigo": INDIGO,
+  "--omnibot-chart-series-grok": CYAN,
+  "--omnibot-provider-claude": TERRACOTTA,
+  "--omnibot-danger-text": CORAL,
+  "--omnibot-badge-new": MAGENTA,
+  "--omnibot-text-dim": DIM,
+  "--omnibot-bg-canvas": CANVAS,
 } as const;
 
 // Four deep anchors that are not brand tokens. Nothing in the product is this

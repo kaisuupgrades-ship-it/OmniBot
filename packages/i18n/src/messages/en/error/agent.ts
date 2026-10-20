@@ -80,7 +80,7 @@ export const messages = defineMessages("error.agent", {
     'A stored agent profile has an unreadable "{field}" value; update the data before starting OmniBot.',
   "error.agent.storedProfileUnreadableId":
     'Stored agent profile {id} has an unreadable "{field}" value; update the data before starting OmniBot.',
-  // Written by `QueueEditRejectedError` in @openbot/contracts, which cannot import this package.
+  // Written by `QueueEditRejectedError` in @omnibot/contracts, which cannot import this package.
   "error.agent.queueEditRejected": "Queue edit rejected: {reason}",
   "error.agent.computerUseLocalOnly": "Computer Use can only be changed on the computer that runs the agent.",
   "error.agent.automationLocalOnly": "Local scripts can only be allowed on the computer that runs the agent.",

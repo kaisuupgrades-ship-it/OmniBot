@@ -101,7 +101,7 @@ private enum PastedItem {
 
   static func copy(_ url: URL, name: String) -> [String: String]? {
     let target = FileManager.default.temporaryDirectory
-      .appendingPathComponent("openbot-paste-\(UUID().uuidString)")
+      .appendingPathComponent("omnibot-paste-\(UUID().uuidString)")
       .appendingPathExtension(url.pathExtension)
     do {
       try FileManager.default.copyItem(at: url, to: target)

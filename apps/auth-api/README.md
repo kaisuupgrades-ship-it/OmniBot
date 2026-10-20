@@ -9,11 +9,11 @@ and team authentication tickets.
 ## Local development
 
 `.env.dev` is the committed encrypted development file. Local identity keys and saved overrides
-stay in ignored `.openbot/dev-state.json`. A checkout without a development key starts with stable
+stay in ignored `.omnibot/dev-state.json`. A checkout without a development key starts with stable
 generated local defaults. Existing state files remain valid.
 
 The update resets values that exist only in the old generated `.env.dev`; it does not import them.
-Local identity and custom settings already saved in `.openbot/dev-state.json` stay unchanged.
+Local identity and custom settings already saved in `.omnibot/dev-state.json` stay unchanged.
 Set new manual overrides in the shell. The load order is shell values, saved local overrides,
 decrypted development settings, then generated defaults. An explicit empty value is an override.
 Shared settings do not replace the local ticket keys, auth webhook secret, report hash secret, or
@@ -33,7 +33,7 @@ commands continue to use that file.
 
 ### Stripe sandbox
 
-`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `openbot_{plan}_{month|year}`)
+`bun run api:stripe:bootstrap` creates the six plan Prices (lookup keys `omnibot_{plan}_{month|year}`)
 and the Customer Portal settings in the Stripe account of `STRIPE_SECRET_KEY`. It is safe to run
 again: a changed amount makes a new Price and moves the lookup key to it. In the Portal, an upgrade
 is charged at once, and a downgrade or a shorter interval starts at the next period.
@@ -69,7 +69,7 @@ bun scripts/stripe-flows-e2e.ts --api http://127.0.0.1:<port> [scenario ...]
 ```
 
 The `portal` scenario prints a Customer Portal cancel page and then an update page, and waits until
-you use them. The report goes to `.openbot-build/stripe-flows-e2e.json`.
+you use them. The report goes to `.omnibot-build/stripe-flows-e2e.json`.
 
 The `boat` scenario runs only when you name it. It pays for a server, waits until OmniBot in the VM
 signs in and publishes the host, restarts the service to check the stored session, and deletes the
@@ -103,7 +103,7 @@ bun run env:validate:prod
 ```
 
 Commit the encrypted `.env.production` and `.env.dev` files. Never commit `.env.keys` or local
-state from `.openbot/`.
+state from `.omnibot/`.
 
 ## Article artwork
 
@@ -158,9 +158,9 @@ before remote changes. Test deployments do not send account analytics.
 
 `GITHUB_APP_PRIVATE_KEY` is the OmniBot GitHub App's private key as a PKCS #8 PEM. GitHub gives a
 PKCS #1 key; convert it with `openssl pkcs8 -topk8 -nocrypt -in <key>.pem`. With the key, the
-Worker gives the desktop installation tokens, so GitHub shows `openbotgit[bot]` as the author of an
+Worker gives the desktop installation tokens, so GitHub shows `omnibotgit[bot]` as the author of an
 agent's work. With no key, the desktop acts as the signed-in user. In GitHub Actions the secret is
-`OPENBOT_GITHUB_APP_PRIVATE_KEY`, because GitHub refuses secret names that start with `GITHUB_`.
+`OMNIBOT_GITHUB_APP_PRIVATE_KEY`, because GitHub refuses secret names that start with `GITHUB_`.
 Secrets are never passed as process arguments. The other values are Worker
 variables. The SMTP connection uses TLS from the start and accepts only port 465.
 
@@ -171,8 +171,8 @@ them in Wrangler's temporary runtime secrets file.
 `SERVER_CLAIMS_ADMIN_TOKEN` lets an operator sign a new server in for a user without an email code: see
 [server claims](../../docs/self-hosted-server.md#sign-in-with-a-server-claim). Without it, the endpoint answers 401.
 
-Use `bun run api:deploy:test` for the isolated `openbot-auth-api-test` Worker
-and the `openbot-auth-test` D1 database.
+Use `bun run api:deploy:test` for the isolated `omnibot-auth-api-test` Worker
+and the `omnibot-auth-test` D1 database.
 
 As a fallback, set `EMAIL_DELIVERY_WEBHOOK_URL` to an HTTPS endpoint. OmniBot
 sends this JSON:

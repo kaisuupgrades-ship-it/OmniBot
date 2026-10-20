@@ -4,9 +4,9 @@ import {
   type BrowserDockGlass,
   type BrowserDockPresentation,
   LOCAL_SERVER_ID,
-} from "@openbot/contracts/ipc";
-import { BrowserDock } from "@openbot/ui/features/browser/BrowserDock";
-import { clamp } from "@openbot/ui/utils";
+} from "@omnibot/contracts/ipc";
+import { BrowserDock } from "@omnibot/ui/features/browser/BrowserDock";
+import { clamp } from "@omnibot/ui/utils";
 import { createSignal, onSettled, Show } from "solid-js";
 import { browserDockPort } from "./browser-dock-port";
 

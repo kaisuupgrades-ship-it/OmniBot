@@ -3,7 +3,7 @@ import type {
   MarketplaceSkillDetail,
   OmniBotDesktopApi,
   SkillSubmission,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   STORY_INSTALLED_SKILLS,
   STORY_MARKETPLACE_SKILL_DETAILS,

@@ -1,4 +1,4 @@
-import type { AppTranslate } from "@openbot/i18n";
+import type { AppTranslate } from "@omnibot/i18n";
 import { Menu, type NativeImage, Tray } from "electron";
 
 export interface BackgroundTray {

@@ -17,7 +17,7 @@ import {
   APP_LOGO_EYE_HEX,
   DEFAULT_APP_LOGO_COLOR,
   DEFAULT_APP_LOGO_EYE_HEX,
-} from "@openbot/contracts/app-logo-color";
+} from "@omnibot/contracts/app-logo-color";
 import {
   APP_LOGO_CORNER,
   APP_LOGO_EYE_CENTERS,
@@ -31,7 +31,7 @@ type Rgb = readonly [number, number, number];
 const ROOT = resolve(import.meta.dirname, "../..");
 const BUILD = join(ROOT, "build");
 
-/** The build colors of the dev and preview apps, `--openbot-logo-dev` and `--openbot-logo-preview`. */
+/** The build colors of the dev and preview apps, `--omnibot-logo-dev` and `--omnibot-logo-preview`. */
 const DEV_HEX = "#e3b866";
 const PREVIEW_HEX = "#61c985";
 
@@ -209,7 +209,7 @@ function main(): void {
     write(`build/icon-${variant}.png`, png(1600, body, eye));
     write(`build/icon-${variant}-macos-safe-area.png`, png(1600, body, eye, MACOS_SAFE_AREA));
     write(`build/icon-${variant}.ico`, icoFor(body, eye, icoSizes));
-    write(`src/renderer/src/assets/openbot-logo-${variant}.png`, png(1600, body, eye));
+    write(`src/renderer/src/assets/omnibot-logo-${variant}.png`, png(1600, body, eye));
   }
   write("build/icon.ico", icoFor(variants.production, eye, icoSizes));
   write(

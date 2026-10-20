@@ -22,12 +22,12 @@ export const APP_LOGO_COLORS = [
 
 export type AppLogoColor = (typeof APP_LOGO_COLORS)[number];
 
-/** The released brand color, `--openbot-logo-production`. */
+/** The released brand color, `--omnibot-logo-production`. */
 export const DEFAULT_APP_LOGO_COLOR: AppLogoColor = "blue";
 
 /**
  * The logo body color of each choice. The main process recolors the app icon with it, and the
- * renderers set `--openbot-logo-production` to it, so the icon and the logos show the same color.
+ * renderers set `--omnibot-logo-production` to it, so the icon and the logos show the same color.
  */
 export const APP_LOGO_COLOR_HEX = {
   lavender: "#d6adf2",
@@ -42,7 +42,7 @@ export const APP_LOGO_COLOR_HEX = {
   white: "#fefdff",
 } as const satisfies Record<AppLogoColor, `#${string}`>;
 
-/** The released eye color, `--openbot-logo-eye`. */
+/** The released eye color, `--omnibot-logo-eye`. */
 export const DEFAULT_APP_LOGO_EYE_HEX = "#040007";
 
 /** The eye color of each choice. Every choice has a light body, so each one keeps the released eyes. */

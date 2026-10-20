@@ -3,8 +3,8 @@ import type {
   HostUpdateSettingsChange,
   HostUpdateStatus,
   OmniBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
 import {
   Alert,
   AlertActions,
@@ -25,9 +25,9 @@ import {
   SettingsSection,
   SwitchField,
   TriangleAlert,
-} from "@openbot/ui";
-import { restartReasonKey } from "@openbot/ui/features/updates/restart-reasons";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { restartReasonKey } from "@omnibot/ui/features/updates/restart-reasons";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { openServerUpdate, serverUpdateStatus } from "./server-update-flow";
@@ -42,7 +42,7 @@ export type HostUpdateCalls = Pick<
 export interface ServerUpdateOptions {
   /** Only administrators can change preferences, cancel, or force a restart. */
   canManage?: boolean;
-  /** The calls of a client with no `window.openbot`, such as the web client. */
+  /** The calls of a client with no `window.omnibot`, such as the web client. */
   calls?: HostUpdateCalls;
 }
 
@@ -60,7 +60,7 @@ export function ServerUpdatePanel(
   props: ServerUpdateOptions & { serverId: string; hostName: string; actionsAvailable: boolean },
 ) {
   const { t, format, errorMessage } = useText();
-  const calls = (): HostUpdateCalls => props.calls ?? window.openbot.hostAdmin;
+  const calls = (): HostUpdateCalls => props.calls ?? window.omnibot.hostAdmin;
   const [release, setRelease] = createSignal<HostReleaseStatus | null>(null);
   const [status, setStatus] = createSignal<HostUpdateStatus | null>(null);
   const [loadError, setLoadError] = createSignal<string | null>(null);

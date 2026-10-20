@@ -8,9 +8,9 @@ import type {
   TeamInviteSummary,
   TeamPresenceMember,
   UpdateTeamMemberInput,
-} from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { classifyFailure } from "@omnibot/telemetry";
 import {
   Alert,
   AlertActions,
@@ -35,18 +35,18 @@ import {
   Tabs,
   Text,
   UsersRound,
-} from "@openbot/ui";
+} from "@omnibot/ui";
 import {
   SaveBarDock,
   SettingsDialogShell,
   type SettingsPagePlacement,
-} from "@openbot/ui/features/settings/SettingsDialogShell";
-import { SettingsHostedSitesTab } from "@openbot/ui/features/settings/SettingsHostedSitesTab";
+} from "@omnibot/ui/features/settings/SettingsDialogShell";
+import { SettingsHostedSitesTab } from "@omnibot/ui/features/settings/SettingsHostedSitesTab";
 import {
   createSettingsHostedSitesStore,
   type HostedSiteDeleteResult,
-} from "@openbot/ui/features/settings/stores/hosted-sites-store";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/settings/stores/hosted-sites-store";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { ConnectorsPanel, type ConnectorsPanelDetail } from "../connectors/ConnectorsPanel";

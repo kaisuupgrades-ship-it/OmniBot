@@ -1,4 +1,4 @@
-import type { AgentProviderId, AppSetupState } from "@openbot/contracts/ipc";
+import type { AgentProviderId, AppSetupState } from "@omnibot/contracts/ipc";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { FirstRunFlow, type FirstRunFlowProps } from "../src/features/onboarding/FirstRunFlow";

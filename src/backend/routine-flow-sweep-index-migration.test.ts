@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { migrateOmniBotDatabase } from "./openbot-database-schema";
+import { migrateOmniBotDatabase } from "./omnibot-database-schema";
 
 // Failure modes: an upgrade loses or changes a routine run, flow link or flow step; a partial migration
 // survives a failure; a retry fails on an index that the failed run left; a newer or incomplete history is

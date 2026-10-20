@@ -1,4 +1,4 @@
-import type { RoutineFeed, RoutineFeedDesktopApi } from "@openbot/contracts/ipc";
+import type { RoutineFeed, RoutineFeedDesktopApi } from "@omnibot/contracts/ipc";
 import {
   Button,
   CalendarClock,
@@ -21,8 +21,8 @@ import {
   SettingsSection,
   Spinner,
   Text,
-} from "@openbot/ui";
-import { useText } from "@openbot/ui/text";
+} from "@omnibot/ui";
+import { useText } from "@omnibot/ui/text";
 import { createSignal, createStore, Show, untrack } from "solid-js";
 import type { ServerSettingsSectionHost } from "./server-settings-section";
 

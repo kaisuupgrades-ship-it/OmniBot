@@ -1,8 +1,8 @@
 import { createHash, randomUUID } from "node:crypto";
 import { EventEmitter } from "node:events";
-import { agentProviderDescriptor } from "@openbot/contracts/agent-providers";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { agentProviderDescriptor } from "@omnibot/contracts/agent-providers";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentAnalyticsInput,
   AgentEvent,
@@ -96,7 +96,7 @@ import type {
   UpdateChannelRoutineInput,
   UpdateQueuedMessageInput,
   UpdateRoutineInput,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   type AgentModelChoice,
   agentAutomationAllowed,
@@ -112,12 +112,12 @@ import {
   type QueueSteerFallback,
   sameAgentModelChoice,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import { ContextResetBusyError } from "@openbot/contracts/team-protocol/context-reset-v1";
-import type { QueueEditRequest } from "@openbot/contracts/team-protocol/queue-edit-v1";
-import { sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger } from "@openbot/logging";
-import { classifyFailure } from "@openbot/telemetry";
+} from "@omnibot/contracts/ipc";
+import { ContextResetBusyError } from "@omnibot/contracts/team-protocol/context-reset-v1";
+import type { QueueEditRequest } from "@omnibot/contracts/team-protocol/queue-edit-v1";
+import { sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger } from "@omnibot/logging";
+import { classifyFailure } from "@omnibot/telemetry";
 import { Cause, Deferred, Effect, Exit, Fiber, Result, Schema, Scope, Semaphore } from "effect";
 import { AgentMemories } from "./agent/agent-memories";
 import { AgentRemoval, AgentRemovalFailed } from "./agent/agent-removal";
@@ -151,7 +151,7 @@ import {
   startingChoice,
   startingModel,
 } from "./agent/model-choice";
-import { OmniBotToolRouter } from "./agent/openbot-tool-router";
+import { OmniBotToolRouter } from "./agent/omnibot-tool-router";
 import { ProfileClients } from "./agent/profile-clients";
 import {
   GenerationUsageLimitError,
@@ -553,7 +553,7 @@ export class AgentService extends EventEmitter<AgentServiceEvents> {
       hooks: {
         bindClient: (client) => {
           client.on("notification", (notification) => {
-            if (notification.method === "openbot/sessionSettings/updated") {
+            if (notification.method === "omnibot/sessionSettings/updated") {
               const threadId = getString(notification.params, "threadId");
               const agentId = threadId ? this.#conversation.agentForThread(threadId) : undefined;
               if (agentId) this.#emit({ type: "agent-session-settings-changed", agentId });

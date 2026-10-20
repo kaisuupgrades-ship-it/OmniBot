@@ -1,4 +1,4 @@
-import { OPENBOT_LINKS } from "../../lib/landing-links";
+import { OMNIBOT_LINKS } from "../../lib/landing-links";
 import type { Comparison } from "./comparison";
 
 // Every statement about Hermes Agent here is taken from the Hermes Agent documentation,
@@ -31,23 +31,23 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
     {
       icon: "cpu",
       topic: "Models and plans",
-      openbot:
+      omnibot:
         "Use the plans you already have: ChatGPT, Claude, Gemini, Grok or Cursor. Or run free models and your own model through OpenCode. Choose one for each agent, and change it later.",
       rival:
         "API keys from many providers, OpenRouter, and local models. Sign in with ChatGPT, SuperGrok or GitHub Copilot. As its model, a Claude plan works only on Max with extra usage credits; a consumer Gemini plan does not work.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "laptop",
       topic: "Where agents work",
-      openbot: "On the computer that runs OmniBot.",
+      omnibot: "On the computer that runs OmniBot.",
       rival:
         "On your computer, a server, or in Docker. Hermes Cloud, which Nous Research hosts, costs a daily price plus the models you use.",
     },
     {
       icon: "cloud",
       topic: "When your computer is off",
-      openbot:
+      omnibot:
         "Agents keep working on the computer or server that runs OmniBot, and routines start them on a schedule. If you do not want to keep a computer on, use a hosted OmniBot server in the EU, from €20 or $25 a month.",
       rival:
         "Scheduled tasks run on the server or cloud computer that runs Hermes. On a laptop, they stop while Hermes is stopped.",
@@ -55,25 +55,25 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
     {
       icon: "phone",
       topic: "Remote access",
-      openbot:
+      omnibot:
         "Apps for iPhone and Android. Chats and files go over an encrypted connection between your devices, and no cloud stores them.",
       rival:
         "Messaging apps such as Telegram, WhatsApp, Signal and Slack, which carry your messages. No native iPhone or Android app is stated.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "users",
       topic: "Teams",
-      openbot:
+      omnibot:
         "Each agent is a full coding agent with its own job. They give work to each other in shared channels, and coworkers can join one team host.",
       rival:
         "10 subagents at once by default, and you can set more. Bots with their own roles talk in group chats of up to six. Several people can use one Hermes instance through messaging apps, with an allowlist.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       icon: "lock",
       topic: "Your data",
-      openbot:
+      omnibot:
         "Workspaces, chats and files stay in a database on your computer. The provider you choose gets the requests you send.",
       rival:
         "Conversations, memory and skills stay in ~/.hermes on your computer, with no telemetry. The provider you choose gets the requests you send.",
@@ -81,7 +81,7 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
     {
       icon: "tag",
       topic: "Price and account",
-      openbot:
+      omnibot:
         "Free for noncommercial use; commercial use needs a license. Your agents use the plans you already pay for.",
       rival:
         "Free under the MIT license, also for commercial use. No account is necessary. You pay your model provider, and Hermes Cloud if you use it.",
@@ -90,7 +90,7 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
     {
       icon: "globe",
       topic: "Where you can use it",
-      openbot:
+      omnibot:
         "In any country: OmniBot has no region lock. The desktop app is in English, French, Japanese and Turkish, and hosted servers run in the EU. Each AI provider sets the countries for its own plan.",
       rival:
         "Anywhere: you run it yourself. Hermes Cloud uses the nearest of 14 locations in Europe, North America, Asia and Australia. The interface is in 17 languages.",
@@ -98,14 +98,14 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
     {
       icon: "devices",
       topic: "Apps",
-      openbot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
+      omnibot: "macOS, Windows and Linux, and mobile apps for iPhone and Android.",
       rival:
         "A command line, a terminal UI, a web dashboard, and Hermes Desktop for macOS, Windows and Linux. The command line also runs on Android in Termux. No iPhone or Android app is stated.",
     },
     {
       icon: "code",
       topic: "Source code",
-      openbot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
+      omnibot: "On GitHub, under the PolyForm Noncommercial License 1.0.0.",
       rival: "On GitHub, under the MIT License.",
     },
   ],
@@ -114,38 +114,38 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
   sections: [
     {
       title: "Models and the plans you pay for",
-      openbot:
+      omnibot:
         "OmniBot runs the provider tools you already use, with the plans you already pay for: Codex with your ChatGPT plan, Claude Code with your Claude plan, Gemini with your Google AI Pro or Ultra plan, Grok CLI with your Grok account or an xAI API key, and Cursor CLI with your Cursor plan or a Cursor API key. OpenCode runs free models, or your own model on any OpenAI-compatible server, also one on your computer. You choose the provider, the model and the reasoning effort for each agent. When you move an agent to a different provider, it keeps its role, workspace and conversation.",
       rival:
         "Hermes Agent calls a model through an API. It works with many providers, OpenRouter and Nous Portal, and with local models on any OpenAI-compatible server, such as Ollama or vLLM. It can sign in with a ChatGPT account, a SuperGrok or X Premium+ subscription, or GitHub Copilot. As its own model, a Claude plan works only on Max, and then it uses only the extra usage credits that you buy; with Claude Pro, you need an API key. There is no way to use a consumer Gemini plan: Gemini needs a Google API key.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "Where the work happens",
-      openbot:
+      omnibot:
         "OmniBot runs on the computer that hosts it. Agent workspaces, conversations and app data stay on that computer, so it must stay on while its agents work. Run it on a desktop or a server that stays on, and your agents keep working while your laptop is closed. If you do not want to keep a computer on, use a hosted OmniBot server. It is a Linux server in the EU (Germany, Finland or France), from €20 or $25 a month, and it keeps the workspaces and chats of its agents. Local-first is not offline: an agent that uses a hosted provider still sends its requests to that provider.",
       rival:
         "Hermes Agent runs on your computer, on a server, or in Docker. Its commands can run on that computer, in Docker, over SSH, or in cloud sandboxes such as Modal and Daytona. Hermes Cloud runs it on a computer that Nous Research hosts, for a daily price, and the models and tools it uses cost extra. On a laptop, tasks stop while Hermes is stopped.",
     },
     {
       title: "Phones and remote access",
-      openbot:
+      omnibot:
         "The OmniBot apps for iPhone and Android connect to the computer that runs your agents. From anywhere, you chat with them, follow their progress and send files. The connection goes directly between your devices when it can, it is encrypted, and no cloud stores your chats or files. Remote access needs an OmniBot account.",
       rival:
         "Hermes Agent reaches your phone through messaging apps: Telegram, WhatsApp, Signal, Slack, SMS, email, iMessage through BlueBubbles, and many more. Your messages then go through the messaging service that you choose. Hermes Desktop can also connect to a Hermes backend on another computer. The documentation states no native iPhone or Android app.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "How agents work as a team",
-      openbot:
+      omnibot:
         "In OmniBot, each agent is a full coding agent: Codex, Claude Code, Gemini, Grok CLI, Cursor CLI or OpenCode, each with its own job and workspace. A lead agent can give parts of a task to other agents in a shared channel. You follow their work and step in when a decision needs you. For a team of people, one computer runs the host and the others join it; the chats and files stay on the host.",
       rival:
         "Hermes Agent starts up to 10 subagents at once by default, and you can set a higher limit. In Bot Mode, each Bot has its own role, model, memory and skills; Bots talk in group chats of up to six and send messages to each other. Bundled skills can give coding work to Claude Code, Codex or OpenCode. Several people can use one Hermes instance through messaging apps such as Slack or Telegram, and an allowlist controls who can talk to it.",
-      better: "openbot",
+      better: "omnibot",
     },
     {
       title: "Data and privacy",
-      openbot:
+      omnibot:
         "OmniBot keeps workspaces, conversations, attachments and browser data in a SQLite database on the computer that runs it. OmniBot keeps no other copy. On a hosted OmniBot server, the database is on that server in the EU. An account holds only your profile, team memberships, invitations, sign-in sessions and the settings that let devices find each other.",
       rival:
         "Hermes Agent keeps conversations, memory and skills in ~/.hermes on the computer that runs it, with its sessions in SQLite. Nous Research says Hermes Agent collects no telemetry, usage data or analytics, and API calls go only to the provider that you set up.",
@@ -221,8 +221,8 @@ export const HERMES_AGENT_COMPARISON: Comparison = {
       label: "Hermes Agent language packs",
       url: "https://hermes-agent.nousresearch.com/docs/user-guide/features/language-packs",
     },
-    { label: "OmniBot privacy notes", url: OPENBOT_LINKS.privacy },
-    { label: "OmniBot source code", url: OPENBOT_LINKS.repository },
+    { label: "OmniBot privacy notes", url: OMNIBOT_LINKS.privacy },
+    { label: "OmniBot source code", url: OMNIBOT_LINKS.repository },
   ],
   checkedAt: "2026-10-02",
 };

@@ -1,9 +1,9 @@
 import { mkdir, readdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { decodeSaveAgentProfileResult } from "@openbot/contracts/ipc";
-import { isGeneratedAgentId, isUuidV4 } from "@openbot/contracts/validation";
+import { decodeSaveAgentProfileResult } from "@omnibot/contracts/ipc";
+import { isGeneratedAgentId, isUuidV4 } from "@omnibot/contracts/validation";
 import { Effect } from "effect";
-import type { OmniBotDatabase } from "../openbot-database";
+import type { OmniBotDatabase } from "../omnibot-database";
 import { StoredStateFailure, storedIO, storedSync } from "../stored-state-effects";
 
 /** A marker precedes every profile-created row, so a crash cannot orphan an executable agent. */

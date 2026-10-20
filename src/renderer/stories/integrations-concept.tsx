@@ -1,4 +1,4 @@
-import type { AgentSummary } from "@openbot/contracts/ipc";
+import type { AgentSummary } from "@omnibot/contracts/ipc";
 import {
   Alert,
   AlertActions,
@@ -36,10 +36,10 @@ import {
   TriangleAlert,
   UsersRound,
   X,
-} from "@openbot/ui";
-import { AgentAvatar } from "@openbot/ui/features/agents/AgentAvatar";
-import { PluginIcon } from "@openbot/ui/features/marketplace/PluginIcon";
-import { GitHubMark } from "@openbot/ui/features/settings/brand-marks";
+} from "@omnibot/ui";
+import { AgentAvatar } from "@omnibot/ui/features/agents/AgentAvatar";
+import { PluginIcon } from "@omnibot/ui/features/marketplace/PluginIcon";
+import { GitHubMark } from "@omnibot/ui/features/settings/brand-marks";
 import {
   type IntegrationStatus,
   LogoTile,
@@ -48,15 +48,15 @@ import {
   Stepper,
   WizardContent,
   type WizardProps,
-} from "@openbot/ui/features/settings/IntegrationLayout";
-import { SettingsDialogShell } from "@openbot/ui/features/settings/SettingsDialogShell";
+} from "@omnibot/ui/features/settings/IntegrationLayout";
+import { SettingsDialogShell } from "@omnibot/ui/features/settings/SettingsDialogShell";
 import type { JSX } from "@solidjs/web";
 import { createSignal, For, Show } from "solid-js";
 import { STORY_AGENT_SUMMARIES, STORY_MARKETPLACE_PLUGINS } from "./fixtures";
 import { SettingsPageStory } from "./settings-page-story";
 
 // Concept only. The copy is literal on purpose: a direction is chosen first, and the real
-// components then get catalog keys. Brand marks stay here until they move to @openbot/brand.
+// components then get catalog keys. Brand marks stay here until they move to @omnibot/brand.
 
 /* ---------------------------------------------------------------- brand marks */
 

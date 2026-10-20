@@ -1,5 +1,5 @@
-import { isAgentModel } from "@openbot/contracts/ipc";
-import { createOmniBotLogger } from "@openbot/logging";
+import { isAgentModel } from "@omnibot/contracts/ipc";
+import { createOmniBotLogger } from "@omnibot/logging";
 import { Effect, Schema } from "effect";
 import type { AcpModel } from "./acp-configuration";
 

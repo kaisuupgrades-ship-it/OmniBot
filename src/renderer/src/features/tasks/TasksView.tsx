@@ -1,10 +1,10 @@
-import type { AgentTask, AgentTasksSnapshot, AttachmentSummary, ConversationSnapshot } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
-import { plainTaskTitle } from "@openbot/team-client/agent-tasks";
-import type { AgentMessage, AgentProfile } from "@openbot/ui/data";
-import { AgentTaskPanel } from "@openbot/ui/features/conversation/AgentTasks";
-import { TasksPage, type TasksVoice } from "@openbot/ui/features/tasks/TasksPage";
-import { currentText } from "@openbot/ui/text";
+import type { AgentTask, AgentTasksSnapshot, AttachmentSummary, ConversationSnapshot } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
+import { plainTaskTitle } from "@omnibot/team-client/agent-tasks";
+import type { AgentMessage, AgentProfile } from "@omnibot/ui/data";
+import { AgentTaskPanel } from "@omnibot/ui/features/conversation/AgentTasks";
+import { TasksPage, type TasksVoice } from "@omnibot/ui/features/tasks/TasksPage";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createMemo, createProjection, createStore, onCleanup, Show, untrack } from "solid-js";
 import { actionToast } from "../../action-toast";
 import { toAgentMessages } from "../../app-message-projection";

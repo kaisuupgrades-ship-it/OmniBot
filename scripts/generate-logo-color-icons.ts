@@ -23,8 +23,8 @@ import {
   APP_LOGO_EYE_HEX,
   DEFAULT_APP_LOGO_COLOR,
   DEFAULT_APP_LOGO_EYE_HEX,
-} from "@openbot/contracts/app-logo-color";
-import { createOmniBotLogger } from "@openbot/logging";
+} from "@omnibot/contracts/app-logo-color";
+import { createOmniBotLogger } from "@omnibot/logging";
 
 type Rgb = readonly [number, number, number];
 
@@ -38,7 +38,7 @@ const SOURCES = ["icon-production.png", "icon-production-macos-safe-area.png"] a
 const BUILD = resolve(import.meta.dirname, "../build");
 const OUTPUT = join(BUILD, "logo-colors");
 const logger = createOmniBotLogger("generate-logo-color-icons");
-/** The logo eyes in `build/icon-production*.png`, `--openbot-logo-eye`. */
+/** The logo eyes in `build/icon-production*.png`, `--omnibot-logo-eye`. */
 const ICON_EYE = hexToRgb(DEFAULT_APP_LOGO_EYE_HEX);
 
 function hexToRgb(hex: string): Rgb {

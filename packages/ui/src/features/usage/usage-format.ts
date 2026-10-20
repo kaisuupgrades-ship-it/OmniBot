@@ -1,6 +1,6 @@
-import type { AnalyticsModel } from "@openbot/contracts/ipc";
-import { agentProviderCliName, isAgentProvider } from "@openbot/contracts/ipc";
-import type { AppTextKey } from "@openbot/i18n";
+import type { AnalyticsModel } from "@omnibot/contracts/ipc";
+import { agentProviderCliName, isAgentProvider } from "@omnibot/contracts/ipc";
+import type { AppTextKey } from "@omnibot/i18n";
 import { currentText, type TextValue } from "../../text";
 
 type UsageText = Pick<TextValue, "t" | "format">;
@@ -81,12 +81,12 @@ export function usageProviders(models: AnalyticsModel[]) {
 // re-sorts when the metric changes, and a legend dot that repainted with it would say a
 // different area belongs to the row.
 const seriesColors: Readonly<Record<string, string>> = {
-  codex: "var(--openbot-chart-series-codex)",
-  claude: "var(--openbot-chart-series-claude)",
-  grok: "var(--openbot-chart-series-grok)",
+  codex: "var(--omnibot-chart-series-codex)",
+  claude: "var(--omnibot-chart-series-claude)",
+  grok: "var(--omnibot-chart-series-grok)",
 };
 export function usageSeriesColor(provider: string): string {
-  return seriesColors[provider] ?? "var(--openbot-chart-series-other)";
+  return seriesColors[provider] ?? "var(--omnibot-chart-series-other)";
 }
 
-export { type UsageSeriesRow, usageSeries, usageTotalSeries } from "@openbot/team-client/usage-series";
+export { type UsageSeriesRow, usageSeries, usageTotalSeries } from "@omnibot/team-client/usage-series";

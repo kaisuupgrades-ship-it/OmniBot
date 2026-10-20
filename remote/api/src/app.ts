@@ -1,16 +1,16 @@
-import type { RemoteAuthEvent } from "@openbot/contracts/signal-protocol/auth-events";
+import type { RemoteAuthEvent } from "@omnibot/contracts/signal-protocol/auth-events";
 import {
   DISCORD_UPLOAD_BYTES_LIMIT,
   type DiscordApiErrorBody,
   type DiscordApiErrorCode,
   type DiscordApiRequest,
-} from "@openbot/contracts/signal-protocol/discord-api";
-import { DISCORD_API_PATH } from "@openbot/contracts/signal-protocol/discord-route";
+} from "@omnibot/contracts/signal-protocol/discord-api";
+import { DISCORD_API_PATH } from "@omnibot/contracts/signal-protocol/discord-route";
 import {
   WEBHOOK_DELIVERY_BODY_BYTES_LIMIT,
   type WebhookDeliveryStatus,
-} from "@openbot/contracts/signal-protocol/messages";
-import { SLACK_EVENTS_PATH } from "@openbot/contracts/signal-protocol/slack-route";
+} from "@omnibot/contracts/signal-protocol/messages";
+import { SLACK_EVENTS_PATH } from "@omnibot/contracts/signal-protocol/slack-route";
 import {
   TELEGRAM_BOT_ID_PATTERN,
   TELEGRAM_CHAT_ID_PATTERN,
@@ -21,7 +21,7 @@ import {
   TELEGRAM_UPDATES_PATH,
   TELEGRAM_UPLOADS_PATH,
   type TelegramUploadAnswer,
-} from "@openbot/contracts/signal-protocol/telegram-route";
+} from "@omnibot/contracts/signal-protocol/telegram-route";
 import {
   WEBHOOK_DELIVERY_ID_HEADER,
   WEBHOOK_DELIVERY_ID_PATTERN,
@@ -31,7 +31,7 @@ import {
   WEBHOOK_SIGNATURE_PATTERN,
   WEBHOOK_TIMESTAMP_HEADER,
   WEBHOOK_TIMESTAMP_PATTERN,
-} from "@openbot/contracts/signal-protocol/webhook-route";
+} from "@omnibot/contracts/signal-protocol/webhook-route";
 import { Effect, type ManagedRuntime, Result } from "effect";
 import { Elysia } from "elysia";
 import { z } from "zod";
@@ -131,8 +131,8 @@ export function createRemoteApiApp(
   discord: DiscordApi | null = null,
 ) {
   const app = new Elysia()
-    .get("/health/live", () => ({ service: "openbot-remote-api", status: "live", commit: config.sourceCommit }))
-    .get("/health/ready", () => ({ service: "openbot-remote-api", status: "ready" }))
+    .get("/health/live", () => ({ service: "omnibot-remote-api", status: "live", commit: config.sourceCommit }))
+    .get("/health/ready", () => ({ service: "omnibot-remote-api", status: "ready" }))
     .post("/internal/auth-events", async ({ request, set }) => {
       const timestamp = request.headers.get("OmniBot-Timestamp") ?? "";
       const signature = request.headers.get("OmniBot-Signature") ?? "";
@@ -605,40 +605,40 @@ function decodeAuthEvent(body: string): RemoteAuthEvent | null {
 export function prometheusMetrics(signal: SignalService): string {
   const metrics = signal.metrics();
   return [
-    "# TYPE openbot_remote_signal_sockets gauge",
-    `openbot_remote_signal_sockets ${metrics.activeSockets}`,
-    "# TYPE openbot_remote_peer_connections gauge",
-    `openbot_remote_peer_connections ${metrics.activePeerConnections}`,
-    "# TYPE openbot_remote_signal_messages_total counter",
-    `openbot_remote_signal_messages_total ${metrics.relayedMessages}`,
-    "# TYPE openbot_remote_auth_failures_total counter",
-    `openbot_remote_auth_failures_total ${metrics.authenticationFailures}`,
-    "# TYPE openbot_remote_protocol_failures_total counter",
-    `openbot_remote_protocol_failures_total ${metrics.protocolFailures}`,
-    "# TYPE openbot_remote_slack_deliveries_total counter",
-    `openbot_remote_slack_deliveries_total ${metrics.slackDeliveries}`,
-    "# TYPE openbot_remote_slack_deliveries_unavailable_total counter",
-    `openbot_remote_slack_deliveries_unavailable_total ${metrics.slackDeliveriesUnavailable}`,
-    "# TYPE openbot_remote_telegram_deliveries_total counter",
-    `openbot_remote_telegram_deliveries_total ${metrics.telegramDeliveries}`,
-    "# TYPE openbot_remote_telegram_deliveries_unrouted_total counter",
-    `openbot_remote_telegram_deliveries_unrouted_total ${metrics.telegramDeliveriesUnrouted}`,
-    "# TYPE openbot_remote_telegram_calls_total counter",
-    `openbot_remote_telegram_calls_total ${metrics.telegramCalls}`,
-    "# TYPE openbot_remote_telegram_calls_refused_total counter",
-    `openbot_remote_telegram_calls_refused_total ${metrics.telegramCallsRefused}`,
-    "# TYPE openbot_remote_queued_deliveries_total counter",
-    `openbot_remote_queued_deliveries_total ${metrics.queuedDeliveries}`,
-    "# TYPE openbot_remote_queued_deliveries_flushed_total counter",
-    `openbot_remote_queued_deliveries_flushed_total ${metrics.queuedDeliveriesFlushed}`,
-    "# TYPE openbot_remote_discord_deliveries_total counter",
-    `openbot_remote_discord_deliveries_total ${metrics.discordDeliveries}`,
-    "# TYPE openbot_remote_discord_deliveries_unavailable_total counter",
-    `openbot_remote_discord_deliveries_unavailable_total ${metrics.discordDeliveriesUnavailable}`,
-    "# TYPE openbot_remote_discord_api_calls_total counter",
-    `openbot_remote_discord_api_calls_total ${metrics.discordApiCalls}`,
-    "# TYPE openbot_remote_discord_api_failures_total counter",
-    `openbot_remote_discord_api_failures_total ${metrics.discordApiFailures}`,
+    "# TYPE omnibot_remote_signal_sockets gauge",
+    `omnibot_remote_signal_sockets ${metrics.activeSockets}`,
+    "# TYPE omnibot_remote_peer_connections gauge",
+    `omnibot_remote_peer_connections ${metrics.activePeerConnections}`,
+    "# TYPE omnibot_remote_signal_messages_total counter",
+    `omnibot_remote_signal_messages_total ${metrics.relayedMessages}`,
+    "# TYPE omnibot_remote_auth_failures_total counter",
+    `omnibot_remote_auth_failures_total ${metrics.authenticationFailures}`,
+    "# TYPE omnibot_remote_protocol_failures_total counter",
+    `omnibot_remote_protocol_failures_total ${metrics.protocolFailures}`,
+    "# TYPE omnibot_remote_slack_deliveries_total counter",
+    `omnibot_remote_slack_deliveries_total ${metrics.slackDeliveries}`,
+    "# TYPE omnibot_remote_slack_deliveries_unavailable_total counter",
+    `omnibot_remote_slack_deliveries_unavailable_total ${metrics.slackDeliveriesUnavailable}`,
+    "# TYPE omnibot_remote_telegram_deliveries_total counter",
+    `omnibot_remote_telegram_deliveries_total ${metrics.telegramDeliveries}`,
+    "# TYPE omnibot_remote_telegram_deliveries_unrouted_total counter",
+    `omnibot_remote_telegram_deliveries_unrouted_total ${metrics.telegramDeliveriesUnrouted}`,
+    "# TYPE omnibot_remote_telegram_calls_total counter",
+    `omnibot_remote_telegram_calls_total ${metrics.telegramCalls}`,
+    "# TYPE omnibot_remote_telegram_calls_refused_total counter",
+    `omnibot_remote_telegram_calls_refused_total ${metrics.telegramCallsRefused}`,
+    "# TYPE omnibot_remote_queued_deliveries_total counter",
+    `omnibot_remote_queued_deliveries_total ${metrics.queuedDeliveries}`,
+    "# TYPE omnibot_remote_queued_deliveries_flushed_total counter",
+    `omnibot_remote_queued_deliveries_flushed_total ${metrics.queuedDeliveriesFlushed}`,
+    "# TYPE omnibot_remote_discord_deliveries_total counter",
+    `omnibot_remote_discord_deliveries_total ${metrics.discordDeliveries}`,
+    "# TYPE omnibot_remote_discord_deliveries_unavailable_total counter",
+    `omnibot_remote_discord_deliveries_unavailable_total ${metrics.discordDeliveriesUnavailable}`,
+    "# TYPE omnibot_remote_discord_api_calls_total counter",
+    `omnibot_remote_discord_api_calls_total ${metrics.discordApiCalls}`,
+    "# TYPE omnibot_remote_discord_api_failures_total counter",
+    `omnibot_remote_discord_api_failures_total ${metrics.discordApiFailures}`,
     "",
   ].join("\n");
 }

@@ -1,6 +1,6 @@
-import type { AgentProviderId } from "@openbot/contracts/ipc";
-import type { ProviderPickerOption } from "@openbot/ui/components/ProviderPicker";
-import { ProviderPicker } from "@openbot/ui/components/ProviderPicker";
+import type { AgentProviderId } from "@omnibot/contracts/ipc";
+import type { ProviderPickerOption } from "@omnibot/ui/components/ProviderPicker";
+import { ProviderPicker } from "@omnibot/ui/components/ProviderPicker";
 import { createSignal } from "solid-js";
 import { fn } from "storybook/test";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";

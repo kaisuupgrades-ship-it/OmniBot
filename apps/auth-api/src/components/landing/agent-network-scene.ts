@@ -14,7 +14,7 @@ import {
   APP_LOGO_EYE_POINTS,
   APP_LOGO_EYE_STROKE,
   APP_LOGO_SIZE,
-} from "@openbot/brand/app-logo-shape";
+} from "@omnibot/brand/app-logo-shape";
 
 /** A node with no avatar is the OmniBot mark at the centre. */
 const HUB = -1;

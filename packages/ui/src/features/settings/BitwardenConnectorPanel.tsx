@@ -1,5 +1,5 @@
-import type { BitwardenConnectorStatus } from "@openbot/contracts/ipc";
-import { Button, Input, Lock, SettingsSection, Text } from "@openbot/ui";
+import type { BitwardenConnectorStatus } from "@omnibot/contracts/ipc";
+import { Button, Input, Lock, SettingsSection, Text } from "@omnibot/ui";
 import { createSignal, Show } from "solid-js";
 import { useText } from "../../text";
 import { DetailHeader, ReadFailedAlert, UNKNOWN_STATUS } from "./IntegrationLayout";

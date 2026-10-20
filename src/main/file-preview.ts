@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
-import { attachmentFileExtension, attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import { ATTACHMENT_LIMITS } from "@openbot/contracts/input-limits";
-import { type FilePreview, filePreviewKindForFile } from "@openbot/contracts/ipc";
-import { sourceText } from "@openbot/i18n/source";
+import { attachmentFileExtension, attachmentMimeTypeForName } from "@omnibot/contracts/attachment-files";
+import { ATTACHMENT_LIMITS } from "@omnibot/contracts/input-limits";
+import { type FilePreview, filePreviewKindForFile } from "@omnibot/contracts/ipc";
+import { sourceText } from "@omnibot/i18n/source";
 import { Effect } from "effect";
 import { attachmentCall } from "../backend/attachment-effects";
 import { filePreviewPages } from "./file-preview-pages";

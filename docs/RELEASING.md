@@ -30,7 +30,7 @@ blocked version is no longer offered, but it stays on the computers that already
 
 ## One-time GitHub setup
 
-Create the `release` environment in `nightly-labs/openbot`, then add these environment secrets:
+Create the `release` environment in `kaisuupgrades-ship-it/OmniBot`, then add these environment secrets:
 
 - `CSC_LINK` — a base64-encoded Developer ID Application `.p12` file.
 - `MAC_PROVISIONING_PROFILE` — the base64-encoded Developer ID provisioning profile for
@@ -52,16 +52,16 @@ The Docker image needs no secret: the `docker-publish` job pushes with `GITHUB_T
 even when the source repository is public. A successful push does not confirm public access.
 
 After the first push, a package administrator must open the
-[OmniBot package](https://github.com/orgs/nightly-labs/packages/container/package/openbot):
+[OmniBot package](https://github.com/users/kaisuupgrades-ship-it/packages/container/package/omnibot):
 
 1. Open **Package settings** and set **Change visibility** to **Public**.
-2. Check that the package is linked to `nightly-labs/openbot`. The Dockerfile sets the
+2. Check that the package is linked to `kaisuupgrades-ship-it/OmniBot`. The Dockerfile sets the
    `org.opencontainers.image.source` label for this link.
-3. Under **Manage Actions access**, check that `nightly-labs/openbot` has write access.
+3. Under **Manage Actions access**, check that `kaisuupgrades-ship-it/OmniBot` has write access.
 
 If **Public** is disabled by organization administrators, an organization owner must enable
 **Public** under **Package creation** in the
-[organization package settings](https://github.com/organizations/nightly-labs/settings/packages).
+[organization package settings](https://github.com/settings/packages).
 Make OmniBot public, then restore the previous organization policy. Existing public packages stay
 public when this creation permission is disabled again.
 
@@ -85,7 +85,7 @@ place. Correct the package settings, then run the failed job again.
 ## Hosted-server snapshots
 
 After GitHub publication, `Publish boat server snapshot` builds the Linux x64 release into a boat
-named snapshot (`openbot-server-production-<version>` with dots replaced by hyphens), then selects
+named snapshot (`omnibot-server-production-<version>` with dots replaced by hyphens), then selects
 it for new production servers. It uses the tagged hosting scripts,
 the published `SHA256SUMS-linux.txt`, and `https://api.omnibot.example.com`. The builder checks the AppImage
 checksum and installed version and requires an empty host profile before saving the snapshot.
@@ -116,12 +116,12 @@ is saving or has an unknown status, any snapshot newer than the release, and eac
 `provider_template` of a production server that is not deleted and has no sandbox yet, because a
 create retry sends its first request again. The job reads these from the production D1
 database and stops if it cannot. Servers already made from a removed snapshot keep running. Names
-without the `openbot-server-production-` prefix are never removed; confirm that neither Worker nor
+without the `omnibot-server-production-` prefix are never removed; confirm that neither Worker nor
 any pending create needs one before removing it by hand.
 
 A successful job reports the selected version in its Actions summary. Verify the first rollout by
 creating a temporary production server and checking its initial installed version. Record the
-result under `.openbot-build/`; remove only that temporary server after the check. This remote check
+result under `.omnibot-build/`; remove only that temporary server after the check. This remote check
 is separate from local checks and requires production access.
 
 ## Windows signing
@@ -132,9 +132,9 @@ A tag build signs the Windows release with Azure Artifact Signing. It needs no s
   holds the Public Trust certificate profile `SYNTHETIFY`, issued to
   `SYNTHETIFY LABS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ`. Microsoft issues a new short-lived
   certificate each day with the same subject.
-- The Entra app registration `openbot-release-signing` has the **Artifact Signing Certificate Profile
+- The Entra app registration `omnibot-release-signing` has the **Artifact Signing Certificate Profile
   Signer** role on that profile only. Its federated credential trusts the subject
-  `repo:nightly-labs@100160810/openbot@1332461149:environment:release`, because this repository uses
+  `repo:kaisuupgrades-ship-it/OmniBot:environment:release`, because this repository uses
   GitHub's immutable OIDC subject format. A dry run has no environment, so it cannot sign.
 - The `windows` job logs in with `azure/login`, caches a token for the signing service, and runs
   `bun run dist:win --config electron-builder.windows-signing.yml`, then runs `az account clear`, so
@@ -426,8 +426,8 @@ text requires a new app release. Missing entries do not cause a network fallback
 
 The installed desktop version comes from `AppInfo`, not an available update or a remote server.
 In development, `AppInfo` uses `package.json`; Electron otherwise reports its own version.
-The local app profile keeps the highest consumed version in `openbot:whats-new-version`. On the
-first launch of this feature, an existing `openbot:analytics-app-version` can supply the previous
+The local app profile keeps the highest consumed version in `omnibot:whats-new-version`. On the
+first launch of this feature, an existing `omnibot:analytics-app-version` can supply the previous
 version; the dialog does not enable analytics. A profile with no previous version gets a silent
 baseline, so onboarding is not covered by release notes. Stable `x.y.z` releases participate;
 unknown versions and prerelease builds do not advance the marker. Downgrades do not lower it.
@@ -531,14 +531,14 @@ The workflow:
    the ZIP whose name contains `arm64` on Apple silicon and the other ZIP on Intel.
 10. builds a Docker image (`docker/Dockerfile`) from each Linux AppImage on a runner of that
     architecture, after it checks the AppImage against its `SHA256SUMS` file. It starts each image
-    with `docker/seccomp.json`, waits for `openbot status`, and stops it, which must exit with 0;
+    with `docker/seccomp.json`, waits for `omnibot status`, and stops it, which must exit with 0;
 11. after the GitHub Release is published, pushes both images to `registry.omnibot.example.com/omnibot`
     with the tags `<version>-amd64` and `<version>-arm64`, joins them under `<version>`, `v<version>`,
     `latest` and `sha-<commit>`, and attests the build provenance of that image. It then checks
     anonymous access to both architectures. See [Docker](docker.md).
 
 Users can verify a downloaded artifact with
-`gh attestation verify <file> --repo nightly-labs/openbot`.
+`gh attestation verify <file> --repo kaisuupgrades-ship-it/OmniBot`.
 
 Before a tag, run the release path without publishing:
 
@@ -571,7 +571,7 @@ after a change to the Azure setup or to `electron-builder.windows-signing.yml`, 
 
 Installed OmniBot builds check for updates shortly after launch and every four minutes. New versions
 download automatically while **Automatically download updates** is on, which is the default and is
-persisted per user in `openbot-update-preference-v1.json`; with the setting off, a download starts
+persisted per user in `omnibot-update-preference-v1.json`; with the setting off, a download starts
 only on a user action. The update notice in the sidebar and Settings > Updates show the current
 state and let the user download an available version, then restart into it. The restart action appears as
 soon as the download completes, and no platform installs without that
@@ -637,7 +637,7 @@ Before creating the first tag or any later release:
     `Restart and install` does start it. With OmniBot closed and with it open, confirm that Open
     OmniBot on a `/join` page opens OmniBot and shows the invitation once, and that uninstall
     removes `HKCU\Software\Classes\omnibot`;
-13. on Ubuntu 24.04 x64 with the AppArmor profile from `build/linux/openbot.apparmor` installed,
+13. on Ubuntu 24.04 x64 with the AppArmor profile from `build/linux/omnibot.apparmor` installed,
     confirm the AppImage starts with the sandbox on, that `xdg-open 'omnibot://join?...'` focuses the
     running application, that a provider downloads in-app, that the page rail is drawn, and that the
     microphone control is absent;
@@ -704,7 +704,7 @@ After verifying OmniBot.app, the macOS job:
 
 1. runs native account tests without creating users;
 2. imports the application and installer certificates into a temporary, isolated keychain;
-3. compiles standalone ARM64 `host-manager` and `openbot-host` executables with Bun, and the native
+3. compiles standalone ARM64 `host-manager` and `omnibot-host` executables with Bun, and the native
    account helper with Swift; no target-machine runtime or compiler is required;
 4. signs all executables with **Developer ID Application**, hardened runtime and timestamp, and
    checks their fixed identifiers and team `ZTRDTUL87R`;

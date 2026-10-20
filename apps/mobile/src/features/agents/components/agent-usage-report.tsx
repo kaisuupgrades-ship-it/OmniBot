@@ -4,8 +4,8 @@ import {
   type AnalyticsProviderDay,
   agentProviderCliName,
   isAgentProvider,
-} from "@openbot/contracts/ipc";
-import { usageSeries, usageTotalSeries } from "@openbot/team-client/usage-series";
+} from "@omnibot/contracts/ipc";
+import { usageSeries, usageTotalSeries } from "@omnibot/team-client/usage-series";
 import { Typography } from "heroui-native";
 import { useMemo, useState } from "react";
 import { View } from "react-native";

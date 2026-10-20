@@ -3,15 +3,15 @@
 // (`remote/api/src/discord-events.ts`), a JSON round trip and the host's decoder, into the real
 // Discord driver and messaging service on a temporary profile. Signal's API (`makeDiscordApi`) runs
 // over a fake Discord REST client. No agent turn runs: the check reads the prompt that a turn would get.
-// `bun scripts/messaging-discord-access-e2e.ts`. Writes .openbot-build/messaging-discord-access-e2e/report.json.
+// `bun scripts/messaging-discord-access-e2e.ts`. Writes .omnibot-build/messaging-discord-access-e2e/report.json.
 import assert from "node:assert/strict";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { DISCORD_GATEWAY_INTENTS, DISCORD_MESSAGE_CONTENT_INTENT } from "@openbot/contracts/discord-app";
-import { isDiscordRoleList } from "@openbot/contracts/ipc";
-import { decodeDiscordApiError, decodeDiscordDelivery } from "@openbot/contracts/signal-protocol/discord-api";
+import { DISCORD_GATEWAY_INTENTS, DISCORD_MESSAGE_CONTENT_INTENT } from "@omnibot/contracts/discord-app";
+import { isDiscordRoleList } from "@omnibot/contracts/ipc";
+import { decodeDiscordApiError, decodeDiscordDelivery } from "@omnibot/contracts/signal-protocol/discord-api";
 import { Effect } from "effect";
 import { type DiscordRestRequest, DiscordTransportError, makeDiscordApi } from "../remote/api/src/discord-api";
 import { DiscordState } from "../remote/api/src/discord-events";
@@ -29,13 +29,13 @@ import {
   MessagingAdapterError,
   type MessagingIngress,
 } from "../src/backend/messaging/messaging-types";
-import { OmniBotDatabase } from "../src/backend/openbot-database";
+import { OmniBotDatabase } from "../src/backend/omnibot-database";
 import { SidebarLayoutStore } from "../src/backend/sidebar-layout-store";
 import { parseSetDiscordAccessInput } from "../src/main/ipc/messaging-inputs";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/messaging-discord-access-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/messaging-discord-access-e2e");
 const REPORT = join(OUT, "report.json");
-const root = await mkdtemp(join(tmpdir(), "openbot-messaging-discord-access-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-messaging-discord-access-"));
 const userData = join(root, "user-data");
 const home = join(root, "home");
 const APP = "300000000000000001";

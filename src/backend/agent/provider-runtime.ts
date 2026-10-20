@@ -11,16 +11,16 @@ import type {
   CapabilityState,
   CustomProviderRestart,
   ProviderCodeLoginStart,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   accountUsageCoversModel,
   agentProviderDescriptor,
   isAgentProvider,
   workspaceAccessEnforced,
-} from "@openbot/contracts/ipc";
-import { matchingSourceKeys, sourceText } from "@openbot/i18n/source";
-import { createOmniBotLogger, redactText } from "@openbot/logging";
-import { classifyUserError } from "@openbot/user-errors";
+} from "@omnibot/contracts/ipc";
+import { matchingSourceKeys, sourceText } from "@omnibot/i18n/source";
+import { createOmniBotLogger, redactText } from "@omnibot/logging";
+import { classifyUserError } from "@omnibot/user-errors";
 import { Deferred, Effect, Exit, Result, Schema, Scope, Semaphore } from "effect";
 import { startAcpAuthentication } from "./../acp-sign-in";
 import { type AgentClient, AgentProcessExitError, type AgentProvider } from "./../agent-client";
@@ -2234,7 +2234,7 @@ export class ProviderRuntime implements ProviderPort {
       .request(
         "initialize",
         {
-          clientInfo: { name: "openbot", title: "OmniBot", version: "0.1.0" },
+          clientInfo: { name: "omnibot", title: "OmniBot", version: "0.1.0" },
           capabilities: { experimentalApi: true, mcpServerOpenaiFormElicitation: true },
         },
         decodeRecordResponse,

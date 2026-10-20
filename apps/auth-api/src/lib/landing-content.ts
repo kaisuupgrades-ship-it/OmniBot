@@ -3,8 +3,8 @@
 //
 // No JSX here, for the same reason `content-collection.ts` holds none.
 
-import type { ProviderLogoVariant } from "@openbot/brand";
-import type { AvatarHue } from "@openbot/contracts/ipc";
+import type { ProviderLogoVariant } from "@omnibot/brand";
+import type { AvatarHue } from "@omnibot/contracts/ipc";
 import { RIVAL_MARK_SHAPES, type RivalMarkName } from "../components/compare/rival-mark-shapes";
 import { COMPARE_COLLECTION } from "./compare";
 

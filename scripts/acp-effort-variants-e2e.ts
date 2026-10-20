@@ -4,7 +4,7 @@
 // the picker gets one model for each family with that family's efforts, that the discovery session
 // goes back to the exact model it opened on, that a selected family and effort reach the session, and
 // that an agent whose option lists the same models keeps today's catalog, also with a provider option.
-// `bun scripts/acp-effort-variants-e2e.ts`. Writes .openbot-build/acp-effort-variants-e2e/report.json.
+// `bun scripts/acp-effort-variants-e2e.ts`. Writes .omnibot-build/acp-effort-variants-e2e/report.json.
 import assert from "node:assert/strict";
 import { chmod, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -20,7 +20,7 @@ import {
 } from "../src/backend/protocol";
 import { NO_PROVIDER_CREDENTIALS, requireProviderDriver } from "../src/backend/provider-drivers";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/acp-effort-variants-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/acp-effort-variants-e2e");
 
 // The selection rules of Antigravity's `config_options.py`: a family value resolves to the variant
 // nearest the current effort, and a listed model ID passes through. `FAKE_AGY_MODE=flat` offers the
@@ -163,7 +163,7 @@ interface Report {
   provider?: { models: string[]; discoveryRequests: number };
 }
 
-const root = await mkdtemp(join(tmpdir(), "openbot-acp-effort-variants-e2e-"));
+const root = await mkdtemp(join(tmpdir(), "omnibot-acp-effort-variants-e2e-"));
 const log = join(root, "agy.jsonl");
 const report: Report = { passed: false };
 const clients: AgentClient[] = [];

@@ -1,7 +1,7 @@
 import { readFile, rm } from "node:fs/promises";
 import { homedir } from "node:os";
 import { isAbsolute, join } from "node:path";
-import type { AppVariant } from "@openbot/contracts/ipc";
+import type { AppVariant } from "@omnibot/contracts/ipc";
 import { Effect, Schema } from "effect";
 import { app } from "electron";
 import { writeFileAtomically } from "../backend/atomic-json-file";
@@ -30,7 +30,7 @@ export function createLoginItem(options: { appVariant: AppVariant; server: boole
   return linuxAutostartLoginItem({
     // The XDG Base Directory Specification ignores a relative path.
     configHome: configHome && isAbsolute(configHome) ? configHome : join(homedir(), ".config"),
-    fileName: options.appVariant === "production" ? "omnibot.desktop" : `openbot-${options.appVariant}.desktop`,
+    fileName: options.appVariant === "production" ? "omnibot.desktop" : `omnibot-${options.appVariant}.desktop`,
     // The AppImage runtime names its own file here. `execPath` is inside the mount, which ends with the run.
     executablePath: process.env.APPIMAGE || process.execPath,
   });

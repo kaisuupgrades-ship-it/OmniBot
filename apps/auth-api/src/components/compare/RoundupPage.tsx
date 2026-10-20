@@ -21,7 +21,7 @@ export interface RoundupPageProps {
 
 /** OmniBot's entry draws its own logo, which `SideMark` draws when no mark is given. */
 function appMark(app: RoundupApp) {
-  return app.mark === "openbot" ? undefined : app.mark;
+  return app.mark === "omnibot" ? undefined : app.mark;
 }
 
 // Many apps in one list. OmniBot is first, and the page says that we make it. Each

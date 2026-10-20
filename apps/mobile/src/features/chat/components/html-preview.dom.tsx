@@ -1,6 +1,6 @@
 "use dom";
 
-import { chatHtmlPreviewDocument } from "@openbot/contracts/chat-preview";
+import { chatHtmlPreviewDocument } from "@omnibot/contracts/chat-preview";
 import { useEffect, useRef, useState } from "react";
 
 interface HtmlPreviewProps {
@@ -108,8 +108,8 @@ function placePage(frame: HTMLIFrameElement | null, top: number, bottom: number)
   const body = frame?.contentDocument?.body;
   if (!body) return;
   const own = getComputedStyle(body);
-  body.dataset.openbotPaddingTop ??= own.paddingTop;
-  body.dataset.openbotPaddingBottom ??= own.paddingBottom;
-  body.style.paddingTop = `calc(${body.dataset.openbotPaddingTop} + ${top}px)`;
-  body.style.paddingBottom = `calc(${body.dataset.openbotPaddingBottom} + ${bottom}px)`;
+  body.dataset.omnibotPaddingTop ??= own.paddingTop;
+  body.dataset.omnibotPaddingBottom ??= own.paddingBottom;
+  body.style.paddingTop = `calc(${body.dataset.omnibotPaddingTop} + ${top}px)`;
+  body.style.paddingBottom = `calc(${body.dataset.omnibotPaddingBottom} + ${bottom}px)`;
 }

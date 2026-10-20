@@ -6,10 +6,10 @@ import {
   type SpawnedMspConnection,
   spawnMspConnection,
 } from "@muse-code/sdk";
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import { isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+import { attachmentMimeTypeForName } from "@omnibot/contracts/attachment-files";
+import { isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
+import { redactText } from "@omnibot/logging";
 import { Effect, Exit, Fiber, Option, Schema, Scope } from "effect";
 import { secretElicitationField } from "./agent/prompts";
 import { type AgentClient, type AgentProvider, type DiagnosticOrigin, RequestTimeoutError } from "./agent-client";
@@ -386,7 +386,7 @@ export class MuseAgentClient extends EventEmitter<ClientEvents> implements Agent
   ): Effect.fn.Return<SpawnedMspConnection, ProviderClientOperationError> {
     const host = yield* providerCall(() =>
       handshake.initialize({
-        clientInfo: { name: "openbot", version: "1" },
+        clientInfo: { name: "omnibot", version: "1" },
         capabilities: { requestedCapabilities: ["sessionMcp"] },
       }),
     ).pipe(
@@ -844,7 +844,7 @@ export class MuseAgentClient extends EventEmitter<ClientEvents> implements Agent
     }
     if (method === "session/tokenUsage") {
       const usage = yield* this.#decode(MuseUsage, params);
-      this.#emit("openbot/usage", {
+      this.#emit("omnibot/usage", {
         threadId: thread.id,
         turnId: usage.turnId,
         usage: {

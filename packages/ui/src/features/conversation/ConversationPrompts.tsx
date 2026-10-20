@@ -1,17 +1,17 @@
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import type {
   AgentApproval,
   BrowserPreview,
   BrowserTab,
   BrowserTakeoverRequest,
   RespondToBrowserSecretInput,
-} from "@openbot/contracts/ipc";
-import { classifyFailure } from "@openbot/telemetry";
-import { Badge, Button, Check, Input, LoaderCircle, Maximize2, Monitor, RadioGroup, toast, X } from "@openbot/ui";
-import { StandingApprovalConfirmation } from "@openbot/ui/components/StandingApprovalConfirmation";
-import { BrowserSecretCard } from "@openbot/ui/features/conversation/BrowserSecretCard";
-import { BrowserTakeoverPreview } from "@openbot/ui/features/conversation/BrowserTakeoverPreview";
-import { type TextValue, useText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { classifyFailure } from "@omnibot/telemetry";
+import { Badge, Button, Check, Input, LoaderCircle, Maximize2, Monitor, RadioGroup, toast, X } from "@omnibot/ui";
+import { StandingApprovalConfirmation } from "@omnibot/ui/components/StandingApprovalConfirmation";
+import { BrowserSecretCard } from "@omnibot/ui/features/conversation/BrowserSecretCard";
+import { BrowserTakeoverPreview } from "@omnibot/ui/features/conversation/BrowserTakeoverPreview";
+import { type TextValue, useText } from "@omnibot/ui/text";
 import { createMemo, createSignal, For, Show } from "solid-js";
 import { isSendShortcutKey, type SendShortcut, sendShortcutAriaKey } from "./send-shortcut";
 

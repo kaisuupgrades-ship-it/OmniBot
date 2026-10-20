@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AgentMemoryOrigin, MemoryEntry } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isString } from "@openbot/contracts/runtime-values";
-import { sourceText } from "@openbot/i18n/source";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AgentMemoryOrigin, MemoryEntry } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isString } from "@omnibot/contracts/runtime-values";
+import { sourceText } from "@omnibot/i18n/source";
 import { databaseRow, databaseRows, requiredStringColumn } from "./database/database-rows";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 
 /**
  * One owner column and one table name are the whole difference between an agent's memories, a

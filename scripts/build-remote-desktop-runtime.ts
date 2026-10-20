@@ -39,7 +39,7 @@ const LINUX_SUNSHINE_OPTIONS = [
 
 const lock = await loadNativeRuntimeLock();
 const outputRoot = resolve("build/remote-desktop-runtime", platform, architecture);
-const workRoot = await mkdtemp(join(tmpdir(), "openbot-remote-desktop-build-"));
+const workRoot = await mkdtemp(join(tmpdir(), "omnibot-remote-desktop-build-"));
 
 try {
   const sunshineSource = await downloadAndExtract(
@@ -68,7 +68,7 @@ try {
   const sunshineBinary = findSunshineBinary(sunshineSource);
   const executableSuffix = platform === "win32" ? ".exe" : "";
   if (platform === "darwin") {
-    await cp(join(sunshineSource, "build-openbot", "Sunshine.app"), join(outputRoot, "Sunshine.app"), {
+    await cp(join(sunshineSource, "build-omnibot", "Sunshine.app"), join(outputRoot, "Sunshine.app"), {
       recursive: true,
     });
   } else {
@@ -125,7 +125,7 @@ async function packageCorrespondingSource(
     "--exclude=node_modules",
     "--exclude=target",
     "--exclude=dist",
-    "--exclude=build-openbot",
+    "--exclude=build-omnibot",
   ];
   execFileSync(
     tarExecutable,
@@ -143,7 +143,7 @@ async function packageCorrespondingSource(
     tarExecutable,
     [
       "-czf",
-      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`),
+      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-omnibot-source.tar.gz`),
       ...exclusions,
       "-C",
       moonlightSource,
@@ -231,7 +231,7 @@ function requiredSunshineSubmodules(targetPlatform: "darwin" | "win32" | "linux"
 }
 
 function buildSunshine(source: string, version: string, commit: string): void {
-  const build = join(source, "build-openbot");
+  const build = join(source, "build-omnibot");
   const generator = process.env.CMAKE_GENERATOR ?? (hasExecutable("ninja") ? "Ninja" : "Unix Makefiles");
   const buildEnvironment = {
     ...process.env,
@@ -279,10 +279,10 @@ function buildSunshine(source: string, version: string, commit: string): void {
     },
   );
   if (platform === "darwin") {
-    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "openbot-setup-test"], {
+    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "omnibot-setup-test"], {
       stdio: "inherit",
     });
-    execFileSync(join(build, "openbot-setup-test"), [], { stdio: "inherit" });
+    execFileSync(join(build, "omnibot-setup-test"), [], { stdio: "inherit" });
   }
 }
 
@@ -386,10 +386,10 @@ function signMacRuntime(root: string, bundledLibraries: string[] = []): void {
 function findSunshineBinary(source: string): string {
   const suffix = platform === "win32" ? ".exe" : "";
   const candidates = [
-    join(source, "build-openbot", `sunshine${suffix}`),
-    join(source, "build-openbot", "sunshine", `sunshine${suffix}`),
-    join(source, "build-openbot", "Release", `sunshine${suffix}`),
-    join(source, "build-openbot", "Sunshine.app", "Contents", "MacOS", "Sunshine"),
+    join(source, "build-omnibot", `sunshine${suffix}`),
+    join(source, "build-omnibot", "sunshine", `sunshine${suffix}`),
+    join(source, "build-omnibot", "Release", `sunshine${suffix}`),
+    join(source, "build-omnibot", "Sunshine.app", "Contents", "MacOS", "Sunshine"),
   ];
   for (const candidate of candidates) {
     try {

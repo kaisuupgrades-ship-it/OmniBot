@@ -1,6 +1,6 @@
-import { Button, Heading } from "@openbot/ui";
-import type { VoicePhase } from "@openbot/ui/features/conversation/VoiceRecordingMorph";
-import { currentText } from "@openbot/ui/text";
+import { Button, Heading } from "@omnibot/ui";
+import type { VoicePhase } from "@omnibot/ui/features/conversation/VoiceRecordingMorph";
+import { currentText } from "@omnibot/ui/text";
 import { createSignal, For, onCleanup, onSettled } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import { createConversationController } from "../src/features/conversation/Conversation";
@@ -18,7 +18,7 @@ import type { ConversationProps } from "../src/features/conversation/conversatio
 import { VOICE_LEVEL_COUNT } from "../src/features/conversation/stores/voice-store";
 import { CONVERSATION_STORY_ARGS, StoryAppProviders } from "./conversation-story-support";
 import { STORY_AGENT_STATUS } from "./fixtures";
-import { createMockOmniBot } from "./mock-openbot";
+import { createMockOmniBot } from "./mock-omnibot";
 
 /** A fixed stretch of speech, so the waveform looks the same in each screenshot. */
 const SPEECH_LEVELS = Array.from({ length: VOICE_LEVEL_COUNT }, (_, index) =>
@@ -99,12 +99,12 @@ function VoiceInputComposer(props: { state: VoiceInputState }) {
 }
 
 function useMockOmniBot() {
-  const previousApi = window.openbot;
+  const previousApi = window.omnibot;
   const mock = createMockOmniBot();
-  window.openbot = mock.api;
+  window.omnibot = mock.api;
   onCleanup(() => {
     mock.dispose();
-    window.openbot = previousApi;
+    window.omnibot = previousApi;
   });
 }
 

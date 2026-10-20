@@ -1,5 +1,5 @@
-import type { WebMessagingInstallPlatform } from "@openbot/contracts/web-messaging-install";
-import type { AppTranslate } from "@openbot/i18n";
+import type { WebMessagingInstallPlatform } from "@omnibot/contracts/web-messaging-install";
+import type { AppTranslate } from "@omnibot/i18n";
 import type { FailureKind } from "./MessagingConnectPage";
 
 /*

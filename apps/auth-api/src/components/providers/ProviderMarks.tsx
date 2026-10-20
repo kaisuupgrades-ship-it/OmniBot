@@ -1,4 +1,4 @@
-import { AppLogo, ProviderLogo } from "@openbot/brand";
+import { AppLogo, ProviderLogo } from "@omnibot/brand";
 import { Show } from "solid-js";
 import type { ProviderPage } from "../../content/providers/provider-page";
 import { LandingIcon } from "../landing/LandingIcon";

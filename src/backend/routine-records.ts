@@ -1,10 +1,10 @@
-import type { RoutineRunFields } from "@openbot/contracts/ipc";
-import type { EventRoutineOwner, EventRoutineRun } from "@openbot/contracts/ipc-events";
-import { ROUTINE_RECOVERY_RUN_ERROR_LIMIT } from "@openbot/contracts/team-protocol/routine-recovery-v1";
+import type { RoutineRunFields } from "@omnibot/contracts/ipc";
+import type { EventRoutineOwner, EventRoutineRun } from "@omnibot/contracts/ipc-events";
+import { ROUTINE_RECOVERY_RUN_ERROR_LIMIT } from "@omnibot/contracts/team-protocol/routine-recovery-v1";
 import { Effect, Schema } from "effect";
 import type { RoutineScheduler } from "./agent/routine-scheduler";
 import type { ChannelRoutineScheduler } from "./channel-routine-scheduler";
-import type { OmniBotDatabase } from "./openbot-database";
+import type { OmniBotDatabase } from "./omnibot-database";
 import type {
   OwnedRoutineRecord,
   ReceivedWebhookEvent,

@@ -19,12 +19,12 @@ import {
   type SessionConfigOption,
   type SessionNotification,
 } from "@agentclientprotocol/sdk";
-import { agentProviderName } from "@openbot/contracts/agent-providers";
-import { attachmentMimeTypeForName } from "@openbot/contracts/attachment-files";
-import type { AgentSessionSettingsSnapshot, AgentSessionSettingValue } from "@openbot/contracts/ipc";
-import { type DynamicRecord, isBoolean, isString } from "@openbot/contracts/runtime-values";
-import { type SourceMessages, sourceText } from "@openbot/i18n/source";
-import { redactText } from "@openbot/logging";
+import { agentProviderName } from "@omnibot/contracts/agent-providers";
+import { attachmentMimeTypeForName } from "@omnibot/contracts/attachment-files";
+import type { AgentSessionSettingsSnapshot, AgentSessionSettingValue } from "@omnibot/contracts/ipc";
+import { type DynamicRecord, isBoolean, isString } from "@omnibot/contracts/runtime-values";
+import { type SourceMessages, sourceText } from "@omnibot/i18n/source";
+import { redactText } from "@omnibot/logging";
 import { Deferred, Effect, Exit, Fiber, Scope } from "effect";
 import {
   AcpConfiguration,
@@ -221,14 +221,14 @@ interface HistoryReplay {
  * What OmniBot offers every ACP agent in `initialize`. One value, so the trial start that "Check
  * agent" makes (`acp-agent-check.ts`) and the real client cannot differ.
  */
-export const OPENBOT_ACP_CLIENT_CAPABILITIES = {
+export const OMNIBOT_ACP_CLIENT_CAPABILITIES = {
   fs: { readTextFile: false, writeTextFile: false },
   terminal: false,
   elicitation: { form: {} },
   session: { configOptions: { boolean: {} } },
 } as const;
 
-export const OPENBOT_ACP_CLIENT_INFO = { name: "openbot", title: "OmniBot", version: "0.1.0" } as const;
+export const OMNIBOT_ACP_CLIENT_INFO = { name: "omnibot", title: "OmniBot", version: "0.1.0" } as const;
 
 export interface AcpProviderOptions {
   provider: AgentProvider;
@@ -613,7 +613,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
 
   #publishSessionSettings(thread: AcpThread): void {
     this.emit("notification", {
-      method: "openbot/sessionSettings/updated",
+      method: "omnibot/sessionSettings/updated",
       params: { threadId: thread.id, ...sessionSettingsSnapshot(thread.configOptions) },
     });
   }
@@ -936,8 +936,8 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
     this.#initialization = yield* providerCall(() =>
       connection.initialize({
         protocolVersion: 1,
-        clientCapabilities: OPENBOT_ACP_CLIENT_CAPABILITIES,
-        clientInfo: OPENBOT_ACP_CLIENT_INFO,
+        clientCapabilities: OMNIBOT_ACP_CLIENT_CAPABILITIES,
+        clientInfo: OMNIBOT_ACP_CLIENT_INFO,
       }),
     ).pipe(
       Effect.timeoutOrElse({
@@ -1546,7 +1546,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
     if (thread.developerInstructions) {
       blocks.unshift({
         type: "text",
-        text: `<openbot-developer-instructions>\n${thread.developerInstructions}\n</openbot-developer-instructions>`,
+        text: `<omnibot-developer-instructions>\n${thread.developerInstructions}\n</omnibot-developer-instructions>`,
       });
     }
     yield* providerSync(() => this.#requireServedModel(thread));
@@ -1610,7 +1610,7 @@ export class AcpAgentClient extends EventEmitter<ClientEvents> {
       if (thread.activeTurn !== turn || turn.completing) return;
       if (response.usage)
         this.emit("notification", {
-          method: "openbot/usage",
+          method: "omnibot/usage",
           params: { threadId: thread.id, turnId: turn.id, usage: response.usage },
         });
       // OpenCode reports a model reply with no text, or with reasoning only, as a successful empty

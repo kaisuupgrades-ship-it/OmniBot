@@ -1,9 +1,9 @@
-import { AppLogo } from "@openbot/brand";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
-import type { AppVariant, CentralAuthIssue, CentralAuthState } from "@openbot/contracts/ipc";
-import { normalizeEmailAddress, normalizeOneTimeCode } from "@openbot/contracts/validation";
-import { ArrowLeft, Button, ErrorReference, Input, Lock, RefreshCw } from "@openbot/ui";
-import { errorReference, type UserErrorDetails } from "@openbot/user-errors";
+import { AppLogo } from "@omnibot/brand";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
+import type { AppVariant, CentralAuthIssue, CentralAuthState } from "@omnibot/contracts/ipc";
+import { normalizeEmailAddress, normalizeOneTimeCode } from "@omnibot/contracts/validation";
+import { ArrowLeft, Button, ErrorReference, Input, Lock, RefreshCw } from "@omnibot/ui";
+import { errorReference, type UserErrorDetails } from "@omnibot/user-errors";
 import { createEffect, createMemo, createSignal, onCleanup, Show, untrack } from "solid-js";
 import { useText } from "../../text";
 import { OtpInput, type OtpInputStatus } from "./OtpInput";

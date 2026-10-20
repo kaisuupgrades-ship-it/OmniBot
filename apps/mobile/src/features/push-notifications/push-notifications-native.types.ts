@@ -1,8 +1,8 @@
-import type { NotificationSound } from "@openbot/contracts/notification-relay";
+import type { NotificationSound } from "@omnibot/contracts/notification-relay";
 import type { NotificationPermission } from "@/features/settings/model/push-notifications";
 
 /** The data key of a sound preview. The notification handler plays it and shows nothing. */
-export const SOUND_PREVIEW_KEY = "openbotSoundPreview";
+export const SOUND_PREVIEW_KEY = "omnibotSoundPreview";
 
 /**
  * The native side of notifications: permission, the push token, and the keys that open a sealed

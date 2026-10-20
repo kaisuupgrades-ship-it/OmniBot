@@ -1,7 +1,7 @@
-import { AGENT_HIDDEN_CAPABILITY } from "@openbot/contracts/team-protocol/current";
-import { createRemoteConnectionRecovery, type RemoteRecoveryStatus } from "@openbot/team-client/remote-recovery";
-import { currentText } from "@openbot/ui/text";
-import type { UserErrorDetails } from "@openbot/user-errors";
+import { AGENT_HIDDEN_CAPABILITY } from "@omnibot/contracts/team-protocol/current";
+import { createRemoteConnectionRecovery, type RemoteRecoveryStatus } from "@omnibot/team-client/remote-recovery";
+import { currentText } from "@omnibot/ui/text";
+import type { UserErrorDetails } from "@omnibot/user-errors";
 import { createEffect, createSignal, createStore, flush, getOwner, isDisposed, onSettled, untrack } from "solid-js";
 import { isGlobalSearchShortcut } from "../../global-search-shortcut";
 import { useNavigation } from "../../navigation";

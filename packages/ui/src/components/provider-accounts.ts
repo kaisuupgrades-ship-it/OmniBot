@@ -1,5 +1,5 @@
-import { type AgentProviderId, DEFAULT_PROVIDER_ACCOUNT_ID, type ProviderAccountStatus } from "@openbot/contracts/ipc";
-import type { AppTranslate } from "@openbot/i18n";
+import { type AgentProviderId, DEFAULT_PROVIDER_ACCOUNT_ID, type ProviderAccountStatus } from "@omnibot/contracts/ipc";
+import type { AppTranslate } from "@omnibot/i18n";
 
 /** One account of a provider row, with the agents that use it. */
 export interface ProviderPickerAccount extends ProviderAccountStatus {

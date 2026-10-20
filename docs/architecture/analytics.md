@@ -9,7 +9,7 @@ first buffered event. The next account claims this buffer; identify precedes ord
 original timestamps. Reconnects do not replay it. Expiry, opt-out, and process exit discard it.
 Account changes invalidate prior operation scopes; the anonymous-to-account transition retains the
 pairing scope so its completion can be recorded. Mobile uses a write-only client in the existing
-Openbot OpenPanel project shared with desktop and the website.
+Omnibot OpenPanel project shared with desktop and the website.
 Workspace command wrappers record outcomes once at the mobile caller; conversation availability is measured in
 the visible chat view, including cached reads, not from background broadcasts. The host remains the only source of turn lifecycle
 events. No Team API or database schema changes are required.
@@ -48,7 +48,7 @@ OpenPanel reads campaign attribution from whichever event creates the session, a
 are sent concurrently.
 See [PRIVACY.md](../../PRIVACY.md) for the data boundary.
 
-`rememberLandingFirstTouch` saves the first visit in `localStorage` (`@openbot/contracts/first-touch`
+`rememberLandingFirstTouch` saves the first visit in `localStorage` (`@omnibot/contracts/first-touch`
 owns the shape, the parser and the 90-day age). The web client sends it with `email/verify`, and
 `/billing/return` sends it with the Checkout Session ID to `POST /api/browser/checkout-attribution`.
 `AccountAttribution` (`src/server/account-attribution.ts`) checks it again, keeps the first value
@@ -133,10 +133,10 @@ Desktop opens Usage from the server context menu. It keeps the previous workspac
 inert until Back, so conversation drafts and settings survive navigation. Agent settings opens
 the same report with an agent filter. Host changes clear the filter and stale responses are rejected.
 The iPhone app opens Usage from the server menu in a sheet. It reads the same route through
-`readHostAnalytics` in `@openbot/team-client` and shows the per-agent rows; a row or the header
+`readHostAnalytics` in `@omnibot/team-client` and shows the per-agent rows; a row or the header
 filter narrows the report to one agent. The agent Usage page reads the same route with the agent
 filter, so its chart has the provider split too; a host without `host-analytics` gets the
-agent-scoped route and one area. The series pivot is in `@openbot/team-client/usage-series`, which
+agent-scoped route and one area. The series pivot is in `@omnibot/team-client/usage-series`, which
 the desktop chart also reads.
 
 `host:get-analytics` and the optional `host-analytics` capability expose `GET /v1/analytics`.

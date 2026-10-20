@@ -2,9 +2,9 @@ import {
   type ApprovalAutomationPreference,
   agentAutoApprovalEnabled,
   type DynamicIslandGeometry,
-} from "@openbot/contracts/ipc";
-import { DEFAULT_GENERAL_SETTINGS, type GeneralSettingsValue } from "@openbot/ui/features/settings/app-settings";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/contracts/ipc";
+import { DEFAULT_GENERAL_SETTINGS, type GeneralSettingsValue } from "@omnibot/ui/features/settings/app-settings";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createSignal, onSettled } from "solid-js";
 import { isActionSoundEnabled, readActionSoundTheme, setActionSoundChoice } from "../../action-sounds";
 import { actionToast } from "../../action-toast";
@@ -19,7 +19,7 @@ import { settingsPort } from "./settings-port";
 import { isOpenSettingsShortcut } from "./settings-shortcut";
 import type { SettingsTab } from "./settings-tabs";
 
-const ANALYTICS_APP_VERSION_STORAGE_KEY = "openbot:analytics-app-version";
+const ANALYTICS_APP_VERSION_STORAGE_KEY = "omnibot:analytics-app-version";
 
 /** Tells the user why a switch went back to its previous value. */
 function showSaveFailure(error: unknown): void {

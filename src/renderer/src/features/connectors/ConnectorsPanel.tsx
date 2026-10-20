@@ -1,8 +1,8 @@
-import { ConnectorDetailPanel, connectorSummary } from "@openbot/ui/features/connectors/ConnectorDetailPanel";
-import { CONNECTOR_LISTINGS } from "@openbot/ui/features/connectors/connector-catalog";
-import type { ConnectorId } from "@openbot/ui/features/connectors/connectors";
-import { IntegrationsHub, type IntegrationsHubRow } from "@openbot/ui/features/settings/IntegrationsHub";
-import { useText } from "@openbot/ui/text";
+import { ConnectorDetailPanel, connectorSummary } from "@omnibot/ui/features/connectors/ConnectorDetailPanel";
+import { CONNECTOR_LISTINGS } from "@omnibot/ui/features/connectors/connector-catalog";
+import type { ConnectorId } from "@omnibot/ui/features/connectors/connectors";
+import { IntegrationsHub, type IntegrationsHubRow } from "@omnibot/ui/features/settings/IntegrationsHub";
+import { useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, Show } from "solid-js";
 import type { ConnectorEntry, ConnectorRegistry } from "./connector-registry";
 

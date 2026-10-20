@@ -4,7 +4,7 @@ import type {
   CentralAuthUser,
   MobileConnectLink,
   OmniBotDesktopApi,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { clone, type Listener, type MockRuntime } from "./mock-support";
 
 export interface MockAuthOptions {

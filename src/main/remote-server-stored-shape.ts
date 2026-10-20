@@ -24,8 +24,8 @@
 // is a re-tag. A version this build does not know is refused outright: it was written by a newer
 // OmniBot, and guessing at it would replace a file that build can still read.
 
-import type { ServerNotificationLevel, TeamRole } from "@openbot/contracts/ipc";
-import { LOCAL_SERVER_ID, SERVER_NOTIFICATION_LEVELS } from "@openbot/contracts/ipc";
+import type { ServerNotificationLevel, TeamRole } from "@omnibot/contracts/ipc";
+import { LOCAL_SERVER_ID, SERVER_NOTIFICATION_LEVELS } from "@omnibot/contracts/ipc";
 import {
   type DynamicRecord,
   isBoolean,
@@ -33,7 +33,7 @@ import {
   isNumber,
   isOneOf,
   isString,
-} from "@openbot/contracts/runtime-values";
+} from "@omnibot/contracts/runtime-values";
 
 export interface StoredRemoteServer {
   id: string;

@@ -90,9 +90,9 @@ export async function verifyHostPayload(expanded: string, version: string): Prom
       throw new Error("Installer script does not match release source.");
   }
   for (const [source, destination] of [
-    ["openbot-host", "/usr/local/bin/openbot-host"],
-    ["openbot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/openbot-relaunch.sh`],
-    ["app.openbot.host-manager.plist", "/Library/LaunchDaemons/app.openbot.host-manager.plist"],
+    ["omnibot-host", "/usr/local/bin/omnibot-host"],
+    ["omnibot-relaunch.sh", `${HOST_MANAGER_DIRECTORY}/omnibot-relaunch.sh`],
+    ["app.omnibot.host-manager.plist", "/Library/LaunchDaemons/app.omnibot.host-manager.plist"],
     ["app.omnibot.desktop.relaunch.plist", "/Library/LaunchAgents/app.omnibot.desktop.relaunch.plist"],
   ] as const) {
     if (
@@ -129,7 +129,7 @@ export async function verifyHostInstaller(pkg: string, version: string, requireN
     await command("/usr/sbin/spctl", ["--assess", "--type", "install", "--verbose=2", pkg]);
     await command("/usr/bin/xcrun", ["stapler", "validate", pkg]);
   }
-  const temp = await mkdtemp(join(tmpdir(), "openbot-host-package-"));
+  const temp = await mkdtemp(join(tmpdir(), "omnibot-host-package-"));
   const expanded = join(temp, "expanded");
   try {
     await command("/usr/sbin/pkgutil", ["--expand-full", resolve(pkg), expanded]);

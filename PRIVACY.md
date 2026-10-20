@@ -286,7 +286,7 @@ the token to disk.
 
 The desktop app also keeps, for each joined server, the ID of its logical remote session and the
 Signal address, so that the next start asks only for a new ticket. The file
-(`openbot-remote-sessions-v1.bin`) is encrypted with the same storage protection and is not written
+(`omnibot-remote-sessions-v1.bin`) is encrypted with the same storage protection and is not written
 when that protection is unavailable. It names only the account that signed in. A session ID gives no
 access without that account's session token. The app removes the file at sign-out or when another
 account signs in, when it starts with no account signed in, and forgets a server's session when it
@@ -295,7 +295,7 @@ service for the next start; signing out or disconnecting the device's sign-in en
 Settings → General → Fast connection to servers turns this off. Off, the app removes the file at
 once, keeps nothing on disk, and ends each session when it quits. Turned on during a run, it keeps the
 sessions that are open at that time. The setting is on by default and is stored
-in `openbot-remote-session-reuse-preference-v1.json`.
+in `omnibot-remote-session-reuse-preference-v1.json`.
 
 Account avatar URLs are public, long-lived resources. A person who has the complete URL can request
 the avatar without an account session.
@@ -332,8 +332,8 @@ stores the ID and receive time of each boat webhook delivery for 7 days. The acc
 not receive the server's conversations, files or commands, and its boat key cannot read them.
 
 The account service gives each sandbox a name in boat, so that an operator can find a server in the
-boat dashboard: `openbot-`, the plan, your account email with each other character as `-`, and the
-first 8 characters of the server ID, such as `openbot-starter-ada-example-com-1a2b3c4d`. boat keeps
+boat dashboard: `omnibot-`, the plan, your account email with each other character as `-`, and the
+first 8 characters of the server ID, such as `omnibot-starter-ada-example-com-1a2b3c4d`. boat keeps
 the name with the sandbox.
 
 ## Central data retention
@@ -492,9 +492,9 @@ is not included in analytics; provider output uses the application's secret reda
   the client registration and the access and refresh tokens. Removing the server in settings, or
   choosing Sign out on it, deletes its record. These values are redacted from logs, exports and diagnostics.
   The port and secret of the local MCP sign-in server are kept in
-  `~/Library/Application Support/OmniBot/openbot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
+  `~/Library/Application Support/OmniBot/omnibot-mcp-oauth-proxy-v1.json`, encrypted in the same way.
 - The GitHub connection (Server settings > Connectors) is kept in
-  `~/Library/Application Support/OmniBot/openbot-github-connector-v1.json`, encrypted by the operating
+  `~/Library/Application Support/OmniBot/omnibot-github-connector-v1.json`, encrypted by the operating
   system's secret storage. It holds the GitHub access and refresh tokens, the account name, ID and
   avatar address, and the port and secret of the local GitHub MCP server.
 - The ElevenLabs API key for dictation is kept in
@@ -514,7 +514,7 @@ is not included in analytics; provider output uses the application's secret reda
   the CLI session key can decrypt the wider vault. Use a separate Bitwarden account if you need
   the password manager itself to enforce that separation.
 - The 1Password connection (Marketplace > 1Password) is kept in
-  `~/Library/Application Support/OmniBot/openbot-onepassword-connector-v1.json`, encrypted by the
+  `~/Library/Application Support/OmniBot/omnibot-onepassword-connector-v1.json`, encrypted by the
   operating system's secret storage. It holds the service account token and the account ID only.
   OmniBot keeps the list of logins (titles and web addresses) in memory, never on disk. A password
   or a one-time code is read from 1Password when the browser fills it, goes only to that page, and
@@ -534,9 +534,9 @@ is not included in analytics; provider output uses the application's secret reda
   and CPU use of each OmniBot process group and provider id, the main process delay, the number of
   agent database statements, active turns and browser tabs. It holds no process IDs, program names,
   command lines or paths. It is kept to two files of 1 MB each and is never sent.
-  `~/Library/Application Support/OmniBot/openbot-resource-summary-v1.json` holds the totals of
+  `~/Library/Application Support/OmniBot/omnibot-resource-summary-v1.json` holds the totals of
   today and of the previous day for the daily analytics summary and the diagnostics export.
-- `~/Library/Application Support/OmniBot/openbot-push-notifications-v1.json` holds, for each member
+- `~/Library/Application Support/OmniBot/omnibot-push-notifications-v1.json` holds, for each member
   phone that gets notifications from this host, the session ID, the member ID, the Apple or Firebase
   push token, the secret that seals the notifications, the interface language, and the notification
   choices. Only the user can read the file, and it is not in the diagnostics export or the data
@@ -651,7 +651,7 @@ Network traffic can also occur when:
   OpenCode and Cline, `x.ai/cli` for Grok, and `raw.githubusercontent.com/agentclientprotocol/registry` and
   `dl.google.com` (for the download size) for Gemini, and the same registry and
   `downloads.cursor.com` (for the download size) for Cursor, and it reads a list of blocked
-  versions from `raw.githubusercontent.com/nightly-labs/openbot`. These requests contain no account, agent,
+  versions from the OmniBot update feed (`updates.omnibot.example.com`). These requests contain no account, agent,
   conversation or file data;
 - an agent shows a visual reply, an agent checks its page with `html_preview`, or a user opens an
   HTML attachment, shared file or workspace file in the file preview. The page is HTML that the
@@ -895,7 +895,7 @@ Review folders before deleting them and keep a backup of anything you need.
 ## Questions
 
 Use [GitHub Discussions](https://omnibot.example.com/source/discussions) for privacy questions.
-Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md), without attaching
+Report vulnerabilities privately through the [contact page](https://omnibot.example.com/contact), without attaching
 credentials, conversations, or unrelated private files.
 
 When you ask OmniBot to generate or revise an agent profile, it sends your setup
@@ -993,7 +993,7 @@ server is only listed; OmniBot saves nothing until you select Add.
 When you add or edit an endpoint, Load models sends the key and headers you typed to that address.
 For a saved endpoint, OmniBot sends the stored key and headers only to the same origin as the saved
 address. Local detection can be turned off in Settings. Its switch, addresses, folders and hidden
-rows are in `openbot-provider-detection-v1.json` in the app profile.
+rows are in `omnibot-provider-detection-v1.json` in the app profile.
 
 ### Custom agents
 

@@ -8,13 +8,13 @@
 // the new messages and return to the latest one, and a message the reader sends while scrolled up
 // must return the chat to the bottom.
 // It checks histories of 40 rows, which the chats draw whole, and of 120, which they virtualize.
-// Writes .openbot-build/chat-scroll-streaming-e2e/report.json and one screenshot per story.
+// Writes .omnibot-build/chat-scroll-streaming-e2e/report.json and one screenshot per story.
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { chromium, type Page } from "playwright-core";
 
-const OUT = resolve(import.meta.dirname, "../.openbot-build/chat-scroll-streaming-e2e");
+const OUT = resolve(import.meta.dirname, "../.omnibot-build/chat-scroll-streaming-e2e");
 const SCROLL = ".conversation-scroll";
 const AGENT_COMPOSER = ".composer [contenteditable='true']";
 const REPLY = '[data-chat-search-message="reading-history-reply"]';

@@ -23,7 +23,7 @@ function preferImages(contents) {
   return mergeContents({
     src: contents,
     newSrc: IMAGE_FIRST,
-    tag: "openbot-share-image-first",
+    tag: "omnibot-share-image-first",
     anchor: /private func parseProvider\(_ provider: NSItemProvider\) async -> SharePayload\? \{/u,
     offset: 1,
     comment: "//",

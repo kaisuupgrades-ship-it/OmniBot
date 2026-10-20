@@ -1,5 +1,5 @@
-import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@openbot/contracts/chat-visual";
-import { sortConversationMessages } from "@openbot/contracts/conversation-order";
+import { CHAT_VISUAL_ITEM_TYPE_PREFIX } from "@omnibot/contracts/chat-visual";
+import { sortConversationMessages } from "@omnibot/contracts/conversation-order";
 import type {
   AgentExchangeSummary,
   AttachmentSummary,
@@ -11,7 +11,7 @@ import type {
   QueueDelivery,
   RoutineConversationEventAction,
   RoutineRunStatus,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import {
   CONVERSATION_PLAN_ITEM_TYPE,
   CONVERSATION_SUBAGENTS_ITEM_TYPE,
@@ -19,8 +19,8 @@ import {
   parseConversationPlanText,
   routineConversationEvent,
   routineRunConversationEvent,
-} from "@openbot/contracts/ipc";
-import type { MobileTextKey } from "@openbot/i18n/mobile";
+} from "@omnibot/contracts/ipc";
+import type { MobileTextKey } from "@omnibot/i18n/mobile";
 
 export type RoutineMarkerEvent = RoutineConversationEventAction | RoutineRunStatus;
 

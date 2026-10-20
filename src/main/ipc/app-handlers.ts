@@ -2,15 +2,15 @@ import { Effect, Semaphore } from "effect";
 // App identity, first-run setup, the analytics preference, external links and the data and
 // diagnostics exports.
 
-import { HOSTED_SERVER_CONTACT_URL } from "@openbot/contracts/hosted-servers";
-import { INPUT_LIMITS } from "@openbot/contracts/input-limits";
+import { HOSTED_SERVER_CONTACT_URL } from "@omnibot/contracts/hosted-servers";
+import { INPUT_LIMITS } from "@omnibot/contracts/input-limits";
 import {
   type AppInfo,
   type AppSetupState,
   type AppVariant,
   type ExternalDestination,
   GROK_BOT_EXPORT_URL,
-} from "@openbot/contracts/ipc";
+} from "@omnibot/contracts/ipc";
 import { app, type BrowserWindow, shell } from "electron";
 import { version as developmentVersion } from "../../../package.json";
 import type { AgentService } from "../../backend/agent-service";
@@ -57,8 +57,8 @@ const EXTERNAL_DESTINATIONS: Record<ExternalDestination, string> = {
   "opencode-install": "https://opencode.ai/docs/",
   "opencode-auth": "https://opencode.ai/auth",
   "claude-install": "https://code.claude.com/docs",
-  feedback: "https://x.com/intent/post?text=Feedback%20for%20OmniBot%20%40norbertbodziony%3A%20",
-  message: "https://x.com/norbertbodziony",
+  feedback: "https://omnibot.example.com/contact",
+  message: "https://omnibot.example.com/contact",
   changelog: "https://omnibot.example.com/changelog",
   guides: "https://omnibot.example.com/guides",
   // A Redirect Rule in the omnibot.example.com Cloudflare zone sends this to the current Discord invite.

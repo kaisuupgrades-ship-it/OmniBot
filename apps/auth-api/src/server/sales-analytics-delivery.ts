@@ -1,4 +1,4 @@
-import { isDynamicRecord, isOneOf } from "@openbot/contracts/runtime-values";
+import { isDynamicRecord, isOneOf } from "@omnibot/contracts/runtime-values";
 import { Effect, Schema } from "effect";
 import { ACCOUNT_ANALYTICS_SCHEMA_VERSION, FIRST_TOUCH_PROPERTIES } from "./account-analytics";
 
@@ -262,7 +262,7 @@ export class SalesAnalyticsDelivery {
           "content-type": "application/json",
           "openpanel-client-id": clientId,
           "openpanel-client-secret": clientSecret,
-          "openpanel-sdk-name": "openbot-account-api",
+          "openpanel-sdk-name": "omnibot-account-api",
         },
         body: JSON.stringify({ type: "track", payload }),
         signal: AbortSignal.timeout(SEND_TIMEOUT_MS),

@@ -19,9 +19,9 @@
  * front of a link kind it has never heard of.
  */
 
-import { parseAgentTemplateUrl } from "@openbot/contracts/agent-template-links";
-import { type InviteLinkOptions, parseInviteUrl } from "@openbot/contracts/invite-links";
-import { parsePluginUrl } from "@openbot/contracts/plugin-links";
+import { parseAgentTemplateUrl } from "@omnibot/contracts/agent-template-links";
+import { type InviteLinkOptions, parseInviteUrl } from "@omnibot/contracts/invite-links";
+import { parsePluginUrl } from "@omnibot/contracts/plugin-links";
 
 export type DeepLink =
   | { kind: "invite"; url: string }

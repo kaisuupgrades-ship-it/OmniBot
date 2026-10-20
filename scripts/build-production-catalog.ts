@@ -3,9 +3,9 @@ import { mkdir, mkdtemp, readdir, readFile, rename, rm, stat, writeFile } from "
 import { homedir, tmpdir } from "node:os";
 import { dirname, join, parse, posix, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { type AvatarHue, isAvatarHue, isSkillCategory, type SkillCategory } from "@openbot/contracts/ipc";
-import { isDynamicRecord, isNumber, isString } from "@openbot/contracts/runtime-values";
-import { createOmniBotLogger, toLogValue } from "@openbot/logging";
+import { type AvatarHue, isAvatarHue, isSkillCategory, type SkillCategory } from "@omnibot/contracts/ipc";
+import { isDynamicRecord, isNumber, isString } from "@omnibot/contracts/runtime-values";
+import { createOmniBotLogger, toLogValue } from "@omnibot/logging";
 import { unzipSync, zipSync } from "fflate";
 import { parse as parseYaml } from "yaml";
 
@@ -51,7 +51,7 @@ type SkillSpec = {
   slug: string;
   category: SkillCategory;
   featured: boolean;
-} & ({ source: "openbot" } | { source: UpstreamProvider; upstreamSkill: string; pack?: Pack });
+} & ({ source: "omnibot" } | { source: UpstreamProvider; upstreamSkill: string; pack?: Pack });
 
 interface AgentSpec {
   category: SkillCategory;
@@ -88,7 +88,7 @@ interface BuiltSkill {
   featured: boolean;
   license: "Apache-2.0" | "MIT" | "PolyForm-Noncommercial-1.0.0";
   source:
-    | { provider: "openbot"; url: string }
+    | { provider: "omnibot"; url: string }
     | {
         provider: UpstreamProvider;
         upstreamSkill: string;
@@ -104,8 +104,8 @@ export async function buildProductionCatalog(outputArgument?: string): Promise<s
   validateOutputTarget(output);
   const version = catalogVersionNumber(spec.catalogVersion);
   const license = await readFile(join(sourceRoot, "licenses", "APACHE-2.0.txt"), "utf8");
-  const openbotLicense = await readFile(join(projectRoot, "LICENSE"), "utf8");
-  const staging = await mkdtemp(join(tmpdir(), "openbot-production-catalog-"));
+  const omnibotLicense = await readFile(join(projectRoot, "LICENSE"), "utf8");
+  const staging = await mkdtemp(join(tmpdir(), "omnibot-production-catalog-"));
 
   try {
     const skillOutput = join(staging, "skills");
@@ -113,11 +113,11 @@ export async function buildProductionCatalog(outputArgument?: string): Promise<s
     const builtSkills: BuiltSkill[] = [];
 
     for (const skill of spec.skills) {
-      const pack = skill.source === "openbot" ? undefined : skill.pack;
+      const pack = skill.source === "omnibot" ? undefined : skill.pack;
       const archive =
-        skill.source !== "openbot" && pack
+        skill.source !== "omnibot" && pack
           ? await packArchive(pack, spec.sources[skill.source])
-          : await promptArchive(skill, skill.source === "openbot" ? openbotLicense : license, spec.sources);
+          : await promptArchive(skill, skill.source === "omnibot" ? omnibotLicense : license, spec.sources);
       const preview = inspectGeneratedArchive(archive, pack !== undefined);
       if (preview.slug !== skill.slug) {
         throw new Error(`Skill folder ${skill.slug} does not match its SKILL.md name (${preview.slug}).`);
@@ -144,9 +144,9 @@ export async function buildProductionCatalog(outputArgument?: string): Promise<s
         featured: skill.featured,
         license: skillLicense(skill.source),
         source:
-          skill.source === "openbot"
+          skill.source === "omnibot"
             ? {
-                provider: "openbot",
+                provider: "omnibot",
                 url: `marketplace/production-catalog/skills/${skill.slug}/SKILL.md`,
               }
             : {
@@ -198,7 +198,7 @@ async function promptArchive(skill: SkillSpec, license: string, sources: Catalog
   const markdown = await readFile(join(sourceRoot, "skills", skill.slug, "SKILL.md"), "utf8");
   validateSkillMarkdown(skill.slug, markdown);
   const notice =
-    skill.source === "openbot"
+    skill.source === "omnibot"
       ? "Original Skill instructions by the OmniBot team. Licensed under PolyForm Noncommercial 1.0.0 (LICENSE.txt).\n"
       : createSkillNotice(skill, sources[skill.source]);
   return zipSync(
@@ -382,7 +382,7 @@ function escapeRegExp(value: string): string {
 }
 
 function skillLicense(source: SkillSpec["source"]): BuiltSkill["license"] {
-  if (source === "openbot") return "PolyForm-Noncommercial-1.0.0";
+  if (source === "omnibot") return "PolyForm-Noncommercial-1.0.0";
   return source === "cursor" ? "MIT" : "Apache-2.0";
 }
 
@@ -436,14 +436,14 @@ function buildAgent(agent: AgentSpec, skills: BuiltSkill[], version: number) {
     };
   });
   const snapshot = {
-    id: `openbot-curated-agent-${agent.slug}`,
+    id: `omnibot-curated-agent-${agent.slug}`,
     slug: agent.slug,
     name: agent.name,
     title: agent.title,
     category: agent.category,
     featured: agent.featured,
     description: agent.description,
-    avatarSeed: `openbot-curated-agent-${agent.slug}`,
+    avatarSeed: `omnibot-curated-agent-${agent.slug}`,
     avatarHue: agent.avatarHue,
     version,
     skills: selected,
@@ -452,7 +452,7 @@ function buildAgent(agent: AgentSpec, skills: BuiltSkill[], version: number) {
   const snapshotHash = sha256(JSON.stringify(snapshot));
   return {
     ...snapshot,
-    versionId: `openbot-curated-agent-version-${agent.slug}-v${version}-${snapshotHash.slice(0, 16)}`,
+    versionId: `omnibot-curated-agent-version-${agent.slug}-v${version}-${snapshotHash.slice(0, 16)}`,
   };
 }
 
@@ -547,8 +547,8 @@ function parseSkillSpec(value: unknown): SkillSpec {
     !isDynamicRecord(value) ||
     !isString(value.slug) ||
     !isSkillCategory(value.category) ||
-    (value.source !== "openai" && value.source !== "anthropic" && value.source !== "openbot") ||
-    (value.source !== "openbot" && !isString(value.upstreamSkill)) ||
+    (value.source !== "openai" && value.source !== "anthropic" && value.source !== "omnibot") ||
+    (value.source !== "omnibot" && !isString(value.upstreamSkill)) ||
     (value.featured !== undefined && typeof value.featured !== "boolean")
   ) {
     throw new Error("Production catalog contains an invalid skill.");
@@ -558,7 +558,7 @@ function parseSkillSpec(value: unknown): SkillSpec {
     category: value.category,
     featured: value.featured === true,
   };
-  if (value.source === "openbot") return { ...base, source: "openbot" };
+  if (value.source === "omnibot") return { ...base, source: "omnibot" };
   if (!isString(value.upstreamSkill)) throw new Error("Upstream skill is required.");
   return { ...base, source: value.source, upstreamSkill: value.upstreamSkill };
 }
@@ -597,7 +597,7 @@ function createSkillNotice(skill: Extract<SkillSpec, { upstreamSkill: string }>,
 
 function createUpstreamNotices(spec: CatalogSpec, skills: BuiltSkill[]): string {
   const entries = skills.map((skill) =>
-    skill.source.provider === "openbot"
+    skill.source.provider === "omnibot"
       ? `- **${skill.slug}** — original OmniBot team instructions; PolyForm Noncommercial 1.0.0.`
       : skill.source.provider === "cursor"
         ? `- **${skill.slug}** — copy of [${skill.source.upstreamSkill}](${skill.source.url}) from cursor commit \`${skill.source.commit}\`, with pstack skill names prefixed; MIT.`
@@ -613,11 +613,11 @@ function upstreamSkillUrl(skill: Extract<SkillSpec, { upstreamSkill: string }>, 
 }
 
 function skillId(slug: string): string {
-  return `openbot-curated-skill-${slug}`;
+  return `omnibot-curated-skill-${slug}`;
 }
 
 function skillVersionId(slug: string, version: number, bundleSha256: string): string {
-  return `openbot-curated-version-${slug}-v${version}-${bundleSha256.slice(0, 16)}`;
+  return `omnibot-curated-version-${slug}-v${version}-${bundleSha256.slice(0, 16)}`;
 }
 
 function catalogVersionNumber(value: string): number {

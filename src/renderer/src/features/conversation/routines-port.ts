@@ -10,8 +10,8 @@ import type {
   RoutineResultDestination,
   RoutineRunFields,
   RoutineSchedule,
-} from "@openbot/contracts/ipc";
-import type { EventRoutine, EventRoutineOwner, EventRoutineTriggerInput } from "@openbot/contracts/ipc-events";
+} from "@omnibot/contracts/ipc";
+import type { EventRoutine, EventRoutineOwner, EventRoutineTriggerInput } from "@omnibot/contracts/ipc-events";
 import type { EventRoutinesApi, RoutineWebhooksApi } from "./routine-webhooks-api";
 
 interface RoutineSaveInput {
@@ -83,7 +83,7 @@ export interface RoutinesPort {
 }
 
 function agentRoutineResults(agentId: string): RoutineResultsPort {
-  const api = window.openbot.routineResults;
+  const api = window.omnibot.routineResults;
   return {
     options: () => api.options(),
     destination: (routineId) => api.destination({ agentId, routineId }),
@@ -100,28 +100,28 @@ export function agentRoutinesPort(agentId: string, automation = false, localHost
     limitPolicy: localHost,
     missedPolicy: localHost,
     onceSchedule: localHost,
-    list: () => window.openbot.agent.listRoutines(agentId),
-    listRuns: (routineId, limit) => window.openbot.agent.listRoutineRuns({ agentId, routineId, limit }),
+    list: () => window.omnibot.agent.listRoutines(agentId),
+    listRuns: (routineId, limit) => window.omnibot.agent.listRoutineRuns({ agentId, routineId, limit }),
     save: ({ routineId, name, instruction, active, timezone, schedule, limitPolicy, missedPolicy }) => {
       const policy = localHost
         ? { ...(limitPolicy ? { limitPolicy } : {}), ...(missedPolicy ? { missedPolicy } : {}) }
         : {};
       return (
         routineId
-          ? window.openbot.agent.updateRoutine({ agentId, routineId, name, instruction, active, schedule, ...policy })
-          : window.openbot.agent.createRoutine({ agentId, name, instruction, active, timezone, schedule, ...policy })
+          ? window.omnibot.agent.updateRoutine({ agentId, routineId, name, instruction, active, schedule, ...policy })
+          : window.omnibot.agent.createRoutine({ agentId, name, instruction, active, timezone, schedule, ...policy })
       ).then((routine) => ({ routine, secret: null }));
     },
-    remove: (routineId) => window.openbot.agent.deleteRoutine({ agentId, routineId }),
+    remove: (routineId) => window.omnibot.agent.deleteRoutine({ agentId, routineId }),
     test: async (routineId) => {
-      await window.openbot.agent.testRoutine({ agentId, routineId });
+      await window.omnibot.agent.testRoutine({ agentId, routineId });
     },
     ...(automation
-      ? { runCommand: (routineId: string) => window.openbot.agent.automationRunCommand({ agentId, routineId }) }
+      ? { runCommand: (routineId: string) => window.omnibot.agent.automationRunCommand({ agentId, routineId }) }
       : {}),
     ...(localHost ? { results: agentRoutineResults(agentId) } : {}),
     subscribe: (reload) =>
-      window.openbot.agent.onEvent((event) => {
+      window.omnibot.agent.onEvent((event) => {
         if (event.type === "routines-changed" && event.agentId === agentId) reload();
       }),
   };
@@ -141,7 +141,7 @@ export type ChannelRoutinesApi = Pick<
 
 export function channelRoutinesPort(
   channelId: string,
-  api: ChannelRoutinesApi = window.openbot.agent,
+  api: ChannelRoutinesApi = window.omnibot.agent,
   localHost = false,
 ): RoutinesPort {
   return {

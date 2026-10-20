@@ -3,15 +3,15 @@ import type {
   InstanceTransferResult,
   InstanceTransferSummary,
   OmniBotDesktopApi,
-} from "@openbot/contracts/ipc";
-import { toast } from "@openbot/ui";
+} from "@omnibot/contracts/ipc";
+import { toast } from "@omnibot/ui";
 import type {
   InstanceExportOptions,
   InstanceExportPhase,
   InstanceImportPhase,
   InstanceTransferScreen,
-} from "@openbot/ui/features/transfer/InstanceTransferView";
-import { currentText } from "@openbot/ui/text";
+} from "@omnibot/ui/features/transfer/InstanceTransferView";
+import { currentText } from "@omnibot/ui/text";
 import { createEffect, createStore } from "solid-js";
 
 /** The transfer calls of one server. Main routes them to this computer or to a joined host. */

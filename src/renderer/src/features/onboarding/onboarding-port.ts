@@ -1,4 +1,4 @@
-import type { OmniBotDesktopApi } from "@openbot/contracts/ipc";
+import type { OmniBotDesktopApi } from "@omnibot/contracts/ipc";
 
 /**
  * What onboarding reaches in main: the saved setup, and the preview of an invite before the user
@@ -10,7 +10,7 @@ export interface OnboardingPort {
   servers: Pick<OmniBotDesktopApi["servers"], "previewInvite">;
 }
 
-/** Read on each call: tests and stories replace `window.openbot` per case. */
+/** Read on each call: tests and stories replace `window.omnibot` per case. */
 export function onboardingPort(): OnboardingPort {
-  return window.openbot;
+  return window.omnibot;
 }

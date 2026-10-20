@@ -7,15 +7,15 @@
   width: var(--integration-tile);
   height: var(--integration-tile);
   place-items: center;
-  border: 1px solid var(--openbot-border);
-  border-radius: var(--openbot-radius-md);
-  background: var(--openbot-bg-surface-raised);
-  color: var(--openbot-text-primary);
+  border: 1px solid var(--omnibot-border);
+  border-radius: var(--omnibot-radius-md);
+  background: var(--omnibot-bg-surface-raised);
+  color: var(--omnibot-text-primary);
 }
 
 .integration-logo-tile[data-size="lg"] {
   --integration-tile: 48px;
-  border-radius: var(--openbot-radius-lg);
+  border-radius: var(--omnibot-radius-lg);
 }
 
 .integration-logo-tile > svg {
@@ -24,18 +24,18 @@
 }
 
 .integration-status {
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
 }
 
 .integration-status-dot {
   width: 6px;
   height: 6px;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--omnibot-radius-pill);
   background: currentColor;
 }
 
 .integration-status[data-status="unavailable"] .integration-status-dot {
-  background: var(--openbot-transparent);
+  background: var(--omnibot-transparent);
   box-shadow: inset 0 0 0 1px currentColor;
 }
 
@@ -43,52 +43,52 @@
 
 .integration-detail-header {
   display: flex;
-  gap: var(--openbot-space-3);
+  gap: var(--omnibot-space-3);
   align-items: center;
 }
 
 .integration-detail-copy {
   display: grid;
   flex: 1;
-  gap: var(--openbot-space-1);
+  gap: var(--omnibot-space-1);
   min-width: 0;
 }
 
 .integration-detail-title {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   align-items: center;
 }
 
 .integration-detail-actions {
   display: flex;
   flex: none;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
 }
 
 /* ------------------------------------------------ connect dialog */
 
 .integration-wizard {
   display: grid;
-  gap: var(--openbot-space-4);
-  padding: var(--openbot-space-6);
-  border-radius: var(--openbot-radius-xl);
-  background: var(--openbot-bg-sheet);
-  box-shadow: var(--openbot-shadow-dialog);
+  gap: var(--omnibot-space-4);
+  padding: var(--omnibot-space-6);
+  border-radius: var(--omnibot-radius-xl);
+  background: var(--omnibot-bg-sheet);
+  box-shadow: var(--omnibot-shadow-dialog);
 }
 
 .integration-wizard-head {
   display: grid;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   justify-items: center;
   text-align: center;
 }
 
 .integration-wizard-logos {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   align-items: center;
-  margin-bottom: var(--openbot-space-2);
+  margin-bottom: var(--omnibot-space-2);
 }
 
 .integration-wizard-app {
@@ -100,9 +100,9 @@
 .integration-wizard-link {
   width: 40px;
   height: 2px;
-  border-radius: var(--openbot-radius-pill);
+  border-radius: var(--omnibot-radius-pill);
   background:
-    radial-gradient(circle, var(--openbot-accent) 0 1px, var(--openbot-transparent) 1.5px) 0 50% / 8px 2px repeat-x;
+    radial-gradient(circle, var(--omnibot-accent) 0 1px, var(--omnibot-transparent) 1.5px) 0 50% / 8px 2px repeat-x;
   animation: integration-wizard-flow 0.6s linear infinite;
 }
 
@@ -113,13 +113,13 @@
 }
 
 .integration-wizard-logos[data-link="connected"] .integration-wizard-link {
-  background: var(--openbot-success);
+  background: var(--omnibot-success);
   animation: none;
 }
 
 .integration-wizard-logos[data-link="broken"] .integration-wizard-link {
   background:
-    radial-gradient(circle, var(--openbot-border-strong) 0 1px, var(--openbot-transparent) 1.5px) 0 50% / 8px 2px
+    radial-gradient(circle, var(--omnibot-border-strong) 0 1px, var(--omnibot-transparent) 1.5px) 0 50% / 8px 2px
     repeat-x;
   animation: none;
 }
@@ -127,23 +127,23 @@
 /* The other app breathes while OmniBot waits for it. */
 .integration-wizard-target {
   display: inline-grid;
-  border-radius: var(--openbot-radius-md);
+  border-radius: var(--omnibot-radius-md);
 }
 
 .integration-wizard-logos[data-link="connecting"] .integration-wizard-target {
-  animation: integration-wizard-pulse 1.8s var(--openbot-ease-out) infinite;
+  animation: integration-wizard-pulse 1.8s var(--omnibot-ease-out) infinite;
 }
 
 .integration-wizard-logos[data-link="connected"] .integration-wizard-target {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--openbot-success) 30%, var(--openbot-transparent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--omnibot-success) 30%, var(--omnibot-transparent));
 }
 
 @keyframes integration-wizard-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--openbot-accent) 45%, var(--openbot-transparent));
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--omnibot-accent) 45%, var(--omnibot-transparent));
   }
   100% {
-    box-shadow: 0 0 0 8px var(--openbot-transparent);
+    box-shadow: 0 0 0 8px var(--omnibot-transparent);
   }
 }
 
@@ -156,33 +156,33 @@
 
 .integration-wizard-body {
   display: grid;
-  gap: var(--openbot-space-3);
+  gap: var(--omnibot-space-3);
 }
 
 .integration-wizard-foot {
   display: flex;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   justify-content: flex-end;
 }
 
 /* CopyButton draws its icon at full size; match the 14px icons of the other footer buttons. */
 .integration-wizard-foot .ui-button > svg {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
 }
 
 /* Above the settings window the flow opens from. */
 .integration-dialog-backdrop {
-  z-index: calc(var(--openbot-layer-dialog) + 1);
+  z-index: calc(var(--omnibot-layer-dialog) + 1);
 }
 
 .integration-wizard-dialog {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: calc(var(--openbot-layer-dialog) + 1);
-  width: min(440px, calc(100vw - var(--openbot-space-6) * 2));
-  max-height: calc(100dvh - var(--openbot-space-6) * 2);
+  z-index: calc(var(--omnibot-layer-dialog) + 1);
+  width: min(440px, calc(100vw - var(--omnibot-space-6) * 2));
+  max-height: calc(100dvh - var(--omnibot-space-6) * 2);
   overflow-y: auto;
   outline: 0;
   transform: translate(-50%, -50%);
@@ -194,8 +194,8 @@
 
 .integration-dialog-close {
   position: absolute;
-  top: var(--openbot-space-3);
-  right: var(--openbot-space-3);
+  top: var(--omnibot-space-3);
+  right: var(--omnibot-space-3);
 }
 
 /* ------------------------------------------------ stepper */
@@ -203,7 +203,7 @@
 .integration-stepper {
   display: flex;
   align-items: center;
-  margin: 0 0 var(--openbot-space-2);
+  margin: 0 0 var(--omnibot-space-2);
   padding: 0;
   list-style: none;
 }
@@ -211,8 +211,8 @@
 .integration-step {
   display: flex;
   align-items: center;
-  color: var(--openbot-text-muted);
-  font-size: var(--openbot-text-sm);
+  color: var(--omnibot-text-muted);
+  font-size: var(--omnibot-text-sm);
 }
 
 /* The line to a step: quiet until the flow reaches that step, then it fills from the left. */
@@ -220,11 +220,11 @@
   display: block;
   width: 24px;
   height: 2px;
-  margin-inline: var(--openbot-space-1);
-  border-radius: var(--openbot-radius-pill);
+  margin-inline: var(--omnibot-space-1);
+  border-radius: var(--omnibot-radius-pill);
   background:
-    linear-gradient(to right, var(--openbot-success), var(--openbot-accent)) no-repeat,
-    var(--openbot-border-strong);
+    linear-gradient(to right, var(--omnibot-success), var(--omnibot-accent)) no-repeat,
+    var(--omnibot-border-strong);
   background-size:
     0% 100%,
     auto;
@@ -235,17 +235,17 @@
   background-size:
     100% 100%,
     auto;
-  animation: integration-step-fill 0.4s var(--openbot-ease-out);
+  animation: integration-step-fill 0.4s var(--omnibot-ease-out);
 }
 
 .integration-step + .integration-step[data-state="done"]::before {
   background:
-    linear-gradient(var(--openbot-success), var(--openbot-success)) no-repeat,
-    var(--openbot-border-strong);
+    linear-gradient(var(--omnibot-success), var(--omnibot-success)) no-repeat,
+    var(--omnibot-border-strong);
   background-size:
     100% 100%,
     auto;
-  animation: integration-step-fill 0.4s var(--openbot-ease-out);
+  animation: integration-step-fill 0.4s var(--omnibot-ease-out);
 }
 
 @keyframes integration-step-fill {
@@ -269,45 +269,45 @@
   width: 20px;
   height: 20px;
   place-items: center;
-  border: 1px solid var(--openbot-border-strong);
-  border-radius: var(--openbot-radius-pill);
-  font-size: var(--openbot-text-sm);
+  border: 1px solid var(--omnibot-border-strong);
+  border-radius: var(--omnibot-radius-pill);
+  font-size: var(--omnibot-text-sm);
   font-variant-numeric: tabular-nums;
-  font-weight: var(--openbot-weight-medium);
+  font-weight: var(--omnibot-weight-medium);
   line-height: 1;
 }
 
 .integration-step[data-state="current"] {
-  color: var(--openbot-text-primary);
+  color: var(--omnibot-text-primary);
 }
 
 .integration-step[data-state="current"] .integration-step-index {
-  border-color: var(--openbot-accent);
-  background: var(--openbot-accent);
-  color: var(--openbot-text-on-accent);
+  border-color: var(--omnibot-accent);
+  background: var(--omnibot-accent);
+  color: var(--omnibot-text-on-accent);
 }
 
 .integration-step[data-state="done"] .integration-step-index {
-  border-color: var(--openbot-success);
-  color: var(--openbot-success);
+  border-color: var(--omnibot-success);
+  color: var(--omnibot-success);
 }
 
 /* ------------------------------------------------ Connectors list */
 
 .integrations-hub {
   display: grid;
-  gap: var(--openbot-space-6);
+  gap: var(--omnibot-space-6);
 }
 
 /* The whole row opens the integration, as on Marketplace cards. Buttons in the row stay on top. */
 .integrations-hub-row {
   position: relative;
-  border-radius: var(--openbot-radius-md);
-  transition: background-color var(--openbot-duration-hover) var(--openbot-ease-out);
+  border-radius: var(--omnibot-radius-md);
+  transition: background-color var(--omnibot-duration-hover) var(--omnibot-ease-out);
 }
 
 .integrations-hub-row:has(> .integrations-hub-hitarea:hover) {
-  background: var(--openbot-hover);
+  background: var(--omnibot-hover);
 }
 
 .integrations-hub-hitarea {
@@ -319,22 +319,22 @@
   padding: 0;
   border: 0;
   border-radius: inherit;
-  background: var(--openbot-transparent);
+  background: var(--omnibot-transparent);
   cursor: pointer;
   transition: none;
 }
 
 .integrations-hub-hitarea:hover:not(:disabled):not([data-disabled]) {
-  background: var(--openbot-transparent);
+  background: var(--omnibot-transparent);
 }
 
 .integrations-hub-hitarea:focus-visible {
-  outline: 2px solid var(--openbot-accent-strong);
+  outline: 2px solid var(--omnibot-accent-strong);
   outline-offset: -2px;
 }
 
 .integrations-hub-actions {
-  gap: var(--openbot-space-3);
+  gap: var(--omnibot-space-3);
 }
 
 .integrations-hub-actions .ui-button {
@@ -343,25 +343,25 @@
 }
 
 .integrations-hub-chevron {
-  width: var(--openbot-icon-sm);
-  height: var(--openbot-icon-sm);
-  margin: 0 var(--openbot-space-1-5);
-  color: var(--openbot-text-muted);
+  width: var(--omnibot-icon-sm);
+  height: var(--omnibot-icon-sm);
+  margin: 0 var(--omnibot-space-1-5);
+  color: var(--omnibot-text-muted);
 }
 
 .integrations-hub-title {
   display: inline-flex;
-  gap: var(--openbot-space-2);
+  gap: var(--omnibot-space-2);
   align-items: center;
 }
 
 .integrations-hub-summary[data-status="attention"] {
-  color: var(--openbot-warning-text);
+  color: var(--omnibot-warning-text);
 }
 
 .integrations-face-stack {
   display: inline-flex;
-  gap: var(--openbot-space-0-5);
+  gap: var(--omnibot-space-0-5);
   align-items: center;
 }
 
@@ -369,12 +369,12 @@
   display: inline-grid;
   min-width: 24px;
   height: 24px;
-  padding: 0 var(--openbot-space-1);
+  padding: 0 var(--omnibot-space-1);
   place-items: center;
-  border-radius: var(--openbot-radius-pill);
-  background: var(--openbot-bg-control);
-  color: var(--openbot-text-secondary);
-  font-size: var(--openbot-text-sm);
+  border-radius: var(--omnibot-radius-pill);
+  background: var(--omnibot-bg-control);
+  color: var(--omnibot-text-secondary);
+  font-size: var(--omnibot-text-sm);
 }
 
 .integrations-agent-face {
