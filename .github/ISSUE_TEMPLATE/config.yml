@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: Security vulnerability
-    url: https://omnibot.example.com/source/security/advisories/new
-    about: Report vulnerabilities privately. Do not open a public issue.
-  - name: Questions and ideas
-    url: https://omnibot.example.com/source/discussions
-    about: Ask setup questions and discuss broader ideas with the community.

@@ -7,20 +7,8 @@ name: Computer Use driver pin
 # once a week for a pin that stopped resolving while nobody touched it.
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/cua-driver.yml"
-      - "native-runtime.lock.json"
-      - "scripts/cua-driver-archive.ts"
-      - "scripts/cua-driver-lock.ts"
-      - "scripts/install-cua-driver.ts"
-      - "scripts/pin-cua-driver.ts"
-      - "scripts/runtime-install.ts"
-  schedule:
-    - cron: "0 6 * * 1"
+  # Manual runs only, so pushes to the private repository do not spend Actions minutes.
   workflow_dispatch:
-
 permissions:
   contents: read
 
