@@ -1,3 +1,4 @@
+import type { AgentProviderId } from "@omnibot/contracts/agent-providers";
 import { useText } from "@omnibot/ui/text";
 import { createEffect, createSignal, Loading, Show } from "solid-js";
 import { useAuth } from "./features/account/account-context";
@@ -13,6 +14,13 @@ import { WhatsNewOverlay } from "./features/updates/WhatsNewOverlay";
 import { AccountLogin, FirstRunFlow, InitialSetup, LanguageStep } from "./lazy-views";
 import { usePlatform } from "./platform";
 import { WorkspaceShell } from "./WorkspaceShell";
+
+/**
+ * The provider a first sign-in saves. A signed-in person skips the first-run choice of where OmniBot
+ * runs and which provider it uses: this computer runs the agents, and new agents start on Codex.
+ * An invitation link still opens its own setup.
+ */
+const AUTO_SETUP_PROVIDER: AgentProviderId = "codex";
 
 /** The placeholder every lazy view below falls back to while its code loads. */
 function LoadingScreen() {
@@ -58,6 +66,23 @@ export function AppAccessGate() {
       if (signedIn && !languageStep.done()) languageStep.complete();
     },
   );
+  // Saves the setup once, so a signed-in person lands on their agents. If the save fails, the
+  // first-run flow is shown instead, so the person can still choose by hand.
+  const [autoSetupFailed, setAutoSetupFailed] = createSignal(false);
+  let autoSetupStarted = false;
+  createEffect(
+    () =>
+      auth.visibleSignedInAccount() !== null &&
+      setup.setupLoaded() &&
+      !setup.setupReadFailed() &&
+      setup.setupState()?.completed !== true &&
+      !setup.pendingInviteUrl().trim(),
+    (needed) => {
+      if (!needed || autoSetupStarted) return;
+      autoSetupStarted = true;
+      setup.saveSetup(AUTO_SETUP_PROVIDER, null).catch(() => setAutoSetupFailed(true));
+    },
+  );
   // A startup mark for `dev:bench`: the first moment the app can leave the splash.
   createEffect(started, (ready) => {
     if (ready) performance.mark("omnibot:app-started");
@@ -97,18 +122,24 @@ export function AppAccessGate() {
                     <Show
                       when={setup.pendingInviteUrl().trim()}
                       fallback={
-                        <Loading fallback={<LoadingScreen />}>
-                          <FirstRunFlow
-                            {...setupProviders}
-                            state={
-                              setup.setupState() ?? { completed: false, preferredProvider: null, preferredModel: null }
-                            }
-                            platform={platform.appInfo()?.platform ?? "darwin"}
-                            onSave={setup.saveSetup}
-                            onProviderStepShown={detection.scanOnce}
-                            logoVariant={platform.appInfo()?.variant ?? "production"}
-                          />
-                        </Loading>
+                        <Show when={autoSetupFailed()} fallback={<LoadingScreen />}>
+                          <Loading fallback={<LoadingScreen />}>
+                            <FirstRunFlow
+                              {...setupProviders}
+                              state={
+                                setup.setupState() ?? {
+                                  completed: false,
+                                  preferredProvider: null,
+                                  preferredModel: null,
+                                }
+                              }
+                              platform={platform.appInfo()?.platform ?? "darwin"}
+                              onSave={setup.saveSetup}
+                              onProviderStepShown={detection.scanOnce}
+                              logoVariant={platform.appInfo()?.variant ?? "production"}
+                            />
+                          </Loading>
+                        </Show>
                       }
                     >
                       <Loading fallback={<LoadingScreen />}>
