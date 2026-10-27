@@ -105,14 +105,21 @@ Features that need accounts of your own before they work:
 
 ## Remote desktop helper
 
-Remote desktop uses a prebuilt helper (Sunshine and Moonlight Web, built from the patches in
-`vendor/remote-desktop/patches/`). The helper was compiled with its own names built in, so these
-keep their original spelling: the `/api/openbot/*` routes, the `openbot-moonlight` message source,
-the `OPENBOT_REMOTE_SETUP` environment variable, the `OPENBOT_SECURITY_TESTS` build flag and the
-patch file names. `native-runtime.lock.json` pins the helper download, by SHA-256, to the GitHub
-release of the original project, so `bun run dist:win` downloads it from there when
-`build/remote-desktop-runtime/` does not have it yet. Renaming them means rebuilding the helper with the "Remote desktop runtime" workflow
-and publishing it from your own repository.
+Remote desktop uses a helper (Sunshine and Moonlight Web, built from the patches in
+`vendor/remote-desktop/patches/`). The patches, the app and `native-runtime.lock.json` use the
+OmniBot names (`/api/omnibot/*`, `omnibot-moonlight`, `OMNIBOT_REMOTE_SETUP`,
+`OMNIBOT_SECURITY_TESTS`). The lock pins the helper to a release of
+`kaisuupgrades-ship-it/OmniBot` that does not exist yet. Until it does, remote desktop does not
+work and `bun run dist:*` cannot download the helper:
+
+1. Run the "Remote desktop runtime" workflow by hand. It builds the helper for each platform and
+   publishes the release under the tag in the lock.
+2. Pin the published files with `bun scripts/pin-remote-desktop-runtime.ts`, then commit the lock.
+3. Build the app only after that. Do not ship an app build with a helper from before the rename.
+
+The repository is private, so downloads need `GITHUB_TOKEN` set to a token that can read its
+releases. After a patch changes, run `bun scripts/omnibot/fix-lock.ts` (patch checksums, input
+digest and tag), then go back to step 1.
 
 ## GitHub Actions
 
