@@ -29,7 +29,7 @@ type ViewerState = "idle" | "connecting" | "connected" | "error";
 const STREAM_READY_TIMEOUT_MS = 60_000;
 type RemoteDisplay = RemoteDesktopSession["displays"][number];
 const viewerMessageSchema = z.object({
-  source: z.literal("openbot-moonlight"),
+  source: z.literal("omnibot-moonlight"),
   type: z.literal("viewer-state"),
   sessionId: z.string().min(1),
   state: z.enum(["connecting", "connected", "error"]),

@@ -46,7 +46,7 @@ const sourceRuntimeSchema = z.object({
 
 const REMOTE_DESKTOP_TARGETS = ["darwin-arm64", "darwin-x64", "win32-x64", "linux-x64"] as const;
 
-const nativeRuntimeLockSchema = z.object({
+export const nativeRuntimeLockSchema = z.object({
   schemaVersion: z.literal(1),
   cloudflared: z.object({
     repository: z.url(),

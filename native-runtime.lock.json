@@ -308,8 +308,8 @@
       "license": "GPL-3.0",
       "licenseSha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "patch": {
-        "path": "vendor/remote-desktop/patches/sunshine-v2026.516.143833-openbot.patch",
-        "sha256": "62ac66da2c46be0d996970514469da552166066718ba7e67621ca6e5860ab774"
+        "path": "vendor/remote-desktop/patches/sunshine-v2026.516.143833-omnibot.patch",
+        "sha256": "6993212722bbbda62ede710f92d39bcbaf9da2743f1e17c5a982e9311984ea93"
       },
       "overrides": [],
       "submodules": {
@@ -350,8 +350,8 @@
       "license": "GPL-3.0",
       "licenseSha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
       "patch": {
-        "path": "vendor/remote-desktop/patches/moonlight-web-stream-v2.10.0-openbot.patch",
-        "sha256": "916fcf57ec3f3d5a7517d488d106d698dbc7f4c8c2d12acc6be9982510a05444"
+        "path": "vendor/remote-desktop/patches/moonlight-web-stream-v2.10.0-omnibot.patch",
+        "sha256": "1a95341e441eaba545f680f788eca9421d7796e565b5f794755408bdfac5ad2f"
       },
       "overrides": [],
       "submodules": {}
@@ -381,9 +381,9 @@
       }
     },
     "artifactRelease": {
-      "repository": "nightly-labs/openbot",
-      "tag": "remote-desktop-runtime-44482c62cb605693ca1b753a7763e0f090457eafde09d89b169a19b221e0ab99",
-      "inputDigest": "44482c62cb605693ca1b753a7763e0f090457eafde09d89b169a19b221e0ab99",
+      "repository": "kaisuupgrades-ship-it/OmniBot",
+      "tag": "remote-desktop-runtime-cbea9e53d821214f5835e7ff9300ce9d7c2cabcb995be7075088c4a535fe0f4e",
+      "inputDigest": "cbea9e53d821214f5835e7ff9300ce9d7c2cabcb995be7075088c4a535fe0f4e",
       "manifestAsset": "remote-desktop-runtime-manifest.json",
       "manifestSha256": "f47a91eae9668689137b35aa016d37a1b1a9054103382417a1030f1678f618e9"
     }

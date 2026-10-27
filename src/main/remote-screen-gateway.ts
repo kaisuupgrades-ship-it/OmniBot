@@ -53,7 +53,7 @@ const RUNTIME_START_FAILURE = {
 } as const satisfies Record<RemoteRuntimeStartStage, string>;
 const viewerGrantSchema = z.object({ grant: z.string().min(1).max(256) });
 const viewerStateSchema = z.object({
-  source: z.literal("openbot-moonlight"),
+  source: z.literal("omnibot-moonlight"),
   type: z.literal("viewer-state"),
   sessionId: z.string().min(1).max(128),
   state: z.enum(["connecting", "connected", "error"]),
@@ -1289,7 +1289,7 @@ function sendViewer(
   const sessionPath = TEAM_API_ROUTES.remoteScreen.session(sessionId);
   const hostId = runtime.hostIds[streamerSlot - 1] ?? runtime.hostId;
   const target = `${sessionPath}/moonlight/stream.html?hostId=${hostId}&appId=${runtime.desktopAppId}`;
-  const html = `<!doctype html><meta charset="utf-8"><title>OmniBot Moonlight Remote</title><meta name="color-scheme" content="dark"><style>html,body{margin:0;width:100%;height:100%;background:#090b0c;color:#fff;font:14px system-ui}main{display:grid;place-items:center;height:100%}</style><main>Connecting…</main><script type="module">const grant=new URL(location.href).hash.slice(1);history.replaceState(null,"",location.pathname);const response=await fetch(${JSON.stringify(`${sessionPath}/authorize`)},{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({grant})});if(!response.ok){document.querySelector("main").textContent="Remote access expired";const refused=()=>parent.postMessage(${JSON.stringify({ source: "openbot-moonlight", type: "viewer-state", sessionId, state: "error" })},"*");document.readyState==="complete"?refused():addEventListener("load",refused);throw new Error("grant rejected")}location.replace(${JSON.stringify(target)});</script>`;
+  const html = `<!doctype html><meta charset="utf-8"><title>OmniBot Moonlight Remote</title><meta name="color-scheme" content="dark"><style>html,body{margin:0;width:100%;height:100%;background:#090b0c;color:#fff;font:14px system-ui}main{display:grid;place-items:center;height:100%}</style><main>Connecting…</main><script type="module">const grant=new URL(location.href).hash.slice(1);history.replaceState(null,"",location.pathname);const response=await fetch(${JSON.stringify(`${sessionPath}/authorize`)},{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({grant})});if(!response.ok){document.querySelector("main").textContent="Remote access expired";const refused=()=>parent.postMessage(${JSON.stringify({ source: "omnibot-moonlight", type: "viewer-state", sessionId, state: "error" })},"*");document.readyState==="complete"?refused():addEventListener("load",refused);throw new Error("grant rejected")}location.replace(${JSON.stringify(target)});</script>`;
   response.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
     "Content-Security-Policy":

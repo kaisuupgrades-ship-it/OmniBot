@@ -143,7 +143,7 @@ async function packageCorrespondingSource(
     tarExecutable,
     [
       "-czf",
-      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-openbot-source.tar.gz`),
+      join(sourceOutput, `moonlight-web-stream-${lock.remoteDesktop.moonlightWeb.version}-omnibot-source.tar.gz`),
       ...exclusions,
       "-C",
       moonlightSource,
@@ -153,11 +153,11 @@ async function packageCorrespondingSource(
   );
   await cp(
     resolve(lock.remoteDesktop.sunshine.patch.path),
-    join(sourceOutput, lock.remoteDesktop.sunshine.patch.path.split("/").at(-1) ?? "sunshine-openbot.patch"),
+    join(sourceOutput, lock.remoteDesktop.sunshine.patch.path.split("/").at(-1) ?? "sunshine-omnibot.patch"),
   );
   await cp(
     resolve(lock.remoteDesktop.moonlightWeb.patch.path),
-    join(sourceOutput, lock.remoteDesktop.moonlightWeb.patch.path.split("/").at(-1) ?? "moonlight-openbot.patch"),
+    join(sourceOutput, lock.remoteDesktop.moonlightWeb.patch.path.split("/").at(-1) ?? "moonlight-omnibot.patch"),
   );
   await writeFile(
     join(sourceOutput, "README.txt"),
@@ -252,7 +252,7 @@ function buildSunshine(source: string, version: string, commit: string): void {
       "-DCMAKE_BUILD_TYPE=Release",
       "-DBUILD_DOCS=OFF",
       "-DBUILD_TESTS=ON",
-      "-DOPENBOT_SECURITY_TESTS=ON",
+      "-DOMNIBOT_SECURITY_TESTS=ON",
       "-DBUILD_WERROR=OFF",
       ...(platform === "linux" ? LINUX_SUNSHINE_OPTIONS : []),
     ],
@@ -279,10 +279,10 @@ function buildSunshine(source: string, version: string, commit: string): void {
     },
   );
   if (platform === "darwin") {
-    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "openbot-setup-test"], {
+    execFileSync("cmake", ["--build", build, "--config", "Release", "--target", "omnibot-setup-test"], {
       stdio: "inherit",
     });
-    execFileSync(join(build, "openbot-setup-test"), [], { stdio: "inherit" });
+    execFileSync(join(build, "omnibot-setup-test"), [], { stdio: "inherit" });
   }
 }
 

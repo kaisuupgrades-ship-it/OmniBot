@@ -422,7 +422,7 @@ export class SunshineMoonlightRuntime {
   > {
     return yield* sunshineJsonEffect(
       yield* desktopSync(() => this.#requireSunshineHttpsPort()),
-      "/api/openbot/setup",
+      "/api/omnibot/setup",
       this.#options.credentials,
       join(this.#options.stateDirectory, "sunshine-cert.pem"),
       sunshineSetupSchema,
@@ -438,14 +438,14 @@ export class SunshineMoonlightRuntime {
     if (action !== "status")
       yield* sunshineRequestEffect(
         port,
-        "/api/openbot/test",
+        "/api/omnibot/test",
         this.#options.credentials,
         certificate,
         JSON.stringify({ action, displayId: this.#selectedDisplayId ?? "" }),
       );
     return yield* sunshineJsonEffect(
       port,
-      "/api/openbot/test",
+      "/api/omnibot/test",
       this.#options.credentials,
       certificate,
       sunshineTestSchema,
@@ -795,7 +795,7 @@ export class SunshineMoonlightRuntime {
     this.#sunshine = yield* desktopSync(() =>
       this.#spawn(this.#options.paths.sunshine, [join(this.#options.stateDirectory, "sunshine.conf")], {
         cwd: dirname(this.#options.paths.sunshine),
-        env: { ...process.env, ...agentDisplayEnvironment(this.#options.platform), OPENBOT_REMOTE_SETUP: "1" },
+        env: { ...process.env, ...agentDisplayEnvironment(this.#options.platform), OMNIBOT_REMOTE_SETUP: "1" },
         stdio: ["ignore", "pipe", "pipe"],
         windowsHide: true,
       }),
@@ -926,7 +926,7 @@ export class SunshineMoonlightRuntime {
   ): Effect.fn.Return<RemoteDesktopDisplay[], RemoteDesktopOperationError> {
     const native = yield* sunshineJsonEffect(
       yield* desktopSync(() => this.#requireSunshineHttpsPort()),
-      "/api/openbot/displays",
+      "/api/omnibot/displays",
       this.#options.credentials,
       join(this.#options.stateDirectory, "sunshine-cert.pem"),
       sunshineDisplaysSchema,
