@@ -293,7 +293,7 @@
     }
   },
   "remoteDesktop": {
-    "recipeVersion": 15,
+    "recipeVersion": 16,
     "sunshine": {
       "sourceMode": "upstream-with-patch",
       "repository": "https://github.com/LizardByte/Sunshine.git",
@@ -382,8 +382,8 @@
     },
     "artifactRelease": {
       "repository": "kaisuupgrades-ship-it/OmniBot",
-      "tag": "remote-desktop-runtime-cbea9e53d821214f5835e7ff9300ce9d7c2cabcb995be7075088c4a535fe0f4e",
-      "inputDigest": "cbea9e53d821214f5835e7ff9300ce9d7c2cabcb995be7075088c4a535fe0f4e",
+      "tag": "remote-desktop-runtime-73852625dafb0c5af633744bc2459cb74a6c79b2ef773f8079ae08b0a941dada",
+      "inputDigest": "73852625dafb0c5af633744bc2459cb74a6c79b2ef773f8079ae08b0a941dada",
       "manifestAsset": "remote-desktop-runtime-manifest.json",
       "manifestSha256": "f47a91eae9668689137b35aa016d37a1b1a9054103382417a1030f1678f618e9"
     }

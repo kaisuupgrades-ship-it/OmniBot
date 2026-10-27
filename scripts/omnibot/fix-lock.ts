@@ -1,6 +1,8 @@
 // Re-pins native-runtime.lock.json after a remote desktop patch changes: each patch's sha256, then
 // the input digest and release tag that depend on them. The release itself must then be rebuilt
-// with the "Remote desktop runtime" workflow and pinned with scripts/pin-remote-desktop-runtime.ts.
+// with the "Remote desktop runtime" workflow and pinned with scripts/pin-remote-desktop-runtime.ts,
+// which cannot do this step: it loads the lock only when the digest is already current. Until the
+// pin, releaseArtifacts keep the old build checksums.
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
